@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EDTECH FieldExplorer</title>
+  <meta name="description" content="Educational Technology & Learning Sciences 분야의 학술 저널과 학회 네트워크 시각화">
+
+  <!-- vis.js Network -->
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+  <!-- html2canvas for screenshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- jsPDF for PDF export -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* KELS Brand Colors - matching landing page */
+      --bg-primary: #0d1b3e;
+      --bg-secondary: #152852;
+      --bg-tertiary: #1e3a5f;
+      --border-color: #2a4a7a;
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --text-muted: #7a8ba3;
+
+      --color-journal: #7ba0cc;
+      --color-conference: #10b981;
+      --color-category: #f5a623;
+      --color-accent: #f5a623;
+      --color-favorite: #ef4444;
+
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
+      --glass-bg: rgba(30, 41, 59, 0.9);
+      --glass-border: rgba(71, 85, 105, 0.5);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8fafc;
+      --bg-secondary: #ffffff;
+      --bg-tertiary: #e2e8f0;
+      --border-color: #cbd5e1;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --glass-bg: rgba(255, 255, 255, 0.9);
+      --glass-border: rgba(203, 213, 225, 0.5);
+    }
+
+    html,
+    body {
+      font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.fullscreen .header,
+    body.fullscreen .legend,
+    body.fullscreen .stats-panel,
+    body.fullscreen .footer-links {
+      display: none !important;
+    }
+
+    body.fullscreen .main {
+      height: 100vh;
+    }
+
+    /* Edge hover trigger zone for fullscreen exit */
+    .fullscreen-edge-trigger {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 50px;
+      height: 100%;
+      z-index: 999;
+      display: none;
+    }
+
+    body.fullscreen .fullscreen-edge-trigger {
+      display: block;
+    }
+
+    .fullscreen-exit {
+      position: fixed;
+      top: 50%;
+      right: -100px;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: none;
+      background: rgba(21, 40, 82, 0.95);
+      border: 1px solid var(--border-color);
+      padding: 12px 16px;
+      border-radius: 8px 0 0 8px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      color: var(--text-primary);
+      backdrop-filter: blur(10px);
+      transition: right 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .fullscreen-exit:hover {
+      background: var(--bg-tertiary);
+    }
+
+    body.fullscreen .fullscreen-exit {
+      display: block;
+    }
+
+    body.fullscreen .fullscreen-edge-trigger:hover~.fullscreen-exit,
+    body.fullscreen .fullscreen-exit:hover {
+      right: 0;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      flex-shrink: 0;
+      z-index: 100;
+      gap: 12px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--color-journal), var(--color-accent));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: white;
+    }
+
+    .logo-text h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .search-box {
+      position: relative;
+      width: 180px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 7px 10px 7px 32px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-box input:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      fill: var(--text-muted);
+    }
+
+    /* ===== SEARCH AUTOCOMPLETE ===== */
+    .search-autocomplete {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+      margin-top: 4px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-autocomplete.visible {
+      display: block;
+    }
+
+    .search-autocomplete-item {
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .search-autocomplete-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-autocomplete-item:hover,
+    .search-autocomplete-item.active {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .search-autocomplete-item .type-badge {
+      font-size: 0.6rem;
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: var(--color-journal);
+      color: white;
+    }
+
+    .search-autocomplete-item .type-badge.conference {
+      background: var(--color-conference);
+    }
+
+    .search-autocomplete-item .type-badge.category {
+      background: var(--color-category);
+    }
+
+    .category-select {
+      padding: 7px 10px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn {
+      padding: 7px 10px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 0.75rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--border-color);
+    }
+
+    .btn.active {
+      background: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .btn svg {
+      width: 13px;
+      height: 13px;
+      fill: currentColor;
+    }
+
+    .btn-icon {
+      padding: 7px;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 3px;
+    }
+
+    .filter-btn {
+      padding: 5px 8px;
+      font-size: 0.7rem;
+    }
+
+    .filter-btn.active {
+      background: var(--color-journal);
+      border-color: var(--color-journal);
+    }
+
+    .filter-btn.conference.active {
+      background: var(--color-conference);
+      border-color: var(--color-conference);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .network-container {
+      flex: 1;
+      position: relative;
+    }
+
+    #network {
+      width: 100%;
+      height: 100%;
+      background: var(--bg-primary);
+      transition: background 0.3s;
+    }
+
+    /* ===== LOADING OVERLAY ===== */
+    .loading-overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--bg-tertiary);
+      border-top-color: var(--color-accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      margin-top: 16px;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 340px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border-left: 1px solid var(--glass-border);
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+      overflow-y: auto;
+      z-index: 60;
+    }
+
+    .sidebar.visible {
+      transform: translateX(0);
+    }
+
+    .sidebar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 16px;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      z-index: 10;
+      gap: 10px;
+    }
+
+    .sidebar-title-group {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sidebar-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+
+    .sidebar-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .sidebar-type {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .impact-badge {
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--color-accent);
+      color: white;
+      font-weight: 600;
+    }
+
+    .sidebar-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-close,
+    .favorite-btn,
+    .pdf-btn {
+      background: var(--bg-tertiary);
+      border: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .sidebar-close:hover,
+    .favorite-btn:hover,
+    .pdf-btn:hover {
+      background: var(--border-color);
+      color: var(--text-primary);
+    }
+
+    .favorite-btn.active {
+      background: var(--color-favorite);
+      color: white;
+    }
+
+    .sidebar-content {
+      padding: 16px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 16px;
+    }
+
+    .sidebar-section h3 {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-section p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .sidebar-section a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .sidebar-section a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar-list {
+      list-style: none;
+    }
+
+    .sidebar-list li {
+      padding: 5px 0;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    .sidebar-list li:last-child {
+      border-bottom: none;
+    }
+
+    .sidebar-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .sidebar-loader .spinner {
+      width: 28px;
+      height: 28px;
+    }
+
+    .sidebar-loader p {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Recommendations */
+    .recommendation-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .rec-chip {
+      padding: 4px 10px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .rec-chip:hover {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+
+    /* CFP Calendar */
+    .cfp-info {
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+
+    .cfp-info p {
+      font-size: 0.75rem;
+      margin-bottom: 4px;
+    }
+
+    .cfp-info p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ===== ANNOTATIONS ===== */
+    .annotations-section {
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .annotations-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .annotation-item {
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .annotation-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .annotation-rating {
+      color: var(--color-accent);
+      font-size: 0.8rem;
+    }
+
+    .annotation-date {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .annotation-comment {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .annotation-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .annotation-tags .tag {
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      background: rgba(245, 166, 35, 0.2);
+      border: 1px solid rgba(245, 166, 35, 0.4);
+      border-radius: 10px;
+      color: var(--color-accent);
+    }
+
+    .no-annotations {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .add-annotation {
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .add-annotation h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .rating-input {
+      margin-bottom: 12px;
+    }
+
+    .rating-input label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    #star-select {
+      display: flex;
+      gap: 4px;
+    }
+
+    #star-select .star {
+      font-size: 1.2rem;
+      color: var(--color-accent);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    #star-select .star:hover {
+      transform: scale(1.2);
+    }
+
+    #annotation-comment {
+      width: 100%;
+      padding: 10px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      resize: vertical;
+      margin-bottom: 12px;
+    }
+
+    #annotation-comment:focus {
+      outline: none;
+      border-color: var(--color-accent);
+    }
+
+    .tags-input {
+      margin-bottom: 12px;
+    }
+
+    .tags-input label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .tag-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag-option {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .tag-option input {
+      accent-color: var(--color-accent);
+    }
+
+    .submit-annotation-btn {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, var(--color-accent), #e5941a);
+      border: none;
+      border-radius: 6px;
+      color: #0d1b3e;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .submit-annotation-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+    }
+
+    /* Reply button and nested replies */
+    .reply-btn {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+
+    .reply-btn:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .replies {
+      margin-left: 16px;
+      margin-top: 10px;
+      padding-left: 12px;
+      border-left: 2px solid var(--border-color);
+    }
+
+    .annotation-item.reply {
+      background: rgba(0, 0, 0, 0.1);
+      padding: 8px;
+      margin-bottom: 6px;
+    }
+
+    .annotation-form-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .annotation-form-actions .submit-annotation-btn {
+      flex: 1;
+    }
+
+    .cancel-reply-btn {
+      padding: 10px 16px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cancel-reply-btn:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      max-width: 550px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      transform: scale(0.95);
+      transition: transform 0.3s ease, background 0.3s;
+    }
+
+    .modal-overlay.visible .modal {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .modal-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .modal-body {
+      padding: 16px;
+    }
+
+    .modal-body h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 14px 0 6px;
+    }
+
+    .modal-body h3:first-child {
+      margin-top: 0;
+    }
+
+    .modal-body p,
+    .modal-body li {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .modal-body ul {
+      padding-left: 18px;
+      margin: 6px 0;
+    }
+
+    .modal-body kbd {
+      background: var(--bg-tertiary);
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-family: monospace;
+    }
+
+    /* ===== PROFILE MODAL ===== */
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+
+    .profile-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--color-accent), #e5941a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .profile-email {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0 0 4px 0;
+    }
+
+    .profile-badge {
+      font-size: 0.65rem;
+      padding: 2px 8px;
+      background: rgba(245, 166, 35, 0.2);
+      color: var(--color-accent);
+      border-radius: 10px;
+    }
+
+    .my-annotations {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .my-annotation-item {
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .my-annotation-venue {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .my-annotation-comment {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .my-annotation-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .my-annotation-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .my-annotation-actions button {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    .my-annotation-actions button:hover {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .my-annotation-actions button.delete:hover {
+      color: #ef4444;
+      border-color: #ef4444;
+    }
+
+    /* ===== FAVORITES LIST ===== */
+    .my-favorites {
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    .favorite-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 10px;
+      background: var(--bg-tertiary);
+      border-radius: 6px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .favorite-item:hover {
+      background: var(--bg-secondary);
+      border-color: var(--color-accent);
+    }
+
+    .favorite-name {
+      font-size: 0.8rem;
+      color: var(--text-primary);
+    }
+
+    .remove-fav {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 2px 6px;
+      transition: color 0.2s;
+    }
+
+    .remove-fav:hover {
+      color: #ef4444;
+    }
+
+    /* ===== LEGEND ===== */
+    .legend {
+      position: absolute;
+      bottom: 100px;
+      left: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 12px;
+      z-index: 40;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .legend h4 {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .legend-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-box {
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+    }
+
+    .legend-label {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+    }
+
+    /* ===== STATS PANEL ===== */
+    .stats-panel {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      z-index: 40;
+      display: flex;
+      gap: 16px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .stat-label {
+      font-size: 0.6rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* ===== METRICS PANEL (Scientific Evidence) ===== */
+    .metrics-panel {
+      position: absolute;
+      top: 70px;
+      left: 16px;
+      background: rgba(139, 92, 246, 0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: 8px;
+      padding: 10px 14px;
+      z-index: 40;
+      display: flex;
+      gap: 16px;
+      transition: all 0.3s;
+    }
+
+    .metrics-panel:hover {
+      background: rgba(139, 92, 246, 0.2);
+      border-color: rgba(139, 92, 246, 0.5);
+    }
+
+    .metric-item {
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #a78bfa;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .metric-label {
+      font-size: 0.55rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== VIS.JS OVERRIDES ===== */
+    .vis-navigation {
+      background: transparent !important;
+    }
+
+    .vis-navigation .vis-button {
+      background-color: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color) !important;
+      border-radius: 8px !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+      opacity: 0.85;
+      transition: all 0.2s ease !important;
+    }
+
+    .vis-navigation .vis-button:hover {
+      background-color: var(--color-accent) !important;
+      border-color: var(--color-accent) !important;
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .vis-navigation .vis-button:active {
+      transform: scale(0.95);
+    }
+
+    /* Fix the button icons for dark mode */
+    [data-theme="dark"] .vis-navigation .vis-button {
+      filter: invert(0.85) hue-rotate(180deg);
+    }
+
+    [data-theme="dark"] .vis-navigation .vis-button:hover {
+      filter: invert(0) brightness(1.2);
+    }
+
+    [data-theme="light"] .vis-navigation .vis-button {
+      filter: none;
+    }
+
+    /* ===== FOOTER LINKS ===== */
+    .footer-links {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 40;
+      display: flex;
+      gap: 8px;
+    }
+
+    .footer-links a,
+    .footer-links button {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 8px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 5px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .footer-links a:hover,
+    .footer-links button:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 0.8rem;
+      color: var(--text-primary);
+      z-index: 300;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .header {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+      }
+
+      .search-box {
+        width: 100%;
+        order: 10;
+      }
+
+      .filter-group,
+      .category-select {
+        display: none;
+      }
+
+      .sidebar {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 340px;
+      }
+
+      .stats-panel {
+        top: 8px;
+        left: 8px;
+        padding: 8px 10px;
+        gap: 12px;
+      }
+
+      .stat-value {
+        font-size: 0.95rem;
+      }
+
+      .legend {
+        bottom: 8px;
+        left: 8px;
+      }
+
+      .footer-links {
+        display: none;
+      }
+    }
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://aistudiocdn.com/@google/genai@^1.19.0"
+    }
+  }
+  </script>
+</head>
+
+<body data-theme="dark">
+  <script>
+    // Auth check - redirect to login if not authenticated
+    const user = localStorage.getItem('fieldexplorer_user');
+    if (!user) {
+      window.location.href = '/';
+    } else {
+      const userData = JSON.parse(user);
+      if (!userData.loggedIn) {
+        window.location.href = '/';
+      }
+    }
+  </script>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="3" />
+          <circle cx="5" cy="6" r="2" />
+          <circle cx="19" cy="6" r="2" />
+          <circle cx="5" cy="18" r="2" />
+          <circle cx="19" cy="18" r="2" />
+          <line x1="12" y1="9" x2="7" y2="7" stroke="white" stroke-width="1.5" />
+          <line x1="12" y1="9" x2="17" y2="7" stroke="white" stroke-width="1.5" />
+          <line x1="12" y1="15" x2="7" y2="17" stroke="white" stroke-width="1.5" />
+          <line x1="12" y1="15" x2="17" y2="17" stroke="white" stroke-width="1.5" />
+        </svg>
+      </div>
+      <div class="logo-text">
+        <h1>FieldExplorer</h1>
+      </div>
+    </div>
+
+    <div class="header-controls">
+      <div class="filter-group">
+        <button class="btn filter-btn active" id="filter-journal">저널</button>
+        <button class="btn filter-btn conference active" id="filter-conf">학회</button>
+      </div>
+
+      <select class="category-select" id="category-jump">
+        <option value="">📍 카테고리 이동</option>
+      </select>
+
+      <select class="category-select" id="impact-filter" title="영향력 필터">
+        <option value="">⭐ 전체 등급</option>
+        <option value="Q1">Q1 (상위)</option>
+        <option value="Q2">Q2</option>
+        <option value="Q3">Q3</option>
+      </select>
+
+      <div class="search-box">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" fill="none" />
+        </svg>
+        <input type="text" id="search-input" placeholder="검색..." aria-label="검색" autocomplete="off">
+        <div class="search-autocomplete" id="search-autocomplete"></div>
+      </div>
+
+      <button class="btn" id="cluster-btn" title="카테고리별 그룹화">클러스터</button>
+      <button class="btn btn-icon" id="fullscreen-btn" title="전체화면 (F)">🖥️</button>
+      <button class="btn btn-icon" id="theme-btn" title="다크/라이트 테마">🌗</button>
+      <button class="btn btn-icon" id="lang-btn" title="한국어/English">🌐</button>
+      <button class="btn btn-icon" id="about-btn" title="사용 안내">ℹ️</button>
+      <button class="btn btn-icon" id="refresh-btn" title="새로고침">🔄</button>
+      <button class="btn" id="logout-btn" title="로그아웃" style="color: #ef4444;">🚪 로그아웃</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="network-container">
+      <div id="network"></div>
+
+      <div class="loading-overlay" id="loading-overlay">
+        <div class="spinner"></div>
+        <p class="loading-text">네트워크 구축 중...</p>
+      </div>
+
+      <div class="stats-panel" id="stats-panel">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-journals">0</div>
+          <div class="stat-label">저널</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-conferences">0</div>
+          <div class="stat-label">학회</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-categories">0</div>
+          <div class="stat-label">카테고리</div>
+        </div>
+      </div>
+
+      <!-- Network Metrics Panel (Scientific Evidence) -->
+      <div class="metrics-panel" id="metrics-panel" title="네트워크 분석 지표">
+        <div class="metric-item">
+          <div class="metric-value">-</div>
+          <div class="metric-label">밀도</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">-</div>
+          <div class="metric-label">군집계수</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value">-</div>
+          <div class="metric-label">엣지</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-value" id="metric-communities">-</div>
+          <div class="metric-label">커뮤니티</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <h4>범례</h4>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-journal);"></span>
+          <span class="legend-label">저널</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot" style="background: var(--color-conference);"></span>
+          <span class="legend-label">학회</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-box" style="background: var(--color-category);"></span>
+          <span class="legend-label">카테고리</span>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <button id="export-btn">📸 이미지 저장</button>
+        <button id="share-btn">🔗 공유</button>
+        <a href="https://forms.gle/FKvTdAyHF45GqQJr9" target="_blank" rel="noopener">📝 수정 제안</a>
+      </div>
+    </div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title-group">
+          <div class="sidebar-title" id="sidebar-title">노드 선택</div>
+          <div class="sidebar-subtitle">
+            <span class="sidebar-type" id="sidebar-type">-</span>
+            <span class="impact-badge" id="impact-badge" style="display: none;">Q1</span>
+          </div>
+        </div>
+        <div class="sidebar-actions">
+          <button class="favorite-btn" id="favorite-btn" title="즐겨찾기">♡</button>
+          <button class="pdf-btn" id="pdf-btn" title="PDF 저장">📄</button>
+          <button class="sidebar-close" id="sidebar-close" title="닫기">✕</button>
+        </div>
+      </div>
+      <div class="sidebar-content" id="sidebar-content">
+        <p style="color: var(--text-muted); font-size: 0.8rem;">노드를 클릭하면 상세 정보가 표시됩니다.</p>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Edge trigger zone for fullscreen exit (invisible, shows button on hover) -->
+  <div class="fullscreen-edge-trigger"></div>
+  <button class="btn fullscreen-exit" id="fullscreen-exit">✕ 전체화면 종료</button>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- About Modal -->
+  <div class="modal-overlay" id="about-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>FieldExplorer 정보</h2>
+        <button class="sidebar-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <h3>📖 개요</h3>
+        <p>Educational Technology(교육공학)와 Learning Sciences(학습과학) 분야의 주요 학술 저널과 학회를 네트워크로 시각화한 도구입니다.</p>
+
+        <h3>🎯 기능</h3>
+        <ul>
+          <li><strong>탐색:</strong> 드래그로 이동, 스크롤로 확대/축소</li>
+          <li><strong>상세 정보:</strong> 노드 클릭시 AI 생성 정보 표시</li>
+          <li><strong>검색/필터:</strong> 저널명 검색, 저널/학회 필터</li>
+          <li><strong>클러스터:</strong> 카테고리별 그룹화</li>
+          <li><strong>즐겨찾기:</strong> 관심 저널 로컬 저장</li>
+          <li><strong>내보내기:</strong> 이미지, PDF, 공유 링크</li>
+        </ul>
+
+        <h3>⌨️ 단축키</h3>
+        <ul>
+          <li><kbd>/</kbd> 검색 포커스</li>
+          <li><kbd>ESC</kbd> 닫기</li>
+          <li><kbd>F</kbd> 전체화면</li>
+        </ul>
+
+        <h3>📊 데이터</h3>
+        <p>신뢰할 수 있는 학술지만 포함 (해적 저널 제외). JCR/Scopus 기반 영향력 지표 표시.</p>
+      </div>
+    </div>
+
+
+    <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>

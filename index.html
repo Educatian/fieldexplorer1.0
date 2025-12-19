@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FieldExplorer - KLSE 학술 네트워크 탐색기</title>
+    <meta name="description" content="Educational Technology & Learning Sciences 분야의 학술 저널과 학회를 네트워크로 탐색하세요">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* KLSE Brand Colors */
+            --klse-navy: #0d1b3e;
+            --klse-navy-light: #152852;
+            --klse-yellow: #f5a623;
+            --klse-yellow-light: #ffc857;
+            --klse-blue: #7ba0cc;
+            --klse-blue-light: #a8c5e6;
+            --klse-white: #ffffff;
+
+            /* UI Colors */
+            --bg-primary: var(--klse-navy);
+            --bg-secondary: var(--klse-navy-light);
+            --border-color: #2a3f6b;
+            --text-primary: var(--klse-white);
+            --text-secondary: #b8c5d6;
+            --text-muted: #7a8ba3;
+            --color-accent: var(--klse-yellow);
+            --color-accent-light: var(--klse-yellow-light);
+        }
+
+        html,
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background with KLSE colors */
+        .bg-animation {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.12) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(123, 160, 204, 0.1) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            animation: float 20s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(50px, 30px) scale(1.1);
+            }
+        }
+
+        /* Network dots animation */
+        .network-dots {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--klse-blue);
+            border-radius: 50%;
+            animation: pulse-dot 3s ease-in-out infinite;
+        }
+
+        .dot.yellow {
+            background: var(--klse-yellow);
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--klse-yellow);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--klse-yellow);
+        }
+
+        /* Hero section */
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 80px;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(245, 166, 35, 0.15);
+            border: 1px solid rgba(245, 166, 35, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--klse-yellow);
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .hero-title span {
+            color: var(--klse-yellow);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--klse-yellow), #e5941a);
+            border: none;
+            border-radius: 10px;
+            color: var(--klse-navy);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--klse-blue);
+        }
+
+        /* Login card */
+        .login-card {
+            width: 380px;
+            background: rgba(21, 40, 82, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+        }
+
+        .auth-tab:hover {
+            color: var(--text-secondary);
+        }
+
+        .auth-tab.active {
+            color: var(--klse-yellow);
+            border-bottom-color: var(--klse-yellow);
+        }
+
+        .auth-form p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .login-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--klse-yellow);
+            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--klse-yellow), #e5941a);
+            border: none;
+            border-radius: 10px;
+            color: var(--klse-navy);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 166, 35, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        .guest-btn {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .guest-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--klse-yellow);
+            border-color: var(--klse-yellow);
+        }
+
+        /* Features section */
+        .features {
+            padding: 80px 40px;
+            background: var(--bg-secondary);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .feature-card {
+            padding: 32px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--klse-yellow);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(245, 166, 35, 0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--klse-yellow);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 48px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            header {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 20px;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .login-card {
+                width: 100%;
+                max-width: 380px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background animation -->
+    <div class="bg-animation"></div>
+    <div class="network-dots" id="network-dots"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <img src="/logo.png" alt="KLSE Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>FieldExplorer</h1>
+                    <span class="logo-subtitle">KELS Researcher Network</span>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#features">기능</a>
+                <a href="#about">소개</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">
+                    <span>✨</span>
+                    <span>EdTech & Learning Sciences</span>
+                </div>
+                <h2 class="hero-title">학술 네트워크를<br><span>한눈에</span> 탐색하세요</h2>
+                <p class="hero-subtitle">
+                    교육공학과 학습과학 분야의 주요 저널과 학회를 인터랙티브 네트워크로 시각화합니다.
+                    연구 분야의 전체 그림을 파악하고 새로운 출판 기회를 발견하세요.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#login" class="btn-primary">시작하기</a>
+                    <a href="#features" class="btn-secondary">더 알아보기</a>
+                </div>
+            </div>
+
+            <div class="login-card" id="login">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">로그인</button>
+                    <button class="auth-tab" data-tab="signup">회원가입</button>
+                </div>
+
+                <!-- Login Form -->
+                <div class="auth-form" id="login-panel">
+                    <p>계정에 로그인하여 FieldExplorer를 사용하세요</p>
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">이메일</label>
+                            <input type="email" id="login-email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">비밀번호</label>
+                            <input type="password" id="login-password" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="login-btn">로그인</button>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="auth-form" id="signup-panel" style="display: none;">
+                    <p>이메일로 간단하게 가입하세요</p>
+                    <form id="signup-form">
+                        <div class="form-group">
+                            <label for="signup-email">이메일</label>
+                            <input type="email" id="signup-email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signup-password">비밀번호</label>
+                            <input type="password" id="signup-password" placeholder="6자 이상" minlength="6" required>
+                        </div>
+                        <button type="submit" class="login-btn">가입하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>인터랙티브 네트워크</h3>
+                    <p>저널과 학회 간의 관계를 시각적으로 탐색하고, 클릭 한 번으로 상세 정보를 확인하세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>스마트 검색</h3>
+                    <p>카테고리, 영향력 지표, 연구 방법론으로 필터링하여 적합한 저널을 찾아보세요.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>한/영 다국어 지원</h3>
+                    <p>한국어와 영어 간 원클릭 전환으로 글로벌 연구자 모두가 편리하게 사용할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2024 <a href="#">KLSE</a> FieldExplorer. Built for researchers by researchers.</p>
+        </footer>
+    </div>
+    <script type="module">
+        import { signIn, signUp, getSession } from './auth.ts';
+
+        // Generate random network dots
+        const dotsContainer = document.getElementById('network-dots');
+        for (let i = 0; i < 30; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot' + (Math.random() > 0.7 ? ' yellow' : '');
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.top = Math.random() * 100 + '%';
+            dot.style.animationDelay = Math.random() * 3 + 's';
+            dotsContainer.appendChild(dot);
+        }
+
+        // Tab switching
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const targetTab = tab.dataset.tab;
+                document.getElementById('login-panel').style.display = targetTab === 'login' ? 'block' : 'none';
+                document.getElementById('signup-panel').style.display = targetTab === 'signup' ? 'block' : 'none';
+            });
+        });
+
+        // Helper: show error message
+        function showError(msg) {
+            alert(msg);
+        }
+
+        // Login form handler (Supabase Auth)
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                const { data, error } = await signIn(email, password);
+
+                if (error) {
+                    showError('로그인 실패: ' + error.message);
+                } else {
+                    localStorage.setItem('fieldexplorer_user', JSON.stringify({ email: data.user.email, loggedIn: true }));
+                    window.location.href = '/app.html';
+                }
+            } catch (err) {
+                showError('로그인 오류: ' + err.message);
+            }
+        });
+
+        // Signup form handler (Supabase Auth)
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (password.length < 6) {
+                showError('비밀번호는 6자 이상이어야 합니다');
+                return;
+            }
+
+            try {
+                const { data, error } = await signUp(email, password);
+
+                if (error) {
+                    showError('가입 실패: ' + error.message);
+                } else {
+                    alert('가입 완료! 이메일을 확인해주세요: ' + email);
+                    localStorage.setItem('fieldexplorer_user', JSON.stringify({ email: data.user?.email, loggedIn: true, isNewUser: true }));
+                    window.location.href = '/app.html';
+                }
+            } catch (err) {
+                showError('가입 오류: ' + err.message);
+            }
+        });
+
+        // Check if already logged in (Supabase session)
+        const session = await getSession();
+        if (session) {
+            localStorage.setItem('fieldexplorer_user', JSON.stringify({ email: session.user.email, loggedIn: true }));
+            window.location.href = '/app.html';
+        }
+    </script>
+</body>
+
+</html>
