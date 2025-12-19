@@ -1,11 +1,8 @@
-import { GoogleGenAI, Type } from "@google/genai";
 import { createClient } from "@supabase/supabase-js";
 
 declare const vis: any;
 declare const html2canvas: any;
 declare const jspdf: any;
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 // Supabase client for annotations
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
