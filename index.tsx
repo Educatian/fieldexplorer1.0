@@ -1367,7 +1367,9 @@ function main() {
         nodesDataset.update(nodes.map(n => ({
             id: n.id,
             opacity: 1,
-            color: undefined // Reset to default
+            color: undefined, // Reset to default
+            borderDashes: false,
+            borderWidth: undefined
         })));
         edgesDataset.update(edges.map(e => ({
             id: e.id,
@@ -1375,11 +1377,155 @@ function main() {
         })));
     }
 
+    // ========================================================================
+    // PHASE 2: ISOLATED NODES & BRIDGE NODES
+    // ========================================================================
+
+    // Calculate node degrees (connection counts)
+    function getNodeDegrees(): Map<string, number> {
+        const degrees = new Map<string, number>();
+        nodes.forEach(n => degrees.set(n.id, 0));
+        edges.forEach(e => {
+            degrees.set(e.from, (degrees.get(e.from) || 0) + 1);
+            degrees.set(e.to, (degrees.get(e.to) || 0) + 1);
+        });
+        return degrees;
+    }
+
+    // Get isolated nodes (0 connections)
+    function getIsolatedNodes(): string[] {
+        const degrees = getNodeDegrees();
+        return nodes.filter(n => degrees.get(n.id) === 0).map(n => n.id);
+    }
+
+    // Get bridge nodes (connect multiple components)
+    function getBridgeNodes(): string[] {
+        const bridgeNodes: string[] = [];
+
+        // For each node, check if removing it increases component count
+        nodes.forEach(node => {
+            // Get node's neighbors
+            const neighbors = new Set<string>();
+            edges.forEach(e => {
+                if (e.from === node.id) neighbors.add(e.to);
+                if (e.to === node.id) neighbors.add(e.from);
+            });
+
+            if (neighbors.size < 2) return;
+
+            // Check if neighbors are in different components when node is removed
+            const componentsWithoutNode = findComponentsExcluding(node.id);
+
+            // If neighbors end up in different components, this is a bridge node
+            const neighborComponents = new Set<number>();
+            neighbors.forEach(n => {
+                const compIdx = componentsWithoutNode.get(n);
+                if (compIdx !== undefined) neighborComponents.add(compIdx);
+            });
+
+            if (neighborComponents.size > 1) {
+                bridgeNodes.push(node.id);
+            }
+        });
+
+        return bridgeNodes;
+    }
+
+    function findComponentsExcluding(excludeNodeId: string): Map<string, number> {
+        const nodeToComponent = new Map<string, number>();
+        const visited = new Set<string>();
+        let componentIdx = 0;
+
+        function dfs(nodeId: string, compIdx: number) {
+            if (visited.has(nodeId) || nodeId === excludeNodeId) return;
+            visited.add(nodeId);
+            nodeToComponent.set(nodeId, compIdx);
+            edges.forEach(e => {
+                if (e.from === nodeId && e.to !== excludeNodeId) dfs(e.to, compIdx);
+                if (e.to === nodeId && e.from !== excludeNodeId) dfs(e.from, compIdx);
+            });
+        }
+
+        nodes.forEach(n => {
+            if (!visited.has(n.id) && n.id !== excludeNodeId) {
+                dfs(n.id, componentIdx);
+                componentIdx++;
+            }
+        });
+
+        return nodeToComponent;
+    }
+
+    // Apply visual indicators for isolated and bridge nodes
+    function applyNodeIndicators() {
+        const isolatedNodes = new Set(getIsolatedNodes());
+        const bridgeNodes = new Set(getBridgeNodes());
+
+        nodesDataset.update(nodes.map(n => {
+            const isIsolated = isolatedNodes.has(n.id);
+            const isBridge = bridgeNodes.has(n.id);
+
+            return {
+                id: n.id,
+                borderDashes: isIsolated ? [5, 5] : false,
+                borderWidth: isIsolated ? 2 : (isBridge ? 3 : undefined),
+                label: isBridge ? `⭐ ${n.label || n.id}` : (n.label || n.id)
+            };
+        }));
+
+        const isolatedCount = isolatedNodes.size;
+        const bridgeCount = bridgeNodes.size;
+
+        // Update UI metric values
+        const isolatedEl = document.getElementById('metric-isolated');
+        const bridgesEl = document.getElementById('metric-bridges');
+        if (isolatedEl) isolatedEl.textContent = String(isolatedCount);
+        if (bridgesEl) bridgesEl.textContent = String(bridgeCount);
+
+        console.log(`[Network] Isolated: ${isolatedCount}, Bridges: ${bridgeCount}`);
+    }
+
+    // Add toggle for isolated nodes only view
+    let showOnlyIsolated = false;
+
+    function toggleIsolatedView() {
+        showOnlyIsolated = !showOnlyIsolated;
+
+        if (showOnlyIsolated) {
+            const isolatedNodes = new Set(getIsolatedNodes());
+            nodesDataset.update(nodes.map(n => ({
+                id: n.id,
+                opacity: isolatedNodes.has(n.id) ? 1 : 0.1
+            })));
+            showToast(`🔘 고립 노드만 표시 (${isolatedNodes.size}개)`);
+        } else {
+            resetHighlight();
+            showToast('전체 노드 표시');
+        }
+    }
+
+    // Apply indicators on load (after network stabilizes)
+    setTimeout(() => {
+        applyNodeIndicators();
+    }, 2000);
+
     // Add click handlers to stat and metric items
     document.querySelectorAll('.stat-item[data-metric], .metric-item[data-metric]').forEach(el => {
         el.addEventListener('click', () => {
             const metric = el.getAttribute('data-metric');
-            if (metric) highlightByMetric(metric);
+            if (metric === 'isolated') {
+                toggleIsolatedView();
+            } else if (metric === 'bridges') {
+                // Highlight bridge nodes
+                const bridgeNodes = new Set(getBridgeNodes());
+                nodesDataset.update(nodes.map(n => ({
+                    id: n.id,
+                    opacity: bridgeNodes.has(n.id) ? 1 : 0.15
+                })));
+                showToast(`⭐ 브릿지 노드 강조 (${bridgeNodes.size}개)`);
+            } else if (metric) {
+                highlightByMetric(metric);
+            }
         });
     });
 
