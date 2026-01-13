@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - FieldExplorer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --klse-navy: #0d1b3e;
+            --klse-navy-light: #152852;
+            --klse-yellow: #f5a623;
+            --border-color: #2a3f6b;
+            --text-primary: #ffffff;
+            --text-secondary: #b8c5d6;
+            --text-muted: #7a8ba3;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background: var(--klse-navy);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .admin-header h1 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+        }
+
+        .admin-badge {
+            background: rgba(245, 166, 35, 0.2);
+            color: var(--klse-yellow);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .back-btn {
+            background: var(--klse-navy-light);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-btn:hover {
+            border-color: var(--klse-yellow);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .admin-card {
+            background: var(--klse-navy-light);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .admin-card h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: var(--klse-navy);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--klse-yellow);
+            color: var(--klse-navy);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            width: 100%;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .user-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .user-item:last-child {
+            border-bottom: none;
+        }
+
+        .user-email {
+            font-size: 0.9rem;
+        }
+
+        .user-role {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            background: rgba(123, 160, 204, 0.2);
+            color: #7ba0cc;
+        }
+
+        .user-role.admin {
+            background: rgba(245, 166, 35, 0.2);
+            color: var(--klse-yellow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--klse-navy);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--klse-yellow);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+        }
+
+        .alert.success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .alert.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px;
+        }
+
+        .not-admin {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .not-admin h2 {
+            color: #ef4444;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-container" id="admin-content">
+        <div class="loading">권한 확인 중...</div>
+    </div>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const supabaseUrl = 'https://rnrxhbdqxorlsgkfvhpe.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJucnhoYmRxeG9ybHNna2Z2aHBlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc1MTI1OTcsImV4cCI6MjA1MzA4ODU5N30.0V3dG9FpZDqsb2E_kJaK4aB7tZjJGLIBjhExXSNRMTM';
+        const supabase = createClient(supabaseUrl, supabaseKey);
+
+        const adminContent = document.getElementById('admin-content');
+
+        async function init() {
+            // First, get session from localStorage
+            const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+            console.log('[Admin] Session check:', session ? 'Found' : 'Not found', sessionError);
+
+            if (!session) {
+                console.log('[Admin] No session, redirecting to home...');
+                // Show message before redirect
+                adminContent.innerHTML = `
+                    <div class="not-admin">
+                        <h2>⚠️ 로그인 필요</h2>
+                        <p>세션이 없습니다. 앱에서 로그인 후 다시 시도하세요.</p>
+                        <br>
+                        <a href="/app.html" class="back-btn">← 앱으로 돌아가기</a>
+                    </div>
+                `;
+                return;
+            }
+
+            const user = session.user;
+            console.log('[Admin] User:', user.email);
+
+            // Check admin role
+            const { data: roleData } = await supabase
+                .from('user_roles')
+                .select('role')
+                .eq('user_id', user.id)
+                .single();
+
+            if (roleData?.role !== 'admin') {
+                adminContent.innerHTML = `
+                    <div class="not-admin">
+                        <h2>🚫 접근 권한 없음</h2>
+                        <p>관리자만 접근할 수 있습니다.</p>
+                        <br>
+                        <a href="/app.html" class="back-btn">← 앱으로 돌아가기</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Load admin dashboard
+            await loadDashboard(user);
+        }
+
+        async function loadDashboard(user) {
+            // Get stats
+            const [usersRes, threadsRes, announcementsRes] = await Promise.all([
+                supabase.from('user_roles').select('*', { count: 'exact' }),
+                supabase.from('collaboration_threads').select('*', { count: 'exact' }),
+                supabase.from('announcement_logs').select('*', { count: 'exact' })
+            ]);
+
+            const userCount = usersRes.count || 0;
+            const threadCount = threadsRes.count || 0;
+            const announcementCount = announcementsRes.count || 0;
+
+            // Get user list
+            const { data: users } = await supabase
+                .from('user_roles')
+                .select('user_id, role, created_at')
+                .order('created_at', { ascending: false })
+                .limit(20);
+
+            adminContent.innerHTML = `
+                <div class="admin-header">
+                    <h1>🔐 Admin Dashboard <span class="admin-badge">ADMIN</span></h1>
+                    <a href="/app.html" class="back-btn">← 앱으로 돌아가기</a>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">${userCount}</div>
+                        <div class="stat-label">등록 사용자</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${threadCount}</div>
+                        <div class="stat-label">협업 쓰레드</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">${announcementCount}</div>
+                        <div class="stat-label">발송된 공지</div>
+                    </div>
+                </div>
+
+                <div class="admin-grid">
+                    <div class="admin-card">
+                        <h2>📧 전체 공지 발송</h2>
+                        <div id="announcement-alert"></div>
+                        <form id="announcement-form">
+                            <div class="form-group">
+                                <label>제목</label>
+                                <input type="text" id="announcement-subject" required placeholder="공지 제목">
+                            </div>
+                            <div class="form-group">
+                                <label>내용</label>
+                                <textarea id="announcement-body" required placeholder="공지 내용을 입력하세요..."></textarea>
+                            </div>
+                            <button type="submit" class="btn" id="send-btn">📨 전체 발송</button>
+                        </form>
+                    </div>
+
+                    <div class="admin-card">
+                        <h2>👥 사용자 목록</h2>
+                        <div class="user-list" id="user-list">
+                            ${users?.map(u => `
+                                <div class="user-item">
+                                    <span class="user-email">${u.user_id.substring(0, 8)}...</span>
+                                    <span class="user-role ${u.role}">${u.role}</span>
+                                </div>
+                            `).join('') || '<div class="loading">사용자 없음</div>'}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Handle announcement form
+            document.getElementById('announcement-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const subject = document.getElementById('announcement-subject').value;
+                const body = document.getElementById('announcement-body').value;
+                const alertEl = document.getElementById('announcement-alert');
+                const sendBtn = document.getElementById('send-btn');
+
+                sendBtn.disabled = true;
+                sendBtn.textContent = '발송 중...';
+
+                try {
+                    // Log announcement (actual email sending would be via Edge Function)
+                    const { error } = await supabase.from('announcement_logs').insert({
+                        admin_id: user.id,
+                        subject,
+                        body,
+                        recipient_count: userCount
+                    });
+
+                    if (error) throw error;
+
+                    alertEl.innerHTML = '<div class="alert success">✅ 공지가 저장되었습니다. (이메일 발송은 Edge Function 연동 필요)</div>';
+                    e.target.reset();
+                } catch (err) {
+                    alertEl.innerHTML = `<div class="alert error">❌ 오류: ${err.message}</div>`;
+                } finally {
+                    sendBtn.disabled = false;
+                    sendBtn.textContent = '📨 전체 발송';
+                }
+            });
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

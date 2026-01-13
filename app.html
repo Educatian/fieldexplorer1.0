@@ -16,6 +16,9 @@
   <!-- jsPDF for PDF export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+  <!-- Chart.js for IF trends (Phase 4) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -285,29 +288,29 @@
     }
 
     .category-select {
-      padding: 7px 10px;
+      padding: 8px 12px;
       background: var(--bg-primary);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       color: var(--text-primary);
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       outline: none;
       cursor: pointer;
     }
 
     .btn {
-      padding: 7px 10px;
+      padding: 8px 12px;
       background: var(--bg-tertiary);
       border: 1px solid var(--border-color);
       border-radius: 6px;
       color: var(--text-primary);
-      font-size: 0.75rem;
+      font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       white-space: nowrap;
     }
 
@@ -336,8 +339,8 @@
     }
 
     .filter-btn {
-      padding: 5px 8px;
-      font-size: 0.7rem;
+      padding: 6px 10px;
+      font-size: 0.8rem;
     }
 
     .filter-btn.active {
@@ -348,6 +351,734 @@
     .filter-btn.conference.active {
       background: var(--color-conference);
       border-color: var(--color-conference);
+    }
+
+    /* ===== CFP CALENDAR STYLES ===== */
+    .cfp-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 10px 0;
+    }
+
+    .cfp-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .cfp-item:hover {
+      background: var(--bg-secondary);
+      transform: translateX(4px);
+    }
+
+    .cfp-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 45px;
+      padding: 6px;
+      background: var(--bg-primary);
+      border-radius: 6px;
+      text-align: center;
+    }
+
+    .cfp-month {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .cfp-day {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .cfp-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cfp-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+
+    .cfp-empty {
+      padding: 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Urgency Badges */
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .badge-urgent {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .badge-soon {
+      background: rgba(245, 158, 11, 0.2);
+      color: #f59e0b;
+    }
+
+    .badge-upcoming {
+      background: rgba(59, 130, 246, 0.2);
+      color: #3b82f6;
+    }
+
+    .badge-normal {
+      background: rgba(107, 114, 128, 0.2);
+      color: var(--text-muted);
+    }
+
+    .badge-expired {
+      background: rgba(107, 114, 128, 0.3);
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    /* CFP Filter Button */
+    .filter-btn.cfp.active {
+      background: #f59e0b;
+      border-color: #f59e0b;
+    }
+
+    /* ===== COMPARISON PANEL ===== */
+    .comparison-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--glass-border);
+      padding: 16px;
+      z-index: 100;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .comparison-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .compare-column {
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      padding: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .compare-name {
+      font-weight: 600;
+      font-size: 0.85rem;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .compare-remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 2px 6px;
+    }
+
+    .compare-remove:hover {
+      color: #ef4444;
+    }
+
+    .compare-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+    }
+
+    .compare-label {
+      color: var(--text-muted);
+    }
+
+    .compare-value {
+      font-weight: 500;
+    }
+
+    .compare-value.impact-Q1 {
+      color: #10b981;
+    }
+
+    .compare-value.impact-Q2 {
+      color: #3b82f6;
+    }
+
+    .compare-value.impact-Q3 {
+      color: #f59e0b;
+    }
+
+    .compare-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .compare-favorite {
+      flex: 1;
+      font-size: 0.75rem;
+      padding: 6px;
+    }
+
+    .comparison-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .decision-timer {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .compare-done {
+      background: var(--color-accent);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .comparison-empty {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-muted);
+    }
+
+    .comparison-empty .hint {
+      font-size: 0.75rem;
+      margin-top: 8px;
+      opacity: 0.7;
+    }
+
+    /* Comparison mode toggle button */
+    .filter-btn.compare.active {
+      background: #8b5cf6;
+      border-color: #8b5cf6;
+    }
+
+    /* ===== IF TREND CHART STYLES ===== */
+    .if-trend-section {
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+    }
+
+    .if-trend-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .if-current {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .if-chart-container {
+      height: 120px;
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 8px;
+    }
+
+    .if-trend-empty {
+      padding: 20px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* Trend badges */
+    .badge-trend-up {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10b981;
+    }
+
+    .badge-trend-down {
+      background: rgba(239, 68, 68, 0.2);
+      color: #ef4444;
+    }
+
+    .badge-trend-stable {
+      background: rgba(107, 114, 128, 0.2);
+      color: var(--text-muted);
+    }
+
+    /* ===== FEED POPUP ===== */
+    .feed-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feed-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .feed-container {
+      position: relative;
+      background: var(--bg-primary);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 480px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .feed-popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .feed-popup-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .feed-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 4px 8px;
+    }
+
+    .feed-close:hover {
+      color: var(--text-primary);
+    }
+
+    .feed-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .feed-card {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .feed-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .feed-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+    }
+
+    .feed-author {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .feed-time {
+      color: var(--text-muted);
+    }
+
+    .feed-venue {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .feed-venue-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .feed-rating {
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+    }
+
+    .feed-comment {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-height: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .feed-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .feed-tag {
+      background: var(--color-accent-alpha);
+      color: var(--color-accent);
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .feed-empty,
+    .feed-loading,
+    .feed-error {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+    }
+
+    .feed-error {
+      color: #ef4444;
+    }
+
+    .feed-load-more {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    /* ===== WHAT'S NEW POPUP ===== */
+    .whatsnew-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .whatsnew-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+    }
+
+    .whatsnew-container {
+      position: relative;
+      background: var(--bg-primary);
+      border-radius: 20px;
+      width: 90%;
+      max-width: 400px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .whatsnew-emoji {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    .whatsnew-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .whatsnew-version {
+      color: var(--color-accent);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .whatsnew-features {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .whatsnew-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+
+    .whatsnew-feature-icon {
+      font-size: 1.2rem;
+    }
+
+    .whatsnew-feature-text {
+      flex: 1;
+    }
+
+    .whatsnew-feature-text strong {
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .whatsnew-feature-text span {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .whatsnew-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      background: var(--color-accent);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* ===== COLLABORATION POPUP ===== */
+    .collab-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .collab-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+    }
+
+    .collab-container {
+      position: relative;
+      background: var(--bg-primary);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .collab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .collab-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .collab-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .collab-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .collab-actions {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+    }
+
+    .collab-thread {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .collab-thread:hover {
+      transform: translateY(-2px);
+    }
+
+    .collab-thread-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .collab-thread-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .collab-thread-status {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(34, 197, 94, 0.2);
+      color: #22c55e;
+    }
+
+    .collab-thread-status.in_progress {
+      background: rgba(245, 166, 35, 0.2);
+      color: var(--color-accent);
+    }
+
+    .collab-thread-status.closed {
+      background: rgba(107, 114, 128, 0.2);
+      color: var(--text-muted);
+    }
+
+    .collab-thread-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .collab-thread-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .collab-form {
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .collab-form input,
+    .collab-form textarea {
+      width: 100%;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      color: var(--text-primary);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .collab-form textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .collab-reply {
+      padding: 12px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .collab-reply:last-child {
+      border-bottom: none;
+    }
+
+    .collab-reply-author {
+      font-size: 0.8rem;
+      color: var(--color-accent);
+      margin-bottom: 4px;
+    }
+
+    .collab-reply-content {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .collab-empty {
+      text-align: center;
+      padding: 40px;
+      color: var(--text-muted);
     }
 
     /* ===== MAIN CONTENT ===== */
@@ -1285,15 +2016,64 @@
     }
 
     /* ===== RESPONSIVE ===== */
+
+    /* Mobile hamburger menu button */
+    .mobile-menu-btn {
+      display: none;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px;
+      cursor: pointer;
+      color: var(--text-primary);
+    }
+
+    .mobile-menu-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* Mobile sidebar overlay */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 55;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .sidebar-overlay.visible {
+      opacity: 1;
+    }
+
     @media (max-width: 768px) {
       .header {
         padding: 8px 12px;
         flex-wrap: wrap;
       }
 
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sidebar-overlay {
+        display: block;
+        pointer-events: none;
+      }
+
+      .sidebar-overlay.visible {
+        pointer-events: auto;
+      }
+
       .search-box {
         width: 100%;
         order: 10;
+        margin-top: 8px;
       }
 
       .filter-group,
@@ -1302,31 +2082,76 @@
       }
 
       .sidebar {
-        position: absolute;
+        position: fixed;
         right: 0;
         top: 0;
         bottom: 0;
         width: 100%;
         max-width: 340px;
+        z-index: 60;
       }
 
       .stats-panel {
         top: 8px;
         left: 8px;
         padding: 8px 10px;
-        gap: 12px;
+        gap: 10px;
+        flex-wrap: wrap;
+        max-width: calc(100% - 16px);
+      }
+
+      .stats-panel .stat-item:nth-child(n+4) {
+        display: none;
       }
 
       .stat-value {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+      }
+
+      .metrics-panel {
+        display: none;
       }
 
       .legend {
         bottom: 8px;
         left: 8px;
+        padding: 8px;
+      }
+
+      .legend h4 {
+        font-size: 0.55rem;
       }
 
       .footer-links {
+        display: none;
+      }
+
+      /* Touch-friendly button sizes */
+      .btn {
+        min-height: 40px;
+        padding: 10px 14px;
+      }
+
+      .btn-icon {
+        min-width: 40px;
+        min-height: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo-text h1 {
+        font-size: 0.9rem;
+      }
+
+      .sidebar {
+        max-width: 100%;
+      }
+
+      .stats-panel {
+        gap: 8px;
+      }
+
+      .stats-panel .stat-item:nth-child(n+3) {
         display: none;
       }
     }
@@ -1375,9 +2200,21 @@
     </div>
 
     <div class="header-controls">
+      <!-- Mobile hamburger menu -->
+      <button class="mobile-menu-btn" id="mobile-menu-btn" title="메뉴">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" />
+        </svg>
+      </button>
+
       <div class="filter-group">
         <button class="btn filter-btn active" id="filter-journal">저널</button>
         <button class="btn filter-btn conference active" id="filter-conf">학회</button>
+        <button class="btn filter-btn cfp" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
+        <button class="btn filter-btn compare" id="compare-btn" title="비교 모드 (C)">📊 비교</button>
+        <button class="btn filter-btn" id="feed-btn" title="최신 리뷰 피드">📢</button>
+        <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝</button>
+        <button class="btn filter-btn" id="admin-btn" title="관리자" style="display:none;">🔐</button>
       </div>
 
       <select class="category-select" id="category-jump">
@@ -1419,15 +2256,15 @@
       </div>
 
       <div class="stats-panel" id="stats-panel">
-        <div class="stat-item">
+        <div class="stat-item" data-metric="journals" style="cursor: pointer;" title="클릭하여 저널만 하이라이트">
           <div class="stat-value" id="stat-journals">0</div>
           <div class="stat-label">저널</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item" data-metric="conferences" style="cursor: pointer;" title="클릭하여 학회만 하이라이트">
           <div class="stat-value" id="stat-conferences">0</div>
           <div class="stat-label">학회</div>
         </div>
-        <div class="stat-item">
+        <div class="stat-item" data-metric="categories" style="cursor: pointer;" title="클릭하여 카테고리만 하이라이트">
           <div class="stat-value" id="stat-categories">0</div>
           <div class="stat-label">카테고리</div>
         </div>
@@ -1435,21 +2272,21 @@
 
       <!-- Network Metrics Panel (Scientific Evidence) -->
       <div class="metrics-panel" id="metrics-panel" title="네트워크 분석 지표">
-        <div class="metric-item">
+        <div class="metric-item" data-metric="density" style="cursor: pointer;" title="클릭하여 연결 많은 노드 강조">
           <div class="metric-value">-</div>
           <div class="metric-label">밀도</div>
         </div>
-        <div class="metric-item">
+        <div class="metric-item" data-metric="clustering" style="cursor: pointer;" title="클릭하여 클러스터 시각화">
           <div class="metric-value">-</div>
           <div class="metric-label">군집계수</div>
         </div>
-        <div class="metric-item">
+        <div class="metric-item" data-metric="edges" style="cursor: pointer;" title="클릭하여 연결선 강조">
           <div class="metric-value">-</div>
           <div class="metric-label">엣지</div>
         </div>
-        <div class="metric-item">
+        <div class="metric-item" data-metric="components" style="cursor: pointer;" title="클릭하여 컴포넌트별 색상">
           <div class="metric-value" id="metric-communities">-</div>
-          <div class="metric-label">커뮤니티</div>
+          <div class="metric-label">컴포넌트</div>
         </div>
       </div>
 
@@ -1506,34 +2343,73 @@
 
   <!-- About Modal -->
   <div class="modal-overlay" id="about-modal">
-    <div class="modal">
+    <div class="modal" style="max-width: 650px;">
       <div class="modal-header">
-        <h2>FieldExplorer 정보</h2>
+        <h2>🗺️ FieldExplorer 사용 안내</h2>
         <button class="sidebar-close" id="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <h3>📖 개요</h3>
-        <p>Educational Technology(교육공학)와 Learning Sciences(학습과학) 분야의 주요 학술 저널과 학회를 네트워크로 시각화한 도구입니다.</p>
+        <div
+          style="background: linear-gradient(135deg, rgba(123, 160, 204, 0.15), rgba(245, 166, 35, 0.15)); padding: 16px; border-radius: 10px; margin-bottom: 16px; text-align: center;">
+          <span style="font-size: 2.5rem;">🎓</span>
+          <p style="margin-top: 8px; font-size: 0.9rem; color: var(--text-primary);">Educational Technology & Learning
+            Sciences 분야의<br><strong>학술 저널과 학회를 네트워크로 탐색</strong>하세요!</p>
+        </div>
 
-        <h3>🎯 기능</h3>
+        <h3>🖱️ 네트워크 탐색</h3>
         <ul>
-          <li><strong>탐색:</strong> 드래그로 이동, 스크롤로 확대/축소</li>
-          <li><strong>상세 정보:</strong> 노드 클릭시 AI 생성 정보 표시</li>
-          <li><strong>검색/필터:</strong> 저널명 검색, 저널/학회 필터</li>
-          <li><strong>클러스터:</strong> 카테고리별 그룹화</li>
-          <li><strong>즐겨찾기:</strong> 관심 저널 로컬 저장</li>
-          <li><strong>내보내기:</strong> 이미지, PDF, 공유 링크</li>
+          <li>🔍 <strong>확대/축소:</strong> 마우스 스크롤 또는 터치 핀치</li>
+          <li>✋ <strong>이동:</strong> 드래그로 화면 이동</li>
+          <li>👆 <strong>노드 클릭:</strong> 상세 정보 확인</li>
+          <li>💡 <strong>호버:</strong> 연결된 노드 하이라이트</li>
         </ul>
 
-        <h3>⌨️ 단축키</h3>
+        <h3>🎨 노드 색상 안내</h3>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0;">
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 14px; height: 14px; background: #7ba0cc; border-radius: 50%;"></span>
+            <span style="font-size: 0.85rem;">저널 (Journal)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 14px; height: 14px; background: #10b981; border-radius: 50%;"></span>
+            <span style="font-size: 0.85rem;">학회 (Conference)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 14px; height: 14px; background: #f5a623; border-radius: 4px;"></span>
+            <span style="font-size: 0.85rem;">카테고리</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="width: 14px; height: 14px; background: #8b5cf6; border-radius: 4px;"></span>
+            <span style="font-size: 0.85rem;">클러스터</span>
+          </div>
+        </div>
+
+        <h3>🎯 주요 기능</h3>
         <ul>
-          <li><kbd>/</kbd> 검색 포커스</li>
-          <li><kbd>ESC</kbd> 닫기</li>
-          <li><kbd>F</kbd> 전체화면</li>
+          <li>🔎 <strong>검색:</strong> 상단 검색창에서 저널/학회 이름으로 검색</li>
+          <li>🏷️ <strong>필터링:</strong> 저널/학회별 또는 영향력 등급(Q1~Q3)별 필터</li>
+          <li>📦 <strong>클러스터:</strong> 카테고리별로 노드 그룹화</li>
+          <li>⭐ <strong>즐겨찾기:</strong> 관심 저널을 저장하여 빠르게 접근</li>
+          <li>💬 <strong>어노테이션:</strong> 노드에 코멘트와 평점 남기기</li>
+          <li>📸 <strong>내보내기:</strong> 네트워크를 이미지/PDF로 저장</li>
         </ul>
 
-        <h3>📊 데이터</h3>
-        <p>신뢰할 수 있는 학술지만 포함 (해적 저널 제외). JCR/Scopus 기반 영향력 지표 표시.</p>
+        <h3>⌨️ 키보드 단축키</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <span><kbd>/</kbd> 검색 포커스</span>
+          <span><kbd>ESC</kbd> 사이드바 닫기</span>
+          <span><kbd>F</kbd> 전체화면</span>
+          <span><kbd>↑↓</kbd> 검색결과 탐색</span>
+        </div>
+
+        <h3 style="margin-top: 16px;">📊 데이터 출처</h3>
+        <p>JCR(Journal Citation Reports)와 Scopus 기반 영향력 지표를 표시합니다. 해적 저널(predatory journals)은 제외되었으며, 신뢰할 수 있는 학술 출판물만
+          포함됩니다.</p>
+
+        <div
+          style="margin-top: 16px; padding: 12px; background: var(--bg-tertiary); border-radius: 8px; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
+          Made with ❤️ for EDTECH Researchers | KELS Theme
+        </div>
       </div>
     </div>
 

@@ -1,0 +1,757 @@
+[
+    {
+        "id": "etrd",
+        "name": "Educational Technology Research and Development",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Instructional Design"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "jls",
+        "name": "Journal of the Learning Sciences",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Learning Sciences"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ijcscl",
+        "name": "International Journal of Computer-Supported Collaborative Learning",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Learning Sciences"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ce",
+        "name": "Computers & Education",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "bjet",
+        "name": "British Journal of Educational Technology",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "li",
+        "name": "Learning and Instruction",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Learning Sciences"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "epr",
+        "name": "Educational Psychology Review",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Educational Psychology"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ep",
+        "name": "Educational Psychologist",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Educational Psychology"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "rer",
+        "name": "Review of Educational Research",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Education Research"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "aerj",
+        "name": "American Educational Research Journal",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Education Research"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "er",
+        "name": "Educational Researcher",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Education Research"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "jep",
+        "name": "Journal of Educational Psychology",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Educational Psychology"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ci",
+        "name": "Cognition and Instruction",
+        "type": "Journal",
+        "categories": [
+            "Well-known",
+            "Learning Sciences"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "jcal",
+        "name": "Journal of Computer Assisted Learning",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "jecr",
+        "name": "Journal of Educational Computing Research",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "tlt",
+        "name": "IEEE Transactions on Learning Technologies",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning",
+            "Immersive Technology"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "ijaied",
+        "name": "International Journal of Artificial Intelligence in Education",
+        "type": "Journal",
+        "categories": [
+            "AIED"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "umuai",
+        "name": "User Modeling and User-Adapted Interaction",
+        "type": "Journal",
+        "categories": [
+            "AIED"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "jla",
+        "name": "Journal of Learning Analytics",
+        "type": "Journal",
+        "categories": [
+            "Learning Analytics"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "is",
+        "name": "Instructional Science",
+        "type": "Journal",
+        "categories": [
+            "Learning Sciences"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "cep",
+        "name": "Contemporary Educational Psychology",
+        "type": "Journal",
+        "categories": [
+            "Educational Psychology"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "lid",
+        "name": "Learning and Individual Differences",
+        "type": "Journal",
+        "categories": [
+            "Educational Psychology"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "mca",
+        "name": "Mind Culture and Activity",
+        "type": "Journal",
+        "categories": [
+            "Learning Sciences"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "err",
+        "name": "Educational Research Review",
+        "type": "Journal",
+        "categories": [
+            "Education Research"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "chb",
+        "name": "Computers in Human Behavior",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "ile",
+        "name": "Interactive Learning Environments",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "de",
+        "name": "Distance Education",
+        "type": "Journal",
+        "categories": [
+            "Online Learning"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "ihe",
+        "name": "Internet and Higher Education",
+        "type": "Journal",
+        "categories": [
+            "Higher Education",
+            "Online Learning"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "ceai",
+        "name": "Computers & Education: Artificial Intelligence",
+        "type": "Journal",
+        "categories": [
+            "AIED"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "jaid",
+        "name": "Journal of Applied Instructional Design",
+        "type": "Journal",
+        "categories": [
+            "Instructional Design"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "jfdl",
+        "name": "Journal of Formative Design in Learning",
+        "type": "Journal",
+        "categories": [
+            "Instructional Design"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "ijdl",
+        "name": "International Journal of Designs for Learning",
+        "type": "Journal",
+        "categories": [
+            "Instructional Design"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "tt",
+        "name": "TechTrends",
+        "type": "Journal",
+        "categories": [
+            "Instructional Design"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "piq",
+        "name": "Performance Improvement Quarterly",
+        "type": "Journal",
+        "categories": [
+            "Instructional Design"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "ets",
+        "name": "Educational Technology & Society",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "eit",
+        "name": "Education and Information Technologies",
+        "type": "Journal",
+        "categories": [
+            "Technology-Enhanced Learning"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "ijethe",
+        "name": "International Journal of Educational Technology in Higher Education",
+        "type": "Journal",
+        "categories": [
+            "Higher Education"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "jche",
+        "name": "Journal of Computing in Higher Education",
+        "type": "Journal",
+        "categories": [
+            "Higher Education"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "olj",
+        "name": "Online Learning Journal",
+        "type": "Journal",
+        "categories": [
+            "Online Learning"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "irrodl",
+        "name": "International Review of Research in Open and Distributed Learning",
+        "type": "Journal",
+        "categories": [
+            "Online Learning"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "ijhci",
+        "name": "International Journal of Human-Computer Interaction",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "hci",
+        "name": "Human-Computer Interaction",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "tochi",
+        "name": "ACM Transactions on Computer-Human Interaction",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "bit",
+        "name": "Behaviour & Information Technology",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "ijcci",
+        "name": "International Journal of Child-Computer Interaction",
+        "type": "Journal",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "sg",
+        "name": "Simulation & Gaming",
+        "type": "Journal",
+        "categories": [
+            "Immersive Technology"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "vr",
+        "name": "Virtual Reality",
+        "type": "Journal",
+        "categories": [
+            "Immersive Technology"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "cexr",
+        "name": "Computers & Education: X Reality",
+        "type": "Journal",
+        "categories": [
+            "Immersive Technology"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "lmt",
+        "name": "Learning Media and Technology",
+        "type": "Journal",
+        "categories": [
+            "Critical Perspectives"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "jrst",
+        "name": "Journal of Research in Science Teaching",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "se",
+        "name": "Science Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ijse",
+        "name": "International Journal of Science Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "jset",
+        "name": "Journal of Science Education and Technology",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "sse",
+        "name": "Studies in Science Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "jee",
+        "name": "Journal of Engineering Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "cse",
+        "name": "Computer Science Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "toce",
+        "name": "ACM Transactions on Computing Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q2"
+    },
+    {
+        "id": "cbe",
+        "name": "CBE-Life Sciences Education",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "merj",
+        "name": "Mathematics Education Research Journal",
+        "type": "Journal",
+        "categories": [
+            "STEM Education"
+        ],
+        "impact": "Q3"
+    },
+    {
+        "id": "isls",
+        "name": "ISLS Annual Meeting",
+        "type": "Conference",
+        "categories": [
+            "Learning Sciences"
+        ],
+        "cfpDeadline": "November"
+    },
+    {
+        "id": "icls",
+        "name": "ICLS",
+        "type": "SubConference",
+        "categories": [
+            "ISLS",
+            "Learning Sciences"
+        ],
+        "cfpDeadline": "November"
+    },
+    {
+        "id": "cscl",
+        "name": "CSCL",
+        "type": "SubConference",
+        "categories": [
+            "ISLS",
+            "Learning Sciences"
+        ],
+        "cfpDeadline": "November"
+    },
+    {
+        "id": "aera",
+        "name": "AERA Annual Meeting",
+        "type": "Conference",
+        "categories": [
+            "Education Research"
+        ],
+        "cfpDeadline": "July"
+    },
+    {
+        "id": "earli",
+        "name": "EARLI Conference",
+        "type": "Conference",
+        "categories": [
+            "Education Research"
+        ],
+        "cfpDeadline": "January"
+    },
+    {
+        "id": "lak",
+        "name": "LAK Conference",
+        "type": "Conference",
+        "categories": [
+            "Learning Analytics"
+        ],
+        "cfpDeadline": "October"
+    },
+    {
+        "id": "edm",
+        "name": "EDM Conference",
+        "type": "Conference",
+        "categories": [
+            "Learning Analytics"
+        ],
+        "cfpDeadline": "February"
+    },
+    {
+        "id": "aied",
+        "name": "AIED Conference",
+        "type": "Conference",
+        "categories": [
+            "AIED"
+        ],
+        "cfpDeadline": "February"
+    },
+    {
+        "id": "its",
+        "name": "ITS Conference",
+        "type": "Conference",
+        "categories": [
+            "AIED"
+        ],
+        "cfpDeadline": "February"
+    },
+    {
+        "id": "chi",
+        "name": "CHI Conference",
+        "type": "Conference",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "cfpDeadline": "September"
+    },
+    {
+        "id": "cscw",
+        "name": "CSCW Conference",
+        "type": "Conference",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "cfpDeadline": "April/November"
+    },
+    {
+        "id": "uist",
+        "name": "UIST Conference",
+        "type": "Conference",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "cfpDeadline": "April"
+    },
+    {
+        "id": "idc",
+        "name": "IDC Conference",
+        "type": "Conference",
+        "categories": [
+            "Human-Computer Interaction"
+        ],
+        "cfpDeadline": "January"
+    },
+    {
+        "id": "ieeevr",
+        "name": "IEEE VR",
+        "type": "Conference",
+        "categories": [
+            "Immersive Technology"
+        ],
+        "cfpDeadline": "September"
+    },
+    {
+        "id": "ismar",
+        "name": "ISMAR",
+        "type": "Conference",
+        "categories": [
+            "Immersive Technology"
+        ],
+        "cfpDeadline": "April"
+    },
+    {
+        "id": "aect",
+        "name": "AECT Convention",
+        "type": "Conference",
+        "categories": [
+            "Instructional Design"
+        ],
+        "cfpDeadline": "March"
+    },
+    {
+        "id": "etra",
+        "name": "ETRA Symposium",
+        "type": "Conference",
+        "categories": [
+            "Eye-tracking"
+        ],
+        "cfpDeadline": "January"
+    },
+    {
+        "id": "las",
+        "name": "L@S Conference",
+        "type": "Conference",
+        "categories": [
+            "Learning at Scale"
+        ],
+        "cfpDeadline": "January"
+    },
+    {
+        "id": "sigcse",
+        "name": "SIGCSE Technical Symposium",
+        "type": "Conference",
+        "categories": [
+            "STEM Education"
+        ],
+        "cfpDeadline": "August"
+    },
+    {
+        "id": "icer",
+        "name": "ICER Conference",
+        "type": "Conference",
+        "categories": [
+            "STEM Education"
+        ],
+        "cfpDeadline": "March"
+    },
+    {
+        "id": "iticse",
+        "name": "ITiCSE Conference",
+        "type": "Conference",
+        "categories": [
+            "STEM Education"
+        ],
+        "cfpDeadline": "January"
+    },
+    {
+        "id": "fie",
+        "name": "FIE Conference",
+        "type": "Conference",
+        "categories": [
+            "STEM Education"
+        ],
+        "cfpDeadline": "April"
+    },
+    {
+        "id": "asee",
+        "name": "ASEE Annual Conference",
+        "type": "Conference",
+        "categories": [
+            "STEM Education"
+        ],
+        "cfpDeadline": "October"
+    }
+]

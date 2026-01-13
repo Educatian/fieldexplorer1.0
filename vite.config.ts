@@ -23,7 +23,8 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, 'index.html'),
-          app: path.resolve(__dirname, 'app.html')
+          app: path.resolve(__dirname, 'app.html'),
+          admin: path.resolve(__dirname, 'admin.html')
         }
       }
     }
