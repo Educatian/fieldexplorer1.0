@@ -9,6 +9,96 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
+// ============================================================================
+// COMPREHENSIVE USER ACTION LOGGING SYSTEM
+// ============================================================================
+let currentSessionId: string | null = null;
+try {
+    currentSessionId = sessionStorage.getItem('fieldexplorer_session') || crypto.randomUUID();
+    sessionStorage.setItem('fieldexplorer_session', currentSessionId);
+} catch { /* fallback */ }
+
+interface LogEntry {
+    action_type: string;
+    context_tag?: string;
+    target_element?: string;
+    target_node?: string;
+    metadata?: Record<string, unknown>;
+    screen_x?: number;
+    screen_y?: number;
+}
+
+async function logAction(entry: LogEntry) {
+    if (!supabase) return;
+
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+
+        await supabase.from('user_logs').insert({
+            user_id: user?.id || null,
+            session_id: currentSessionId,
+            action_type: entry.action_type,
+            context_tag: entry.context_tag || detectContext(),
+            target_element: entry.target_element,
+            target_node: entry.target_node,
+            metadata: entry.metadata || {},
+            screen_x: entry.screen_x,
+            screen_y: entry.screen_y
+        });
+    } catch (e) {
+        console.warn('[Log] Failed:', e);
+    }
+}
+
+function detectContext(): string {
+    // Detect current context based on visible elements
+    if (document.getElementById('admin-popup-container')) return 'admin';
+    if (document.getElementById('collab-popup')?.style.display !== 'none') return 'collab';
+    if (document.querySelector('.sidebar')?.classList.contains('active')) return 'sidebar';
+    if (document.querySelector('.comparison-panel')?.classList.contains('active')) return 'comparison';
+    return 'network';
+}
+
+function getElementDescription(el: HTMLElement): string {
+    // Get meaningful description of clicked element
+    if (el.id) return `#${el.id}`;
+    if (el.getAttribute('data-metric')) return `metric:${el.getAttribute('data-metric')}`;
+    if (el.getAttribute('data-filter')) return `filter:${el.getAttribute('data-filter')}`;
+    if (el.classList.contains('btn')) return `btn:${el.textContent?.substring(0, 30)}`;
+    if (el.tagName === 'BUTTON') return `button:${el.textContent?.substring(0, 30)}`;
+    if (el.classList.contains('stat-item')) return 'stat-item';
+    if (el.classList.contains('metric-item')) return 'metric-item';
+    return el.tagName.toLowerCase();
+}
+
+// Global click logger
+document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+
+    // Skip logging for network canvas clicks (handled separately)
+    if (target.tagName === 'CANVAS') return;
+
+    logAction({
+        action_type: 'click',
+        target_element: getElementDescription(target),
+        screen_x: e.clientX,
+        screen_y: e.clientY
+    });
+}, { passive: true });
+
+// Auth state change logging
+supabase?.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN') {
+        logAction({ action_type: 'login', metadata: { email: session?.user?.email } });
+    } else if (event === 'SIGNED_OUT') {
+        logAction({ action_type: 'logout' });
+    }
+});
+
+// Page view logging
+logAction({ action_type: 'page_view', context_tag: 'network', metadata: { url: window.location.href } });
+
 // Annotation types
 interface Annotation {
     id?: string;
@@ -161,8 +251,15 @@ function getFavorites(): Set<string> {
     }
 }
 
-function saveFavorites(favorites: Set<string>) {
+function saveFavorites(favorites: Set<string>, lastAction?: { action: 'add' | 'remove', nodeId: string }) {
     localStorage.setItem(FAVORITES_KEY, JSON.stringify([...favorites]));
+    if (lastAction) {
+        logAction({
+            action_type: lastAction.action === 'add' ? 'favorite_add' : 'favorite_remove',
+            context_tag: 'sidebar',
+            target_node: lastAction.nodeId
+        });
+    }
 }
 
 // ============================================================================
@@ -1124,9 +1221,18 @@ function main() {
         if (params.nodes.length === 0) {
             hideSidebar();
             currentNodeId = null;
+            logAction({ action_type: 'node_deselect', context_tag: 'network' });
             return;
         }
-        handleNodeClick(params.nodes[0]);
+        const nodeId = params.nodes[0];
+        const node = nodes.find(n => n.id === nodeId);
+        logAction({
+            action_type: 'node_click',
+            context_tag: 'network',
+            target_node: nodeId,
+            metadata: { label: node?.label, group: node?.group }
+        });
+        handleNodeClick(nodeId);
     });
 
     // Hover
@@ -1230,6 +1336,7 @@ function main() {
             filterJournal = !filterJournal;
             (e.target as HTMLElement).classList.toggle('active', filterJournal);
             applyFilters();
+            logAction({ action_type: 'filter_toggle', context_tag: 'network', metadata: { filter: 'journal', value: filterJournal } });
         } catch (err) {
             console.error('Journal filter error:', err);
             showToast('저널 필터 오류');
@@ -1241,6 +1348,7 @@ function main() {
             filterConference = !filterConference;
             (e.target as HTMLElement).classList.toggle('active', filterConference);
             applyFilters();
+            logAction({ action_type: 'filter_toggle', context_tag: 'network', metadata: { filter: 'conference', value: filterConference } });
         } catch (err) {
             console.error('Conference filter error:', err);
             showToast('학회 필터 오류');
@@ -1252,6 +1360,7 @@ function main() {
         try {
             impactFilter = (e.target as HTMLSelectElement).value;
             applyFilters();
+            logAction({ action_type: 'filter_change', context_tag: 'network', metadata: { filter: 'impact', value: impactFilter } });
             showToast(impactFilter ? `${impactFilter} 저널만 표시` : '전체 등급 표시');
         } catch (err) {
             console.error('Impact filter error:', err);
@@ -2589,6 +2698,7 @@ function main() {
         }
     }
 
+    let searchLogTimeout: number | null = null;
     searchInput.addEventListener('input', (e) => {
         const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
         updateAutocomplete(query);
@@ -2598,6 +2708,12 @@ function main() {
             return;
         }
         nodesDataset.update(nodes.map(n => ({ id: n.id, opacity: n.id.toLowerCase().includes(query) ? 1 : 0.08 })));
+
+        // Debounced search logging (only log after 500ms of no typing)
+        if (searchLogTimeout) clearTimeout(searchLogTimeout);
+        searchLogTimeout = window.setTimeout(() => {
+            logAction({ action_type: 'search', context_tag: 'network', metadata: { query } });
+        }, 500);
     });
 
     searchInput.addEventListener('keydown', (e) => {
