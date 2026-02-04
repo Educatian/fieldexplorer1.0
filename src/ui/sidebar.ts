@@ -10,55 +10,67 @@ import { getVenueDetailsByName, type VenueDetails } from '../data/venues';
 // ============================================================================
 
 export interface RenderContext {
-    nodes: NodeData[];
-    edges: EdgeData[];
-    favorites: Set<string>;
-    onNodeClick?: (nodeId: string) => void;
+  nodes: NodeData[];
+  edges: EdgeData[];
+  favorites: Set<string>;
+  onNodeClick?: (nodeId: string) => void;
 }
 
 export function getRecommendations(nodeId: string, nodes: NodeData[], edges: EdgeData[]): NodeData[] {
-    const myCategories = edges.filter(e => e.from === nodeId).map(e => e.to);
-    const recommendations = new Set<string>();
+  const myCategories = edges.filter(e => e.from === nodeId).map(e => e.to);
+  const recommendations = new Set<string>();
 
-    for (const cat of myCategories) {
-        const sameCategory = edges.filter(e => e.to === cat && e.from !== nodeId).map(e => e.from);
-        sameCategory.forEach(n => recommendations.add(n));
-    }
+  for (const cat of myCategories) {
+    const sameCategory = edges.filter(e => e.to === cat && e.from !== nodeId).map(e => e.from);
+    sameCategory.forEach(n => recommendations.add(n));
+  }
 
-    return Array.from(recommendations)
-        .slice(0, 5)
-        .map(id => nodes.find(n => n.id === id)!)
-        .filter(Boolean);
+  return Array.from(recommendations)
+    .slice(0, 5)
+    .map(id => nodes.find(n => n.id === id)!)
+    .filter(Boolean);
 }
 
 export function renderVenueDetails(data: VenueDetails, node: NodeData, recommendations: NodeData[]): string {
-    const desc = data.overview?.description || '정보 없음';
-    const website = data.overview?.website;
-    const topics = data.topics?.length ? data.topics.join(', ') : '정보 없음';
-    const acceptance = data.newcomerFriendliness?.acceptanceRate || 'N/A';
-    const decision = data.newcomerFriendliness?.timeToDecision || 'N/A';
+  const desc = data.overview?.description || '정보 없음';
+  const website = data.overview?.website;
+  const topics = data.topics?.length ? data.topics.join(', ') : '정보 없음';
+  const acceptance = data.newcomerFriendliness?.acceptanceRate || 'N/A';
+  const decision = data.newcomerFriendliness?.timeToDecision || 'N/A';
 
-    const methodologyHtml = data.methodologyProfile?.length
-        ? data.methodologyProfile.map(m => `
-        <div style="margin-bottom: 8px;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 0.75rem;">
-            <span>${m.methodology}</span>
-            <span style="color: var(--color-accent);">${m.prevalence}%</span>
-          </div>
-          <div style="background: var(--bg-tertiary); border-radius: 3px; height: 4px; overflow: hidden;">
-            <div style="background: var(--color-accent); width: ${m.prevalence}%; height: 100%;"></div>
-          </div>
-        </div>
-      `).join('')
-        : '<p>정보 없음</p>';
+  const methodologyHtml = data.methodologyProfile?.length
+    ? data.methodologyProfile.map(m => {
+      const isExpert = data.isExpertVerified;
+      const barTitle = isExpert ? "Expert Verified" : "Data-driven Profile";
+      return `
+            <div style="margin-bottom: 12px;" title="${barTitle}">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 0.75rem; font-weight: 500;">
+                <span style="color: var(--text-secondary);">${m.methodology}</span>
+                <span style="color: var(--color-accent); font-family: 'Inter', sans-serif;">${m.prevalence}%</span>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.05); border-radius: 4px; height: 6px; overflow: hidden; position: relative;">
+                <div class="methodology-bar-shimmer" style="
+                  background: linear-gradient(90deg, var(--color-accent) 0%, #ffc857 50%, var(--color-accent) 100%);
+                  background-size: 200% 100%;
+                  width: ${m.prevalence}%;
+                  height: 100%;
+                  border-radius: 4px;
+                  animation: shimmer 3s infinite linear;
+                  box-shadow: 0 0 10px rgba(245, 166, 35, 0.2);
+                "></div>
+              </div>
+            </div>
+            `;
+    }).join('')
+    : '<p style="color: var(--text-muted); font-size: 0.85rem;">정보 없음</p>';
 
-    const contributorsHtml = data.keyContributors?.length
-        ? `<ul class="sidebar-list">${data.keyContributors.map(c =>
-            `<li>${c.name}${c.affiliation ? ` <span style="color: var(--text-muted);">· ${c.affiliation}</span>` : ''}</li>`
-        ).join('')}</ul>`
-        : '<p>정보 없음</p>';
+  const contributorsHtml = data.keyContributors?.length
+    ? `<ul class="sidebar-list">${data.keyContributors.map(c =>
+      `<li>${c.name}${c.affiliation ? ` <span style="color: var(--text-muted);">· ${c.affiliation}</span>` : ''}</li>`
+    ).join('')}</ul>`
+    : '<p>정보 없음</p>';
 
-    const cfpHtml = node.cfpDeadline ? `
+  const cfpHtml = node.cfpDeadline ? `
     <div class="sidebar-section">
       <h3>📅 CFP 일정</h3>
       <div class="cfp-info">
@@ -67,7 +79,7 @@ export function renderVenueDetails(data: VenueDetails, node: NodeData, recommend
     </div>
   ` : '';
 
-    const recsHtml = recommendations.length ? `
+  const recsHtml = recommendations.length ? `
     <div class="sidebar-section">
       <h3>🎓 유사한 저널/학회</h3>
       <div class="recommendation-chips">
@@ -76,7 +88,7 @@ export function renderVenueDetails(data: VenueDetails, node: NodeData, recommend
     </div>
   ` : '';
 
-    return `
+  return `
     <div class="sidebar-section">
       <h3>개요</h3>
       <p>${desc}</p>
@@ -114,15 +126,15 @@ export function renderVenueDetails(data: VenueDetails, node: NodeData, recommend
 // ============================================================================
 
 export function renderCategoryDetails(connectedNodes: NodeData[]): string {
-    const journals = connectedNodes.filter(n => n.group === 'Journal');
-    const conferences = connectedNodes.filter(n => n.group === 'Conference' || n.group === 'SubConference');
+  const journals = connectedNodes.filter(n => n.group === 'Journal');
+  const conferences = connectedNodes.filter(n => n.group === 'Conference' || n.group === 'SubConference');
 
-    return `
+  return `
     <div class="sidebar-section">
       <h3>저널 (${journals.length}개)</h3>
       ${journals.length ? `<ul class="sidebar-list">${journals.map(n =>
-        `<li>${n.id}${n.impact ? ` <span class="impact-badge" style="background: ${n.impact === 'Q1' ? '#10b981' : n.impact === 'Q2' ? '#3b82f6' : '#f59e0b'}; font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; color: white;">${n.impact}</span>` : ''}</li>`
-    ).join('')}</ul>` : '<p>없음</p>'}
+    `<li>${n.id}${n.impact ? ` <span class="impact-badge" style="background: ${n.impact === 'Q1' ? '#10b981' : n.impact === 'Q2' ? '#3b82f6' : '#f59e0b'}; font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; color: white;">${n.impact}</span>` : ''}</li>`
+  ).join('')}</ul>` : '<p>없음</p>'}
     </div>
     
     <div class="sidebar-section">

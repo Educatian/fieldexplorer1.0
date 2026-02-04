@@ -22,6 +22,7 @@ export interface VenueDetails {
     overview: { description: string; website: string };
     topics: string[];
     methodologyProfile: { methodology: string; prevalence: number }[];
+    isExpertVerified?: boolean;
     newcomerFriendliness: { acceptanceRate: string; timeToDecision: string };
     keyContributors: { name: string; affiliation: string }[];
 }

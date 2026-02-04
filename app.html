@@ -39,12 +39,13 @@
     :root {
       /* KELS Brand Colors - matching landing page */
       --bg-primary: #0d1b3e;
-      --bg-secondary: #152852;
-      --bg-tertiary: #1e3a5f;
-      --border-color: #2a4a7a;
+      --bg-secondary: #0f1f46;
+      /* Slightly lighter for layering */
+      --bg-tertiary: rgba(30, 58, 95, 0.4);
+      --border-color: rgba(42, 74, 122, 0.5);
       --text-primary: #ffffff;
-      --text-secondary: #b8c5d6;
-      --text-muted: #7a8ba3;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
 
       --color-journal: #7ba0cc;
       --color-conference: #10b981;
@@ -52,21 +53,26 @@
       --color-accent: #f5a623;
       --color-favorite: #ef4444;
 
-      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.4);
-      --glass-bg: rgba(30, 41, 59, 0.9);
-      --glass-border: rgba(71, 85, 105, 0.5);
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+      --glass-bg: rgba(13, 27, 62, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --glass-blur: blur(16px);
+
+      --stellar-glow: 0 0 15px rgba(245, 166, 35, 0.15);
     }
 
     [data-theme="light"] {
       --bg-primary: #f8fafc;
       --bg-secondary: #ffffff;
-      --bg-tertiary: #e2e8f0;
-      --border-color: #cbd5e1;
-      --text-primary: #1e293b;
+      --bg-tertiary: #f1f5f9;
+      --border-color: #e2e8f0;
+      --text-primary: #0f172a;
       --text-secondary: #475569;
       --text-muted: #64748b;
-      --glass-bg: rgba(255, 255, 255, 0.9);
-      --glass-border: rgba(203, 213, 225, 0.5);
+      --glass-bg: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(0, 0, 0, 0.05);
+      --glass-blur: blur(16px);
+      --stellar-glow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     html,
@@ -130,17 +136,72 @@
       white-space: nowrap;
     }
 
-    .fullscreen-exit:hover {
-      background: var(--bg-tertiary);
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      color: var(--text-primary);
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    body.fullscreen .fullscreen-exit {
-      display: block;
+    .toast.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      color: var(--color-accent);
+      font-size: 1.1rem;
     }
 
     body.fullscreen .fullscreen-edge-trigger:hover~.fullscreen-exit,
     body.fullscreen .fullscreen-exit:hover {
       right: 0;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    @keyframes stellar-pulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+      }
+    }
+
+    .methodology-bar-shimmer {
+      background-size: 200% 100% !important;
+      animation: shimmer 3s infinite linear;
     }
 
     /* ===== HEADER ===== */
@@ -222,33 +283,76 @@
 
     .search-box svg {
       position: absolute;
-      left: 8px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
       width: 14px;
       height: 14px;
       fill: var(--text-muted);
+      transition: fill 0.2s;
+    }
+
+    .search-box:focus-within svg {
+      fill: var(--color-accent);
     }
 
     /* ===== SEARCH AUTOCOMPLETE ===== */
     .search-autocomplete {
       position: absolute;
-      top: 100%;
+      top: calc(100% + 8px);
       left: 0;
       right: 0;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      max-height: 250px;
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      max-height: 320px;
       overflow-y: auto;
-      z-index: 100;
+      z-index: 1100;
       display: none;
-      margin-top: 4px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      padding: 6px;
+    }
+
+    /* ===== SEARCH FOCUS MODE ===== */
+    .search-focus-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      z-index: 1000;
+      pointer-events: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body.search-focused .search-focus-overlay {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+
+    .header-controls {
+      position: relative;
+      z-index: 1200;
+      /* Above overlay */
     }
 
     .search-autocomplete.visible {
       display: block;
+      animation: slideInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideInDown {
+      from {
+        transform: translateY(-10px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .search-autocomplete-item {
@@ -1551,14 +1655,19 @@
 
     /* ===== SIDEBAR ===== */
     .sidebar {
-      width: 340px;
+      width: 360px;
+      /* Slightly wider for better readability */
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
       border-left: 1px solid var(--glass-border);
+      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
       transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
       overflow-y: auto;
       z-index: 60;
+      line-height: 1.6;
+      letter-spacing: -0.01em;
     }
 
     .sidebar.visible {
@@ -1569,14 +1678,15 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 16px;
+      padding: 20px 24px;
       border-bottom: 1px solid var(--glass-border);
       position: sticky;
       top: 0;
       background: var(--glass-bg);
-      backdrop-filter: blur(20px);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
       z-index: 10;
-      gap: 10px;
+      gap: 12px;
     }
 
     .sidebar-title-group {
@@ -2628,6 +2738,7 @@
       <button class="btn btn-icon" id="theme-btn" title="다크/라이트 테마">🌗</button>
       <button class="btn btn-icon" id="lang-btn" title="한국어/English">🌐</button>
       <button class="btn btn-icon" id="about-btn" title="사용 안내">ℹ️</button>
+      <button class="btn btn-icon" id="tour-btn" title="가이드 시작">🎓</button>
       <button class="btn btn-icon" id="refresh-btn" title="새로고침">🔄</button>
       <button class="btn" id="logout-btn" title="로그아웃" style="color: #ef4444;">🚪 로그아웃</button>
     </div>
@@ -2808,6 +2919,13 @@
       </div>
     </div>
 
+
+    <div id="toast-container" class="toast">
+      <span class="toast-icon">✨</span>
+      <span id="toast-message"></span>
+    </div>
+
+    <div class="search-focus-overlay" id="search-overlay"></div>
 
     <script type="module" src="/index.tsx"></script>
 </body>

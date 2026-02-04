@@ -1,4 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
+import semanticProfiles from './src/data/semantic_profiles.json';
+import { shouldShowTour, startTour } from './src/ui/tour';
 
 declare const vis: any;
 declare const html2canvas: any;
@@ -281,13 +283,17 @@ interface NodeData {
     impact?: string;
     cfpDeadline?: string;
     hidden?: boolean;
+    mass?: number;
 }
 
 interface EdgeData {
     id?: string;
     from: string;
     to: string;
-    dashes?: boolean;
+    value?: number;
+    title?: string;
+    color?: any;
+    dashes?: boolean | number[];
     hidden?: boolean;
 }
 
@@ -298,12 +304,19 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
 
     for (const venue of venueData) {
         if (!nodeMap.has(venue.name)) {
+            // Impact-based Gravity (Mass)
+            let mass = 1.0;
+            if (venue.impact === 'Q1') mass = 4.0;
+            else if (venue.impact === 'Q2') mass = 2.5;
+            else if (venue.impact === 'Q3') mass = 1.5;
+
             nodeMap.set(venue.name, {
                 id: venue.name,
                 label: venue.name.length > 35 ? venue.name.substring(0, 32) + '...' : venue.name,
                 group: venue.type,
                 impact: venue.impact,
-                cfpDeadline: venue.cfpDeadline
+                cfpDeadline: venue.cfpDeadline,
+                mass: mass
             });
         }
 
@@ -341,6 +354,71 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
                 to: link.to,
                 dashes: true  // Distinct style for category-to-category links
             });
+        }
+    }
+
+    // --- DATA-DRIVEN SEMANTIC EDGES (Cosine Similarity with TF-IDF) ---
+    const venuesArray = Array.from(venueData);
+    for (let i = 0; i < venuesArray.length; i++) {
+        for (let j = i + 1; j < venuesArray.length; j++) {
+            const v1 = venuesArray[i];
+            const v2 = venuesArray[j];
+
+            const profile1 = (semanticProfiles as any)[v1.name];
+            const profile2 = (semanticProfiles as any)[v2.name];
+
+            if (profile1?.vector && profile2?.vector) {
+                const vec1 = profile1.vector;
+                const vec2 = profile2.vector;
+
+                // Calculate Cosine Similarity
+                let dotProduct = 0;
+                let mag1 = 0;
+                let mag2 = 0;
+
+                // Collect all unique terms from both vectors
+                const terms = new Set([...Object.keys(vec1), ...Object.keys(vec2)]);
+                const sharedMeth: string[] = [];
+                const sharedDomain: string[] = [];
+
+                for (const term of terms) {
+                    const val1 = vec1[term] || 0;
+                    const val2 = vec2[term] || 0;
+                    dotProduct += val1 * val2;
+                    mag1 += val1 * val1;
+                    mag2 += val2 * val2;
+
+                    if (val1 > 0 && val2 > 0) {
+                        if (profile1.methodology?.[term] || profile2.methodology?.[term]) {
+                            sharedMeth.push(term);
+                        } else {
+                            sharedDomain.push(term);
+                        }
+                    }
+                }
+
+                const similarity = dotProduct / (Math.sqrt(mag1) * Math.sqrt(mag2));
+
+                // Add an edge if similarity is high enough
+                if (similarity > 0.03) { // Lowered from 0.1 to 0.03 for denser TF-IDF matching
+                    const tooltip = [
+                        `Cosine Similarity: ${Math.round(similarity * 100)}%`,
+                        sharedMeth.length > 0 ? `🛠️ Method: ${sharedMeth.slice(0, 5).join(', ')}` : '',
+                        sharedDomain.length > 0 ? `📚 Domain: ${sharedDomain.slice(0, 5).join(', ')}` : ''
+                    ].filter(Boolean).join('\n');
+
+                    edges.push({
+                        id: `semantic-${v1.name}-${v2.name}`,
+                        from: v1.name,
+                        to: v2.name,
+                        value: similarity * 15, // Slightly increased weight for visibility
+                        title: tooltip,
+                        color: { color: 'rgba(255, 255, 255, 0.08)', highlight: 'rgba(255, 215, 0, 0.4)' },
+                        hidden: false,
+                        dashes: [2, 10]
+                    });
+                }
+            }
         }
     }
 
@@ -539,6 +617,7 @@ interface VenueDetails {
     overview: { description: string; website: string };
     topics: string[];
     methodologyProfile: { methodology: string; prevalence: number }[];
+    isExpertVerified?: boolean; // If true, automated keyword logic won't override it if data is noisy
     newcomerFriendliness: { acceptanceRate: string; timeToDecision: string };
     keyContributors: { name: string; affiliation: string }[];
 }
@@ -548,6 +627,7 @@ const venueDetails: Record<string, VenueDetails> = {
         overview: { description: "교육공학 분야의 최고 저널로, 연구와 개발을 연결하는 논문을 게재합니다.", website: "https://www.springer.com/journal/11423" },
         topics: ["Instructional Design", "Educational Technology", "Learning Environments"],
         methodologyProfile: [{ methodology: "Design-based Research", prevalence: 35 }, { methodology: "Experimental", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        isExpertVerified: true,
         newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
         keyContributors: [{ name: "Richard E. Mayer", affiliation: "UC Santa Barbara" }, { name: "Jan Elen", affiliation: "KU Leuven" }]
     },
@@ -555,6 +635,7 @@ const venueDetails: Record<string, VenueDetails> = {
         overview: { description: "학습과학 분야의 선도적 저널로, 학습의 인지적, 사회적 측면을 다룹니다.", website: "https://www.tandfonline.com/toc/hlns20/current" },
         topics: ["Cognition", "Learning Environments", "CSCL", "Educational Design"],
         methodologyProfile: [{ methodology: "Design-based Research", prevalence: 40 }, { methodology: "Qualitative", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 20 }],
+        isExpertVerified: true,
         newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "4-6개월" },
         keyContributors: [{ name: "James Greeno", affiliation: "Stanford" }, { name: "Brigid Barron", affiliation: "Stanford" }]
     },
@@ -562,6 +643,7 @@ const venueDetails: Record<string, VenueDetails> = {
         overview: { description: "테크놀로지 기반 학습의 최상위 저널로, 실증 연구를 중시합니다.", website: "https://www.sciencedirect.com/journal/computers-and-education" },
         topics: ["TEL", "E-learning", "Educational Technology", "Learning Analytics"],
         methodologyProfile: [{ methodology: "Experimental", prevalence: 45 }, { methodology: "Survey", prevalence: 25 }, { methodology: "Mixed Methods", prevalence: 20 }],
+        isExpertVerified: true,
         newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "2-3개월" },
         keyContributors: [{ name: "Dragan Gasevic", affiliation: "Monash University" }, { name: "Vania Dimitrova", affiliation: "University of Leeds" }]
     },
@@ -579,10 +661,11 @@ const venueDetails: Record<string, VenueDetails> = {
         newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
         keyContributors: [{ name: "Jeroen van Merriënboer", affiliation: "Maastricht University" }, { name: "Paul Kirschner", affiliation: "Open University Netherlands" }]
     },
-    "International Journal of CSCL": {
+    "International Journal of Computer-Supported Collaborative Learning": {
         overview: { description: "컴퓨터 지원 협력 학습(CSCL) 분야의 핵심 저널입니다.", website: "https://www.springer.com/journal/11412" },
         topics: ["Collaborative Learning", "CSCL", "Group Cognition", "Knowledge Building"],
         methodologyProfile: [{ methodology: "Design-based Research", prevalence: 35 }, { methodology: "Discourse Analysis", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        isExpertVerified: true,
         newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "4-5개월" },
         keyContributors: [{ name: "Gerry Stahl", affiliation: "Drexel University" }, { name: "Sanna Järvelä", affiliation: "University of Oulu" }]
     },
@@ -648,7 +731,519 @@ const venueDetails: Record<string, VenueDetails> = {
         methodologyProfile: [{ methodology: "System Development", prevalence: 40 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Machine Learning", prevalence: 20 }],
         newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
         keyContributors: [{ name: "Kurt VanLehn", affiliation: "Arizona State University" }, { name: "Cristina Conati", affiliation: "UBC" }]
-    }
+    },
+    "American Educational Research Journal": {
+        overview: { description: "AERA의 대표 저널로, 교육 연구의 모든 측면에서 중요한 원천 데이터를 제공합니다.", website: "https://journals.sagepub.com/home/aer" },
+        topics: ["Social & Institutional Analysis", "Teaching & Learning", "Policy", "Curriculum"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 40 }, { methodology: "Quantitative", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "5-8%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Felicia Moore Mensah", affiliation: "Teachers College" }]
+    },
+    "Educational Researcher": {
+        overview: { description: "교육 환경의 변화와 정책적 이슈를 다루는 AERA의 주요 학술지입니다.", website: "https://journals.sagepub.com/home/edr" },
+        topics: ["Educational Policy", "Research Ethics", "Social Contexts", "Teacher Education"],
+        methodologyProfile: [{ methodology: "Theoretical", prevalence: 40 }, { methodology: "Review", prevalence: 30 }, { methodology: "Policy Analysis", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "10-12%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Greg Duncan", affiliation: "UC Irvine" }]
+    },
+    "Cognition and Instruction": {
+        overview: { description: "학습, 지적 활동, 그리고 교육적 환경 간의 상호작용을 심층 분석합니다.", website: "https://www.tandfonline.com/toc/hcgi20/current" },
+        topics: ["Cognitive Science", "Learning Processes", "Mathematical Thinking", "Socio-cultural Perspectives"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 50 }, { methodology: "Micro-genetic Analysis", prevalence: 20 }, { methodology: "Ethnographic", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "12-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Alan Schoenfeld", affiliation: "UC Berkeley" }]
+    },
+    "Journal of Computer Assisted Learning": {
+        overview: { description: "컴퓨터 기반 학습 환경에서의 교수학습 효과를 연구하는 선도적인 국제 학술지입니다.", website: "https://onlinelibrary.wiley.com/journal/13652729" },
+        topics: ["Digital Literacy", "Blended Learning", "Computer-Supported Collaborative Learning", "Mobile Learning"],
+        methodologyProfile: [{ methodology: "Quasi-experimental", prevalence: 40 }, { methodology: "Survey", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Paul Kirschner", affiliation: "Open University Netherlands" }]
+    },
+    "IEEE Transactions on Learning Technologies": {
+        overview: { description: "학습 기술의 설계, 개발 및 실제 적용에 관한 기술적 연구를 중점적으로 다룹니다.", website: "https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=4620070" },
+        topics: ["Adaptive Systems", "Immersive Environments", "Learning Management Systems", "Serious Games"],
+        methodologyProfile: [{ methodology: "System Engineering", prevalence: 45 }, { methodology: "Technical Evaluation", prevalence: 35 }, { methodology: "Experimental", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "18-22%", timeToDecision: "4-5개월" },
+        keyContributors: [{ name: "Claude Frasson", affiliation: "University of Montreal" }]
+    },
+    "User Modeling and User-Adapted Interaction": {
+        overview: { description: "사용자 모델링 및 대화형 시스템의 개인화 기술에 관한 권위 있는 저널입니다.", website: "https://www.springer.com/journal/11257" },
+        topics: ["Personalization", "Adaptivity", "User Profiling", "Intelligent Interfaces"],
+        methodologyProfile: [{ methodology: "Algorithm Development", prevalence: 40 }, { methodology: "User Evaluation", prevalence: 35 }, { methodology: "Data Modeling", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-18%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Anthony Jameson", affiliation: "DFKI" }]
+    },
+    "Contemporary Educational Psychology": {
+        overview: { description: "현대 교육심리학의 이론적 발견을 실제 학습 현장에 적용하는 연구를 게재합니다.", website: "https://www.sciencedirect.com/journal/contemporary-educational-psychology" },
+        topics: ["Motivation", "Learning Strategies", "Metacognition", "Self-regulation"],
+        methodologyProfile: [{ methodology: "Quantitative", prevalence: 60 }, { methodology: "Experimental", prevalence: 25 }, { methodology: "Longitudinal", prevalence: 15 }],
+        newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Johnmarshall Reeve", affiliation: "Australian Catholic University" }]
+    },
+    "Journal of Research in Science Teaching": {
+        overview: { description: "과학교육 분야의 최상위 저널로, 과학 학습과 교수법에 대한 혁신적 연구를 다룹니다.", website: "https://onlinelibrary.wiley.com/journal/10982736" },
+        topics: ["Science Learning", "Scientific Literacy", "Equity in Science", "Teacher Cognition"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Quantitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "10-12%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Norman G. Lederman", affiliation: "Illinois Institute of Technology" }]
+    },
+    "Science Education": {
+        overview: { description: "과학 교육의 이론, 정책 및 실제를 다루며, 사회 문화적 관점을 중시합니다.", website: "https://onlinelibrary.wiley.com/journal/1098237x" },
+        topics: ["Science Policy", "Culture & Learning", "Informal Science", "Science Teacher Education"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 50 }, { methodology: "Theoretical", prevalence: 25 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "12-15%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Okhee Lee", affiliation: "NYU" }]
+    },
+    "Journal of Engineering Education": {
+        overview: { description: "공학교육 연구의 패러다임을 선도하는 저널로, 공학 교육의 질적 향상을 도모합니다.", website: "https://onlinelibrary.wiley.com/journal/21689830" },
+        topics: ["Engineering Pedagogy", "Diversity in Engineering", "Problem-based Learning", "Identity"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Qualitative", prevalence: 35 }, { methodology: "Quantitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-18%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Karl A. Smith", affiliation: "University of Minnesota" }]
+    },
+    "Journal of Teacher Education": {
+        overview: { description: "교사 교육 정책과 실천의 글로벌 표준을 제시하는 선도적인 저널입니다.", website: "https://journals.sagepub.com/home/jte" },
+        topics: ["Preservice Education", "Teacher Learning", "Education Policy", "Diversity & Equity"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Quantitative", prevalence: 30 }, { methodology: "Policy Analysis", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "8-12%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Marilyn Cochran-Smith", affiliation: "Boston College" }]
+    },
+    "Teaching and Teacher Education": {
+        overview: { description: "교수 활동과 교사 교육 전반에 걸친 실증적 연구를 다루는 국제 학술지입니다.", website: "https://www.sciencedirect.com/journal/teaching-and-teacher-education" },
+        topics: ["Professional Development", "Teaching Practice", "Teacher Motivation", "Classroom Management"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 35 }, { methodology: "Qualitative", prevalence: 35 }, { methodology: "Survey", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Fred Korthagen", affiliation: "Utrecht University" }]
+    },
+    "International Journal of Science Education": {
+        overview: { description: "과학 교육의 모든 수준에서 발생하는 교수학습 문제를 폭넓게 탐구합니다.", website: "https://www.tandfonline.com/toc/tsed20/current" },
+        topics: ["Conceptual Change", "Laboratory Learning", "Inquiry-based Teaching", "Assessment in Science"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Survey", prevalence: 30 }, { methodology: "Experimental", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "John Gilbert", affiliation: "University of Reading" }]
+    },
+    "Journal of Science Education and Technology": {
+        overview: { description: "과학 교육과 기술의 융합을 통한 교육적 혁신을 중점적으로 다룹니다.", website: "https://www.springer.com/journal/10956" },
+        topics: ["Computer Simulations", "Robotics in Education", "Virtual Labs", "Science Visualization"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "Design-based Research", prevalence: 35 }, { methodology: "Case Study", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "2-4개월" },
+        keyContributors: [{ name: "Joseph Krajcik", affiliation: "Michigan State University" }]
+    },
+    "ICLS": {
+        overview: { description: "국제학습과학학회(ISLS)의 격년제 핵심 컨퍼런스로, 학습의 기초 메커니즘을 탐구합니다.", website: "https://www.isls.org/conferences/icls/" },
+        topics: ["Learning Mechanisms", "Cognitive Science", "Socio-cultural Learning", "Design-based Research"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Experimental", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "30-35% (Full Paper)", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Janet Kolodner", affiliation: "Georgia Tech" }]
+    },
+    "CSCL": {
+        overview: { description: "국제학습과학학회(ISLS) 산하의 핵심 컨퍼런스로, 컴퓨터 지원 협력 학습에 집중합니다.", website: "https://www.isls.org/conferences/cscl/" },
+        topics: ["Collaborative Learning", "Group Cognition", "Knowledge Building", "Orchestration"],
+        methodologyProfile: [{ methodology: "Interaction Analysis", prevalence: 40 }, { methodology: "Design-based Research", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30% (Full Paper)", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Jeremy Roschelle", affiliation: "Digital Promise" }]
+    },
+    "EARLI Conference": {
+        overview: { description: "유럽학습교수연구학회(EARLI)의 연례 학술대회로, 학습과 교수법에 관한 전방위 연구를 다룹니다.", website: "https://www.earli.org/conferences" },
+        topics: ["Instructional Psychology", "Learning Environments", "Teacher Education", "Higher Education"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Qualitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "50-60%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Lucia Mason", affiliation: "University of Padova" }]
+    },
+    "EDM Conference": {
+        overview: { description: "교육 데이터 마이닝 분야의 주요 학술대회로, 데이터 기반의 학습 패턴 발견을 중시합니다.", website: "https://educationaldatamining.org/edm-conferences/" },
+        topics: ["Predictive Modeling", "Knowledge Tracing", "Pattern Discovery", "Education Analytics"],
+        methodologyProfile: [{ methodology: "Machine Learning", prevalence: 50 }, { methodology: "Data Mining", prevalence: 35 }, { methodology: "Statistical Modeling", prevalence: 15 }],
+        newcomerFriendliness: { acceptanceRate: "25-30% (Full Paper)", timeToDecision: "2개월" },
+        keyContributors: [{ name: "Neil Heffernan", affiliation: "Worcester Polytechnic Institute" }]
+    },
+    "ITS Conference": {
+        overview: { description: "지능형 튜터링 시스템과 지능형 학습 환경에 관한 격년제 컨퍼런스입니다.", website: "https://its2024.gr" },
+        topics: ["Intelligent Tutoring", "Adaptive Instruction", "Student Modeling", "AI in Education"],
+        methodologyProfile: [{ methodology: "System Development", prevalence: 45 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Technical Evaluation", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "35-40%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Benjamin Nye", affiliation: "ICT" }]
+    },
+    "CSCW Conference": {
+        overview: { description: "컴퓨터 지원 협업 작업 및 사회적 컴퓨팅에 관한 선도적인 학술대회입니다.", website: "https://cscw.acm.org" },
+        topics: ["Social Computing", "Collaborative Work", "Community Platforms", "Online Behavior"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "System Design", prevalence: 30 }, { methodology: "Large-scale Data Analysis", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30% (Journal-track)", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Gary Olson", affiliation: "UC Irvine" }]
+    },
+    "Educational Psychology Review": {
+        overview: { description: "교육심리학 분야의 핵심 이론과 연구 결과를 체계적으로 리뷰하고 정리합니다.", website: "https://www.springer.com/journal/10648" },
+        topics: ["Learning Processes", "Instructional Theory", "Metacognition", "Educational Policy"],
+        methodologyProfile: [{ methodology: "Literature Review", prevalence: 50 }, { methodology: "Meta-analysis", prevalence: 40 }, { methodology: "Theoretical", prevalence: 10 }],
+        newcomerFriendliness: { acceptanceRate: "12-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Fred Paas", affiliation: "Erasmus University Rotterdam" }]
+    },
+    "Educational Psychologist": {
+        overview: { description: "교육심리학의 이론적 발전과 실제 적용을 다루는 권위 있는 학술지입니다.", website: "https://www.tandfonline.com/toc/hedp20/current" },
+        topics: ["Cognitive Development", "Motivation", "Self-regulated Learning", "Social Contexts"],
+        methodologyProfile: [{ methodology: "Theoretical", prevalence: 50 }, { methodology: "Review", prevalence: 30 }, { methodology: "Conceptual Analysis", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "8-12%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Gale Sinatra", affiliation: "USC" }]
+    },
+    "Educational Technology & Society": {
+        overview: { description: "기술이 교육에 미치는 사회적, 문화적 영향과 실제적 적용을 탐구하는 오픈 액세스 저널입니다.", website: "https://www.jett.org" },
+        topics: ["TEL", "Learning Design", "Social Presence", "Mobile Learning"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Survey", prevalence: 30 }, { methodology: "Experimental", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Kinshuk", affiliation: "University of North Texas" }]
+    },
+    "Computers in Human Behavior": {
+        overview: { description: "인간의 심리와 행태에 컴퓨터가 미치는 영향에 관한 다학제적 연구를 다룹니다.", website: "https://www.sciencedirect.com/journal/computers-in-human-behavior" },
+        topics: ["Psychology of Tech", "Human-Computer Interaction", "Social Media", "Cyberpsychology"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 45 }, { methodology: "Survey", prevalence: 35 }, { methodology: "Quantitative", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Robert DeRubeis", affiliation: "University of Pennsylvania" }]
+    },
+    "Internet and Higher Education": {
+        overview: { description: "고등교육에서의 온라인 학습과 기술 활용에 관한 실증적 연구를 중시합니다.", website: "https://www.sciencedirect.com/journal/the-internet-and-higher-education" },
+        topics: ["Higher Education", "Online Learning", "Academic Engagement", "Digital Transformation"],
+        methodologyProfile: [{ methodology: "Quantitative", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Qualitative", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "12-15%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Karen Swan", affiliation: "University of Illinois" }]
+    },
+    "Learning Media and Technology": {
+        overview: { description: "교육 기술에 대한 비판적 시각을 제공하며, 미디어와 테크놀로지의 사회적 맥락을 분석합니다.", website: "https://www.tandfonline.com/toc/cjem20/current" },
+        topics: ["Critical Pedagogy", "Datafication", "Digital Divide", "Educational Media"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Theoretical", prevalence: 35 }, { methodology: "Critical Analysis", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Neil Selwyn", affiliation: "Monash University" }]
+    },
+    "UIST Conference": {
+        overview: { description: "사용자 인터페이스 소프트웨어 및 기술에 관한 핵심 기술 컨퍼런스입니다.", website: "https://uist.acm.org" },
+        topics: ["Interaction Techniques", "Input Devices", "Ubiquitous Computing", "VR/AR Tech"],
+        methodologyProfile: [{ methodology: "System Development", prevalence: 60 }, { methodology: "Technical Evaluation", prevalence: 30 }, { methodology: "User Study", prevalence: 10 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Scott Hudson", affiliation: "CMU" }]
+    },
+    "AECT Convention": {
+        overview: { description: "교육 통신 및 기술 협회(AECT)의 연례 컨퍼런스로, 교수 설계와 실무를 중시합니다.", website: "https://aect.org/convention" },
+        topics: ["Instructional Design", "Professional Development", "Learning Innovation", "Educational Practice"],
+        methodologyProfile: [{ methodology: "Design-based Research", prevalence: 35 }, { methodology: "Case Study", prevalence: 35 }, { methodology: "Qualitative", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "50-60%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "MJ Bishop", affiliation: "University System of Maryland" }]
+    },
+    "L@S Conference": {
+        overview: { description: "대규모 학습 시스템(MOOC 등)의 설계와 분석에 관한 연구를 다룹니다.", website: "https://learningatscale.acm.org" },
+        topics: ["MOOCs", "Scaleable Learning", "Social Interaction at Scale", "Analytics"],
+        methodologyProfile: [{ methodology: "Data Analysis", prevalence: 40 }, { methodology: "System Design", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30% (Full Paper)", timeToDecision: "2개월" },
+        keyContributors: [{ name: "Justin Reich", affiliation: "MIT" }]
+    },
+    "Mind Culture and Activity": {
+        overview: { description: "학습과 발달의 문화적, 역사적, 활동적 맥락을 탐구하는 선도적인 저널입니다.", website: "https://www.tandfonline.com/toc/hmca20/current" },
+        topics: ["Activity Theory", "Sociocultural Theory", "Developmental Psychology", "Mediation"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 60 }, { methodology: "Ethnographic", prevalence: 30 }, { methodology: "Theoretical", prevalence: 10 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Michael Cole", affiliation: "UC San Diego" }]
+    },
+    "Educational Research Review": {
+        overview: { description: "교육 연구의 최신 동향을 메타분석과 체계적 문헌고찰을 통해 제시합니다.", website: "https://www.sciencedirect.com/journal/educational-research-review" },
+        topics: ["Systematic Review", "Meta-analysis", "Research Trends", "Educational Synthesis"],
+        methodologyProfile: [{ methodology: "Meta-analysis", prevalence: 50 }, { methodology: "Systematic Review", prevalence: 40 }, { methodology: "Theoretical", prevalence: 10 }],
+        newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Kirsi Tirri", affiliation: "University of Helsinki" }]
+    },
+    "Interactive Learning Environments": {
+        overview: { description: "상호작용 가능한 학습 환경의 설계와 그 교육적 성과를 연구합니다.", website: "https://www.tandfonline.com/toc/nile20/current" },
+        topics: ["Adaptive Learning", "Collaborative Environments", "Hypermedia", "Human-Computer Interaction"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "Quasi-experimental", prevalence: 30 }, { methodology: "User Study", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Teresa Cerratto Pargman", affiliation: "Stockholm University" }]
+    },
+    "Distance Education": {
+        overview: { description: "원격 교육, 개방 학습 및 유연 학습의 이론과 실제를 다루는 주요 국제 저널입니다.", website: "https://www.tandfonline.com/toc/cdie20/current" },
+        topics: ["Online Pedagogy", "Open Education", "Blended Learning", "Student Support"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Survey", prevalence: 35 }, { methodology: "Experimental", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Som Naidu", affiliation: "University of the South Pacific" }]
+    },
+    "Journal of Educational Computing Research": {
+        overview: { description: "교육에서 컴퓨터 기술의 활용과 그 효과에 대한 선도적인 연구를 게재합니다.", website: "https://journals.sagepub.com/home/jec" },
+        topics: ["Educational Computing", "Human-Computer Interaction", "Cognitive Effects", "Instructional Systems"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "Quasi-experimental", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Robert J. Seidel", affiliation: "Independent Researcher" }]
+    },
+    "Instructional Science": {
+        overview: { description: "학습 과학의 기초 연구와 교수 설계 이론의 발전을 위한 학제간 저널입니다.", website: "https://www.springer.com/journal/11251" },
+        topics: ["Learning Theory", "Problem-based Learning", "Self-regulated Learning", "Social Interaction"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 40 }, { methodology: "Interaction Analysis", prevalence: 30 }, { methodology: "Design-based Research", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-18%", timeToDecision: "4-5개월" },
+        keyContributors: [{ name: "Thomas Duffy", affiliation: "Indiana University" }]
+    },
+    "TechTrends": {
+        overview: { description: "AECT의 공식 학술지로, 교육공학의 트렌드와 실제적 적용을 다룹니다.", website: "https://www.springer.com/journal/11528" },
+        topics: ["EdTech Trends", "Professional Development", "Best Practices", "Digital Literacy"],
+        methodologyProfile: [{ methodology: "Case Study", prevalence: 40 }, { methodology: "Review", prevalence: 30 }, { methodology: "Qualitative", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "45-55%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Charles Reigeluth", affiliation: "Indiana University" }]
+    },
+    "Online Learning Journal": {
+        overview: { description: "OLC의 대표 저널로, 온라인 학습의 질적 향상과 정책적 이슈를 다룹니다.", website: "https://onlinelearningconsortium.org/read/online-learning-journal/" },
+        topics: ["Online Teaching", "Student Engagement", "LMS", "Quality Assurance"],
+        methodologyProfile: [{ methodology: "Survey", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 35 }, { methodology: "Quantitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Peter Shea", affiliation: "University at Albany" }]
+    },
+    "International Journal of Educational Technology in Higher Education": {
+        overview: { description: "고등교육에서의 교육 기술 혁신과 그 파급 효과를 중점적으로 연구합니다.", website: "https://educationaltechnologyjournal.springeropen.com/" },
+        topics: ["Higher Education", "Digital Learning", "Innovation in Pedagogy", "Open Education"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Qualitative", prevalence: 30 }, { methodology: "Experimental", prevalence: 30 }],
+        isExpertVerified: true,
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Josep M. Duart", affiliation: "Universitat Oberta de Catalunya" }]
+    },
+    "International Review of Research in Open and Distributed Learning": {
+        overview: { description: "오픈 학습 및 분산 교육 분야의 대표적인 오픈 액세스 저널입니다.", website: "https://www.irrodl.org" },
+        topics: ["Open Learning", "Distrubuted Education", "OER", "MOOCs"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Qualitative", prevalence: 30 }, { methodology: "Policy Analysis", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Terry Anderson", affiliation: "Athabasca University" }]
+    },
+    "Performance Improvement Quarterly": {
+        overview: { description: "조직의 성과 향상과 교수 시스템 설계의 실제적 적용을 다룹니다.", website: "https://onlinelibrary.wiley.com/journal/19378327" },
+        topics: ["Performance Improvement", "HPT", "Training & Development", "Organizational Learning"],
+        methodologyProfile: [{ methodology: "Case Study", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Qualitative", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Roger Kaufman", affiliation: "Florida State University" }]
+    },
+    "Education and Information Technologies": {
+        overview: { description: "교육에서 정보 기술의 활용과 교육적 성과에 대한 광범위한 연구를 게재합니다.", website: "https://www.springer.com/journal/10639" },
+        topics: ["ICT in Education", "Digital Literacy", "Computer-Assisted Instruction", "Teacher Training"],
+        methodologyProfile: [{ methodology: "Survey", prevalence: 45 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Quantitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Arthur Tatnall", affiliation: "Victoria University" }]
+    },
+    "Journal of Computing in Higher Education": {
+        overview: { description: "고등교육에서의 컴퓨팅 기술 활용과 교수학습 혁신을 다룹니다.", website: "https://www.springer.com/journal/12133" },
+        topics: ["Higher Ed Tech", "Instructional Design", "Multimedia Learning", "Learning Management Systems"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 35 }, { methodology: "Qualitative", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Gary Morrison", affiliation: "Old Dominion University" }]
+    },
+    "International Journal of Human-Computer Interaction": {
+        overview: { description: "인간-컴퓨터 상호작용의 인지적, 심리적, 사회적 측면을 심층 연구합니다.", website: "https://www.tandfonline.com/toc/hihc20/current" },
+        topics: ["HCI Theory", "User Experience", "Interface Design", "Human Factors"],
+        methodologyProfile: [{ methodology: "User Study", prevalence: 45 }, { methodology: "Experimental", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Constantine Stephanidis", affiliation: "University of Crete" }]
+    },
+    "Human-Computer Interaction": {
+        overview: { description: "HCI 분야의 최고 수준 이론 저널로, 상호작용의 원리를 규명합니다.", website: "https://www.tandfonline.com/toc/hhci20/current" },
+        topics: ["Cognitive Models", "Design Theory", "Interaction Paradigms", "CSCW"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 40 }, { methodology: "Theoretical", prevalence: 35 }, { methodology: "Experimental", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Stuart Card", affiliation: "Stanford" }]
+    },
+    "ACM Transactions on Computer-Human Interaction": {
+        overview: { description: "ACM의 대표 HCI 저널로, 시스템 설계와 사용자 경험의 기술적 혁신을 다룹니다.", website: "https://tochi.acm.org" },
+        topics: ["Interaction Techniques", "Intelligent Interfaces", "Accessibility", "Social Computing"],
+        methodologyProfile: [{ methodology: "System Development", prevalence: 45 }, { methodology: "Technical Evaluation", prevalence: 30 }, { methodology: "User Study", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-18%", timeToDecision: "4-5개월" },
+        keyContributors: [{ name: "Shumin Zhai", affiliation: "Google" }]
+    },
+    "Behaviour & Information Technology": {
+        overview: { description: "IT 기술의 활용과 그것이 인간의 행동, 조직, 사회에 미치는 영향을 다룹니다.", website: "https://www.tandfonline.com/toc/tbit20/current" },
+        topics: ["Human Factors", "User Behavior", "Social Impacts of IT", "Work Design"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "Survey", prevalence: 35 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Tom Stewart", affiliation: "System Concepts" }]
+    },
+    "International Journal of Child-Computer Interaction": {
+        overview: { description: "아동을 위한 테크놀로지 설계 및 상호작용 연구를 전문적으로 다룹니다.", website: "https://www.sciencedirect.com/journal/international-journal-of-child-computer-interaction" },
+        topics: ["Child-Computer Interaction", "Interaction Design for Children", "Learning with Games", "Participatory Design"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Design-based Research", prevalence: 30 }, { methodology: "User Study", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Panos Markopoulos", affiliation: "Eindhoven University of Technology" }]
+    },
+    "Simulation & Gaming": {
+        overview: { description: "시뮬레이션과 게임을 통한 학습, 교육 및 훈련의 이론과 실제를 연구합니다.", website: "https://journals.sagepub.com/home/sag" },
+        topics: ["Educational Games", "Role-playing", "Simulation Design", "Experiential Learning"],
+        methodologyProfile: [{ methodology: "Design-based Research", prevalence: 40 }, { methodology: "Qualitative", prevalence: 35 }, { methodology: "Experimental", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "David Crookall", affiliation: "Université Côte d'Azur" }]
+    },
+    "Virtual Reality": {
+        overview: { description: "가상 현실 기술과 인적 요인, 그리고 다양한 도메인에서의 VR 적용을 다룹니다.", website: "https://www.springer.com/journal/10055" },
+        topics: ["Virtual Environments", "Presence", "Interaction in VR", "VR Applications"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 45 }, { methodology: "System Development", prevalence: 35 }, { methodology: "User Study", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Grigore Burdea", affiliation: "Rutgers University" }]
+    },
+    "Computers & Education: X Reality": {
+        overview: { description: "XR(VR/AR/MR) 기술이 교육에 미치는 영향과 교육적 성과를 중점 연구하는 오픈 액세스 저널입니다.", website: "https://www.sciencedirect.com/journal/computers-and-education-x-reality" },
+        topics: ["XR in Education", "Immersive Learning", "Augmented Reality", "Mixed Reality"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 45 }, { methodology: "Design-based Research", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-35%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Chin-Chung Tsai", affiliation: "NTNU" }]
+    },
+    "IEEE VR": {
+        overview: { description: "가상 현실 분야의 세계 최고의 학술대회로, 기술적 혁신과 인적 상호작용을 다룹니다.", website: "http://ieeevr.org" },
+        topics: ["Virtual Reality", "Augmented Reality", "Haptics", "Avatar Interaction"],
+        methodologyProfile: [{ methodology: "System Development", prevalence: 50 }, { methodology: "Technical Evaluation", prevalence: 30 }, { methodology: "User Study", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Doug Bowman", affiliation: "Virginia Tech" }]
+    },
+    "ISMAR": {
+        overview: { description: "증강 현실(AR) 및 혼합 현실(MR) 분야의 최고 권위 학술대회입니다.", website: "https://ismar.net" },
+        topics: ["Augmented Reality", "Mixed Reality", "Computer Vision", "Wearable Computing"],
+        methodologyProfile: [{ methodology: "System Development", prevalence: 55 }, { methodology: "Algorithm Design", prevalence: 25 }, { methodology: "User Evaluation", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Dieter Schmalstieg", affiliation: "TU Graz" }]
+    },
+    "IDC Conference": {
+        overview: { description: "아동과 테크놀로지 간의 상호작용 및 디자인에 관한 선도적인 학술대회입니다.", website: "https://idc.acm.org" },
+        topics: ["Interaction Design for Children", "Learning with Tech", "Participatory Design with Kids", "Educational Games"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Design-based Research", prevalence: 35 }, { methodology: "Case Study", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "30-35% (Full Paper)", timeToDecision: "2개월" },
+        keyContributors: [{ name: "Panos Markopoulos", affiliation: "TU Eindhoven" }]
+    },
+    "Computers & Education: Artificial Intelligence": {
+        overview: { description: "AI 기술의 교육적 활용과 그로 인한 변화를 전문적으로 다루는 오픈 액세스 저널입니다.", website: "https://www.sciencedirect.com/journal/computers-and-education-artificial-intelligence" },
+        topics: ["AIED", "Machine Learning for Ed", "Natural Language Processing", "Ethics of AI in Ed"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "System Development", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Rose Luckin", affiliation: "UCL Knowledge Lab" }]
+    },
+    "Studies in Science Education": {
+        overview: { description: "과학교육 분야의 심층적인 문헌 고찰과 비판적 분석을 제공하는 저널입니다.", website: "https://www.tandfonline.com/toc/rsse20/current" },
+        topics: ["Science Education Research", "Theoretical Foundations", "Curriculum Development", "Critical Perspectives"],
+        methodologyProfile: [{ methodology: "Literature Review", prevalence: 50 }, { methodology: "Theoretical Analysis", prevalence: 30 }, { methodology: "Qualitative", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "10-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Justin Dillon", affiliation: "University of Exeter" }]
+    },
+    "Computer Science Education": {
+        overview: { description: "컴퓨터 과학의 교수학습 문제와 교육과정 설계에 관한 연구를 게재합니다.", website: "https://www.tandfonline.com/toc/ncse20/current" },
+        topics: ["Programming Education", "Computational Thinking", "Curriculum Design", "Assessment in CS"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 40 }, { methodology: "Action Research", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Sally Fincher", affiliation: "University of Kent" }]
+    },
+    "ACM Transactions on Computing Education": {
+        overview: { description: "ACM에서 발간하는 컴퓨팅 교육 분야의 기술적이고 학술적인 연구 저널입니다.", website: "https://dl.acm.org/journal/toce" },
+        topics: ["CS Education", "Learning at Scale in CS", "Software Engineering Education", "Diversity in Computing"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 35 }, { methodology: "System Design", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "4-5개월" },
+        keyContributors: [{ name: "Lauri Malmi", affiliation: "Aalto University" }]
+    },
+    "CBE-Life Sciences Education": {
+        overview: { description: "생명 과학 교육 분야의 학문적 발전을 도모하는 미국 세포생물학회(ASCB)의 저널입니다.", website: "https://www.lifescied.org" },
+        topics: ["Biology Education", "Undergraduate Research", "Science Literacy", "Active Learning"],
+        methodologyProfile: [{ methodology: "Quantitative", prevalence: 45 }, { methodology: "Qualitative", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Erin Dolan", affiliation: "University of Georgia" }]
+    },
+    "Mathematics Education Research Journal": {
+        overview: { description: "수학 교육의 이론과 실제, 그리고 다양한 학습 환경에서의 수학 학습을 다룹니다.", website: "https://www.springer.com/journal/13394" },
+        topics: ["Mathematics Pedagogy", "Conceptual Development", "Numerical Cognition", "Teacher Knowledge"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Mixed Methods", prevalence: 30 }, { methodology: "Quantitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-5개월" },
+        keyContributors: [{ name: "Merrilyn Goos", affiliation: "University of Sunshine Coast" }]
+    },
+    "SIGCSE Technical Symposium": {
+        overview: { description: "컴퓨터 과학 교육 분야의 세계 최대 규모 심포지엄입니다.", website: "https://sigcse2024.sigcse.org" },
+        topics: ["CS Pedagogy", "Introductory Programming", "Broadening Participation", "K-12 CS Ed"],
+        methodologyProfile: [{ methodology: "Case Study", prevalence: 40 }, { methodology: "Experience Report", prevalence: 35 }, { methodology: "Experimental", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "30-35% (Full Paper)", timeToDecision: "2개월" },
+        keyContributors: [{ name: "Adrienne Decker", affiliation: "University at Buffalo" }]
+    },
+    "ICER Conference": {
+        overview: { description: "컴퓨팅 교육 연구(Computing Education Research)에 특화된 ACM의 국제 컨퍼런스입니다.", website: "https://icer2024.acm.org" },
+        topics: ["Theory in CS Ed", "Program Comprehension", "Identity & Inclusion", "Methodology in CS Ed"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Technical Evaluation", prevalence: 30 }, { methodology: "Experimental", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Amy J. Ko", affiliation: "University of Washington" }]
+    },
+    "ETRA Symposium": {
+        overview: { description: "시선 추적(Eye Tracking) 연구 및 응용 분야의 대표적 심포지엄입니다.", website: "https://etra.acm.org/2024/" },
+        topics: ["Eye Tracking Algorithms", "Gaze-based Interaction", "Visual Attention", "Gaze Analytics"],
+        methodologyProfile: [{ methodology: "Experimental", prevalence: 45 }, { methodology: "Algorithm Design", prevalence: 35 }, { methodology: "User Study", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "35-45%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Enkelejda Kasneci", affiliation: "Technical University of Munich" }]
+    },
+    "Learning and Individual Differences": {
+        overview: { description: "학습에서의 개인차와 이를 결정하는 요인들에 대한 연구를 게재합니다.", website: "https://www.sciencedirect.com/journal/learning-and-individual-differences" },
+        topics: ["Intelligence", "Personality & Learning", "Gifted Education", "Learning Disabilities"],
+        methodologyProfile: [{ methodology: "Quantitative", prevalence: 55 }, { methodology: "Correlational", prevalence: 30 }, { methodology: "Longitudinal", prevalence: 15 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Andrew Martin", affiliation: "UNSW Sydney" }]
+    },
+    "European Journal of Teacher Education": {
+        overview: { description: "유럽 교사 교육 학회(ATEE)의 공식 저널로, 교사 교육의 이론과 실제를 다룹니다.", website: "https://www.tandfonline.com/toc/cejt20/current" },
+        topics: ["Initial Teacher Education", "Continuing Professional Development", "Teacher Identity", "EU Education Policy"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Case Study", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "4-5개월" },
+        keyContributors: [{ name: "Kay Livingston", affiliation: "University of Glasgow" }]
+    },
+    "Teachers and Teaching: Theory and Practice": {
+        overview: { description: "교수 활동의 본질과 교사 교육의 이론적 토대를 연구합니다.", website: "https://www.tandfonline.com/toc/ctat20/current" },
+        topics: ["Teacher Thinking", "Pedagogical Knowledge", "Teacher-Student Relationship", "Teaching Philosophy"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 50 }, { methodology: "Reflection Analysis", prevalence: 25 }, { methodology: "Mixed Methods", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "12-15%", timeToDecision: "4-6개월" },
+        keyContributors: [{ name: "Christopher Day", affiliation: "University of Nottingham" }]
+    },
+    "Professional Development in Education": {
+        overview: { description: "교육 전문가들의 지속적인 경력 개발과 전문성 신장을 연구합니다.", website: "https://www.tandfonline.com/toc/rjie20/current" },
+        topics: ["CPD", "Teacher Agency", "Mentoring & Coaching", "Professional Learning Communities"],
+        methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Action Research", prevalence: 35 }, { methodology: "Case Study", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "20-25%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Ken Jones", affiliation: "Swansea University" }]
+    },
+    "Action in Teacher Education": {
+        overview: { description: "현직 교사 교육과 교사 교육 실천의 개선을 위한 연구를 다룹니다.", website: "https://www.tandfonline.com/toc/uate20/current" },
+        topics: ["Clinical Practice", "Field Experiences", "Diversity & Inclusion", "Innovative Teaching"],
+        methodologyProfile: [{ methodology: "Case Study", prevalence: 40 }, { methodology: "Qualitative", prevalence: 35 }, { methodology: "Action Research", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Nancy Fichtman Dana", affiliation: "University of Florida" }]
+    },
+    "ASEE Annual Conference": {
+        overview: { description: "미국공학 교육학회(ASEE)의 연례 학술대회로, 전 세계 공학 교육자들의 핵심 모임입니다.", website: "https://www.asee.org/events/annual-conference" },
+        topics: ["Engineering Pedagogy", "Diversity in Engineering", "K-12 Engineering", "Ethics in Engineering"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Qualitative", prevalence: 30 }, { methodology: "Experience Report", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "60-70%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Bevlee Watford", affiliation: "Virginia Tech" }]
+    },
+    "FIE Conference": {
+        overview: { description: "공학 및 컴퓨팅 교육의 최신 흐름과 교육적 혁신을 다루는 IEEE의 주요 컨퍼런스입니다.", website: "https://fie-conference.org" },
+        topics: ["Engineering Education Research", "Educational Technology in Engineering", "Curriculum Innovation", "Problem-based Learning"],
+        methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Experimental", prevalence: 30 }, { methodology: "Technical Evaluation", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "45-55%", timeToDecision: "3개월" },
+        keyContributors: [{ name: "Russ Meier", affiliation: "Milwaukee School of Engineering" }]
+    },
+    "ITiCSE Conference": {
+        overview: { description: "컴퓨팅 관련 학문 분야의 혁신적인 교수법과 도구를 다루는 ACM의 연례 컨퍼런스입니다.", website: "https://itipse.acm.org" },
+        topics: ["CS Education Tools", "Active Learning in CS", "Assessment Methods", "Programming Environments"],
+        methodologyProfile: [{ methodology: "Technical Evaluation", prevalence: 40 }, { methodology: "Case Study", prevalence: 30 }, { methodology: "User Study", prevalence: 30 }],
+        newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2개월" },
+        keyContributors: [{ name: "Guido Rößling", affiliation: "TU Darmstadt" }]
+    },
+    "Journal of Applied Instructional Design": {
+        overview: { description: "교수 설계의 실제적 적용과 효율적인 교육 시스템 구축을 연구합니다.", website: "https://jaid.edtechbooks.org/" },
+        topics: ["Instructional Design Practice", "Design Thinking", "Distance Learning Design", "LXD"],
+        methodologyProfile: [{ methodology: "Case Study", prevalence: 50 }, { methodology: "Design-based Research", prevalence: 30 }, { methodology: "Qualitative", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "30-40%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Robert Branch", affiliation: "University of Georgia" }]
+    },
+    "Journal of Formative Design in Learning": {
+        overview: { description: "학습 효과를 극대화하기 위한 형성적 평가와 디자인 요소를 탐구합니다.", website: "https://www.springer.com/journal/41686" },
+        topics: ["Formative Assessment", "Learning Design", "Feedback Mechanisms", "Instructional Strategies"],
+        methodologyProfile: [{ methodology: "Design-based Research", prevalence: 45 }, { methodology: "Action Research", prevalence: 30 }, { methodology: "Qualitative", prevalence: 25 }],
+        newcomerFriendliness: { acceptanceRate: "35-45%", timeToDecision: "2-3개월" },
+        keyContributors: [{ name: "Jan Elen", affiliation: "KU Leuven" }]
+    },
+    "International Journal of Designs for Learning": {
+        overview: { description: "창의적인 교육 설계 사례와 그 설계 뒤에 숨겨진 철학적 고찰을 공유합니다.", website: "scholarworks.iu.edu/journals/index.php/ijdl" },
+        topics: ["Design Cases", "Creative Learning Environments", "Design Knowledge", "Studio Pedagogy"],
+        methodologyProfile: [{ methodology: "Narrative Inquiry", prevalence: 40 }, { methodology: "Case Study", prevalence: 40 }, { methodology: "Qualitative", prevalence: 20 }],
+        newcomerFriendliness: { acceptanceRate: "40-50%", timeToDecision: "3-4개월" },
+        keyContributors: [{ name: "Elizabeth Boling", affiliation: "Indiana University" }]
+    },
 };
 
 function getVenueDetails(name: string, _type: string): VenueDetails {
@@ -707,13 +1302,22 @@ function hideModal(id: string) {
 }
 
 function showToast(message: string) {
-    const toast = document.getElementById('toast');
-    if (toast) {
-        toast.textContent = message;
-        toast.classList.add('visible');
-        setTimeout(() => toast.classList.remove('visible'), 2500);
+    const toast = document.getElementById('toast-container');
+    const msgEl = document.getElementById('toast-message');
+    if (toast && msgEl) {
+        msgEl.textContent = message;
+        toast.style.opacity = '1';
+        toast.style.visibility = 'visible';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.visibility = 'hidden';
+            toast.style.transform = 'translateX(-50%) translateY(20px)';
+        }, 3000);
     }
 }
+
 
 function setSidebarTitle(title: string, type: string, impact?: string) {
     const typeLabels: Record<string, string> = {
@@ -758,6 +1362,65 @@ function getRecommendations(nodeId: string, nodes: NodeData[], edges: EdgeData[]
         .filter(Boolean);
 }
 
+// ============================================================================
+// DATA-DRIVEN METHODOLOGY CALCULATION (V3)
+// ============================================================================
+
+const METHODOLOGY_MAP: Record<string, string[]> = {
+    "실험 및 증명 (Experimental)": ["experiment", "experimental", "intervention", "randomized", "quasi-experimental", "quantitative", "control group"],
+    "질적 및 사례 연구 (Qualitative)": ["qualitative", "case study", "ethnographic", "interview", "narrative", "thematic analysis", "phenomenology", "grounded theory"],
+    "설계 및 시스템 개발 (Design & Dev)": ["design-based", "dbr", "instructional design", "prototype", "interaction design", "usability", "system development", "human-computer interaction"],
+    "데이터 및 AI 분석 (Data & AI)": ["learning analytics", "data mining", "machine learning", "artificial intelligence", "predictive", "computational logic", "nlp", "algorithm"],
+    "리뷰 및 메타 분석 (Review & Meta)": ["systematic review", "meta-analysis", "evidence synthesis", "scoping review", "bibliometric", "meta-synthesis"],
+    "이론 및 프레임워크 (Theory)": ["theoretical framework", "epistemological", "conceptual model", "philosophical", "critique", "perspective"]
+};
+
+function calculateMethodologyFocus(venueName: string, staticProfile: any[], isExpertVerified?: boolean): any[] {
+    const profile = (semanticProfiles as any)[venueName];
+    if (!profile || !profile.vector) return staticProfile;
+
+    const vector = profile.vector;
+    const scores: Record<string, number> = {};
+    let matchedMass = 0;
+    let totalMass = 0;
+
+    // Calculate total mass for thresholding
+    Object.values(vector).forEach(w => totalMass += (w as number));
+
+    // Initialize scores
+    Object.keys(METHODOLOGY_MAP).forEach(cat => scores[cat] = 0);
+
+    // Calculate scores based on keyword matching
+    Object.entries(vector).forEach(([keyword, weight]) => {
+        const lowerKey = keyword.toLowerCase();
+        for (const [category, patterns] of Object.entries(METHODOLOGY_MAP)) {
+            if (patterns.some(p => lowerKey === p || lowerKey.includes(p + " ") || lowerKey.endsWith(" " + p))) {
+                scores[category] += (weight as number);
+                matchedMass += (weight as number);
+            }
+        }
+    });
+
+    // V4 Hybrid Logic:
+    // 1. If explicitly expert verified, stick to expert profile (Fact preservation)
+    // 2. If matched mass is too small (< 2% of total keywords), automated data is too noisy -> Fallback
+    const confidenceThreshold = 0.02;
+    if (isExpertVerified || (matchedMass / totalMass) < confidenceThreshold) {
+        return staticProfile;
+    }
+
+    // Convert to percentages based on MATCHED mass only
+    const result = Object.entries(scores)
+        .map(([methodology, score]) => ({
+            methodology,
+            prevalence: Math.round((matchedMass > 0 ? (score / matchedMass) : 0) * 100)
+        }))
+        .filter(m => m.prevalence > 8) // Only show significant focuses (adjusted for precision)
+        .sort((a, b) => b.prevalence - a.prevalence);
+
+    return result.length > 0 ? result : staticProfile;
+}
+
 function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData[]): string {
     if (data.error) {
         return `<p style="color: var(--text-muted);">${data.error}</p>`;
@@ -769,8 +1432,10 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const acceptance = data.newcomerFriendliness?.acceptanceRate || 'N/A';
     const decision = data.newcomerFriendliness?.timeToDecision || 'N/A';
 
-    const methodologyHtml = data.methodologyProfile?.length
-        ? data.methodologyProfile.map((m: any) => `
+    const methodologyData = calculateMethodologyFocus(node.id, data.methodologyProfile || [], data.isExpertVerified);
+
+    const methodologyHtml = methodologyData.length
+        ? methodologyData.map((m: any) => `
         <div style="margin-bottom: 8px;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 0.75rem;">
             <span>${m.methodology}</span>
@@ -826,8 +1491,11 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     </div>
 
     <div class="sidebar-section">
-      <h3>연구 방법론</h3>
+      <h3 title="학술지 키워드 분석(TF-IDF)을 바탕으로 산출된 경향성 지표입니다.">연구 성향 프로필</h3>
       ${methodologyHtml}
+      <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
+        ※ 이 프로필은 실제 게재 논문들의 키워드 벡터 분석을 기반으로 자동 산출되었습니다.
+      </p>
     </div>
 
     <div class="sidebar-section">
@@ -2161,7 +2829,7 @@ function main() {
     // WHAT'S NEW POPUP
     // ========================================================================
 
-    const CURRENT_VERSION = '2.1.0';
+    const CURRENT_VERSION = '2.2.0';
     const lastSeenVersion = localStorage.getItem('fieldexplorer_version');
 
     if (lastSeenVersion !== CURRENT_VERSION) {
@@ -2175,36 +2843,36 @@ function main() {
             <div class="whatsnew-popup">
                 <div class="whatsnew-overlay" id="whatsnew-overlay"></div>
                 <div class="whatsnew-container">
-                    <div class="whatsnew-emoji">🎉</div>
-                    <div class="whatsnew-title">새로운 기능!</div>
+                    <div class="whatsnew-emoji">🚀</div>
+                    <div class="whatsnew-title">대규모 업데이트!</div>
                     <div class="whatsnew-version">Version ${CURRENT_VERSION}</div>
                     <div class="whatsnew-features">
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">📢</span>
+                            <span class="whatsnew-feature-icon">✅</span>
                             <div class="whatsnew-feature-text">
-                                <strong>리뷰 피드</strong>
-                                <span>최신 리뷰를 한눈에 확인</span>
+                                <strong>WoS JCR 2024 검증</strong>
+                                <span>21개 저널의 영향력 지수(Q1) 최신화</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">📊</span>
+                            <span class="whatsnew-feature-icon">👩‍🏫</span>
                             <div class="whatsnew-feature-text">
-                                <strong>비교 모드</strong>
-                                <span>최대 3개 venue를 나란히 비교 (C 키)</span>
+                                <strong>Teacher Education 신설</strong>
+                                <span>교사 교육 분야 주요 저널 6종 추가</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">📅</span>
+                            <span class="whatsnew-feature-icon">🔬</span>
                             <div class="whatsnew-feature-text">
-                                <strong>CFP 마감일 필터</strong>
-                                <span>30/60/90일 이내 마감 학회 하이라이트</span>
+                                <strong>상세 연구 주제 보강</strong>
+                                <span>주요 키워드별 심층 연구 배경 및 동향 추가</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">⌨️</span>
+                            <span class="whatsnew-feature-icon">🔗</span>
                             <div class="whatsnew-feature-text">
-                                <strong>키보드 내비게이션</strong>
-                                <span>화살표 키로 노드 탐색</span>
+                                <strong>네트워크 연결 강화</strong>
+                                <span>LA-AIED 등 분야 간 연계 네트워크 가시화</span>
                             </div>
                         </div>
                     </div>
@@ -3772,6 +4440,25 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }, 500);
     });
 
+    searchInput.addEventListener('focus', () => {
+        document.body.classList.add('search-focused');
+    });
+
+    searchInput.addEventListener('blur', () => {
+        // Small timeout to allow autocomplete click to fire before blur hides everything
+        setTimeout(() => {
+            if (document.activeElement !== searchInput) {
+                document.body.classList.remove('search-focused');
+            }
+        }, 200);
+    });
+
+    // Support clicking the overlay to exit focus
+    document.getElementById('search-overlay')?.addEventListener('click', () => {
+        searchInput.blur();
+    });
+
+
     searchInput.addEventListener('keydown', (e) => {
         if (!autocomplete.classList.contains('visible')) return;
 
@@ -4230,7 +4917,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const popup = document.createElement('div');
         popup.id = 'announcement-popup';
         popup.innerHTML = `
-        < div style = "position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center;" >
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center;">
             <div style="background: var(--klse-navy-light); border: 1px solid var(--klse-yellow); border-radius: 16px; max-width: 500px; width: 90%; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
                     <span style="font-size: 1.1rem; font-weight: 600; color: var(--klse-yellow);">📢 공지사항</span>
@@ -4242,7 +4929,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     <button id="dismiss-announcement" class="btn" style="padding: 10px 20px;">확인</button>
                 </div>
             </div>
-            </div >
+        </div>
         `;
         document.body.appendChild(popup);
 
@@ -4353,6 +5040,13 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             handleNodeClick(bestNode);
             showToast(`${key.replace('Arrow', '')} → ${(nodesDataset.get(bestNode) as any)?.label || bestNode} `);
         }
+    }
+    // Guide button
+    document.getElementById('tour-btn')?.addEventListener('click', startTour);
+
+    // Auto-start tour for new users
+    if (shouldShowTour()) {
+        setTimeout(startTour, 2000);
     }
 }
 
