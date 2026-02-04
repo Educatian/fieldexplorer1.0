@@ -136,7 +136,7 @@
         "categories": [
             "Technology-Enhanced Learning"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "jecr",
@@ -145,7 +145,7 @@
         "categories": [
             "Technology-Enhanced Learning"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "tlt",
@@ -155,7 +155,7 @@
             "Technology-Enhanced Learning",
             "Immersive Technology"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "ijaied",
@@ -164,7 +164,7 @@
         "categories": [
             "AIED"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "umuai",
@@ -173,7 +173,7 @@
         "categories": [
             "AIED"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "jla",
@@ -191,7 +191,7 @@
         "categories": [
             "Learning Sciences"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "cep",
@@ -200,7 +200,7 @@
         "categories": [
             "Educational Psychology"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "lid",
@@ -209,7 +209,7 @@
         "categories": [
             "Educational Psychology"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "mca",
@@ -221,13 +221,23 @@
         "impact": "Q2"
     },
     {
+        "id": "cs",
+        "name": "Cognitive Science",
+        "type": "Journal",
+        "categories": [
+            "Learning Sciences",
+            "Cognitive Psychology"
+        ],
+        "impact": "Q1"
+    },
+    {
         "id": "err",
         "name": "Educational Research Review",
         "type": "Journal",
         "categories": [
             "Education Research"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "chb",
@@ -236,7 +246,7 @@
         "categories": [
             "Human-Computer Interaction"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "ile",
@@ -245,7 +255,7 @@
         "categories": [
             "Technology-Enhanced Learning"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "de",
@@ -254,7 +264,7 @@
         "categories": [
             "Online Learning"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "ihe",
@@ -264,7 +274,7 @@
             "Higher Education",
             "Online Learning"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "ceai",
@@ -327,7 +337,7 @@
         "categories": [
             "Technology-Enhanced Learning"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "eit",
@@ -336,7 +346,7 @@
         "categories": [
             "Technology-Enhanced Learning"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "ijethe",
@@ -345,7 +355,7 @@
         "categories": [
             "Higher Education"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "jche",
@@ -354,7 +364,7 @@
         "categories": [
             "Higher Education"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "olj",
@@ -363,7 +373,7 @@
         "categories": [
             "Online Learning"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "irrodl",
@@ -381,7 +391,7 @@
         "categories": [
             "Human-Computer Interaction"
         ],
-        "impact": "Q3"
+        "impact": "Q1"
     },
     {
         "id": "hci",
@@ -390,7 +400,7 @@
         "categories": [
             "Human-Computer Interaction"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "tochi",
@@ -453,7 +463,7 @@
         "categories": [
             "Critical Perspectives"
         ],
-        "impact": "Q2"
+        "impact": "Q1"
     },
     {
         "id": "jrst",

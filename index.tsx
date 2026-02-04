@@ -158,21 +158,21 @@ const venueData: VenueInfo[] = [
     { name: "Cognition and Instruction", type: "Journal", categories: ["Well-known", "Learning Sciences"], impact: "Q1" },
 
     // Q2 Journals
-    { name: "Journal of Computer Assisted Learning", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q2" },
-    { name: "Journal of Educational Computing Research", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q2" },
-    { name: "IEEE Transactions on Learning Technologies", type: "Journal", categories: ["Technology-Enhanced Learning", "Immersive Technology"], impact: "Q2" },
-    { name: "International Journal of Artificial Intelligence in Education", type: "Journal", categories: ["AIED"], impact: "Q2" },
-    { name: "User Modeling and User-Adapted Interaction", type: "Journal", categories: ["AIED"], impact: "Q2" },
+    { name: "Journal of Computer Assisted Learning", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q1" },
+    { name: "Journal of Educational Computing Research", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q1" },
+    { name: "IEEE Transactions on Learning Technologies", type: "Journal", categories: ["Technology-Enhanced Learning", "Immersive Technology"], impact: "Q1" },
+    { name: "International Journal of Artificial Intelligence in Education", type: "Journal", categories: ["AIED"], impact: "Q1" },
+    { name: "User Modeling and User-Adapted Interaction", type: "Journal", categories: ["AIED"], impact: "Q1" },
     { name: "Journal of Learning Analytics", type: "Journal", categories: ["Learning Analytics"], impact: "Q2" },
-    { name: "Instructional Science", type: "Journal", categories: ["Learning Sciences"], impact: "Q2" },
-    { name: "Contemporary Educational Psychology", type: "Journal", categories: ["Educational Psychology"], impact: "Q2" },
-    { name: "Learning and Individual Differences", type: "Journal", categories: ["Educational Psychology"], impact: "Q2" },
+    { name: "Instructional Science", type: "Journal", categories: ["Learning Sciences"], impact: "Q1" },
+    { name: "Contemporary Educational Psychology", type: "Journal", categories: ["Educational Psychology"], impact: "Q1" },
+    { name: "Learning and Individual Differences", type: "Journal", categories: ["Educational Psychology"], impact: "Q1" },
     { name: "Mind Culture and Activity", type: "Journal", categories: ["Learning Sciences"], impact: "Q2" },
-    { name: "Educational Research Review", type: "Journal", categories: ["Education Research"], impact: "Q2" },
-    { name: "Computers in Human Behavior", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q2" },
-    { name: "Interactive Learning Environments", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q2" },
-    { name: "Distance Education", type: "Journal", categories: ["Online Learning"], impact: "Q2" },
-    { name: "Internet and Higher Education", type: "Journal", categories: ["Higher Education", "Online Learning"], impact: "Q2" },
+    { name: "Educational Research Review", type: "Journal", categories: ["Education Research"], impact: "Q1" },
+    { name: "Computers in Human Behavior", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q1" },
+    { name: "Interactive Learning Environments", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q1" },
+    { name: "Distance Education", type: "Journal", categories: ["Online Learning"], impact: "Q1" },
+    { name: "Internet and Higher Education", type: "Journal", categories: ["Higher Education", "Online Learning"], impact: "Q1" },
 
     // Q3 Journals
     { name: "Computers & Education: Artificial Intelligence", type: "Journal", categories: ["AIED"], impact: "Q3" },
@@ -181,21 +181,21 @@ const venueData: VenueInfo[] = [
     { name: "International Journal of Designs for Learning", type: "Journal", categories: ["Instructional Design"], impact: "Q3" },
     { name: "TechTrends", type: "Journal", categories: ["Instructional Design"], impact: "Q3" },
     { name: "Performance Improvement Quarterly", type: "Journal", categories: ["Instructional Design"], impact: "Q3" },
-    { name: "Educational Technology & Society", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q3" },
-    { name: "Education and Information Technologies", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q3" },
-    { name: "International Journal of Educational Technology in Higher Education", type: "Journal", categories: ["Higher Education"], impact: "Q3" },
-    { name: "Journal of Computing in Higher Education", type: "Journal", categories: ["Higher Education"], impact: "Q3" },
-    { name: "Online Learning Journal", type: "Journal", categories: ["Online Learning"], impact: "Q3" },
+    { name: "Educational Technology & Society", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q1" },
+    { name: "Education and Information Technologies", type: "Journal", categories: ["Technology-Enhanced Learning"], impact: "Q1" },
+    { name: "International Journal of Educational Technology in Higher Education", type: "Journal", categories: ["Higher Education"], impact: "Q1" },
+    { name: "Journal of Computing in Higher Education", type: "Journal", categories: ["Higher Education"], impact: "Q1" },
+    { name: "Online Learning Journal", type: "Journal", categories: ["Online Learning"], impact: "Q1" },
     { name: "International Review of Research in Open and Distributed Learning", type: "Journal", categories: ["Online Learning"], impact: "Q3" },
-    { name: "International Journal of Human-Computer Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q3" },
-    { name: "Human-Computer Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q2" },
+    { name: "International Journal of Human-Computer Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q1" },
+    { name: "Human-Computer Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q1" },
     { name: "ACM Transactions on Computer-Human Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q1" },
     { name: "Behaviour & Information Technology", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q3" },
     { name: "International Journal of Child-Computer Interaction", type: "Journal", categories: ["Human-Computer Interaction"], impact: "Q3" },
     { name: "Simulation & Gaming", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
     { name: "Virtual Reality", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
     { name: "Computers & Education: X Reality", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
-    { name: "Learning Media and Technology", type: "Journal", categories: ["Critical Perspectives"], impact: "Q2" },
+    { name: "Learning Media and Technology", type: "Journal", categories: ["Critical Perspectives"], impact: "Q1" },
 
     // STEM Education Journals
     { name: "Journal of Research in Science Teaching", type: "Journal", categories: ["STEM Education"], impact: "Q1" },
@@ -313,6 +313,23 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
                 from: venue.name,
                 to: cat,
                 dashes: venue.type === 'Conference' || venue.type === 'SubConference'
+            });
+        }
+    }
+
+    // Add category-to-category edges for closely related research areas
+    const categoryLinks: Array<{ from: string; to: string }> = [
+        { from: 'Learning Analytics', to: 'AIED' },
+        { from: 'AIED', to: 'Human-Computer Interaction' },
+        { from: 'Learning Sciences', to: 'Educational Psychology' },
+    ];
+
+    for (const link of categoryLinks) {
+        if (categorySet.has(link.from) && categorySet.has(link.to)) {
+            edges.push({
+                from: link.from,
+                to: link.to,
+                dashes: true  // Distinct style for category-to-category links
             });
         }
     }
@@ -1089,6 +1106,73 @@ function main() {
             ripplePhase = (ripplePhase + 1) % 60;
             network.redraw();
         }, 50);
+    });
+
+    // === Shift+Drag: Move connected nodes together ===
+    let shiftDragNodeId: string | null = null;
+    let shiftDragStartPositions: Map<string, { x: number; y: number }> = new Map();
+    let shiftDragConnectedNodes: string[] = [];
+    let lastDragPosition: { x: number; y: number } | null = null;
+
+    network.on('dragStart', (params: { nodes: string[]; event: { srcEvent: MouseEvent } }) => {
+        if (params.nodes.length === 1 && params.event.srcEvent.shiftKey) {
+            shiftDragNodeId = params.nodes[0];
+
+            // Get all connected nodes (direct neighbors)
+            const connectedEdges = network.getConnectedEdges(shiftDragNodeId);
+            const connectedNodeSet = new Set<string>();
+
+            connectedEdges.forEach((edgeId: string) => {
+                const edge = edgesDataset.get(edgeId);
+                if (edge) {
+                    if (edge.from !== shiftDragNodeId) connectedNodeSet.add(edge.from as string);
+                    if (edge.to !== shiftDragNodeId) connectedNodeSet.add(edge.to as string);
+                }
+            });
+
+            shiftDragConnectedNodes = Array.from(connectedNodeSet);
+
+            // Store initial positions of all connected nodes
+            const allNodeIds = [shiftDragNodeId, ...shiftDragConnectedNodes];
+            const positions = network.getPositions(allNodeIds);
+
+            shiftDragStartPositions.clear();
+            allNodeIds.forEach(id => {
+                if (positions[id]) {
+                    shiftDragStartPositions.set(id, { x: positions[id].x, y: positions[id].y });
+                }
+            });
+
+            lastDragPosition = positions[shiftDragNodeId];
+        }
+    });
+
+    network.on('dragging', (params: { nodes: string[]; event: { srcEvent: MouseEvent } }) => {
+        if (shiftDragNodeId && params.nodes.includes(shiftDragNodeId) && params.event.srcEvent.shiftKey) {
+            const currentPosition = network.getPositions([shiftDragNodeId])[shiftDragNodeId];
+
+            if (lastDragPosition && currentPosition) {
+                const deltaX = currentPosition.x - lastDragPosition.x;
+                const deltaY = currentPosition.y - lastDragPosition.y;
+
+                // Move all connected nodes by the same delta
+                shiftDragConnectedNodes.forEach(nodeId => {
+                    const nodePos = network.getPositions([nodeId])[nodeId];
+                    if (nodePos) {
+                        network.moveNode(nodeId, nodePos.x + deltaX, nodePos.y + deltaY);
+                    }
+                });
+
+                lastDragPosition = currentPosition;
+            }
+        }
+    });
+
+    network.on('dragEnd', () => {
+        shiftDragNodeId = null;
+        shiftDragConnectedNodes = [];
+        shiftDragStartPositions.clear();
+        lastDragPosition = null;
     });
 
     // Node click handler
@@ -2635,6 +2719,968 @@ function main() {
         }
     });
 
+    // ========================================================================
+    // RESEARCH TOPICS POPUP
+    // ========================================================================
+
+    interface ResearchTopic {
+        id: string;
+        name: string;
+        category: string;
+        description: string;
+        details?: string;
+        keyResearchers?: string[];
+        relatedTopics?: string[];
+    }
+
+    // ISLS Research Topics data (49 topics)
+    const ISLS_TOPICS: ResearchTopic[] = [
+        {
+            id: "cscl-in-times-of-crisis", name: "CSCL in Times of Crisis", category: "CSCL",
+            description: "위기 상황에서의 컴퓨터 지원 협력 학습",
+            details: "이 주제는 팬데믹, 자연재해, 사회적 위기 상황에서 CSCL이 어떻게 학습 연속성을 지원하는지 탐구합니다. 원격 협력 도구의 효과성, 사회정서적 지원, 디지털 격차 해소 전략, 비동기/동기 학습의 균형 등을 다룹니다. COVID-19 팬데믹은 이 분야 연구를 크게 촉진시켰습니다.",
+            keyResearchers: ["Stahl, G.", "Law, N.", "Järvelä, S."],
+            relatedTopics: ["group-cognition", "learning-with-technology", "shared-regulation-cscl"]
+        },
+        {
+            id: "analysis-of-discourse-data", name: "Analysis of Discourse Data", category: "Methodologies",
+            description: "담화 데이터 분석 방법론",
+            details: "담화 분석은 학습 대화, 토론, 글쓰기에서 의미 구성 과정을 탐구합니다. 대화 분석(CA), 비판적 담화 분석(CDA), 통계적 담화 분석, 다층 담화 분석 등 다양한 접근법이 있습니다. 협력 학습의 과정을 이해하는 핵심 방법론입니다.",
+            keyResearchers: ["Gee, J.P.", "Mercer, N.", "Resnick, L."],
+            relatedTopics: ["quantitative-ethnography", "conversation-analysis-ethnomethodological-approaches"]
+        },
+        {
+            id: "argumentation-and-learning-in-cscl",
+            name: "Argumentation and Learning in CSCL",
+            category: "CSCL",
+            description: "CSCL에서의 논증과 학습: 논쟁을 통한 학습",
+            details: `논증 학습(Argumentation Learning)은 학생들이 논증적 담화에 참여함으로써 깊은 이해와 비판적 사고를 발달시키는 과정입니다.
+
+**두 가지 접근:**
+• 논쟁하기를 배우기(Learning to Argue): 논증 능력 자체를 향상시키는 것
+• 논쟁을 통해 배우기(Arguing to Learn): 논증을 통해 내용 지식과 이해를 심화
+
+**핵심 개념:**
+• 대화적 공간(Dialogical Space): 경쟁이 아닌 협력적 탐구로서의 논증
+• 근거 기반 주장(Claim-Evidence-Reasoning): 주장, 근거, 추론의 체계적 구조
+• 숙의적 대화(Deliberative Dialogue): 합의 지향적 토론이 경쟁적 토론보다 학습에 효과적
+
+**CSCL 도구와 스캐폴딩:**
+• 시각적 논증 맵(Argument Maps)
+• 대화 버튼과 문장 스타터(Sentence Starters)
+• AI 지원 피드백 시스템
+• Toulmin 모델 기반 구조화
+
+**주요 연구자 기여:**
+• Andriessen: 논쟁에서 배우기 프레임워크, 스캐폴딩 필요성 강조
+• Baker: 학습 메커니즘 규명 (지식 명시화, 개념 변화)
+• Asterhan: 숙의적 vs 논쟁적 대화의 학습 효과 비교`,
+            keyResearchers: ["Andriessen, Jerry (위트레흐트대)", "Baker, Michael (CNRS/Telecom Paris)", "Asterhan, Christa (히브리대)", "Clark, Douglas"],
+            relatedTopics: ["epistemic-cognition", "knowledge-building", "cscl-conceptual-change", "analysis-of-discourse-data"]
+        },
+        {
+            id: "assessment", name: "Assessment", category: "Methodologies",
+            description: "학습 평가 방법론",
+            details: "학습과학에서의 평가는 전통적 시험을 넘어 형성평가, 포트폴리오 평가, 임베디드 평가, 동료 평가, 자기 평가 등 다양한 접근을 포함합니다. 학습을 위한 평가(AfL)와 학습으로서의 평가가 강조되며, 테크놀로지 기반 적응적 평가도 발전하고 있습니다.",
+            keyResearchers: ["Black, P.", "Wiliam, D.", "Shepard, L."],
+            relatedTopics: ["feedback-in-learning", "learning-analytics"]
+        },
+        {
+            id: "augmented-reality-learning-sciences", name: "Augmented Reality in Learning", category: "Technology",
+            description: "학습에서의 증강현실",
+            details: "증강현실(AR)은 실제 환경에 디지털 정보를 오버레이하여 학습을 지원합니다. 과학 시뮬레이션, 역사 현장 학습, 의료 훈련, 언어 학습 등에서 맥락화된 학습 경험을 제공합니다. 공간적 이해와 체화된 학습을 촉진합니다.",
+            keyResearchers: ["Dede, C.", "Dunleavy, M.", "Klopfer, E."],
+            relatedTopics: ["embodiment-and-embodied-design", "learning-with-technology"]
+        },
+        {
+            id: "automated-argumentation-analysis", name: "Automated Argumentation Analysis", category: "Methodologies",
+            description: "자동화된 논증 분석",
+            details: "자연어처리(NLP)와 기계학습을 활용하여 학생들의 논증을 자동으로 분석합니다. 논증 구조 추출, 논증 품질 평가, 실시간 피드백 제공 등이 연구됩니다. 대규모 담화 분석과 적시 피드백을 가능하게 합니다.",
+            keyResearchers: ["Pinkwart, N.", "McLaren, B.", "Rosé, C."],
+            relatedTopics: ["argumentation-and-learning-in-cscl", "learning-analytics"]
+        },
+        {
+            id: "automated-collaborative-process-analysis", name: "Automated Collaborative Process Analysis", category: "Methodologies",
+            description: "자동화된 협력 과정 분석",
+            details: "협력 학습의 상호작용 패턴을 자동으로 감지하고 분석합니다. 사회적 네트워크 분석, 시퀀스 마이닝, 프로세스 마이닝 등의 기법을 사용하여 조절, 참여 패턴, 지식 구축 과정을 추적합니다.",
+            keyResearchers: ["Reimann, P.", "Wise, A.", "Cress, U."],
+            relatedTopics: ["learning-analytics", "group-awareness-tools", "quantitative-ethnography"]
+        },
+        {
+            id: "classroom-orchestration", name: "Classroom Orchestration", category: "Practice",
+            description: "테크놀로지 기반 교실 오케스트레이션",
+            details: "교실 오케스트레이션은 교사가 테크놀로지 기반 학습 활동을 실시간으로 조정하고 관리하는 복잡한 과정입니다. 스크립팅, 모니터링 도구, 대시보드, 유연성과 구조의 균형이 핵심입니다. 1:1 컴퓨팅 환경에서 특히 중요합니다.",
+            keyResearchers: ["Dillenbourg, P.", "Prieto, L.P.", "Roschelle, J."],
+            relatedTopics: ["learning-with-technology", "group-awareness-tools", "technology-and-teacher-learning"]
+        },
+        {
+            id: "cognition-and-metacognition", name: "Cognition and Metacognition", category: "Learning Sciences",
+            description: "인지와 메타인지 과정",
+            details: "학습에서의 인지 과정(주의, 지각, 기억, 추론)과 메타인지(인지에 대한 인식과 조절)를 탐구합니다. 학습 전략의 효과성, 메타인지 훈련, 자기조절학습과의 연결이 주요 주제입니다.",
+            keyResearchers: ["Flavell, J.", "Brown, A.", "Schunk, D."],
+            relatedTopics: ["self-regulated-learning", "metacognition-science"]
+        },
+        {
+            id: "cognitive-apprenticeship", name: "Cognitive Apprenticeship", category: "Learning Sciences",
+            description: "인지적 도제 학습",
+            details: "전통적 도제의 원리(모델링, 코칭, 스캐폴딩, 페이딩)를 인지적 기술 습득에 적용합니다. 전문가 사고의 명시화, 상황적 학습, 정통 과제가 핵심입니다. 읽기, 쓰기, 수학 교육에 적용됩니다.",
+            keyResearchers: ["Collins, A.", "Brown, J.S.", "Newman, S."],
+            relatedTopics: ["situative-cognition", "distributed-scaffolding"]
+        },
+        {
+            id: "cognitive-tutors", name: "Cognitive Tutors", category: "Technology",
+            description: "인지 모델 기반 지능형 튜터링",
+            details: "학습자의 인지 상태를 ACT-R 이론에 기반하여 모델링하고 개인화된 피드백을 제공하는 지능형 튜터링 시스템입니다. Carnegie Learning의 수학 튜터가 대표적이며, 대규모 효과성이 입증되었습니다.",
+            keyResearchers: ["Anderson, J.R.", "Koedinger, K.", "Aleven, V."],
+            relatedTopics: ["feedback-in-learning", "learning-analytics"]
+        },
+        {
+            id: "collaboration-scripts-for-cscl", name: "Collaboration Scripts", category: "CSCL",
+            description: "CSCL을 위한 협력 스크립트",
+            details: "협력 스크립트는 학습자 간 상호작용을 구조화하여 생산적 협력을 유도합니다. Jigsaw, MURDER, ArgueGraph 등 다양한 유형이 있습니다. 과도한 구조화의 부작용(스크립트 역설)도 연구됩니다.",
+            keyResearchers: ["Fischer, F.", "Kollar, I.", "Weinberger, A."],
+            relatedTopics: ["group-cognition", "shared-regulation-cscl", "argumentation-and-learning-in-cscl"]
+        },
+        {
+            id: "communities-of-learners", name: "Communities of Learners", category: "Learning Sciences",
+            description: "학습자 공동체",
+            details: "지식 공유, 상호 지원, 집단적 성장을 추구하는 학습자 집단입니다. Brown과 Campione의 FCL(Fostering Communities of Learners), Wenger의 실천 공동체(CoP) 등의 모델이 있습니다.",
+            keyResearchers: ["Brown, A.", "Campione, J.", "Wenger, E."],
+            relatedTopics: ["knowledge-building", "situative-cognition"]
+        },
+        {
+            id: "complexity-and-the-learning-sciences", name: "Complexity and Learning Sciences", category: "Learning Sciences",
+            description: "복잡계 이론과 학습과학",
+            details: "복잡계 이론을 학습에 적용하여 창발, 자기조직화, 비선형 역학을 탐구합니다. 학습을 개인, 사회, 물질적 요소의 동적 상호작용으로 이해합니다. 에이전트 기반 모델링도 활용됩니다.",
+            keyResearchers: ["Jacobson, M.", "Kauffman, S.", "Davis, B."],
+            relatedTopics: ["distributed-intelligence", "systems-thinking"]
+        },
+        {
+            id: "conversation-analysis-ethnomethodological-approaches", name: "Conversation Analysis", category: "Methodologies",
+            description: "민족지학적 대화 분석",
+            details: "Garfinkel과 Sacks의 민족지학적 방법론을 학습 맥락에 적용합니다. 턴테이킹, 수리(repair), 순차 조직 등 대화의 미시적 구조를 분석하여 학습이 상호작용에서 어떻게 구성되는지 탐구합니다.",
+            keyResearchers: ["Sacks, H.", "Schegloff, E.", "Koschmann, T."],
+            relatedTopics: ["analysis-of-discourse-data", "situative-cognition"]
+        },
+        {
+            id: "creating-supporting-design-teams", name: "Supporting Design Teams", category: "Practice",
+            description: "설계 팀 지원",
+            details: "교육 혁신을 위한 협력적 설계 과정을 지원합니다. 교사, 연구자, 디자이너 간 파트너십, 공동 설계(co-design), 참여적 설계 등이 포함됩니다. 설계기반연구의 실천적 측면입니다.",
+            keyResearchers: ["Penuel, W.", "Fishman, B.", "Coburn, C."],
+            relatedTopics: ["design-design-based-research", "technology-and-teacher-learning"]
+        },
+        {
+            id: "cscl-conceptual-change", name: "CSCL and Conceptual Change", category: "CSCL",
+            description: "CSCL을 통한 개념 변화",
+            details: "협력적 논의, 인지 갈등, 동료 설명을 통해 학습자가 기존의 오개념을 과학적 개념으로 재구성하는 과정입니다. 사회구성주의적 관점에서 개념 변화를 이해합니다.",
+            keyResearchers: ["Vosniadou, S.", "Sinatra, G.", "Chi, M."],
+            relatedTopics: ["argumentation-and-learning-in-cscl", "prior-knowledge"]
+        },
+        {
+            id: "cscl-and-disabilities", name: "CSCL and Disabilities", category: "CSCL",
+            description: "장애와 CSCL",
+            details: "다양한 능력의 학습자가 협력 학습에 참여할 수 있도록 접근성, 보편적 설계, 보조 기술을 연구합니다. 인지적, 감각적, 운동적 장애에 대한 포용적 CSCL 환경 설계를 탐구합니다.",
+            keyResearchers: ["Cook, A.M.", "Buzhardt, J.", "Stahl, G."],
+            relatedTopics: ["learning-with-technology", "group-awareness-tools"]
+        },
+        {
+            id: "data-science-education", name: "Data Science Education", category: "Technology",
+            description: "데이터 과학 교육",
+            details: "데이터 리터러시, 통계적 사고, 컴퓨팅 사고를 통합한 데이터 과학 교육을 탐구합니다. K-12 및 고등교육에서 데이터 분석, 시각화, 추론 능력 개발이 주요 주제입니다.",
+            keyResearchers: ["Finzer, W.", "Lee, V.", "Engel, J."],
+            relatedTopics: ["learning-with-technology", "computational-thinking"]
+        },
+        {
+            id: "design-design-based-research",
+            name: "Design-Based Research",
+            category: "Methodologies",
+            description: "설계기반연구(DBR): 반복적 설계와 이론 개발",
+            details: `설계기반연구(Design-Based Research, DBR)는 교육 이론 검증과 학습 환경 개선을 동시에 추구하는 방법론입니다.
+
+**핵심 특징:**
+• 반복적 설계(Iterative Design): 설계 → 실행 → 분석 → 수정의 지속적 순환
+• 자연스러운 교육 맥락에서 연구 수행
+• 이론 개발과 실천 개선의 이중 목표
+• '설계 실험(Design Experiments)'이라고도 불림
+
+**추측 매핑(Conjecture Mapping):**
+Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
+• 구체화(Embodiments): 특정 설계 요소들
+• 매개 과정(Mediating Processes): 예상되는 학습 메커니즘
+• 학습 결과(Learning Outcomes): 목표하는 성과
+• 설계 원리(Design Principles): 반복 사이클에서 도출되는 일반화 가능한 원칙
+
+**DBR 프로세스:**
+• 1단계: 문제 분석 및 초기 설계
+• 2단계: 실행 및 데이터 수집
+• 3단계: 분석 및 설계 수정
+• 4단계: 반복 및 이론 정교화
+
+**강점과 한계:**
+• 강점: 생태학적 타당성, 실천적 유용성, 복잡성 포착
+• 한계: 일반화 어려움, 시간 집약적, 연구자 개입의 편향 가능성`,
+            keyResearchers: ["Barab, Sasha (아리조나주립대)", "Cobb, Paul (밴더빌트대)", "Sandoval, William (UCLA)", "DBR Collective"],
+            relatedTopics: ["design-based-implementation-research", "creating-supporting-design-teams", "learning-environments"]
+        },
+        {
+            id: "design-based-implementation-research", name: "Design-Based Implementation Research", category: "Methodologies",
+            description: "설계기반실행연구(DBIR)",
+            details: "DBR을 확장하여 혁신의 지속가능한 실행과 확산에 초점을 맞춥니다. 연구자-실천가 파트너십, 조직적 맥락, 정책 연계를 강조합니다.",
+            keyResearchers: ["Penuel, W.", "Fishman, B.", "Sabelli, N."],
+            relatedTopics: ["design-design-based-research", "technology-and-teacher-learning"]
+        },
+        {
+            id: "distributed-intelligence", name: "Distributed Intelligence", category: "Learning Sciences",
+            description: "분산 지능",
+            details: "지능이 개인 내부에만 있는 것이 아니라 도구, 타인, 환경에 분산되어 있다는 관점입니다. 계산기, 노트, 협력자 등이 인지 시스템의 일부로 기능합니다. Hutchins의 분산 인지가 핵심입니다.",
+            keyResearchers: ["Hutchins, E.", "Pea, R.", "Salomon, G."],
+            relatedTopics: ["situative-cognition", "group-cognition"]
+        },
+        {
+            id: "distributed-scaffolding", name: "Distributed Scaffolding", category: "Learning Sciences",
+            description: "분산 스캐폴딩",
+            details: "학습 지원이 교사, 동료, 도구, 과제 구조 등 여러 원천에서 제공됨을 인식합니다. 다중 원천 간 조정, 점진적 철수(fading), 상호보완적 지원 설계가 중요합니다.",
+            keyResearchers: ["Tabak, I.", "Reiser, B.", "Puntambekar, S."],
+            relatedTopics: ["cognitive-apprenticeship", "learning-with-technology"]
+        },
+        {
+            id: "embodiment-and-embodied-design", name: "Embodiment and Embodied Design", category: "Learning Sciences",
+            description: "체화된 인지와 설계",
+            details: "신체 경험이 개념 이해에 근본적 역할을 한다는 관점입니다. 제스처, 움직임, 물리적 조작이 수학, 과학 학습을 지원합니다. 체화된 설계는 이를 테크놀로지 기반 학습에 적용합니다.",
+            keyResearchers: ["Abrahamson, D.", "Nathan, M.", "Alibali, M."],
+            relatedTopics: ["gestures-learning-teaching", "augmented-reality-learning-sciences"]
+        },
+        {
+            id: "epistemic-cognition", name: "Epistemic Cognition", category: "Learning Sciences",
+            description: "인식론적 인지",
+            details: "지식의 본질, 정당화, 원천에 대한 신념과 사고입니다. 인식론적 발달, 영역 특수적 vs 일반적 인식론, 과학적 인식론이 연구됩니다. 비판적 사고와 과학 교육에 중요합니다.",
+            keyResearchers: ["Hofer, B.", "Chinn, C.", "Greene, J."],
+            relatedTopics: ["argumentation-and-learning-in-cscl", "knowledge-building"]
+        },
+        {
+            id: "example-based-learning", name: "Example-Based Learning", category: "Learning Sciences",
+            description: "예제 기반 학습",
+            details: "전문가의 문제 해결 과정을 단계별로 보여줌으로써 학습자의 인지 부하를 줄이는 접근입니다. 자기설명 촉진, 페이딩, 오류 예제 등이 효과를 높입니다. 수학, 과학, 프로그래밍 교육에서 널리 사용됩니다.",
+            keyResearchers: ["Renkl, A.", "Atkinson, R.", "Sweller, J."],
+            relatedTopics: ["cognitive-load-theory", "worked-examples"]
+        },
+        {
+            id: "foundations-of-the-learning-sciences", name: "Foundations of Learning Sciences", category: "Learning Sciences",
+            description: "학습과학의 기초",
+            details: "학습과학의 이론적 토대로 인지과학, 교육심리학, 인공지능, 인류학의 통합을 다룹니다. 구성주의, 상황적 학습, 사회문화적 이론이 핵심 패러다임입니다.",
+            keyResearchers: ["Sawyer, R.K.", "Bransford, J.", "Nathan, M."],
+            relatedTopics: ["situative-cognition", "design-design-based-research"]
+        },
+        {
+            id: "gestures-learning-teaching", name: "Gestures in Learning", category: "Learning Sciences",
+            description: "학습에서의 제스처",
+            details: "제스처가 수학적 사고, 과학적 추론, 언어 학습을 어떻게 지원하는지 탐구합니다. 제스처-언어 불일치는 학습 준비 상태를 나타내며, 교사 제스처가 학생 이해에 영향을 미칩니다.",
+            keyResearchers: ["Alibali, M.", "Goldin-Meadow, S.", "Nathan, M."],
+            relatedTopics: ["embodiment-and-embodied-design", "representational-learning"]
+        },
+        {
+            id: "group-awareness-tools", name: "Group Awareness Tools", category: "CSCL",
+            description: "그룹 인식 도구",
+            details: "협력 학습에서 동료의 활동, 지식 상태, 참여도 등을 시각화합니다. 참여 미터, 지식 인식 도구, 조정 도구 등이 조정과 공평한 참여를 촉진합니다.",
+            keyResearchers: ["Janssen, J.", "Bodemer, D.", "Buder, J."],
+            relatedTopics: ["group-cognition", "shared-regulation-cscl", "learning-analytics"]
+        },
+        {
+            id: "group-cognition", name: "Group Cognition", category: "CSCL",
+            description: "집단 인지",
+            details: "개인 인지의 단순 합이 아닌 그룹 수준에서 창발하는 인지 과정입니다. 공유된 의미 구성, 상호주관성, 대화적 지식 구축이 핵심 개념입니다. Stahl의 VMT 연구가 대표적입니다.",
+            keyResearchers: ["Stahl, G.", "Suthers, D.", "Roschelle, J."],
+            relatedTopics: ["knowledge-building", "distributed-intelligence", "collaboration-scripts-for-cscl"]
+        },
+        {
+            id: "information-problem-solving", name: "Information Problem Solving", category: "Learning Sciences",
+            description: "정보 문제 해결",
+            details: "디지털 환경에서 정보를 검색, 평가, 통합, 사용하는 능력입니다. 정보 리터러시, 비판적 평가, 출처 신뢰도 판단 등이 포함됩니다. 인터넷 시대의 핵심 역량입니다.",
+            keyResearchers: ["Brand-Gruwel, S.", "Stadtler, M.", "Rouet, J.F."],
+            relatedTopics: ["epistemic-cognition", "data-science-education"]
+        },
+        {
+            id: "inquiry-learning-knowledge-integration", name: "Inquiry and Knowledge Integration", category: "Learning Sciences",
+            description: "탐구 학습과 지식 통합",
+            details: "학생이 질문, 조사, 증거 수집, 설명 구성을 통해 학습합니다. Linn의 WISE 프로젝트가 대표적이며, 다양한 아이디어를 연결하여 일관된 이해를 구축합니다.",
+            keyResearchers: ["Linn, M.", "Songer, N.", "Krajcik, J."],
+            relatedTopics: ["learning-through-problem-solving", "learning-with-technology"]
+        },
+        {
+            id: "interactional-ethnography-and-problem-based-learning", name: "Interactional Ethnography and PBL", category: "Methodologies",
+            description: "상호작용 민족지학과 PBL",
+            details: "민족지학적 방법론을 문제기반학습(PBL) 연구에 적용합니다. 학습의 사회문화적 맥락, 참여 구조, 정체성 형성을 탐구합니다. 장기간 현장 관찰이 특징입니다.",
+            keyResearchers: ["Green, J.", "Castanheira, M.", "Hmelo-Silver, C."],
+            relatedTopics: ["conversation-analysis-ethnomethodological-approaches", "communities-of-learners"]
+        },
+        {
+            id: "knowledge-building",
+            name: "Knowledge Building",
+            category: "CSCL",
+            description: "지식 구축: 집단적 아이디어 개선과 지식 창출",
+            details: `지식 구축(Knowledge Building)은 Marlene Scardamalia와 Carl Bereiter가 1990년대 초 개발한 교육 접근법으로, 학습자들이 과학자처럼 집단적으로 새로운 지식을 창출하는 과정입니다.
+
+**핵심 개념:**
+• 아이디어는 '개념적 인공물(conceptual artifacts)'로서 지속적으로 개선될 수 있음
+• 집단 인지적 책임(Collective Cognitive Responsibility): 공동체 지식 발전에 대한 공유된 책임감
+• 인식적 주체성(Epistemic Agency): 학습자가 지식 창출 과정의 주체로 참여
+
+**Knowledge Forum (플랫폼):**
+• 1980년대 CSILE(Computer Supported Intentional Learning Environments)로 시작
+• 아이디어 공유, 연결, 재구성, 통합을 지원하는 비동기 온라인 환경
+• 시각적 논증 맵과 대화 버튼으로 성찰적 토론 촉진
+
+**12가지 지식 구축 원칙:**
+• 실제 아이디어와 진정한 문제
+• 개선 가능한 아이디어
+• 아이디어 다양성
+• 위에서 올라가기(Rise Above)
+• 인식적 주체성
+• 공동체 지식과 집단 책임
+
+**'논쟁에서 배우기'와의 차이:** 지식 구축은 승패가 아닌 공동 지식 발전에 초점`,
+            keyResearchers: ["Scardamalia, Marlene (토론토대 OISE)", "Bereiter, Carl (토론토대)", "Zhang, Jianwei (뉴욕주립대 알바니)"],
+            relatedTopics: ["epistemic-cognition", "group-cognition", "communities-of-learners", "argumentation-and-learning-in-cscl"]
+        },
+        {
+            id: "knowledge-creation", name: "Knowledge Creation", category: "Learning Sciences",
+            description: "지식 창조",
+            details: "기존 지식의 습득을 넘어 새로운 아이디어와 지식을 생성하는 과정입니다. Nonaka의 SECI 모델, 트리어로기적(Trialogical) 학습 접근이 있습니다.",
+            keyResearchers: ["Nonaka, I.", "Paavola, S.", "Hakkarainen, K."],
+            relatedTopics: ["knowledge-building", "communities-of-learners"]
+        },
+        {
+            id: "learning-in-the-disciplines", name: "Learning in the Disciplines", category: "Learning Sciences",
+            description: "학문 분야별 학습",
+            details: "수학, 과학, 역사, 문학 등 각 분야의 고유한 인식론, 실천, 추론 방식을 탐구합니다. 분야 전문가처럼 생각하고 실천하는 법을 학습합니다.",
+            keyResearchers: ["Wineburg, S.", "Lehrer, R.", "Sfard, A."],
+            relatedTopics: ["epistemic-cognition", "inquiry-learning-knowledge-integration"]
+        },
+        {
+            id: "learning-progressions-in-science-education", name: "Learning Progressions", category: "Learning Sciences",
+            description: "과학 교육의 학습 진행",
+            details: "학생들이 시간에 따라 핵심 과학 개념을 어떻게 발달시키는지 경험적으로 근거한 경로를 기술합니다. 교육과정 설계와 평가 개발에 활용됩니다.",
+            keyResearchers: ["Corcoran, T.", "Duncan, R.G.", "Lehrer, R."],
+            relatedTopics: ["assessment", "cscl-conceptual-change"]
+        },
+        {
+            id: "learning-through-problem-solving", name: "Learning Through Problem Solving", category: "Learning Sciences",
+            description: "문제 해결을 통한 학습",
+            details: "문제기반학습(PBL), 프로젝트기반학습 등 실제적 문제를 통해 학습합니다. 맥락화된 학습, 자기주도성, 협력이 강조됩니다. 의학 교육에서 시작되어 확산되었습니다.",
+            keyResearchers: ["Barrows, H.", "Hmelo-Silver, C.", "Schmidt, H."],
+            relatedTopics: ["inquiry-learning-knowledge-integration", "productive-failure"]
+        },
+        {
+            id: "learning-with-technology", name: "Learning with Technology", category: "Technology",
+            description: "테크놀로지 기반 학습",
+            details: "디지털 도구가 학습을 어떻게 지원하고 변형하는지 탐구합니다. TPACK(기술교수내용지식), SAMR 모델 등이 프레임워크로 사용됩니다. 도구가 학습을 어떻게 매개하는지가 핵심입니다.",
+            keyResearchers: ["Mishra, P.", "Koehler, M.", "Jonassen, D."],
+            relatedTopics: ["distributed-scaffolding", "augmented-reality-learning-sciences"]
+        },
+        {
+            id: "learning-by-design", name: "Learning by Design", category: "Learning Sciences",
+            description: "설계를 통한 학습",
+            details: "학습자가 인공물(artifact)을 설계하고 만드는 과정에서 학습합니다. 공학 설계, 게임 만들기, 로봇 프로그래밍 등이 포함됩니다. Papert의 구성주의(Constructionism)가 이론적 토대입니다.",
+            keyResearchers: ["Kolodner, J.", "Papert, S.", "Kafai, Y."],
+            relatedTopics: ["inquiry-learning-knowledge-integration", "embodiment-and-embodied-design"]
+        },
+        {
+            id: "multilevel-analysis", name: "Multilevel Analysis", category: "Methodologies",
+            description: "다층 분석",
+            details: "학생이 교실에, 교실이 학교에 내포된 위계적 데이터 구조를 모델링합니다. HLM(Hierarchical Linear Modeling)을 통해 개인, 그룹, 조직 수준의 효과를 분리할 수 있습니다.",
+            keyResearchers: ["Raudenbush, S.", "Bryk, A.", "Snijders, T."],
+            relatedTopics: ["analysis-of-discourse-data", "learning-analytics"]
+        },
+        {
+            id: "neurocognitive-foundations-learning-sciences", name: "Neurocognitive Foundations", category: "Learning Sciences",
+            description: "신경인지과학적 기초",
+            details: "뇌과학 연구를 학습에 적용합니다. 가소성, 기억 공고화, 주의, 정서와 학습의 연결이 탐구됩니다. 신경신화(neuromyth) 비판과 증거기반 적용이 중요합니다.",
+            keyResearchers: ["Howard-Jones, P.", "Ansari, D.", "Goswami, U."],
+            relatedTopics: ["memory-and-learning", "emotion-and-learning"]
+        },
+        {
+            id: "quantitative-ethnography", name: "Quantitative Ethnography", category: "Methodologies",
+            description: "양적 민족지학",
+            details: "ENA(Epistemic Network Analysis) 등을 통해 담화와 상호작용의 패턴을 정량화합니다. 빅데이터와 민족지학적 심층 분석을 결합하여 의미 있는 패턴을 발견합니다.",
+            keyResearchers: ["Shaffer, D.W.", "Ruis, A.", "Siebert-Evenstone, A."],
+            relatedTopics: ["analysis-of-discourse-data", "learning-analytics"]
+        },
+        {
+            id: "representational-learning", name: "Representational Learning", category: "Learning Sciences",
+            description: "표상을 통한 학습",
+            details: "그래프, 다이어그램, 시뮬레이션 등 다양한 표상을 통한 학습을 탐구합니다. 다중 표상의 연결, 표상 능력 발달, 표상 도구 설계가 주요 주제입니다.",
+            keyResearchers: ["Ainsworth, S.", "diSessa, A.", "Kozma, R."],
+            relatedTopics: ["multimedia-learning", "visualization"]
+        },
+        {
+            id: "shared-regulation-cscl", name: "Shared Regulation", category: "CSCL",
+            description: "공유 조절",
+            details: "그룹 구성원이 함께 목표를 설정하고, 진행을 모니터링하며, 전략을 조정하는 과정입니다. 자기조절, 공동조절, 사회적으로 공유된 조절이 구분됩니다.",
+            keyResearchers: ["Järvelä, S.", "Hadwin, A.", "Malmberg, J."],
+            relatedTopics: ["self-regulated-learning", "group-awareness-tools"]
+        },
+        {
+            id: "massively-open-online-courses-moocs", name: "MOOCs", category: "Technology",
+            description: "대규모 공개 온라인 강좌",
+            details: "대규모 개방형 온라인 강좌로, 접근성, 확장성, 유연성을 제공합니다. 완료율, 학습자 참여, 동료 학습, 적응형 학습의 통합이 연구 주제입니다.",
+            keyResearchers: ["Reich, J.", "Kizilcec, R.", "Dillahunt, T."],
+            relatedTopics: ["learning-with-technology", "learning-analytics"]
+        },
+        {
+            id: "situative-cognition", name: "Situated Cognition", category: "Learning Sciences",
+            description: "상황 인지",
+            details: "지식이 맥락에 놓여 있고 활동과 문화에서 분리될 수 없다는 관점입니다. 정통 과제, 실천 공동체, 학교와 실세계의 연결이 강조됩니다. 전이 문제의 핵심 관점입니다.",
+            keyResearchers: ["Brown, J.S.", "Lave, J.", "Greeno, J."],
+            relatedTopics: ["cognitive-apprenticeship", "communities-of-learners", "transfer-of-learning"]
+        },
+        {
+            id: "statistical-discourse-analysis", name: "Statistical Discourse Analysis", category: "Methodologies",
+            description: "통계적 담화 분석",
+            details: "대규모 담화 데이터에 통계적 방법을 적용합니다. 자동 코딩, 주제 모델링, 시퀀스 분석 등을 통해 패턴을 발견합니다. 질적 분석과 양적 분석의 통합입니다.",
+            keyResearchers: ["Rose, C.", "Chiu, M.", "Wise, A."],
+            relatedTopics: ["analysis-of-discourse-data", "learning-analytics"]
+        },
+        {
+            id: "technology-and-teacher-learning", name: "Technology and Teacher Learning", category: "Practice",
+            description: "테크놀로지와 교사 학습",
+            details: "교사가 테크놀로지를 학습하고 교수에 통합하는 과정을 탐구합니다. 온라인 전문성 개발, 비디오 기반 반성, 교사 학습 공동체가 효과적 접근법입니다.",
+            keyResearchers: ["Ball, D.", "Borko, H.", "Fishman, B."],
+            relatedTopics: ["classroom-orchestration", "design-based-implementation-research"]
+        },
+        // === Science of Learning (Cognitive Science perspective) ===
+        {
+            id: "cognitive-load-theory",
+            name: "Cognitive Load Theory",
+            category: "Science of Learning",
+            description: "인지 부하 이론: 작업기억 용량과 학습 설계",
+            details: `인지 부하 이론(CLT)은 1980년대 후반 호주의 교육심리학자 John Sweller가 개발한 이론으로, 인간 작업기억의 제한된 용량이 학습에 미치는 영향을 설명합니다.
+
+**세 가지 인지 부하 유형:**
+• 내재적 부하(Intrinsic Load): 학습 내용 자체의 고유한 복잡성. 요소 간 상호작용(element interactivity)이 높을수록 증가. 학습자의 사전 지식 수준에 따라 달라짐.
+• 외재적 부하(Extraneous Load): 불필요한 교수 설계로 인해 발생하는 부하. 분리 주의 효과(split-attention), 중복 효과(redundancy) 등. 최소화가 목표.
+• 본유적 부하(Germane Load): 스키마 구성과 자동화에 투입되는 '생산적' 부하. 학습과 장기기억 전이에 직접 기여.
+
+**핵심 교수 설계 원칙:**
+• 예제 기반 학습(Worked Examples): 초보자에게 완전한 해결 과정을 제시하여 인지 부하 감소
+• 분절화(Segmenting): 복잡한 내용을 작은 단위로 나누어 순차 제시
+• 사전훈련(Pre-training): 핵심 개념을 먼저 학습시켜 내재적 부하 감소
+• 통합 형식(Integrated Format): 관련 정보를 공간/시간적으로 가깝게 배치하여 분리 주의 효과 방지
+• 모달리티 원칙: 시각(다이어그램) + 청각(설명)을 결합하여 작업기억 용량 확장
+
+**전문성 역전 효과(Expertise Reversal Effect):**
+초보자에게 효과적인 교수법이 전문가에게는 오히려 방해가 될 수 있음. 학습자 수준에 맞는 적응적 교수 설계 필요.
+
+**메타분석 결과:** Sweller et al.(2019)의 종합 연구에서 CLT 기반 교수 설계가 전통적 방법 대비 효과 크기 d=0.71로 유의미한 학습 향상을 보임.`,
+            keyResearchers: ["Sweller, John (호주 뉴사우스웨일스대)", "Paas, Fred (네덜란드 에라스무스대)", "van Merriënboer, Jeroen (네덜란드 마스트리히트대)", "Kalyuga, Slava (호주)"],
+            relatedTopics: ["multimedia-learning", "worked-examples", "example-based-learning", "expertise-development"]
+        },
+        {
+            id: "retrieval-practice",
+            name: "Retrieval Practice",
+            category: "Science of Learning",
+            description: "인출 연습: 테스트 효과와 능동적 기억 인출",
+            details: `인출 연습(Retrieval Practice)은 정보를 단순히 다시 읽는 것보다 기억에서 능동적으로 인출하는 것이 장기 파지에 훨씬 효과적이라는 '테스트 효과(Testing Effect)'에 기반합니다.
+
+**핵심 메커니즘:**
+• 기억 흔적 강화: 인출 시도 자체가 신경 연결을 강화하여 기억을 더 접근 가능하게 만듦
+• 기억 공고화 촉진: 인출은 해마 의존성을 줄이고 장기기억으로 통합
+• 지식 격차 파악: 무엇을 모르는지 인식하여 학습 초점 조정 가능
+• 메타인지 향상: 자기 이해 수준에 대한 정확한 판단력 발달
+
+**효과적인 구현 방법:**
+• 플래시카드와 자기 테스트
+• 저위험 퀴즈(low-stakes quiz)
+• 쓰면서 암기하기(brain dump)
+• 교차 연습(interleaving)과 결합
+
+**연구 결과:** Roediger & Karpicke(2006)의 실험에서 반복 학습 집단보다 인출 연습 집단이 일주일 후 50% 이상 더 많은 정보를 기억함.`,
+            keyResearchers: ["Roediger, Henry (미국 워싱턴대 세인트루이스)", "Karpicke, Jeffrey (미국 퍼듀대)", "Butler, Andrew (미국 워싱턴대)"],
+            relatedTopics: ["spaced-practice", "desirable-difficulties", "interleaving"]
+        },
+        {
+            id: "spaced-practice",
+            name: "Spaced Practice",
+            category: "Science of Learning",
+            description: "분산 연습: 간격 효과와 망각 곡선",
+            details: `분산 연습(Spaced Practice)은 학습을 시간에 걸쳐 분산할 때 집중 연습(cramming)보다 장기 파지가 명확히 우수하다는 '간격 효과(Spacing Effect)'에 기반합니다.
+
+**이론적 기초 - Ebbinghaus 망각 곡선:**
+• 1885년 독일 심리학자 Ebbinghaus가 발견
+• 새 정보의 약 70%가 24시간 내 망각
+• 전략적 복습으로 망각 속도를 크게 늦출 수 있음
+
+**왜 효과적인가:**
+• 기억 공고화: 간격이 뇌의 기억 통합 시간을 허용
+• 인출 노력 증가: 어느 정도 망각 후 인출 시 더 강한 기억 흔적 형성
+• 인코딩 변산성: 다른 맥락에서 학습 시 다양한 인출 단서 형성
+
+**최적 간격 설계:**
+• 파지 기간의 10-20%가 최적 간격 (예: 1주일 시험 → 1-2일 간격)
+• 간격 확장(expanding interval): 점진적으로 간격을 늘려가기
+• Anki, SuperMemo 등 간격 반복 소프트웨어 활용
+
+**효과 크기:** 메타분석에서 d=0.42~0.79로 중간-큰 효과 확인됨.`,
+            keyResearchers: ["Cepeda, Nicholas (요크대)", "Pashler, Harold (UCSD)", "Dunlosky, John (켄트주립대)", "Ebbinghaus, Hermann (선구자)"],
+            relatedTopics: ["retrieval-practice", "desirable-difficulties", "forgetting-curve"]
+        },
+        {
+            id: "multimedia-learning",
+            name: "Multimedia Learning",
+            category: "Science of Learning",
+            description: "멀티미디어 학습 이론: 이중 채널과 인지 부하 관리",
+            details: `Richard Mayer의 멀티미디어 학습 이론(CTML)은 텍스트와 이미지를 함께 사용할 때 학습이 향상된다는 연구 기반 프레임워크입니다.
+
+**세 가지 핵심 가정:**
+• 이중 채널(Dual Channel): 시각과 청각 정보가 별도 채널에서 처리됨
+• 제한된 용량(Limited Capacity): 각 채널은 동시에 처리할 수 있는 정보량에 한계가 있음
+• 능동적 처리(Active Processing): 학습자가 정보를 선택, 조직, 통합해야 함
+
+**핵심 멀티미디어 원칙:**
+• 모달리티 원칙: 그래픽+음성 설명이 그래픽+텍스트보다 효과적
+• 인접성 원칙: 관련 단어와 그림을 시공간적으로 가깝게 배치
+• 중복성 원칙: 애니메이션+나래이션+동일 텍스트는 피하기
+• 분절화 원칙: 복잡한 내용을 학습자 속도 조절이 가능한 세그먼트로
+• 신호화 원칙: 핵심 요소를 강조하기 위한 신호 제공
+
+**설계 지침:**
+• 장식용 이미지는 인지 부하만 증가시키므로 피하기
+• 1인칭 대화체 나래이션이 형식적 문체보다 효과적
+• 전문가에게는 초보자와 다른 설계가 필요(전문성 역전 효과)`,
+            keyResearchers: ["Mayer, Richard E. (UC 산타바바라)", "Moreno, Roxana", "Paivio, Allan (이중 부호화 이론)"],
+            relatedTopics: ["cognitive-load-theory", "dual-coding", "representational-learning"]
+        },
+        {
+            id: "self-regulated-learning",
+            name: "Self-Regulated Learning",
+            category: "Science of Learning",
+            description: "자기조절학습: 학습의 자기주도적 통제",
+            details: `자기조절학습(SRL)은 학습자가 목표 설정, 전략 선택, 진행 모니터링, 반성을 통해 자신의 학습을 주도적으로 관리하는 과정입니다.
+
+**Zimmerman의 순환 모형 (3단계):**
+• 사전숙고(Forethought): 과제 분석, 목표 설정, 전략 계획, 동기적 신념 활성화
+• 수행(Performance): 과제 실행, 자기 모니터링, 자기 통제 전략 사용
+• 자기성찰(Self-Reflection): 수행 평가, 귀인, 향후 전략 조정
+
+**Pintrich의 4단계 모형:**
+• 계획 및 활성화 → 모니터링 → 통제 → 반응 및 성찰
+• 인지, 동기/정서, 행동, 맥락의 4개 영역에서 조절
+
+**Winne & Hadwin의 정보처리 모형:**
+• 과제 정의 → 목표 설정/계획 → 전략 실행 → 적응
+• 메타인지적 모니터링과 피드백 강조
+
+**핵심 요소:**
+• 메타인지: 자신의 사고과정에 대한 인식과 조절
+• 목표 설정: SMART 목표(구체적, 측정가능, 달성가능, 관련성, 시간제한)
+• 자기 모니터링: 진행 상황 지속적 점검
+• 귀인: 성공/실패 원인에 대한 해석
+
+**교육적 시사점:** SRL은 가르칠 수 있으며, 명시적 전략 교수와 메타인지 프롬프트가 효과적.`,
+            keyResearchers: ["Zimmerman, Barry J. (CUNY)", "Pintrich, Paul (미시간대)", "Winne, Philip (사이먼 프레이저대)", "Hadwin, Allyson"],
+            relatedTopics: ["metacognition-science", "motivation-and-learning", "feedback-in-learning"]
+        },
+        {
+            id: "metacognition-science", name: "Metacognition", category: "Science of Learning",
+            description: "Thinking about thinking",
+            details: "메타인지는 자신의 인지 과정에 대한 인식과 조절입니다. Flavell이 도입한 이 개념은 메타인지적 지식(과제, 전략, 자기 인식)과 메타인지적 기술(계획, 모니터링, 평가)로 구성됩니다. 학습 성과와 강한 상관관계가 있습니다.",
+            keyResearchers: ["Flavell, J.", "Schraw, G.", "Veenman, M."],
+            relatedTopics: ["self-regulated-learning", "calibration"]
+        },
+        {
+            id: "desirable-difficulties",
+            name: "Desirable Difficulties",
+            category: "Science of Learning",
+            description: "바람직한 어려움: 학습을 강화하는 도전",
+            details: `Robert Bjork가 제안한 '바람직한 어려움(Desirable Difficulties)'은 학습 중 수행을 일시적으로 어렵게 만들지만, 장기 파지와 전이를 크게 향상시키는 조건들입니다.
+
+**왜 '바람직한' 어려움인가:**
+• 더 깊은 인코딩: 노력이 필요한 인출이 기억 흔적을 강화
+• 더 다양한 인코딩: 여러 맥락에서 학습하면 유연한 지식 형성
+• 유창성 환상 방지: 쉬운 학습이 과잉 자신감을 유발하는 것을 방지
+
+**주요 바람직한 어려움들:**
+• 간격 연습(Spacing): 집중 연습보다 분산 연습
+• 인출 연습(Retrieval): 재학습보다 기억에서 인출
+• 교차 연습(Interleaving): 블록 연습보다 유형을 섞어 연습
+• 생성 효과(Generation): 정보를 주어지기보다 스스로 생성
+• 맥락 변산성(Contextual variability): 다양한 조건에서 연습
+
+**중요한 경계 조건:**
+• 학습자에게 너무 어려우면 '바람직하지 않은 어려움'이 됨
+• 기초 지식이 부족하면 효과 없음
+• 난이도가 학습자 수준에 맞아야 함
+
+**실용적 적용:** 시험 전 벼락치기보다 여러 날에 걸쳐 자기 테스트하며 공부하기.`,
+            keyResearchers: ["Bjork, Robert A. (UCLA)", "Bjork, Elizabeth L. (UCLA)", "Soderstrom, Nicholas", "Roediger, Henry"],
+            relatedTopics: ["retrieval-practice", "spaced-practice", "interleaving", "generation-effect"]
+        },
+        {
+            id: "interleaving", name: "Interleaving", category: "Science of Learning",
+            description: "Mixing different topics or problems",
+            details: "교차 연습은 유사한 주제나 문제 유형을 섞어서 학습하는 것이 블록 연습보다 장기적으로 효과적임을 보여줍니다. 변별 학습과 인출 연습이 결합되어 학습이 향상됩니다.",
+            keyResearchers: ["Rohrer, D.", "Bjork, R."],
+            relatedTopics: ["spaced-practice", "desirable-difficulties"]
+        },
+        {
+            id: "transfer-of-learning", name: "Transfer of Learning", category: "Science of Learning",
+            description: "Applying knowledge to new situations",
+            details: "학습 전이는 한 상황에서 학습한 것을 새로운 상황에 적용하는 것입니다. 근전이(near transfer)와 원전이(far transfer)가 구분되며, 추상화, 다양한 예시, 유추적 사고가 전이를 촉진합니다.",
+            keyResearchers: ["Barnett, S.", "Ceci, S.", "Bransford, J."],
+            relatedTopics: ["prior-knowledge", "analogical-reasoning"]
+        },
+        {
+            id: "motivation-and-learning", name: "Motivation and Learning", category: "Science of Learning",
+            description: "How motivation drives learning",
+            details: "동기는 학습의 시작, 방향, 강도, 지속성을 결정합니다. 자기결정이론(SDT), 기대-가치 이론, 목표 지향성, 자기효능감 등이 핵심 개념입니다. 내재적 동기가 깊은 학습과 연결됩니다.",
+            keyResearchers: ["Deci, E.", "Ryan, R.", "Eccles, J.", "Wigfield, A."],
+            relatedTopics: ["self-regulated-learning", "emotion-and-learning"]
+        },
+        {
+            id: "feedback-in-learning", name: "Feedback in Learning", category: "Science of Learning",
+            description: "How feedback influences learning",
+            details: "Hattie의 메타분석에서 피드백은 가장 효과적인 교육 개입 중 하나로 나타났습니다. 피드백 유형(과제 vs 과정 vs 자기조절), 타이밍, 복잡성, 학습자 수용 등이 효과에 영향을 미칩니다.",
+            keyResearchers: ["Hattie, J.", "Shute, V.", "Kluger, A."],
+            relatedTopics: ["formative-assessment", "self-regulated-learning"]
+        },
+        {
+            id: "worked-examples", name: "Worked Examples", category: "Science of Learning",
+            description: "Learning from step-by-step solutions",
+            details: "예제 기반 학습은 전문가의 문제 해결 과정을 단계별로 보여줌으로써 학습자의 인지 부하를 줄입니다. 페이딩(fading), 자기설명 촉진, 오류 예제 등이 효과를 높입니다.",
+            keyResearchers: ["Renkl, A.", "Atkinson, R.", "Sweller, J."],
+            relatedTopics: ["cognitive-load-theory", "self-explanation"]
+        },
+        {
+            id: "prior-knowledge", name: "Prior Knowledge Effects", category: "Science of Learning",
+            description: "Role of existing knowledge",
+            details: "사전 지식은 새로운 학습의 가장 강력한 예측 변인 중 하나입니다. 스키마 이론, 전문성 역전 효과, 오개념의 역할 등이 연구됩니다. '학습자가 이미 알고 있는 것을 파악하고, 그에 맞게 가르치라'는 Ausubel의 원칙이 적용됩니다.",
+            keyResearchers: ["Dochy, F.", "Alexander, P.", "Chi, M."],
+            relatedTopics: ["conceptual-change", "expertise-development"]
+        },
+        {
+            id: "productive-failure", name: "Productive Failure", category: "Science of Learning",
+            description: "Learning from initial failure",
+            details: "Kapur가 제안한 생산적 실패는 직접 교수 전에 학습자가 먼저 문제를 탐색하도록 하여 깊은 이해를 촉진합니다. 실패 경험이 활성화 지식(activation knowledge)을 생성하여 후속 교수의 효과를 높입니다.",
+            keyResearchers: ["Kapur, M.", "Bielaczyc, K."],
+            relatedTopics: ["problem-solving", "desirable-difficulties"]
+        },
+        {
+            id: "dual-coding", name: "Dual Coding Theory", category: "Science of Learning",
+            description: "Learning through verbal and visual",
+            details: "Paivio의 이중 부호화 이론은 정보가 언어적, 비언어적(이미지) 채널로 처리되며, 두 채널을 함께 사용하면 기억이 향상된다고 주장합니다. 멀티미디어 학습, 시각화, 마인드맵 등에 적용됩니다.",
+            keyResearchers: ["Paivio, A."],
+            relatedTopics: ["multimedia-learning"]
+        }
+    ];
+
+    const TOPIC_CATEGORY_COLORS: Record<string, string> = {
+        'CSCL': '#10b981',
+        'Learning Sciences': '#7ba0cc',
+        'Methodologies': '#f59e0b',
+        'Technology': '#8b5cf6',
+        'Practice': '#ef4444',
+        'Science of Learning': '#ec4899'
+    };
+
+    const TOPIC_CATEGORY_ICONS: Record<string, string> = {
+        'CSCL': '🤝',
+        'Learning Sciences': '🧠',
+        'Methodologies': '📊',
+        'Technology': '💻',
+        'Practice': '🎯',
+        'Science of Learning': '🔬'
+    };
+
+    let currentTopicFilter = 'All';
+    let currentTopicSearch = '';
+    let selectedTopic: ResearchTopic | null = null;
+
+    function getFilteredTopics(): ResearchTopic[] {
+        let filtered = ISLS_TOPICS;
+        if (currentTopicFilter !== 'All') {
+            filtered = filtered.filter(t => t.category === currentTopicFilter);
+        }
+        if (currentTopicSearch.trim()) {
+            const q = currentTopicSearch.toLowerCase();
+            filtered = filtered.filter(t =>
+                t.name.toLowerCase().includes(q) ||
+                t.description.toLowerCase().includes(q)
+            );
+        }
+        return filtered;
+    }
+
+    function renderTopicCard(topic: ResearchTopic): string {
+        const color = TOPIC_CATEGORY_COLORS[topic.category] || '#64748b';
+        const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
+        return `
+            <div class="topic-card" data-topic-id="${topic.id}">
+                <div class="topic-header">
+                    <span class="topic-icon">${icon}</span>
+                    <span class="topic-category" style="color: ${color}">${topic.category}</span>
+                </div>
+                <h3 class="topic-name">${topic.name}</h3>
+                <p class="topic-description">${topic.description}</p>
+            </div>
+        `;
+    }
+
+    function renderTopicsGrid(topics: ResearchTopic[]): string {
+        if (topics.length === 0) {
+            return '<div class="topics-empty"><p>검색 결과가 없습니다</p></div>';
+        }
+        return `<div class="topics-grid">${topics.map(renderTopicCard).join('')}</div>`;
+    }
+
+    // Simple markdown to HTML converter for topic details
+    function formatTopicDetails(text: string): string {
+        if (!text) return '';
+
+        // Split by double newlines to get sections
+        const sections = text.split(/\n\n+/);
+
+        return sections.map(section => {
+            const trimmed = section.trim();
+
+            // Check if it's a header (starts with **)
+            if (trimmed.startsWith('**') && trimmed.includes(':**')) {
+                const headerMatch = trimmed.match(/^\*\*(.+?):\*\*\s*([\s\S]*)/);
+                if (headerMatch) {
+                    const title = headerMatch[1];
+                    const content = headerMatch[2];
+                    // Check if content has bullet points
+                    if (content.includes('•')) {
+                        const bullets = content.split('•').filter(b => b.trim());
+                        const bulletHtml = bullets.map(b => `<li>${b.trim()}</li>`).join('');
+                        return `<div class="detail-section"><h5>${title}</h5><ul>${bulletHtml}</ul></div>`;
+                    }
+                    return `<div class="detail-section"><h5>${title}</h5><p>${content}</p></div>`;
+                }
+            }
+
+            // Handle lines with bullets
+            if (trimmed.includes('•')) {
+                const bullets = trimmed.split('•').filter(b => b.trim());
+                const bulletHtml = bullets.map(b => {
+                    // Convert **text** to <strong>text</strong>
+                    const formatted = b.trim().replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+                    return `<li>${formatted}</li>`;
+                }).join('');
+                return `<ul class="detail-bullets">${bulletHtml}</ul>`;
+            }
+
+            // Regular paragraph - convert **text** to <strong>
+            const formatted = trimmed.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            return `<p>${formatted}</p>`;
+        }).join('');
+    }
+
+    function renderTopicDetail(topic: ResearchTopic): string {
+        const color = TOPIC_CATEGORY_COLORS[topic.category] || '#64748b';
+        const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
+        const details = topic.details || topic.description;
+        const formattedDetails = formatTopicDetails(details);
+
+        // Format researchers as individual badges
+        const researcherBadges = topic.keyResearchers?.map(r =>
+            `<span class="researcher-badge">${r}</span>`
+        ).join('') || '<span style="color: var(--text-muted);">연구자 정보 없음</span>';
+
+        const related = topic.relatedTopics?.map(id => {
+            const t = ISLS_TOPICS.find(rt => rt.id === id);
+            return t ? `<span class="related-topic-chip" data-topic-id="${id}">${t.name}</span>` : '';
+        }).filter(Boolean).join('') || '<span style="color: var(--text-muted);">관련 주제 없음</span>';
+
+        return `
+            <div class="topic-detail-view">
+                <button class="topic-back-btn" id="topic-back">← 목록으로</button>
+                <div class="topic-detail-header">
+                    <span class="topic-icon-large">${icon}</span>
+                    <div>
+                        <span class="topic-category-badge" style="background: ${color}20; color: ${color}">${topic.category}</span>
+                        <h2 class="topic-detail-name">${topic.name}</h2>
+                    </div>
+                </div>
+                <p class="topic-detail-summary">${topic.description}</p>
+                <div class="topic-detail-content">
+                    <h4>📖 상세 설명</h4>
+                    <div class="detail-formatted">${formattedDetails}</div>
+                </div>
+                <div class="topic-detail-researchers">
+                    <h4>👤 주요 연구자</h4>
+                    <div class="researchers-container">${researcherBadges}</div>
+                </div>
+                <div class="topic-detail-related">
+                    <h4>🔗 관련 주제</h4>
+                    <div class="related-topics-container">${related}</div>
+                </div>
+                <div class="topic-detail-link">
+                    <a href="https://www.isls.org/research-topics/${topic.id}" target="_blank" rel="noopener noreferrer" class="isls-link-btn">
+                        🌐 ISLS 위키에서 더 보기
+                    </a>
+                </div>
+            </div>
+        `;
+    }
+
+
+
+    function showTopicDetail(topicId: string) {
+        const topic = ISLS_TOPICS.find(t => t.id === topicId);
+        if (!topic) return;
+
+        selectedTopic = topic;
+        const grid = document.getElementById('topics-grid');
+        if (grid) {
+            grid.innerHTML = renderTopicDetail(topic);
+
+            // Back button
+            document.getElementById('topic-back')?.addEventListener('click', () => {
+                selectedTopic = null;
+                updateTopicsGridUI();
+            });
+
+            // Related topic clicks
+            grid.querySelectorAll('.related-topic-chip').forEach(chip => {
+                chip.addEventListener('click', (e) => {
+                    const id = (e.target as HTMLElement).getAttribute('data-topic-id');
+                    if (id) showTopicDetail(id);
+                });
+            });
+        }
+
+        logAction({ action_type: 'topic_detail_view', context_tag: 'research-topics', metadata: { topicId } });
+    }
+
+    function openResearchTopicsPopup() {
+        closeResearchTopicsPopup();
+
+        const categories = [...new Set(ISLS_TOPICS.map(t => t.category))].sort();
+        const topics = getFilteredTopics();
+
+        const popup = document.createElement('div');
+        popup.id = 'research-topics-popup-container';
+        popup.innerHTML = `
+        <div class="research-topics-overlay visible" id="research-topics-modal">
+            <div class="research-topics-content">
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <h2>🔬 Research Topics</h2>
+                        <p class="modal-subtitle">연구 주제 탐색 (${ISLS_TOPICS.length}개)</p>
+                    </div>
+                    <button class="sidebar-close" id="close-research-topics">✕</button>
+                </div>
+
+                <div class="modal-controls">
+                    <div class="search-box-large">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="m21 21-4.35-4.35" />
+                        </svg>
+                        <input type="text" id="topics-search" placeholder="연구 주제 검색...">
+                    </div>
+
+                    <div class="category-filter">
+                        <button class="filter-chip ${currentTopicFilter === 'All' ? 'active' : ''}" data-category="All">
+                            All (${ISLS_TOPICS.length})
+                        </button>
+                        ${categories.map(cat => `
+                                <button class="filter-chip ${currentTopicFilter === cat ? 'active' : ''}" data-category="${cat}">
+                                    ${TOPIC_CATEGORY_ICONS[cat] || '📌'} ${cat}
+                                </button>
+                            `).join('')}
+                    </div>
+                </div>
+
+                <div class="modal-body" id="topics-grid">
+                    ${renderTopicsGrid(topics)}
+                </div>
+            </div>
+        </div>
+        `;
+        document.body.appendChild(popup);
+
+        // Event: Close button
+        document.getElementById('close-research-topics')?.addEventListener('click', closeResearchTopicsPopup);
+
+        // Event: Overlay click
+        document.getElementById('research-topics-modal')?.addEventListener('click', (e) => {
+            if ((e.target as HTMLElement).id === 'research-topics-modal') {
+                closeResearchTopicsPopup();
+            }
+        });
+
+        // Event: Search
+        const searchInput = document.getElementById('topics-search') as HTMLInputElement;
+        searchInput?.addEventListener('input', () => {
+            currentTopicSearch = searchInput.value;
+            updateTopicsGridUI();
+        });
+
+        // Event: Filter chips
+        popup.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', (e) => {
+                const cat = (e.target as HTMLElement).getAttribute('data-category') || 'All';
+                currentTopicFilter = cat;
+                popup.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+                (e.target as HTMLElement).classList.add('active');
+                updateTopicsGridUI();
+            });
+        });
+
+        // Event: Topic card click - show detail view
+        popup.addEventListener('click', (e) => {
+            const card = (e.target as HTMLElement).closest('.topic-card');
+            if (card) {
+                const topicId = card.getAttribute('data-topic-id');
+                if (topicId) {
+                    showTopicDetail(topicId);
+                }
+            }
+        });
+
+        logAction({ action_type: 'popup_open', context_tag: 'research-topics' });
+    }
+
+    function updateTopicsGridUI() {
+        const grid = document.getElementById('topics-grid');
+        if (grid) {
+            if (selectedTopic) {
+                grid.innerHTML = renderTopicDetail(selectedTopic);
+                // Re-bind detail view event handlers
+                document.getElementById('topic-back')?.addEventListener('click', () => {
+                    selectedTopic = null;
+                    updateTopicsGridUI();
+                });
+                grid.querySelectorAll('.related-topic-chip').forEach(chip => {
+                    chip.addEventListener('click', (e) => {
+                        const id = (e.target as HTMLElement).getAttribute('data-topic-id');
+                        if (id) showTopicDetail(id);
+                    });
+                });
+            } else {
+                const filtered = getFilteredTopics();
+                grid.innerHTML = renderTopicsGrid(filtered);
+            }
+        }
+    }
+
+    function closeResearchTopicsPopup() {
+        currentTopicFilter = 'All';
+        currentTopicSearch = '';
+        selectedTopic = null;
+        document.getElementById('research-topics-popup-container')?.remove();
+    }
+
+    const researchTopicsBtn = document.getElementById('research-topics-btn');
+    researchTopicsBtn?.addEventListener('click', openResearchTopicsPopup);
+
+    // ESC closes research topics popup
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('research-topics-popup-container')) {
+            closeResearchTopicsPopup();
+        }
+    });
+
     // Category jump
     categorySelect.addEventListener('change', () => {
         const cat = categorySelect.value;
@@ -2675,10 +3721,10 @@ function main() {
                 n.group === 'Category' ? 'category' : '';
             const typeLabel = n.group === 'Conference' || n.group === 'SubConference' ? '학회' :
                 n.group === 'Category' ? '분야' : '저널';
-            return `<div class="search-autocomplete-item" data-id="${n.id}">
-                <span class="type-badge ${typeClass}">${typeLabel}</span>
+            return `< div class="search-autocomplete-item" data - id="${n.id}" >
+        <span class="type-badge ${typeClass}">${typeLabel}</span>
                 ${n.id}
-            </div>`;
+            </div > `;
         }).join('');
 
         autocomplete.classList.add('visible');
@@ -2773,8 +3819,8 @@ function main() {
                         try {
                             network.clusterByConnection(cat.id, {
                                 clusterNodeProperties: {
-                                    id: `cluster_${cat.id}`,
-                                    label: `${cat.label}\n(${connectedNodes.length})`,
+                                    id: `cluster_${cat.id} `,
+                                    label: `${cat.label} \n(${connectedNodes.length})`,
                                     shape: 'hexagon',
                                     size: 24 + Math.min(connectedNodes.length, 10),
                                     color: { background: '#8b5cf6', border: '#7c3aed' },
@@ -3053,11 +4099,11 @@ function main() {
             favoritesContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">즐겨찾기가 없습니다.</p>';
         } else {
             favoritesContainer.innerHTML = Array.from(favorites).map(fav => `
-                <div class="favorite-item" data-venue="${fav}">
+        < div class="favorite-item" data - venue="${fav}" >
                     <span class="favorite-name">${fav}</span>
                     <button class="remove-fav" data-id="${fav}">✕</button>
-                </div>
-            `).join('');
+                </div >
+        `).join('');
 
             // Click to focus on node
             favoritesContainer.querySelectorAll('.favorite-item').forEach(item => {
@@ -3096,7 +4142,7 @@ function main() {
             container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">작성한 의견이 없습니다.</p>';
         } else {
             container.innerHTML = myAnnotations.map(a => `
-                <div class="my-annotation-item" data-id="${a.id}">
+        < div class="my-annotation-item" data - id="${a.id}" >
                     <div class="my-annotation-venue">${a.venue_name}</div>
                     <div class="my-annotation-comment">${a.comment}</div>
                     <div class="my-annotation-meta">
@@ -3105,8 +4151,8 @@ function main() {
                             <button class="delete" data-id="${a.id}">삭제</button>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                </div >
+        `).join('');
 
             // Delete handlers
             container.querySelectorAll('.delete').forEach(btn => {
@@ -3174,19 +4220,19 @@ function main() {
         const popup = document.createElement('div');
         popup.id = 'announcement-popup';
         popup.innerHTML = `
-            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center;">
-                <div style="background: var(--klse-navy-light); border: 1px solid var(--klse-yellow); border-radius: 16px; max-width: 500px; width: 90%; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                        <span style="font-size: 1.1rem; font-weight: 600; color: var(--klse-yellow);">📢 공지사항</span>
-                        <button id="close-announcement" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">×</button>
-                    </div>
-                    <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary);">${announcement.subject}</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; white-space: pre-wrap;">${announcement.body}</p>
-                    <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
-                        <button id="dismiss-announcement" class="btn" style="padding: 10px 20px;">확인</button>
-                    </div>
+        < div style = "position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 10000; display: flex; align-items: center; justify-content: center;" >
+            <div style="background: var(--klse-navy-light); border: 1px solid var(--klse-yellow); border-radius: 16px; max-width: 500px; width: 90%; padding: 24px; box-shadow: 0 20px 60px rgba(0,0,0,0.5);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <span style="font-size: 1.1rem; font-weight: 600; color: var(--klse-yellow);">📢 공지사항</span>
+                    <button id="close-announcement" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">×</button>
+                </div>
+                <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary);">${announcement.subject}</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; white-space: pre-wrap;">${announcement.body}</p>
+                <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                    <button id="dismiss-announcement" class="btn" style="padding: 10px 20px;">확인</button>
                 </div>
             </div>
+            </div >
         `;
         document.body.appendChild(popup);
 
@@ -3295,7 +4341,7 @@ function main() {
             network.selectNodes([bestNode]);
             network.focus(bestNode, { scale: 1.5, animation: { duration: 300 } });
             handleNodeClick(bestNode);
-            showToast(`${key.replace('Arrow', '')} → ${(nodesDataset.get(bestNode) as any)?.label || bestNode}`);
+            showToast(`${key.replace('Arrow', '')} → ${(nodesDataset.get(bestNode) as any)?.label || bestNode} `);
         }
     }
 }

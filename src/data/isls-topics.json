@@ -1,0 +1,296 @@
+[
+    {
+        "id": "cscl-in-times-of-crisis",
+        "name": "CSCL in Times of Crisis",
+        "category": "CSCL",
+        "description": "Computer-Supported Collaborative Learning during crisis situations"
+    },
+    {
+        "id": "analysis-of-discourse-data",
+        "name": "Analysis of Discourse Data",
+        "category": "Methodologies",
+        "description": "Analysis of discourse data promises insights into the processes of (computer-supported) collaborative learning on multiple levels"
+    },
+    {
+        "id": "argumentation-and-learning-in-cscl",
+        "name": "Argumentation and Learning in CSCL",
+        "category": "CSCL",
+        "description": "Argumentation processes in computer-supported collaborative learning environments"
+    },
+    {
+        "id": "assessment",
+        "name": "Assessment",
+        "category": "Methodologies",
+        "description": "Assessment methods and approaches in learning sciences"
+    },
+    {
+        "id": "augmented-reality-learning-sciences",
+        "name": "Augmented Reality Learning Sciences",
+        "category": "Technology",
+        "description": "Use of augmented reality technologies in learning contexts"
+    },
+    {
+        "id": "automated-argumentation-analysis",
+        "name": "Automated Argumentation Analysis",
+        "category": "Methodologies",
+        "description": "Computational methods for analyzing argumentation"
+    },
+    {
+        "id": "automated-collaborative-process-analysis",
+        "name": "Automated Collaborative Process Analysis",
+        "category": "Methodologies",
+        "description": "Automated analysis of collaborative learning processes"
+    },
+    {
+        "id": "classroom-orchestration",
+        "name": "Classroom Orchestration",
+        "category": "Practice",
+        "description": "Orchestration of technology-enhanced learning in classroom settings"
+    },
+    {
+        "id": "cognition-and-metacognition",
+        "name": "Cognition and Metacognition",
+        "category": "Learning Sciences",
+        "description": "Cognitive and metacognitive processes in learning"
+    },
+    {
+        "id": "cognitive-apprenticeship",
+        "name": "Cognitive Apprenticeship",
+        "category": "Learning Sciences",
+        "description": "Apprenticeship models for cognitive skill development"
+    },
+    {
+        "id": "cognitive-tutors",
+        "name": "Cognitive Tutors",
+        "category": "Technology",
+        "description": "Intelligent tutoring systems based on cognitive models"
+    },
+    {
+        "id": "collaboration-scripts-for-cscl",
+        "name": "Collaboration Scripts for CSCL",
+        "category": "CSCL",
+        "description": "Structured collaboration scripts in CSCL environments"
+    },
+    {
+        "id": "communities-of-learners",
+        "name": "Communities of Learners",
+        "category": "Learning Sciences",
+        "description": "Learning community formation and dynamics"
+    },
+    {
+        "id": "complexity-and-the-learning-sciences",
+        "name": "Complexity and the Learning Sciences",
+        "category": "Learning Sciences",
+        "description": "Complex systems approaches to understanding learning"
+    },
+    {
+        "id": "conversation-analysis-ethnomethodological-approaches",
+        "name": "Conversation Analysis Ethnomethodological Approaches",
+        "category": "Methodologies",
+        "description": "Ethnomethodological conversation analysis in learning contexts"
+    },
+    {
+        "id": "creating-supporting-design-teams",
+        "name": "Creating Supporting Design Teams",
+        "category": "Practice",
+        "description": "Supporting collaborative design in educational contexts"
+    },
+    {
+        "id": "cscl-conceptual-change",
+        "name": "CSCL Conceptual Change",
+        "category": "CSCL",
+        "description": "Conceptual change through computer-supported collaboration"
+    },
+    {
+        "id": "cscl-and-disabilities",
+        "name": "CSCL and Disabilities",
+        "category": "CSCL",
+        "description": "Accessibility and inclusion in CSCL environments"
+    },
+    {
+        "id": "data-science-education",
+        "name": "Data Science Education",
+        "category": "Technology",
+        "description": "Teaching and learning data science"
+    },
+    {
+        "id": "design-design-based-research",
+        "name": "Design Design Based Research",
+        "category": "Methodologies",
+        "description": "Design-based research methodologies"
+    },
+    {
+        "id": "design-based-implementation-research",
+        "name": "Design Based Implementation Research",
+        "category": "Methodologies",
+        "description": "Implementation research in educational design"
+    },
+    {
+        "id": "distributed-intelligence",
+        "name": "Distributed Intelligence",
+        "category": "Learning Sciences",
+        "description": "Intelligence distributed across people and tools"
+    },
+    {
+        "id": "distributed-scaffolding",
+        "name": "Distributed Scaffolding",
+        "category": "Learning Sciences",
+        "description": "Scaffolding distributed across multiple sources"
+    },
+    {
+        "id": "embodiment-and-embodied-design",
+        "name": "Embodiment and Embodied Design",
+        "category": "Learning Sciences",
+        "description": "Embodied cognition and design for learning"
+    },
+    {
+        "id": "epistemic-cognition",
+        "name": "Epistemic Cognition",
+        "category": "Learning Sciences",
+        "description": "Knowledge about knowledge and knowing"
+    },
+    {
+        "id": "example-based-learning",
+        "name": "Example Based Learning",
+        "category": "Learning Sciences",
+        "description": "Learning through worked examples"
+    },
+    {
+        "id": "foundations-of-the-learning-sciences",
+        "name": "Foundations of the Learning Sciences",
+        "category": "Learning Sciences",
+        "description": "Foundational theories and principles of learning sciences"
+    },
+    {
+        "id": "gestures-learning-teaching",
+        "name": "Gestures Learning Teaching",
+        "category": "Learning Sciences",
+        "description": "Role of gestures in learning and teaching"
+    },
+    {
+        "id": "group-awareness-tools",
+        "name": "Group Awareness Tools",
+        "category": "CSCL",
+        "description": "Tools for supporting group awareness in collaboration"
+    },
+    {
+        "id": "group-cognition",
+        "name": "Group Cognition",
+        "category": "CSCL",
+        "description": "Collective cognitive processes in groups"
+    },
+    {
+        "id": "information-problem-solving",
+        "name": "Information Problem Solving",
+        "category": "Learning Sciences",
+        "description": "Problem-solving with information resources"
+    },
+    {
+        "id": "inquiry-learning-knowledge-integration",
+        "name": "Inquiry Learning Knowledge Integration",
+        "category": "Learning Sciences",
+        "description": "Inquiry-based learning and knowledge integration"
+    },
+    {
+        "id": "interactional-ethnography-and-problem-based-learning",
+        "name": "Interactional Ethnography and Problem Based Learning",
+        "category": "Methodologies",
+        "description": "Ethnographic approaches to studying problem-based learning"
+    },
+    {
+        "id": "knowledge-building",
+        "name": "Knowledge Building",
+        "category": "CSCL",
+        "description": "Collaborative knowledge building communities"
+    },
+    {
+        "id": "knowledge-creation",
+        "name": "Knowledge Creation",
+        "category": "Learning Sciences",
+        "description": "Processes of creating new knowledge"
+    },
+    {
+        "id": "learning-in-the-disciplines",
+        "name": "Learning in the Disciplines",
+        "category": "Learning Sciences",
+        "description": "Discipline-specific learning processes"
+    },
+    {
+        "id": "learning-progressions-in-science-education",
+        "name": "Learning Progressions in Science Education",
+        "category": "Learning Sciences",
+        "description": "Developmental progressions in science learning"
+    },
+    {
+        "id": "learning-through-problem-solving",
+        "name": "Learning Through Problem Solving",
+        "category": "Learning Sciences",
+        "description": "Problem-based and problem-solving approaches to learning"
+    },
+    {
+        "id": "learning-with-technology",
+        "name": "Learning with Technology",
+        "category": "Technology",
+        "description": "Technology-enhanced learning environments"
+    },
+    {
+        "id": "learning-by-design",
+        "name": "Learning by Design",
+        "category": "Learning Sciences",
+        "description": "Learning through design activities"
+    },
+    {
+        "id": "multilevel-analysis",
+        "name": "Multilevel Analysis",
+        "category": "Methodologies",
+        "description": "Multi-level analytical approaches in learning research"
+    },
+    {
+        "id": "neurocognitive-foundations-learning-sciences",
+        "name": "Neurocognitive Foundations Learning Sciences",
+        "category": "Learning Sciences",
+        "description": "Neuroscience foundations of learning"
+    },
+    {
+        "id": "quantitative-ethnography",
+        "name": "Quantitative Ethnography",
+        "category": "Methodologies",
+        "description": "Quantitative approaches to ethnographic data"
+    },
+    {
+        "id": "representational-learning",
+        "name": "Representational Learning",
+        "category": "Learning Sciences",
+        "description": "Learning with and through representations"
+    },
+    {
+        "id": "shared-regulation-cscl",
+        "name": "Shared Regulation CSCL",
+        "category": "CSCL",
+        "description": "Shared regulation of learning in collaborative contexts"
+    },
+    {
+        "id": "massively-open-online-courses-moocs",
+        "name": "Massively Open Online Courses MOOCs",
+        "category": "Technology",
+        "description": "Design and research on MOOCs"
+    },
+    {
+        "id": "situative-cognition",
+        "name": "Situative Cognition",
+        "category": "Learning Sciences",
+        "description": "Situated cognition and learning"
+    },
+    {
+        "id": "statistical-discourse-analysis",
+        "name": "Statistical Discourse Analysis",
+        "category": "Methodologies",
+        "description": "Statistical methods for discourse analysis"
+    },
+    {
+        "id": "technology-and-teacher-learning",
+        "name": "Technology and Teacher Learning",
+        "category": "Practice",
+        "description": "Technology for teacher professional development"
+    }
+]
