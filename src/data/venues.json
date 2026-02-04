@@ -763,5 +763,59 @@
             "STEM Education"
         ],
         "cfpDeadline": "October"
+    },
+    {
+        "id": "jte",
+        "name": "Journal of Teacher Education",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "tate",
+        "name": "Teaching and Teacher Education",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ejte",
+        "name": "European Journal of Teacher Education",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "tttp",
+        "name": "Teachers and Teaching: Theory and Practice",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "pde",
+        "name": "Professional Development in Education",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q1"
+    },
+    {
+        "id": "ate",
+        "name": "Action in Teacher Education",
+        "type": "Journal",
+        "categories": [
+            "Teacher Education"
+        ],
+        "impact": "Q2"
     }
 ]

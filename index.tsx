@@ -209,6 +209,14 @@ const venueData: VenueInfo[] = [
     { name: "CBE-Life Sciences Education", type: "Journal", categories: ["STEM Education"], impact: "Q1" },
     { name: "Mathematics Education Research Journal", type: "Journal", categories: ["STEM Education"], impact: "Q3" },
 
+    // Teacher Education Journals
+    { name: "Journal of Teacher Education", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
+    { name: "Teaching and Teacher Education", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
+    { name: "European Journal of Teacher Education", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
+    { name: "Teachers and Teaching: Theory and Practice", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
+    { name: "Professional Development in Education", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
+    { name: "Action in Teacher Education", type: "Journal", categories: ["Teacher Education"], impact: "Q2" },
+
     // Conferences with CFP deadlines
     { name: "ISLS Annual Meeting", type: "Conference", categories: ["Learning Sciences"], cfpDeadline: "November" },
     { name: "ICLS", type: "SubConference", categories: ["ISLS", "Learning Sciences"], cfpDeadline: "November" },
@@ -322,6 +330,8 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
         { from: 'Learning Analytics', to: 'AIED' },
         { from: 'AIED', to: 'Human-Computer Interaction' },
         { from: 'Learning Sciences', to: 'Educational Psychology' },
+        { from: 'Teacher Education', to: 'Educational Psychology' },
+        { from: 'Teacher Education', to: 'Learning Sciences' },
     ];
 
     for (const link of categoryLinks) {
