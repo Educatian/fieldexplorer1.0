@@ -2856,7 +2856,7 @@ function main() {
     // WHAT'S NEW POPUP
     // ========================================================================
 
-    const CURRENT_VERSION = '2.2.0';
+    const CURRENT_VERSION = '2.3.0';
     const lastSeenVersion = localStorage.getItem('fieldexplorer_version');
 
     if (lastSeenVersion !== CURRENT_VERSION) {
@@ -2870,36 +2870,36 @@ function main() {
             <div class="whatsnew-popup">
                 <div class="whatsnew-overlay" id="whatsnew-overlay"></div>
                 <div class="whatsnew-container">
-                    <div class="whatsnew-emoji">🚀</div>
-                    <div class="whatsnew-title">대규모 업데이트!</div>
+                    <div class="whatsnew-emoji">🇰🇷</div>
+                    <div class="whatsnew-title">한국 네트워크 신규!</div>
                     <div class="whatsnew-version">Version ${CURRENT_VERSION}</div>
                     <div class="whatsnew-features">
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">✅</span>
+                            <span class="whatsnew-feature-icon">🎯</span>
                             <div class="whatsnew-feature-text">
-                                <strong>WoS JCR 2024 검증</strong>
-                                <span>21개 저널의 영향력 지수(Q1) 최신화</span>
+                                <strong>한국 교육공학 정체성 네트워크</strong>
+                                <span>Jung et al. (2025) 기반 21개 저널 시각화</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">👩‍🏫</span>
+                            <span class="whatsnew-feature-icon">🔄</span>
                             <div class="whatsnew-feature-text">
-                                <strong>Teacher Education 신설</strong>
-                                <span>교사 교육 분야 주요 저널 6종 추가</span>
+                                <strong>인식 관점 토글</strong>
+                                <span>전체/대학/현장 관점에 따른 동적 변화</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">🔬</span>
+                            <span class="whatsnew-feature-icon">👻</span>
                             <div class="whatsnew-feature-text">
-                                <strong>상세 연구 주제 보강</strong>
-                                <span>주요 키워드별 심층 연구 배경 및 동향 추가</span>
+                                <strong>Ghost Node 트레일</strong>
+                                <span>이동 방향 시각화로 "정체성은 동적" 표현</span>
                             </div>
                         </div>
                         <div class="whatsnew-feature">
-                            <span class="whatsnew-feature-icon">🔗</span>
+                            <span class="whatsnew-feature-icon">📊</span>
                             <div class="whatsnew-feature-text">
-                                <strong>네트워크 연결 강화</strong>
-                                <span>LA-AIED 등 분야 간 연계 네트워크 가시화</span>
+                                <strong>k=3 군집 기반 배치</strong>
+                                <span>핵심/중간/주변 클러스터별 색상 구분</span>
                             </div>
                         </div>
                     </div>
@@ -2907,6 +2907,7 @@ function main() {
                 </div>
             </div>
         `;
+
         document.body.appendChild(popup);
 
         function closeWhatsNew() {
