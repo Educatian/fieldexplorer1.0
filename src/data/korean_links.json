@@ -1,0 +1,82 @@
+[
+    {
+        "source": "KSET",
+        "target": "J_EDU_MEDIA"
+    },
+    {
+        "source": "KSET",
+        "target": "J_TEACH_METHOD"
+    },
+    {
+        "source": "KSET",
+        "target": "J_DIGITAL_CONTENT"
+    },
+    {
+        "source": "KSET",
+        "target": "J_INFO_EDU"
+    },
+    {
+        "source": "KSET",
+        "target": "J_COMPUTER_EDU"
+    },
+    {
+        "source": "KSET",
+        "target": "J_HRD"
+    },
+    {
+        "source": "KSET",
+        "target": "J_HCI"
+    },
+    {
+        "source": "KSET",
+        "target": "J_OPEN_EDU"
+    },
+    {
+        "source": "KSET",
+        "target": "J_INTERNET"
+    },
+    {
+        "source": "KSET",
+        "target": "J_PHIL"
+    },
+    {
+        "source": "KSET",
+        "target": "J_ADMIN"
+    },
+    {
+        "source": "KSET",
+        "target": "J_CURRICULUM"
+    },
+    {
+        "source": "KSET",
+        "target": "J_VOCATIONAL"
+    },
+    {
+        "source": "KSET",
+        "target": "J_EDU_PSYCH"
+    },
+    {
+        "source": "KSET",
+        "target": "J_EDU_EVAL"
+    },
+    {
+        "source": "KSET",
+        "target": "J_INCLUSIVE"
+    },
+    {
+        "source": "KSET",
+        "target": "J_LIFELONG"
+    },
+    {
+        "source": "KSET",
+        "target": "J_COMM"
+    },
+    {
+        "source": "KSET",
+        "target": "J_COGNITIVE"
+    },
+    {
+        "source": "KSET",
+        "target": "J_TEACHER_EDU"
+    }
+]

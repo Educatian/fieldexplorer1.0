@@ -1853,15 +1853,22 @@ function main() {
         lastDragPosition = null;
     });
 
+    // Korean network state (needed before handleNodeClick)
+    let isKoreanNetworkActive = false;
+    let savedIntlPositions: Map<string, { x: number, y: number }> = new Map();
+
     // Node click handler
+
     async function handleNodeClick(nodeId: string) {
         if (network.isCluster(nodeId)) {
             network.openCluster(nodeId);
             return;
         }
 
-        const node = nodesDataset.get(nodeId);
+        // Use network.body.data.nodes to get node from current DataSet (works with setData)
+        const node = network.body.data.nodes.get(nodeId);
         if (!node) return;
+
 
         currentNodeId = nodeId;
         showSidebar();
@@ -1876,6 +1883,25 @@ function main() {
             const connectedIds = network.getConnectedNodes(nodeId);
             const connected = nodesDataset.get(connectedIds);
             setSidebarContent(renderCategoryDetails(connected));
+        } else if (isKoreanNetworkActive) {
+            // Korean network - show Korean journal info
+            const koreanInfo = `
+                <div class="sidebar-section">
+                    <h3>📖 저널 정보</h3>
+                    <p><strong>${node.label || node.id}</strong></p>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">한국 교육공학 정체성 네트워크 소속 저널</p>
+                </div>
+                <div class="sidebar-section">
+                    <h3>📊 심리적 거리 (M값)</h3>
+                    <p>교육공학연구(KSET)와의 심리적 거리를 나타냅니다.</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">값이 작을수록 KSET과 가까운 정체성을 가집니다.</p>
+                </div>
+                <div class="sidebar-section">
+                    <h3>💡 참고</h3>
+                    <p style="font-size: 0.85rem;">이 데이터는 Jung et al. (2025) 연구의 k=3 클러스터링 결과를 기반으로 합니다.</p>
+                </div>
+            `;
+            setSidebarContent(koreanInfo);
         } else {
             const recs = getRecommendations(nodeId, nodes, edges);
             const data = getVenueDetails(node.id, node.group);
@@ -1883,6 +1909,7 @@ function main() {
             // Fetch annotations from Supabase
             const annotations = await fetchAnnotations(node.id);
             const annotationsHtml = renderAnnotations(annotations, node.id, node.group);
+
 
             setSidebarContent(renderVenueDetails(data, node, recs) + annotationsHtml);
 
@@ -5041,6 +5068,433 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             showToast(`${key.replace('Arrow', '')} → ${(nodesDataset.get(bestNode) as any)?.label || bestNode} `);
         }
     }
+
+    // ============================================================================
+    // KOREAN NETWORK TOGGLE (KSET Identity Network)
+    // ============================================================================
+
+    document.getElementById('korean-network-btn')?.addEventListener('click', async () => {
+        const btn = document.getElementById('korean-network-btn');
+
+        if (!isKoreanNetworkActive) {
+            // Switch to Korean Network
+            try {
+                // SAVE current international node positions before switching
+                savedIntlPositions.clear();
+                network.body.data.nodes.forEach((node: any) => {
+                    const pos = network.getPosition(node.id);
+                    savedIntlPositions.set(node.id, { x: pos.x, y: pos.y });
+                });
+                console.log('[Korean Network] Saved', savedIntlPositions.size, 'international node positions');
+
+                // Dynamic import of Korean parser
+                const { parseKoreanNetwork, getClusterSummary } = await import('./src/network/korean-parser');
+
+                const canvasCenter = { x: 0, y: 0 };
+                const koreanData = parseKoreanNetwork('overall', canvasCenter.x, canvasCenter.y);
+
+                // Create Korean network nodes
+
+                const koreanNodes = koreanData.nodes.map(node => ({
+                    id: node.id,
+                    label: node.label,
+                    x: node.x,
+                    y: node.y,
+                    fixed: false,  // Allow dragging
+                    shape: 'dot',
+                    size: node.size,
+                    color: {
+                        background: node.color,
+                        border: node.fixed ? '#f5a623' : node.color,
+                        highlight: { background: node.color, border: '#ffffff' }
+                    },
+                    font: { color: '#ffffff', size: 12 },
+                    borderWidth: node.borderWidth,
+                    title: node.fixed
+                        ? '교육공학연구 (중심 노드)'
+                        : `${node.label}\nM = ${node.M_current.toFixed(2)} (심리적 거리)\n클러스터: ${node.cluster}`,
+                    // Store Korean-specific metadata for sidebar
+                    korean: true,
+                    M_current: node.M_current,
+                    cluster: node.cluster
+                }));
+
+
+                // Create Korean network edges
+                const koreanEdges = koreanData.edges.map((edge, i) => ({
+                    id: `korean-edge-${i}`,
+                    from: edge.from,
+                    to: edge.to,
+                    color: edge.color,
+                    width: edge.width,
+                    dashes: edge.dashes || false,
+                    smooth: edge.type === 'similarity'
+                        ? { type: 'continuous', roundness: 0.2 }
+                        : { type: 'curvedCW', roundness: 0.1 }
+                }));
+
+                // Disable physics for static radial layout
+                network.setOptions({ physics: false });
+
+                // Use setData for COMPLETE data replacement (avoids clear() issues)
+                network.setData({
+                    nodes: new vis.DataSet(koreanNodes),
+                    edges: new vis.DataSet(koreanEdges)
+                });
+
+                // Pulse animation for KSET center node
+                let pulsePhase = 0;
+                const pulseInterval = setInterval(() => {
+                    if (!isKoreanNetworkActive) {
+                        clearInterval(pulseInterval);
+                        return;
+                    }
+                    pulsePhase += 0.1;
+                    const scale = 1 + 0.15 * Math.sin(pulsePhase);
+                    const shadowSize = 15 + 10 * Math.sin(pulsePhase);
+
+                    try {
+                        network.body.data.nodes.update({
+                            id: 'KSET',
+                            size: 50 * scale,
+                            shadow: {
+                                enabled: true,
+                                color: `rgba(245, 166, 35, ${0.5 + 0.3 * Math.sin(pulsePhase)})`,
+                                size: shadowSize,
+                                x: 0,
+                                y: 0
+                            }
+                        });
+                    } catch (e) {
+                        clearInterval(pulseInterval);
+                    }
+                }, 50);
+
+                // Fit view to show entire radial network
+
+                network.fit({ animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
+
+                // Update UI state
+                btn?.classList.add('active');
+                isKoreanNetworkActive = true;
+
+                // Update legend display
+                const clusterSummary = getClusterSummary();
+                console.log('[Korean Network] Loaded:', koreanData.nodes.length, 'nodes,', koreanData.edges.length, 'edges');
+                console.log('[Korean Network] Clusters:', clusterSummary);
+
+                // Show legend toast with edge explanation
+                showToast('🇰🇷 한국 교육공학 정체성 네트워크 로드됨');
+
+                // Create and display Korean network legend
+                const existingLegend = document.getElementById('korean-legend');
+                if (existingLegend) existingLegend.remove();
+
+                const legend = document.createElement('div');
+                legend.id = 'korean-legend';
+                legend.innerHTML = `
+                    <div style="position: fixed; bottom: 20px; left: 20px; background: rgba(30, 41, 59, 0.95); 
+                                border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 16px 20px;
+                                font-size: 13px; color: #e2e8f0; z-index: 1000; backdrop-filter: blur(8px);
+                                box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                        <div style="font-weight: 600; margin-bottom: 12px; font-size: 14px;">📊 범례 (Legend)</div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-weight: 500; margin-bottom: 6px; color: #94a3b8;">노드 색상 (Clusters)</div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
+                                <span style="width: 12px; height: 12px; background: #2dd4bf; border-radius: 50%;"></span>
+                                <span>핵심 (Core) - Cluster 3</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
+                                <span style="width: 12px; height: 12px; background: #60a5fa; border-radius: 50%;"></span>
+                                <span>중간 (Mid) - Cluster 2</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
+                                <span style="width: 12px; height: 12px; background: #94a3b8; border-radius: 50%;"></span>
+                                <span>주변 (Peripheral) - Cluster 1</span>
+                            </div>
+                        </div>
+                        
+                        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px;">
+                            <div style="font-weight: 500; margin-bottom: 6px; color: #94a3b8;">엣지 유형 (Edges)</div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
+                                <span style="width: 24px; height: 2px; background: #475569;"></span>
+                                <span>실선: 심리적 거리 (M)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
+                                <span style="width: 24px; height: 2px; background: repeating-linear-gradient(90deg, #60a5fa 0, #60a5fa 4px, transparent 4px, transparent 8px);"></span>
+                                <span>점선: k=3 군집 유사성</span>
+                            </div>
+                        </div>
+                        
+                        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px;">
+                            <div style="font-weight: 500; margin-bottom: 8px; color: #94a3b8;">🔄 인식 관점 (Perspective)</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <button id="perspective-overall" class="perspective-btn active" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: #3b82f6; color: white; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                    전체
+                                </button>
+                                <button id="perspective-university" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #94a3b8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                    🎓 대학
+                                </button>
+                                <button id="perspective-field" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #94a3b8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                    💼 현장
+                                </button>
+                            </div>
+                            <div id="perspective-info" style="margin-top: 8px; font-size: 10px; color: #64748b;">
+                                현재: 전체 응답자 평균
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 12px; font-size: 9px; color: #64748b; line-height: 1.5; max-width: 280px;">
+                            <strong>출처:</strong><br>
+                            Jung, J., Lim, K., Han, I., & Lee, E. (2025). Exploring the academic identity of educational technology through perceived proximity among related disciplines and journals (교육공학의 학문적 정체성 탐색: 인접 학문 및 학술지와의 인식적 거리 분석). <em>Journal of Educational Technology (교육공학연구)</em>, 41(3), 1251-1285.
+                        </div>
+
+                    </div>
+                `;
+                document.body.appendChild(legend);
+
+                // Perspective toggle functionality
+                let currentPerspective: 'overall' | 'university' | 'field' = 'overall';
+
+                const updatePerspective = async (newPerspective: 'overall' | 'university' | 'field') => {
+                    if (currentPerspective === newPerspective) return;
+
+                    // Update button styles
+                    document.querySelectorAll('.perspective-btn').forEach(btn => {
+                        (btn as HTMLElement).style.background = 'transparent';
+                        (btn as HTMLElement).style.color = '#94a3b8';
+                    });
+                    const activeBtn = document.getElementById(`perspective-${newPerspective}`);
+                    if (activeBtn) {
+                        activeBtn.style.background = '#3b82f6';
+                        activeBtn.style.color = 'white';
+                    }
+
+                    // Update info text
+                    const infoEl = document.getElementById('perspective-info');
+                    if (infoEl) {
+                        const labels: Record<string, string> = {
+                            overall: '현재: 전체 응답자 평균',
+                            university: '현재: 🎓 대학 소속 연구자 관점',
+                            field: '현재: 💼 현장 전문가 관점'
+                        };
+                        infoEl.textContent = labels[newPerspective];
+                    }
+
+                    // Animate nodes to new positions
+                    const { parseKoreanNetwork } = await import('./src/network/korean-parser');
+                    const newData = parseKoreanNetwork(newPerspective, 0, 0);
+
+                    // Animate transition over 30 frames
+                    const frames = 30;
+                    const currentPositions = new Map<string, { x: number, y: number }>();
+
+                    // Get current positions
+                    network.body.data.nodes.forEach((node: any) => {
+                        const pos = network.getPosition(node.id);
+                        currentPositions.set(node.id, { x: pos.x, y: pos.y });
+                    });
+
+                    // Create target position map
+                    const targetPositions = new Map<string, { x: number, y: number, M: number }>();
+                    newData.nodes.forEach(node => {
+                        targetPositions.set(node.id, { x: node.x, y: node.y, M: node.M_current });
+                    });
+
+                    // === GHOST NODES: Show "Before" positions ===
+                    const ghostNodes: any[] = [];
+                    const trailEdges: any[] = [];
+
+                    currentPositions.forEach((pos, nodeId) => {
+                        if (nodeId === 'KSET') return; // Skip center
+
+                        const target = targetPositions.get(nodeId);
+                        if (!target) return;
+
+                        // Only create ghost if position changes significantly
+                        const distance = Math.sqrt(Math.pow(target.x - pos.x, 2) + Math.pow(target.y - pos.y, 2));
+                        if (distance < 20) return;
+
+                        const originalNode = network.body.data.nodes.get(nodeId);
+                        if (!originalNode) return;
+
+                        // Create ghost node at OLD position
+                        ghostNodes.push({
+                            id: `ghost-${nodeId}`,
+                            x: pos.x,
+                            y: pos.y,
+                            fixed: true,
+                            shape: 'dot',
+                            size: (originalNode.size || 20) * 0.6,
+                            color: {
+                                background: 'rgba(148, 163, 184, 0.3)',
+                                border: 'rgba(148, 163, 184, 0.5)'
+                            },
+                            label: '',
+                            font: { size: 0 },
+                            borderWidth: 1
+                        });
+
+                        // Create trail edge from ghost to real node
+                        trailEdges.push({
+                            id: `trail-${nodeId}`,
+                            from: `ghost-${nodeId}`,
+                            to: nodeId,
+                            color: { color: 'rgba(148, 163, 184, 0.4)', opacity: 0.4 },
+                            width: 1,
+                            dashes: [4, 4],
+                            arrows: { to: { enabled: true, scaleFactor: 0.4, type: 'arrow' } },
+                            smooth: { type: 'continuous', roundness: 0 }
+                        });
+                    });
+
+                    // Add ghost nodes and trail edges
+                    if (ghostNodes.length > 0) {
+                        network.body.data.nodes.add(ghostNodes);
+                        network.body.data.edges.add(trailEdges);
+                    }
+
+                    // Animate
+                    let frame = 0;
+                    const animateFrame = () => {
+                        frame++;
+                        const progress = frame / frames;
+                        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+
+                        const updates: any[] = [];
+                        currentPositions.forEach((startPos, nodeId) => {
+                            const target = targetPositions.get(nodeId);
+                            if (target && nodeId !== 'KSET') {
+                                updates.push({
+                                    id: nodeId,
+                                    x: startPos.x + (target.x - startPos.x) * eased,
+                                    y: startPos.y + (target.y - startPos.y) * eased
+                                });
+                            }
+                        });
+
+                        network.body.data.nodes.update(updates);
+
+                        if (frame < frames) {
+                            requestAnimationFrame(animateFrame);
+                        } else {
+                            // Animation complete - fade out and remove ghost nodes after 1.5 seconds
+                            setTimeout(() => {
+                                // Remove ghost nodes and trail edges
+                                const ghostIds = ghostNodes.map(g => g.id);
+                                const trailIds = trailEdges.map(e => e.id);
+                                try {
+                                    network.body.data.edges.remove(trailIds);
+                                    network.body.data.nodes.remove(ghostIds);
+                                } catch (e) {
+                                    // Ignore errors if already removed
+                                }
+                            }, 1500);
+                        }
+                    };
+
+                    requestAnimationFrame(animateFrame);
+                    currentPerspective = newPerspective;
+
+                    showToast(`🔄 ${newPerspective === 'overall' ? '전체' : newPerspective === 'university' ? '대학' : '현장'} 관점으로 전환`);
+
+                };
+
+                // Add click handlers
+                document.getElementById('perspective-overall')?.addEventListener('click', () => updatePerspective('overall'));
+                document.getElementById('perspective-university')?.addEventListener('click', () => updatePerspective('university'));
+                document.getElementById('perspective-field')?.addEventListener('click', () => updatePerspective('field'));
+
+
+
+                // Log action
+                logAction({
+                    action_type: 'korean_network_activate',
+                    context_tag: 'network',
+                    metadata: { nodes: koreanData.nodes.length, edges: koreanData.edges.length }
+                });
+
+
+            } catch (error) {
+                console.error('[Korean Network] Failed to load:', error);
+                showToast('⚠️ 한국 네트워크 로드 실패');
+            }
+        } else {
+            // Switch back to International Network
+            try {
+                console.log('[Korean Network] Switching back to international...');
+
+                // Parse fresh international data
+                const freshData = parseNetworkData();
+                const processedNodes = applyMetricsToNodes(freshData.nodes, calculateNetworkMetrics(freshData.nodes, freshData.edges));
+
+                console.log('[Korean Network] International data parsed:', freshData.nodes.length, 'nodes,', freshData.edges.length, 'edges');
+
+                // Create international nodes with SAVED positions
+                const intlNodes = processedNodes.map((n: any) => {
+                    const savedPos = savedIntlPositions.get(n.id);
+                    return {
+                        id: n.id,
+                        label: n.label,
+                        group: n.group,
+                        impact: n.impact,
+                        cfpDeadline: n.cfpDeadline,
+                        mass: n.mass,
+                        size: n.size || 15,
+                        title: n.title || n.id,
+                        // Restore saved positions
+                        x: savedPos?.x,
+                        y: savedPos?.y,
+                        fixed: savedPos ? true : false  // Keep fixed if we have saved positions
+                    };
+                });
+
+                console.log('[Korean Network] Restored positions for', intlNodes.filter((n: any) => n.x !== undefined).length, 'nodes');
+
+                // Use setData for COMPLETE data replacement
+                network.setData({
+                    nodes: new vis.DataSet(intlNodes),
+                    edges: new vis.DataSet(freshData.edges)
+                });
+
+
+                console.log('[Korean Network] setData completed');
+
+                // Keep physics disabled - just fit the view
+                // Physics will be re-enabled if user interacts with the network
+                network.setOptions({ physics: false });
+
+                // Fit view after a brief delay
+                setTimeout(() => {
+                    network.fit({ animation: { duration: 500, easingFunction: 'easeInOutQuad' } });
+                    console.log('[Korean Network] International network restored');
+                }, 50);
+
+                // Update UI state
+                btn?.classList.remove('active');
+                isKoreanNetworkActive = false;
+
+                showToast('🌍 국제 네트워크로 전환됨');
+
+                // Remove Korean legend
+                const koreanLegend = document.getElementById('korean-legend');
+                if (koreanLegend) koreanLegend.remove();
+
+
+                // Log action
+                logAction({
+                    action_type: 'korean_network_deactivate',
+                    context_tag: 'network'
+                });
+            } catch (error) {
+                console.error('[Korean Network] Failed to switch back:', error);
+                showToast('⚠️ 국제 네트워크 전환 실패');
+            }
+        }
+
+    });
+
     // Guide button
     document.getElementById('tour-btn')?.addEventListener('click', startTour);
 

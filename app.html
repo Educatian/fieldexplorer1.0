@@ -715,6 +715,13 @@
       border-color: #8b5cf6;
     }
 
+    /* Korean Network toggle button */
+    .filter-btn.korean.active {
+      background: #2dd4bf;
+      border-color: #2dd4bf;
+      color: #0d1b3e;
+    }
+
     /* ===== IF TREND CHART STYLES ===== */
     .if-trend-section {
       margin-top: 16px;
@@ -2708,11 +2715,13 @@
         <button class="btn filter-btn conference active" id="filter-conf">학회</button>
         <button class="btn filter-btn cfp" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
         <button class="btn filter-btn compare" id="compare-btn" title="비교 모드 (C)">📊 비교</button>
+        <button class="btn filter-btn korean" id="korean-network-btn" title="한국 교육공학 정체성 네트워크">🇰🇷 한국</button>
         <button class="btn filter-btn" id="feed-btn" title="최신 리뷰 피드">📢</button>
         <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝</button>
         <button class="btn filter-btn" id="research-topics-btn" title="연구 주제 탐색">🔬</button>
         <button class="btn filter-btn" id="admin-btn" title="관리자" style="display:none;">🔐</button>
       </div>
+
 
       <select class="category-select" id="category-jump">
         <option value="">📍 카테고리 이동</option>
