@@ -2903,7 +2903,12 @@ function main() {
                             </div>
                         </div>
                     </div>
+                    <div style="margin-top: 16px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+                        💡 <strong>더 나은 서비스를 위해</strong><br>
+                        사용 패턴 분석을 통해 앱 개선에 활용합니다. 개인 정보는 수집하지 않으며, 모든 데이터는 연구 목적으로만 사용됩니다.
+                    </div>
                     <button class="whatsnew-btn" id="whatsnew-close">확인했어요!</button>
+
                 </div>
             </div>
         `;
