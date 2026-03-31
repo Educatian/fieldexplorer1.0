@@ -1,5 +1,22 @@
 import { createClient } from "@supabase/supabase-js";
 import semanticProfiles from './src/data/semantic_profiles.json';
+import {
+    getBuiltInOfficialCFPRecord,
+    resolveCFPInfoWithOverrides,
+    type CFPRecordMap,
+    type OfficialCFPRecord,
+    type ResolvedCFPInfo
+} from './src/data/cfp';
+import {
+    CONTRIBUTORS_SUPPRESSED_NOTE,
+    IMPACT_REFERENCE_NOTE,
+    METHODOLOGY_REFERENCE_NOTE,
+    NEWCOMER_SUPPRESSED_NOTE,
+    OVERVIEW_EDITORIAL_NOTE,
+    getVenueContentAudit,
+    softenEditorialDescription,
+    type VenueContentAudit
+} from './src/data/venueContentAudit';
 import { shouldShowTour, startTour } from './src/ui/tour';
 
 declare const vis: any;
@@ -10,6 +27,28 @@ declare const jspdf: any;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
+const DESIGN_COLORS = {
+    surface: '#060e20',
+    surfaceLow: '#091328',
+    surfaceHigh: '#141f38',
+    surfaceHighest: '#192540',
+    onSurface: '#dee5ff',
+    onSurfaceVariant: '#9aa8c8',
+    outline: '#6d758c',
+    outlineGhost: 'rgba(64, 72, 93, 0.2)',
+    outlineSoft: 'rgba(109, 117, 140, 0.3)',
+    outlineStrong: 'rgba(109, 117, 140, 0.5)',
+    primary: '#3bbffa',
+    primaryContainer: '#22b1ec',
+    primarySoft: '#7ad6ff',
+    secondary: '#10b981',
+    secondarySoft: '#34d3b2',
+    secondaryDeep: '#0f967d',
+    tertiary: '#f5a623',
+    tertiarySoft: '#ffc857',
+    tertiaryDeep: '#d98714'
+} as const;
 
 // ============================================================================
 // COMPREHENSIVE USER ACTION LOGGING SYSTEM
@@ -250,7 +289,30 @@ const venueData: VenueInfo[] = [
 // ============================================================================
 
 const FAVORITES_KEY = 'fieldexplorer_favorites';
+const CFP_OVERRIDES_KEY = 'fieldexplorer_cfp_overrides';
+const CFP_HISTORY_KEY = 'fieldexplorer_cfp_history';
 const venueCache: Record<string, any> = {};
+let cfpOverrideCache: CFPRecordMap = {};
+let cfpHistoryCache: CFPHistoryEntry[] = [];
+let cfpPersistenceMode: 'cloud' | 'local' | 'unavailable' = 'local';
+let cfpPersistenceDetail = '로컬 브라우저 저장 중';
+
+interface StoredUser {
+    email?: string;
+    loggedIn?: boolean;
+    isGuest?: boolean;
+    isNewUser?: boolean;
+}
+
+interface CFPHistoryEntry {
+    id: string;
+    venueName: string;
+    action: 'upsert' | 'delete';
+    storageMode: 'cloud' | 'local';
+    snapshot?: OfficialCFPRecord;
+    changedAt: string;
+    changedBy?: string | null;
+}
 
 function getFavorites(): Set<string> {
     try {
@@ -270,6 +332,298 @@ function saveFavorites(favorites: Set<string>, lastAction?: { action: 'add' | 'r
             target_node: lastAction.nodeId
         });
     }
+}
+
+function getStoredUser(): StoredUser {
+    try {
+        return JSON.parse(localStorage.getItem('fieldexplorer_user') || '{}');
+    } catch {
+        return {};
+    }
+}
+
+function isGuestUser(): boolean {
+    const user = getStoredUser();
+    return Boolean(user.isGuest || user.email === 'guest');
+}
+
+function requireMemberAccess(featureLabel: string): boolean {
+    if (!isGuestUser()) return true;
+    showToast(`${featureLabel}은 로그인 후 사용할 수 있습니다.`);
+    return false;
+}
+
+function escapeHtml(value: string): string {
+    return value
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+}
+
+function getCFPOverrides(): CFPRecordMap {
+    try {
+        const stored = localStorage.getItem(CFP_OVERRIDES_KEY);
+        return stored ? JSON.parse(stored) : {};
+    } catch {
+        return {};
+    }
+}
+
+cfpOverrideCache = getCFPOverrides();
+
+function getLocalCFPHistory(): CFPHistoryEntry[] {
+    try {
+        const stored = localStorage.getItem(CFP_HISTORY_KEY);
+        return stored ? JSON.parse(stored) : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveLocalCFPHistory(history: CFPHistoryEntry[]) {
+    cfpHistoryCache = [...history];
+    localStorage.setItem(CFP_HISTORY_KEY, JSON.stringify(history));
+}
+
+cfpHistoryCache = getLocalCFPHistory();
+
+function saveCFPOverrides(overrides: CFPRecordMap) {
+    cfpOverrideCache = { ...overrides };
+    localStorage.setItem(CFP_OVERRIDES_KEY, JSON.stringify(overrides));
+}
+
+function getResolvedCFPInfo(venueName: string, legacyPattern?: string, now = new Date()): ResolvedCFPInfo {
+    return resolveCFPInfoWithOverrides(venueName, legacyPattern, cfpOverrideCache, now);
+}
+
+function toCloudCFPRow(record: OfficialCFPRecord, userId?: string | null) {
+    return {
+        venue_name: record.venueName,
+        submission_deadline: record.submissionDeadline,
+        submission_label: record.submissionLabel,
+        abstract_deadline: record.abstractDeadline || null,
+        abstract_label: record.abstractLabel || null,
+        source_url: record.sourceUrl,
+        source_label: record.sourceLabel,
+        verified_at: record.verifiedAt,
+        timezone: record.timezone,
+        notes: record.notes || null,
+        verified_by: userId || null
+    };
+}
+
+function fromCloudCFPRows(rows: any[]): CFPRecordMap {
+    const mapped: CFPRecordMap = {};
+    rows.forEach(row => {
+        mapped[row.venue_name] = {
+            venueName: row.venue_name,
+            submissionDeadline: row.submission_deadline,
+            submissionLabel: row.submission_label,
+            abstractDeadline: row.abstract_deadline || undefined,
+            abstractLabel: row.abstract_label || undefined,
+            sourceUrl: row.source_url,
+            sourceLabel: row.source_label,
+            verifiedAt: row.verified_at,
+            timezone: row.timezone,
+            notes: row.notes || undefined
+        };
+    });
+    return mapped;
+}
+
+function fromCloudCFPHistoryRows(rows: any[]): CFPHistoryEntry[] {
+    return (rows || []).map((row: any) => ({
+        id: row.id,
+        venueName: row.venue_name,
+        action: row.action,
+        storageMode: row.storage_mode,
+        snapshot: row.snapshot || undefined,
+        changedAt: row.changed_at,
+        changedBy: row.changed_by || null
+    }));
+}
+
+function createLocalCFPHistoryEntry(
+    action: 'upsert' | 'delete',
+    storageMode: 'cloud' | 'local',
+    venueName: string,
+    snapshot?: OfficialCFPRecord,
+    changedBy?: string | null
+): CFPHistoryEntry {
+    return {
+        id: crypto.randomUUID(),
+        venueName,
+        action,
+        storageMode,
+        snapshot,
+        changedAt: new Date().toISOString(),
+        changedBy: changedBy || getStoredUser().email || null
+    };
+}
+
+function appendLocalCFPHistory(entry: CFPHistoryEntry) {
+    const nextHistory = [entry, ...cfpHistoryCache].slice(0, 80);
+    saveLocalCFPHistory(nextHistory);
+}
+
+async function loadCFPOverridesFromCloud(): Promise<CFPRecordMap | null> {
+    if (!supabase) {
+        cfpPersistenceMode = 'unavailable';
+        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
+        return null;
+    }
+
+    const { data, error } = await supabase
+        .from('cfp_verifications')
+        .select('venue_name, submission_deadline, submission_label, abstract_deadline, abstract_label, source_url, source_label, verified_at, timezone, notes')
+        .order('verified_at', { ascending: false });
+
+    if (error) {
+        console.warn('[CFP] Cloud load failed:', error.message);
+        cfpPersistenceMode = 'local';
+        cfpPersistenceDetail = error.message.includes('cfp_verifications')
+            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
+            : `원격 로드 실패: ${error.message}`;
+        return null;
+    }
+
+    cfpPersistenceMode = 'cloud';
+    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
+    return fromCloudCFPRows(data || []);
+}
+
+async function loadCFPHistoryFromCloud(): Promise<CFPHistoryEntry[] | null> {
+    if (!supabase) return null;
+
+    const { data, error } = await supabase
+        .from('cfp_verification_history')
+        .select('id, venue_name, action, snapshot, storage_mode, changed_by, changed_at')
+        .order('changed_at', { ascending: false })
+        .limit(40);
+
+    if (error) {
+        console.warn('[CFP] Cloud history load failed:', error.message);
+        return null;
+    }
+
+    return fromCloudCFPHistoryRows(data || []);
+}
+
+async function initializeCFPOverrides() {
+    cfpOverrideCache = getCFPOverrides();
+    const cloudOverrides = await loadCFPOverridesFromCloud();
+    if (cloudOverrides) {
+        cfpOverrideCache = cloudOverrides;
+        localStorage.setItem(CFP_OVERRIDES_KEY, JSON.stringify(cloudOverrides));
+    }
+
+    const cloudHistory = await loadCFPHistoryFromCloud();
+    if (cloudHistory) {
+        saveLocalCFPHistory(cloudHistory);
+    } else {
+        cfpHistoryCache = getLocalCFPHistory();
+    }
+
+    applyCFPFilter(true);
+    if (currentNodeId) {
+        void handleNodeClick(currentNodeId);
+    }
+}
+
+async function logCFPHistory(
+    action: 'upsert' | 'delete',
+    storageMode: 'cloud' | 'local',
+    venueName: string,
+    snapshot?: OfficialCFPRecord
+) {
+    const userEmail = getStoredUser().email || null;
+    const localEntry = createLocalCFPHistoryEntry(action, storageMode, venueName, snapshot, userEmail);
+    appendLocalCFPHistory(localEntry);
+
+    if (!supabase || storageMode !== 'cloud') return;
+
+    const { data: { user } } = await supabase.auth.getUser();
+    const { error } = await supabase
+        .from('cfp_verification_history')
+        .insert({
+            venue_name: venueName,
+            action,
+            snapshot: snapshot || {},
+            storage_mode: storageMode,
+            changed_by: user?.id || null
+        });
+
+    if (error) {
+        console.warn('[CFP] History write failed:', error.message);
+    }
+}
+
+async function saveCFPRecord(record: OfficialCFPRecord) {
+    const localOverrides = { ...cfpOverrideCache, [record.venueName]: record };
+    saveCFPOverrides(localOverrides);
+
+    if (!supabase) {
+        cfpPersistenceMode = 'local';
+        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
+        await logCFPHistory('upsert', 'local', record.venueName, record);
+        return { ok: true, mode: 'local' as const, message: '로컬에 저장되었습니다.' };
+    }
+
+    const { data: { user } } = await supabase.auth.getUser();
+    const { error } = await supabase
+        .from('cfp_verifications')
+        .upsert(toCloudCFPRow(record, user?.id), { onConflict: 'venue_name' });
+
+    if (error) {
+        console.warn('[CFP] Cloud save failed:', error.message);
+        cfpPersistenceMode = 'local';
+        cfpPersistenceDetail = error.message.includes('cfp_verifications')
+            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
+            : `원격 저장 실패: ${error.message}`;
+        await logCFPHistory('upsert', 'local', record.venueName, record);
+        return { ok: true, mode: 'local' as const, message: `원격 저장 실패로 로컬에만 저장했습니다: ${error.message}` };
+    }
+
+    cfpPersistenceMode = 'cloud';
+    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
+    await logCFPHistory('upsert', 'cloud', record.venueName, record);
+    return { ok: true, mode: 'cloud' as const, message: 'Supabase에 저장되었습니다.' };
+}
+
+async function clearCFPRecordOverride(venueName: string) {
+    const snapshot = cfpOverrideCache[venueName];
+    const localOverrides = { ...cfpOverrideCache };
+    delete localOverrides[venueName];
+    saveCFPOverrides(localOverrides);
+
+    if (!supabase) {
+        cfpPersistenceMode = 'local';
+        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
+        await logCFPHistory('delete', 'local', venueName, snapshot);
+        return { ok: true, mode: 'local' as const, message: '로컬 override를 제거했습니다.' };
+    }
+
+    const { error } = await supabase
+        .from('cfp_verifications')
+        .delete()
+        .eq('venue_name', venueName);
+
+    if (error) {
+        console.warn('[CFP] Cloud delete failed:', error.message);
+        cfpPersistenceMode = 'local';
+        cfpPersistenceDetail = error.message.includes('cfp_verifications')
+            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
+            : `원격 삭제 실패: ${error.message}`;
+        await logCFPHistory('delete', 'local', venueName, snapshot);
+        return { ok: true, mode: 'local' as const, message: `원격 삭제 실패로 로컬 override만 제거했습니다: ${error.message}` };
+    }
+
+    cfpPersistenceMode = 'cloud';
+    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
+    await logCFPHistory('delete', 'cloud', venueName, snapshot);
+    return { ok: true, mode: 'cloud' as const, message: 'Supabase override를 제거했습니다.' };
 }
 
 // ============================================================================
@@ -620,6 +974,7 @@ interface VenueDetails {
     isExpertVerified?: boolean; // If true, automated keyword logic won't override it if data is noisy
     newcomerFriendliness: { acceptanceRate: string; timeToDecision: string };
     keyContributors: { name: string; affiliation: string }[];
+    audit?: VenueContentAudit;
 }
 
 const venueDetails: Record<string, VenueDetails> = {
@@ -1253,8 +1608,18 @@ function getVenueDetails(name: string, _type: string): VenueDetails {
     // Look up in static data
     const details = venueDetails[name];
     if (details) {
-        venueCache[name] = details;
-        return details;
+        const audit = getVenueContentAudit(name, details.overview?.website);
+        const auditedDetails: VenueDetails = {
+            ...details,
+            overview: {
+                ...details.overview,
+                description: softenEditorialDescription(details.overview?.description || ''),
+                website: audit.website?.url || details.overview?.website || '#'
+            },
+            audit
+        };
+        venueCache[name] = auditedDetails;
+        return auditedDetails;
     }
 
     // Default fallback for venues without detailed data
@@ -1263,7 +1628,8 @@ function getVenueDetails(name: string, _type: string): VenueDetails {
         topics: ["정보 없음"],
         methodologyProfile: [{ methodology: "다양함", prevalence: 100 }],
         newcomerFriendliness: { acceptanceRate: "정보 없음", timeToDecision: "정보 없음" },
-        keyContributors: []
+        keyContributors: [],
+        audit: getVenueContentAudit(name)
     };
 }
 
@@ -1333,9 +1699,15 @@ function setSidebarTitle(title: string, type: string, impact?: string) {
     const badge = document.getElementById('impact-badge')!;
     if (impact) {
         badge.textContent = impact;
+        badge.title = IMPACT_REFERENCE_NOTE;
         badge.style.display = 'inline';
-        badge.style.background = impact === 'Q1' ? '#10b981' : impact === 'Q2' ? '#3b82f6' : '#f59e0b';
+        badge.style.background = impact === 'Q1'
+            ? DESIGN_COLORS.secondary
+            : impact === 'Q2'
+                ? DESIGN_COLORS.primary
+                : DESIGN_COLORS.tertiary;
     } else {
+        badge.removeAttribute('title');
         badge.style.display = 'none';
     }
 }
@@ -1428,9 +1800,8 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
 
     const desc = data.overview?.description || '정보 없음';
     const website = data.overview?.website;
+    const audit = data.audit || getVenueContentAudit(node.id, website);
     const topics = data.topics?.length ? data.topics.join(', ') : '정보 없음';
-    const acceptance = data.newcomerFriendliness?.acceptanceRate || 'N/A';
-    const decision = data.newcomerFriendliness?.timeToDecision || 'N/A';
 
     const methodologyData = calculateMethodologyFocus(node.id, data.methodologyProfile || [], data.isExpertVerified);
 
@@ -1448,20 +1819,64 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       `).join('')
         : '<p>정보 없음</p>';
 
-    const contributorsHtml = data.keyContributors?.length
-        ? `<ul class="sidebar-list">${data.keyContributors.map((c: any) =>
-            `<li>${c.name}${c.affiliation ? ` <span style="color: var(--text-muted);">· ${c.affiliation}</span>` : ''}</li>`
-        ).join('')}</ul>`
-        : '<p>정보 없음</p>';
-
-    const cfpHtml = node.cfpDeadline ? `
-    <div class="sidebar-section">
-      <h3>📅 CFP 일정</h3>
-      <div class="cfp-info">
-        <p><strong>마감 시기:</strong> ${node.cfpDeadline}</p>
+    const contentStatusHtml = `
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.primary};font-size:0.72rem;font-weight:700;">
+          ${audit.website?.status === 'official' ? '공식 링크 확인' : '퍼블리셔 링크'}
+        </span>
+        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.secondary};font-size:0.72rem;font-weight:700;">
+          개요·토픽 편집 요약
+        </span>
+        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.tertiary};font-size:0.72rem;font-weight:700;">
+          연구 성향·Q등급 참고용
+        </span>
       </div>
-    </div>
-  ` : '';
+    `;
+    const contentAuditHtml = `
+      <div class="sidebar-section">
+        <h3>팩트체크 메모</h3>
+        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;">${OVERVIEW_EDITORIAL_NOTE}</p>
+        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${IMPACT_REFERENCE_NOTE}</p>
+        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${NEWCOMER_SUPPRESSED_NOTE}</p>
+        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${CONTRIBUTORS_SUPPRESSED_NOTE}</p>
+        ${audit.website?.verifiedAt ? `<p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">마지막 링크 검토: ${audit.website.verifiedAt}</p>` : ''}
+        ${audit.website?.sourceUrl && audit.website?.sourceLabel ? `<p style="margin-top:8px;"><a href="${audit.website.sourceUrl}" target="_blank" rel="noopener">${audit.website.sourceLabel} ↗</a></p>` : ''}
+      </div>
+    `;
+
+    const cfpInfo = getResolvedCFPInfo(node.id, node.cfpDeadline);
+    const cfpStatusLabel = cfpInfo.confidence === 'official'
+        ? (cfpInfo.deadlineState === 'passed' ? '공식 확인 · 마감 지남' : '공식 확인')
+        : cfpInfo.confidence === 'estimated'
+            ? '추정치'
+            : '정보 없음';
+    const cfpStatusColor = cfpInfo.confidence === 'official'
+        ? DESIGN_COLORS.secondary
+        : cfpInfo.confidence === 'estimated'
+            ? DESIGN_COLORS.tertiary
+            : DESIGN_COLORS.outline;
+    const cfpUrgencyLabel = cfpInfo.daysUntil === null
+        ? '마감일 계산 불가'
+        : cfpInfo.daysUntil >= 0
+            ? `D-${cfpInfo.daysUntil}`
+            : `${Math.abs(cfpInfo.daysUntil)}일 지남`;
+    const cfpHtml = cfpInfo.confidence !== 'missing' ? `
+        <div class="sidebar-section">
+          <h3>📅 CFP 일정</h3>
+          <div class="cfp-info" style="background: rgba(59, 191, 250, 0.07); border-radius: 10px; padding: 12px;">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+              <span style="display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: ${cfpStatusColor}; font-size: 0.72rem; font-weight: 700;">${cfpStatusLabel}</span>
+              <span style="display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: var(--text-primary); font-size: 0.72rem; font-weight: 700;">${cfpUrgencyLabel}</span>
+            </div>
+            <p><strong>${cfpInfo.primaryDeadlineLabel}:</strong> ${cfpInfo.primaryDeadlineDisplay}</p>
+            ${cfpInfo.secondaryDeadlineDisplay && cfpInfo.secondaryDeadlineLabel ? `<p><strong>${cfpInfo.secondaryDeadlineLabel}:</strong> ${cfpInfo.secondaryDeadlineDisplay}</p>` : ''}
+            ${cfpInfo.timezoneLabel ? `<p><strong>기준 시간대:</strong> ${cfpInfo.timezoneLabel}</p>` : ''}
+            ${cfpInfo.verifiedAt ? `<p><strong>마지막 검증:</strong> ${cfpInfo.verifiedAt}</p>` : ''}
+            <p style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.6; margin-top: 8px;">${cfpInfo.note}</p>
+            ${cfpInfo.sourceUrl && cfpInfo.sourceLabel ? `<p style="margin-top: 8px;"><a href="${cfpInfo.sourceUrl}" target="_blank" rel="noopener">${cfpInfo.sourceLabel} ↗</a></p>` : ''}
+          </div>
+        </div>
+    ` : '';
 
     const recsHtml = recommendations.length ? `
     <div class="sidebar-section">
@@ -1475,8 +1890,9 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     return `
     <div class="sidebar-section">
       <h3>개요</h3>
+      ${contentStatusHtml}
       <p>${desc}</p>
-      ${website ? `<p style="margin-top: 6px;"><a href="${website}" target="_blank" rel="noopener">웹사이트 방문 →</a></p>` : ''}
+      ${website ? `<p style="margin-top: 6px;"><a href="${website}" target="_blank" rel="noopener">${audit.website?.status === 'official' ? '공식 페이지 방문' : '퍼블리셔 페이지 방문'} ↗</a></p>` : ''}
     </div>
 
     <div class="sidebar-section">
@@ -1485,24 +1901,13 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     </div>
 
     <div class="sidebar-section">
-      <h3>신규 연구자 친화도</h3>
-      <p><strong>채택률:</strong> ${acceptance}</p>
-      <p><strong>심사 기간:</strong> ${decision}</p>
-    </div>
-
-    <div class="sidebar-section">
       <h3 title="학술지 키워드 분석(TF-IDF)을 바탕으로 산출된 경향성 지표입니다.">연구 성향 프로필</h3>
       ${methodologyHtml}
       <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
-        ※ 이 프로필은 실제 게재 논문들의 키워드 벡터 분석을 기반으로 자동 산출되었습니다.
+        ※ ${METHODOLOGY_REFERENCE_NOTE}
       </p>
     </div>
-
-    <div class="sidebar-section">
-      <h3>주요 연구자</h3>
-      ${contributorsHtml}
-    </div>
-
+    ${contentAuditHtml}
     ${cfpHtml}
     ${recsHtml}
   `;
@@ -1516,7 +1921,7 @@ function renderCategoryDetails(connectedNodes: any[]): string {
     <div class="sidebar-section">
       <h3>저널 (${journals.length}개)</h3>
       ${journals.length ? `<ul class="sidebar-list">${journals.map(n =>
-        `<li>${n.id}${n.impact ? ` <span class="impact-badge" style="background: ${n.impact === 'Q1' ? '#10b981' : n.impact === 'Q2' ? '#3b82f6' : '#f59e0b'}; font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; color: white;">${n.impact}</span>` : ''}</li>`
+        `<li>${n.id}${n.impact ? ` <span class="impact-badge" style="background: ${n.impact === 'Q1' ? DESIGN_COLORS.secondary : n.impact === 'Q2' ? DESIGN_COLORS.primary : DESIGN_COLORS.tertiary}; font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; color: ${DESIGN_COLORS.surface};">${n.impact}</span>` : ''}</li>`
     ).join('')}</ul>` : '<p>없음</p>'}
     </div>
     
@@ -1530,6 +1935,7 @@ function renderCategoryDetails(connectedNodes: any[]): string {
 // Render annotations section with threaded replies
 function renderAnnotations(annotations: Annotation[], venueName: string, venueType: string): string {
     const TAGS = ['신규 연구자 추천', '까다로운 리뷰', '빠른 피드백', '높은 영향력'];
+    const guestMode = isGuestUser();
 
     const starRating = (rating: number) => '★'.repeat(rating) + '☆'.repeat(5 - rating);
 
@@ -1548,7 +1954,7 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
             </div>
             <p class="annotation-comment">${a.comment}</p>
             ${a.tags?.length ? `<div class="annotation-tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-            ${!isReply ? `<button class="reply-btn" data-parent="${a.id}">💬 답글</button>` : ''}
+            ${!isReply && !guestMode ? `<button class="reply-btn" data-parent="${a.id}">💬 답글</button>` : ''}
             ${annotationReplies.length ? `
                 <div class="replies">
                     ${annotationReplies.map(r => renderAnnotation(r, true)).join('')}
@@ -1568,28 +1974,37 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
         <div class="annotations-list" id="annotations-list">
             ${annotationsList}
         </div>
-        
-        <div class="add-annotation" id="add-annotation-form">
-            <h4 id="annotation-form-title">의견 남기기</h4>
-            <input type="hidden" id="reply-parent-id" value="">
-            <div class="rating-input">
-                <label>추천도</label>
-                <div class="star-select" id="star-select">
-                    ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-rating="${i}">☆</span>`).join('')}
+
+        ${guestMode ? `
+            <div class="add-annotation" style="background: rgba(59, 191, 250, 0.08);">
+                <h4 style="margin-bottom: 8px;">로그인 후 의견 작성 가능</h4>
+                <p style="margin: 0; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.6;">
+                    게스트 모드에서는 의견 작성과 답글 등록이 잠겨 있습니다. 랜딩 페이지에서 로그인하면 즐겨찾기, 의견, 협업 기능을 모두 사용할 수 있습니다.
+                </p>
+            </div>
+        ` : `
+            <div class="add-annotation" id="add-annotation-form">
+                <h4 id="annotation-form-title">의견 남기기</h4>
+                <input type="hidden" id="reply-parent-id" value="">
+                <div class="rating-input">
+                    <label>추천도</label>
+                    <div class="star-select" id="star-select">
+                        ${[1, 2, 3, 4, 5].map(i => `<span class="star" data-rating="${i}">☆</span>`).join('')}
+                    </div>
+                </div>
+                <textarea id="annotation-comment" placeholder="이 저널/학회에 대한 의견을 남겨주세요..." rows="3"></textarea>
+                <div class="tags-input">
+                    <label>태그 선택</label>
+                    <div class="tag-options">
+                        ${TAGS.map(tag => `<label class="tag-option"><input type="checkbox" value="${tag}"> ${tag}</label>`).join('')}
+                    </div>
+                </div>
+                <div class="annotation-form-actions">
+                    <button class="submit-annotation-btn" id="submit-annotation" data-venue="${venueName}" data-type="${venueType}">의견 등록</button>
+                    <button class="cancel-reply-btn" id="cancel-reply" style="display: none;">취소</button>
                 </div>
             </div>
-            <textarea id="annotation-comment" placeholder="이 저널/학회에 대한 의견을 남겨주세요..." rows="3"></textarea>
-            <div class="tags-input">
-                <label>태그 선택</label>
-                <div class="tag-options">
-                    ${TAGS.map(tag => `<label class="tag-option"><input type="checkbox" value="${tag}"> ${tag}</label>`).join('')}
-                </div>
-            </div>
-            <div class="annotation-form-actions">
-                <button class="submit-annotation-btn" id="submit-annotation" data-venue="${venueName}" data-type="${venueType}">의견 등록</button>
-                <button class="cancel-reply-btn" id="cancel-reply" style="display: none;">취소</button>
-            </div>
-        </div>
+        `}
     </div>
     `;
 }
@@ -1671,34 +2086,93 @@ function main() {
     let currentNodeId: string | null = null;
     let favorites = getFavorites();
 
+    interface ExplorerShareState {
+        nodeId: string | null;
+        query: string;
+        impact: string;
+        journalsEnabled: boolean;
+        conferencesEnabled: boolean;
+        cfpDays: number;
+        compareNodes: string[];
+        koreanNetwork: boolean;
+        topicsOpen: boolean;
+        scale: number | null;
+        x: number | null;
+        y: number | null;
+    }
+
+    function parseNumberParam(value: string | null): number | null {
+        if (value === null || value === '') return null;
+        const parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : null;
+    }
+
+    function parseExplorerStateFromUrl(): ExplorerShareState {
+        const params = new URLSearchParams(window.location.search);
+        const parsedCfpDays = Number(params.get('cfp'));
+
+        return {
+            nodeId: params.get('node'),
+            query: params.get('q') || '',
+            impact: params.get('impact') || '',
+            journalsEnabled: params.get('journals') !== '0',
+            conferencesEnabled: params.get('confs') !== '0',
+            cfpDays: [30, 60, 90].includes(parsedCfpDays) ? parsedCfpDays : 0,
+            compareNodes: params.getAll('compare').filter(id => nodes.some(node => node.id === id)),
+            koreanNetwork: params.get('korean') === '1',
+            topicsOpen: params.get('topics') === '1',
+            scale: parseNumberParam(params.get('scale')),
+            x: parseNumberParam(params.get('x')),
+            y: parseNumberParam(params.get('y'))
+        };
+    }
+
+    const initialShareState = parseExplorerStateFromUrl();
+
     const options = {
         nodes: {
             borderWidth: 2,
-            shadow: { enabled: true, color: 'rgba(0,0,0,0.4)', size: 8, x: 2, y: 2 },
-            font: { size: 10, color: '#94a3b8', face: 'Inter, Noto Sans KR, sans-serif' }
+            shadow: { enabled: true, color: 'rgba(6, 14, 32, 0.36)', size: 8, x: 2, y: 2 },
+            font: { size: 10, color: DESIGN_COLORS.onSurfaceVariant, face: 'Inter, Noto Sans KR, sans-serif' }
         },
         edges: {
-            width: 1,
-            color: { color: '#475569', highlight: '#64748b' },
+            width: 1.5,
+            color: { color: DESIGN_COLORS.outlineSoft, highlight: DESIGN_COLORS.outlineStrong },
             smooth: { enabled: true, type: 'continuous' }
         },
         groups: {
             Journal: {
                 shape: 'dot', size: 14,
-                color: { background: '#7ba0cc', border: '#5a8ab8', highlight: { background: '#a8c5e6', border: '#7ba0cc' } }
+                color: {
+                    background: DESIGN_COLORS.primary,
+                    border: DESIGN_COLORS.primaryContainer,
+                    highlight: { background: DESIGN_COLORS.primarySoft, border: DESIGN_COLORS.primary }
+                }
             },
             Conference: {
                 shape: 'dot', size: 11,
-                color: { background: '#10b981', border: '#059669', highlight: { background: '#34d399', border: '#10b981' } }
+                color: {
+                    background: DESIGN_COLORS.secondary,
+                    border: DESIGN_COLORS.secondaryDeep,
+                    highlight: { background: DESIGN_COLORS.secondarySoft, border: DESIGN_COLORS.secondary }
+                }
             },
             SubConference: {
                 shape: 'dot', size: 9,
-                color: { background: '#14b8a6', border: '#0d9488', highlight: { background: '#2dd4bf', border: '#14b8a6' } }
+                color: {
+                    background: DESIGN_COLORS.secondarySoft,
+                    border: DESIGN_COLORS.secondary,
+                    highlight: { background: '#7be3cf', border: DESIGN_COLORS.secondarySoft }
+                }
             },
             Category: {
                 shape: 'box',
-                color: { background: '#f5a623', border: '#e5941a', highlight: { background: '#ffc857', border: '#f5a623' } },
-                font: { color: '#0d1b3e', size: 11 },
+                color: {
+                    background: DESIGN_COLORS.tertiary,
+                    border: DESIGN_COLORS.tertiaryDeep,
+                    highlight: { background: DESIGN_COLORS.tertiarySoft, border: DESIGN_COLORS.tertiary }
+                },
+                font: { color: DESIGN_COLORS.surface, size: 11 },
                 margin: 7,
                 shapeProperties: { borderRadius: 5 }
             }
@@ -1718,22 +2192,7 @@ function main() {
         network.setOptions({ physics: false });
         hideLoading();
         network.fit({ animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
-
-        // Apply URL params if any
-        const params = new URLSearchParams(window.location.search);
-        const focusNode = params.get('node');
-        const searchQuery = params.get('q');
-
-        if (focusNode && nodes.find(n => n.id === focusNode)) {
-            setTimeout(() => {
-                network.selectNodes([focusNode]);
-                network.focus(focusNode, { scale: 1.5, animation: true });
-            }, 500);
-        }
-
-        if (searchQuery) {
-            (document.getElementById('search-input') as HTMLInputElement).value = searchQuery;
-        }
+        void restoreExplorerStateFromUrl(initialShareState);
 
         // Radar-style ripple animation for flagship journals (ETRD, JLS, IJCSCL only)
         const flagshipIds = [
@@ -1769,7 +2228,7 @@ function main() {
 
                         ctx.beginPath();
                         ctx.arc(position.x, position.y, radius + 14, 0, 2 * Math.PI);
-                        ctx.strokeStyle = `rgba(139, 92, 246, ${alpha * 0.6})`;
+                        ctx.strokeStyle = `rgba(59, 191, 250, ${alpha * 0.45})`;
                         ctx.lineWidth = 2;
                         ctx.stroke();
                     }
@@ -1878,6 +2337,8 @@ function main() {
         const favBtn = document.getElementById('favorite-btn')!;
         favBtn.textContent = favorites.has(nodeId) ? '♥' : '♡';
         favBtn.classList.toggle('active', favorites.has(nodeId));
+        favBtn.disabled = isGuestUser();
+        favBtn.title = isGuestUser() ? '로그인 후 즐겨찾기 사용 가능' : '즐겨찾기';
 
         if (node.group === 'Category') {
             const connectedIds = network.getConnectedNodes(nodeId);
@@ -1938,6 +2399,8 @@ function main() {
 
             // Submit annotation
             document.getElementById('submit-annotation')?.addEventListener('click', async () => {
+                if (!requireMemberAccess('의견 작성')) return;
+
                 const comment = (document.getElementById('annotation-comment') as HTMLTextAreaElement).value.trim();
                 if (!comment) {
                     showToast('의견을 입력해주세요');
@@ -1953,7 +2416,7 @@ function main() {
                     tags.push((input as HTMLInputElement).value);
                 });
 
-                const user = JSON.parse(localStorage.getItem('fieldexplorer_user') || '{}');
+                const user = getStoredUser();
                 const parentIdInput = document.getElementById('reply-parent-id') as HTMLInputElement;
                 const parentId = parentIdInput?.value || null;
 
@@ -2021,6 +2484,9 @@ function main() {
             target_node: nodeId,
             metadata: { label: node?.label, group: node?.group }
         });
+        if (comparisonState.isActive && node?.group !== 'Category') {
+            addToComparison(nodeId);
+        }
         handleNodeClick(nodeId);
     });
 
@@ -2150,10 +2616,10 @@ function main() {
             impactFilter = (e.target as HTMLSelectElement).value;
             applyFilters();
             logAction({ action_type: 'filter_change', context_tag: 'network', metadata: { filter: 'impact', value: impactFilter } });
-            showToast(impactFilter ? `${impactFilter} 저널만 표시` : '전체 등급 표시');
+            showToast(impactFilter ? `${impactFilter} 참고 등급 저널만 표시` : '전체 참고 등급 표시');
         } catch (err) {
             console.error('Impact filter error:', err);
-            showToast('등급 필터 오류');
+            showToast('참고 등급 필터 오류');
         }
     });
 
@@ -2219,7 +2685,7 @@ function main() {
                 // Highlight all edges
                 edgesDataset.update(edges.map(e => ({
                     id: e.id,
-                    color: { color: '#00d4ff', opacity: 1 }
+                    color: { color: DESIGN_COLORS.primary, opacity: 1 }
                 })));
                 showToast('📊 엣지 강조');
                 break;
@@ -2227,7 +2693,17 @@ function main() {
             case 'components':
                 // Color by connected components
                 const visited = new Set<string>();
-                const componentColors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dfe6e9', '#a29bfe', '#fd79a8', '#00b894'];
+                const componentColors = [
+                    DESIGN_COLORS.primary,
+                    DESIGN_COLORS.secondary,
+                    DESIGN_COLORS.tertiary,
+                    DESIGN_COLORS.primaryContainer,
+                    DESIGN_COLORS.secondarySoft,
+                    DESIGN_COLORS.tertiarySoft,
+                    DESIGN_COLORS.primarySoft,
+                    '#7be3cf',
+                    '#ffd88b'
+                ];
                 let componentIdx = 0;
                 const nodeColors: Record<string, string> = {};
 
@@ -2431,74 +2907,72 @@ function main() {
     let cfpFilterDays = 0; // 0 = off, 30/60/90 = days
 
     function getCFPEntries() {
-        const monthMap: Record<string, number> = {
-            'January': 0, 'February': 1, 'March': 2, 'April': 3,
-            'May': 4, 'June': 5, 'July': 6, 'August': 7,
-            'September': 8, 'October': 9, 'November': 10, 'December': 11
-        };
-
-        const entries: Array<{ venueId: string; deadline: Date; daysUntil: number }> = [];
+        const entries: Array<{ venueId: string; info: ResolvedCFPInfo; daysUntil: number }> = [];
         const now = new Date();
-        const currentYear = now.getFullYear();
 
         for (const venue of venueData) {
             if (!venue.cfpDeadline) continue;
-
-            const firstMonth = venue.cfpDeadline.split('/')[0];
-            const monthIndex = monthMap[firstMonth];
-            if (monthIndex === undefined) continue;
-
-            let deadline = new Date(currentYear, monthIndex, 15);
-            if (deadline < now) {
-                deadline = new Date(currentYear + 1, monthIndex, 15);
-            }
-
-            const daysUntil = Math.ceil((deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-            entries.push({ venueId: venue.name, deadline, daysUntil });
+            const info = getResolvedCFPInfo(venue.name, venue.cfpDeadline, now);
+            if (info.daysUntil === null) continue;
+            entries.push({ venueId: venue.name, info, daysUntil: info.daysUntil });
         }
 
         return entries.sort((a, b) => a.daysUntil - b.daysUntil);
     }
 
-    function applyCFPFilter() {
+    function applyCFPFilter(silent = false) {
         if (cfpFilterDays === 0) {
-            // Show all conferences
-            showToast('CFP 필터 해제');
+            nodesDataset.update(nodes.map(n => ({ id: n.id, borderWidth: 1, color: { border: undefined } })));
+            if (!silent) {
+                showToast('CFP 필터 해제');
+            }
             return;
         }
 
         const cfpEntries = getCFPEntries();
-        const urgentVenues = new Set(
-            cfpEntries
-                .filter(e => e.daysUntil >= 0 && e.daysUntil <= cfpFilterDays)
-                .map(e => e.venueId)
-        );
+        const urgentEntries = cfpEntries.filter(e => e.daysUntil >= 0 && e.daysUntil <= cfpFilterDays);
+        const officialCount = urgentEntries.filter(entry => entry.info.confidence === 'official').length;
+        const estimatedCount = urgentEntries.filter(entry => entry.info.confidence === 'estimated').length;
 
         // Highlight urgent nodes
         const updates = nodes.map(n => {
-            if (urgentVenues.has(n.id)) {
-                return { id: n.id, borderWidth: 4, color: { border: '#f59e0b' } };
+            const entry = urgentEntries.find(item => item.venueId === n.id);
+            if (entry) {
+                return {
+                    id: n.id,
+                    borderWidth: 4,
+                    color: { border: entry.info.confidence === 'official' ? DESIGN_COLORS.tertiary : DESIGN_COLORS.primary }
+                };
             }
             return { id: n.id, borderWidth: 1, color: { border: undefined } };
         });
         nodesDataset.update(updates);
 
-        showToast(`CFP 마감 ${cfpFilterDays}일 이내: ${urgentVenues.size}개 학회`);
+        if (!silent) {
+            showToast(`CFP ${cfpFilterDays}일 이내: 공식 ${officialCount}개 · 추정 ${estimatedCount}개`);
+        }
     }
 
     // CFP filter button toggle (if exists)
     const cfpFilterBtn = document.getElementById('cfp-filter-btn');
+    function updateCFPFilterButton() {
+        if (!cfpFilterBtn) return;
+        cfpFilterBtn.classList.toggle('active', cfpFilterDays > 0);
+        cfpFilterBtn.textContent = cfpFilterDays > 0 ? `📅 D-${cfpFilterDays}` : '📅 CFP';
+    }
+
     if (cfpFilterBtn) {
         cfpFilterBtn.addEventListener('click', () => {
             // Cycle through: 0 -> 30 -> 60 -> 90 -> 0
             cfpFilterDays = cfpFilterDays === 0 ? 30 :
                 cfpFilterDays === 30 ? 60 :
                     cfpFilterDays === 60 ? 90 : 0;
-            cfpFilterBtn.classList.toggle('active', cfpFilterDays > 0);
-            cfpFilterBtn.textContent = cfpFilterDays > 0 ? `📅 D-${cfpFilterDays}` : '📅 CFP';
+            updateCFPFilterButton();
             applyCFPFilter();
         });
     }
+
+    void initializeCFPOverrides();
 
     // ========================================================================
     // COMPARISON MODE (Phase 3)
@@ -2527,6 +3001,7 @@ function main() {
             comparisonState.startTime = Date.now();
             showToast('📊 비교 모드 활성화 - 노드를 클릭하세요 (최대 3개)');
         } else {
+            comparisonState.nodes = [];
             removeComparisonPanel();
             showToast('비교 모드 종료');
         }
@@ -2555,12 +3030,13 @@ function main() {
 
     function getVenueDataForComparison(nodeId: string) {
         const venue = venueData.find(v => v.name === nodeId);
+        const cfpInfo = venue ? getResolvedCFPInfo(venue.name, venue.cfpDeadline) : null;
         return venue ? {
             id: venue.name,
             name: venue.name,
             type: venue.type,
             impact: venue.impact,
-            cfpDeadline: venue.cfpDeadline,
+            cfpInfo,
             categories: venue.categories
         } : null;
     }
@@ -2599,8 +3075,8 @@ function main() {
                     </div>
                     <div class="compare-body">
                         <div class="compare-row"><span class="compare-label">유형</span><span class="compare-value">${v!.type}</span></div>
-                        <div class="compare-row"><span class="compare-label">등급</span><span class="compare-value ${v!.impact ? 'impact-' + v!.impact : ''}">${v!.impact || '-'}</span></div>
-                        ${v!.cfpDeadline ? `<div class="compare-row"><span class="compare-label">CFP</span><span class="compare-value">${v!.cfpDeadline}</span></div>` : ''}
+                        <div class="compare-row"><span class="compare-label">참고 등급</span><span class="compare-value ${v!.impact ? 'impact-' + v!.impact : ''}" title="${IMPACT_REFERENCE_NOTE}">${v!.impact || '-'}</span></div>
+                        ${v!.cfpInfo && v!.cfpInfo.confidence !== 'missing' ? `<div class="compare-row"><span class="compare-label">CFP</span><span class="compare-value">${v!.cfpInfo.primaryDeadlineDisplay} ${v!.cfpInfo.confidence === 'official' ? '(공식)' : '(추정)'}</span></div>` : ''}
                     </div>
                     <div class="compare-actions">
                         <button class="btn compare-favorite" data-id="${v!.id}">♡ 즐겨찾기</button>
@@ -2638,11 +3114,11 @@ function main() {
 
         comparisonPanelEl.querySelectorAll('.compare-favorite').forEach(btn => {
             btn.addEventListener('click', () => {
+                if (!requireMemberAccess('즐겨찾기 저장')) return;
                 const id = btn.getAttribute('data-id');
                 if (id) {
-                    const favorites = getFavorites();
                     favorites.add(id);
-                    saveFavorites(favorites);
+                    saveFavorites(favorites, { action: 'add', nodeId: id });
                     showToast(`♥ ${id} 즐겨찾기 추가`);
                     renderComparisonPanel();
                 }
@@ -2978,6 +3454,264 @@ function main() {
 
     adminBtn?.addEventListener('click', openAdminPopup);
 
+    function getCFPReviewRows() {
+        return venueData
+            .filter(venue => Boolean(venue.cfpDeadline))
+            .map(venue => {
+                const info = getResolvedCFPInfo(venue.name, venue.cfpDeadline);
+                return {
+                    venueName: venue.name,
+                    legacyPattern: venue.cfpDeadline || '',
+                    info,
+                    hasOverride: Boolean(cfpOverrideCache[venue.name])
+                };
+            })
+            .sort((a, b) => {
+                const score = (row: { info: ResolvedCFPInfo }) => {
+                    if (row.info.confidence === 'estimated') return 0;
+                    if (row.info.deadlineState === 'passed') return 1;
+                    return 2;
+                };
+                return score(a) - score(b) || a.venueName.localeCompare(b.venueName);
+            });
+    }
+
+    function getCFPVerificationAgeDays(info: ResolvedCFPInfo) {
+        if (!info.verifiedAt) return null;
+        const verifiedDate = new Date(`${info.verifiedAt}T00:00:00Z`);
+        return Math.floor((Date.now() - verifiedDate.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    function getCFPReviewBadge(info: ResolvedCFPInfo) {
+        const ageDays = getCFPVerificationAgeDays(info);
+
+        if (info.confidence !== 'official') {
+            return {
+                label: '공식 검증 필요',
+                color: DESIGN_COLORS.tertiary
+            };
+        }
+
+        if (info.deadlineState === 'passed' || info.isStale || (ageDays !== null && ageDays >= 180)) {
+            return {
+                label: '재검증 필요',
+                color: DESIGN_COLORS.primary
+            };
+        }
+
+        if (ageDays !== null && ageDays >= 90) {
+            return {
+                label: '곧 재검토',
+                color: DESIGN_COLORS.tertiary
+            };
+        }
+
+        return {
+            label: '최신',
+            color: DESIGN_COLORS.secondarySoft
+        };
+    }
+
+    function renderAdminCFPHistory() {
+        const historyEl = document.getElementById('admin-cfp-history-list');
+        if (!historyEl) return;
+
+        if (cfpHistoryCache.length === 0) {
+            historyEl.innerHTML = '<div style="color: var(--text-muted); font-size: 0.78rem;">아직 저장된 검증 이력이 없습니다.</div>';
+            return;
+        }
+
+        historyEl.innerHTML = cfpHistoryCache.slice(0, 12).map(entry => `
+            <div style="padding: 10px 0; border-bottom: 1px solid rgba(64, 72, 93, 0.22);">
+                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 4px;">
+                    <span style="font-size: 0.8rem; color: var(--text-primary); font-weight: 600;">${escapeHtml(entry.venueName)}</span>
+                    <span style="font-size: 0.68rem; color: ${entry.storageMode === 'cloud' ? 'var(--secondary-soft)' : 'var(--tertiary)'};">
+                        ${entry.action === 'upsert' ? '저장' : '삭제'} · ${entry.storageMode === 'cloud' ? '공용' : '로컬'}
+                    </span>
+                </div>
+                <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.5;">
+                    ${new Date(entry.changedAt).toLocaleString('ko-KR')}
+                    ${entry.snapshot?.sourceLabel ? ` · ${escapeHtml(entry.snapshot.sourceLabel)}` : ''}
+                    ${entry.snapshot?.verifiedAt ? ` · 검증일 ${escapeHtml(entry.snapshot.verifiedAt)}` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderAdminCFPPreview(venueName: string) {
+        const preview = document.getElementById('admin-cfp-preview');
+        if (!preview) return;
+
+        const venue = venueData.find(item => item.name === venueName);
+        const info = venue ? getResolvedCFPInfo(venue.name, venue.cfpDeadline) : null;
+
+        if (!venue || !info) {
+            preview.innerHTML = '<span style="color: var(--text-muted);">선택한 학회의 CFP 미리보기를 불러올 수 없습니다.</span>';
+            return;
+        }
+
+        const statusColor = info.confidence === 'official'
+            ? DESIGN_COLORS.secondarySoft
+            : info.confidence === 'estimated'
+                ? DESIGN_COLORS.tertiary
+                : DESIGN_COLORS.outline;
+
+        preview.innerHTML = `
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+                <span style="padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: ${statusColor}; font-size: 0.72rem; font-weight: 700;">
+                    ${info.confidence === 'official' ? '공식 확인' : info.confidence === 'estimated' ? '추정치' : '정보 없음'}
+                </span>
+                <span style="padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: var(--text-primary); font-size: 0.72rem; font-weight: 700;">
+                    ${info.daysUntil === null ? '계산 불가' : info.daysUntil >= 0 ? `D-${info.daysUntil}` : `${Math.abs(info.daysUntil)}일 지남`}
+                </span>
+            </div>
+            <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7;">
+                <div><strong>${info.primaryDeadlineLabel}:</strong> ${info.primaryDeadlineDisplay}</div>
+                ${info.secondaryDeadlineDisplay && info.secondaryDeadlineLabel ? `<div><strong>${info.secondaryDeadlineLabel}:</strong> ${info.secondaryDeadlineDisplay}</div>` : ''}
+                ${info.verifiedAt ? `<div><strong>마지막 검증:</strong> ${info.verifiedAt}</div>` : ''}
+                ${info.sourceUrl ? `<div><strong>출처:</strong> <a href="${info.sourceUrl}" target="_blank" rel="noopener">${info.sourceLabel || '공식 링크'}</a></div>` : ''}
+                <div style="margin-top: 8px;">${info.note}</div>
+            </div>
+        `;
+    }
+
+    function renderCFPPersistenceStatus() {
+        const statusEl = document.getElementById('admin-cfp-storage-status');
+        if (!statusEl) return;
+
+        const color = cfpPersistenceMode === 'cloud'
+            ? DESIGN_COLORS.secondarySoft
+            : cfpPersistenceMode === 'local'
+                ? DESIGN_COLORS.tertiary
+                : DESIGN_COLORS.outline;
+
+        statusEl.innerHTML = `<span style="color: ${color}; font-weight: 600;">${cfpPersistenceMode === 'cloud' ? '공용 저장' : '로컬 저장'}</span> · ${cfpPersistenceDetail}`;
+    }
+
+    function fillAdminCFPForm(venueName: string) {
+        const venue = venueData.find(item => item.name === venueName);
+        const overrides = getCFPOverrides();
+        const record = overrides[venueName] || getBuiltInOfficialCFPRecord(venueName);
+
+        (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)!.value = venueName;
+        (document.getElementById('admin-cfp-source-url') as HTMLInputElement | null)!.value = record?.sourceUrl || '';
+        (document.getElementById('admin-cfp-source-label') as HTMLInputElement | null)!.value = record?.sourceLabel || '';
+        (document.getElementById('admin-cfp-verified-at') as HTMLInputElement | null)!.value = record?.verifiedAt || new Date().toISOString().slice(0, 10);
+        (document.getElementById('admin-cfp-submission-deadline') as HTMLInputElement | null)!.value = record?.submissionDeadline || '';
+        (document.getElementById('admin-cfp-submission-label') as HTMLInputElement | null)!.value = record?.submissionLabel || 'Paper submission deadline';
+        (document.getElementById('admin-cfp-abstract-deadline') as HTMLInputElement | null)!.value = record?.abstractDeadline || '';
+        (document.getElementById('admin-cfp-abstract-label') as HTMLInputElement | null)!.value = record?.abstractLabel || '';
+        (document.getElementById('admin-cfp-timezone') as HTMLSelectElement | null)!.value = record?.timezone || 'AoE';
+        (document.getElementById('admin-cfp-notes') as HTMLTextAreaElement | null)!.value = record?.notes || (venue?.cfpDeadline ? `Legacy month pattern: ${venue.cfpDeadline}` : '');
+
+        renderAdminCFPPreview(venueName);
+    }
+
+    function getAdminCFPFormRecord(): OfficialCFPRecord | null {
+        const venueName = (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)?.value;
+        const sourceUrl = (document.getElementById('admin-cfp-source-url') as HTMLInputElement | null)?.value.trim() || '';
+        const sourceLabel = (document.getElementById('admin-cfp-source-label') as HTMLInputElement | null)?.value.trim() || '';
+        const verifiedAt = (document.getElementById('admin-cfp-verified-at') as HTMLInputElement | null)?.value || '';
+        const submissionDeadline = (document.getElementById('admin-cfp-submission-deadline') as HTMLInputElement | null)?.value || '';
+        const submissionLabel = (document.getElementById('admin-cfp-submission-label') as HTMLInputElement | null)?.value.trim() || '';
+        const abstractDeadline = (document.getElementById('admin-cfp-abstract-deadline') as HTMLInputElement | null)?.value || '';
+        const abstractLabel = (document.getElementById('admin-cfp-abstract-label') as HTMLInputElement | null)?.value.trim() || '';
+        const timezone = (document.getElementById('admin-cfp-timezone') as HTMLSelectElement | null)?.value as OfficialCFPRecord['timezone'];
+        const notes = (document.getElementById('admin-cfp-notes') as HTMLTextAreaElement | null)?.value.trim() || '';
+
+        if (!venueName || !sourceUrl || !sourceLabel || !verifiedAt || !submissionDeadline || !submissionLabel) {
+            return null;
+        }
+
+        return {
+            venueName,
+            sourceUrl,
+            sourceLabel,
+            verifiedAt,
+            submissionDeadline,
+            submissionLabel,
+            abstractDeadline: abstractDeadline || undefined,
+            abstractLabel: abstractDeadline ? (abstractLabel || 'Abstract deadline') : undefined,
+            timezone: timezone || 'AoE',
+            notes: notes || undefined
+        };
+    }
+
+    function bindAdminCFPEvents() {
+        const venueSelect = document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null;
+        const reviewButtons = document.querySelectorAll('.admin-cfp-review-item');
+
+        venueSelect?.addEventListener('change', () => {
+            if (venueSelect.value) {
+                fillAdminCFPForm(venueSelect.value);
+            }
+        });
+
+        reviewButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const venueName = button.getAttribute('data-venue');
+                if (venueName) {
+                    fillAdminCFPForm(venueName);
+                }
+            });
+        });
+
+        document.getElementById('admin-cfp-save')?.addEventListener('click', async () => {
+            const record = getAdminCFPFormRecord();
+            const result = document.getElementById('admin-cfp-result');
+            if (!record) {
+                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">필수 항목을 모두 입력하세요.</span>`;
+                return;
+            }
+
+            const saveResult = await saveCFPRecord(record);
+            renderAdminCFPPreview(record.venueName);
+            renderCFPPersistenceStatus();
+            renderAdminCFPHistory();
+            applyCFPFilter(true);
+
+            if (currentNodeId === record.venueName) {
+                void handleNodeClick(record.venueName);
+            }
+
+            if (result) {
+                result.innerHTML = `<span style="color: ${saveResult.mode === 'cloud' ? DESIGN_COLORS.secondarySoft : DESIGN_COLORS.tertiary};">✅ ${saveResult.message}</span>`;
+            }
+        });
+
+        document.getElementById('admin-cfp-clear')?.addEventListener('click', async () => {
+            const venueName = (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)?.value;
+            const result = document.getElementById('admin-cfp-result');
+            if (!venueName) return;
+
+            const clearResult = await clearCFPRecordOverride(venueName);
+            fillAdminCFPForm(venueName);
+            renderCFPPersistenceStatus();
+            renderAdminCFPHistory();
+            applyCFPFilter(true);
+
+            if (currentNodeId === venueName) {
+                void handleNodeClick(venueName);
+            }
+
+            if (result) result.innerHTML = `<span style="color: ${clearResult.mode === 'cloud' ? DESIGN_COLORS.primary : DESIGN_COLORS.tertiary};">↺ ${clearResult.message}</span>`;
+        });
+
+        document.getElementById('admin-cfp-export')?.addEventListener('click', async () => {
+            const overrides = cfpOverrideCache;
+            const result = document.getElementById('admin-cfp-result');
+            try {
+                await navigator.clipboard.writeText(JSON.stringify(overrides, null, 2));
+                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.secondarySoft};">📋 현재 CFP override JSON을 클립보드에 복사했습니다.</span>`;
+            } catch {
+                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">클립보드 복사에 실패했습니다.</span>`;
+            }
+        });
+
+        renderCFPPersistenceStatus();
+        renderAdminCFPHistory();
+    }
+
     async function openAdminPopup() {
         if (!supabase) return;
 
@@ -2998,6 +3732,18 @@ function main() {
 
         const userCount = usersRes.count || 0;
         const threadCount = threadsRes.count || 0;
+        const cfpRows = getCFPReviewRows();
+        const officialCFPCount = cfpRows.filter(row => row.info.confidence === 'official').length;
+        const estimatedCFPCount = cfpRows.filter(row => row.info.confidence === 'estimated').length;
+        const recheckCFPCount = cfpRows.filter(row => row.info.confidence !== 'official' || row.info.deadlineState === 'passed').length;
+        const staleCFPCount = cfpRows.filter(row => {
+            const age = getCFPVerificationAgeDays(row.info);
+            return row.info.confidence === 'official' && (row.info.isStale || row.info.deadlineState === 'passed' || (age !== null && age >= 180));
+        }).length;
+        const agingCFPCount = cfpRows.filter(row => {
+            const age = getCFPVerificationAgeDays(row.info);
+            return row.info.confidence === 'official' && age !== null && age >= 90 && age < 180 && row.info.deadlineState !== 'passed';
+        }).length;
 
         // Get recent users
         const { data: users } = await supabase
@@ -3026,6 +3772,95 @@ function main() {
                             <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; text-align: center;">
                                 <div style="font-size: 1.8rem; font-weight: 700; color: var(--klse-yellow);">${threadCount}</div>
                                 <div style="font-size: 0.75rem; color: var(--text-muted);">협업 쓰레드</div>
+                            </div>
+                        </div>
+
+                        <!-- CFP Verification -->
+                        <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
+                            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
+                                <div>
+                                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">📅 CFP 팩트체크 워크플로</h3>
+                                    <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">공식 링크, 마감일, 검증일을 저장하면 이 로컬 브라우저에서 즉시 반영됩니다.</p>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); color: var(--secondary-soft);">공식 ${officialCFPCount}</span>
+                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(245, 166, 35, 0.12); color: var(--tertiary);">추정 ${estimatedCFPCount}</span>
+                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(59, 191, 250, 0.12); color: var(--primary);">재검토 ${recheckCFPCount}</span>
+                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(59, 191, 250, 0.18); color: var(--primary-soft);">stale ${staleCFPCount}</span>
+                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(245, 166, 35, 0.16); color: var(--tertiarySoft);">90일+ ${agingCFPCount}</span>
+                                </div>
+                            </div>
+                            <div id="admin-cfp-storage-status" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;"></div>
+
+                            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr); gap: 16px;">
+                                <div style="background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
+                                    <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 10px;">검토 우선 목록</div>
+                                    <div style="display: grid; gap: 8px; max-height: 320px; overflow-y: auto;">
+                                        ${cfpRows.slice(0, 16).map(row => {
+                                            const badge = getCFPReviewBadge(row.info);
+                                            return `
+                                            <button class="admin-cfp-review-item" data-venue="${row.venueName}" style="text-align: left; background: rgba(25, 37, 64, 0.95); border: 1px solid rgba(64, 72, 93, 0.35); border-radius: 10px; padding: 10px; color: var(--text-primary); cursor: pointer;">
+                                                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 4px;">
+                                                    <span style="font-size: 0.8rem; font-weight: 600;">${row.venueName}</span>
+                                                    <span style="font-size: 0.65rem; color: ${row.info.confidence === 'official' ? 'var(--secondary-soft)' : 'var(--tertiary)'};">
+                                                        ${row.info.confidence === 'official' ? '공식' : row.info.confidence === 'estimated' ? '추정' : '없음'}
+                                                    </span>
+                                                </div>
+                                                <div style="font-size: 0.72rem; color: var(--text-muted);">${row.info.primaryDeadlineDisplay}</div>
+                                                <div style="font-size: 0.7rem; color: ${badge.color}; margin-top: 4px;">
+                                                    ${badge.label}
+                                                </div>
+                                                <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 4px;">
+                                                    ${row.info.deadlineState === 'passed' ? '다음 cycle 재검증 필요' : row.hasOverride ? 'override 적용 중' : `기존 패턴: ${row.legacyPattern}`}
+                                                </div>
+                                            </button>
+                                        `;
+                                        }).join('')}
+                                    </div>
+                                </div>
+
+                                <div style="background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
+                                    <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 10px;">검증 레코드 편집</div>
+                                    <select id="admin-cfp-venue-select" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 10px;">
+                                        <option value="">학회 선택...</option>
+                                        ${venueData.filter(venue => Boolean(venue.cfpDeadline)).map(venue => `<option value="${venue.name}">${venue.name}</option>`).join('')}
+                                    </select>
+                                    <input id="admin-cfp-source-url" type="url" placeholder="공식 CFP URL" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 8px;">
+                                    <input id="admin-cfp-source-label" type="text" placeholder="출처 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 8px;">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                        <input id="admin-cfp-verified-at" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                        <select id="admin-cfp-timezone" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                            <option value="AoE">AoE</option>
+                                            <option value="PT">PT</option>
+                                            <option value="Local">Local</option>
+                                        </select>
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                        <input id="admin-cfp-submission-deadline" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                        <input id="admin-cfp-submission-label" type="text" placeholder="주 마감 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                    </div>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+                                        <input id="admin-cfp-abstract-deadline" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                        <input id="admin-cfp-abstract-label" type="text" placeholder="보조 마감 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                    </div>
+                                    <textarea id="admin-cfp-notes" placeholder="검증 메모" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; min-height: 70px; resize: vertical; margin-bottom: 10px;"></textarea>
+                                    <div id="admin-cfp-preview" style="background: rgba(25, 37, 64, 0.95); border-radius: 10px; padding: 12px; margin-bottom: 10px; min-height: 100px; color: var(--text-secondary); font-size: 0.8rem;">
+                                        검증 레코드를 선택하면 현재 적용 상태가 여기에 표시됩니다.
+                                    </div>
+                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                        <button id="admin-cfp-save" class="btn" style="padding: 10px 14px;">저장</button>
+                                        <button id="admin-cfp-clear" class="btn" style="padding: 10px 14px; background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);">override 제거</button>
+                                        <button id="admin-cfp-export" class="btn" style="padding: 10px 14px; background: transparent; border: 1px solid var(--border-color); color: var(--primary);">JSON 복사</button>
+                                    </div>
+                                    <div id="admin-cfp-result" style="font-size: 0.78rem; margin-top: 10px;"></div>
+                                </div>
+                            </div>
+                            <div style="margin-top: 16px; background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
+                                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 10px;">
+                                    <div style="font-size: 0.8rem; font-weight: 600;">최근 검증 이력</div>
+                                    <div style="font-size: 0.72rem; color: var(--text-muted);">최대 12건</div>
+                                </div>
+                                <div id="admin-cfp-history-list"></div>
                             </div>
                         </div>
 
@@ -3058,7 +3893,7 @@ function main() {
                                 <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
                                     <span style="font-size: 0.8rem; font-family: monospace;">${u.user_id.substring(0, 12)}...</span>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: ${u.role === 'admin' ? 'rgba(245, 166, 35, 0.2)' : 'rgba(123, 160, 204, 0.2)'}; color: ${u.role === 'admin' ? 'var(--klse-yellow)' : '#7ba0cc'};">${u.role}</span>
+                                        <span style="font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: ${u.role === 'admin' ? 'rgba(245, 166, 35, 0.18)' : 'rgba(59, 191, 250, 0.14)'}; color: ${u.role === 'admin' ? 'var(--klse-yellow)' : '#3bbffa'};">${u.role}</span>
                                         <button class="admin-toggle-role" data-userid="${u.user_id}" data-role="${u.role}" 
                                             style="font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer;">
                                             ${u.role === 'admin' ? '→user' : '→admin'}
@@ -3075,6 +3910,10 @@ function main() {
 
         document.getElementById('admin-overlay')?.addEventListener('click', closeAdminPopup);
         document.getElementById('admin-close')?.addEventListener('click', closeAdminPopup);
+        bindAdminCFPEvents();
+        if (cfpRows[0]) {
+            fillAdminCFPForm(cfpRows[0].venueName);
+        }
 
         // Search user
         document.getElementById('admin-search-btn')?.addEventListener('click', async () => {
@@ -3152,7 +3991,7 @@ function main() {
             const resultDiv = document.getElementById('admin-announce-result');
 
             if (!subject.trim() || !body.trim()) {
-                if (resultDiv) resultDiv.innerHTML = '<span style="color: #ef4444;">제목과 내용을 입력하세요</span>';
+                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">제목과 내용을 입력하세요</span>`;
                 return;
             }
 
@@ -3164,9 +4003,9 @@ function main() {
             });
 
             if (error) {
-                if (resultDiv) resultDiv.innerHTML = `<span style="color: #ef4444;">❌ ${error.message}</span>`;
+                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">❌ ${error.message}</span>`;
             } else {
-                if (resultDiv) resultDiv.innerHTML = '<span style="color: #22c55e;">✅ 공지 저장됨 (이메일은 Edge Function 연동 필요)</span>';
+                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.secondarySoft};">✅ 공지 저장됨 (이메일은 Edge Function 연동 필요)</span>`;
                 (document.getElementById('admin-announce-subject') as HTMLInputElement).value = '';
                 (document.getElementById('admin-announce-body') as HTMLTextAreaElement).value = '';
             }
@@ -3213,6 +4052,8 @@ function main() {
     }
 
     async function openCollabPopup() {
+        if (!requireMemberAccess('협업 요청')) return;
+
         // Remove existing popup first
         closeCollabPopup();
 
@@ -4084,12 +4925,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     ];
 
     const TOPIC_CATEGORY_COLORS: Record<string, string> = {
-        'CSCL': '#10b981',
-        'Learning Sciences': '#7ba0cc',
-        'Methodologies': '#f59e0b',
-        'Technology': '#8b5cf6',
-        'Practice': '#ef4444',
-        'Science of Learning': '#ec4899'
+        'CSCL': DESIGN_COLORS.secondary,
+        'Learning Sciences': DESIGN_COLORS.primary,
+        'Methodologies': DESIGN_COLORS.tertiary,
+        'Technology': DESIGN_COLORS.primaryContainer,
+        'Practice': DESIGN_COLORS.secondarySoft,
+        'Science of Learning': DESIGN_COLORS.primarySoft
     };
 
     const TOPIC_CATEGORY_ICONS: Record<string, string> = {
@@ -4121,7 +4962,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 
     function renderTopicCard(topic: ResearchTopic): string {
-        const color = TOPIC_CATEGORY_COLORS[topic.category] || '#64748b';
+        const color = TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant;
         const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
         return `
             <div class="topic-card" data-topic-id="${topic.id}">
@@ -4186,7 +5027,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 
     function renderTopicDetail(topic: ResearchTopic): string {
-        const color = TOPIC_CATEGORY_COLORS[topic.category] || '#64748b';
+        const color = TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant;
         const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
         const details = topic.details || topic.description;
         const formattedDetails = formatTopicDetails(details);
@@ -4215,6 +5056,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 <div class="topic-detail-content">
                     <h4>📖 상세 설명</h4>
                     <div class="detail-formatted">${formattedDetails}</div>
+                    <p style="font-size:0.72rem;color:var(--text-muted);line-height:1.6;margin-top:10px;">주제 설명과 연구자 표기는 학습용 편집 요약이며, 공식 taxonomy 전체를 그대로 복제한 것은 아닙니다.</p>
                 </div>
                 <div class="topic-detail-researchers">
                     <h4>👤 주요 연구자</h4>
@@ -4277,6 +5119,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     <div class="modal-title">
                         <h2>🔬 Research Topics</h2>
                         <p class="modal-subtitle">연구 주제 탐색 (${ISLS_TOPICS.length}개)</p>
+                        <p class="modal-subtitle" style="margin-top:6px;color:var(--text-muted);font-size:0.75rem;">주제 설명은 학습용 요약이며, 세부 정의는 각 공식 학회 자료와 함께 보는 것을 권장합니다.</p>
                     </div>
                     <button class="sidebar-close" id="close-research-topics">✕</button>
                 </div>
@@ -4392,13 +5235,158 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }
     });
 
+    function delay(ms: number) {
+        return new Promise(resolve => window.setTimeout(resolve, ms));
+    }
+
+    async function waitForNodeAvailability(nodeId: string, maxAttempts = 30, delayMs = 150) {
+        for (let attempt = 0; attempt < maxAttempts; attempt += 1) {
+            if (nodesDataset.get(nodeId)) return true;
+            await delay(delayMs);
+        }
+        return false;
+    }
+
+    async function ensureNodeAvailable(nodeId: string) {
+        if (nodesDataset.get(nodeId)) return true;
+
+        if (isKoreanNetworkActive && nodes.some(node => node.id === nodeId)) {
+            (document.getElementById('korean-network-btn') as HTMLButtonElement | null)?.click();
+            return waitForNodeAvailability(nodeId);
+        }
+
+        return false;
+    }
+
+    async function focusNodeById(nodeId: string, options?: { scale?: number; toast?: string }) {
+        const targetNodeAvailable = await ensureNodeAvailable(nodeId);
+        if (!targetNodeAvailable) {
+            showToast('학습 경로에서 찾을 수 없는 노드입니다.');
+            return;
+        }
+
+        nodesDataset.update(nodes.map(n => ({ id: n.id, opacity: 1 })));
+        network.selectNodes([nodeId]);
+        network.focus(nodeId, { scale: options?.scale ?? 1.45, animation: { duration: 320 } });
+        await handleNodeClick(nodeId);
+
+        if (options?.toast) {
+            showToast(options.toast);
+        }
+    }
+
+    function syncFilterControls() {
+        document.getElementById('filter-journal')?.classList.toggle('active', filterJournal);
+        document.getElementById('filter-conf')?.classList.toggle('active', filterConference);
+
+        const impactFilterEl = document.getElementById('impact-filter') as HTMLSelectElement | null;
+        if (impactFilterEl) {
+            impactFilterEl.value = impactFilter;
+        }
+
+        updateCFPFilterButton();
+        compareBtn?.classList.toggle('active', comparisonState.isActive);
+    }
+
+    async function restoreExplorerStateFromUrl(state: ExplorerShareState) {
+        if (state.query) {
+            searchInput.value = state.query;
+        }
+
+        filterJournal = state.journalsEnabled;
+        filterConference = state.conferencesEnabled;
+        impactFilter = state.impact;
+        cfpFilterDays = state.cfpDays;
+
+        syncFilterControls();
+        applyFilters();
+        applyCFPFilter(true);
+
+        if (state.koreanNetwork && !isKoreanNetworkActive) {
+            (document.getElementById('korean-network-btn') as HTMLButtonElement | null)?.click();
+            if (state.nodeId) {
+                await waitForNodeAvailability(state.nodeId, 40, 150);
+            } else {
+                await delay(700);
+            }
+        }
+
+        if (!state.koreanNetwork && state.compareNodes.length > 0) {
+            comparisonState.isActive = true;
+            comparisonState.startTime = Date.now();
+            comparisonState.nodes = state.compareNodes.filter(id => nodes.some(node => node.id === id));
+            syncFilterControls();
+            renderComparisonPanel();
+        }
+
+        if (state.topicsOpen) {
+            openResearchTopicsPopup();
+        }
+
+        if (state.nodeId) {
+            await focusNodeById(state.nodeId, { scale: state.scale ?? 1.5 });
+            return;
+        }
+
+        if (state.scale !== null || state.x !== null || state.y !== null) {
+            network.moveTo({
+                position: { x: state.x ?? 0, y: state.y ?? 0 },
+                scale: state.scale ?? network.getScale(),
+                animation: false
+            });
+        }
+    }
+
+    function openLearningModal() {
+        showModal('learning-modal');
+    }
+
+    function hideLearningModal() {
+        hideModal('learning-modal');
+    }
+
+    function runLearningAction(action: string, target?: string) {
+        hideLearningModal();
+
+        if (action === 'focus' && target) {
+            void focusNodeById(target, { toast: `학습 경로 시작: ${target}` });
+            return;
+        }
+
+        if (action === 'topics') {
+            openResearchTopicsPopup();
+            showToast('연구 주제 탐색을 열었습니다.');
+            return;
+        }
+
+        if (action === 'korean-network') {
+            const koreanBtn = document.getElementById('korean-network-btn') as HTMLButtonElement | null;
+            if (!isKoreanNetworkActive) {
+                koreanBtn?.click();
+            } else {
+                showToast('이미 한국 네트워크가 열려 있습니다.');
+            }
+        }
+    }
+
+    document.getElementById('learning-mode-btn')?.addEventListener('click', openLearningModal);
+    document.getElementById('learning-modal-close')?.addEventListener('click', hideLearningModal);
+    document.getElementById('learning-modal')?.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).classList.contains('modal-overlay')) hideLearningModal();
+    });
+    document.querySelectorAll('[data-learning-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = (btn as HTMLElement).getAttribute('data-learning-action');
+            const target = (btn as HTMLElement).getAttribute('data-learning-target') || undefined;
+            if (action) runLearningAction(action, target);
+        });
+    });
+
     // Category jump
     categorySelect.addEventListener('change', () => {
         const cat = categorySelect.value;
         if (cat) {
-            network.selectNodes([cat]);
-            network.focus(cat, { scale: 1.5, animation: { duration: 400 } });
-            handleNodeClick(cat);
+            void focusNodeById(cat, { scale: 1.5 });
         }
         categorySelect.value = '';
     });
@@ -4448,10 +5436,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (nodeId) {
             searchInput.value = nodeId;
             autocomplete.classList.remove('visible');
-            nodesDataset.update(nodes.map(n => ({ id: n.id, opacity: 1 })));
-            network.selectNodes([nodeId]);
-            network.focus(nodeId, { scale: 1.5, animation: { duration: 300 } });
-            handleNodeClick(nodeId);
+            focusNodeById(nodeId, { scale: 1.5 });
         }
     }
 
@@ -4553,8 +5538,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                                     label: `${cat.label} \n(${connectedNodes.length})`,
                                     shape: 'hexagon',
                                     size: 24 + Math.min(connectedNodes.length, 10),
-                                    color: { background: '#8b5cf6', border: '#7c3aed' },
-                                    font: { color: '#fff', size: 10, face: 'Inter, sans-serif' },
+                                    color: { background: DESIGN_COLORS.primaryContainer, border: DESIGN_COLORS.primary },
+                                    font: { color: DESIGN_COLORS.onSurface, size: 10, face: 'Inter, sans-serif' },
                                     borderWidth: 2
                                 }
                             });
@@ -4601,14 +5586,16 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     // Favorite
     document.getElementById('favorite-btn')!.addEventListener('click', () => {
         if (!currentNodeId) return;
+        if (!requireMemberAccess('즐겨찾기 저장')) return;
         if (favorites.has(currentNodeId)) {
             favorites.delete(currentNodeId);
             showToast('즐겨찾기에서 제거됨');
+            saveFavorites(favorites, { action: 'remove', nodeId: currentNodeId });
         } else {
             favorites.add(currentNodeId);
             showToast('즐겨찾기에 추가됨');
+            saveFavorites(favorites, { action: 'add', nodeId: currentNodeId });
         }
-        saveFavorites(favorites);
         document.getElementById('favorite-btn')!.textContent = favorites.has(currentNodeId) ? '♥' : '♡';
         document.getElementById('favorite-btn')!.classList.toggle('active', favorites.has(currentNodeId));
     });
@@ -4670,6 +5657,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             clusterBtn.title = isKorean ? '카테고리별 그룹화' : 'Group by Category';
         }
 
+        const learningModeBtn = document.getElementById('learning-mode-btn');
+        if (learningModeBtn) {
+            learningModeBtn.textContent = isKorean ? '🧭 학습' : '🧭 Learn';
+            learningModeBtn.title = isKorean ? '학습 모드' : 'Learning Mode';
+        }
+
         const fullscreenBtn = document.getElementById('fullscreen-btn');
         if (fullscreenBtn) fullscreenBtn.title = isKorean ? '전체화면 (F)' : 'Fullscreen (F)';
 
@@ -4678,6 +5671,9 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         const aboutBtn = document.getElementById('about-btn');
         if (aboutBtn) aboutBtn.title = isKorean ? '사용 안내' : 'Help';
+
+        const profileBtn = document.getElementById('profile-btn');
+        if (profileBtn) profileBtn.title = isKorean ? '내 프로필' : 'Profile';
 
         const refreshBtn = document.getElementById('refresh-btn');
         if (refreshBtn) refreshBtn.title = isKorean ? '새로고침' : 'Refresh';
@@ -4748,11 +5744,37 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }
     });
 
+    function buildShareUrl() {
+        const url = new URL(window.location.pathname, window.location.origin);
+        const viewport = network.getViewPosition();
+        const scale = network.getScale();
+        const topicsPopupOpen = Boolean(document.getElementById('research-topics-popup-container'));
+
+        if (currentNodeId) url.searchParams.set('node', currentNodeId);
+        if (searchInput.value.trim()) url.searchParams.set('q', searchInput.value.trim());
+        if (impactFilter) url.searchParams.set('impact', impactFilter);
+        if (!filterJournal) url.searchParams.set('journals', '0');
+        if (!filterConference) url.searchParams.set('confs', '0');
+        if (cfpFilterDays > 0) url.searchParams.set('cfp', String(cfpFilterDays));
+        if (isKoreanNetworkActive) url.searchParams.set('korean', '1');
+        if (topicsPopupOpen) url.searchParams.set('topics', '1');
+
+        if (comparisonState.isActive) {
+            comparisonState.nodes.forEach(nodeId => {
+                url.searchParams.append('compare', nodeId);
+            });
+        }
+
+        url.searchParams.set('scale', scale.toFixed(2));
+        url.searchParams.set('x', viewport.x.toFixed(1));
+        url.searchParams.set('y', viewport.y.toFixed(1));
+
+        return url;
+    }
+
     // Share URL
     document.getElementById('share-btn')!.addEventListener('click', () => {
-        const url = new URL(window.location.href);
-        if (currentNodeId) url.searchParams.set('node', currentNodeId);
-        if (searchInput.value) url.searchParams.set('q', searchInput.value);
+        const url = buildShareUrl();
 
         navigator.clipboard.writeText(url.toString()).then(() => {
             showToast('링크가 클립보드에 복사됨!');
@@ -4802,7 +5824,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     // Profile modal
     async function fetchMyAnnotations(email: string) {
-        if (!supabase) return [];
+        if (!supabase || !email || email === 'guest' || isGuestUser()) return [];
         const { data, error } = await supabase
             .from('annotations')
             .select('*')
@@ -4811,28 +5833,43 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return error ? [] : (data as Annotation[]);
     }
 
+    function closeProfileDialog() {
+        hideModal('profile-dialog');
+    }
+
     async function openProfileDialog() {
-        const dialog = document.getElementById('profile-dialog')!;
-        const user = JSON.parse(localStorage.getItem('fieldexplorer_user') || '{}');
+        const dialog = document.getElementById('profile-dialog');
+        if (!dialog) return;
+
+        const user = getStoredUser();
+        const guestMode = isGuestUser();
         const email = user.email || 'guest';
 
-        // Show dialog
-        dialog.style.display = 'flex';
+        showModal('profile-dialog');
 
         // Update profile info
         document.getElementById('profile-email-text')!.textContent = email;
-        document.getElementById('profile-badge-text')!.textContent = user.isGuest ? '게스트' : '회원';
+        document.getElementById('profile-badge-text')!.textContent = guestMode ? '게스트' : '회원';
+
+        const accessNote = document.getElementById('profile-access-note');
+        if (accessNote) {
+            accessNote.textContent = guestMode
+                ? '게스트 모드에서는 즐겨찾기, 의견 작성, 협업 요청이 저장되지 않습니다. 로그인하면 개인 기록과 활동 내역이 이곳에 함께 표시됩니다.'
+                : '저장된 즐겨찾기와 내가 작성한 의견을 한 곳에서 확인할 수 있습니다.';
+        }
 
         // Display favorites
         const favoritesContainer = document.getElementById('my-favorites-list')!;
-        if (favorites.size === 0) {
+        if (guestMode) {
+            favoritesContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6;">게스트 모드에서는 즐겨찾기가 저장되지 않습니다.</p>';
+        } else if (favorites.size === 0) {
             favoritesContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">즐겨찾기가 없습니다.</p>';
         } else {
             favoritesContainer.innerHTML = Array.from(favorites).map(fav => `
-        < div class="favorite-item" data - venue="${fav}" >
-                    <span class="favorite-name">${fav}</span>
-                    <button class="remove-fav" data-id="${fav}">✕</button>
-                </div >
+                <div class="favorite-item" data-venue="${escapeHtml(fav)}">
+                    <span class="favorite-name">${escapeHtml(fav)}</span>
+                    <button class="remove-fav" data-id="${escapeHtml(fav)}">✕</button>
+                </div>
         `).join('');
 
             // Click to focus on node
@@ -4841,10 +5878,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     if (!(e.target as HTMLElement).classList.contains('remove-fav')) {
                         const venue = item.getAttribute('data-venue');
                         if (venue) {
-                            dialog.style.display = 'none';
-                            network.selectNodes([venue]);
-                            network.focus(venue, { scale: 1.5, animation: { duration: 300 } });
-                            handleNodeClick(venue);
+                            closeProfileDialog();
+                            void focusNodeById(venue, { scale: 1.5 });
                         }
                     }
                 });
@@ -4852,12 +5887,13 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
             // Remove from favorites
             favoritesContainer.querySelectorAll('.remove-fav').forEach(btn => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', (event) => {
+                    event.stopPropagation();
                     const id = btn.getAttribute('data-id');
                     if (id) {
                         favorites.delete(id);
-                        saveFavorites(favorites);
-                        openProfileDialog(); // Refresh
+                        saveFavorites(favorites, { action: 'remove', nodeId: id });
+                        void openProfileDialog();
                         showToast('즐겨찾기에서 제거됨');
                     }
                 });
@@ -4868,20 +5904,22 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const myAnnotations = await fetchMyAnnotations(email);
         const container = document.getElementById('my-annotations-list')!;
 
-        if (myAnnotations.length === 0) {
+        if (guestMode) {
+            container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6;">게스트 모드에서는 의견 작성과 활동 기록이 저장되지 않습니다.</p>';
+        } else if (myAnnotations.length === 0) {
             container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">작성한 의견이 없습니다.</p>';
         } else {
             container.innerHTML = myAnnotations.map(a => `
-        < div class="my-annotation-item" data - id="${a.id}" >
-                    <div class="my-annotation-venue">${a.venue_name}</div>
-                    <div class="my-annotation-comment">${a.comment}</div>
+                <div class="my-annotation-item" data-id="${a.id}">
+                    <div class="my-annotation-venue">${escapeHtml(a.venue_name)}</div>
+                    <div class="my-annotation-comment">${escapeHtml(a.comment)}</div>
                     <div class="my-annotation-meta">
                         <span style="color: var(--color-accent); font-size: 0.7rem;">${'★'.repeat(a.rating)}${'☆'.repeat(5 - a.rating)}</span>
                         <div class="my-annotation-actions">
                             <button class="delete" data-id="${a.id}">삭제</button>
                         </div>
                     </div>
-                </div >
+                </div>
         `).join('');
 
             // Delete handlers
@@ -4891,7 +5929,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     if (confirm('정말 삭제하시겠습니까?')) {
                         if (supabase) {
                             await supabase.from('annotations').delete().eq('id', id);
-                            openProfileDialog(); // Refresh
+                            void openProfileDialog();
                             showToast('삭제되었습니다');
                         }
                     }
@@ -4899,6 +5937,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             });
         }
     }
+
+    document.getElementById('profile-btn')?.addEventListener('click', () => {
+        void openProfileDialog();
+    });
+    document.getElementById('profile-close')?.addEventListener('click', closeProfileDialog);
+    document.getElementById('profile-dialog')?.addEventListener('click', (e) => {
+        if ((e.target as HTMLElement).classList.contains('modal-overlay')) closeProfileDialog();
+    });
 
     // Refresh
     document.getElementById('refresh-btn')!.addEventListener('click', () => location.reload());
@@ -4989,6 +6035,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (e.key === 'Escape') {
             hideSidebar();
             hideModal('about-modal');
+            hideModal('profile-dialog');
+            hideModal('learning-modal');
             searchInput.blur();
             currentNodeId = null;
         }
@@ -4996,6 +6044,11 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         // Fullscreen toggle
         if ((e.key === 'f' || e.key === 'F') && document.activeElement !== searchInput) {
             toggleFullscreen();
+        }
+
+        if ((e.key === 'l' || e.key === 'L') && document.activeElement !== searchInput) {
+            e.preventDefault();
+            openLearningModal();
         }
 
         // Arrow key navigation (NEW for V2.0)
@@ -5111,10 +6164,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     size: node.size,
                     color: {
                         background: node.color,
-                        border: node.fixed ? '#f5a623' : node.color,
-                        highlight: { background: node.color, border: '#ffffff' }
+                        border: node.fixed ? DESIGN_COLORS.tertiary : node.color,
+                        highlight: { background: node.color, border: DESIGN_COLORS.onSurface }
                     },
-                    font: { color: '#ffffff', size: 12 },
+                    font: { color: DESIGN_COLORS.onSurface, size: 12 },
                     borderWidth: node.borderWidth,
                     title: node.fixed
                         ? '교육공학연구 (중심 노드)'
@@ -5199,59 +6252,59 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 const legend = document.createElement('div');
                 legend.id = 'korean-legend';
                 legend.innerHTML = `
-                    <div style="position: fixed; bottom: 20px; left: 20px; background: rgba(30, 41, 59, 0.95); 
-                                border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; padding: 16px 20px;
-                                font-size: 13px; color: #e2e8f0; z-index: 1000; backdrop-filter: blur(8px);
-                                box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                    <div style="position: fixed; bottom: 20px; left: 20px; background: rgba(25, 37, 64, 0.92); 
+                                border: 1px solid rgba(64, 72, 93, 0.28); border-radius: 12px; padding: 16px 20px;
+                                font-size: 13px; color: #dee5ff; z-index: 1000; backdrop-filter: blur(8px);
+                                box-shadow: 0 8px 32px rgba(6,14,32,0.3);">
                         <div style="font-weight: 600; margin-bottom: 12px; font-size: 14px;">📊 범례 (Legend)</div>
                         
                         <div style="margin-bottom: 10px;">
-                            <div style="font-weight: 500; margin-bottom: 6px; color: #94a3b8;">노드 색상 (Clusters)</div>
+                            <div style="font-weight: 500; margin-bottom: 6px; color: #9aa8c8;">노드 색상 (Clusters)</div>
                             <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
-                                <span style="width: 12px; height: 12px; background: #2dd4bf; border-radius: 50%;"></span>
+                                <span style="width: 12px; height: 12px; background: #34d3b2; border-radius: 50%;"></span>
                                 <span>핵심 (Core) - Cluster 3</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
-                                <span style="width: 12px; height: 12px; background: #60a5fa; border-radius: 50%;"></span>
+                                <span style="width: 12px; height: 12px; background: #3bbffa; border-radius: 50%;"></span>
                                 <span>중간 (Mid) - Cluster 2</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
-                                <span style="width: 12px; height: 12px; background: #94a3b8; border-radius: 50%;"></span>
+                                <span style="width: 12px; height: 12px; background: #9aa8c8; border-radius: 50%;"></span>
                                 <span>주변 (Peripheral) - Cluster 1</span>
                             </div>
                         </div>
                         
                         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px;">
-                            <div style="font-weight: 500; margin-bottom: 6px; color: #94a3b8;">엣지 유형 (Edges)</div>
+                            <div style="font-weight: 500; margin-bottom: 6px; color: #9aa8c8;">엣지 유형 (Edges)</div>
                             <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
-                                <span style="width: 24px; height: 2px; background: #475569;"></span>
+                                <span style="width: 24px; height: 2px; background: #6d758c;"></span>
                                 <span>실선: 심리적 거리 (M)</span>
                             </div>
                             <div style="display: flex; align-items: center; gap: 8px; margin: 4px 0;">
-                                <span style="width: 24px; height: 2px; background: repeating-linear-gradient(90deg, #60a5fa 0, #60a5fa 4px, transparent 4px, transparent 8px);"></span>
+                                <span style="width: 24px; height: 2px; background: repeating-linear-gradient(90deg, #3bbffa 0, #3bbffa 4px, transparent 4px, transparent 8px);"></span>
                                 <span>점선: k=3 군집 유사성</span>
                             </div>
                         </div>
                         
                         <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; margin-top: 10px;">
-                            <div style="font-weight: 500; margin-bottom: 8px; color: #94a3b8;">🔄 인식 관점 (Perspective)</div>
+                            <div style="font-weight: 500; margin-bottom: 8px; color: #9aa8c8;">🔄 인식 관점 (Perspective)</div>
                             <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                                <button id="perspective-overall" class="perspective-btn active" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: #3b82f6; color: white; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                <button id="perspective-overall" class="perspective-btn active" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(64,72,93,0.32); background: #3bbffa; color: #060e20; cursor: pointer; font-size: 11px; transition: all 0.2s;">
                                     전체
                                 </button>
-                                <button id="perspective-university" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #94a3b8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                <button id="perspective-university" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(64,72,93,0.32); background: transparent; color: #9aa8c8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
                                     🎓 대학
                                 </button>
-                                <button id="perspective-field" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #94a3b8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
+                                <button id="perspective-field" class="perspective-btn" style="padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(64,72,93,0.32); background: transparent; color: #9aa8c8; cursor: pointer; font-size: 11px; transition: all 0.2s;">
                                     💼 현장
                                 </button>
                             </div>
-                            <div id="perspective-info" style="margin-top: 8px; font-size: 10px; color: #64748b;">
+                            <div id="perspective-info" style="margin-top: 8px; font-size: 10px; color: #9aa8c8;">
                                 현재: 전체 응답자 평균
                             </div>
                         </div>
                         
-                        <div style="margin-top: 12px; font-size: 9px; color: #64748b; line-height: 1.5; max-width: 280px;">
+                        <div style="margin-top: 12px; font-size: 9px; color: #9aa8c8; line-height: 1.5; max-width: 280px;">
                             <strong>출처:</strong><br>
                             Jung, J., Lim, K., Han, I., & Lee, E. (2025). Exploring the academic identity of educational technology through perceived proximity among related disciplines and journals (교육공학의 학문적 정체성 탐색: 인접 학문 및 학술지와의 인식적 거리 분석). <em>Journal of Educational Technology (교육공학연구)</em>, 41(3), 1251-1285.
                         </div>
@@ -5269,12 +6322,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     // Update button styles
                     document.querySelectorAll('.perspective-btn').forEach(btn => {
                         (btn as HTMLElement).style.background = 'transparent';
-                        (btn as HTMLElement).style.color = '#94a3b8';
+                        (btn as HTMLElement).style.color = '#9aa8c8';
                     });
                     const activeBtn = document.getElementById(`perspective-${newPerspective}`);
                     if (activeBtn) {
-                        activeBtn.style.background = '#3b82f6';
-                        activeBtn.style.color = 'white';
+                        activeBtn.style.background = '#3bbffa';
+                        activeBtn.style.color = '#060e20';
                     }
 
                     // Update info text
@@ -5334,8 +6387,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                             shape: 'dot',
                             size: (originalNode.size || 20) * 0.6,
                             color: {
-                                background: 'rgba(148, 163, 184, 0.3)',
-                                border: 'rgba(148, 163, 184, 0.5)'
+                                background: 'rgba(109, 117, 140, 0.3)',
+                                border: 'rgba(109, 117, 140, 0.5)'
                             },
                             label: '',
                             font: { size: 0 },
@@ -5347,7 +6400,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                             id: `trail-${nodeId}`,
                             from: `ghost-${nodeId}`,
                             to: nodeId,
-                            color: { color: 'rgba(148, 163, 184, 0.4)', opacity: 0.4 },
+                            color: { color: 'rgba(109, 117, 140, 0.4)', opacity: 0.4 },
                             width: 1,
                             dashes: [4, 4],
                             arrows: { to: { enabled: true, scaleFactor: 0.4, type: 'arrow' } },

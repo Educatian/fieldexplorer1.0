@@ -23,16 +23,16 @@
         }
 
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --border-color: #475569;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --color-accent: #8b5cf6;
-            --color-accent-light: #a78bfa;
-            --color-journal: #3b82f6;
+            --bg-primary: #060e20;
+            --bg-secondary: #091328;
+            --bg-tertiary: #141f38;
+            --border-color: rgba(64, 72, 93, 0.24);
+            --text-primary: #dee5ff;
+            --text-secondary: #c1cde7;
+            --text-muted: #9aa8c8;
+            --color-accent: #3bbffa;
+            --color-accent-light: #22b1ec;
+            --color-journal: #3bbffa;
             --color-conference: #10b981;
         }
 
@@ -58,7 +58,7 @@
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 191, 250, 0.15) 0%, transparent 70%);
             top: -100px;
             right: -100px;
             animation: float 15s ease-in-out infinite;
@@ -69,7 +69,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
             bottom: -100px;
             left: -100px;
             animation: float 20s ease-in-out infinite reverse;
@@ -197,8 +197,8 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(139, 92, 246, 0.15);
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: rgba(59, 191, 250, 0.12);
+            border: 1px solid rgba(64, 72, 93, 0.28);
             border-radius: 50px;
             font-size: 0.8rem;
             color: var(--color-accent-light);
@@ -230,10 +230,10 @@
 
         .btn-primary {
             padding: 14px 32px;
-            background: linear-gradient(135deg, var(--color-accent), #7c3aed);
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
             border: none;
             border-radius: 10px;
-            color: white;
+            color: var(--bg-primary);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -243,7 +243,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(34, 177, 236, 0.28);
         }
 
         .btn-secondary {
@@ -267,7 +267,7 @@
         /* Login card */
         .login-card {
             width: 380px;
-            background: rgba(30, 41, 59, 0.8);
+            background: rgba(20, 31, 56, 0.82);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
             border-radius: 20px;
@@ -312,7 +312,7 @@
 
         .form-group input:focus {
             border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+            box-shadow: 0 0 0 3px rgba(59, 191, 250, 0.18);
         }
 
         .form-group input::placeholder {
@@ -322,10 +322,10 @@
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--color-accent), #7c3aed);
+            background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
             border: none;
             border-radius: 10px;
-            color: white;
+            color: var(--bg-primary);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -335,7 +335,7 @@
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 8px 25px rgba(34, 177, 236, 0.28);
         }
 
         .divider {
@@ -405,7 +405,7 @@
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: rgba(139, 92, 246, 0.15);
+            background: rgba(59, 191, 250, 0.12);
             border-radius: 12px;
             display: flex;
             align-items: center;

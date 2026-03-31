@@ -18,3 +18,14 @@ View your app in AI Studio: https://ai.studio/apps/drive/1QXem__msZw0iPdfMYZEvQ4
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## CFP Ops
+
+CFP verification operations are documented in [CFP-OPERATIONS.md](./CFP-OPERATIONS.md).
+General content fact-check scope is documented in [CONTENT-FACTCHECK.md](./CONTENT-FACTCHECK.md).
+
+Use these files for shared CFP data:
+
+- `supabase-cfp.sql`
+- `supabase-cfp-seed.sql`
+- `cfp-seed.json`

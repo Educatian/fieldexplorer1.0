@@ -37,42 +37,59 @@
     }
 
     :root {
-      /* KELS Brand Colors - matching landing page */
-      --bg-primary: #0d1b3e;
-      --bg-secondary: #0f1f46;
-      /* Slightly lighter for layering */
-      --bg-tertiary: rgba(30, 58, 95, 0.4);
-      --border-color: rgba(42, 74, 122, 0.5);
-      --text-primary: #ffffff;
-      --text-secondary: #cbd5e1;
-      --text-muted: #94a3b8;
+      --surface: #060e20;
+      --surface-container-low: #091328;
+      --surface-container-high: #141f38;
+      --surface-container-highest: #192540;
+      --surface-bright: rgba(25, 37, 64, 0.78);
+      --outline: #6d758c;
+      --outline-variant: #40485d;
+      --outline-ghost: rgba(64, 72, 93, 0.2);
+      --outline-soft: rgba(64, 72, 93, 0.35);
+      --on-surface: #dee5ff;
+      --on-surface-variant: #9aa8c8;
 
-      --color-journal: #7ba0cc;
-      --color-conference: #10b981;
-      --color-category: #f5a623;
-      --color-accent: #f5a623;
-      --color-favorite: #ef4444;
+      --primary: #3bbffa;
+      --primary-container: #22b1ec;
+      --secondary: #10b981;
+      --secondary-soft: #34d3b2;
+      --tertiary: #f5a623;
+      --tertiary-soft: #ffc857;
 
-      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
-      --glass-bg: rgba(13, 27, 62, 0.75);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --bg-primary: var(--surface);
+      --bg-secondary: var(--surface-container-low);
+      --bg-tertiary: var(--surface-container-high);
+      --border-color: var(--outline-ghost);
+      --text-primary: var(--on-surface);
+      --text-secondary: #c1cde7;
+      --text-muted: var(--on-surface-variant);
+
+      --color-journal: var(--primary);
+      --color-conference: var(--secondary);
+      --color-category: var(--tertiary);
+      --color-accent: var(--primary);
+      --color-favorite: var(--primary-container);
+
+      --shadow-lg: 0 8px 32px rgba(6, 14, 32, 0.4);
+      --glass-bg: rgba(25, 37, 64, 0.7);
+      --glass-border: rgba(109, 117, 140, 0.16);
       --glass-blur: blur(16px);
 
-      --stellar-glow: 0 0 15px rgba(245, 166, 35, 0.15);
+      --stellar-glow: 0 0 18px rgba(34, 177, 236, 0.18);
     }
 
     [data-theme="light"] {
-      --bg-primary: #f8fafc;
-      --bg-secondary: #ffffff;
-      --bg-tertiary: #f1f5f9;
-      --border-color: #e2e8f0;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --text-muted: #64748b;
-      --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(0, 0, 0, 0.05);
+      --bg-primary: var(--surface);
+      --bg-secondary: var(--surface-container-low);
+      --bg-tertiary: var(--surface-container-high);
+      --border-color: var(--outline-ghost);
+      --text-primary: var(--on-surface);
+      --text-secondary: #c1cde7;
+      --text-muted: var(--on-surface-variant);
+      --glass-bg: rgba(25, 37, 64, 0.7);
+      --glass-border: rgba(109, 117, 140, 0.16);
       --glass-blur: blur(16px);
-      --stellar-glow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      --stellar-glow: 0 0 18px rgba(34, 177, 236, 0.18);
     }
 
     html,
@@ -150,7 +167,7 @@
       border-radius: 12px;
       font-size: 0.85rem;
       font-weight: 500;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 10px 25px rgba(6, 14, 32, 0.32);
       z-index: 2000;
       opacity: 0;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -277,8 +294,8 @@
     }
 
     .search-box input:focus {
-      border-color: var(--color-accent);
-      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(59, 191, 250, 0.14), 0 0 14px rgba(59, 191, 250, 0.1);
     }
 
     .search-box svg {
@@ -311,7 +328,7 @@
       overflow-y: auto;
       z-index: 1100;
       display: none;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 15px 40px rgba(6, 14, 32, 0.4);
       padding: 6px;
     }
 
@@ -319,7 +336,7 @@
     .search-focus-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0);
+      background: rgba(6, 14, 32, 0);
       backdrop-filter: blur(0px);
       z-index: 1000;
       pointer-events: none;
@@ -327,7 +344,7 @@
     }
 
     body.search-focused .search-focus-overlay {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(6, 14, 32, 0.42);
       backdrop-filter: blur(4px);
       pointer-events: auto;
     }
@@ -537,18 +554,18 @@
     }
 
     .badge-urgent {
-      background: rgba(239, 68, 68, 0.2);
-      color: #ef4444;
+      background: rgba(245, 166, 35, 0.18);
+      color: var(--tertiary-soft);
     }
 
     .badge-soon {
-      background: rgba(245, 158, 11, 0.2);
-      color: #f59e0b;
+      background: rgba(59, 191, 250, 0.18);
+      color: var(--primary);
     }
 
     .badge-upcoming {
-      background: rgba(59, 130, 246, 0.2);
-      color: #3b82f6;
+      background: rgba(16, 185, 129, 0.18);
+      color: var(--secondary-soft);
     }
 
     .badge-normal {
@@ -564,8 +581,9 @@
 
     /* CFP Filter Button */
     .filter-btn.cfp.active {
-      background: #f59e0b;
-      border-color: #f59e0b;
+      background: linear-gradient(135deg, var(--tertiary), var(--tertiary-soft));
+      border-color: transparent;
+      color: var(--surface);
     }
 
     /* ===== COMPARISON PANEL ===== */
@@ -630,7 +648,7 @@
     }
 
     .compare-remove:hover {
-      color: #ef4444;
+      color: var(--primary);
     }
 
     .compare-body {
@@ -655,15 +673,15 @@
     }
 
     .compare-value.impact-Q1 {
-      color: #10b981;
+      color: var(--secondary);
     }
 
     .compare-value.impact-Q2 {
-      color: #3b82f6;
+      color: var(--primary);
     }
 
     .compare-value.impact-Q3 {
-      color: #f59e0b;
+      color: var(--tertiary);
     }
 
     .compare-actions {
@@ -692,8 +710,8 @@
     }
 
     .compare-done {
-      background: var(--color-accent);
-      color: #000;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--surface);
       font-weight: 600;
     }
 
@@ -711,15 +729,16 @@
 
     /* Comparison mode toggle button */
     .filter-btn.compare.active {
-      background: #8b5cf6;
-      border-color: #8b5cf6;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      border-color: transparent;
+      color: var(--surface);
     }
 
     /* Korean Network toggle button */
     .filter-btn.korean.active {
-      background: #2dd4bf;
-      border-color: #2dd4bf;
-      color: #0d1b3e;
+      background: rgba(16, 185, 129, 0.18);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: var(--secondary-soft);
     }
 
     /* ===== IF TREND CHART STYLES ===== */
@@ -759,13 +778,13 @@
 
     /* Trend badges */
     .badge-trend-up {
-      background: rgba(16, 185, 129, 0.2);
-      color: #10b981;
+      background: rgba(16, 185, 129, 0.18);
+      color: var(--secondary-soft);
     }
 
     .badge-trend-down {
-      background: rgba(239, 68, 68, 0.2);
-      color: #ef4444;
+      background: rgba(245, 166, 35, 0.18);
+      color: var(--tertiary);
     }
 
     .badge-trend-stable {
@@ -786,7 +805,7 @@
     .feed-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(6, 14, 32, 0.58);
       backdrop-filter: blur(4px);
     }
 
@@ -799,7 +818,7 @@
       max-height: 80vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(6, 14, 32, 0.3);
     }
 
     .feed-popup-header {
@@ -913,7 +932,7 @@
     }
 
     .feed-error {
-      color: #ef4444;
+      color: var(--tertiary);
     }
 
     .feed-load-more {
@@ -934,7 +953,7 @@
     .whatsnew-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(6, 14, 32, 0.68);
       backdrop-filter: blur(4px);
     }
 
@@ -946,7 +965,7 @@
       max-width: 400px;
       padding: 24px;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 60px rgba(6, 14, 32, 0.4);
       animation: popIn 0.3s ease;
     }
 
@@ -1015,8 +1034,8 @@
       padding: 12px;
       font-size: 1rem;
       font-weight: 600;
-      background: var(--color-accent);
-      color: #000;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--surface);
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -1035,7 +1054,7 @@
     .collab-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(6, 14, 32, 0.58);
       backdrop-filter: blur(4px);
     }
 
@@ -1048,7 +1067,7 @@
       max-height: 80vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 60px rgba(6, 14, 32, 0.3);
     }
 
     .collab-header {
@@ -1116,8 +1135,8 @@
       font-size: 0.7rem;
       padding: 3px 8px;
       border-radius: 10px;
-      background: rgba(34, 197, 94, 0.2);
-      color: #22c55e;
+      background: rgba(16, 185, 129, 0.18);
+      color: var(--secondary-soft);
     }
 
     .collab-thread-status.in_progress {
@@ -1201,7 +1220,7 @@
       display: none;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(6, 14, 32, 0.72);
       backdrop-filter: blur(6px);
       opacity: 0;
       transition: opacity 0.3s ease;
@@ -1221,7 +1240,7 @@
       max-height: 85vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 80px rgba(6, 14, 32, 0.4);
       animation: topicsSlideIn 0.3s ease;
     }
 
@@ -1320,7 +1339,7 @@
     .filter-chip.active {
       background: var(--color-accent);
       border-color: var(--color-accent);
-      color: #000;
+      color: var(--surface);
       font-weight: 600;
     }
 
@@ -1347,7 +1366,7 @@
 
     .topic-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 25px rgba(6, 14, 32, 0.18);
       border-color: var(--color-accent);
     }
 
@@ -1491,7 +1510,7 @@
 
     .related-topic-chip:hover {
       background: var(--color-accent);
-      color: #000;
+      color: var(--surface);
     }
 
     .topic-detail-link {
@@ -1502,8 +1521,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--color-accent);
-      color: #000;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--surface);
       padding: 12px 24px;
       border-radius: 10px;
       text-decoration: none;
@@ -1668,7 +1687,7 @@
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border-left: 1px solid var(--glass-border);
-      box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+      box-shadow: -10px 0 30px rgba(6, 14, 32, 0.22);
       transform: translateX(100%);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s;
       overflow-y: auto;
@@ -1764,6 +1783,11 @@
     .favorite-btn.active {
       background: var(--color-favorite);
       color: white;
+    }
+
+    .favorite-btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     .sidebar-content {
@@ -1926,10 +1950,10 @@
     .annotation-tags .tag {
       font-size: 0.6rem;
       padding: 2px 6px;
-      background: rgba(245, 166, 35, 0.2);
-      border: 1px solid rgba(245, 166, 35, 0.4);
+      background: rgba(59, 191, 250, 0.12);
+      border: 1px solid rgba(64, 72, 93, 0.24);
       border-radius: 10px;
-      color: var(--color-accent);
+      color: var(--primary);
     }
 
     .no-annotations {
@@ -2028,10 +2052,10 @@
     .submit-annotation-btn {
       width: 100%;
       padding: 10px;
-      background: linear-gradient(135deg, var(--color-accent), #e5941a);
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
       border: none;
       border-radius: 6px;
-      color: #0d1b3e;
+      color: var(--surface);
       font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
@@ -2040,7 +2064,7 @@
 
     .submit-annotation-btn:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+      box-shadow: 0 4px 12px rgba(34, 177, 236, 0.28);
     }
 
     /* Reply button and nested replies */
@@ -2069,7 +2093,7 @@
     }
 
     .annotation-item.reply {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgba(9, 19, 40, 0.72);
       padding: 8px;
       margin-bottom: 6px;
     }
@@ -2103,7 +2127,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(6, 14, 32, 0.76);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2182,6 +2206,118 @@
       font-family: monospace;
     }
 
+    .learning-hero {
+      margin-bottom: 18px;
+      padding: 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(59, 191, 250, 0.14), rgba(16, 185, 129, 0.1));
+    }
+
+    .learning-hero p {
+      margin-top: 8px;
+    }
+
+    .learning-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 16px;
+    }
+
+    .learning-section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .learning-track-grid,
+    .glossary-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .learning-track-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .track-card,
+    .glossary-card {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .track-card h4,
+    .glossary-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .track-card p,
+    .glossary-card p {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .track-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(59, 191, 250, 0.12);
+      color: var(--primary);
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    .track-steps {
+      margin: 12px 0 14px;
+      padding-left: 18px;
+    }
+
+    .track-steps li {
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      line-height: 1.45;
+    }
+
+    .track-action {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
+      color: var(--surface);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .track-action.secondary {
+      background: rgba(16, 185, 129, 0.16);
+      color: var(--secondary-soft);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+
+    .glossary-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .glossary-card {
+      min-height: 92px;
+    }
+
+    @media (max-width: 840px) {
+      .learning-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* ===== PROFILE MODAL ===== */
     .profile-info {
       display: flex;
@@ -2196,7 +2332,7 @@
     .profile-avatar {
       width: 48px;
       height: 48px;
-      background: linear-gradient(135deg, var(--color-accent), #e5941a);
+      background: linear-gradient(135deg, var(--primary), var(--primary-container));
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -2214,9 +2350,25 @@
     .profile-badge {
       font-size: 0.65rem;
       padding: 2px 8px;
-      background: rgba(245, 166, 35, 0.2);
-      color: var(--color-accent);
+      background: rgba(59, 191, 250, 0.12);
+      color: var(--primary);
       border-radius: 10px;
+    }
+
+    .profile-note {
+      margin: 0 0 18px;
+      padding: 12px 14px;
+      background: rgba(59, 191, 250, 0.1);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 0.8rem;
+      line-height: 1.6;
+    }
+
+    .profile-section-title {
+      margin: 0 0 10px;
+      font-size: 0.85rem;
+      color: var(--text-primary);
     }
 
     .my-annotations {
@@ -2271,8 +2423,8 @@
     }
 
     .my-annotation-actions button.delete:hover {
-      color: #ef4444;
-      border-color: #ef4444;
+      color: var(--tertiary);
+      border-color: rgba(245, 166, 35, 0.35);
     }
 
     /* ===== FAVORITES LIST ===== */
@@ -2314,7 +2466,7 @@
     }
 
     .remove-fav:hover {
-      color: #ef4444;
+      color: var(--primary);
     }
 
     /* ===== LEGEND ===== */
@@ -2405,9 +2557,9 @@
       position: absolute;
       top: 70px;
       left: 16px;
-      background: rgba(139, 92, 246, 0.1);
+      background: rgba(25, 37, 64, 0.82);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(139, 92, 246, 0.3);
+      border: 1px solid rgba(64, 72, 93, 0.28);
       border-radius: 8px;
       padding: 10px 14px;
       z-index: 40;
@@ -2417,8 +2569,8 @@
     }
 
     .metrics-panel:hover {
-      background: rgba(139, 92, 246, 0.2);
-      border-color: rgba(139, 92, 246, 0.5);
+      background: rgba(25, 37, 64, 0.96);
+      border-color: rgba(59, 191, 250, 0.22);
     }
 
     .metric-item {
@@ -2428,7 +2580,7 @@
     .metric-value {
       font-size: 0.95rem;
       font-weight: 700;
-      color: #a78bfa;
+      color: var(--primary);
       font-family: 'JetBrains Mono', monospace;
     }
 
@@ -2448,7 +2600,7 @@
       background-color: var(--bg-secondary) !important;
       border: 1px solid var(--border-color) !important;
       border-radius: 8px !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+      box-shadow: 0 2px 8px rgba(6, 14, 32, 0.22) !important;
       opacity: 0.85;
       transition: all 0.2s ease !important;
     }
@@ -2552,7 +2704,7 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(6, 14, 32, 0.58);
       z-index: 55;
       opacity: 0;
       transition: opacity 0.3s;
@@ -2719,6 +2871,7 @@
         <button class="btn filter-btn" id="feed-btn" title="최신 리뷰 피드">📢</button>
         <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝</button>
         <button class="btn filter-btn" id="research-topics-btn" title="연구 주제 탐색">🔬</button>
+        <button class="btn filter-btn" id="learning-mode-btn" title="학습 모드">🧭 학습</button>
         <button class="btn filter-btn" id="admin-btn" title="관리자" style="display:none;">🔐</button>
       </div>
 
@@ -2727,8 +2880,8 @@
         <option value="">📍 카테고리 이동</option>
       </select>
 
-      <select class="category-select" id="impact-filter" title="영향력 필터">
-        <option value="">⭐ 전체 등급</option>
+      <select class="category-select" id="impact-filter" title="참고 등급 필터">
+        <option value="">⭐ 전체 참고 등급</option>
         <option value="Q1">Q1 (상위)</option>
         <option value="Q2">Q2</option>
         <option value="Q3">Q3</option>
@@ -2747,9 +2900,10 @@
       <button class="btn btn-icon" id="theme-btn" title="다크/라이트 테마">🌗</button>
       <button class="btn btn-icon" id="lang-btn" title="한국어/English">🌐</button>
       <button class="btn btn-icon" id="about-btn" title="사용 안내">ℹ️</button>
+      <button class="btn btn-icon" id="profile-btn" title="내 프로필">👤</button>
       <button class="btn btn-icon" id="tour-btn" title="가이드 시작">🎓</button>
       <button class="btn btn-icon" id="refresh-btn" title="새로고침">🔄</button>
-      <button class="btn" id="logout-btn" title="로그아웃" style="color: #ef4444;">🚪 로그아웃</button>
+      <button class="btn" id="logout-btn" title="로그아웃" style="color: var(--primary);">🚪 로그아웃</button>
     </div>
   </header>
 
@@ -2865,7 +3019,7 @@
       </div>
       <div class="modal-body">
         <div
-          style="background: linear-gradient(135deg, rgba(123, 160, 204, 0.15), rgba(245, 166, 35, 0.15)); padding: 16px; border-radius: 10px; margin-bottom: 16px; text-align: center;">
+          style="background: linear-gradient(135deg, rgba(59, 191, 250, 0.14), rgba(34, 177, 236, 0.12)); padding: 16px; border-radius: 10px; margin-bottom: 16px; text-align: center;">
           <span style="font-size: 2.5rem;">🎓</span>
           <p style="margin-top: 8px; font-size: 0.9rem; color: var(--text-primary);">Educational Technology & Learning
             Sciences 분야의<br><strong>학술 저널과 학회를 네트워크로 탐색</strong>하세요!</p>
@@ -2882,19 +3036,19 @@
         <h3>🎨 노드 색상 안내</h3>
         <div style="display: flex; gap: 16px; flex-wrap: wrap; margin: 10px 0;">
           <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="width: 14px; height: 14px; background: #7ba0cc; border-radius: 50%;"></span>
+            <span style="width: 14px; height: 14px; background: var(--color-journal); border-radius: 50%;"></span>
             <span style="font-size: 0.85rem;">저널 (Journal)</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="width: 14px; height: 14px; background: #10b981; border-radius: 50%;"></span>
+            <span style="width: 14px; height: 14px; background: var(--color-conference); border-radius: 50%;"></span>
             <span style="font-size: 0.85rem;">학회 (Conference)</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="width: 14px; height: 14px; background: #f5a623; border-radius: 4px;"></span>
+            <span style="width: 14px; height: 14px; background: var(--color-category); border-radius: 4px;"></span>
             <span style="font-size: 0.85rem;">카테고리</span>
           </div>
           <div style="display: flex; align-items: center; gap: 6px;">
-            <span style="width: 14px; height: 14px; background: #8b5cf6; border-radius: 4px;"></span>
+            <span style="width: 14px; height: 14px; background: var(--primary-container); border-radius: 4px;"></span>
             <span style="font-size: 0.85rem;">클러스터</span>
           </div>
         </div>
@@ -2902,7 +3056,7 @@
         <h3>🎯 주요 기능</h3>
         <ul>
           <li>🔎 <strong>검색:</strong> 상단 검색창에서 저널/학회 이름으로 검색</li>
-          <li>🏷️ <strong>필터링:</strong> 저널/학회별 또는 영향력 등급(Q1~Q3)별 필터</li>
+          <li>🏷️ <strong>필터링:</strong> 저널/학회별 또는 참고 등급(Q1~Q3)별 필터</li>
           <li>📦 <strong>클러스터:</strong> 카테고리별로 노드 그룹화</li>
           <li>⭐ <strong>즐겨찾기:</strong> 관심 저널을 저장하여 빠르게 접근</li>
           <li>💬 <strong>어노테이션:</strong> 노드에 코멘트와 평점 남기기</li>
@@ -2927,7 +3081,151 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="modal-overlay" id="profile-dialog">
+    <div class="modal" style="max-width: 720px;">
+      <div class="modal-header">
+        <h2>👤 내 프로필</h2>
+        <button class="sidebar-close" id="profile-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="profile-info">
+          <div class="profile-avatar">👤</div>
+          <div>
+            <p class="profile-email" id="profile-email-text">guest</p>
+            <span class="profile-badge" id="profile-badge-text">게스트</span>
+          </div>
+        </div>
+
+        <p class="profile-note" id="profile-access-note">
+          저장 가능한 개인 기능을 여기서 확인할 수 있습니다.
+        </p>
+
+        <section style="margin-bottom: 18px;">
+          <h3 class="profile-section-title">⭐ 즐겨찾기</h3>
+          <div class="my-favorites" id="my-favorites-list"></div>
+        </section>
+
+        <section>
+          <h3 class="profile-section-title">💬 내 의견</h3>
+          <div class="my-annotations" id="my-annotations-list"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="learning-modal">
+      <div class="modal" style="max-width: 980px; width: 94%;">
+        <div class="modal-header">
+          <h2>🧭 학습 모드</h2>
+          <button class="sidebar-close" id="learning-modal-close">✕</button>
+        </div>
+        <div class="modal-body">
+          <div class="learning-hero">
+            <h3 style="margin: 0;">FieldExplorer를 교육용으로 쓰는 가장 쉬운 시작점</h3>
+            <p>탐색을 막막하게 느끼는 학습자를 위해, 자주 쓰는 진입 경로와 핵심 용어를 한 번에 모았습니다. 트랙을 누르면 실제 네트워크가 해당 맥락으로 바로 이동합니다.</p>
+          </div>
+
+          <div class="learning-layout">
+            <section>
+              <div class="learning-section-title">Guided Tracks</div>
+              <div class="learning-track-grid">
+                <article class="track-card">
+                  <div class="track-meta">입문</div>
+                  <h4>Learning Sciences 시작점</h4>
+                  <p>학습과학이 어떤 저널과 연구 전통으로 구성되는지 빠르게 감 잡는 경로입니다.</p>
+                  <ul class="track-steps">
+                    <li>대표 저널의 위치를 먼저 확인합니다.</li>
+                    <li>사이드바에서 카테고리와 추천 저널을 읽습니다.</li>
+                    <li>필요하면 연구 주제 탐색으로 이어갑니다.</li>
+                  </ul>
+                  <button class="track-action" data-learning-action="focus" data-learning-target="Journal of the Learning Sciences">이 경로 시작</button>
+                </article>
+
+                <article class="track-card">
+                  <div class="track-meta">투고 준비</div>
+                  <h4>대표 저널 비교 시작</h4>
+                  <p>첫 투고나 저널 스코핑 단계에서 자주 참고할 대표 저널로 이동합니다.</p>
+                  <ul class="track-steps">
+                    <li>대표 저널의 상세 정보와 연결 카테고리를 봅니다.</li>
+                    <li>비교 모드로 다른 저널과 바로 비교합니다.</li>
+                    <li>즐겨찾기와 메모로 후보군을 정리합니다.</li>
+                  </ul>
+                  <button class="track-action" data-learning-action="focus" data-learning-target="Computers & Education">저널부터 보기</button>
+                </article>
+
+                <article class="track-card">
+                  <div class="track-meta">학회 탐색</div>
+                  <h4>학회 구조 이해하기</h4>
+                  <p>학회와 저널이 어떻게 연결되는지 이해하고 CFP 흐름까지 같이 보려는 학습자용입니다.</p>
+                  <ul class="track-steps">
+                    <li>대표 학회를 중심으로 관련 저널을 확인합니다.</li>
+                    <li>CFP 버튼으로 마감 임박 학회를 같이 봅니다.</li>
+                    <li>학회와 저널의 역할 차이를 비교합니다.</li>
+                  </ul>
+                  <button class="track-action" data-learning-action="focus" data-learning-target="ISLS Annual Meeting">학회부터 보기</button>
+                </article>
+
+                <article class="track-card">
+                  <div class="track-meta">맥락 확장</div>
+                  <h4>한국 교육공학 정체성 보기</h4>
+                  <p>국제 네트워크와는 다른 한국 교육공학 맥락을 별도 시각화로 학습합니다.</p>
+                  <ul class="track-steps">
+                    <li>한국 네트워크로 전환합니다.</li>
+                    <li>핵심, 중간, 주변 클러스터 구조를 읽습니다.</li>
+                    <li>대학/현장 관점을 번갈아 봅니다.</li>
+                  </ul>
+                  <button class="track-action secondary" data-learning-action="korean-network">한국 네트워크 열기</button>
+                </article>
+
+                <article class="track-card">
+                  <div class="track-meta">토픽 탐색</div>
+                  <h4>핵심 연구 주제 훑기</h4>
+                  <p>저널보다 먼저 개념 지형을 배우고 싶은 학습자를 위한 진입입니다.</p>
+                  <ul class="track-steps">
+                    <li>CSCL, Learning Sciences, Methodologies를 훑습니다.</li>
+                    <li>관련 연구자와 연결 토픽을 확인합니다.</li>
+                    <li>다시 네트워크로 돌아와 맥락을 연결합니다.</li>
+                  </ul>
+                  <button class="track-action" data-learning-action="topics">연구 주제 열기</button>
+                </article>
+              </div>
+            </section>
+
+            <section>
+              <div class="learning-section-title">Glossary</div>
+              <div class="glossary-grid">
+                <article class="glossary-card">
+                  <h4>CFP</h4>
+                  <p>Call for Papers의 약자입니다. 학회나 특집호가 논문 제출을 받는 공고이며, 마감 시기가 실제 탐색과 투고 계획에 큰 영향을 줍니다.</p>
+                </article>
+                <article class="glossary-card">
+                  <h4>Q1 / Q2 / Q3</h4>
+                  <p>영향력 지표를 기반으로 한 대략적 구간입니다. 절대적인 품질보다 분야 안에서의 상대적 위치를 읽는 보조 지표로 이해하는 것이 좋습니다.</p>
+                </article>
+                <article class="glossary-card">
+                  <h4>Impact Factor</h4>
+                  <p>저널 영향력의 대표 지표 중 하나입니다. 교육용으로는 숫자 자체보다, 비슷한 범주의 저널을 비교하는 출발점으로 보는 편이 유용합니다.</p>
+                </article>
+                <article class="glossary-card">
+                  <h4>CSCL</h4>
+                  <p>Computer-Supported Collaborative Learning입니다. 디지털 환경에서 협력학습이 어떻게 일어나는지 탐구하는 학습과학의 핵심 영역입니다.</p>
+                </article>
+                <article class="glossary-card">
+                  <h4>Learning Analytics</h4>
+                  <p>학습 데이터를 수집하고 해석해 학습을 이해하고 개선하는 분야입니다. 분석 그 자체보다 어떤 학습 의사결정에 쓰이는지 함께 보는 게 중요합니다.</p>
+                </article>
+                <article class="glossary-card">
+                  <h4>AIED</h4>
+                  <p>Artificial Intelligence in Education입니다. 지능형 튜터, 적응형 학습, 자동 피드백처럼 AI가 교육에 개입하는 방식을 다룹니다.</p>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div id="toast-container" class="toast">
       <span class="toast-icon">✨</span>

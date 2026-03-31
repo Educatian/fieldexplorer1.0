@@ -29,7 +29,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -42,24 +42,34 @@
         }
 
         :root {
-            /* KLSE Brand Colors */
-            --klse-navy: #0d1b3e;
-            --klse-navy-light: #152852;
-            --klse-yellow: #f5a623;
-            --klse-yellow-light: #ffc857;
-            --klse-blue: #7ba0cc;
-            --klse-blue-light: #a8c5e6;
-            --klse-white: #ffffff;
+            --surface: #060e20;
+            --surface-container-low: #091328;
+            --surface-container-high: #141f38;
+            --surface-container-highest: #192540;
+            --surface-bright: rgba(25, 37, 64, 0.78);
+            --outline: #6d758c;
+            --outline-variant: #40485d;
+            --outline-ghost: rgba(64, 72, 93, 0.2);
+            --outline-soft: rgba(64, 72, 93, 0.35);
+            --on-surface: #dee5ff;
+            --on-surface-variant: #9aa8c8;
+            --primary: #3bbffa;
+            --primary-container: #22b1ec;
+            --primary-soft: #7ad6ff;
+            --secondary: #10b981;
+            --secondary-soft: #34d3b2;
+            --tertiary: #f5a623;
+            --tertiary-soft: #ffc857;
 
-            /* UI Colors */
-            --bg-primary: var(--klse-navy);
-            --bg-secondary: var(--klse-navy-light);
-            --border-color: #2a3f6b;
-            --text-primary: var(--klse-white);
-            --text-secondary: #b8c5d6;
-            --text-muted: #7a8ba3;
-            --color-accent: var(--klse-yellow);
-            --color-accent-light: var(--klse-yellow-light);
+            --bg-primary: var(--surface);
+            --bg-secondary: var(--surface-container-low);
+            --bg-tertiary: var(--surface-container-high);
+            --border-color: var(--outline-ghost);
+            --text-primary: var(--on-surface);
+            --text-secondary: #c1cde7;
+            --text-muted: var(--on-surface-variant);
+            --color-accent: var(--primary);
+            --color-accent-light: var(--primary-container);
         }
 
         html,
@@ -84,7 +94,7 @@
             position: absolute;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(245, 166, 35, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(59, 191, 250, 0.12) 0%, transparent 70%);
             top: -100px;
             right: -100px;
             animation: float 15s ease-in-out infinite;
@@ -95,7 +105,7 @@
             position: absolute;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(123, 160, 204, 0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
             bottom: -100px;
             left: -100px;
             animation: float 20s ease-in-out infinite reverse;
@@ -126,14 +136,14 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: var(--klse-blue);
+            background: var(--primary-soft);
             border-radius: 50%;
             opacity: 0;
             animation: particle-float 8s ease-in-out infinite;
         }
 
         .particle.yellow {
-            background: var(--klse-yellow);
+            background: var(--tertiary);
         }
 
         @keyframes particle-float {
@@ -162,8 +172,8 @@
             inset: 0;
             z-index: 0;
             background-image:
-                linear-gradient(rgba(123, 160, 204, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(123, 160, 204, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(59, 191, 250, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 191, 250, 0.03) 1px, transparent 1px);
             background-size: 60px 60px;
             animation: grid-move 30s linear infinite;
         }
@@ -184,7 +194,7 @@
             inset: 0;
             z-index: 0;
             pointer-events: none;
-            background: radial-gradient(ellipse at 50% 0%, rgba(245, 166, 35, 0.03) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 50% 0%, rgba(34, 177, 236, 0.05) 0%, transparent 50%);
             animation: ambient-glow 15s ease-in-out infinite alternate;
         }
 
@@ -210,13 +220,13 @@
             position: absolute;
             width: 4px;
             height: 4px;
-            background: var(--klse-blue);
+            background: var(--primary);
             border-radius: 50%;
             animation: pulse-dot 4s ease-in-out infinite;
         }
 
         .dot.yellow {
-            background: var(--klse-yellow);
+            background: var(--tertiary);
         }
 
         .dot::before {
@@ -288,7 +298,7 @@
 
         .logo-subtitle {
             font-size: 0.7rem;
-            color: var(--klse-yellow);
+            color: var(--primary-container);
             font-weight: 500;
             letter-spacing: 0.05em;
         }
@@ -307,7 +317,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--klse-yellow);
+            color: var(--primary);
         }
 
         /* Hero section */
@@ -329,15 +339,16 @@
             align-items: center;
             gap: 8px;
             padding: 8px 16px;
-            background: rgba(245, 166, 35, 0.15);
-            border: 1px solid rgba(245, 166, 35, 0.3);
+            background: rgba(59, 191, 250, 0.12);
+            border: 1px solid rgba(64, 72, 93, 0.28);
             border-radius: 50px;
             font-size: 0.8rem;
-            color: var(--klse-yellow);
+            color: var(--primary);
             margin-bottom: 24px;
         }
 
         .hero-title {
+            font-family: 'Manrope', 'Noto Sans KR', sans-serif;
             font-size: 3.2rem;
             font-weight: 800;
             line-height: 1.1;
@@ -346,7 +357,7 @@
         }
 
         .hero-title span {
-            color: var(--klse-yellow);
+            color: var(--primary);
         }
 
         .hero-subtitle {
@@ -359,14 +370,16 @@
         .cta-buttons {
             display: flex;
             gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .btn-primary {
             padding: 14px 32px;
-            background: linear-gradient(135deg, var(--klse-yellow), #e5941a);
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
             border: none;
             border-radius: 10px;
-            color: var(--klse-navy);
+            color: var(--surface);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -376,7 +389,7 @@
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+            box-shadow: 0 10px 30px rgba(34, 177, 236, 0.28);
         }
 
         .btn-secondary {
@@ -393,18 +406,48 @@
         }
 
         .btn-secondary:hover {
-            background: var(--bg-secondary);
-            border-color: var(--klse-blue);
+            background: var(--surface-bright);
+            border-color: rgba(59, 191, 250, 0.22);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .hero-meta-item {
+            min-width: 110px;
+        }
+
+        .hero-meta-value {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .hero-meta-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .hero-note {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
         }
 
         /* Login card */
         .login-card {
             width: 380px;
-            background: rgba(21, 40, 82, 0.9);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
+            background: rgba(25, 37, 64, 0.7);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(109, 117, 140, 0.16);
             border-radius: 20px;
             padding: 32px;
+            box-shadow: 0 18px 48px rgba(6, 14, 32, 0.34);
         }
 
         .auth-tabs {
@@ -432,8 +475,8 @@
         }
 
         .auth-tab.active {
-            color: var(--klse-yellow);
-            border-bottom-color: var(--klse-yellow);
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         .auth-form p {
@@ -479,8 +522,8 @@
         }
 
         .form-group input:focus {
-            border-color: var(--klse-yellow);
-            box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.2);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 191, 250, 0.14), 0 0 18px rgba(59, 191, 250, 0.1);
         }
 
         .form-group input::placeholder {
@@ -490,10 +533,10 @@
         .login-btn {
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, var(--klse-yellow), #e5941a);
+            background: linear-gradient(135deg, var(--primary), var(--primary-container));
             border: none;
             border-radius: 10px;
-            color: var(--klse-navy);
+            color: var(--surface);
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -503,7 +546,7 @@
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 166, 35, 0.4);
+            box-shadow: 0 8px 25px rgba(34, 177, 236, 0.28);
         }
 
         .divider {
@@ -526,7 +569,8 @@
             padding: 0 16px;
         }
 
-        .guest-btn {
+        .guest-btn,
+        .skip-link-btn {
             width: 100%;
             padding: 12px;
             background: transparent;
@@ -538,10 +582,35 @@
             transition: all 0.2s;
         }
 
-        .guest-btn:hover {
-            background: var(--bg-secondary);
-            color: var(--klse-yellow);
-            border-color: var(--klse-yellow);
+        .guest-btn:hover,
+        .skip-link-btn:hover {
+            background: var(--surface-bright);
+            color: var(--primary);
+            border-color: rgba(59, 191, 250, 0.22);
+        }
+
+        .entry-helper {
+            margin-top: 18px;
+            padding: 14px;
+            background: rgba(59, 191, 250, 0.08);
+            border: 1px solid rgba(64, 72, 93, 0.24);
+            border-radius: 14px;
+        }
+
+        .entry-helper h3 {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+        }
+
+        .entry-helper p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .entry-helper .skip-link-btn {
+            color: var(--text-primary);
         }
 
         /* Features section */
@@ -568,13 +637,14 @@
 
         .feature-card:hover {
             transform: translateY(-4px);
-            border-color: var(--klse-yellow);
+            border-color: rgba(59, 191, 250, 0.22);
+            background: var(--surface-bright);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: rgba(245, 166, 35, 0.15);
+            background: rgba(59, 191, 250, 0.12);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -605,7 +675,7 @@
         }
 
         footer a {
-            color: var(--klse-yellow);
+            color: var(--primary);
             text-decoration: none;
         }
 
@@ -622,6 +692,10 @@
             }
 
             .cta-buttons {
+                justify-content: center;
+            }
+
+            .hero-meta {
                 justify-content: center;
             }
 
@@ -673,6 +747,9 @@
                 </div>
             </div>
             <nav class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#login">Access</a>
+                <a href="https://github.com/Educatian/fieldexplorer1.0" target="_blank" rel="noopener">GitHub</a>
             </nav>
         </header>
 
@@ -680,13 +757,32 @@
             <div class="hero-content">
                 <div class="badge">
                     <span>✨</span>
-                    <span>EdTech & Learning Sciences</span>
+                    <span>The Digital Curator for Learning Sciences</span>
                 </div>
-                <h2 class="hero-title">학술 네트워크를<br><span>한눈에</span> 탐색하세요</h2>
+                <h2 class="hero-title">학술 지형을<br><span>더 직관적으로</span> 탐색하세요</h2>
                 <p class="hero-subtitle">
-                    교육공학과 학습과학 분야의 주요 저널과 학회를 인터랙티브 네트워크로 시각화합니다.
-                    연구 분야의 전체 그림을 파악하고 새로운 출판 기회를 발견하세요.
+                    저널, 학회, 토픽, 비교 지표를 하나의 탐색 캔버스에서 연결해 보여줍니다.
+                    차가운 목록이 아니라 큐레이션된 연구 공간처럼, 어디를 봐야 할지 바로 감이 오도록 설계했습니다.
                 </p>
+                <div class="cta-buttons">
+                    <a href="#login" class="btn-primary">로그인하고 시작</a>
+                    <button type="button" class="btn-secondary" id="hero-skip-btn">로그인 건너뛰기</button>
+                </div>
+                <div class="hero-meta">
+                    <div class="hero-meta-item">
+                        <div class="hero-meta-value">64</div>
+                        <div class="hero-meta-label">Journals</div>
+                    </div>
+                    <div class="hero-meta-item">
+                        <div class="hero-meta-value">23</div>
+                        <div class="hero-meta-label">Conferences</div>
+                    </div>
+                    <div class="hero-meta-item">
+                        <div class="hero-meta-value">18</div>
+                        <div class="hero-meta-label">Categories</div>
+                    </div>
+                </div>
+                <p class="hero-note">로그인 없이 바로 네트워크 탐색이 가능하고, 저장과 협업 기능만 로그인 후 활성화됩니다.</p>
             </div>
 
             <div class="login-card" id="login">
@@ -725,6 +821,15 @@
                         </div>
                         <button type="submit" class="login-btn">가입하기</button>
                     </form>
+                </div>
+
+                <div class="divider"><span>또는</span></div>
+                <button type="button" class="guest-btn" id="guest-btn">skip login 하고 둘러보기</button>
+
+                <div class="entry-helper">
+                    <h3>빠른 미리보기</h3>
+                    <p>현재 네트워크, 토픽, 비교 패널은 바로 탐색할 수 있습니다. 북마크, 의견 남기기, 계정 저장 기능만 로그인 후 사용됩니다.</p>
+                    <button type="button" class="skip-link-btn" id="card-skip-btn">게스트 모드로 입장</button>
                 </div>
             </div>
         </section>
@@ -784,6 +889,15 @@
             alert(msg);
         }
 
+        function enterWithoutLogin() {
+            localStorage.setItem('fieldexplorer_user', JSON.stringify({
+                email: 'guest',
+                loggedIn: true,
+                isGuest: true
+            }));
+            window.location.href = '/app.html';
+        }
+
         // Login form handler (Supabase Auth)
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -838,6 +952,10 @@
                 window.location.href = '/app.html';
             }
         })();
+
+        document.getElementById('hero-skip-btn')?.addEventListener('click', enterWithoutLogin);
+        document.getElementById('guest-btn')?.addEventListener('click', enterWithoutLogin);
+        document.getElementById('card-skip-btn')?.addEventListener('click', enterWithoutLogin);
 
         // Generate floating particles
         (function generateParticles() {

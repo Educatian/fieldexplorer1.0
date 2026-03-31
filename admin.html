@@ -14,13 +14,15 @@
 
     <style>
         :root {
-            --klse-navy: #0d1b3e;
-            --klse-navy-light: #152852;
+            --klse-navy: #060e20;
+            --klse-navy-light: #091328;
             --klse-yellow: #f5a623;
-            --border-color: #2a3f6b;
-            --text-primary: #ffffff;
-            --text-secondary: #b8c5d6;
-            --text-muted: #7a8ba3;
+            --klse-blue: #3bbffa;
+            --klse-green: #10b981;
+            --border-color: rgba(64, 72, 93, 0.24);
+            --text-primary: #dee5ff;
+            --text-secondary: #c1cde7;
+            --text-muted: #9aa8c8;
         }
 
         * {
@@ -175,8 +177,8 @@
             font-size: 0.75rem;
             padding: 4px 10px;
             border-radius: 12px;
-            background: rgba(123, 160, 204, 0.2);
-            color: #7ba0cc;
+            background: rgba(59, 191, 250, 0.14);
+            color: var(--klse-blue);
         }
 
         .user-role.admin {
@@ -218,13 +220,13 @@
         }
 
         .alert.success {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
+            background: rgba(16, 185, 129, 0.18);
+            color: var(--klse-green);
         }
 
         .alert.error {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            background: rgba(245, 166, 35, 0.18);
+            color: var(--klse-yellow);
         }
 
         .loading {
@@ -239,7 +241,7 @@
         }
 
         .not-admin h2 {
-            color: #ef4444;
+            color: var(--klse-yellow);
             margin-bottom: 16px;
         }
     </style>
