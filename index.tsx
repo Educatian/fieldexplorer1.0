@@ -5420,6 +5420,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     const ragInput = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
     const ragSendBtn = document.getElementById('rag-chatbot-send') as HTMLButtonElement | null;
     const ragMessages: RagChatMessage[] = [];
+    let isKorean = true;
     let ragPending = false;
     let ragDeepPending = false;
     let activeDeepResearchId: string | null = null;
@@ -6891,7 +6892,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     });
 
     // Language toggle (한/영)
-    let isKorean = true;
     document.getElementById('lang-btn')!.addEventListener('click', () => {
         isKorean = !isKorean;
 
