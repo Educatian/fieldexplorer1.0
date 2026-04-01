@@ -54,6 +54,7 @@ const DESIGN_COLORS = {
 // COMPREHENSIVE USER ACTION LOGGING SYSTEM
 // ============================================================================
 let currentSessionId: string | null = null;
+let loggingDisabledReason: string | null = null;
 try {
     currentSessionId = sessionStorage.getItem('fieldexplorer_session') || crypto.randomUUID();
     sessionStorage.setItem('fieldexplorer_session', currentSessionId);
@@ -70,12 +71,11 @@ interface LogEntry {
 }
 
 async function logAction(entry: LogEntry) {
-    if (!supabase) return;
+    if (!supabase || loggingDisabledReason) return;
 
     try {
         const { data: { user } } = await supabase.auth.getUser();
-
-        await supabase.from('user_logs').insert({
+        const { error } = await supabase.from('user_logs').insert({
             user_id: user?.id || null,
             session_id: currentSessionId,
             action_type: entry.action_type,
@@ -86,6 +86,22 @@ async function logAction(entry: LogEntry) {
             screen_x: entry.screen_x,
             screen_y: entry.screen_y
         });
+
+        if (error) {
+            const message = error.message || '';
+            if (
+                error.code === '401' ||
+                message.includes('401') ||
+                message.includes('permission') ||
+                message.includes('row-level security') ||
+                message.includes('user_logs')
+            ) {
+                loggingDisabledReason = message || 'user_logs unavailable';
+                console.info('[Log] Disabled remote user_logs writes:', loggingDisabledReason);
+                return;
+            }
+            console.warn('[Log] Failed:', message);
+        }
     } catch (e) {
         console.warn('[Log] Failed:', e);
     }
@@ -296,6 +312,8 @@ let cfpOverrideCache: CFPRecordMap = {};
 let cfpHistoryCache: CFPHistoryEntry[] = [];
 let cfpPersistenceMode: 'cloud' | 'local' | 'unavailable' = 'local';
 let cfpPersistenceDetail = '로컬 브라우저 저장 중';
+let cfpHistoryCloudAvailable: boolean | null = null;
+let refreshCFPDerivedViews = () => { /* assigned inside main */ };
 
 interface StoredUser {
     email?: string;
@@ -495,7 +513,7 @@ async function loadCFPOverridesFromCloud(): Promise<CFPRecordMap | null> {
 }
 
 async function loadCFPHistoryFromCloud(): Promise<CFPHistoryEntry[] | null> {
-    if (!supabase) return null;
+    if (!supabase || cfpHistoryCloudAvailable === false) return null;
 
     const { data, error } = await supabase
         .from('cfp_verification_history')
@@ -504,10 +522,20 @@ async function loadCFPHistoryFromCloud(): Promise<CFPHistoryEntry[] | null> {
         .limit(40);
 
     if (error) {
+        if (
+            error.message.includes('cfp_verification_history') ||
+            error.message.includes('schema cache') ||
+            error.code === 'PGRST204'
+        ) {
+            cfpHistoryCloudAvailable = false;
+            console.info('[CFP] Cloud history table unavailable, using local history fallback.');
+            return null;
+        }
         console.warn('[CFP] Cloud history load failed:', error.message);
         return null;
     }
 
+    cfpHistoryCloudAvailable = true;
     return fromCloudCFPHistoryRows(data || []);
 }
 
@@ -526,10 +554,7 @@ async function initializeCFPOverrides() {
         cfpHistoryCache = getLocalCFPHistory();
     }
 
-    applyCFPFilter(true);
-    if (currentNodeId) {
-        void handleNodeClick(currentNodeId);
-    }
+    refreshCFPDerivedViews();
 }
 
 async function logCFPHistory(
@@ -542,7 +567,7 @@ async function logCFPHistory(
     const localEntry = createLocalCFPHistoryEntry(action, storageMode, venueName, snapshot, userEmail);
     appendLocalCFPHistory(localEntry);
 
-    if (!supabase || storageMode !== 'cloud') return;
+    if (!supabase || storageMode !== 'cloud' || cfpHistoryCloudAvailable === false) return;
 
     const { data: { user } } = await supabase.auth.getUser();
     const { error } = await supabase
@@ -556,6 +581,15 @@ async function logCFPHistory(
         });
 
     if (error) {
+        if (
+            error.message.includes('cfp_verification_history') ||
+            error.message.includes('schema cache') ||
+            error.code === 'PGRST204'
+        ) {
+            cfpHistoryCloudAvailable = false;
+            console.info('[CFP] Cloud history writes disabled, local history will continue.');
+            return;
+        }
         console.warn('[CFP] History write failed:', error.message);
     }
 }
@@ -2966,6 +3000,13 @@ function main() {
             applyCFPFilter();
         });
     }
+
+    refreshCFPDerivedViews = () => {
+        applyCFPFilter(true);
+        if (currentNodeId) {
+            void handleNodeClick(currentNodeId);
+        }
+    };
 
     void initializeCFPOverrides();
 
