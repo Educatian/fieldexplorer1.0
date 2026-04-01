@@ -5532,6 +5532,18 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return '';
     }
 
+    function buildDeepResearchStarterPrompt() {
+        const currentVenueName = getCurrentRagVenueName();
+        if (currentVenueName) {
+            return isKorean
+                ? `${currentVenueName} 기준으로 최근 흐름, 관련 학회, 공식 링크, CFP까지 심층 정리해줘`
+                : `Deep research on ${currentVenueName}: recent trends, related venues, official links, and CFP status`;
+        }
+        return isKorean
+            ? 'CSCL 입문자를 위한 저널, 학회, 공식 링크, 최근 흐름을 심층 정리해줘'
+            : 'Deep research for CSCL beginners: journals, conferences, official links, and recent trends';
+    }
+
     function openRagPanel() {
         ragPanel?.classList.add('visible');
         if (ragMessages.length === 0) {
@@ -6424,8 +6436,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (ragPending || ragDeepPending) return;
         const prompt = (ragInput?.value || '').trim() || findLastUserPrompt();
         if (!prompt) {
-            showToast(isKorean ? '먼저 질문을 입력한 뒤 심층 리서치를 시작해주세요.' : 'Enter a prompt first, then start deep research.');
+            const starterPrompt = buildDeepResearchStarterPrompt();
+            setRagInputValue(starterPrompt);
             ragInput?.focus();
+            showToast(isKorean ? '심층 리서치용 질문을 입력창에 넣었습니다. 한 번 더 누르거나 Enter로 시작하세요.' : 'Added a deep research prompt. Click again or press Enter to start.');
             return;
         }
         setRagInputValue('');
