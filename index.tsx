@@ -5336,6 +5336,812 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }
     }
 
+    const ragApiUrl = (import.meta.env.VITE_RAG_API_URL || '/api/rag').trim();
+    const ragRetrieveUrl = (import.meta.env.VITE_RAG_RETRIEVE_URL || '/api/rag-retrieve').trim();
+    const ragMode = import.meta.env.VITE_RAG_MODE === 'local' ? 'local' : 'auto';
+    const defaultRagSuggestions = [
+        'CSCL 입문자에게 추천 저널 3개',
+        '마감 임박한 CFP 보여줘',
+        'JLS와 Computers & Education 비교해줘',
+        'Learning Analytics 관련 주제 알려줘'
+    ];
+
+    type RagSourceTone = 'official' | 'reference' | 'editorial';
+    type RagActionType = 'focus-node' | 'add-compare' | 'open-topic' | 'open-topics' | 'open-link';
+    type RagDocumentType = 'venue' | 'topic' | 'cfp' | 'glossary' | 'context';
+
+    interface RagChatSource {
+        label: string;
+        tone: RagSourceTone;
+    }
+
+    interface RagChatAction {
+        type: RagActionType;
+        label: string;
+        target?: string;
+    }
+
+    interface RagChatMessage {
+        role: 'assistant' | 'user';
+        text: string;
+        sources?: RagChatSource[];
+        actions?: RagChatAction[];
+        suggestions?: string[];
+        meta?: string;
+        loading?: boolean;
+    }
+
+    interface RagRetrievalDocument {
+        id: string;
+        type: RagDocumentType;
+        title: string;
+        summary: string;
+        body: string;
+        sourceLabel: string;
+        sourceTone: RagSourceTone;
+        sourceUrl?: string;
+        venueName?: string;
+        topicId?: string;
+        compareEligible?: boolean;
+        score?: number;
+    }
+
+    interface RagApiPayload {
+        mode?: 'ai' | 'fallback';
+        answer?: string;
+        suggestions?: string[];
+        warnings?: string[];
+    }
+
+    const ragFab = document.getElementById('rag-chatbot-fab') as HTMLButtonElement | null;
+    const ragPanel = document.getElementById('rag-chatbot-panel');
+    const ragClose = document.getElementById('rag-chatbot-close') as HTMLButtonElement | null;
+    const ragMessagesEl = document.getElementById('rag-chatbot-messages');
+    const ragForm = document.getElementById('rag-chatbot-form') as HTMLFormElement | null;
+    const ragInput = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
+    const ragMessages: RagChatMessage[] = [];
+    const ragGlossaryDocs = [
+        {
+            id: 'glossary-cfp',
+            keywords: ['cfp', '마감', 'deadline', 'submission'],
+            title: 'CFP',
+            summary: '학회 논문 모집 공고와 투고 마감 정보를 뜻합니다.',
+            body: 'CFP는 Call for Papers의 약자입니다. 실제 사용 시에는 마감일, abstract deadline, notification, camera-ready 일정을 함께 확인하는 것이 중요합니다.'
+        },
+        {
+            id: 'glossary-q',
+            keywords: ['q1', 'q2', 'q3', 'q4', '등급', 'quartile'],
+            title: 'Quartile 참고 등급',
+            summary: '앱의 Q 등급은 참고용 지표이며 공식 최신 source-of-truth가 아닐 수 있습니다.',
+            body: 'Q1~Q4는 저널의 상대적 구간을 뜻하지만, 데이터 제공원과 시점에 따라 달라질 수 있습니다. 이 앱에서는 의사결정 보조용 참고 정보로 취급합니다.'
+        },
+        {
+            id: 'glossary-cscl',
+            keywords: ['cscl', '협력학습', 'collaborative'],
+            title: 'CSCL',
+            summary: 'Computer-Supported Collaborative Learning의 약자입니다.',
+            body: 'CSCL은 디지털 도구를 통해 협력 학습을 설계하고 분석하는 연구 영역입니다. IJCSCL, ISLS, ICLS 같은 venue와 연결해 보는 것이 좋습니다.'
+        },
+        {
+            id: 'glossary-la',
+            keywords: ['learning analytics', 'la', '분석'],
+            title: 'Learning Analytics',
+            summary: '학습 데이터를 분석해 학습과 교수 설계를 개선하는 분야입니다.',
+            body: 'Learning Analytics는 데이터 기반 피드백, 예측 모델, 학습자 지원, 대시보드 설계를 다룹니다. LAK, Journal of Learning Analytics, EDM과 자주 연결됩니다.'
+        }
+    ] as const;
+    let ragRemoteAvailability: 'unknown' | 'ready' | 'unavailable' = ragMode === 'local' ? 'unavailable' : 'unknown';
+    let ragRemoteNoticeShown = false;
+
+    function normalizeRagText(value: string) {
+        return value
+            .toLowerCase()
+            .replace(/&/g, ' and ')
+            .replace(/[^a-z0-9가-힣\s]/gi, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function tokenizeRagText(value: string) {
+        return [...new Set(normalizeRagText(value).split(' ').filter(token => token.length >= 2))];
+    }
+
+    function isRagPanelOpen() {
+        return Boolean(ragPanel?.classList.contains('visible'));
+    }
+
+    function getRagModeLabel() {
+        if (ragMode === 'local') return '로컬 근거 모드';
+        if (ragRemoteAvailability === 'ready') return 'AI grounded 요약';
+        return '근거 문서 검색 모드';
+    }
+
+    function openRagPanel() {
+        ragPanel?.classList.add('visible');
+        if (ragMessages.length === 0) {
+            ragMessages.push({
+                role: 'assistant',
+                text: '질문을 주시면 먼저 앱 내부의 저널, 학회, CFP, 연구 주제 문서를 검색하고, 가능하면 AI로 짧게 정리해드릴게요.',
+                suggestions: defaultRagSuggestions,
+                meta: getRagModeLabel()
+            });
+            renderRagMessages();
+        }
+        window.setTimeout(() => ragInput?.focus(), 120);
+    }
+
+    function closeRagPanel() {
+        ragPanel?.classList.remove('visible');
+    }
+
+    function renderRagMessages() {
+        if (!ragMessagesEl) return;
+
+        ragMessagesEl.innerHTML = ragMessages.map((message, index) => `
+            <div class="rag-message ${message.role}">
+                <div class="rag-bubble">${escapeHtml(message.text)}</div>
+                ${message.meta ? `
+                    <div class="rag-source-row">
+                        <span class="rag-source-chip reference">${escapeHtml(message.meta)}</span>
+                    </div>
+                ` : ''}
+                ${message.sources?.length ? `
+                    <div class="rag-source-row">
+                        ${message.sources.map(source => `<span class="rag-source-chip ${source.tone}">${escapeHtml(source.label)}</span>`).join('')}
+                    </div>
+                ` : ''}
+                ${message.loading ? '' : message.actions?.length ? `
+                    <div class="rag-action-row">
+                        ${message.actions.map(action => `<button class="rag-action-chip" data-chat-action="${action.type}" data-chat-target="${escapeHtml(action.target || '')}" data-message-index="${index}">${escapeHtml(action.label)}</button>`).join('')}
+                    </div>
+                ` : ''}
+                ${message.loading ? '' : message.suggestions?.length ? `
+                    <div class="rag-suggestion-row">
+                        ${message.suggestions.map(prompt => `<button class="rag-suggestion-chip" data-rag-prompt="${escapeHtml(prompt)}">${escapeHtml(prompt)}</button>`).join('')}
+                    </div>
+                ` : ''}
+            </div>
+        `).join('');
+
+        ragMessagesEl.scrollTop = ragMessagesEl.scrollHeight;
+    }
+
+    function getCurrentRagVenueName() {
+        if (!currentNodeId) return null;
+        return venueData.some(venue => venue.name === currentNodeId) ? currentNodeId : null;
+    }
+
+    function getVenueTypeKorean(type: string) {
+        return type.includes('Conference') ? '학회' : '저널';
+    }
+
+    function buildVenueMatches(query: string) {
+        const normalizedQuery = normalizeRagText(query);
+        const queryTokens = tokenizeRagText(query);
+        const wantsJournal = /저널|journal/.test(normalizedQuery);
+        const wantsConference = /학회|conference|cfp|deadline|마감/.test(normalizedQuery);
+
+        return venueData
+            .map(venue => {
+                const details = getVenueDetails(venue.name, venue.type);
+                const audit = getVenueContentAudit(venue.name, details.overview.website);
+                const haystack = normalizeRagText([
+                    venue.name,
+                    venue.type,
+                    venue.categories.join(' '),
+                    details.topics.join(' '),
+                    details.overview.description,
+                    details.methodologyProfile.map(item => item.methodology).join(' ')
+                ].join(' '));
+
+                let score = 0;
+                const normalizedName = normalizeRagText(venue.name);
+
+                if (normalizedQuery.includes(normalizedName)) score += 40;
+                queryTokens.forEach(token => {
+                    if (normalizedName.includes(token)) score += 8;
+                    else if (haystack.includes(token)) score += 2;
+                });
+
+                if (wantsJournal && venue.type === 'Journal') score += 3;
+                if (wantsConference && venue.type.includes('Conference')) score += 3;
+                if (/추천|recommend|어디|입문|start/.test(normalizedQuery) && venue.type === 'Journal') score += 1;
+                if (/cfp|deadline|마감/.test(normalizedQuery) && venue.cfpDeadline) score += 4;
+
+                return { venue, details, audit, score };
+            })
+            .filter(entry => entry.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 6);
+    }
+
+    function buildTopicMatches(query: string) {
+        const normalizedQuery = normalizeRagText(query);
+        const queryTokens = tokenizeRagText(query);
+
+        return ISLS_TOPICS
+            .map(topic => {
+                const haystack = normalizeRagText([
+                    topic.name,
+                    topic.category,
+                    topic.description,
+                    topic.details || '',
+                    (topic.keyResearchers || []).join(' ')
+                ].join(' '));
+
+                let score = 0;
+                const normalizedName = normalizeRagText(topic.name);
+                if (normalizedQuery.includes(normalizedName)) score += 30;
+                queryTokens.forEach(token => {
+                    if (normalizedName.includes(token)) score += 6;
+                    else if (haystack.includes(token)) score += 2;
+                });
+
+                if (/주제|topic|개념|설명/.test(normalizedQuery)) score += 1;
+                return { topic, score };
+            })
+            .filter(entry => entry.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 5);
+    }
+
+    function buildVenueSource(venueName: string, details: VenueDetails, type: string): RagChatSource {
+        const audit = getVenueContentAudit(venueName, details.overview.website);
+        return {
+            label: `${venueName} · ${getVenueTypeKorean(type)} · ${audit.website?.status === 'official' ? '공식 링크 확인' : '편집 요약'}`,
+            tone: audit.website?.status === 'official' ? 'official' : 'editorial'
+        };
+    }
+
+    function buildTopicSource(topic: ResearchTopic): RagChatSource {
+        return {
+            label: `${topic.name} · 주제 요약`,
+            tone: 'editorial'
+        };
+    }
+
+    function dedupeRagSources(sources: RagChatSource[]) {
+        const seen = new Set<string>();
+        return sources.filter(source => {
+            const key = `${source.tone}:${source.label}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        }).slice(0, 5);
+    }
+
+    function dedupeRagActions(actions: RagChatAction[]) {
+        const seen = new Set<string>();
+        return actions.filter(action => {
+            const key = `${action.type}:${action.target || ''}:${action.label}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        }).slice(0, 5);
+    }
+
+    function buildRagDocuments(query: string): RagRetrievalDocument[] {
+        const normalizedQuery = normalizeRagText(query);
+        const venueMatches = buildVenueMatches(query);
+        const topicMatches = buildTopicMatches(query);
+        const currentVenueName = getCurrentRagVenueName();
+        const cfpEntries = getCFPEntries();
+        const documents: RagRetrievalDocument[] = [];
+
+        if (currentVenueName && /현재|선택|이 저널|이 학회|이 노드|this|selected/.test(normalizedQuery)) {
+            const venue = venueData.find(item => item.name === currentVenueName);
+            if (venue) {
+                const details = getVenueDetails(venue.name, venue.type);
+                documents.push({
+                    id: `context:${venue.name}`,
+                    type: 'context',
+                    title: `${venue.name} 현재 컨텍스트`,
+                    summary: `${venue.categories.join(', ')} · ${details.topics.slice(0, 3).join(', ')}`,
+                    body: `${details.overview.description}\n대표 토픽: ${details.topics.join(', ')}\n방법론 단서: ${details.methodologyProfile.map(item => `${item.methodology} ${item.prevalence}%`).join(', ')}`,
+                    sourceLabel: `${venue.name} · 현재 선택 노드`,
+                    sourceTone: 'reference',
+                    sourceUrl: details.overview.website,
+                    venueName: venue.name,
+                    compareEligible: true
+                });
+            }
+        }
+
+        venueMatches.slice(0, 4).forEach(match => {
+            const cfp = cfpEntries.find(entry => entry.venueId === match.venue.name);
+            const methodology = match.details.methodologyProfile
+                .slice(0, 3)
+                .map(item => `${item.methodology} ${item.prevalence}%`)
+                .join(', ');
+
+            documents.push({
+                id: `venue:${match.venue.name}`,
+                type: 'venue',
+                title: match.venue.name,
+                summary: `${getVenueTypeKorean(match.venue.type)} · ${match.details.topics.slice(0, 2).join(', ')}`,
+                body: [
+                    match.details.overview.description,
+                    `카테고리: ${match.venue.categories.join(', ')}`,
+                    `대표 토픽: ${match.details.topics.join(', ')}`,
+                    methodology ? `방법론 경향: ${methodology}` : '',
+                    match.venue.impact ? `참고 등급: ${match.venue.impact}` : '',
+                    cfp ? `CFP: ${cfp.info.primaryDeadlineDisplay} (${cfp.info.confidence === 'official' ? '공식 확인' : cfp.info.confidence === 'estimated' ? '추정치' : '정보 없음'})` : ''
+                ].filter(Boolean).join('\n'),
+                sourceLabel: `${match.venue.name} · ${getVenueTypeKorean(match.venue.type)} · ${match.audit.website?.status === 'official' ? '공식 링크 확인' : '편집 요약'}`,
+                sourceTone: match.audit.website?.status === 'official' ? 'official' : 'editorial',
+                sourceUrl: match.details.overview.website,
+                venueName: match.venue.name,
+                compareEligible: true
+            });
+        });
+
+        topicMatches.slice(0, 3).forEach(match => {
+            documents.push({
+                id: `topic:${match.topic.id}`,
+                type: 'topic',
+                title: match.topic.name,
+                summary: `${match.topic.category} · ${match.topic.description}`,
+                body: [
+                    match.topic.description,
+                    match.topic.details || '',
+                    match.topic.keyResearchers?.length ? `관련 연구자: ${match.topic.keyResearchers.join(', ')}` : '',
+                    match.topic.relatedTopics?.length ? `연결 토픽: ${match.topic.relatedTopics.join(', ')}` : ''
+                ].filter(Boolean).join('\n'),
+                sourceLabel: `${match.topic.name} · 연구 주제`,
+                sourceTone: 'editorial',
+                topicId: match.topic.id
+            });
+        });
+
+        if (/cfp|deadline|마감|투고|submission/.test(normalizedQuery)) {
+            cfpEntries
+                .filter(entry => entry.daysUntil >= -30)
+                .filter(entry => {
+                    if (venueMatches.length === 0) return true;
+                    return venueMatches.some(match => match.venue.name === entry.venueId);
+                })
+                .slice(0, 4)
+                .forEach(entry => {
+                    documents.push({
+                        id: `cfp:${entry.venueId}`,
+                        type: 'cfp',
+                        title: `${entry.venueId} CFP`,
+                        summary: `${entry.info.primaryDeadlineDisplay} · ${entry.daysUntil >= 0 ? `D-${entry.daysUntil}` : `${Math.abs(entry.daysUntil)}일 지남`}`,
+                        body: [
+                            `주 마감: ${entry.info.primaryDeadlineDisplay}`,
+                            entry.info.abstractDeadlineDisplay ? `추가 마감: ${entry.info.abstractDeadlineDisplay}` : '',
+                            `검증 상태: ${entry.info.confidence === 'official' ? '공식 확인' : entry.info.confidence === 'estimated' ? '추정치' : '정보 없음'}`,
+                            entry.info.verifiedAt ? `마지막 검증: ${entry.info.verifiedAt}` : '',
+                            entry.info.notes || ''
+                        ].filter(Boolean).join('\n'),
+                        sourceLabel: `${entry.venueId} · ${entry.info.confidence === 'official' ? '공식 CFP' : '추정 CFP'}`,
+                        sourceTone: entry.info.confidence === 'official' ? 'official' : 'reference',
+                        sourceUrl: entry.info.sourceUrl,
+                        venueName: entry.venueId
+                    });
+                });
+        }
+
+        ragGlossaryDocs.forEach(doc => {
+            if (doc.keywords.some(keyword => normalizedQuery.includes(normalizeRagText(keyword)))) {
+                documents.push({
+                    id: doc.id,
+                    type: 'glossary',
+                    title: doc.title,
+                    summary: doc.summary,
+                    body: doc.body,
+                    sourceLabel: `${doc.title} · 용어 안내`,
+                    sourceTone: 'reference'
+                });
+            }
+        });
+
+        const deduped = new Map<string, RagRetrievalDocument>();
+        documents.forEach(document => {
+            if (!deduped.has(document.id)) {
+                deduped.set(document.id, document);
+            }
+        });
+
+        return [...deduped.values()].slice(0, 8);
+    }
+
+    function buildRagSourcesFromDocuments(documents: RagRetrievalDocument[]) {
+        return dedupeRagSources(documents.map(document => ({
+            label: document.sourceLabel,
+            tone: document.sourceTone
+        })));
+    }
+
+    function buildRagActionsFromDocuments(query: string, documents: RagRetrievalDocument[]) {
+        const normalizedQuery = normalizeRagText(query);
+        const compareIntent = /비교|compare|차이|difference|vs/.test(normalizedQuery);
+        const actions: RagChatAction[] = [];
+        const venueDocs = documents.filter(document => document.venueName);
+        const topicDoc = documents.find(document => document.topicId);
+        const linkDoc = documents.find(document => document.sourceUrl && document.sourceUrl !== '#');
+
+        venueDocs.slice(0, compareIntent ? 2 : 1).forEach(document => {
+            if (document.venueName) {
+                actions.push({ type: 'focus-node', label: `${document.venueName} 보기`, target: document.venueName });
+            }
+        });
+
+        if (compareIntent) {
+            venueDocs.slice(0, 2).forEach(document => {
+                if (document.compareEligible && document.venueName) {
+                    actions.push({ type: 'add-compare', label: `${document.venueName} 비교 추가`, target: document.venueName });
+                }
+            });
+        }
+
+        if (topicDoc?.topicId) {
+            actions.push({ type: 'open-topic', label: `${topicDoc.title} 상세 열기`, target: topicDoc.topicId });
+        } else {
+            actions.push({ type: 'open-topics', label: '연구 주제 탐색 열기' });
+        }
+
+        if (linkDoc?.sourceUrl) {
+            actions.push({
+                type: 'open-link',
+                label: linkDoc.type === 'cfp' ? '공식 CFP 열기' : '공식 링크 열기',
+                target: linkDoc.sourceUrl
+            });
+        }
+
+        return dedupeRagActions(actions);
+    }
+
+    function mergeRagResponse(base: RagChatMessage, query: string, documents: RagRetrievalDocument[], meta: string): RagChatMessage {
+        return {
+            ...base,
+            meta,
+            sources: dedupeRagSources([...(base.sources || []), ...buildRagSourcesFromDocuments(documents)]),
+            actions: dedupeRagActions([...(base.actions || []), ...buildRagActionsFromDocuments(query, documents)]),
+            suggestions: base.suggestions?.length ? base.suggestions : defaultRagSuggestions
+        };
+    }
+
+    function generateLocalRagResponse(query: string): RagChatMessage {
+        const normalizedQuery = normalizeRagText(query);
+        const venueMatches = buildVenueMatches(query);
+        const topicMatches = buildTopicMatches(query);
+        const currentVenueName = getCurrentRagVenueName();
+        const compareIntent = /비교|compare|차이|difference|vs/.test(normalizedQuery);
+        const cfpIntent = /cfp|deadline|마감|투고|submission/.test(normalizedQuery);
+        const topicIntent = /주제|topic|개념|설명|learning analytics|cscl|aied|methodolog/.test(normalizedQuery);
+        const currentContextIntent = Boolean(currentVenueName && /현재|선택|이 저널|이 학회|이 노드|this|selected/.test(normalizedQuery));
+
+        if (compareIntent && venueMatches.length >= 2) {
+            const [first, second] = venueMatches;
+            const firstImpact = first.venue.impact || '정보 없음';
+            const secondImpact = second.venue.impact || '정보 없음';
+            const firstTopics = first.details.topics.slice(0, 3).join(', ');
+            const secondTopics = second.details.topics.slice(0, 3).join(', ');
+            return {
+                role: 'assistant',
+                text: `${first.venue.name}와 ${second.venue.name}를 앱 데이터 기준으로 빠르게 비교하면:\n• 참고 등급: ${firstImpact} vs ${secondImpact}\n• 대표 토픽: ${firstTopics} vs ${secondTopics}\n• 방법론 성향: ${first.details.methodologyProfile[0]?.methodology || '정보 없음'} 중심 vs ${second.details.methodologyProfile[0]?.methodology || '정보 없음'} 중심\n원하면 아래 버튼으로 비교 패널에 바로 넣어둘 수 있어요.`,
+                sources: [
+                    buildVenueSource(first.venue.name, first.details, first.venue.type),
+                    buildVenueSource(second.venue.name, second.details, second.venue.type)
+                ],
+                actions: [
+                    { type: 'focus-node', label: `${first.venue.name} 보기`, target: first.venue.name },
+                    { type: 'focus-node', label: `${second.venue.name} 보기`, target: second.venue.name },
+                    { type: 'add-compare', label: `${first.venue.name} 비교 추가`, target: first.venue.name },
+                    { type: 'add-compare', label: `${second.venue.name} 비교 추가`, target: second.venue.name }
+                ],
+                suggestions: ['이 둘의 CFP나 학회 연결도 보여줘', `${first.venue.name} 입문자에게 괜찮아?`]
+            };
+        }
+
+        if (cfpIntent) {
+            const relevantEntries = getCFPEntries()
+                .filter(entry => {
+                    if (venueMatches.length === 0) return true;
+                    return venueMatches.some(match => match.venue.name === entry.venueId || match.venue.categories.some(category => normalizeRagText(query).includes(normalizeRagText(category))));
+                })
+                .filter(entry => entry.daysUntil >= -30)
+                .slice(0, 4);
+
+            if (relevantEntries.length > 0) {
+                const summary = relevantEntries.map(entry => {
+                    const status = entry.info.confidence === 'official' ? '공식 확인' : entry.info.confidence === 'estimated' ? '추정치' : '정보 없음';
+                    const due = entry.daysUntil >= 0 ? `D-${entry.daysUntil}` : `${Math.abs(entry.daysUntil)}일 지남`;
+                    return `• ${entry.venueId}: ${due} · ${entry.info.primaryDeadlineDisplay} · ${status}`;
+                }).join('\n');
+                const topEntry = relevantEntries[0];
+                return {
+                    role: 'assistant',
+                    text: `질문과 가장 가까운 CFP 후보를 추려보면:\n${summary}\n공식 검증이 붙은 항목은 아래에서 바로 열 수 있어요.`,
+                    sources: relevantEntries.map(entry => ({
+                        label: `${entry.venueId} · ${entry.info.confidence === 'official' ? '공식 CFP' : '추정 CFP'}`,
+                        tone: entry.info.confidence === 'official' ? 'official' : 'reference'
+                    })),
+                    actions: [
+                        { type: 'focus-node', label: `${topEntry.venueId} 보기`, target: topEntry.venueId },
+                        ...(topEntry.info.sourceUrl ? [{ type: 'open-link' as const, label: '공식 CFP 열기', target: topEntry.info.sourceUrl }] : [])
+                    ],
+                    suggestions: ['공식 확인된 CFP만 다시 보여줘', '이 중 Learning Sciences 쪽만 골라줘']
+                };
+            }
+        }
+
+        if (currentContextIntent && currentVenueName) {
+            const currentVenue = venueData.find(venue => venue.name === currentVenueName);
+            if (currentVenue) {
+                const details = getVenueDetails(currentVenue.name, currentVenue.type);
+                return {
+                    role: 'assistant',
+                    text: `${currentVenue.name}를 기준으로 보면:\n• 카테고리: ${currentVenue.categories.join(', ')}\n• 대표 토픽: ${details.topics.slice(0, 4).join(', ')}\n• 첫 방법론 단서: ${details.methodologyProfile[0]?.methodology || '정보 없음'}\n${details.overview.description}`,
+                    sources: [buildVenueSource(currentVenue.name, details, currentVenue.type)],
+                    actions: [
+                        { type: 'focus-node', label: '현재 노드 다시 보기', target: currentVenue.name },
+                        ...(details.overview.website && details.overview.website !== '#' ? [{ type: 'open-link' as const, label: '웹사이트 열기', target: details.overview.website }] : [])
+                    ],
+                    suggestions: [`${currentVenue.name}와 비슷한 저널 추천`, `${currentVenue.name} 관련 학회 알려줘`]
+                };
+            }
+        }
+
+        if (topicIntent && topicMatches.length > 0) {
+            const topTopic = topicMatches[0].topic;
+            const relatedVenueMatches = buildVenueMatches(`${topTopic.name} ${topTopic.category}`)
+                .filter(match => match.venue.type === 'Journal' || match.venue.type.includes('Conference'))
+                .slice(0, 3);
+            return {
+                role: 'assistant',
+                text: `${topTopic.name}는 ${topTopic.category} 범주의 연구 주제로, ${topTopic.description}.\n${topTopic.details ? topTopic.details.split('\n').slice(0, 3).join(' ') : ''}\n앱 안에서 같이 보면 좋은 저널/학회도 아래에 붙여뒀어요.`,
+                sources: [
+                    buildTopicSource(topTopic),
+                    ...relatedVenueMatches.map(match => buildVenueSource(match.venue.name, match.details, match.venue.type))
+                ].slice(0, 4),
+                actions: [
+                    { type: 'open-topic', label: `${topTopic.name} 상세 열기`, target: topTopic.id },
+                    ...relatedVenueMatches.slice(0, 2).map(match => ({ type: 'focus-node' as const, label: `${match.venue.name} 보기`, target: match.venue.name }))
+                ],
+                suggestions: ['관련 학회도 보여줘', '입문자용으로 쉬운 순서로 정리해줘']
+            };
+        }
+
+        if (venueMatches.length > 0) {
+            const shortlist = venueMatches.slice(0, 3);
+            const summary = shortlist.map(match => {
+                const label = getVenueTypeKorean(match.venue.type);
+                const mainTopic = match.details.topics[0] || match.venue.categories[0] || '일반';
+                return `• ${match.venue.name} (${label}) · ${mainTopic}`;
+            }).join('\n');
+
+            return {
+                role: 'assistant',
+                text: `질문과 가장 가까운 후보를 앱 내부 데이터에서 추려보면:\n${summary}\n먼저 하나를 열어보고, 필요하면 비교 패널로 바로 이어가면 좋습니다.`,
+                sources: shortlist.map(match => buildVenueSource(match.venue.name, match.details, match.venue.type)),
+                actions: [
+                    { type: 'focus-node', label: `${shortlist[0].venue.name} 보기`, target: shortlist[0].venue.name },
+                    ...(shortlist[1] ? [{ type: 'focus-node' as const, label: `${shortlist[1].venue.name} 보기`, target: shortlist[1].venue.name }] : []),
+                    { type: 'open-topics', label: '연구 주제 탐색 열기' }
+                ],
+                suggestions: ['이 중에서 입문자에게 쉬운 순서로 추천해줘', '학회 중심으로 다시 추천해줘']
+            };
+        }
+
+        return {
+            role: 'assistant',
+            text: '질문과 바로 맞는 내부 근거를 많이 찾지 못했어요. 저널명, 학회명, 토픽명, 혹은 CFP/비교처럼 원하는 작업을 조금 더 구체적으로 적어주시면 더 정확하게 안내할 수 있습니다.',
+            suggestions: [
+                'CSCL 관련 대표 저널 알려줘',
+                '공식 확인된 CFP만 보여줘',
+                'Learning Analytics 입문 순서 추천',
+                '현재 선택 노드 설명해줘'
+            ]
+        };
+    }
+
+    function mergeRagDocuments(localDocuments: RagRetrievalDocument[], remoteDocuments: RagRetrievalDocument[]) {
+        const merged = new Map<string, RagRetrievalDocument>();
+        [...remoteDocuments, ...localDocuments].forEach(document => {
+            if (!merged.has(document.id)) {
+                merged.set(document.id, document);
+            }
+        });
+        return [...merged.values()].slice(0, 8);
+    }
+
+    async function requestRemoteRagDocuments(query: string) {
+        if (ragMode === 'local' || ragRemoteAvailability === 'unavailable') {
+            return [] as RagRetrievalDocument[];
+        }
+
+        try {
+            const response = await fetch(ragRetrieveUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query, limit: 6 })
+            });
+
+            if (!response.ok) {
+                if (response.status === 404 || response.status === 405 || response.status === 503) {
+                    return [] as RagRetrievalDocument[];
+                }
+                throw new Error(`RAG retrieve API ${response.status}`);
+            }
+
+            const payload = await response.json() as { documents?: RagRetrievalDocument[] };
+            return Array.isArray(payload.documents) ? payload.documents : [];
+        } catch (error) {
+            console.warn('[RAG] Remote retrieval failed:', error);
+            return [];
+        }
+    }
+
+    async function requestRemoteRagSummary(query: string, documents: RagRetrievalDocument[]) {
+        if (ragMode === 'local' || ragRemoteAvailability === 'unavailable' || documents.length === 0) {
+            return null;
+        }
+
+        try {
+            const response = await fetch(ragApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query,
+                    currentContext: getCurrentRagVenueName(),
+                    documents
+                })
+            });
+
+            if (!response.ok) {
+                if (response.status === 404 || response.status === 405 || response.status === 503) {
+                    ragRemoteAvailability = 'unavailable';
+                    if (!ragRemoteNoticeShown) {
+                        ragRemoteNoticeShown = true;
+                        showToast('AI RAG 미설정 상태라 로컬 근거 모드로 전환됩니다.');
+                    }
+                    return null;
+                }
+                throw new Error(`RAG API ${response.status}`);
+            }
+
+            const payload = await response.json() as RagApiPayload;
+            ragRemoteAvailability = 'ready';
+            return payload;
+        } catch (error) {
+            console.warn('[RAG] Remote summary failed:', error);
+            if (!ragRemoteNoticeShown) {
+                ragRemoteNoticeShown = true;
+                showToast('AI RAG 응답에 실패해 로컬 근거 모드로 안내합니다.');
+            }
+            return null;
+        }
+    }
+
+    async function resolveRagResponse(query: string): Promise<RagChatMessage> {
+        const localDocuments = buildRagDocuments(query);
+        const remoteDocuments = await requestRemoteRagDocuments(query);
+        const retrievalDocuments = mergeRagDocuments(localDocuments, remoteDocuments);
+        const localResponse = generateLocalRagResponse(query);
+        const localMeta = retrievalDocuments.length > 0
+            ? remoteDocuments.length > 0
+                ? '벡터 검색 + 로컬 근거 요약'
+                : '근거 문서 검색 · 로컬 요약'
+            : '로컬 탐색 답변';
+        const remotePayload = await requestRemoteRagSummary(query, retrievalDocuments);
+
+        if (!remotePayload?.answer) {
+            return mergeRagResponse(localResponse, query, retrievalDocuments, localMeta);
+        }
+
+        const warningText = remotePayload.warnings?.length ? `\n\n주의: ${remotePayload.warnings.join(' / ')}` : '';
+        return {
+            role: 'assistant',
+            text: `${remotePayload.answer}${warningText}`,
+            sources: buildRagSourcesFromDocuments(retrievalDocuments),
+            actions: buildRagActionsFromDocuments(query, retrievalDocuments),
+            suggestions: remotePayload.suggestions?.length ? remotePayload.suggestions : localResponse.suggestions || defaultRagSuggestions,
+            meta: '근거 문서 검색 · AI grounded 요약'
+        };
+    }
+
+    async function submitRagPrompt(prompt: string) {
+        const cleanPrompt = prompt.trim();
+        if (!cleanPrompt) return;
+
+        ragMessages.push({ role: 'user', text: cleanPrompt });
+        ragMessages.push({
+            role: 'assistant',
+            text: '질문과 연결된 근거 문서를 찾는 중입니다...',
+            loading: true,
+            meta: getRagModeLabel()
+        });
+        const pendingIndex = ragMessages.length - 1;
+        renderRagMessages();
+
+        ragMessages[pendingIndex] = await resolveRagResponse(cleanPrompt);
+        renderRagMessages();
+    }
+
+    async function handleRagAction(actionType: string, target?: string) {
+        if (!actionType) return;
+
+        if (actionType === 'focus-node' && target) {
+            await focusNodeById(target, { scale: 1.45, toast: `${target}로 이동했습니다.` });
+            return;
+        }
+
+        if (actionType === 'add-compare' && target) {
+            if (!comparisonState.isActive) toggleComparisonMode();
+            addToComparison(target);
+            return;
+        }
+
+        if (actionType === 'open-topic' && target) {
+            if (!document.getElementById('research-topics-popup-container')) {
+                openResearchTopicsPopup();
+            }
+            window.setTimeout(() => showTopicDetail(target), 80);
+            return;
+        }
+
+        if (actionType === 'open-topics') {
+            openResearchTopicsPopup();
+            return;
+        }
+
+        if (actionType === 'open-link' && target) {
+            window.open(target, '_blank', 'noopener');
+        }
+    }
+
+    ragFab?.addEventListener('click', () => {
+        if (isRagPanelOpen()) closeRagPanel();
+        else openRagPanel();
+    });
+
+    ragClose?.addEventListener('click', closeRagPanel);
+
+    ragForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!ragInput) return;
+        const prompt = ragInput.value;
+        ragInput.value = '';
+        ragInput.style.height = '';
+        void submitRagPrompt(prompt);
+    });
+
+    ragInput?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            ragForm?.requestSubmit();
+        }
+    });
+
+    ragMessagesEl?.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement;
+        const actionChip = target.closest('[data-chat-action]') as HTMLElement | null;
+        const suggestionChip = target.closest('[data-rag-prompt]') as HTMLElement | null;
+
+        if (actionChip) {
+            const actionType = actionChip.getAttribute('data-chat-action') || '';
+            const actionTarget = actionChip.getAttribute('data-chat-target') || undefined;
+            void handleRagAction(actionType, actionTarget);
+            return;
+        }
+
+        if (suggestionChip) {
+            const prompt = suggestionChip.getAttribute('data-rag-prompt') || '';
+            if (ragInput) {
+                ragInput.value = prompt;
+            }
+            void submitRagPrompt(prompt);
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && isRagPanelOpen()) {
+            closeRagPanel();
+        }
+    });
+
     function syncFilterControls() {
         document.getElementById('filter-journal')?.classList.toggle('active', filterJournal);
         document.getElementById('filter-conf')?.classList.toggle('active', filterConference);
