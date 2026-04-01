@@ -5338,6 +5338,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     const ragApiUrl = (import.meta.env.VITE_RAG_API_URL || '/api/rag').trim();
     const ragRetrieveUrl = (import.meta.env.VITE_RAG_RETRIEVE_URL || '/api/rag-retrieve').trim();
+    const ragDeepUrl = (import.meta.env.VITE_RAG_DEEP_URL || '/api/deep-research').trim();
     const ragMode = import.meta.env.VITE_RAG_MODE === 'local' ? 'local' : 'auto';
     const defaultRagSuggestions = [
         'CSCL 입문자에게 추천 저널 3개',
@@ -5369,6 +5370,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         suggestions?: string[];
         meta?: string;
         loading?: boolean;
+        variant?: 'default' | 'deep-research';
     }
 
     interface RagRetrievalDocument {
@@ -5393,14 +5395,34 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         warnings?: string[];
     }
 
+    interface DeepResearchStartPayload {
+        id?: string;
+        status?: string;
+        agent?: string;
+        error?: string;
+        detail?: string;
+    }
+
+    interface DeepResearchStatusPayload {
+        id?: string;
+        status?: string;
+        text?: string;
+        error?: string;
+        detail?: string;
+    }
+
     const ragFab = document.getElementById('rag-chatbot-fab') as HTMLButtonElement | null;
     const ragPanel = document.getElementById('rag-chatbot-panel');
+    const ragDeepButton = document.getElementById('rag-chatbot-deep') as HTMLButtonElement | null;
     const ragClose = document.getElementById('rag-chatbot-close') as HTMLButtonElement | null;
     const ragMessagesEl = document.getElementById('rag-chatbot-messages');
     const ragForm = document.getElementById('rag-chatbot-form') as HTMLFormElement | null;
     const ragInput = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
+    const ragSendBtn = document.getElementById('rag-chatbot-send') as HTMLButtonElement | null;
     const ragMessages: RagChatMessage[] = [];
     let ragPending = false;
+    let ragDeepPending = false;
+    let activeDeepResearchId: string | null = null;
     let lastRagPrompt = '';
     const ragGlossaryDocs = [
         {
@@ -5464,17 +5486,66 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return '근거 문서 검색 모드';
     }
 
+    function getDeepResearchModeLabel() {
+        return isKorean ? 'Gemini Deep Research · 백그라운드 리포트' : 'Gemini Deep Research · background report';
+    }
+
+    function getDeepResearchButtonLabel() {
+        return ragDeepPending
+            ? (isKorean ? '리서치 중' : 'Researching')
+            : (isKorean ? '심층' : 'Deep');
+    }
+
+    function getDeepResearchWaitingText(status?: string) {
+        const normalizedStatus = (status || '').toLowerCase();
+        if (isKorean) {
+            if (normalizedStatus === 'completed') return '웹 리서치와 공식 링크 확인이 끝나 최종 보고서를 정리하고 있습니다...';
+            if (normalizedStatus === 'failed' || normalizedStatus === 'cancelled') return '심층 리서치가 중단되어 빠른 근거 모드로 전환합니다...';
+            if (normalizedStatus === 'running' || normalizedStatus === 'processing' || normalizedStatus === 'in_progress') return '공식 페이지와 웹 근거를 탐색하며 심층 보고서를 작성 중입니다...';
+            return '웹과 공식 소스를 바탕으로 심층 리서치를 시작하는 중입니다...';
+        }
+        if (normalizedStatus === 'completed') return 'Deep research is wrapping up the final report...';
+        if (normalizedStatus === 'failed' || normalizedStatus === 'cancelled') return 'Deep research stopped, falling back to the quick grounded mode...';
+        if (normalizedStatus === 'running' || normalizedStatus === 'processing' || normalizedStatus === 'in_progress') return 'Reviewing official pages and web evidence for a deeper report...';
+        return 'Launching deep research across web and official sources...';
+    }
+
+    function syncRagComposerState() {
+        if (ragSendBtn) {
+            ragSendBtn.disabled = ragPending || ragDeepPending;
+        }
+        if (ragDeepButton) {
+            ragDeepButton.disabled = ragPending || ragDeepPending;
+            ragDeepButton.textContent = getDeepResearchButtonLabel();
+            ragDeepButton.title = isKorean
+                ? (ragDeepPending ? '심층 리서치 진행 중' : '현재 질문으로 심층 리서치 시작')
+                : (ragDeepPending ? 'Deep research in progress' : 'Start deep research for the current prompt');
+        }
+    }
+
+    function findLastUserPrompt() {
+        for (let index = ragMessages.length - 1; index >= 0; index -= 1) {
+            if (ragMessages[index].role === 'user') {
+                return ragMessages[index].text.trim();
+            }
+        }
+        return '';
+    }
+
     function openRagPanel() {
         ragPanel?.classList.add('visible');
         if (ragMessages.length === 0) {
             ragMessages.push({
                 role: 'assistant',
-                text: '질문을 주시면 먼저 앱 내부의 저널, 학회, CFP, 연구 주제 문서를 검색하고, 가능하면 AI로 짧게 정리해드릴게요.',
+                text: isKorean
+                    ? '질문을 주시면 먼저 앱 내부의 저널, 학회, CFP, 연구 주제 문서를 검색하고, 가능하면 AI로 짧게 정리해드릴게요. 더 긴 분석이 필요하면 오른쪽 위 심층 버튼으로 웹 리서치도 시작할 수 있습니다.'
+                    : 'Ask a question and I will search journals, conferences, CFPs, and topic documents first, then summarize with AI when available. Use the Deep button for a longer web research pass.',
                 suggestions: defaultRagSuggestions,
                 meta: getRagModeLabel()
             });
             renderRagMessages();
         }
+        syncRagComposerState();
         window.setTimeout(() => ragInput?.focus(), 120);
     }
 
@@ -6127,13 +6198,169 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         };
     }
 
+    async function requestDeepResearchStart(query: string, documents: RagRetrievalDocument[]) {
+        try {
+            const response = await fetch(ragDeepUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    query,
+                    currentContext: getCurrentRagVenueName(),
+                    documents
+                })
+            });
+
+            if (!response.ok) {
+                if (response.status === 404 || response.status === 405 || response.status === 503) {
+                    return null;
+                }
+                throw new Error(`Deep Research API ${response.status}`);
+            }
+
+            const payload = await response.json() as DeepResearchStartPayload;
+            return payload?.id ? payload : null;
+        } catch (error) {
+            console.warn('[RAG] Deep Research start failed:', error);
+            return null;
+        }
+    }
+
+    async function requestDeepResearchStatus(interactionId: string) {
+        try {
+            const response = await fetch(`${ragDeepUrl}?id=${encodeURIComponent(interactionId)}`, {
+                method: 'GET'
+            });
+
+            if (!response.ok) {
+                throw new Error(`Deep Research status API ${response.status}`);
+            }
+
+            return await response.json() as DeepResearchStatusPayload;
+        } catch (error) {
+            console.warn('[RAG] Deep Research status failed:', error);
+            return null;
+        }
+    }
+
+    function buildDeepResearchSuggestions(query: string, fallback: string[]) {
+        const normalizedQuery = normalizeRagText(query);
+        const suggestions = [];
+
+        if (/cfp|deadline|마감|submission/.test(normalizedQuery)) {
+            suggestions.push('공식 CFP만 다시 요약');
+        }
+        if (/cscl|learning analytics|aied|topic|주제/.test(normalizedQuery)) {
+            suggestions.push('관련 학회 흐름 비교');
+        }
+        suggestions.push('핵심 venue만 shortlist');
+        suggestions.push('다음 탐색 순서 추천');
+
+        return sanitizeRagSuggestions(suggestions, fallback);
+    }
+
+    function buildDeepResearchMessage(query: string, documents: RagRetrievalDocument[], reportText: string, fallbackSuggestions: string[]): RagChatMessage {
+        return {
+            role: 'assistant',
+            text: reportText,
+            sources: buildRagSourcesFromDocuments(documents),
+            actions: buildRagActionsFromDocuments(query, documents),
+            suggestions: buildDeepResearchSuggestions(query, fallbackSuggestions),
+            meta: getDeepResearchModeLabel(),
+            variant: 'deep-research'
+        };
+    }
+
+    async function submitDeepResearchPrompt(prompt: string) {
+        const cleanPrompt = prompt.trim();
+        if (!cleanPrompt || ragPending || ragDeepPending) return;
+
+        ragDeepPending = true;
+        activeDeepResearchId = null;
+        lastRagPrompt = cleanPrompt;
+        syncRagComposerState();
+
+        const localDocuments = buildRagDocuments(cleanPrompt);
+        const remoteDocuments = await requestRemoteRagDocuments(cleanPrompt);
+        const retrievalDocuments = mergeRagDocuments(localDocuments, remoteDocuments);
+        const localResponse = generateLocalRagResponse(cleanPrompt);
+
+        ragMessages.push({ role: 'user', text: cleanPrompt });
+        ragMessages.push({
+            role: 'assistant',
+            text: getDeepResearchWaitingText(),
+            loading: true,
+            meta: getDeepResearchModeLabel(),
+            variant: 'deep-research'
+        });
+        const pendingIndex = ragMessages.length - 1;
+        renderRagMessages();
+
+        try {
+            const started = await requestDeepResearchStart(cleanPrompt, retrievalDocuments);
+
+            if (!started?.id) {
+                showToast(isKorean ? '심층 리서치를 시작하지 못해 빠른 근거 모드로 안내합니다.' : 'Deep research was unavailable, so I used the quick grounded mode.');
+                ragMessages[pendingIndex] = mergeRagResponse(localResponse, cleanPrompt, retrievalDocuments, getRagModeLabel());
+                renderRagMessages();
+                return;
+            }
+
+            activeDeepResearchId = started.id;
+            let attempts = 0;
+
+            while (attempts < 45 && activeDeepResearchId === started.id) {
+                const statusPayload = await requestDeepResearchStatus(started.id);
+                const status = statusPayload?.status || started.status || 'submitted';
+
+                ragMessages[pendingIndex] = {
+                    role: 'assistant',
+                    text: getDeepResearchWaitingText(status),
+                    loading: status !== 'completed',
+                    meta: getDeepResearchModeLabel(),
+                    variant: 'deep-research'
+                };
+                renderRagMessages();
+
+                if (status === 'completed' && statusPayload?.text?.trim()) {
+                    ragMessages[pendingIndex] = buildDeepResearchMessage(
+                        cleanPrompt,
+                        retrievalDocuments,
+                        statusPayload.text.trim(),
+                        localResponse.suggestions || defaultRagSuggestions
+                    );
+                    renderRagMessages();
+                    return;
+                }
+
+                if (status === 'failed' || status === 'cancelled') {
+                    showToast(isKorean ? '심층 리서치가 중단되어 빠른 근거 모드로 전환합니다.' : 'Deep research stopped, falling back to the quick grounded mode.');
+                    ragMessages[pendingIndex] = mergeRagResponse(localResponse, cleanPrompt, retrievalDocuments, getRagModeLabel());
+                    renderRagMessages();
+                    return;
+                }
+
+                attempts += 1;
+                await delay(8000);
+            }
+
+            showToast(isKorean ? '심층 리서치가 길어져 빠른 근거 답변으로 먼저 이어갑니다.' : 'Deep research is taking longer, so I returned a quick grounded answer first.');
+            ragMessages[pendingIndex] = mergeRagResponse(localResponse, cleanPrompt, retrievalDocuments, getRagModeLabel());
+            renderRagMessages();
+        } finally {
+            ragDeepPending = false;
+            activeDeepResearchId = null;
+            syncRagComposerState();
+        }
+    }
+
     async function submitRagPrompt(prompt: string) {
         const cleanPrompt = prompt.trim();
-        if (!cleanPrompt || ragPending) return;
+        if (!cleanPrompt || ragPending || ragDeepPending) return;
         if (lastRagPrompt === cleanPrompt && ragMessages[ragMessages.length - 1]?.loading) return;
 
         ragPending = true;
         lastRagPrompt = cleanPrompt;
+        syncRagComposerState();
         ragMessages.push({ role: 'user', text: cleanPrompt });
         ragMessages.push({
             role: 'assistant',
@@ -6152,6 +6379,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             renderRagMessages();
         } finally {
             ragPending = false;
+            syncRagComposerState();
         }
     }
 
@@ -6192,11 +6420,26 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         else openRagPanel();
     });
 
+    ragDeepButton?.addEventListener('click', () => {
+        if (ragPending || ragDeepPending) return;
+        const prompt = (ragInput?.value || '').trim() || findLastUserPrompt();
+        if (!prompt) {
+            showToast(isKorean ? '먼저 질문을 입력한 뒤 심층 리서치를 시작해주세요.' : 'Enter a prompt first, then start deep research.');
+            ragInput?.focus();
+            return;
+        }
+        setRagInputValue('');
+        if (ragInput) {
+            ragInput.style.height = '';
+        }
+        void submitDeepResearchPrompt(prompt);
+    });
+
     ragClose?.addEventListener('click', closeRagPanel);
 
     ragForm?.addEventListener('submit', (event) => {
         event.preventDefault();
-        if (!ragInput || ragPending) return;
+        if (!ragInput || ragPending || ragDeepPending) return;
         const prompt = ragInput.value;
         setRagInputValue('');
         ragInput.style.height = '';
@@ -6224,7 +6467,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         if (suggestionChip) {
             const prompt = suggestionChip.getAttribute('data-rag-prompt') || '';
-            if (ragPending || !prompt || (prompt.trim() === lastRagPrompt && ragMessages[ragMessages.length - 1]?.loading)) return;
+            if (ragPending || ragDeepPending || !prompt || (prompt.trim() === lastRagPrompt && ragMessages[ragMessages.length - 1]?.loading)) return;
             setRagInputValue(prompt);
             window.setTimeout(() => {
                 setRagInputValue('');
@@ -6241,6 +6484,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             closeRagPanel();
         }
     });
+
+    syncRagComposerState();
 
     function syncFilterControls() {
         document.getElementById('filter-journal')?.classList.toggle('active', filterJournal);
@@ -6635,8 +6880,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         const ragSubtitle = document.getElementById('rag-chatbot-subtitle');
         if (ragSubtitle) ragSubtitle.textContent = isKorean
-            ? '근거 문서를 우선 검색하고, AI 연결 시 요약 품질을 높입니다'
-            : 'Searches grounded documents first, then improves summaries with AI when available';
+            ? '근거 문서를 우선 검색하고, 필요하면 심층 웹 리서치까지 이어집니다'
+            : 'Searches grounded documents first, then can expand into deeper web research';
 
         const ragInputEl = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
         if (ragInputEl) {
@@ -6647,13 +6892,20 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         const ragHint = document.getElementById('rag-chatbot-hint');
         if (ragHint) ragHint.textContent = isKorean
-            ? '근거 칩, 관련 노드 보기, 비교 추가, 공식 링크 열기까지 함께 제공합니다.'
-            : 'Includes grounding chips, node shortcuts, compare actions, and official links.';
+            ? '빠른 근거 답변과 심층 리서치를 함께 쓰고, 관련 노드 이동과 공식 링크 확인까지 바로 이어집니다.'
+            : 'Use quick grounded answers or deep research, then jump to nodes and official links.';
+
+        const ragDeepBtn = document.getElementById('rag-chatbot-deep');
+        if (ragDeepBtn) {
+            ragDeepBtn.textContent = getDeepResearchButtonLabel();
+            ragDeepBtn.title = isKorean
+                ? (ragDeepPending ? '심층 리서치 진행 중' : '현재 질문으로 심층 리서치 시작')
+                : (ragDeepPending ? 'Deep research in progress' : 'Start deep research for the current prompt');
+        }
 
         const ragCloseBtn = document.getElementById('rag-chatbot-close');
         if (ragCloseBtn) ragCloseBtn.title = isKorean ? '닫기' : 'Close';
 
-        const ragSendBtn = document.getElementById('rag-chatbot-send');
         if (ragSendBtn) ragSendBtn.title = isKorean ? '보내기' : 'Send';
 
         const fullscreenBtn = document.getElementById('fullscreen-btn');

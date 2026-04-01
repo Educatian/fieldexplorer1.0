@@ -3559,6 +3559,39 @@
       margin-top: 2px;
     }
 
+    .rag-chatbot-header-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .rag-chatbot-deep {
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(64, 72, 93, 0.18);
+      background: rgba(9, 19, 40, 0.8);
+      color: var(--primary-soft);
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, color 0.18s ease;
+    }
+
+    .rag-chatbot-deep:hover:not(:disabled) {
+      background: rgba(25, 37, 64, 0.98);
+      border-color: rgba(59, 191, 250, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .rag-chatbot-deep:disabled {
+      opacity: 0.62;
+      cursor: wait;
+      transform: none;
+    }
+
     .rag-chatbot-close {
       width: 34px;
       height: 34px;
@@ -4047,6 +4080,10 @@
         grid-template-columns: 1fr;
       }
 
+      .rag-chatbot-deep {
+        padding: 0 10px;
+      }
+
       .footer-links {
         width: 100%;
         justify-content: center;
@@ -4529,7 +4566,10 @@
             <div class="rag-chatbot-subtitle" id="rag-chatbot-subtitle">근거 문서를 우선 검색하고, AI 연결 시 요약 품질을 높입니다</div>
           </div>
         </div>
-        <button class="rag-chatbot-close" id="rag-chatbot-close" title="닫기">✕</button>
+        <div class="rag-chatbot-header-controls">
+          <button class="rag-chatbot-deep" id="rag-chatbot-deep" title="심층 리서치 시작">심층</button>
+          <button class="rag-chatbot-close" id="rag-chatbot-close" title="닫기">✕</button>
+        </div>
       </div>
       <div class="rag-chatbot-messages" id="rag-chatbot-messages"></div>
       <div class="rag-chatbot-footer">
