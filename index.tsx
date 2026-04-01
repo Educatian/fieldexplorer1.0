@@ -5400,6 +5400,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     const ragForm = document.getElementById('rag-chatbot-form') as HTMLFormElement | null;
     const ragInput = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
     const ragMessages: RagChatMessage[] = [];
+    let ragPending = false;
+    let lastRagPrompt = '';
     const ragGlossaryDocs = [
         {
             id: 'glossary-cfp',
@@ -5444,6 +5446,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     function tokenizeRagText(value: string) {
         return [...new Set(normalizeRagText(value).split(' ').filter(token => token.length >= 2))];
+    }
+
+    function setRagInputValue(value: string) {
+        if (!ragInput) return;
+        ragInput.value = value;
+        ragInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
     function isRagPanelOpen() {
@@ -5492,6 +5500,41 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return { visible, overflow };
     }
 
+    function getRagSectionLabel(kind: 'grounding' | 'next' | 'try') {
+        if (isKorean) {
+            if (kind === 'grounding') return '근거';
+            if (kind === 'next') return '다음 액션';
+            return '다음 질문';
+        }
+        if (kind === 'grounding') return 'Grounding';
+        if (kind === 'next') return 'Next Step';
+        return 'Try Next';
+    }
+
+    function normalizeSuggestionPrompt(prompt: string) {
+        const cleaned = prompt
+            .replace(/[?？!！]+$/g, '')
+            .replace(/^(네,\s*)/g, '')
+            .replace(/(알려드릴까요|확인하시겠습니까|원하십니까|해보세요|살펴보세요|알아보세요|보여드릴까요)$/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+        return cleaned.length > 42 ? cleaned.slice(0, 42).trim() : cleaned;
+    }
+
+    function sanitizeRagSuggestions(suggestions: string[] | undefined, fallback: string[] = []) {
+        const seen = new Set<string>();
+        const next = [...(suggestions || []), ...fallback]
+            .map(normalizeSuggestionPrompt)
+            .filter(Boolean)
+            .filter(prompt => {
+                const key = normalizeRagText(prompt);
+                if (!key || seen.has(key)) return false;
+                seen.add(key);
+                return true;
+            });
+        return next.slice(0, 4);
+    }
+
     function renderRagMessages() {
         if (!ragMessagesEl) return;
 
@@ -5502,28 +5545,40 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
             return `
                 <div class="rag-message ${message.role}">
-                    <div class="rag-bubble">${escapeHtml(message.text)}</div>
+                    <div class="rag-bubble ${message.loading ? 'loading' : ''}">
+                        ${message.loading ? `
+                            <div class="rag-typing-dots" aria-hidden="true">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div class="rag-loading-copy">
+                                <div class="rag-loading-title">${escapeHtml(isKorean ? '근거를 찾는 중' : 'Searching evidence')}</div>
+                                <div class="rag-loading-subtitle">${escapeHtml(message.text)}</div>
+                            </div>
+                        ` : escapeHtml(message.text)}
+                    </div>
                     ${message.meta ? `
                         <div class="rag-source-row">
                             <span class="rag-source-chip reference">${escapeHtml(message.meta)}</span>
                         </div>
                     ` : ''}
                     ${visibleSources.visible.length ? `
-                        <div class="rag-section-label">Grounding</div>
+                        <div class="rag-section-label">${escapeHtml(getRagSectionLabel('grounding'))}</div>
                         <div class="rag-source-row">
                             ${visibleSources.visible.map(source => `<span class="rag-source-chip ${source.tone}">${escapeHtml(source.label)}</span>`).join('')}
                             ${visibleSources.overflow > 0 ? `<span class="rag-overflow-chip">+${visibleSources.overflow} more</span>` : ''}
                         </div>
                     ` : ''}
                     ${message.loading ? '' : visibleActions.visible.length ? `
-                        <div class="rag-section-label">Next Step</div>
+                        <div class="rag-section-label">${escapeHtml(getRagSectionLabel('next'))}</div>
                         <div class="rag-action-row">
                             ${visibleActions.visible.map((action, actionIndex) => `<button class="rag-action-chip ${actionIndex === 0 ? 'primary' : 'secondary'}" data-chat-action="${action.type}" data-chat-target="${escapeHtml(action.target || '')}" data-message-index="${index}">${escapeHtml(action.label)}</button>`).join('')}
                         </div>
                         ${visibleActions.overflow > 0 ? `<div class="rag-source-row"><span class="rag-overflow-chip">추가 액션 ${visibleActions.overflow}개는 다음 답변에서 이어서 제안됩니다</span></div>` : ''}
                     ` : ''}
                     ${message.loading ? '' : visibleSuggestions.visible.length ? `
-                        <div class="rag-section-label">Try Next</div>
+                        <div class="rag-section-label">${escapeHtml(getRagSectionLabel('try'))}</div>
                         <div class="rag-suggestion-row">
                             ${visibleSuggestions.visible.map(prompt => `<button class="rag-suggestion-chip" data-rag-prompt="${escapeHtml(prompt)}">${escapeHtml(prompt)}</button>`).join('')}
                             ${visibleSuggestions.overflow > 0 ? `<span class="rag-overflow-chip">+${visibleSuggestions.overflow} prompts</span>` : ''}
@@ -5828,7 +5883,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             meta,
             sources: dedupeRagSources([...(base.sources || []), ...buildRagSourcesFromDocuments(documents)]),
             actions: dedupeRagActions([...(base.actions || []), ...buildRagActionsFromDocuments(query, documents)]),
-            suggestions: base.suggestions?.length ? base.suggestions : defaultRagSuggestions
+            suggestions: sanitizeRagSuggestions(base.suggestions, defaultRagSuggestions)
         };
     }
 
@@ -5974,7 +6029,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 merged.set(document.id, document);
             }
         });
-        return [...merged.values()].slice(0, 8);
+        return [...merged.values()].slice(0, 5);
     }
 
     async function requestRemoteRagDocuments(query: string) {
@@ -6067,15 +6122,18 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             text: `${remotePayload.answer}${warningText}`,
             sources: buildRagSourcesFromDocuments(retrievalDocuments),
             actions: buildRagActionsFromDocuments(query, retrievalDocuments),
-            suggestions: remotePayload.suggestions?.length ? remotePayload.suggestions : localResponse.suggestions || defaultRagSuggestions,
+            suggestions: sanitizeRagSuggestions(remotePayload.suggestions, localResponse.suggestions || defaultRagSuggestions),
             meta: '근거 문서 검색 · AI grounded 요약'
         };
     }
 
     async function submitRagPrompt(prompt: string) {
         const cleanPrompt = prompt.trim();
-        if (!cleanPrompt) return;
+        if (!cleanPrompt || ragPending) return;
+        if (lastRagPrompt === cleanPrompt && ragMessages[ragMessages.length - 1]?.loading) return;
 
+        ragPending = true;
+        lastRagPrompt = cleanPrompt;
         ragMessages.push({ role: 'user', text: cleanPrompt });
         ragMessages.push({
             role: 'assistant',
@@ -6083,11 +6141,18 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             loading: true,
             meta: getRagModeLabel()
         });
+        ragMessages[ragMessages.length - 1].text = isKorean
+            ? '문서 검색과 grounded 요약을 준비하고 있습니다...'
+            : 'Retrieving documents and preparing a grounded summary...';
         const pendingIndex = ragMessages.length - 1;
         renderRagMessages();
 
-        ragMessages[pendingIndex] = await resolveRagResponse(cleanPrompt);
-        renderRagMessages();
+        try {
+            ragMessages[pendingIndex] = await resolveRagResponse(cleanPrompt);
+            renderRagMessages();
+        } finally {
+            ragPending = false;
+        }
     }
 
     async function handleRagAction(actionType: string, target?: string) {
@@ -6131,9 +6196,9 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     ragForm?.addEventListener('submit', (event) => {
         event.preventDefault();
-        if (!ragInput) return;
+        if (!ragInput || ragPending) return;
         const prompt = ragInput.value;
-        ragInput.value = '';
+        setRagInputValue('');
         ragInput.style.height = '';
         void submitRagPrompt(prompt);
     });
@@ -6159,9 +6224,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         if (suggestionChip) {
             const prompt = suggestionChip.getAttribute('data-rag-prompt') || '';
-            if (ragInput) {
-                ragInput.value = prompt;
-            }
+            if (ragPending || !prompt || (prompt.trim() === lastRagPrompt && ragMessages[ragMessages.length - 1]?.loading)) return;
+            setRagInputValue(prompt);
+            window.setTimeout(() => {
+                setRagInputValue('');
+                if (ragInput) {
+                    ragInput.style.height = '';
+                }
+            }, 60);
             void submitRagPrompt(prompt);
         }
     });

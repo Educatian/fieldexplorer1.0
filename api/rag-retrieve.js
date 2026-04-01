@@ -158,7 +158,7 @@ export default async function handler(request) {
   }
 
   const rows = await rpcResponse.json();
-  const documents = Array.isArray(rows) ? rows.map((row) => ({
+  const mapped = Array.isArray(rows) ? rows.map((row) => ({
     id: row.id || `remote:${row.title || 'document'}`,
     type: row.doc_type || 'venue',
     title: row.title || 'Untitled document',
@@ -172,6 +172,12 @@ export default async function handler(request) {
     compareEligible: Boolean(row.venue_name),
     score: typeof row.similarity === 'number' ? row.similarity : undefined
   })) : [];
+
+  const topScore = mapped[0]?.score || 0;
+  const similarityFloor = Math.max(0.35, topScore - 0.08);
+  const documents = mapped
+    .filter((document) => typeof document.score !== 'number' || document.score >= similarityFloor)
+    .slice(0, 4);
 
   return json({ mode: 'vector', documents });
 }

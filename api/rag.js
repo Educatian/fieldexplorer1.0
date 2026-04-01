@@ -178,7 +178,11 @@ export default async function handler(request) {
     'Use only the provided retrieval documents.',
     'If evidence is partial, say so plainly.',
     'Never invent deadlines, rankings, or official status.',
+    'Never mention venues, links, or facts that are not present in the retrieved documents.',
+    'When listing links, only use exact source_url values from the retrieved documents.',
     'Prefer concise answers that help the user act inside the app.',
+    'Suggestions must be short follow-up search prompts, not chatbot sentences.',
+    'Suggestions should be 3 to 8 words, no question marks, no polite endings, no duplicate meaning.',
     'Return valid JSON with keys: answer, suggestions, warnings.'
   ].join(' ');
 
