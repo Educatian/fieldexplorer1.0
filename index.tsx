@@ -1807,27 +1807,27 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
 
     const methodologyHtml = methodologyData.length
         ? methodologyData.map((m: any) => `
-        <div style="margin-bottom: 8px;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 3px; font-size: 0.75rem;">
+        <div class="detail-progress-row">
+          <div class="detail-progress-head">
             <span>${m.methodology}</span>
-            <span style="color: var(--color-accent);">${m.prevalence}%</span>
+            <span class="detail-progress-value">${m.prevalence}%</span>
           </div>
-          <div style="background: var(--bg-tertiary); border-radius: 3px; height: 4px; overflow: hidden;">
-            <div style="background: var(--color-accent); width: ${m.prevalence}%; height: 100%;"></div>
+          <div class="detail-progress-track">
+            <div class="detail-progress-fill" style="width: ${m.prevalence}%;"></div>
           </div>
         </div>
       `).join('')
         : '<p>정보 없음</p>';
 
     const contentStatusHtml = `
-      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.primary};font-size:0.72rem;font-weight:700;">
+      <div class="sidebar-status-row">
+        <span class="sidebar-status-chip sidebar-status-chip--primary">
           ${audit.website?.status === 'official' ? '공식 링크 확인' : '퍼블리셔 링크'}
         </span>
-        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.secondary};font-size:0.72rem;font-weight:700;">
+        <span class="sidebar-status-chip sidebar-status-chip--secondary">
           개요·토픽 편집 요약
         </span>
-        <span style="display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;background:rgba(25,37,64,0.95);color:${DESIGN_COLORS.tertiary};font-size:0.72rem;font-weight:700;">
+        <span class="sidebar-status-chip sidebar-status-chip--tertiary">
           연구 성향·Q등급 참고용
         </span>
       </div>
@@ -1835,12 +1835,12 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const contentAuditHtml = `
       <div class="sidebar-section">
         <h3>팩트체크 메모</h3>
-        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;">${OVERVIEW_EDITORIAL_NOTE}</p>
-        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${IMPACT_REFERENCE_NOTE}</p>
-        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${NEWCOMER_SUPPRESSED_NOTE}</p>
-        <p style="font-size:0.76rem;color:var(--text-secondary);line-height:1.7;margin-top:8px;">${CONTRIBUTORS_SUPPRESSED_NOTE}</p>
-        ${audit.website?.verifiedAt ? `<p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">마지막 링크 검토: ${audit.website.verifiedAt}</p>` : ''}
-        ${audit.website?.sourceUrl && audit.website?.sourceLabel ? `<p style="margin-top:8px;"><a href="${audit.website.sourceUrl}" target="_blank" rel="noopener">${audit.website.sourceLabel} ↗</a></p>` : ''}
+        <p class="sidebar-note-muted">${OVERVIEW_EDITORIAL_NOTE}</p>
+        <p class="sidebar-note-muted">${IMPACT_REFERENCE_NOTE}</p>
+        <p class="sidebar-note-muted">${NEWCOMER_SUPPRESSED_NOTE}</p>
+        <p class="sidebar-note-muted">${CONTRIBUTORS_SUPPRESSED_NOTE}</p>
+        ${audit.website?.verifiedAt ? `<p class="sidebar-meta-caption">마지막 링크 검토: ${audit.website.verifiedAt}</p>` : ''}
+        ${audit.website?.sourceUrl && audit.website?.sourceLabel ? `<p class="sidebar-link-row"><a href="${audit.website.sourceUrl}" target="_blank" rel="noopener">${audit.website.sourceLabel} ↗</a></p>` : ''}
       </div>
     `;
 
@@ -1850,11 +1850,6 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
         : cfpInfo.confidence === 'estimated'
             ? '추정치'
             : '정보 없음';
-    const cfpStatusColor = cfpInfo.confidence === 'official'
-        ? DESIGN_COLORS.secondary
-        : cfpInfo.confidence === 'estimated'
-            ? DESIGN_COLORS.tertiary
-            : DESIGN_COLORS.outline;
     const cfpUrgencyLabel = cfpInfo.daysUntil === null
         ? '마감일 계산 불가'
         : cfpInfo.daysUntil >= 0
@@ -1863,17 +1858,17 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const cfpHtml = cfpInfo.confidence !== 'missing' ? `
         <div class="sidebar-section">
           <h3>📅 CFP 일정</h3>
-          <div class="cfp-info" style="background: rgba(59, 191, 250, 0.07); border-radius: 10px; padding: 12px;">
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-              <span style="display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: ${cfpStatusColor}; font-size: 0.72rem; font-weight: 700;">${cfpStatusLabel}</span>
-              <span style="display: inline-flex; align-items: center; padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: var(--text-primary); font-size: 0.72rem; font-weight: 700;">${cfpUrgencyLabel}</span>
+          <div class="cfp-info">
+            <div class="meta-pill-row">
+              <span class="meta-pill ${cfpInfo.confidence === 'official' ? 'meta-pill--official' : cfpInfo.confidence === 'estimated' ? 'meta-pill--estimated' : 'meta-pill--neutral'}">${cfpStatusLabel}</span>
+              <span class="meta-pill">${cfpUrgencyLabel}</span>
             </div>
             <p><strong>${cfpInfo.primaryDeadlineLabel}:</strong> ${cfpInfo.primaryDeadlineDisplay}</p>
             ${cfpInfo.secondaryDeadlineDisplay && cfpInfo.secondaryDeadlineLabel ? `<p><strong>${cfpInfo.secondaryDeadlineLabel}:</strong> ${cfpInfo.secondaryDeadlineDisplay}</p>` : ''}
             ${cfpInfo.timezoneLabel ? `<p><strong>기준 시간대:</strong> ${cfpInfo.timezoneLabel}</p>` : ''}
             ${cfpInfo.verifiedAt ? `<p><strong>마지막 검증:</strong> ${cfpInfo.verifiedAt}</p>` : ''}
-            <p style="font-size: 0.76rem; color: var(--text-secondary); line-height: 1.6; margin-top: 8px;">${cfpInfo.note}</p>
-            ${cfpInfo.sourceUrl && cfpInfo.sourceLabel ? `<p style="margin-top: 8px;"><a href="${cfpInfo.sourceUrl}" target="_blank" rel="noopener">${cfpInfo.sourceLabel} ↗</a></p>` : ''}
+            <p class="sidebar-note sidebar-link-row">${cfpInfo.note}</p>
+            ${cfpInfo.sourceUrl && cfpInfo.sourceLabel ? `<p class="sidebar-link-row"><a href="${cfpInfo.sourceUrl}" target="_blank" rel="noopener">${cfpInfo.sourceLabel} ↗</a></p>` : ''}
           </div>
         </div>
     ` : '';
@@ -1892,7 +1887,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       <h3>개요</h3>
       ${contentStatusHtml}
       <p>${desc}</p>
-      ${website ? `<p style="margin-top: 6px;"><a href="${website}" target="_blank" rel="noopener">${audit.website?.status === 'official' ? '공식 페이지 방문' : '퍼블리셔 페이지 방문'} ↗</a></p>` : ''}
+      ${website ? `<p class="sidebar-link-inline"><a href="${website}" target="_blank" rel="noopener">${audit.website?.status === 'official' ? '공식 페이지 방문' : '퍼블리셔 페이지 방문'} ↗</a></p>` : ''}
     </div>
 
     <div class="sidebar-section">
@@ -1903,7 +1898,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     <div class="sidebar-section">
       <h3 title="학술지 키워드 분석(TF-IDF)을 바탕으로 산출된 경향성 지표입니다.">연구 성향 프로필</h3>
       ${methodologyHtml}
-      <p style="font-size: 0.65rem; color: var(--text-muted); margin-top: 10px; line-height: 1.4;">
+      <p class="sidebar-footnote">
         ※ ${METHODOLOGY_REFERENCE_NOTE}
       </p>
     </div>
@@ -1976,9 +1971,9 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
         </div>
 
         ${guestMode ? `
-            <div class="add-annotation" style="background: rgba(59, 191, 250, 0.08);">
-                <h4 style="margin-bottom: 8px;">로그인 후 의견 작성 가능</h4>
-                <p style="margin: 0; color: var(--text-secondary); font-size: 0.8rem; line-height: 1.6;">
+            <div class="add-annotation info-banner">
+                <h4 class="section-copy">로그인 후 의견 작성 가능</h4>
+                <p class="text-muted-copy">
                     게스트 모드에서는 의견 작성과 답글 등록이 잠겨 있습니다. 랜딩 페이지에서 로그인하면 즐겨찾기, 의견, 협업 기능을 모두 사용할 수 있습니다.
                 </p>
             </div>
@@ -2001,7 +1996,7 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
                 </div>
                 <div class="annotation-form-actions">
                     <button class="submit-annotation-btn" id="submit-annotation" data-venue="${venueName}" data-type="${venueType}">의견 등록</button>
-                    <button class="cancel-reply-btn" id="cancel-reply" style="display: none;">취소</button>
+                    <button class="cancel-reply-btn is-hidden" id="cancel-reply">취소</button>
                 </div>
             </div>
         `}
@@ -3061,7 +3056,7 @@ function main() {
                     <div class="comparison-empty">
                         <p>📊 비교할 노드를 클릭하세요 (최대 3개)</p>
                         <p class="hint">노드 클릭 또는 C 키로 비교 모드 전환</p>
-                        <button class="btn compare-cancel" style="margin-top: 10px;">✕ 비교 취소</button>
+                        <button class="btn compare-cancel mt-10">✕ 비교 취소</button>
                     </div>
                 </div>
             `;
@@ -3069,7 +3064,7 @@ function main() {
             const elapsedSec = Math.floor((Date.now() - comparisonState.startTime) / 1000);
             const columns = venues.map(v => `
                 <div class="compare-column" data-venue-id="${v!.id}">
-                    <div class="compare-header" style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+                    <div class="compare-header compare-header-row">
                         <span class="compare-name">${v!.name}</span>
                         <button class="compare-remove" data-id="${v!.id}" title="제거">✕</button>
                     </div>
@@ -3379,7 +3374,7 @@ function main() {
                             </div>
                         </div>
                     </div>
-                    <div style="margin-top: 16px; padding: 12px; background: rgba(59, 130, 246, 0.1); border-radius: 8px; font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+                    <div class="info-banner">
                         💡 <strong>더 나은 서비스를 위해</strong><br>
                         사용 패턴 분석을 통해 앱 개선에 활용합니다. 개인 정보는 수집하지 않으며, 모든 데이터는 연구 목적으로만 사용됩니다.
                     </div>
@@ -3512,24 +3507,42 @@ function main() {
         };
     }
 
+    function getCFPConfidenceClass(confidence: ResolvedCFPInfo['confidence']) {
+        if (confidence === 'official') return 'official';
+        if (confidence === 'estimated') return 'estimated';
+        return 'neutral';
+    }
+
+    function getCFPStorageToneClass(mode: CFPStorageMode) {
+        return mode === 'cloud' ? 'tone-success' : mode === 'local' ? 'tone-warn' : '';
+    }
+
+    function getCFPReviewToneClass(info: ResolvedCFPInfo) {
+        const ageDays = getCFPVerificationAgeDays(info);
+        if (info.confidence !== 'official') return 'admin-chip--estimated';
+        if (info.deadlineState === 'passed' || (ageDays !== null && ageDays >= 180)) return 'admin-chip--stale';
+        if (ageDays !== null && ageDays >= 90) return 'admin-chip--aging';
+        return 'admin-chip--official';
+    }
+
     function renderAdminCFPHistory() {
         const historyEl = document.getElementById('admin-cfp-history-list');
         if (!historyEl) return;
 
         if (cfpHistoryCache.length === 0) {
-            historyEl.innerHTML = '<div style="color: var(--text-muted); font-size: 0.78rem;">아직 저장된 검증 이력이 없습니다.</div>';
+            historyEl.innerHTML = '<div class="admin-empty">아직 저장된 검증 이력이 없습니다.</div>';
             return;
         }
 
         historyEl.innerHTML = cfpHistoryCache.slice(0, 12).map(entry => `
-            <div style="padding: 10px 0; border-bottom: 1px solid rgba(64, 72, 93, 0.22);">
-                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 4px;">
-                    <span style="font-size: 0.8rem; color: var(--text-primary); font-weight: 600;">${escapeHtml(entry.venueName)}</span>
-                    <span style="font-size: 0.68rem; color: ${entry.storageMode === 'cloud' ? 'var(--secondary-soft)' : 'var(--tertiary)'};">
+            <div class="admin-review-divider">
+                <div class="admin-review-head">
+                    <span class="admin-review-title">${escapeHtml(entry.venueName)}</span>
+                    <span class="admin-review-confidence ${entry.storageMode === 'cloud' ? 'official' : 'estimated'}">
                         ${entry.action === 'upsert' ? '저장' : '삭제'} · ${entry.storageMode === 'cloud' ? '공용' : '로컬'}
                     </span>
                 </div>
-                <div style="font-size: 0.72rem; color: var(--text-muted); line-height: 1.5;">
+                <div class="admin-meta-line">
                     ${new Date(entry.changedAt).toLocaleString('ko-KR')}
                     ${entry.snapshot?.sourceLabel ? ` · ${escapeHtml(entry.snapshot.sourceLabel)}` : ''}
                     ${entry.snapshot?.verifiedAt ? ` · 검증일 ${escapeHtml(entry.snapshot.verifiedAt)}` : ''}
@@ -3546,31 +3559,25 @@ function main() {
         const info = venue ? getResolvedCFPInfo(venue.name, venue.cfpDeadline) : null;
 
         if (!venue || !info) {
-            preview.innerHTML = '<span style="color: var(--text-muted);">선택한 학회의 CFP 미리보기를 불러올 수 없습니다.</span>';
+            preview.innerHTML = '<span class="admin-empty">선택한 학회의 CFP 미리보기를 불러올 수 없습니다.</span>';
             return;
         }
 
-        const statusColor = info.confidence === 'official'
-            ? DESIGN_COLORS.secondarySoft
-            : info.confidence === 'estimated'
-                ? DESIGN_COLORS.tertiary
-                : DESIGN_COLORS.outline;
-
         preview.innerHTML = `
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
-                <span style="padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: ${statusColor}; font-size: 0.72rem; font-weight: 700;">
+            <div class="admin-preview-pills">
+                <span class="admin-preview-pill ${getCFPConfidenceClass(info.confidence)}">
                     ${info.confidence === 'official' ? '공식 확인' : info.confidence === 'estimated' ? '추정치' : '정보 없음'}
                 </span>
-                <span style="padding: 4px 8px; border-radius: 999px; background: rgba(25, 37, 64, 0.95); color: var(--text-primary); font-size: 0.72rem; font-weight: 700;">
+                <span class="admin-preview-pill">
                     ${info.daysUntil === null ? '계산 불가' : info.daysUntil >= 0 ? `D-${info.daysUntil}` : `${Math.abs(info.daysUntil)}일 지남`}
                 </span>
             </div>
-            <div style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7;">
+            <div class="admin-meta-line">
                 <div><strong>${info.primaryDeadlineLabel}:</strong> ${info.primaryDeadlineDisplay}</div>
                 ${info.secondaryDeadlineDisplay && info.secondaryDeadlineLabel ? `<div><strong>${info.secondaryDeadlineLabel}:</strong> ${info.secondaryDeadlineDisplay}</div>` : ''}
                 ${info.verifiedAt ? `<div><strong>마지막 검증:</strong> ${info.verifiedAt}</div>` : ''}
                 ${info.sourceUrl ? `<div><strong>출처:</strong> <a href="${info.sourceUrl}" target="_blank" rel="noopener">${info.sourceLabel || '공식 링크'}</a></div>` : ''}
-                <div style="margin-top: 8px;">${info.note}</div>
+                <div class="admin-meta-line">${info.note}</div>
             </div>
         `;
     }
@@ -3579,13 +3586,8 @@ function main() {
         const statusEl = document.getElementById('admin-cfp-storage-status');
         if (!statusEl) return;
 
-        const color = cfpPersistenceMode === 'cloud'
-            ? DESIGN_COLORS.secondarySoft
-            : cfpPersistenceMode === 'local'
-                ? DESIGN_COLORS.tertiary
-                : DESIGN_COLORS.outline;
-
-        statusEl.innerHTML = `<span style="color: ${color}; font-weight: 600;">${cfpPersistenceMode === 'cloud' ? '공용 저장' : '로컬 저장'}</span> · ${cfpPersistenceDetail}`;
+        statusEl.className = `admin-storage-status ${getCFPStorageToneClass(cfpPersistenceMode)}`.trim();
+        statusEl.innerHTML = `<strong>${cfpPersistenceMode === 'cloud' ? '공용 저장' : '로컬 저장'}</strong> · ${cfpPersistenceDetail}`;
     }
 
     function fillAdminCFPForm(venueName: string) {
@@ -3660,7 +3662,10 @@ function main() {
             const record = getAdminCFPFormRecord();
             const result = document.getElementById('admin-cfp-result');
             if (!record) {
-                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">필수 항목을 모두 입력하세요.</span>`;
+                if (result) {
+                    result.className = 'admin-result tone-warn';
+                    result.textContent = '필수 항목을 모두 입력하세요.';
+                }
                 return;
             }
 
@@ -3675,7 +3680,8 @@ function main() {
             }
 
             if (result) {
-                result.innerHTML = `<span style="color: ${saveResult.mode === 'cloud' ? DESIGN_COLORS.secondarySoft : DESIGN_COLORS.tertiary};">✅ ${saveResult.message}</span>`;
+                result.className = `admin-result ${getCFPStorageToneClass(saveResult.mode)}`.trim();
+                result.textContent = `✅ ${saveResult.message}`;
             }
         });
 
@@ -3694,7 +3700,10 @@ function main() {
                 void handleNodeClick(venueName);
             }
 
-            if (result) result.innerHTML = `<span style="color: ${clearResult.mode === 'cloud' ? DESIGN_COLORS.primary : DESIGN_COLORS.tertiary};">↺ ${clearResult.message}</span>`;
+            if (result) {
+                result.className = `admin-result ${clearResult.mode === 'cloud' ? 'tone-info' : 'tone-warn'}`.trim();
+                result.textContent = `↺ ${clearResult.message}`;
+            }
         });
 
         document.getElementById('admin-cfp-export')?.addEventListener('click', async () => {
@@ -3702,9 +3711,15 @@ function main() {
             const result = document.getElementById('admin-cfp-result');
             try {
                 await navigator.clipboard.writeText(JSON.stringify(overrides, null, 2));
-                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.secondarySoft};">📋 현재 CFP override JSON을 클립보드에 복사했습니다.</span>`;
+                if (result) {
+                    result.className = 'admin-result tone-success';
+                    result.textContent = '📋 현재 CFP override JSON을 클립보드에 복사했습니다.';
+                }
             } catch {
-                if (result) result.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">클립보드 복사에 실패했습니다.</span>`;
+                if (result) {
+                    result.className = 'admin-result tone-warn';
+                    result.textContent = '클립보드 복사에 실패했습니다.';
+                }
             }
         });
 
@@ -3757,60 +3772,58 @@ function main() {
         popup.innerHTML = `
             <div class="collab-popup">
                 <div class="collab-overlay" id="admin-overlay"></div>
-                <div class="collab-container" style="max-width: 700px;">
+                <div class="collab-container collab-container-wide">
                     <div class="collab-header">
                         <span class="collab-title">🔐 Admin Dashboard</span>
                         <button class="collab-close" id="admin-close">×</button>
                     </div>
-                    <div class="collab-content" style="padding: 20px; max-height: 70vh; overflow-y: auto;">
+                    <div class="collab-content modal-scroll-body">
                         <!-- Stats -->
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 20px;">
-                            <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--klse-yellow);">${userCount}</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">등록 사용자</div>
+                        <div class="admin-stat-grid">
+                            <div class="admin-stat-card">
+                                <div class="admin-stat-value">${userCount}</div>
+                                <div class="admin-stat-label">등록 사용자</div>
                             </div>
-                            <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; text-align: center;">
-                                <div style="font-size: 1.8rem; font-weight: 700; color: var(--klse-yellow);">${threadCount}</div>
-                                <div style="font-size: 0.75rem; color: var(--text-muted);">협업 쓰레드</div>
+                            <div class="admin-stat-card">
+                                <div class="admin-stat-value">${threadCount}</div>
+                                <div class="admin-stat-label">협업 쓰레드</div>
                             </div>
                         </div>
 
                         <!-- CFP Verification -->
-                        <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
-                            <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
+                        <div class="surface-panel">
+                            <div class="admin-section-header">
                                 <div>
-                                    <h3 style="font-size: 0.95rem; margin-bottom: 6px;">📅 CFP 팩트체크 워크플로</h3>
-                                    <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0;">공식 링크, 마감일, 검증일을 저장하면 이 로컬 브라우저에서 즉시 반영됩니다.</p>
+                                    <h3 class="admin-section-title">📅 CFP 팩트체크 워크플로</h3>
+                                    <p class="admin-section-copy">공식 링크, 마감일, 검증일을 저장하면 전역 데이터와 관리자 워크플로에 즉시 반영됩니다.</p>
                                 </div>
-                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); color: var(--secondary-soft);">공식 ${officialCFPCount}</span>
-                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(245, 166, 35, 0.12); color: var(--tertiary);">추정 ${estimatedCFPCount}</span>
-                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(59, 191, 250, 0.12); color: var(--primary);">재검토 ${recheckCFPCount}</span>
-                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(59, 191, 250, 0.18); color: var(--primary-soft);">stale ${staleCFPCount}</span>
-                                    <span style="font-size: 0.72rem; padding: 4px 8px; border-radius: 999px; background: rgba(245, 166, 35, 0.16); color: var(--tertiarySoft);">90일+ ${agingCFPCount}</span>
+                                <div class="admin-chip-row">
+                                    <span class="admin-chip admin-chip--official">공식 ${officialCFPCount}</span>
+                                    <span class="admin-chip admin-chip--estimated">추정 ${estimatedCFPCount}</span>
+                                    <span class="admin-chip admin-chip--recheck">재검토 ${recheckCFPCount}</span>
+                                    <span class="admin-chip admin-chip--stale">stale ${staleCFPCount}</span>
+                                    <span class="admin-chip admin-chip--aging">90일+ ${agingCFPCount}</span>
                                 </div>
                             </div>
-                            <div id="admin-cfp-storage-status" style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;"></div>
+                            <div id="admin-cfp-storage-status" class="admin-storage-status"></div>
 
-                            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr); gap: 16px;">
-                                <div style="background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
-                                    <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 10px;">검토 우선 목록</div>
-                                    <div style="display: grid; gap: 8px; max-height: 320px; overflow-y: auto;">
+                            <div class="admin-split-grid">
+                                <div class="admin-subpanel">
+                                    <div class="admin-subpanel-title">검토 우선 목록</div>
+                                    <div class="admin-list-scroll">
                                         ${cfpRows.slice(0, 16).map(row => {
                                             const badge = getCFPReviewBadge(row.info);
                                             return `
-                                            <button class="admin-cfp-review-item" data-venue="${row.venueName}" style="text-align: left; background: rgba(25, 37, 64, 0.95); border: 1px solid rgba(64, 72, 93, 0.35); border-radius: 10px; padding: 10px; color: var(--text-primary); cursor: pointer;">
-                                                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 4px;">
-                                                    <span style="font-size: 0.8rem; font-weight: 600;">${row.venueName}</span>
-                                                    <span style="font-size: 0.65rem; color: ${row.info.confidence === 'official' ? 'var(--secondary-soft)' : 'var(--tertiary)'};">
+                                            <button class="admin-cfp-review-item admin-review-item" data-venue="${row.venueName}">
+                                                <div class="admin-review-head">
+                                                    <span class="admin-review-title">${row.venueName}</span>
+                                                    <span class="admin-review-confidence ${getCFPConfidenceClass(row.info.confidence)}">
                                                         ${row.info.confidence === 'official' ? '공식' : row.info.confidence === 'estimated' ? '추정' : '없음'}
                                                     </span>
                                                 </div>
-                                                <div style="font-size: 0.72rem; color: var(--text-muted);">${row.info.primaryDeadlineDisplay}</div>
-                                                <div style="font-size: 0.7rem; color: ${badge.color}; margin-top: 4px;">
-                                                    ${badge.label}
-                                                </div>
-                                                <div style="font-size: 0.68rem; color: var(--text-muted); margin-top: 4px;">
+                                                <div class="admin-review-meta">${row.info.primaryDeadlineDisplay}</div>
+                                                <div class="admin-chip ${getCFPReviewToneClass(row.info)} mt-8">${badge.label}</div>
+                                                <div class="admin-review-submeta">
                                                     ${row.info.deadlineState === 'passed' ? '다음 cycle 재검증 필요' : row.hasOverride ? 'override 적용 중' : `기존 패턴: ${row.legacyPattern}`}
                                                 </div>
                                             </button>
@@ -3819,88 +3832,86 @@ function main() {
                                     </div>
                                 </div>
 
-                                <div style="background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
-                                    <div style="font-size: 0.8rem; font-weight: 600; margin-bottom: 10px;">검증 레코드 편집</div>
-                                    <select id="admin-cfp-venue-select" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 10px;">
+                                <div class="admin-subpanel">
+                                    <div class="admin-subpanel-title">검증 레코드 편집</div>
+                                    <select id="admin-cfp-venue-select" class="admin-select-input">
                                         <option value="">학회 선택...</option>
                                         ${venueData.filter(venue => Boolean(venue.cfpDeadline)).map(venue => `<option value="${venue.name}">${venue.name}</option>`).join('')}
                                     </select>
-                                    <input id="admin-cfp-source-url" type="url" placeholder="공식 CFP URL" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 8px;">
-                                    <input id="admin-cfp-source-label" type="text" placeholder="출처 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; margin-bottom: 8px;">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                                        <input id="admin-cfp-verified-at" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
-                                        <select id="admin-cfp-timezone" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                    <input id="admin-cfp-source-url" type="url" placeholder="공식 CFP URL" class="admin-text-input">
+                                    <input id="admin-cfp-source-label" type="text" placeholder="출처 라벨" class="admin-text-input">
+                                    <div class="field-grid-2">
+                                        <input id="admin-cfp-verified-at" type="date" class="admin-text-input">
+                                        <select id="admin-cfp-timezone" class="admin-select-input">
                                             <option value="AoE">AoE</option>
                                             <option value="PT">PT</option>
                                             <option value="Local">Local</option>
                                         </select>
                                     </div>
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                                        <input id="admin-cfp-submission-deadline" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
-                                        <input id="admin-cfp-submission-label" type="text" placeholder="주 마감 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                    <div class="field-grid-2">
+                                        <input id="admin-cfp-submission-deadline" type="date" class="admin-text-input">
+                                        <input id="admin-cfp-submission-label" type="text" placeholder="주 마감 라벨" class="admin-text-input">
                                     </div>
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-                                        <input id="admin-cfp-abstract-deadline" type="date" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
-                                        <input id="admin-cfp-abstract-label" type="text" placeholder="보조 마감 라벨" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem;">
+                                    <div class="field-grid-2">
+                                        <input id="admin-cfp-abstract-deadline" type="date" class="admin-text-input">
+                                        <input id="admin-cfp-abstract-label" type="text" placeholder="보조 마감 라벨" class="admin-text-input">
                                     </div>
-                                    <textarea id="admin-cfp-notes" placeholder="검증 메모" style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.82rem; min-height: 70px; resize: vertical; margin-bottom: 10px;"></textarea>
-                                    <div id="admin-cfp-preview" style="background: rgba(25, 37, 64, 0.95); border-radius: 10px; padding: 12px; margin-bottom: 10px; min-height: 100px; color: var(--text-secondary); font-size: 0.8rem;">
+                                    <textarea id="admin-cfp-notes" placeholder="검증 메모" class="admin-textarea"></textarea>
+                                    <div id="admin-cfp-preview" class="admin-preview">
                                         검증 레코드를 선택하면 현재 적용 상태가 여기에 표시됩니다.
                                     </div>
-                                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                        <button id="admin-cfp-save" class="btn" style="padding: 10px 14px;">저장</button>
-                                        <button id="admin-cfp-clear" class="btn" style="padding: 10px 14px; background: transparent; border: 1px solid var(--border-color); color: var(--text-primary);">override 제거</button>
-                                        <button id="admin-cfp-export" class="btn" style="padding: 10px 14px; background: transparent; border: 1px solid var(--border-color); color: var(--primary);">JSON 복사</button>
+                                    <div class="button-row">
+                                        <button id="admin-cfp-save" class="btn">저장</button>
+                                        <button id="admin-cfp-clear" class="btn btn-secondary-ghost">override 제거</button>
+                                        <button id="admin-cfp-export" class="btn btn-secondary-accent">JSON 복사</button>
                                     </div>
-                                    <div id="admin-cfp-result" style="font-size: 0.78rem; margin-top: 10px;"></div>
+                                    <div id="admin-cfp-result" class="admin-result"></div>
                                 </div>
                             </div>
-                            <div style="margin-top: 16px; background: var(--bg-secondary); border-radius: 10px; padding: 12px;">
-                                <div style="display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 10px;">
-                                    <div style="font-size: 0.8rem; font-weight: 600;">최근 검증 이력</div>
-                                    <div style="font-size: 0.72rem; color: var(--text-muted);">최대 12건</div>
+                            <div class="admin-subpanel mt-16">
+                                <div class="admin-section-header">
+                                    <div class="admin-subpanel-title">최근 검증 이력</div>
+                                    <div class="admin-review-meta">최대 12건</div>
                                 </div>
                                 <div id="admin-cfp-history-list"></div>
                             </div>
                         </div>
 
                         <!-- User Search & Role Assignment -->
-                        <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
-                            <h3 style="font-size: 0.9rem; margin-bottom: 12px;">👤 사용자 검색 & 역할 할당</h3>
-                            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                                <input type="text" id="admin-user-search" placeholder="user_id 또는 이메일 검색..." 
-                                    style="flex: 1; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.85rem;">
-                                <button id="admin-search-btn" class="btn" style="padding: 10px 16px;">검색</button>
+                        <div class="surface-panel">
+                            <h3 class="admin-section-heading">👤 사용자 검색 & 역할 할당</h3>
+                            <div class="admin-search-row">
+                                <input type="text" id="admin-user-search" placeholder="user_id 또는 이메일 검색..." class="admin-text-input admin-search-input">
+                                <button id="admin-search-btn" class="btn admin-inline-button">검색</button>
                             </div>
-                            <div id="admin-search-result" style="font-size: 0.85rem;"></div>
+                            <div id="admin-search-result" class="admin-search-result"></div>
                         </div>
                         
                         <!-- Announcement -->
-                        <div style="background: var(--bg-primary); padding: 16px; border-radius: 12px; margin-bottom: 20px;">
-                            <h3 style="font-size: 0.9rem; margin-bottom: 12px;">📧 전체 공지</h3>
-                            <input type="text" id="admin-announce-subject" placeholder="공지 제목" 
-                                style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.85rem; margin-bottom: 8px;">
-                            <textarea id="admin-announce-body" placeholder="공지 내용..." 
-                                style="width: 100%; background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px; color: var(--text-primary); font-size: 0.85rem; min-height: 80px; resize: vertical;"></textarea>
-                            <button id="admin-send-announce" class="btn" style="margin-top: 8px;">📨 공지 발송 (저장)</button>
-                            <div id="admin-announce-result" style="font-size: 0.8rem; margin-top: 8px;"></div>
+                        <div class="surface-panel">
+                            <h3 class="admin-section-heading">📧 전체 공지</h3>
+                            <div class="admin-input-stack">
+                                <input type="text" id="admin-announce-subject" placeholder="공지 제목" class="admin-text-input">
+                                <textarea id="admin-announce-body" placeholder="공지 내용..." class="admin-textarea admin-textarea-tall"></textarea>
+                            </div>
+                            <button id="admin-send-announce" class="btn mt-8">📨 공지 발송 (저장)</button>
+                            <div id="admin-announce-result" class="admin-announce-result"></div>
                         </div>
                         
                         <!-- Recent Users -->
-                        <h3 style="font-size: 0.9rem; margin-bottom: 12px;">👥 최근 사용자</h3>
-                        <div style="max-height: 150px; overflow-y: auto;">
+                        <h3 class="admin-section-heading">👥 최근 사용자</h3>
+                        <div class="admin-list-compact">
                             ${users?.map(u => `
-                                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
-                                    <span style="font-size: 0.8rem; font-family: monospace;">${u.user_id.substring(0, 12)}...</span>
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; background: ${u.role === 'admin' ? 'rgba(245, 166, 35, 0.18)' : 'rgba(59, 191, 250, 0.14)'}; color: ${u.role === 'admin' ? 'var(--klse-yellow)' : '#3bbffa'};">${u.role}</span>
-                                        <button class="admin-toggle-role" data-userid="${u.user_id}" data-role="${u.role}" 
-                                            style="font-size: 0.7rem; padding: 2px 8px; border-radius: 6px; background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); cursor: pointer;">
+                                <div class="admin-user-row">
+                                    <span class="admin-user-id">${u.user_id.substring(0, 12)}...</span>
+                                    <div class="admin-user-actions">
+                                        <span class="admin-role-badge ${u.role}">${u.role}</span>
+                                        <button class="admin-toggle-role admin-role-toggle" data-userid="${u.user_id}" data-role="${u.role}">
                                             ${u.role === 'admin' ? '→user' : '→admin'}
                                         </button>
                                     </div>
                                 </div>
-                            `).join('') || '<div style="color: var(--text-muted);">사용자 없음</div>'}
+                            `).join('') || '<div class="admin-empty">사용자 없음</div>'}
                         </div>
                     </div>
                 </div>
@@ -3928,15 +3939,15 @@ function main() {
                 .limit(5);
 
             if (error || !data?.length) {
-                resultDiv.innerHTML = '<span style="color: var(--text-muted);">결과 없음</span>';
+                resultDiv.className = 'admin-search-result';
+                resultDiv.textContent = '결과 없음';
                 return;
             }
 
             resultDiv.innerHTML = data.map(u => `
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
-                    <span style="font-family: monospace; font-size: 0.8rem;">${u.user_id}</span>
-                    <select class="admin-role-select" data-userid="${u.user_id}" 
-                        style="background: var(--klse-navy); border: 1px solid var(--border-color); border-radius: 6px; padding: 4px 8px; color: var(--text-primary); font-size: 0.8rem;">
+                <div class="admin-search-user-row">
+                    <span class="admin-user-id">${u.user_id}</span>
+                    <select class="admin-role-select" data-userid="${u.user_id}">
                         <option value="user" ${u.role === 'user' ? 'selected' : ''}>user</option>
                         <option value="admin" ${u.role === 'admin' ? 'selected' : ''}>admin</option>
                     </select>
@@ -3991,7 +4002,10 @@ function main() {
             const resultDiv = document.getElementById('admin-announce-result');
 
             if (!subject.trim() || !body.trim()) {
-                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">제목과 내용을 입력하세요</span>`;
+                if (resultDiv) {
+                    resultDiv.className = 'admin-announce-result tone-warn';
+                    resultDiv.textContent = '제목과 내용을 입력하세요';
+                }
                 return;
             }
 
@@ -4003,9 +4017,15 @@ function main() {
             });
 
             if (error) {
-                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.tertiary};">❌ ${error.message}</span>`;
+                if (resultDiv) {
+                    resultDiv.className = 'admin-announce-result tone-warn';
+                    resultDiv.textContent = `❌ ${error.message}`;
+                }
             } else {
-                if (resultDiv) resultDiv.innerHTML = `<span style="color: ${DESIGN_COLORS.secondarySoft};">✅ 공지 저장됨 (이메일은 Edge Function 연동 필요)</span>`;
+                if (resultDiv) {
+                    resultDiv.className = 'admin-announce-result tone-success';
+                    resultDiv.textContent = '✅ 공지 저장됨 (이메일은 Edge Function 연동 필요)';
+                }
                 (document.getElementById('admin-announce-subject') as HTMLInputElement).value = '';
                 (document.getElementById('admin-announce-body') as HTMLTextAreaElement).value = '';
             }
@@ -4116,28 +4136,28 @@ function main() {
             <div class="collab-form">
                 <input type="text" id="new-thread-title" placeholder="협업 제목 *" required>
                 
-                <label style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; display: block;">목적 유형 * (복수 선택)</label>
-                <div id="purpose-checkboxes" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="paper"> 📝 논문</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="research_plan"> 🔬 연구</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="data_analysis"> 📊 분석</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="irb"> 📋 IRB</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="course_dev"> 📚 수업</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="other"> 📌 기타</label>
+                <label class="form-field-label">목적 유형 * (복수 선택)</label>
+                <div id="purpose-checkboxes" class="checkbox-grid">
+                    <label class="checkbox-chip"><input type="checkbox" value="paper"> 📝 논문</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="research_plan"> 🔬 연구</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="data_analysis"> 📊 분석</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="irb"> 📋 IRB</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="course_dev"> 📚 수업</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="other"> 📌 기타</label>
                 </div>
                 
-                <label style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px; display: block;">찾는 역할</label>
-                <div id="role-checkboxes" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="coauthor"> 공동저자</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="reviewer"> 리뷰어</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="stats"> 통계</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="coding"> 코딩</label>
-                    <label style="display: flex; align-items: center; gap: 4px; font-size: 0.8rem; white-space: nowrap;"><input type="checkbox" value="design"> 디자인</label>
+                <label class="form-field-label">찾는 역할</label>
+                <div id="role-checkboxes" class="checkbox-grid">
+                    <label class="checkbox-chip"><input type="checkbox" value="coauthor"> 공동저자</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="reviewer"> 리뷰어</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="stats"> 통계</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="coding"> 코딩</label>
+                    <label class="checkbox-chip"><input type="checkbox" value="design"> 디자인</label>
                 </div>
                 
                 <textarea id="new-thread-desc" placeholder="프로젝트 설명, 타임라인, 산출물 등을 적어주세요..."></textarea>
                 <button class="btn" id="create-thread-btn">생성하기</button>
-                <button class="btn" id="cancel-thread-btn" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); margin-top: 8px;">취소</button>
+                <button class="btn btn-ghost-muted mt-8" id="cancel-thread-btn">취소</button>
             </div>
         `;
 
@@ -4207,26 +4227,26 @@ function main() {
         if (!content) return;
 
         content.innerHTML = `
-            <div style="margin-bottom: 16px;">
-                <button class="btn" id="back-to-list" style="background: transparent; color: var(--text-muted); border: 1px solid var(--border-color); padding: 8px 16px;">← 목록으로</button>
+            <div class="modal-back-row">
+                <button class="btn btn-ghost-muted" id="back-to-list">← 목록으로</button>
             </div>
-            <div class="collab-thread" style="cursor: default;">
+            <div class="collab-thread static-detail">
                 <div class="collab-thread-header">
                     <span class="collab-thread-title">${thread.title}</span>
                     <span class="collab-thread-status ${thread.status}">${getStatusLabel(thread.status)}</span>
                 </div>
                 ${thread.description ? `<div class="collab-thread-desc">${thread.description}</div>` : ''}
             </div>
-            <h4 style="margin: 16px 0 8px; font-size: 0.9rem;">💬 댓글 (${replies.length})</h4>
+            <h4 class="modal-section-title">💬 댓글 (${replies.length})</h4>
             <div id="replies-list">
                 ${replies.length > 0 ? replies.map(r => `
                     <div class="collab-reply">
                         <div class="collab-reply-author">👤 ${r.author_id.substring(0, 8)}...</div>
                         <div class="collab-reply-content">${r.content}</div>
                     </div>
-                `).join('') : '<div class="collab-empty" style="padding: 20px;">아직 댓글이 없어요</div>'}
+                `).join('') : '<div class="collab-empty">아직 댓글이 없어요</div>'}
             </div>
-            <div class="collab-form" style="margin-top: 16px;">
+            <div class="collab-form collab-form-tight">
                 <textarea id="reply-content" placeholder="댓글을 입력하세요..."></textarea>
                 <button class="btn" id="submit-reply">댓글 작성</button>
             </div>
@@ -5861,9 +5881,9 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         // Display favorites
         const favoritesContainer = document.getElementById('my-favorites-list')!;
         if (guestMode) {
-            favoritesContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6;">게스트 모드에서는 즐겨찾기가 저장되지 않습니다.</p>';
+            favoritesContainer.innerHTML = '<p class="text-muted-block">게스트 모드에서는 즐겨찾기가 저장되지 않습니다.</p>';
         } else if (favorites.size === 0) {
-            favoritesContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">즐겨찾기가 없습니다.</p>';
+            favoritesContainer.innerHTML = '<p class="text-muted-block">즐겨찾기가 없습니다.</p>';
         } else {
             favoritesContainer.innerHTML = Array.from(favorites).map(fav => `
                 <div class="favorite-item" data-venue="${escapeHtml(fav)}">
@@ -5905,16 +5925,16 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const container = document.getElementById('my-annotations-list')!;
 
         if (guestMode) {
-            container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem; line-height: 1.6;">게스트 모드에서는 의견 작성과 활동 기록이 저장되지 않습니다.</p>';
+            container.innerHTML = '<p class="text-muted-block">게스트 모드에서는 의견 작성과 활동 기록이 저장되지 않습니다.</p>';
         } else if (myAnnotations.length === 0) {
-            container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.8rem;">작성한 의견이 없습니다.</p>';
+            container.innerHTML = '<p class="text-muted-block">작성한 의견이 없습니다.</p>';
         } else {
             container.innerHTML = myAnnotations.map(a => `
                 <div class="my-annotation-item" data-id="${a.id}">
                     <div class="my-annotation-venue">${escapeHtml(a.venue_name)}</div>
                     <div class="my-annotation-comment">${escapeHtml(a.comment)}</div>
                     <div class="my-annotation-meta">
-                        <span style="color: var(--color-accent); font-size: 0.7rem;">${'★'.repeat(a.rating)}${'☆'.repeat(5 - a.rating)}</span>
+                        <span class="note-stars">${'★'.repeat(a.rating)}${'☆'.repeat(5 - a.rating)}</span>
                         <div class="my-annotation-actions">
                             <button class="delete" data-id="${a.id}">삭제</button>
                         </div>
