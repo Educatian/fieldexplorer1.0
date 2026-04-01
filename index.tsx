@@ -5618,6 +5618,20 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return next.slice(0, 4);
     }
 
+    function getRagLoadingTitle(message: RagChatMessage) {
+        if (message.variant === 'deep-research') {
+            return isKorean ? '심층 리서치 진행 중' : 'Deep research in progress';
+        }
+        return isKorean ? '근거를 찾는 중' : 'Searching evidence';
+    }
+
+    function getRagLoadingBadge(message: RagChatMessage) {
+        if (message.variant === 'deep-research') {
+            return isKorean ? 'Deep Research' : 'Deep Research';
+        }
+        return isKorean ? '빠른 탐색' : 'Quick';
+    }
+
     function renderRagMessages() {
         if (!ragMessagesEl) return;
 
@@ -5628,17 +5642,25 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
             return `
                 <div class="rag-message ${message.role}">
-                    <div class="rag-bubble ${message.loading ? 'loading' : ''}">
+                    <div class="rag-bubble ${message.loading ? 'loading' : ''} ${message.loading && message.variant === 'deep-research' ? 'deep-research' : ''}">
                         ${message.loading ? `
-                            <div class="rag-typing-dots" aria-hidden="true">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <div class="rag-loading-head">
+                                <div class="rag-typing-dots" aria-hidden="true">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span class="rag-loading-badge ${message.variant === 'deep-research' ? 'deep' : ''}">${escapeHtml(getRagLoadingBadge(message))}</span>
                             </div>
                             <div class="rag-loading-copy">
-                                <div class="rag-loading-title">${escapeHtml(isKorean ? '근거를 찾는 중' : 'Searching evidence')}</div>
+                                <div class="rag-loading-title">${escapeHtml(getRagLoadingTitle(message))}</div>
                                 <div class="rag-loading-subtitle">${escapeHtml(message.text)}</div>
                             </div>
+                            ${message.variant === 'deep-research' ? `
+                                <div class="rag-loading-track" aria-hidden="true">
+                                    <div class="rag-loading-bar"></div>
+                                </div>
+                            ` : ''}
                         ` : escapeHtml(message.text)}
                     </div>
                     ${message.meta ? `
@@ -6606,6 +6628,35 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             const target = (btn as HTMLElement).getAttribute('data-learning-target') || undefined;
             if (action) runLearningAction(action, target);
         });
+    });
+    document.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement | null;
+        if (!target) return;
+
+        const learningButton = target.closest('#learning-mode-btn');
+        if (learningButton) {
+            openLearningModal();
+            return;
+        }
+
+        const learningClose = target.closest('#learning-modal-close');
+        if (learningClose) {
+            hideLearningModal();
+            return;
+        }
+
+        const learningOverlay = target.closest('#learning-modal.modal-overlay');
+        if (learningOverlay && target === learningOverlay) {
+            hideLearningModal();
+            return;
+        }
+
+        const learningAction = target.closest('[data-learning-action]') as HTMLElement | null;
+        if (learningAction) {
+            const action = learningAction.getAttribute('data-learning-action');
+            const actionTarget = learningAction.getAttribute('data-learning-target') || undefined;
+            if (action) runLearningAction(action, actionTarget);
+        }
     });
 
     // Category jump

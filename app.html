@@ -379,7 +379,7 @@
       inset: 0;
       background: rgba(6, 14, 32, 0);
       backdrop-filter: blur(0px);
-      z-index: 1000;
+      z-index: 90;
       pointer-events: none;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -3471,7 +3471,7 @@
       position: fixed;
       right: 18px;
       bottom: 84px;
-      z-index: 120;
+      z-index: 1205;
       width: 58px;
       height: 58px;
       border: none;
@@ -3494,7 +3494,7 @@
       position: fixed;
       right: 18px;
       bottom: 152px;
-      z-index: 125;
+      z-index: 1210;
       width: min(392px, calc(100vw - 24px));
       max-height: min(72vh, 640px);
       display: flex;
@@ -3654,10 +3654,50 @@
       border-color: rgba(59, 191, 250, 0.12);
     }
 
+    .rag-bubble.loading.deep-research {
+      min-width: 240px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      background:
+        linear-gradient(135deg, rgba(20, 31, 56, 0.96), rgba(9, 19, 40, 0.92)),
+        radial-gradient(circle at top right, rgba(59, 191, 250, 0.12), transparent 48%);
+      border-color: rgba(59, 191, 250, 0.2);
+      box-shadow: 0 12px 28px rgba(5, 10, 24, 0.32);
+    }
+
+    .rag-loading-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .rag-loading-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(59, 191, 250, 0.14);
+      color: var(--primary-soft);
+      border: 1px solid rgba(59, 191, 250, 0.18);
+    }
+
+    .rag-loading-badge.deep {
+      background: linear-gradient(135deg, rgba(59, 191, 250, 0.18), rgba(16, 185, 129, 0.12));
+      color: #bfefff;
+    }
+
     .rag-loading-copy {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      width: 100%;
     }
 
     .rag-loading-title {
@@ -3669,6 +3709,24 @@
     .rag-loading-subtitle {
       font-size: 0.7rem;
       color: var(--text-muted);
+    }
+
+    .rag-loading-track {
+      position: relative;
+      width: 100%;
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(64, 72, 93, 0.24);
+    }
+
+    .rag-loading-bar {
+      position: absolute;
+      inset: 0 auto 0 -32%;
+      width: 42%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(59, 191, 250, 0), rgba(59, 191, 250, 0.95), rgba(16, 185, 129, 0.7));
+      animation: ragLoadingSweep 1.4s ease-in-out infinite;
     }
 
     .rag-typing-dots {
@@ -3703,6 +3761,15 @@
       40% {
         opacity: 1;
         transform: translateY(-2px);
+      }
+    }
+
+    @keyframes ragLoadingSweep {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(240%);
       }
     }
 
@@ -4186,7 +4253,7 @@
         <button class="btn filter-btn" id="feed-btn" title="최신 리뷰 피드">📢</button>
         <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝</button>
         <button class="btn filter-btn" id="research-topics-btn" title="연구 주제 탐색">🔬</button>
-        <button class="btn filter-btn" id="learning-mode-btn" title="학습 모드">🧭 학습</button>
+        <button class="btn filter-btn" id="learning-mode-btn" type="button" title="학습 모드">🧭 학습</button>
         <button class="btn filter-btn is-hidden" id="admin-btn" title="관리자">🔐</button>
       </div>
       </div>
@@ -4442,7 +4509,7 @@
       <div class="modal" style="max-width: 980px; width: 94%;">
         <div class="modal-header">
           <h2>🧭 학습 모드</h2>
-          <button class="sidebar-close" id="learning-modal-close">✕</button>
+          <button class="sidebar-close" id="learning-modal-close" type="button">✕</button>
         </div>
         <div class="modal-body">
           <div class="learning-hero">
@@ -4463,7 +4530,7 @@
                     <li>사이드바에서 카테고리와 추천 저널을 읽습니다.</li>
                     <li>필요하면 연구 주제 탐색으로 이어갑니다.</li>
                   </ul>
-                  <button class="track-action" data-learning-action="focus" data-learning-target="Journal of the Learning Sciences">이 경로 시작</button>
+                  <button class="track-action" type="button" data-learning-action="focus" data-learning-target="Journal of the Learning Sciences">이 경로 시작</button>
                 </article>
 
                 <article class="track-card">
@@ -4475,7 +4542,7 @@
                     <li>비교 모드로 다른 저널과 바로 비교합니다.</li>
                     <li>즐겨찾기와 메모로 후보군을 정리합니다.</li>
                   </ul>
-                  <button class="track-action" data-learning-action="focus" data-learning-target="Computers & Education">저널부터 보기</button>
+                  <button class="track-action" type="button" data-learning-action="focus" data-learning-target="Computers & Education">저널부터 보기</button>
                 </article>
 
                 <article class="track-card">
@@ -4487,7 +4554,7 @@
                     <li>CFP 버튼으로 마감 임박 학회를 같이 봅니다.</li>
                     <li>학회와 저널의 역할 차이를 비교합니다.</li>
                   </ul>
-                  <button class="track-action" data-learning-action="focus" data-learning-target="ISLS Annual Meeting">학회부터 보기</button>
+                  <button class="track-action" type="button" data-learning-action="focus" data-learning-target="ISLS Annual Meeting">학회부터 보기</button>
                 </article>
 
                 <article class="track-card">
@@ -4499,7 +4566,7 @@
                     <li>핵심, 중간, 주변 클러스터 구조를 읽습니다.</li>
                     <li>대학/현장 관점을 번갈아 봅니다.</li>
                   </ul>
-                  <button class="track-action secondary" data-learning-action="korean-network">한국 네트워크 열기</button>
+                  <button class="track-action secondary" type="button" data-learning-action="korean-network">한국 네트워크 열기</button>
                 </article>
 
                 <article class="track-card">
@@ -4511,7 +4578,7 @@
                     <li>관련 연구자와 연결 토픽을 확인합니다.</li>
                     <li>다시 네트워크로 돌아와 맥락을 연결합니다.</li>
                   </ul>
-                  <button class="track-action" data-learning-action="topics">연구 주제 열기</button>
+                  <button class="track-action" type="button" data-learning-action="topics">연구 주제 열기</button>
                 </article>
               </div>
             </section>
