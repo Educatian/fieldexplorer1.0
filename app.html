@@ -3587,8 +3587,8 @@
     .rag-message {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      max-width: 92%;
+      gap: 6px;
+      max-width: 88%;
     }
 
     .rag-message.user {
@@ -3625,9 +3625,19 @@
       gap: 8px;
     }
 
+    .rag-section-label {
+      font-size: 0.66rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      opacity: 0.7;
+      margin-bottom: 2px;
+    }
+
     .rag-source-chip,
     .rag-action-chip,
-    .rag-suggestion-chip {
+    .rag-suggestion-chip,
+    .rag-overflow-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -3655,11 +3665,46 @@
     }
 
     .rag-action-chip,
-    .rag-suggestion-chip {
+    .rag-suggestion-chip,
+    .rag-overflow-chip {
       background: rgba(25, 37, 64, 0.92);
       color: var(--text-primary);
-      cursor: pointer;
       transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    }
+
+    .rag-action-chip,
+    .rag-suggestion-chip {
+      cursor: pointer;
+    }
+
+    .rag-action-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.95fr);
+      align-items: stretch;
+    }
+
+    .rag-action-chip {
+      justify-content: center;
+      min-height: 34px;
+    }
+
+    .rag-action-chip.primary {
+      background: linear-gradient(135deg, rgba(59, 191, 250, 0.24), rgba(34, 177, 236, 0.16));
+      border-color: rgba(59, 191, 250, 0.28);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .rag-action-chip.secondary {
+      background: rgba(20, 31, 56, 0.92);
+      color: var(--primary-soft);
+    }
+
+    .rag-overflow-chip {
+      background: transparent;
+      color: var(--text-muted);
+      border-style: dashed;
+      opacity: 0.85;
     }
 
     .rag-action-chip:hover,
@@ -3934,6 +3979,10 @@
         bottom: 148px;
         width: auto;
         max-height: min(68vh, 560px);
+      }
+
+      .rag-action-row {
+        grid-template-columns: 1fr;
       }
 
       .footer-links {
@@ -4414,8 +4463,8 @@
         <div class="rag-chatbot-title-wrap">
           <div class="rag-chatbot-mark">RAG</div>
           <div>
-            <div class="rag-chatbot-title">탐색 어시스턴트</div>
-            <div class="rag-chatbot-subtitle">근거 문서를 우선 검색하고, AI 연결 시 요약 품질을 높입니다</div>
+            <div class="rag-chatbot-title" id="rag-chatbot-title">탐색 어시스턴트</div>
+            <div class="rag-chatbot-subtitle" id="rag-chatbot-subtitle">근거 문서를 우선 검색하고, AI 연결 시 요약 품질을 높입니다</div>
           </div>
         </div>
         <button class="rag-chatbot-close" id="rag-chatbot-close" title="닫기">✕</button>
@@ -4424,9 +4473,9 @@
       <div class="rag-chatbot-footer">
         <form class="rag-chatbot-form" id="rag-chatbot-form">
           <textarea class="rag-chatbot-input" id="rag-chatbot-input" placeholder="예: CSCL 입문자에게 추천 저널 3개, 마감 임박 CFP, JLS와 C&E 비교" rows="2"></textarea>
-          <button class="rag-chatbot-send" type="submit" title="보내기">➜</button>
+          <button class="rag-chatbot-send" type="submit" id="rag-chatbot-send" title="보내기">➜</button>
         </form>
-        <div class="rag-chatbot-hint">근거 칩, 관련 노드 보기, 비교 추가, 공식 링크 열기까지 함께 제공합니다.</div>
+        <div class="rag-chatbot-hint" id="rag-chatbot-hint">근거 칩, 관련 노드 보기, 비교 추가, 공식 링크 열기까지 함께 제공합니다.</div>
       </div>
     </section>
 

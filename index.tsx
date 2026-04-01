@@ -5474,34 +5474,64 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         ragPanel?.classList.remove('visible');
     }
 
+    function getVisibleRagSources(sources?: RagChatSource[]) {
+        const visible = (sources || []).slice(0, 2);
+        const overflow = Math.max(0, (sources || []).length - visible.length);
+        return { visible, overflow };
+    }
+
+    function getVisibleRagActions(actions?: RagChatAction[]) {
+        const visible = (actions || []).slice(0, 2);
+        const overflow = Math.max(0, (actions || []).length - visible.length);
+        return { visible, overflow };
+    }
+
+    function getVisibleRagSuggestions(suggestions?: string[]) {
+        const visible = (suggestions || []).slice(0, 2);
+        const overflow = Math.max(0, (suggestions || []).length - visible.length);
+        return { visible, overflow };
+    }
+
     function renderRagMessages() {
         if (!ragMessagesEl) return;
 
-        ragMessagesEl.innerHTML = ragMessages.map((message, index) => `
-            <div class="rag-message ${message.role}">
-                <div class="rag-bubble">${escapeHtml(message.text)}</div>
-                ${message.meta ? `
-                    <div class="rag-source-row">
-                        <span class="rag-source-chip reference">${escapeHtml(message.meta)}</span>
-                    </div>
-                ` : ''}
-                ${message.sources?.length ? `
-                    <div class="rag-source-row">
-                        ${message.sources.map(source => `<span class="rag-source-chip ${source.tone}">${escapeHtml(source.label)}</span>`).join('')}
-                    </div>
-                ` : ''}
-                ${message.loading ? '' : message.actions?.length ? `
-                    <div class="rag-action-row">
-                        ${message.actions.map(action => `<button class="rag-action-chip" data-chat-action="${action.type}" data-chat-target="${escapeHtml(action.target || '')}" data-message-index="${index}">${escapeHtml(action.label)}</button>`).join('')}
-                    </div>
-                ` : ''}
-                ${message.loading ? '' : message.suggestions?.length ? `
-                    <div class="rag-suggestion-row">
-                        ${message.suggestions.map(prompt => `<button class="rag-suggestion-chip" data-rag-prompt="${escapeHtml(prompt)}">${escapeHtml(prompt)}</button>`).join('')}
-                    </div>
-                ` : ''}
-            </div>
-        `).join('');
+        ragMessagesEl.innerHTML = ragMessages.map((message, index) => {
+            const visibleSources = getVisibleRagSources(message.sources);
+            const visibleActions = getVisibleRagActions(message.actions);
+            const visibleSuggestions = getVisibleRagSuggestions(message.suggestions);
+
+            return `
+                <div class="rag-message ${message.role}">
+                    <div class="rag-bubble">${escapeHtml(message.text)}</div>
+                    ${message.meta ? `
+                        <div class="rag-source-row">
+                            <span class="rag-source-chip reference">${escapeHtml(message.meta)}</span>
+                        </div>
+                    ` : ''}
+                    ${visibleSources.visible.length ? `
+                        <div class="rag-section-label">Grounding</div>
+                        <div class="rag-source-row">
+                            ${visibleSources.visible.map(source => `<span class="rag-source-chip ${source.tone}">${escapeHtml(source.label)}</span>`).join('')}
+                            ${visibleSources.overflow > 0 ? `<span class="rag-overflow-chip">+${visibleSources.overflow} more</span>` : ''}
+                        </div>
+                    ` : ''}
+                    ${message.loading ? '' : visibleActions.visible.length ? `
+                        <div class="rag-section-label">Next Step</div>
+                        <div class="rag-action-row">
+                            ${visibleActions.visible.map((action, actionIndex) => `<button class="rag-action-chip ${actionIndex === 0 ? 'primary' : 'secondary'}" data-chat-action="${action.type}" data-chat-target="${escapeHtml(action.target || '')}" data-message-index="${index}">${escapeHtml(action.label)}</button>`).join('')}
+                        </div>
+                        ${visibleActions.overflow > 0 ? `<div class="rag-source-row"><span class="rag-overflow-chip">추가 액션 ${visibleActions.overflow}개는 다음 답변에서 이어서 제안됩니다</span></div>` : ''}
+                    ` : ''}
+                    ${message.loading ? '' : visibleSuggestions.visible.length ? `
+                        <div class="rag-section-label">Try Next</div>
+                        <div class="rag-suggestion-row">
+                            ${visibleSuggestions.visible.map(prompt => `<button class="rag-suggestion-chip" data-rag-prompt="${escapeHtml(prompt)}">${escapeHtml(prompt)}</button>`).join('')}
+                            ${visibleSuggestions.overflow > 0 ? `<span class="rag-overflow-chip">+${visibleSuggestions.overflow} prompts</span>` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
 
         ragMessagesEl.scrollTop = ragMessagesEl.scrollHeight;
     }
@@ -6529,6 +6559,32 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             learningModeBtn.textContent = isKorean ? '🧭 학습' : '🧭 Learn';
             learningModeBtn.title = isKorean ? '학습 모드' : 'Learning Mode';
         }
+
+        const ragTitle = document.getElementById('rag-chatbot-title');
+        if (ragTitle) ragTitle.textContent = isKorean ? '탐색 어시스턴트' : 'Research Assistant';
+
+        const ragSubtitle = document.getElementById('rag-chatbot-subtitle');
+        if (ragSubtitle) ragSubtitle.textContent = isKorean
+            ? '근거 문서를 우선 검색하고, AI 연결 시 요약 품질을 높입니다'
+            : 'Searches grounded documents first, then improves summaries with AI when available';
+
+        const ragInputEl = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
+        if (ragInputEl) {
+            ragInputEl.placeholder = isKorean
+                ? '예: CSCL 입문자에게 추천 저널 3개, 마감 임박 CFP, JLS와 C&E 비교'
+                : 'Try: 3 journals for CSCL beginners, urgent CFPs, compare JLS and C&E';
+        }
+
+        const ragHint = document.getElementById('rag-chatbot-hint');
+        if (ragHint) ragHint.textContent = isKorean
+            ? '근거 칩, 관련 노드 보기, 비교 추가, 공식 링크 열기까지 함께 제공합니다.'
+            : 'Includes grounding chips, node shortcuts, compare actions, and official links.';
+
+        const ragCloseBtn = document.getElementById('rag-chatbot-close');
+        if (ragCloseBtn) ragCloseBtn.title = isKorean ? '닫기' : 'Close';
+
+        const ragSendBtn = document.getElementById('rag-chatbot-send');
+        if (ragSendBtn) ragSendBtn.title = isKorean ? '보내기' : 'Send';
 
         const fullscreenBtn = document.getElementById('fullscreen-btn');
         if (fullscreenBtn) fullscreenBtn.title = isKorean ? '전체화면 (F)' : 'Fullscreen (F)';
