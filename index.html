@@ -569,8 +569,7 @@
             padding: 0 16px;
         }
 
-        .guest-btn,
-        .skip-link-btn {
+        .guest-btn {
             width: 100%;
             padding: 12px;
             background: transparent;
@@ -582,8 +581,7 @@
             transition: all 0.2s;
         }
 
-        .guest-btn:hover,
-        .skip-link-btn:hover {
+        .guest-btn:hover {
             background: var(--surface-bright);
             color: var(--primary);
             border-color: rgba(59, 191, 250, 0.22);
@@ -608,11 +606,6 @@
             margin-bottom: 12px;
             line-height: 1.5;
         }
-
-        .entry-helper .skip-link-btn {
-            color: var(--text-primary);
-        }
-
         /* Features section */
         .features {
             padding: 80px 40px;
@@ -829,7 +822,6 @@
                 <div class="entry-helper">
                     <h3>빠른 미리보기</h3>
                     <p>현재 네트워크, 토픽, 비교 패널은 바로 탐색할 수 있습니다. 북마크, 의견 남기기, 계정 저장 기능만 로그인 후 사용됩니다.</p>
-                    <button type="button" class="skip-link-btn" id="card-skip-btn">게스트 모드로 입장</button>
                 </div>
             </div>
         </section>
@@ -955,7 +947,6 @@
 
         document.getElementById('hero-skip-btn')?.addEventListener('click', enterWithoutLogin);
         document.getElementById('guest-btn')?.addEventListener('click', enterWithoutLogin);
-        document.getElementById('card-skip-btn')?.addEventListener('click', enterWithoutLogin);
 
         // Generate floating particles
         (function generateParticles() {
