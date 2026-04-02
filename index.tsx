@@ -307,6 +307,8 @@ const venueData: VenueInfo[] = [
 const FAVORITES_KEY = 'fieldexplorer_favorites';
 const CFP_OVERRIDES_KEY = 'fieldexplorer_cfp_overrides';
 const CFP_HISTORY_KEY = 'fieldexplorer_cfp_history';
+const DEEP_RESEARCH_USAGE_KEY = 'fieldexplorer_deep_research_usage';
+const DEEP_RESEARCH_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
 const venueCache: Record<string, any> = {};
 let cfpOverrideCache: CFPRecordMap = {};
 let cfpHistoryCache: CFPHistoryEntry[] = [];
@@ -381,6 +383,49 @@ function getStoredUser(): StoredUser {
 function isGuestUser(): boolean {
     const user = getStoredUser();
     return Boolean(user.isGuest || user.email === 'guest');
+}
+
+function getDeepResearchMemberKey(): string | null {
+    const user = getStoredUser();
+    const email = user.email?.trim().toLowerCase();
+    if (!email || email === 'guest' || user.isGuest) return null;
+    return email;
+}
+
+function getDeepResearchUsageMap(): Record<string, string> {
+    try {
+        return JSON.parse(localStorage.getItem(DEEP_RESEARCH_USAGE_KEY) || '{}');
+    } catch {
+        return {};
+    }
+}
+
+function getDeepResearchLastUsedAt(): string | null {
+    const memberKey = getDeepResearchMemberKey();
+    if (!memberKey) return null;
+    return getDeepResearchUsageMap()[memberKey] || null;
+}
+
+function getDeepResearchCooldownRemainingMs(): number {
+    const lastUsedAt = getDeepResearchLastUsedAt();
+    if (!lastUsedAt) return 0;
+    const lastUsedTime = new Date(lastUsedAt).getTime();
+    if (!Number.isFinite(lastUsedTime)) return 0;
+    return Math.max(0, (lastUsedTime + DEEP_RESEARCH_COOLDOWN_MS) - Date.now());
+}
+
+function markDeepResearchUsed() {
+    const memberKey = getDeepResearchMemberKey();
+    if (!memberKey) return;
+    const usageMap = getDeepResearchUsageMap();
+    usageMap[memberKey] = new Date().toISOString();
+    localStorage.setItem(DEEP_RESEARCH_USAGE_KEY, JSON.stringify(usageMap));
+}
+
+function getDeepResearchAccessState(): 'guest' | 'cooldown' | 'available' {
+    if (isGuestUser() || !getDeepResearchMemberKey()) return 'guest';
+    if (getDeepResearchCooldownRemainingMs() > 0) return 'cooldown';
+    return 'available';
 }
 
 function requireMemberAccess(featureLabel: string): boolean {
@@ -5657,10 +5702,35 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         return isKorean ? 'Gemini Deep Research · 백그라운드 리포트' : 'Gemini Deep Research · background report';
     }
 
+    function getDeepResearchCooldownLabel() {
+        const remainingMs = getDeepResearchCooldownRemainingMs();
+        const remainingDays = Math.ceil(remainingMs / (24 * 60 * 60 * 1000));
+        if (isKorean) {
+            return remainingDays > 0 ? `${remainingDays}일 후 재사용` : '곧 재사용 가능';
+        }
+        return remainingDays > 0 ? `Retry in ${remainingDays}d` : 'Available soon';
+    }
+
     function getDeepResearchButtonLabel() {
+        const accessState = getDeepResearchAccessState();
+        if (accessState === 'guest') return isKorean ? '회원 전용' : 'Members';
+        if (accessState === 'cooldown') return getDeepResearchCooldownLabel();
         return ragDeepPending
             ? (isKorean ? '리서치 중' : 'Researching')
             : (isKorean ? '심층' : 'Deep');
+    }
+
+    function getDeepResearchButtonTitle() {
+        const accessState = getDeepResearchAccessState();
+        if (accessState === 'guest') {
+            return isKorean ? '심층 리서치는 회원만 사용할 수 있습니다.' : 'Deep research is available for signed-in members only.';
+        }
+        if (accessState === 'cooldown') {
+            return isKorean ? '심층 리서치는 사용 후 7일 뒤에 다시 사용할 수 있습니다.' : 'Deep research becomes available again 7 days after each use.';
+        }
+        return ragDeepPending
+            ? (isKorean ? '심층 리서치 진행 중' : 'Deep research in progress')
+            : (isKorean ? '현재 질문으로 심층 리서치 시작' : 'Start deep research for the current prompt');
     }
 
     function getDeepResearchWaitingText(status?: string) {
@@ -5682,11 +5752,9 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             ragSendBtn.disabled = ragPending || ragDeepPending;
         }
         if (ragDeepButton) {
-            ragDeepButton.disabled = ragPending || ragDeepPending;
+            ragDeepButton.disabled = ragPending || ragDeepPending || getDeepResearchAccessState() !== 'available';
             ragDeepButton.textContent = getDeepResearchButtonLabel();
-            ragDeepButton.title = isKorean
-                ? (ragDeepPending ? '심층 리서치 진행 중' : '현재 질문으로 심층 리서치 시작')
-                : (ragDeepPending ? 'Deep research in progress' : 'Start deep research for the current prompt');
+            ragDeepButton.title = getDeepResearchButtonTitle();
         }
     }
 
@@ -6670,6 +6738,17 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     async function submitDeepResearchPrompt(prompt: string) {
         const cleanPrompt = prompt.trim();
         if (!cleanPrompt || ragPending || ragDeepPending) return;
+        const accessState = getDeepResearchAccessState();
+        if (accessState === 'guest') {
+            showToast(isKorean ? '심층 리서치는 회원만 사용할 수 있습니다.' : 'Deep research is available for members only.');
+            syncRagComposerState();
+            return;
+        }
+        if (accessState === 'cooldown') {
+            showToast(isKorean ? '심층 리서치는 사용 후 7일 뒤에 다시 사용할 수 있습니다.' : 'Deep research becomes available again 7 days after each use.');
+            syncRagComposerState();
+            return;
+        }
 
         ragDeepPending = true;
         activeDeepResearchId = null;
@@ -6719,6 +6798,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 renderRagMessages();
 
                 if (status === 'completed' && statusPayload?.text?.trim()) {
+                    markDeepResearchUsed();
                     ragMessages[pendingIndex] = buildDeepResearchMessage(
                         cleanPrompt,
                         retrievalDocuments,
@@ -6819,6 +6899,17 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     ragDeepButton?.addEventListener('click', () => {
         if (ragPending || ragDeepPending) return;
+        const accessState = getDeepResearchAccessState();
+        if (accessState === 'guest') {
+            showToast(isKorean ? '심층 리서치는 로그인한 회원만 사용할 수 있습니다.' : 'Deep research is available to signed-in members only.');
+            syncRagComposerState();
+            return;
+        }
+        if (accessState === 'cooldown') {
+            showToast(isKorean ? '심층 리서치는 사용 후 7일 뒤에 다시 사용할 수 있습니다.' : 'Deep research becomes available again 7 days after each use.');
+            syncRagComposerState();
+            return;
+        }
         const prompt = (ragInput?.value || '').trim() || findLastUserPrompt();
         if (!prompt) {
             const starterPrompt = buildDeepResearchStarterPrompt();
@@ -7325,9 +7416,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const ragDeepBtn = document.getElementById('rag-chatbot-deep');
         if (ragDeepBtn) {
             ragDeepBtn.textContent = getDeepResearchButtonLabel();
-            ragDeepBtn.title = isKorean
-                ? (ragDeepPending ? '심층 리서치 진행 중' : '현재 질문으로 심층 리서치 시작')
-                : (ragDeepPending ? 'Deep research in progress' : 'Start deep research for the current prompt');
+            ragDeepBtn.title = getDeepResearchButtonTitle();
         }
 
         const ragCloseBtn = document.getElementById('rag-chatbot-close');
