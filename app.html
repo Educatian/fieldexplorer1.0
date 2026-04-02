@@ -2164,6 +2164,48 @@
       color: var(--text-muted);
     }
 
+    .admin-refresh-state-wrap {
+      margin: 14px 0 16px;
+    }
+
+    .admin-refresh-card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .admin-refresh-card {
+      background: rgba(25, 37, 64, 0.95);
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 96px;
+    }
+
+    .admin-refresh-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .admin-refresh-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.25;
+    }
+
+    .admin-refresh-value--small {
+      font-size: 0.86rem;
+    }
+
+    .admin-refresh-meta,
+    .admin-refresh-footnote {
+      margin-top: 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
     .admin-section-header {
       display: flex;
       justify-content: space-between;
@@ -2211,6 +2253,18 @@
       padding: 10px;
       color: var(--text-primary);
       cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .admin-refresh-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .admin-refresh-card-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .admin-review-head {

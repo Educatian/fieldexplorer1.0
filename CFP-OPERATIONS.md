@@ -7,6 +7,51 @@ FieldExplorer now supports a CFP verification workflow with:
 - verification history
 - local fallback when the cloud table is missing or unavailable
 
+## Auto Refresh
+
+FieldExplorer can now auto-refresh CFP records without admin approval.
+
+What it updates automatically:
+
+- official CFP source URL
+- source label
+- main submission deadline
+- earlier abstract deadline when the official page clearly lists one
+- timezone (`AoE`, `PT`, `Local`)
+- verification date
+
+What it does not auto-write:
+
+- acceptance rates
+- time to decision
+- contributor lists
+- editorial guidance text
+
+Setup:
+
+1. Run `supabase-admin.sql`
+2. Run `supabase-cfp.sql`
+3. Run `supabase-cfp-refresh.sql`
+4. Add Vercel env vars:
+
+- `CRON_SECRET`
+- `GEMINI_API_KEY`
+- `SUPABASE_URL` or `VITE_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+How it runs:
+
+- Vercel Cron calls `/api/cron-cfp-refresh` once per day at `08:00 UTC`
+- the function checks `cfp_refresh_state.last_success_at`
+- if fewer than 15 days passed, it exits
+- if 15 or more days passed, it starts Gemini Deep Research
+- a later daily run picks up the completed Deep Research report and writes verified CFP rows into `cfp_verifications`
+
+Manual trigger:
+
+- send a GET request to `/api/cron-cfp-refresh?force=1`
+- include `Authorization: Bearer <CRON_SECRET>`
+
 ## Apply Order
 
 Run these SQL files in Supabase SQL Editor in this order:

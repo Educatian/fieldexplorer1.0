@@ -313,6 +313,8 @@ let cfpHistoryCache: CFPHistoryEntry[] = [];
 let cfpPersistenceMode: 'cloud' | 'local' | 'unavailable' = 'local';
 let cfpPersistenceDetail = '로컬 브라우저 저장 중';
 let cfpHistoryCloudAvailable: boolean | null = null;
+let cfpRefreshStateCache: CFPRefreshState | null = null;
+let cfpRefreshStateAvailable: boolean | null = null;
 let refreshCFPDerivedViews = () => { /* assigned inside main */ };
 
 interface StoredUser {
@@ -330,6 +332,22 @@ interface CFPHistoryEntry {
     snapshot?: OfficialCFPRecord;
     changedAt: string;
     changedBy?: string | null;
+}
+
+interface CFPRefreshState {
+    id: string;
+    status: 'idle' | 'running' | 'completed' | 'failed';
+    interactionId?: string | null;
+    interactionStartedAt?: string | null;
+    lastCheckedAt?: string | null;
+    completedAt?: string | null;
+    lastSuccessAt?: string | null;
+    nextDueAt?: string | null;
+    lastError?: string | null;
+    lastResultCount: number;
+    lastReport?: string | null;
+    targetNames: string[];
+    updatedAt?: string | null;
 }
 
 function getFavorites(): Set<string> {
@@ -463,6 +481,25 @@ function fromCloudCFPHistoryRows(rows: any[]): CFPHistoryEntry[] {
     }));
 }
 
+function fromCloudCFPRefreshStateRow(row: any): CFPRefreshState | null {
+    if (!row?.id) return null;
+    return {
+        id: row.id,
+        status: row.status || 'idle',
+        interactionId: row.interaction_id || null,
+        interactionStartedAt: row.interaction_started_at || null,
+        lastCheckedAt: row.last_checked_at || null,
+        completedAt: row.completed_at || null,
+        lastSuccessAt: row.last_success_at || null,
+        nextDueAt: row.next_due_at || null,
+        lastError: row.last_error || null,
+        lastResultCount: typeof row.last_result_count === 'number' ? row.last_result_count : 0,
+        lastReport: row.last_report || null,
+        targetNames: Array.isArray(row.target_names) ? row.target_names : [],
+        updatedAt: row.updated_at || null
+    };
+}
+
 function createLocalCFPHistoryEntry(
     action: 'upsert' | 'delete',
     storageMode: 'cloud' | 'local',
@@ -537,6 +574,34 @@ async function loadCFPHistoryFromCloud(): Promise<CFPHistoryEntry[] | null> {
 
     cfpHistoryCloudAvailable = true;
     return fromCloudCFPHistoryRows(data || []);
+}
+
+async function loadCFPRefreshStateFromCloud(): Promise<CFPRefreshState | null> {
+    if (!supabase || cfpRefreshStateAvailable === false) return null;
+
+    const { data, error } = await supabase
+        .from('cfp_refresh_state')
+        .select('*')
+        .eq('id', 'cfp-auto-refresh')
+        .maybeSingle();
+
+    if (error) {
+        if (
+            error.message.includes('cfp_refresh_state') ||
+            error.message.includes('schema cache') ||
+            error.code === 'PGRST204'
+        ) {
+            cfpRefreshStateAvailable = false;
+            console.info('[CFP] Auto refresh state table unavailable.');
+            return null;
+        }
+        console.warn('[CFP] Auto refresh state load failed:', error.message);
+        return null;
+    }
+
+    cfpRefreshStateAvailable = true;
+    cfpRefreshStateCache = fromCloudCFPRefreshStateRow(data);
+    return cfpRefreshStateCache;
 }
 
 async function initializeCFPOverrides() {
@@ -3558,6 +3623,31 @@ function main() {
         return mode === 'cloud' ? 'tone-success' : mode === 'local' ? 'tone-warn' : '';
     }
 
+    function formatAdminDateTime(dateString?: string | null) {
+        if (!dateString) return 'ì—†ìŒ';
+        try {
+            return new Date(dateString).toLocaleString('ko-KR');
+        } catch {
+            return dateString;
+        }
+    }
+
+    function getRefreshStatusLabel(state: CFPRefreshState | null) {
+        if (!state) return 'ë¯¸ì„¤ì •';
+        if (state.status === 'running') return 'ì‹¤í–‰ ì¤‘';
+        if (state.status === 'completed') return 'ì •ìƒ';
+        if (state.status === 'failed') return 'ì‹¤íŒ¨';
+        return 'ëŒ€ê¸°';
+    }
+
+    function getRefreshStatusTone(state: CFPRefreshState | null) {
+        if (!state) return 'admin-chip--estimated';
+        if (state.status === 'completed') return 'admin-chip--official';
+        if (state.status === 'running') return 'admin-chip--aging';
+        if (state.status === 'failed') return 'admin-chip--stale';
+        return 'admin-chip--estimated';
+    }
+
     function getCFPReviewToneClass(info: ResolvedCFPInfo) {
         const ageDays = getCFPVerificationAgeDays(info);
         if (info.confidence !== 'official') return 'admin-chip--estimated';
@@ -3629,6 +3719,66 @@ function main() {
 
         statusEl.className = `admin-storage-status ${getCFPStorageToneClass(cfpPersistenceMode)}`.trim();
         statusEl.innerHTML = `<strong>${cfpPersistenceMode === 'cloud' ? '공용 저장' : '로컬 저장'}</strong> · ${cfpPersistenceDetail}`;
+    }
+
+    function renderAdminCFPRefreshState() {
+        const root = document.getElementById('admin-cfp-refresh-state');
+        if (!root) return;
+
+        if (cfpRefreshStateAvailable === false) {
+            root.innerHTML = `
+                <div class="admin-refresh-card-grid">
+                    <div class="admin-refresh-card">
+                        <div class="admin-refresh-label">ìžë™ ê°±ì‹ </div>
+                        <div class="admin-refresh-value">ë¯¸ì„¤ì •</div>
+                        <div class="admin-refresh-meta">cfp_refresh_state í…Œì´ë¸”ì„ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.</div>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        const state = cfpRefreshStateCache;
+        if (!state) {
+            root.innerHTML = `
+                <div class="admin-refresh-card-grid">
+                    <div class="admin-refresh-card">
+                        <div class="admin-refresh-label">ìžë™ ê°±ì‹ </div>
+                        <div class="admin-refresh-value">ëŒ€ê¸°</div>
+                        <div class="admin-refresh-meta">ì•„ì§ ì‹¤í–‰ ê¸°ë¡ì´ ì—†ìŠµë‹ˆë‹¤.</div>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        root.innerHTML = `
+            <div class="admin-refresh-card-grid">
+                <div class="admin-refresh-card">
+                    <div class="admin-refresh-label">ìžë™ ê°±ì‹  ìƒíƒœ</div>
+                    <div class="admin-refresh-value">${getRefreshStatusLabel(state)}</div>
+                    <div class="admin-chip ${getRefreshStatusTone(state)} mt-8">${state.status}</div>
+                </div>
+                <div class="admin-refresh-card">
+                    <div class="admin-refresh-label">ë§ˆì§€ë§‰ ì„±ê³µ</div>
+                    <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.lastSuccessAt)}</div>
+                    <div class="admin-refresh-meta">ì™„ë£Œ ${formatAdminDateTime(state.completedAt)}</div>
+                </div>
+                <div class="admin-refresh-card">
+                    <div class="admin-refresh-label">ë‹¤ìŒ ì˜ˆì •</div>
+                    <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.nextDueAt)}</div>
+                    <div class="admin-refresh-meta">ì¼ì¼ cronì´ 15ì¼ ì£¼ê¸°ë¡œ íŒì •í•©ë‹ˆë‹¤.</div>
+                </div>
+                <div class="admin-refresh-card">
+                    <div class="admin-refresh-label">ìµœê·¼ ë°˜ì˜</div>
+                    <div class="admin-refresh-value">${state.lastResultCount}</div>
+                    <div class="admin-refresh-meta">${state.targetNames.length}ê°œ venue ëŒ€ìƒ</div>
+                </div>
+            </div>
+            <div class="admin-refresh-footnote">
+                ${state.lastError ? `ë§ˆì§€ë§‰ ì˜¤ë¥˜: ${escapeHtml(state.lastError)}` : 'ìµœê·¼ ì˜¤ë¥˜ ì—†ìŒ'}
+            </div>
+        `;
     }
 
     function fillAdminCFPForm(venueName: string) {
@@ -3781,9 +3931,10 @@ function main() {
         }
 
         // Get stats
-        const [usersRes, threadsRes] = await Promise.all([
+        const [usersRes, threadsRes, refreshState] = await Promise.all([
             supabase.from('user_roles').select('*', { count: 'exact' }),
-            supabase.from('collaboration_threads').select('*', { count: 'exact' })
+            supabase.from('collaboration_threads').select('*', { count: 'exact' }),
+            loadCFPRefreshStateFromCloud()
         ]);
 
         const userCount = usersRes.count || 0;
@@ -3800,6 +3951,7 @@ function main() {
             const age = getCFPVerificationAgeDays(row.info);
             return row.info.confidence === 'official' && age !== null && age >= 90 && age < 180 && row.info.deadlineState !== 'passed';
         }).length;
+        cfpRefreshStateCache = refreshState;
 
         // Get recent users
         const { data: users } = await supabase
@@ -3847,6 +3999,7 @@ function main() {
                                 </div>
                             </div>
                             <div id="admin-cfp-storage-status" class="admin-storage-status"></div>
+                            <div id="admin-cfp-refresh-state" class="admin-refresh-state-wrap"></div>
 
                             <div class="admin-split-grid">
                                 <div class="admin-subpanel">
@@ -3966,6 +4119,7 @@ function main() {
         if (cfpRows[0]) {
             fillAdminCFPForm(cfpRows[0].venueName);
         }
+        renderAdminCFPRefreshState();
 
         // Search user
         document.getElementById('admin-search-btn')?.addEventListener('click', async () => {
