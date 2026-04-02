@@ -50,6 +50,7 @@ function buildResearchPrompt({ query, currentContext, documents }) {
     'Answer in Korean.',
     'Use web research actively and prefer official conference, journal, and society pages when dates, CFP status, or policy details matter.',
     'Treat the app evidence below as context from the product, not as guaranteed truth.',
+    'If an evidence document type is "graph", treat it as a structural path hint from the product network, not as an official source.',
     'If the app evidence conflicts with fresher official web sources, say so clearly.',
     'Be explicit about what is verified, what is inferred, and what still needs confirmation.',
     'Keep the report practical for a user exploring journals, conferences, topics, and CFPs inside the app.',

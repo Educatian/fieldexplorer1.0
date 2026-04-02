@@ -5503,7 +5503,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     type RagSourceTone = 'official' | 'reference' | 'editorial';
     type RagActionType = 'focus-node' | 'add-compare' | 'open-topic' | 'open-topics' | 'open-link';
-    type RagDocumentType = 'venue' | 'topic' | 'cfp' | 'glossary' | 'context';
+    type RagDocumentType = 'venue' | 'topic' | 'cfp' | 'glossary' | 'context' | 'graph';
 
     interface RagChatSource {
         label: string;
@@ -5930,6 +5930,134 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             .slice(0, 5);
     }
 
+    function getSharedVenueCategories(firstVenue: typeof venueData[number], secondVenue: typeof venueData[number]) {
+        return firstVenue.categories.filter(category => secondVenue.categories.includes(category));
+    }
+
+    function buildGraphNeighborMatches(seedVenue: typeof venueData[number]) {
+        return venueData
+            .filter(candidate => candidate.name !== seedVenue.name)
+            .map(candidate => {
+                const sharedCategories = getSharedVenueCategories(seedVenue, candidate);
+                if (sharedCategories.length === 0) return null;
+
+                const details = getVenueDetails(candidate.name, candidate.type);
+                let score = sharedCategories.length * 10;
+                if (candidate.type === seedVenue.type) score += 2;
+                if (candidate.impact === 'Q1') score += 1;
+
+                return {
+                    venue: candidate,
+                    details,
+                    sharedCategories,
+                    score
+                };
+            })
+            .filter((entry): entry is {
+                venue: typeof venueData[number];
+                details: VenueDetails;
+                sharedCategories: string[];
+                score: number;
+            } => Boolean(entry))
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 4);
+    }
+
+    function buildGraphRagDocuments(
+        query: string,
+        venueMatches: ReturnType<typeof buildVenueMatches>,
+        topicMatches: ReturnType<typeof buildTopicMatches>,
+        currentVenueName: string | null
+    ): RagRetrievalDocument[] {
+        const documents: RagRetrievalDocument[] = [];
+        const seedVenues = new Map<string, typeof venueData[number]>();
+
+        if (currentVenueName) {
+            const currentVenue = venueData.find(venue => venue.name === currentVenueName);
+            if (currentVenue) {
+                seedVenues.set(currentVenue.name, currentVenue);
+            }
+        }
+
+        venueMatches.slice(0, 2).forEach(match => {
+            seedVenues.set(match.venue.name, match.venue);
+        });
+
+        [...seedVenues.values()].slice(0, 2).forEach(seedVenue => {
+            const neighbors = buildGraphNeighborMatches(seedVenue);
+            if (neighbors.length === 0) return;
+
+            documents.push({
+                id: `graph:neighbors:${seedVenue.name}`,
+                type: 'graph',
+                title: `${seedVenue.name} graph neighborhood`,
+                summary: `${seedVenue.categories.slice(0, 2).join(', ')} -> ${neighbors.slice(0, 2).map(item => item.venue.name).join(', ')}`,
+                body: [
+                    `Seed venue: ${seedVenue.name}`,
+                    `Shared categories: ${seedVenue.categories.join(', ')}`,
+                    ...neighbors.map(item => `Path: ${seedVenue.name} -> ${item.sharedCategories[0]} -> ${item.venue.name}`),
+                    `Related venues: ${neighbors.map(item => `${item.venue.name} (${item.sharedCategories.join(', ')})`).join('; ')}`
+                ].join('\n'),
+                sourceLabel: `${seedVenue.name} · 그래프 이웃`,
+                sourceTone: 'reference',
+                venueName: seedVenue.name,
+                compareEligible: true
+            });
+        });
+
+        if (venueMatches.length >= 2) {
+            const first = venueMatches[0].venue;
+            const second = venueMatches[1].venue;
+            const sharedCategories = getSharedVenueCategories(first, second);
+            if (sharedCategories.length > 0) {
+                documents.push({
+                    id: `graph:path:${first.name}:${second.name}`,
+                    type: 'graph',
+                    title: `${first.name} ↔ ${second.name}`,
+                    summary: `Shared path via ${sharedCategories.join(', ')}`,
+                    body: [
+                        `Graph path between venues: ${first.name} -> ${sharedCategories[0]} -> ${second.name}`,
+                        `All shared categories: ${sharedCategories.join(', ')}`,
+                        `${first.name} categories: ${first.categories.join(', ')}`,
+                        `${second.name} categories: ${second.categories.join(', ')}`
+                    ].join('\n'),
+                    sourceLabel: `${first.name} ↔ ${second.name} · 그래프 경로`,
+                    sourceTone: 'reference',
+                    venueName: first.name,
+                    compareEligible: true
+                });
+            }
+        }
+
+        if (topicMatches.length > 0) {
+            const topTopic = topicMatches[0].topic;
+            const relatedVenues = buildVenueMatches(`${topTopic.name} ${topTopic.category}`).slice(0, 3);
+            if (relatedVenues.length > 0) {
+                documents.push({
+                    id: `graph:topic:${topTopic.id}`,
+                    type: 'graph',
+                    title: `${topTopic.name} graph bridge`,
+                    summary: `${topTopic.category} -> ${relatedVenues.map(item => item.venue.name).join(', ')}`,
+                    body: [
+                        `Topic: ${topTopic.name}`,
+                        `Category bridge: ${topTopic.category}`,
+                        `Related venues: ${relatedVenues.map(item => `${item.venue.name} (${item.venue.categories.join(', ')})`).join('; ')}`
+                    ].join('\n'),
+                    sourceLabel: `${topTopic.name} · 그래프 브리지`,
+                    sourceTone: 'reference',
+                    topicId: topTopic.id
+                });
+            }
+        }
+
+        const normalizedQuery = normalizeRagText(query);
+        if ((/graph|network|연결|path|relation|related|가까운|인접/.test(normalizedQuery) || currentVenueName) && documents.length > 0) {
+            return documents.slice(0, 3);
+        }
+
+        return documents.slice(0, 2);
+    }
+
     function buildVenueSource(venueName: string, details: VenueDetails, type: string): RagChatSource {
         const audit = getVenueContentAudit(venueName, details.overview.website);
         return {
@@ -5972,6 +6100,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const currentVenueName = getCurrentRagVenueName();
         const cfpEntries = getCFPEntries();
         const documents: RagRetrievalDocument[] = [];
+        const graphDocuments = buildGraphRagDocuments(query, venueMatches, topicMatches, currentVenueName);
 
         if (currentVenueName && /현재|선택|이 저널|이 학회|이 노드|this|selected/.test(normalizedQuery)) {
             const venue = venueData.find(item => item.name === currentVenueName);
@@ -6081,6 +6210,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             }
         });
 
+        graphDocuments.forEach(document => {
+            documents.push(document);
+        });
+
         const deduped = new Map<string, RagRetrievalDocument>();
         documents.forEach(document => {
             if (!deduped.has(document.id)) {
@@ -6088,7 +6221,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             }
         });
 
-        return [...deduped.values()].slice(0, 8);
+        return [...deduped.values()].slice(0, 10);
     }
 
     function buildRagSourcesFromDocuments(documents: RagRetrievalDocument[]) {
@@ -6147,6 +6280,52 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         };
     }
 
+    function generateGraphLocalResponse(
+        query: string,
+        venueMatches: ReturnType<typeof buildVenueMatches>,
+        topicMatches: ReturnType<typeof buildTopicMatches>,
+        currentVenueName: string | null
+    ): RagChatMessage | null {
+        const graphDocuments = buildGraphRagDocuments(query, venueMatches, topicMatches, currentVenueName);
+        if (graphDocuments.length === 0) return null;
+
+        const pathDocument = graphDocuments.find(document => document.id.startsWith('graph:path:'));
+        const neighborhoodDocument = graphDocuments.find(document => document.id.startsWith('graph:neighbors:'));
+        const topicBridgeDocument = graphDocuments.find(document => document.id.startsWith('graph:topic:'));
+
+        if (pathDocument) {
+            return {
+                role: 'assistant',
+                text: `그래프 연결 기준으로 보면 ${pathDocument.title}는 ${pathDocument.summary} 구조로 이어집니다.\n${pathDocument.body}\n즉, 단순 키워드 매치뿐 아니라 공유 카테고리 경로에서도 두 venue가 가깝습니다.`,
+                sources: buildRagSourcesFromDocuments(graphDocuments),
+                actions: buildRagActionsFromDocuments(query, graphDocuments),
+                suggestions: ['공유 카테고리 기준으로 더 비교', '이 경로에서 CFP 있는 학회만 보기']
+            };
+        }
+
+        if (neighborhoodDocument) {
+            return {
+                role: 'assistant',
+                text: `현재 질문과 가장 가까운 그래프 이웃은 ${neighborhoodDocument.title}입니다.\n${neighborhoodDocument.body}\n이 흐름을 따라가면 구조적으로 이어진 venue를 빠르게 탐색할 수 있습니다.`,
+                sources: buildRagSourcesFromDocuments(graphDocuments),
+                actions: buildRagActionsFromDocuments(query, graphDocuments),
+                suggestions: ['이웃 venue만 shortlist', '가장 가까운 학회 경로 보여줘']
+            };
+        }
+
+        if (topicBridgeDocument) {
+            return {
+                role: 'assistant',
+                text: `${topicBridgeDocument.title} 기준으로 보면 연구 주제가 그래프에서 venue로 이어지는 구조는 다음과 같습니다.\n${topicBridgeDocument.body}`,
+                sources: buildRagSourcesFromDocuments(graphDocuments),
+                actions: buildRagActionsFromDocuments(query, graphDocuments),
+                suggestions: ['이 주제에서 입문 순서 추천', '관련 학회만 다시 보여줘']
+            };
+        }
+
+        return null;
+    }
+
     function generateLocalRagResponse(query: string): RagChatMessage {
         const normalizedQuery = normalizeRagText(query);
         const venueMatches = buildVenueMatches(query);
@@ -6156,6 +6335,15 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const cfpIntent = /cfp|deadline|마감|투고|submission/.test(normalizedQuery);
         const topicIntent = /주제|topic|개념|설명|learning analytics|cscl|aied|methodolog/.test(normalizedQuery);
         const currentContextIntent = Boolean(currentVenueName && /현재|선택|이 저널|이 학회|이 노드|this|selected/.test(normalizedQuery));
+
+        const graphIntent = /graph|network|연결|path|relation|related|가까운|인접|구조/.test(normalizedQuery);
+
+        if (graphIntent || (currentContextIntent && currentVenueName)) {
+            const graphResponse = generateGraphLocalResponse(query, venueMatches, topicMatches, currentVenueName);
+            if (graphResponse) {
+                return graphResponse;
+            }
+        }
 
         if (compareIntent && venueMatches.length >= 2) {
             const [first, second] = venueMatches;
@@ -6289,7 +6477,15 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 merged.set(document.id, document);
             }
         });
-        return [...merged.values()].slice(0, 5);
+        const documents = [...merged.values()];
+        const visible = documents.slice(0, 5);
+        if (!visible.some(document => document.type === 'graph')) {
+            const graphDocument = documents.find(document => document.type === 'graph');
+            if (graphDocument) {
+                visible[visible.length - 1] = graphDocument;
+            }
+        }
+        return visible.filter(Boolean);
     }
 
     async function requestRemoteRagDocuments(query: string) {

@@ -176,6 +176,7 @@ export default async function handler(request) {
     'You are a grounded research assistant for an academic venue explorer.',
     'Answer in Korean.',
     'Use only the provided retrieval documents.',
+    'Documents with type "graph" are structural hints that describe venue-to-category-to-venue paths or topic bridges inside the app network.',
     'If evidence is partial, say so plainly.',
     'Never invent deadlines, rankings, or official status.',
     'Never mention venues, links, or facts that are not present in the retrieved documents.',
