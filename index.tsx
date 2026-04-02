@@ -5888,8 +5888,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                                 <span class="rag-loading-badge ${message.variant === 'deep-research' ? 'deep' : ''}">${escapeHtml(getRagLoadingBadge(message))}</span>
                             </div>
                             <div class="rag-loading-copy">
-                                <div class="rag-loading-title">${escapeHtml(getRagLoadingTitle(message))}</div>
-                                <div class="rag-loading-subtitle">${escapeHtml(message.text)}</div>
+                                <div class="rag-loading-title">${escapeHtml(getRagLoadingTitle(message))}<span class="rag-animated-ellipsis" aria-hidden="true">...</span></div>
+                                <div class="rag-loading-subtitle">${escapeHtml(message.text)}<span class="rag-animated-ellipsis" aria-hidden="true">...</span></div>
                             </div>
                             ${message.variant === 'deep-research' ? `
                                 <div class="rag-loading-track" aria-hidden="true">

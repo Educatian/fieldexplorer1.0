@@ -3776,6 +3776,15 @@
       color: var(--text-primary);
     }
 
+    .rag-animated-ellipsis {
+      display: inline-block;
+      width: 1.6em;
+      overflow: hidden;
+      vertical-align: bottom;
+      white-space: nowrap;
+      animation: ragEllipsisSteps 1.2s steps(4, end) infinite;
+    }
+
     .rag-loading-subtitle {
       font-size: 0.7rem;
       color: var(--text-muted);
@@ -3840,6 +3849,15 @@
       }
       100% {
         transform: translateX(240%);
+      }
+    }
+
+    @keyframes ragEllipsisSteps {
+      0% {
+        width: 0;
+      }
+      100% {
+        width: 1.6em;
       }
     }
 
