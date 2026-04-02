@@ -236,8 +236,9 @@ async function supabaseRequest({ supabaseUrl, serviceKey, path, method = 'GET', 
     throw new Error(`Supabase ${method} ${path} failed: ${await response.text()}`);
   }
 
-  if (response.status === 204) return null;
-  return response.json();
+  const text = await response.text();
+  if (!text.trim()) return null;
+  return JSON.parse(text);
 }
 
 async function getRefreshState({ supabaseUrl, serviceKey }) {
