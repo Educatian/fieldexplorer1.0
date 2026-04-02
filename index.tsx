@@ -398,6 +398,18 @@ function escapeHtml(value: string): string {
         .replaceAll("'", '&#39;');
 }
 
+function formatRagMessageHtml(value: string): string {
+    const escaped = escapeHtml(value);
+    const linked = escaped.replace(
+        /((https?:\/\/|www\.)[^\s<]+)/gi,
+        (match) => {
+            const href = match.startsWith('www.') ? `https://${match}` : match;
+            return `<a href="${href}" target="_blank" rel="noopener" class="rag-inline-link">${match}</a>`;
+        }
+    );
+    return linked.replace(/\n/g, '<br>');
+}
+
 function getCFPOverrides(): CFPRecordMap {
     try {
         const stored = localStorage.getItem(CFP_OVERRIDES_KEY);
@@ -5816,7 +5828,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                                     <div class="rag-loading-bar"></div>
                                 </div>
                             ` : ''}
-                        ` : escapeHtml(message.text)}
+                        ` : formatRagMessageHtml(message.text)}
                     </div>
                     ${message.meta ? `
                         <div class="rag-source-row">
@@ -7291,12 +7303,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }
 
         const ragTitle = document.getElementById('rag-chatbot-title');
-        if (ragTitle) ragTitle.textContent = isKorean ? '탐색 어시스턴트' : 'Research Assistant';
+        if (ragTitle) ragTitle.textContent = 'Sage';
 
         const ragSubtitle = document.getElementById('rag-chatbot-subtitle');
         if (ragSubtitle) ragSubtitle.textContent = isKorean
-            ? '근거 문서를 우선 검색하고, 필요하면 심층 웹 리서치까지 이어집니다'
-            : 'Searches grounded documents first, then can expand into deeper web research';
+            ? '근거 문서와 그래프 경로를 먼저 보고, 필요하면 심층 웹 리서치까지 이어집니다'
+            : 'Starts with grounded documents and graph paths, then can expand into deeper web research';
 
         const ragInputEl = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
         if (ragInputEl) {
