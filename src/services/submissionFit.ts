@@ -246,6 +246,125 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
     return results.sort((a, b) => b.overall - a.overall);
 }
 
+// ============================================================================
+// SCORECARD AS A TEACHING MOMENT
+// Turn the ranked output into a contrasting-cases / worked-example explanation:
+// why #1 fits (discourse signal), how it differs from #2 (what to attend to),
+// and a metacognitive "check it yourself" prompt. Grounded ONLY in real result
+// fields (sharedTerms, topMethodology, impact, cfp). The scorecard is framed as
+// a heuristic mentor, never ground truth.
+// ============================================================================
+
+export interface FitTeaching {
+    topName: string;
+    runnerName: string | null;
+    /** Why #1 fits, read as a research-culture/discourse signal. */
+    headline: string;
+    /** Fingerprint terms #1 shares that #2 does not (what makes #1 distinctive). */
+    distinctiveTop: string[];
+    /** Fingerprint terms #2 shares that #1 does not (what would pull you to #2). */
+    distinctiveRunner: string[];
+    /** Contrast sentence (#1 vs #2), or null when there is no runner-up. */
+    contrast: string | null;
+    /** Methodology-culture note across #1/#2, or null when unavailable. */
+    methodNote: string | null;
+    /** Q-tier / CFP tradeoff note, or null when nothing notable differs. */
+    tradeoff: string | null;
+    /** Metacognitive self-check the learner should verify against real issues. */
+    nextCheck: string;
+    /** Honesty caveat: heuristic mentor, fingerprint may lag editorial reality. */
+    caveat: string;
+}
+
+function joinTerms(terms: string[]): string {
+    return terms.map(t => `"${t}"`).join(', ');
+}
+
+/**
+ * Build a teaching panel from the ranked fit results. Pure: depends only on the
+ * VenueFitResult fields the scorer already produced. Returns null when there is
+ * nothing to teach (empty input).
+ */
+export function explainFit(results: VenueFitResult[]): FitTeaching | null {
+    if (!results || results.length === 0) return null;
+    const top = results[0];
+    const runner = results.length > 1 ? results[1] : null;
+
+    const topSet = new Set(top.sharedTerms);
+    const runnerSet = new Set(runner ? runner.sharedTerms : []);
+    const distinctiveTop = top.sharedTerms.filter(t => !runnerSet.has(t)).slice(0, 4);
+    const distinctiveRunner = runner ? runner.sharedTerms.filter(t => !topSet.has(t)).slice(0, 4) : [];
+
+    // (a) Why #1 — interpret the shared vocabulary as a discourse signal.
+    const cultureClause = top.topMethodology
+        ? `이 어휘는 ${top.topMethodology} 연구문화의 담론 방식과 맞닿아 있어요`
+        : `주제 어휘가 이 venue의 관심사와 겹쳐요`;
+    const headline = top.sharedTerms.length
+        ? `${top.name}이(가) 1순위인 까닭: 당신 초록이 ${joinTerms(top.sharedTerms.slice(0, 3))} 같은 어휘를 이 venue의 지문과 공유합니다. ${cultureClause}.`
+        : `${top.name}이(가) 1순위지만 공유 어휘 신호는 약합니다. 주제 정합보다 CFP 준비도가 순위를 끌어올렸을 수 있어요.`;
+
+    // (b) Contrast #1 vs #2 — contrasting cases.
+    let contrast: string | null = null;
+    if (runner) {
+        const parts: string[] = [];
+        if (distinctiveTop.length) {
+            parts.push(`${top.name} 쪽으로 기우는 신호는 ${joinTerms(distinctiveTop)}`);
+        }
+        if (distinctiveRunner.length) {
+            parts.push(`반대로 초록에 ${joinTerms(distinctiveRunner)}의 비중이 더 컸다면 ${runner.name}이(가) 더 어울립니다`);
+        }
+        if (parts.length === 0) {
+            parts.push(`${top.name}과(와) ${runner.name}은(는) 공유 어휘가 거의 같아, 주제만으로는 가르기 어렵습니다`);
+        }
+        contrast = parts.join('; ') + '.';
+    }
+
+    // Methodology-culture difference (only when we actually have signal).
+    let methodNote: string | null = null;
+    if (runner && top.topMethodology && runner.topMethodology) {
+        methodNote = top.topMethodology === runner.topMethodology
+            ? `두 venue 모두 ${top.topMethodology} 색채가 강합니다. 그렇다면 방법론이 아니라 주제 적합과 CFP 타이밍으로 결정하세요.`
+            : `연구문화가 갈립니다: ${top.name}=${top.topMethodology}, ${runner.name}=${runner.topMethodology}. 당신 연구의 방법론 정체성에 맞는 쪽을 고르세요.`;
+    } else if (top.topMethodology) {
+        methodNote = `${top.name}의 우세 방법론은 ${top.topMethodology}입니다. 당신 연구가 이 결과보다 ${top.topMethodology}와 거리가 멀면 순위를 의심하세요.`;
+    }
+
+    // Q-tier / CFP tradeoff.
+    let tradeoff: string | null = null;
+    if (runner) {
+        const bits: string[] = [];
+        if (top.impact && runner.impact && top.impact !== runner.impact) {
+            bits.push(`등급은 ${top.name}=${top.impact} vs ${runner.name}=${runner.impact}`);
+        }
+        const topSoon = top.cfpDaysUntil !== null && top.cfpDaysUntil >= 0;
+        const runnerSoon = runner.cfpDaysUntil !== null && runner.cfpDaysUntil >= 0;
+        if (topSoon && runnerSoon && Math.abs((top.cfpDaysUntil as number) - (runner.cfpDaysUntil as number)) >= 14) {
+            const sooner = (top.cfpDaysUntil as number) < (runner.cfpDaysUntil as number) ? top : runner;
+            bits.push(`마감은 ${sooner.name}이(가) 더 임박(D-${sooner.cfpDaysUntil})`);
+        }
+        if (bits.length) tradeoff = bits.join(' · ') + '. 적합도와 현실(등급·마감)을 함께 저울질하세요.';
+    }
+
+    // (c) Metacognitive self-check.
+    const checkMethod = top.topMethodology || '당신의 핵심 방법론';
+    const nextCheck = `직접 점검: ${top.name}의 최근 1년 목차를 열어 ${checkMethod} 계열 논문이 실제로 실리는지, aims & scope가 당신 기여와 맞는지 확인하세요. 지문은 어휘 통계일 뿐, 편집 방향의 최신 판단은 당신 몫입니다.`;
+
+    const caveat = `이 카드는 정답이 아니라 멘토 휴리스틱입니다. venue 지문은 OpenAlex 어휘 기반이라 최신 편집 방향과 어긋날 수 있어요.`;
+
+    return {
+        topName: top.name,
+        runnerName: runner ? runner.name : null,
+        headline,
+        distinctiveTop,
+        distinctiveRunner,
+        contrast,
+        methodNote,
+        tradeoff,
+        nextCheck,
+        caveat,
+    };
+}
+
 export interface MethodologyNeighborhood {
     category: string;
     venues: { name: string; share: number }[];

@@ -918,6 +918,15 @@
     .fit-why { margin-top: 8px; font-size: 0.72rem; color: var(--text-secondary); }
     .fit-term { display: inline-block; background: rgba(123,160,204,.16); border-radius: 6px; padding: 1px 7px; margin: 2px 4px 0 0; }
 
+    /* ===== SCORECARD TEACHING PANEL ===== */
+    .fit-teach { border: 1px solid var(--border-color); border-left: 3px solid var(--accent-color, #2f6fed); border-radius: 12px; padding: 12px 14px; background: rgba(47,111,237,.05); margin-bottom: 4px; }
+    .fit-teach .teach-head { font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; }
+    .fit-teach p { margin: 6px 0; font-size: 0.76rem; line-height: 1.5; color: var(--text-primary); }
+    .fit-teach .teach-caveat { font-size: 0.7rem; color: var(--text-secondary); font-style: italic; margin-top: 8px; }
+    .fit-teach .teach-check { background: rgba(16,185,129,.10); border-radius: 8px; padding: 6px 9px; }
+    .fit-teach .teach-row { margin: 4px 0; font-size: 0.72rem; }
+    .fit-teach .teach-tag { display: inline-block; font-weight: 600; color: var(--text-secondary); margin-right: 6px; }
+
     /* ===== METHODOLOGY MAP ===== */
     #meth-modal-container { position: fixed; inset: 0; z-index: 240; display: flex; align-items: center; justify-content: center; }
     .meth-modal { max-width: 760px; }
@@ -3726,6 +3735,31 @@
       transform: none;
     }
 
+    .rag-chatbot-tutor {
+      min-height: 34px;
+      padding: 0 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(64, 72, 93, 0.18);
+      background: rgba(9, 19, 40, 0.8);
+      color: var(--primary-soft);
+      cursor: pointer;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, color 0.18s ease;
+    }
+
+    .rag-chatbot-tutor:hover {
+      background: rgba(25, 37, 64, 0.98);
+      transform: translateY(-1px);
+    }
+
+    .rag-chatbot-tutor[aria-pressed="true"] {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.55);
+      color: #34d399;
+    }
+
     .rag-chatbot-close {
       width: 34px;
       height: 34px;
@@ -4846,6 +4880,7 @@
           </div>
         </div>
         <div class="rag-chatbot-header-controls">
+          <button class="rag-chatbot-tutor" id="rag-chatbot-tutor" type="button" aria-pressed="false" title="튜터 모드: 답을 바로 주는 대신 생각을 코칭합니다">🧑‍🏫 튜터</button>
           <button class="rag-chatbot-deep" id="rag-chatbot-deep" type="button" title="심층 리서치 시작">심층</button>
           <button class="rag-chatbot-close" id="rag-chatbot-close" title="닫기">✕</button>
         </div>
