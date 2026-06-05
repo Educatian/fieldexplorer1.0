@@ -14,6 +14,7 @@ VENUES_JSON_PATH = Path("src/data/venues.json")
 OUTPUT_PATH = Path("src/data/semantic_profiles.json")
 SAMPLES_PER_JOURNAL = 75          # was 15 -- larger sample = far less noisy fingerprint
 MIN_ABSTRACT_WORDS = 40           # skip near-empty abstracts
+MIN_CONF_ABSTRACTS = 12           # conferences below this are skipped (too noisy)
 MAILTO = "jewoong.moon@gmail.com"  # OpenAlex polite pool
 DELAY = 0.4
 
@@ -110,6 +111,111 @@ def _abstract_from_work(work):
 def _norm(s):
     return re.sub(r'[^a-z0-9]+', ' ', (s or '').lower()).strip()
 
+# Conferences are indexed inconsistently on OpenAlex (acronyms collide, proceedings
+# are fragmented per-year, some are workshops-only). For each, (search query, MUST
+# substring): a candidate source's name must CONTAIN the must-substring, which kills
+# generic-token false matches (e.g. a networking source for CSCW). Aggregate all
+# matching sources, then gate on abstract volume.
+CONFERENCE_QUERY_HINTS = {
+    'ISLS Annual Meeting': ('International Society of the Learning Sciences', 'learning sciences'),
+    'ICLS': ('International Conference of the Learning Sciences', 'learning sciences'),
+    'CSCL': ('Computer-Supported Collaborative Learning', 'collaborative learning'),
+    'AERA Annual Meeting': ('American Educational Research Association', 'educational research association'),
+    'EARLI Conference': ('European Association for Research on Learning and Instruction', 'learning and instruction'),
+    'LAK Conference': ('Learning Analytics and Knowledge', 'learning analytics'),
+    'EDM Conference': ('Educational Data Mining', 'data mining'),
+    'AIED Conference': ('Artificial Intelligence in Education', 'artificial intelligence in education'),
+    'ITS Conference': ('Intelligent Tutoring Systems', 'intelligent tutoring'),
+    'CHI Conference': ('Human Factors in Computing Systems', 'human factors in computing'),
+    'CSCW Conference': ('Computer Supported Cooperative Work Social Computing', 'supported cooperative work'),
+    'UIST Conference': ('User Interface Software and Technology', 'user interface software'),
+    'IDC Conference': ('Interaction Design and Children', 'interaction design and children'),
+    'IEEE VR': ('IEEE Virtual Reality', 'virtual reality'),
+    'ISMAR': ('Mixed and Augmented Reality', 'mixed and augmented reality'),
+    'AECT Convention': ('Educational Communications and Technology', 'educational communications'),
+    'ETRA Symposium': ('Eye Tracking Research and Applications', 'eye tracking'),
+    'L@S Conference': ('Learning at Scale', 'learning at scale'),
+    'SIGCSE Technical Symposium': ('SIGCSE technical symposium computer science education', 'sigcse'),
+    'ICER Conference': ('International Computing Education Research', 'computing education research'),
+    'ITiCSE Conference': ('Innovation and Technology in Computer Science Education', 'innovation and technology in computer science'),
+    'FIE Conference': ('Frontiers in Education', 'frontiers in education'),
+    'ASEE Annual Conference': ('American Society for Engineering Education', 'engineering education'),
+}
+
+def resolve_conference_source_ids(name):
+    """Return a list of OpenAlex source IDs for a conference (aggregates fragmented
+    per-year proceedings), plus the search hint used. A candidate's name MUST contain
+    the must-substring, so generic-token false matches are rejected."""
+    hint_q, must = CONFERENCE_QUERY_HINTS.get(
+        name, (re.sub(r'\b(Conference|Symposium|Technical|Convention|Annual|Meeting)\b', '', name).strip(), None))
+    must_n = _norm(must) if must else None
+    try:
+        params = {'search': hint_q, 'per_page': 25,
+                  'select': 'id,display_name,type,works_count', 'mailto': MAILTO}
+        resp = requests.get(OPENALEX_SOURCES_URL, params=params, timeout=15)
+        if resp.status_code != 200:
+            return [], hint_q
+        results = resp.json().get('results', [])
+        ids = []
+        for src in results:
+            if src.get('type') not in ('conference', 'repository'):
+                continue
+            if src.get('works_count', 0) < 5:
+                continue
+            sn = _norm(src.get('display_name'))
+            if must_n and must_n not in sn:
+                continue
+            ids.append((src.get('id') or '').rsplit('/', 1)[-1])
+            if len(ids) >= 10:
+                break
+        return ids, hint_q
+    except Exception as e:
+        print(f"  conference resolve error: {e}")
+        return [], hint_q
+
+def _accumulate_text(works):
+    all_text, kept = "", 0
+    for work in works:
+        abstract = _abstract_from_work(work)
+        title = work.get('title') or ""
+        if len(abstract.split()) < MIN_ABSTRACT_WORDS:
+            if title:
+                all_text += " " + title
+            continue
+        all_text += " " + abstract + (" " + title if title else "")
+        kept += 1
+    return all_text, kept
+
+def fetch_conference_data(name):
+    print(f"Fetching (conf): {name}")
+    ids, hint = resolve_conference_source_ids(name)
+    if not ids:
+        print(f"  no conference sources for '{hint}' -> skip")
+        return None
+    try:
+        joined = "|".join(ids[:10])
+        base = {
+            'sort': 'publication_date:desc',
+            'per_page': SAMPLES_PER_JOURNAL,
+            'select': 'title,abstract_inverted_index',
+            'filter': f'primary_location.source.id:{joined},has_abstract:true',
+            'mailto': MAILTO,
+        }
+        resp = requests.get(OPENALEX_API_URL, params=base, timeout=25)
+        if resp.status_code != 200:
+            return None
+        works = resp.json().get('results', [])
+        all_text, kept = _accumulate_text(works)
+        print(f"  {len(ids)} source(s), kept {kept} abstracts")
+        # Quality gate: too few abstracts -> a noisy fingerprint, skip honestly.
+        if kept < MIN_CONF_ABSTRACTS:
+            print(f"  SKIP: only {kept} abstracts (< {MIN_CONF_ABSTRACTS})")
+            return None
+        return all_text if all_text.strip() else None
+    except Exception as e:
+        print(f"  Error: {e}")
+        return None
+
 def resolve_source_id(journal_name):
     """Resolve a venue NAME to a concrete OpenAlex Source ID.
 
@@ -194,13 +300,25 @@ def main():
     if not VENUES_JSON_PATH.exists(): return
 
     with open(VENUES_JSON_PATH, 'r', encoding='utf-8') as f:
-        venues = [v for v in json.load(f) if v.get('type') == 'Journal']
+        venues = [v for v in json.load(f)
+                  if v.get('type') in ('Journal', 'Conference', 'SubConference')]
 
     journal_texts = {}
-    for journal in venues:
-        text = fetch_journal_data(journal['name'])
-        if text: journal_texts[journal['name']] = text
+    conf_ok, conf_skip = 0, 0
+    for venue in venues:
+        vtype = venue.get('type')
+        if vtype == 'Journal':
+            text = fetch_journal_data(venue['name'])
+        else:
+            text = fetch_conference_data(venue['name'])
+            if text:
+                conf_ok += 1
+            else:
+                conf_skip += 1
+        if text:
+            journal_texts[venue['name']] = text
         time.sleep(DELAY)
+    print(f"\nConferences: {conf_ok} profiled, {conf_skip} skipped (insufficient OpenAlex coverage).")
 
     # 1. Calculate TF
     journal_tfs = {name: get_weighted_ngrams(text) for name, text in journal_texts.items()}
