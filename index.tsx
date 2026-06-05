@@ -18,7 +18,7 @@ import {
     type VenueContentAudit
 } from './src/data/venueContentAudit';
 import { shouldShowTour, startTour } from './src/ui/tour';
-import { rankSubmissionFit, methodologyNeighborhoods, type VenueFitInput, type VenueFitResult } from './src/services/submissionFit';
+import { rankSubmissionFit, methodologyNeighborhoods, explainFit, type VenueFitInput, type VenueFitResult, type FitTeaching } from './src/services/submissionFit';
 import quizData from './src/data/learning-quiz.json';
 
 declare const vis: any;
@@ -3620,6 +3620,25 @@ async function main() {
         return `<span class="fit-cfp ${cls}">D-${r.cfpDaysUntil} · ${tag}</span>`;
     }
 
+    function renderFitTeaching(t: FitTeaching | null): string {
+        if (!t) return '';
+        const chip = (term: string) => `<span class="fit-term">${escapeHtml(term)}</span>`;
+        const distinct = (label: string, terms: string[]) => terms.length
+            ? `<div class="teach-row"><span class="teach-tag">${label}</span>${terms.map(chip).join('')}</div>` : '';
+        return `
+            <div class="fit-teach" role="note" aria-label="스코어카드 해설">
+                <div class="teach-head">🧭 이 결과를 어떻게 읽을까</div>
+                <p class="teach-why">${escapeHtml(t.headline)}</p>
+                ${t.contrast ? `<p class="teach-contrast"><strong>대조:</strong> ${escapeHtml(t.contrast)}</p>` : ''}
+                ${distinct(`${escapeHtml(t.topName)} 신호`, t.distinctiveTop)}
+                ${t.runnerName ? distinct(`${escapeHtml(t.runnerName)} 신호`, t.distinctiveRunner) : ''}
+                ${t.methodNote ? `<p class="teach-method"><strong>방법론:</strong> ${escapeHtml(t.methodNote)}</p>` : ''}
+                ${t.tradeoff ? `<p class="teach-tradeoff"><strong>트레이드오프:</strong> ${escapeHtml(t.tradeoff)}</p>` : ''}
+                <p class="teach-check">✅ ${escapeHtml(t.nextCheck)}</p>
+                <p class="teach-caveat">${escapeHtml(t.caveat)}</p>
+            </div>`;
+    }
+
     function renderFitResults(results: VenueFitResult[]) {
         const body = document.getElementById('fit-results');
         if (!body) return;
@@ -3628,7 +3647,7 @@ async function main() {
             return;
         }
         const top = results.slice(0, 12);
-        body.innerHTML = top.map((r, i) => `
+        body.innerHTML = renderFitTeaching(explainFit(results)) + top.map((r, i) => `
             <div class="fit-card" data-venue="${escapeHtml(r.name)}" tabindex="0" role="button">
                 <div class="fit-card-head">
                     <span class="fit-rank">#${i + 1}</span>
@@ -6057,6 +6076,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     const ragFab = document.getElementById('rag-chatbot-fab') as HTMLButtonElement | null;
     const ragPanel = document.getElementById('rag-chatbot-panel');
     const ragDeepButton = document.getElementById('rag-chatbot-deep') as HTMLButtonElement | null;
+    const ragTutorButton = document.getElementById('rag-chatbot-tutor') as HTMLButtonElement | null;
     const ragClose = document.getElementById('rag-chatbot-close') as HTMLButtonElement | null;
     const ragMessagesEl = document.getElementById('rag-chatbot-messages');
     const ragForm = document.getElementById('rag-chatbot-form') as HTMLFormElement | null;
@@ -6068,6 +6088,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     let ragDeepPending = false;
     let activeDeepResearchId: string | null = null;
     let lastRagPrompt = '';
+    let ragTutorMode = false;
     const ragGlossaryDocs = [
         {
             id: 'glossary-cfp',
@@ -7039,7 +7060,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 body: JSON.stringify({
                     query,
                     currentContext: getCurrentRagVenueName(),
-                    documents
+                    documents,
+                    tutorMode: ragTutorMode
                 })
             });
 
@@ -7355,6 +7377,30 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             ragInput.style.height = '';
         }
         void submitDeepResearchPrompt(prompt);
+    });
+
+    function applyRagTutorState() {
+        if (ragTutorButton) ragTutorButton.setAttribute('aria-pressed', ragTutorMode ? 'true' : 'false');
+        const subtitle = document.getElementById('rag-chatbot-subtitle');
+        if (subtitle) {
+            subtitle.textContent = ragTutorMode
+                ? '튜터 모드: 답을 바로 주는 대신 유도질문·힌트·이해 점검으로 생각을 코칭합니다 (근거 문서 기반)'
+                : '근거 문서와 그래프 경로를 먼저 보고, 필요하면 심층 웹 리서치까지 이어집니다';
+        }
+    }
+
+    ragTutorButton?.addEventListener('click', () => {
+        ragTutorMode = !ragTutorMode;
+        applyRagTutorState();
+        ragMessages.push({
+            role: 'assistant',
+            text: ragTutorMode
+                ? '🧑‍🏫 튜터 모드를 켰어요. 이제 정답을 바로 드리기보다, 근거 문서를 함께 읽으며 **유도 질문 → 힌트 → 이해 점검**으로 스스로 판단하도록 돕습니다. 예: "내 초록엔 어느 venue가 맞을까?"처럼 물어보세요.'
+                : '튜터 모드를 껐어요. 다시 간결한 근거 기반 답변 모드로 돌아갑니다.',
+            meta: ragTutorMode ? '메타인지 튜터' : '일반 모드',
+        });
+        renderRagMessages();
+        logAction({ action_type: 'rag_tutor_toggle', context_tag: 'sage', metadata: { on: ragTutorMode } });
     });
 
     ragClose?.addEventListener('click', closeRagPanel);

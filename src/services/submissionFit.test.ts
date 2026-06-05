@@ -1,8 +1,24 @@
 import { describe, it, expect } from 'vitest';
 import {
     vectorizeText, cosine, methodologyDistribution, cfpReadiness, rankSubmissionFit,
-    methodologyNeighborhoods,
+    methodologyNeighborhoods, explainFit, type VenueFitResult,
 } from './submissionFit';
+
+function mkResult(over: Partial<VenueFitResult> & { name: string }): VenueFitResult {
+    return {
+        name: over.name,
+        overall: over.overall ?? 50,
+        topicScore: over.topicScore ?? 50,
+        methodScore: over.methodScore ?? null,
+        cfpScore: over.cfpScore ?? 30,
+        cfpDaysUntil: over.cfpDaysUntil ?? null,
+        cfpVerified: over.cfpVerified ?? false,
+        sharedTerms: over.sharedTerms ?? [],
+        topMethodology: over.topMethodology ?? null,
+        type: over.type,
+        impact: over.impact,
+    };
+}
 
 describe('vectorizeText', () => {
     it('drops short words and stopwords, keeps unigrams + bigrams', () => {
@@ -98,5 +114,56 @@ describe('rankSubmissionFit', () => {
             expect(soon[0].cfpScore).toBeGreaterThan(far[0].cfpScore);
             expect(soon[0].overall).toBeGreaterThanOrEqual(far[0].overall);
         }
+    });
+});
+
+describe('explainFit (scorecard teaching moment)', () => {
+    it('returns null for empty results', () => {
+        expect(explainFit([])).toBeNull();
+    });
+
+    it('builds a headline + self-check from the top result alone', () => {
+        const t = explainFit([mkResult({
+            name: 'Journal of the Learning Sciences',
+            sharedTerms: ['epistemic', 'argumentation', 'sensemaking'],
+            topMethodology: 'Qualitative',
+        })]);
+        expect(t).not.toBeNull();
+        expect(t!.topName).toBe('Journal of the Learning Sciences');
+        expect(t!.runnerName).toBeNull();
+        expect(t!.contrast).toBeNull();           // no runner-up
+        expect(t!.headline).toContain('Journal of the Learning Sciences');
+        expect(t!.headline).toContain('Qualitative'); // discourse/culture signal surfaced
+        expect(t!.nextCheck.length).toBeGreaterThan(0);
+        expect(t!.caveat).toContain('휴리스틱');     // honest framing
+    });
+
+    it('contrasts #1 vs #2 on distinctive terms and methodology culture', () => {
+        const t = explainFit([
+            mkResult({ name: 'ijCSCL', sharedTerms: ['collaborative', 'discourse', 'group'], topMethodology: 'Qualitative', impact: 'Q1', cfpDaysUntil: 10 }),
+            mkResult({ name: 'Computers & Education', sharedTerms: ['collaborative', 'analytics', 'platform'], topMethodology: 'Data & AI', impact: 'Q1', cfpDaysUntil: 120 }),
+        ]);
+        expect(t).not.toBeNull();
+        expect(t!.runnerName).toBe('Computers & Education');
+        // shared term "collaborative" is common → excluded from distinctive sets
+        expect(t!.distinctiveTop).not.toContain('collaborative');
+        expect(t!.distinctiveTop).toContain('discourse');
+        expect(t!.distinctiveRunner).toContain('analytics');
+        expect(t!.contrast).toBeTruthy();
+        expect(t!.methodNote).toContain('Qualitative');
+        expect(t!.methodNote).toContain('Data & AI');
+        // CFP gap >= 14 days → tradeoff surfaces the sooner deadline
+        expect(t!.tradeoff).toContain('ijCSCL');
+    });
+
+    it('degrades gracefully when there is no methodology or term signal', () => {
+        const t = explainFit([
+            mkResult({ name: 'Venue A', sharedTerms: [], topMethodology: null }),
+            mkResult({ name: 'Venue B', sharedTerms: [], topMethodology: null }),
+        ]);
+        expect(t).not.toBeNull();
+        expect(t!.methodNote).toBeNull();
+        expect(t!.headline).toContain('약');       // weak-signal wording
+        expect(typeof t!.nextCheck).toBe('string');
     });
 });
