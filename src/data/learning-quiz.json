@@ -1,0 +1,77 @@
+{
+  "_note": "Venue-matching quiz items. The correct answer is computed at RUNTIME by the submission-fit scorecard ranking the 4 options (no hardcoded answer), so items stay consistent with the live fingerprints. Each `intended` venue has been verified to win among its options with a clear margin.",
+  "items": [
+    {
+      "id": "ls-discourse",
+      "abstract": "Through interaction analysis of small-group classroom discourse, we trace how students co-construct epistemic agency and disciplinary argumentation while making sense of a science phenomenon across a multi-week design study.",
+      "options": ["Journal of the Learning Sciences", "EDM Conference", "Computers & Education", "TechTrends"],
+      "intended": "Journal of the Learning Sciences",
+      "teaching_point": "신호는 방법론(담화/상호작용 분석)과 주제(인식적 주체성·논증)예요. 학습과학 핵심 저널의 언어입니다.",
+      "focus": "methodology"
+    },
+    {
+      "id": "la-clickstream",
+      "abstract": "We model self-regulated learning from clickstream and trace data in an online course, using sequence mining and a predictive dashboard to detect disengagement and deliver just-in-time analytics feedback.",
+      "options": ["Journal of Learning Analytics", "Journal of the Learning Sciences", "European Journal of Teacher Education", "TechTrends"],
+      "intended": "Journal of Learning Analytics",
+      "teaching_point": "trace data, sequence mining, dashboard 같은 학습분석 어휘가 venue를 가릅니다.",
+      "focus": "topic"
+    },
+    {
+      "id": "edm-tracing",
+      "abstract": "On a large educational dataset we benchmark deep knowledge tracing and Bayesian models for dropout prediction, reporting AUC across feature sets and a matrix factorization of student performance.",
+      "options": ["EDM Conference", "Journal of the Learning Sciences", "European Journal of Teacher Education", "Educational Technology Research and Development"],
+      "intended": "EDM Conference",
+      "teaching_point": "knowledge tracing, AUC, factorization은 교육데이터마이닝 학회의 전형적 언어예요.",
+      "focus": "topic"
+    },
+    {
+      "id": "qual-teacher",
+      "abstract": "Through a qualitative case study with semi-structured interviews and thematic analysis, we explore preservice teachers' professional identity and reflective practice during their field placement.",
+      "options": ["European Journal of Teacher Education", "EDM Conference", "Journal of Learning Analytics", "IEEE VR"],
+      "intended": "European Journal of Teacher Education",
+      "teaching_point": "같은 주제라도 방법론(질적 사례연구·인터뷰)이 venue를 결정합니다. 분석 학회와 대비해 보세요.",
+      "focus": "methodology"
+    },
+    {
+      "id": "idc-tangible",
+      "abstract": "We co-design a tangible programming toy with pre-schoolers and caregivers, studying playful collaborative interaction and how young children make sense of computational concepts.",
+      "options": ["IDC Conference", "EDM Conference", "Educational Psychologist", "Journal of Learning Analytics"],
+      "intended": "IDC Conference",
+      "teaching_point": "대상(유아)·디자인(tangible, co-design)·놀이 상호작용이 아동-상호작용 학회를 가리킵니다.",
+      "focus": "topic"
+    },
+    {
+      "id": "vr-immersive",
+      "abstract": "We present an immersive virtual reality system with virtual humans, evaluating presence, embodiment, and user interaction during a teleoperation task with head-mounted displays.",
+      "options": ["IEEE VR", "Journal of Learning Analytics", "European Journal of Teacher Education", "EDM Conference"],
+      "intended": "IEEE VR",
+      "teaching_point": "presence, embodiment, HMD는 VR 학회의 지문이에요. 교육 맥락이 약하면 분야 학회로 갑니다.",
+      "focus": "topic"
+    },
+    {
+      "id": "jls-designbased",
+      "abstract": "This design-based study follows middle-school students as they iteratively develop mechanistic explanations of thermal equilibrium using inscriptions, talk, and teacher prompts. Analysis traces how classroom discourse, representational tools, and epistemic norms support conceptual change over a semester.",
+      "options": ["Journal of the Learning Sciences", "Computers & Education", "British Journal of Educational Technology", "EDM Conference"],
+      "intended": "Journal of the Learning Sciences",
+      "teaching_point": "이론 풍부한 교실 기제(개념변화·표상·인식규범)가 신호예요. '교육기술 효과성' 일반 저널과 헷갈리지 마세요.",
+      "focus": "methodology"
+    },
+    {
+      "id": "cscl-knowledgebuilding",
+      "abstract": "We analyze small-group knowledge building in an online collaborative inquiry environment, focusing on uptake, transactivity, and regulation across threaded discussions. Sequential interaction analysis shows how shared artifacts mediate productive collaboration and breakdowns.",
+      "options": ["International Journal of Computer-Supported Collaborative Learning", "Journal of the Learning Sciences", "CSCL", "Educational Technology Research and Development"],
+      "intended": "International Journal of Computer-Supported Collaborative Learning",
+      "teaching_point": "협력 과정 신호(uptake, transactivity, regulation, shared artifacts)가 CSCL 저널을 가리킵니다. 학회판(CSCL)과도 비교해 보세요.",
+      "focus": "topic"
+    },
+    {
+      "id": "etrd-ar-designdev",
+      "abstract": "A randomized study evaluates an augmented-reality simulation for preservice teacher practice, measuring transfer to classroom noticing and instructional decision-making. Design features are mapped to instructional design principles and implementation constraints.",
+      "options": ["Educational Technology Research and Development", "British Journal of Educational Technology", "Journal of Computer Assisted Learning", "Computers & Education"],
+      "intended": "Educational Technology Research and Development",
+      "teaching_point": "단순히 '교육기술이 있다'가 아니라 설계·개발 + 평가 + 수업설계 원리 언어를 보세요.",
+      "focus": "methodology"
+    }
+  ]
+}

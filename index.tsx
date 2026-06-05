@@ -19,6 +19,7 @@ import {
 } from './src/data/venueContentAudit';
 import { shouldShowTour, startTour } from './src/ui/tour';
 import { rankSubmissionFit, methodologyNeighborhoods, type VenueFitInput, type VenueFitResult } from './src/services/submissionFit';
+import quizData from './src/data/learning-quiz.json';
 
 declare const vis: any;
 declare const html2canvas: any;
@@ -3781,6 +3782,140 @@ async function main() {
     document.getElementById('methodology-map-btn')?.addEventListener('click', openMethodologyMap);
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && document.getElementById('meth-modal-container')) closeMethodologyMap();
+    });
+
+    // ========================================================================
+    // VENUE-MATCHING QUIZ  (educational: guided practice -> immediate feedback)
+    // The scorecard is the answer key, framed as a mentor heuristic (not truth).
+    // ========================================================================
+
+    const quizItems: any[] = (quizData as any).items || [];
+    let quizOrder: number[] = [];
+    let quizPos = 0;
+    let quizStreak = 0;
+    let quizAnswered = 0;
+
+    function shuffleQuiz() {
+        quizOrder = quizItems.map((_, i) => i);
+        for (let i = quizOrder.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [quizOrder[i], quizOrder[j]] = [quizOrder[j], quizOrder[i]];
+        }
+        quizPos = 0;
+    }
+
+    function gradeQuizItem(item: any): VenueFitResult[] {
+        const now = new Date();
+        const inputs: VenueFitInput[] = (item.options as string[]).map((name) => {
+            const v = venueData.find((x) => x.name === name);
+            const info = v?.cfpDeadline ? getResolvedCFPInfo(v.name, v.cfpDeadline, now) : null;
+            return {
+                name,
+                type: v?.type,
+                impact: v?.impact,
+                cfpDaysUntil: info ? info.daysUntil : null,
+                cfpVerified: info ? info.confidence === 'official' : false,
+            };
+        });
+        return rankSubmissionFit(item.abstract, inputs);
+    }
+
+    function renderQuizCard() {
+        const body = document.getElementById('quiz-body');
+        if (!body) return;
+        if (quizItems.length === 0) { body.innerHTML = '<p>퀴즈 문항이 없습니다.</p>'; return; }
+        if (quizPos >= quizOrder.length) {
+            body.innerHTML = `
+                <div class="quiz-done">
+                    <h4>완료! 🎉</h4>
+                    <p>${quizAnswered}문제 중 정답 흐름을 따라가며 venue 매칭 감각을 연습했어요.</p>
+                    <p class="quiz-streak">최고 연속 정답: ${quizStreak}</p>
+                    <button class="btn" id="quiz-restart">다시 풀기</button>
+                </div>`;
+            document.getElementById('quiz-restart')?.addEventListener('click', () => { shuffleQuiz(); quizStreak = 0; quizAnswered = 0; renderQuizCard(); });
+            return;
+        }
+        const item = quizItems[quizOrder[quizPos]];
+        body.innerHTML = `
+            <div class="quiz-progress">문제 ${quizPos + 1} / ${quizOrder.length} · 연속 정답 ${quizStreak}</div>
+            <div class="quiz-abstract">${escapeHtml(item.abstract)}</div>
+            <p class="quiz-q">이 초록은 어느 venue에 가장 잘 맞을까요?</p>
+            <div class="quiz-options">
+                ${(item.options as string[]).map((o) => `<button class="quiz-opt" data-venue="${escapeHtml(o)}">${escapeHtml(o)}</button>`).join('')}
+            </div>
+            <div id="quiz-feedback"></div>`;
+        body.querySelectorAll<HTMLElement>('.quiz-opt').forEach((btn) => {
+            btn.addEventListener('click', () => onQuizPick(item, btn.getAttribute('data-venue') || ''));
+        });
+    }
+
+    function onQuizPick(item: any, picked: string) {
+        const ranked = gradeQuizItem(item);
+        const correct = ranked[0]?.name || item.intended;
+        const isRight = picked === correct;
+        quizAnswered += 1;
+        quizStreak = isRight ? quizStreak + 1 : 0;
+        logAction({ action_type: 'quiz_answer', context_tag: 'quiz', metadata: { item: item.id, picked, correct, right: isRight } });
+
+        const scoreById: Record<string, VenueFitResult> = {};
+        ranked.forEach((r) => { scoreById[r.name] = r; });
+        document.querySelectorAll<HTMLElement>('.quiz-opt').forEach((btn) => {
+            const name = btn.getAttribute('data-venue') || '';
+            btn.classList.add('answered');
+            if (name === correct) btn.classList.add('correct');
+            if (name === picked && !isRight) btn.classList.add('wrong');
+            const s = scoreById[name];
+            if (s) btn.innerHTML += ` <span class="quiz-opt-score">${s.overall}</span>`;
+            btn.setAttribute('disabled', 'true');
+        });
+
+        const top = scoreById[correct];
+        const why = top?.sharedTerms?.length ? top.sharedTerms.slice(0, 5).map((t) => `<span class="fit-term">${escapeHtml(t)}</span>`).join('') : '';
+        const fb = document.getElementById('quiz-feedback');
+        if (fb) {
+            fb.innerHTML = `
+                <div class="quiz-result ${isRight ? 'ok' : 'no'}">
+                    ${isRight ? '✅ 정답!' : `🟡 스코어카드는 <b>${escapeHtml(correct)}</b>를 1순위로 봅니다`}
+                </div>
+                ${why ? `<div class="quiz-why">왜: ${why}</div>` : ''}
+                <div class="quiz-teach">💡 ${escapeHtml(item.teaching_point || '')}</div>
+                <div class="quiz-mentor">스코어카드는 정답이 아니라 <b>멘토 휴리스틱</b>이에요. 주제·방법론·커뮤니티 적합을 따로 따져보세요.</div>
+                <button class="btn" id="quiz-next">다음 문제 →</button>`;
+            document.getElementById('quiz-next')?.addEventListener('click', () => { quizPos += 1; renderQuizCard(); });
+        }
+    }
+
+    function openVenueQuiz() {
+        let modal = document.getElementById('quiz-modal-container');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'quiz-modal-container';
+            document.body.appendChild(modal);
+        }
+        if (quizOrder.length === 0) shuffleQuiz();
+        modal.innerHTML = `
+            <div class="fit-overlay" id="quiz-overlay"></div>
+            <div class="fit-modal quiz-modal" role="dialog" aria-label="투고처 매칭 연습">
+                <div class="fit-modal-head">
+                    <h3>🎓 투고처 매칭 연습</h3>
+                    <button class="fit-close" id="quiz-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">초록을 읽고 어느 venue에 맞을지 골라보세요. 고르면 스코어카드가 옵션을 채점하고 <strong>왜 그렇게 보는지</strong>를 보여줍니다. 학문 출판 리터러시(주제·방법론·커뮤니티 적합)를 연습하는 코너예요.</p>
+                <div id="quiz-body"></div>
+            </div>`;
+        document.getElementById('quiz-close-btn')?.addEventListener('click', closeVenueQuiz);
+        document.getElementById('quiz-overlay')?.addEventListener('click', closeVenueQuiz);
+        renderQuizCard();
+        logAction({ action_type: 'open_panel', context_tag: 'quiz', metadata: {} });
+    }
+
+    function closeVenueQuiz() {
+        document.getElementById('quiz-modal-container')?.remove();
+    }
+
+    document.getElementById('venue-quiz-btn')?.addEventListener('click', openVenueQuiz);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('quiz-modal-container')) closeVenueQuiz();
     });
 
     // ========================================================================
