@@ -18,6 +18,7 @@ import {
     type VenueContentAudit
 } from './src/data/venueContentAudit';
 import { shouldShowTour, startTour } from './src/ui/tour';
+import { rankSubmissionFit, methodologyNeighborhoods, type VenueFitInput, type VenueFitResult } from './src/services/submissionFit';
 
 declare const vis: any;
 declare const html2canvas: any;
@@ -114,6 +115,69 @@ function detectContext(): string {
     if (document.querySelector('.sidebar')?.classList.contains('active')) return 'sidebar';
     if (document.querySelector('.comparison-panel')?.classList.contains('active')) return 'comparison';
     return 'network';
+}
+
+// ============================================================================
+// INTERACTION DATASET EXPORT  (second moat: turn telemetry into a research dataset)
+// The app already logs how a researcher explores/compares/chooses venues to
+// `user_logs`. Here we make that portable: a studiable venue-choice behavior set.
+// ============================================================================
+
+function _downloadBlob(filename: string, content: string, mime: string) {
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function _rowsToCSV(rows: any[]): string {
+    const cols = ['created_at', 'session_id', 'action_type', 'context_tag', 'target_node', 'metadata'];
+    const esc = (v: any) => {
+        const s = (v !== null && typeof v === 'object') ? JSON.stringify(v) : (v ?? '');
+        return '"' + String(s).replace(/"/g, '""') + '"';
+    };
+    return [cols.join(','), ...rows.map(r => cols.map(c => esc(r[c])).join(','))].join('\n');
+}
+
+async function exportInteractionDataset(format: 'csv' | 'json') {
+    const status = document.getElementById('export-dataset-status');
+    const setStatus = (m: string) => { if (status) status.textContent = m; };
+    if (!supabase) {
+        setStatus('저장소(Supabase)가 연결되지 않아 내보낼 탐색 데이터가 없습니다.');
+        return;
+    }
+    try {
+        setStatus('불러오는 중...');
+        const { data: { user } } = await supabase.auth.getUser();
+        let q = supabase
+            .from('user_logs')
+            .select('created_at,session_id,action_type,context_tag,target_node,metadata')
+            .order('created_at', { ascending: true })
+            .limit(5000);
+        if (user?.id) q = q.eq('user_id', user.id);
+        else if (currentSessionId) q = q.eq('session_id', currentSessionId);
+        const { data, error } = await q;
+        if (error) throw new Error(error.message);
+        const rows = data || [];
+        if (!rows.length) {
+            setStatus('아직 기록된 탐색 이벤트가 없습니다. 잠시 탐색한 뒤 다시 시도하세요.');
+            return;
+        }
+        const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
+        if (format === 'csv') {
+            _downloadBlob(`fieldexplorer_interactions_${stamp}.csv`, _rowsToCSV(rows), 'text/csv;charset=utf-8');
+        } else {
+            _downloadBlob(`fieldexplorer_interactions_${stamp}.json`, JSON.stringify(rows, null, 2), 'application/json');
+        }
+        setStatus(`${rows.length}개 이벤트를 ${format.toUpperCase()}로 내보냈습니다.`);
+    } catch (e: any) {
+        setStatus('내보내기 실패: ' + (e?.message || e));
+    }
 }
 
 function getElementDescription(el: HTMLElement): string {
@@ -2761,8 +2825,8 @@ function main() {
         }
     });
 
-    // Impact filter dropdown
-    document.getElementById('impact-filter')!.addEventListener('change', (e) => {
+    // Impact filter dropdown (Q-tier browse removed from header; guard kept for safety)
+    document.getElementById('impact-filter')?.addEventListener('change', (e) => {
         try {
             impactFilter = (e.target as HTMLSelectElement).value;
             applyFilters();
@@ -3484,6 +3548,208 @@ function main() {
         if (e.key === 'Escape' && document.getElementById('feed-popup-container')) {
             closeFeedPopup();
         }
+    });
+
+    // ========================================================================
+    // SUBMISSION FIT SCORECARD  (headline differentiator)
+    // Paste an abstract -> rank venues as SUBMISSION TARGETS by topic fit,
+    // methodology-culture fit, and live CFP readiness.
+    // ========================================================================
+
+    function buildFitInputs(): VenueFitInput[] {
+        const now = new Date();
+        return venueData.map(v => {
+            const info = v.cfpDeadline ? getResolvedCFPInfo(v.name, v.cfpDeadline, now) : null;
+            return {
+                name: v.name,
+                type: v.type,
+                impact: v.impact,
+                cfpDaysUntil: info ? info.daysUntil : null,
+                cfpVerified: info ? info.confidence === 'official' : false,
+            };
+        });
+    }
+
+    function fitBar(label: string, value: number | null, color: string): string {
+        if (value === null) {
+            return `<div class="fit-metric"><span class="fit-metric-label">${label}</span>
+                <span class="fit-metric-na">신호 없음</span></div>`;
+        }
+        return `<div class="fit-metric"><span class="fit-metric-label">${label}</span>
+            <span class="fit-bar"><span class="fit-bar-fill" style="width:${Math.max(2, value)}%;background:${color}"></span></span>
+            <span class="fit-metric-val">${value}</span></div>`;
+    }
+
+    function cfpChip(r: VenueFitResult): string {
+        if (r.cfpDaysUntil === null) return '<span class="fit-cfp fit-cfp-unknown">마감일 미확인</span>';
+        if (r.cfpDaysUntil < 0) return `<span class="fit-cfp fit-cfp-passed">지난 주기 (${Math.abs(r.cfpDaysUntil)}일 지남)</span>`;
+        const tag = r.cfpVerified ? '✅ 검증' : '~추정';
+        const cls = r.cfpDaysUntil <= 45 ? 'fit-cfp-soon' : 'fit-cfp-open';
+        return `<span class="fit-cfp ${cls}">D-${r.cfpDaysUntil} · ${tag}</span>`;
+    }
+
+    function renderFitResults(results: VenueFitResult[]) {
+        const body = document.getElementById('fit-results');
+        if (!body) return;
+        if (results.length === 0) {
+            body.innerHTML = '<div class="fit-empty">초록에서 분석 가능한 내용 신호를 찾지 못했어요. 영어 초록을 충분히 붙여넣어 주세요.</div>';
+            return;
+        }
+        const top = results.slice(0, 12);
+        body.innerHTML = top.map((r, i) => `
+            <div class="fit-card" data-venue="${escapeHtml(r.name)}" tabindex="0" role="button">
+                <div class="fit-card-head">
+                    <span class="fit-rank">#${i + 1}</span>
+                    <span class="fit-venue">${escapeHtml(r.name)}</span>
+                    ${r.impact ? `<span class="fit-q">${r.impact}</span>` : ''}
+                    <span class="fit-overall">${r.overall}</span>
+                </div>
+                <div class="fit-metrics">
+                    ${fitBar('주제 적합', r.topicScore, '#7ba0cc')}
+                    ${fitBar('방법론 문화', r.methodScore, '#10b981')}
+                    ${fitBar('CFP 준비도', r.cfpScore, '#f59e0b')}
+                </div>
+                <div class="fit-foot">
+                    ${cfpChip(r)}
+                    ${r.topMethodology ? `<span class="fit-meth">우세 방법론: ${escapeHtml(r.topMethodology)}</span>` : ''}
+                </div>
+                ${r.sharedTerms.length ? `<div class="fit-why">왜: ${r.sharedTerms.map(t => `<span class="fit-term">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+            </div>
+        `).join('');
+
+        body.querySelectorAll<HTMLElement>('.fit-card').forEach(card => {
+            const go = () => {
+                const name = card.getAttribute('data-venue');
+                if (name) { navigateToVenue(name); closeSubmissionFit(); }
+            };
+            card.addEventListener('click', go);
+            card.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') go(); });
+        });
+    }
+
+    function runSubmissionFit() {
+        const ta = document.getElementById('fit-input') as HTMLTextAreaElement | null;
+        const abstract = ta?.value?.trim() || '';
+        if (abstract.length < 60) {
+            showToast('초록을 조금 더 길게 붙여넣어 주세요 (최소 ~60자).');
+            return;
+        }
+        const results = rankSubmissionFit(abstract, buildFitInputs());
+        renderFitResults(results);
+        logAction({
+            action_type: 'submission_fit_run',
+            context_tag: 'scorecard',
+            metadata: { chars: abstract.length, top: results[0]?.name || null, count: results.length },
+        });
+    }
+
+    function openSubmissionFit() {
+        let modal = document.getElementById('fit-modal-container');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'fit-modal-container';
+            document.body.appendChild(modal);
+        }
+        modal.innerHTML = `
+            <div class="fit-overlay" id="fit-overlay"></div>
+            <div class="fit-modal" role="dialog" aria-label="투고 적합도 분석">
+                <div class="fit-modal-head">
+                    <h3>🎯 투고 적합도 스코어카드</h3>
+                    <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">초록을 붙여넣으면 주제 적합 + 방법론 문화 + CFP 준비도를 결합해 투고처를 추천합니다. (논문 검색이 아니라 <strong>제출 타깃</strong> 추천)</p>
+                <textarea id="fit-input" class="fit-textarea" placeholder="여기에 영어 초록(또는 핵심 단락)을 붙여넣으세요..."></textarea>
+                <div class="fit-actions">
+                    <button class="btn" id="fit-run-btn">분석</button>
+                    <span class="fit-hint">주제는 venue 지문(OpenAlex 기반)과의 코사인, 방법론은 6개 연구문화 정렬로 계산됩니다.</span>
+                </div>
+                <div id="fit-results" class="fit-results"></div>
+            </div>
+        `;
+        document.getElementById('fit-close-btn')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-overlay')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-run-btn')?.addEventListener('click', runSubmissionFit);
+        document.getElementById('fit-input')?.addEventListener('keydown', (e) => {
+            if ((e as KeyboardEvent).key === 'Enter' && ((e as KeyboardEvent).ctrlKey || (e as KeyboardEvent).metaKey)) runSubmissionFit();
+        });
+        requestAnimationFrame(() => (document.getElementById('fit-input') as HTMLTextAreaElement | null)?.focus());
+        logAction({ action_type: 'open_panel', context_tag: 'scorecard', metadata: {} });
+    }
+
+    function closeSubmissionFit() {
+        document.getElementById('fit-modal-container')?.remove();
+    }
+
+    document.getElementById('submission-fit-btn')?.addEventListener('click', openSubmissionFit);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('fit-modal-container')) closeSubmissionFit();
+    });
+
+    // ========================================================================
+    // METHODOLOGY NEIGHBORHOOD MAP  (the angle citation maps miss)
+    // Group venues by dominant research culture from the fingerprints.
+    // ========================================================================
+
+    const METHODOLOGY_BLURB: Record<string, string> = {
+        'Experimental': '실험·준실험·통계 검증 중심',
+        'Qualitative': '사례연구·인터뷰·담화/주제 분석 중심',
+        'Design & Dev': '설계기반연구·시스템/프로토타입 개발 중심',
+        'Data & AI': '학습분석·데이터마이닝·AI/ML 중심',
+        'Review & Meta': '체계적 문헌고찰·메타분석 중심',
+        'Theory': '이론·프레임워크·개념 정교화 중심',
+    };
+
+    function openMethodologyMap() {
+        let modal = document.getElementById('meth-modal-container');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'meth-modal-container';
+            document.body.appendChild(modal);
+        }
+        const neighborhoods = methodologyNeighborhoods(venueData.map(v => v.name));
+        const cards = neighborhoods.map(nb => `
+            <div class="meth-card">
+                <div class="meth-card-head">${escapeHtml(nb.category)}</div>
+                <div class="meth-blurb">${escapeHtml(METHODOLOGY_BLURB[nb.category] || '')}</div>
+                ${nb.venues.length ? nb.venues.map(v => `
+                    <div class="meth-venue" data-venue="${escapeHtml(v.name)}" tabindex="0" role="button">
+                        <span class="meth-venue-name">${escapeHtml(v.name)}</span>
+                        <span class="meth-share"><span class="meth-share-fill" style="width:${v.share}%"></span></span>
+                        <span class="meth-share-val">${v.share}%</span>
+                    </div>`).join('') : '<div class="meth-empty">데이터 신호 없음</div>'}
+            </div>
+        `).join('');
+        modal.innerHTML = `
+            <div class="fit-overlay" id="meth-overlay"></div>
+            <div class="fit-modal meth-modal" role="dialog" aria-label="방법론 지형">
+                <div class="fit-modal-head">
+                    <h3>🧪 방법론 지형 (Methodology Neighborhoods)</h3>
+                    <button class="fit-close" id="meth-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">각 venue가 어떤 <strong>연구 문화</strong>에 가까운지 지문(OpenAlex 기반)에서 추정해 묶었습니다. 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
+                <div class="meth-grid">${cards}</div>
+            </div>
+        `;
+        document.getElementById('meth-close-btn')?.addEventListener('click', closeMethodologyMap);
+        document.getElementById('meth-overlay')?.addEventListener('click', closeMethodologyMap);
+        modal.querySelectorAll<HTMLElement>('.meth-venue').forEach(el => {
+            const go = () => {
+                const name = el.getAttribute('data-venue');
+                if (name) { navigateToVenue(name); closeMethodologyMap(); }
+            };
+            el.addEventListener('click', go);
+            el.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Enter') go(); });
+        });
+        logAction({ action_type: 'open_panel', context_tag: 'methodology_map', metadata: {} });
+    }
+
+    function closeMethodologyMap() {
+        document.getElementById('meth-modal-container')?.remove();
+    }
+
+    document.getElementById('methodology-map-btn')?.addEventListener('click', openMethodologyMap);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('meth-modal-container')) closeMethodologyMap();
     });
 
     // ========================================================================
@@ -7706,6 +7972,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     document.getElementById('profile-dialog')?.addEventListener('click', (e) => {
         if ((e.target as HTMLElement).classList.contains('modal-overlay')) closeProfileDialog();
     });
+    document.getElementById('export-dataset-csv')?.addEventListener('click', () => void exportInteractionDataset('csv'));
+    document.getElementById('export-dataset-json')?.addEventListener('click', () => void exportInteractionDataset('json'));
 
     // Refresh
     document.getElementById('refresh-btn')!.addEventListener('click', () => location.reload());
