@@ -2228,9 +2228,40 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
 // MAIN
 // ============================================================================
 
-function main() {
+// Load approved community-submitted venues (e.g. from the KELS /add-venue bot
+// command) and merge them into the graph. Safe: returns [] on any failure.
+async function loadCommunityVenues(): Promise<VenueInfo[]> {
+    if (!supabase) return [];
+    try {
+        const { data, error } = await supabase
+            .from('community_venues')
+            .select('id,name,type,categories,impact,cfp_deadline')
+            .eq('status', 'approved');
+        if (error || !data) return [];
+        return (data as any[]).map((r) => ({
+            id: r.id || String(r.name).toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+            name: r.name,
+            type: (r.type || 'Journal') as VenueInfo['type'],
+            categories: Array.isArray(r.categories) ? r.categories : [],
+            impact: r.impact || undefined,
+            cfpDeadline: r.cfp_deadline || undefined,
+        })).filter((v) => v.name && v.categories.length > 0);
+    } catch {
+        return [];
+    }
+}
+
+async function main() {
     const container = document.getElementById('network');
     if (!container) return;
+
+    // Merge approved community venues before the graph is built (additive, safe).
+    try {
+        const community = await loadCommunityVenues();
+        for (const v of community) {
+            if (!venueData.some((x) => x.name === v.name)) venueData.push(v);
+        }
+    } catch { /* fall back to static venues.json baseline */ }
 
     let { nodes, edges, categories } = parseNetworkData();
 
@@ -8592,4 +8623,4 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 }
 
-main();
+main().catch((e) => console.error('main() failed', e));
