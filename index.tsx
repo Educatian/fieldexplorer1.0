@@ -2469,7 +2469,7 @@ async function main() {
                     border: DESIGN_COLORS.tertiaryDeep,
                     highlight: { background: DESIGN_COLORS.tertiarySoft, border: DESIGN_COLORS.tertiary }
                 },
-                font: { color: DESIGN_COLORS.surface, size: 11 },
+                font: { color: DESIGN_COLORS.surface, size: 11, strokeWidth: 0 },
                 margin: 7,
                 shapeProperties: { borderRadius: 5 }
             }
