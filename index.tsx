@@ -21,7 +21,7 @@ import {
     type VenueContentAudit
 } from './src/data/venueContentAudit';
 import { shouldShowTour, startTour } from './src/ui/tour';
-import { rankSubmissionFit, methodologyNeighborhoods, explainFit, type VenueFitInput, type VenueFitResult, type FitTeaching } from './src/services/submissionFit';
+import { rankSubmissionFit, methodologyNeighborhoods, dominantMethodology, explainFit, type VenueFitInput, type VenueFitResult, type FitTeaching } from './src/services/submissionFit';
 import quizData from './src/data/learning-quiz.json';
 
 declare const vis: any;
@@ -32,6 +32,21 @@ declare const jspdf: any;
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
+
+// V6: venue_metrics lookup by display name (node scorecard) + interdisciplinarity percentile
+const venueMetricsByName: Record<string, any> = {};
+{
+    const _vs = (venueMetrics as any).venues || {};
+    for (const k in _vs) { const v = _vs[k]; if (v && v.name) venueMetricsByName[v.name] = v; }
+}
+const _interdiscVals = (Object.values((venueMetrics as any).venues || {}) as any[])
+    .map((v) => v?.interdisciplinarity_simpson?.mean)
+    .filter((x) => x != null) as number[];
+function interdiscTopPercent(val: number): number {
+    if (!_interdiscVals.length) return 50;
+    const better = _interdiscVals.filter((x) => x > val).length;
+    return Math.max(1, Math.round((100 * better) / _interdiscVals.length));
+}
 
 const DESIGN_COLORS = {
     // Slate + Indigo (modern dark, single signature accent) -- mirrors app.html :root
@@ -2072,6 +2087,19 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
 
     const methodologyData = calculateMethodologyFocus(node.id, data.methodologyProfile || [], data.isExpertVerified);
 
+    // V6: interdisciplinarity (cited-field diversity) cue + field composition
+    const vm = venueMetricsByName[node.id];
+    const interdiscHtml = (vm && vm.interdisciplinarity_simpson) ? `
+      <div class="sidebar-section">
+        <h3 title="venue가 인용하는 OpenAlex 최상위 분야의 다양성(Simpson). pySciSci/Stirling 기반.">🧭 학제간성 (인용 분야 다양성)</h3>
+        <p class="sidebar-note-muted">다양성 ${vm.interdisciplinarity_simpson.mean.toFixed(2)} · 상위 ${interdiscTopPercent(vm.interdisciplinarity_simpson.mean)}% · 여러 분야를 얼마나 폭넓게 인용하는지 보여주는 sensemaking cue (평가점수 아님)</p>
+        ${(vm.top_fields && vm.top_fields.length) ? `<p class="sidebar-meta-caption">주로 인용하는 분야</p>` + vm.top_fields.slice(0, 4).map((f: any) => `
+        <div class="detail-progress-row">
+          <div class="detail-progress-head"><span>${f.field}</span><span class="detail-progress-value">${Math.round(f.share * 100)}%</span></div>
+          <div class="detail-progress-track"><div class="detail-progress-fill" style="width: ${Math.round(f.share * 100)}%;"></div></div>
+        </div>`).join('') : ''}
+      </div>` : '';
+
     const methodologyHtml = methodologyData.length
         ? methodologyData.map((m: any) => `
         <div class="detail-progress-row">
@@ -2161,6 +2189,8 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       <h3>주요 토픽</h3>
       <p>${topics}</p>
     </div>
+
+    ${interdiscHtml}
 
     <div class="sidebar-section">
       <h3 title="학술지 키워드 분석(TF-IDF)을 바탕으로 산출된 경향성 지표입니다.">연구 성향 프로필</h3>
@@ -2942,30 +2972,46 @@ async function main() {
         return `rgb(${Math.round(a[0] + (b[0] - a[0]) * f)},${Math.round(a[1] + (b[1] - a[1]) * f)},${Math.round(a[2] + (b[2] - a[2]) * f)})`;
     };
     const interColor = (v: number) => cividis(iMax > iMin ? (v - iMin) / (iMax - iMin) : 0.5);
-    const recolorByInterdisc = (on: boolean) => {
-        nodesDataset.update(venueNodes.map((n) => {
-            if (on && n.interdisc != null) return { id: n.id, color: { background: interColor(n.interdisc), border: 'rgba(255,255,255,0.55)' } };
-            const gc = groupColor(n.group);
-            return { id: n.id, color: { background: gc.background, border: gc.border } };
-        }));
+
+    // --- V6: node-colour ENCODING switcher (decoupled from the citation toggle) ---
+    // type (default) / interdisciplinarity (cividis) / methodology (categorical).
+    let nodeEncoding: 'type' | 'interdisc' | 'method' = 'type';
+    const NO_DATA = { background: '#2c3344', border: '#3a4256' };
+    const METHOD_COLORS: Record<string, string> = {
+        'Experimental': '#6366f1', 'Qualitative': '#f472b6', 'Design & Dev': '#38bdf8',
+        'Data & AI': '#34d399', 'Review & Meta': '#fbbf24', 'Theory': '#a78bfa'
     };
-    const showInterdiscLegend = (show: boolean) => {
-        let el = document.getElementById('interdisc-legend');
-        if (!show) { el?.remove(); return; }
-        if (!el) {
-            el = document.createElement('div');
-            el.id = 'interdisc-legend';
-            el.style.cssText = 'position:fixed;left:18px;bottom:96px;z-index:60;background:rgba(9,19,40,0.88);border:1px solid rgba(109,117,140,0.3);border-radius:8px;padding:8px 10px;font:11px Inter,\'Noto Sans KR\',sans-serif;color:#dee5ff;pointer-events:none';
-            el.innerHTML = '<div style="margin-bottom:5px;opacity:.85">노드 색 = 학제간성 (인용 분야 다양성)</div><div style="height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,rgb(0,32,77),rgb(124,123,120),rgb(255,233,69))"></div><div style="display:flex;justify-content:space-between;opacity:.7;margin-top:3px"><span>낮음</span><span>높음</span></div><div style="margin-top:6px;opacity:.7">선 = 인용 흐름 backbone · 노드 클릭=이웃 펼치기</div>';
-            document.body.appendChild(el);
+    const methodOf = (name: string): string | null => {
+        const vec = (semanticProfiles as any)[name]?.vector;
+        return vec ? dominantMethodology(vec) : null;
+    };
+    const nodeColorFor = (n: NodeData) => {
+        if (nodeEncoding === 'interdisc') return n.interdisc != null ? { background: interColor(n.interdisc), border: 'rgba(255,255,255,0.55)' } : NO_DATA;
+        if (nodeEncoding === 'method') { const m = methodOf(n.id); return m && METHOD_COLORS[m] ? { background: METHOD_COLORS[m], border: 'rgba(255,255,255,0.45)' } : NO_DATA; }
+        return groupColor(n.group);
+    };
+    const showEncodingLegend = () => {
+        let el = document.getElementById('encoding-legend');
+        if (nodeEncoding === 'type') { el?.remove(); return; }
+        if (!el) { el = document.createElement('div'); el.id = 'encoding-legend'; document.body.appendChild(el); }
+        el.style.cssText = "position:fixed;left:18px;bottom:96px;z-index:60;background:rgba(17,20,29,0.9);border:1px solid rgba(124,134,160,0.3);border-radius:8px;padding:8px 10px;font:11px Inter,'Noto Sans KR',sans-serif;color:#e6e9f0;pointer-events:none;max-width:210px";
+        if (nodeEncoding === 'interdisc') {
+            el.innerHTML = '<div style="margin-bottom:5px;opacity:.85">노드 색 = 학제간성 (인용 분야 다양성)</div><div style="height:9px;width:160px;border-radius:5px;background:linear-gradient(90deg,rgb(0,32,77),rgb(124,123,120),rgb(255,233,69))"></div><div style="display:flex;justify-content:space-between;opacity:.7;margin-top:3px"><span>낮음</span><span>높음</span></div><div style="margin-top:6px;opacity:.6">회색 = 데이터 없음</div>';
+        } else {
+            const chips = Object.entries(METHOD_COLORS).map(([k, c]) => `<div style="display:flex;align-items:center;gap:6px;margin-top:3px"><span style="width:10px;height:10px;border-radius:50%;background:${c};flex:none"></span>${k}</div>`).join('');
+            el.innerHTML = `<div style="margin-bottom:4px;opacity:.85">노드 색 = 방법론 문화 (TF-IDF)</div>${chips}<div style="margin-top:6px;opacity:.6">회색 = 신호 없음</div>`;
         }
+    };
+    const applyNodeEncoding = () => {
+        nodesDataset.update(venueNodes.map((n) => ({ id: n.id, color: nodeColorFor(n) })));
+        showEncodingLegend();
     };
 
     // FOCUS+CONTEXT: reveal one venue's full citation ego-network on click
     showCitationEgo = (nodeId: string | null) => {
         if (!citationMode) return;
         edgesDataset.remove(citationEdgeIds);
-        recolorByInterdisc(true); // reset any prior focus-node highlight
+        applyNodeEncoding(); // reset any prior focus-node highlight (respects current encoding)
         if (!nodeId) { // empty click -> back to calm backbone
             edgesDataset.add(backboneEdges.map((e) => ({ ...e })));
             return;
@@ -2987,14 +3033,18 @@ async function main() {
             if (citationMode) {
                 edgesDataset.add(backboneEdges); // backbone only -> calm default
                 edgesDataset.update(semanticEdgeIds.map((id) => ({ id, color: { color: 'rgba(255,255,255,0.02)' } })));
-                recolorByInterdisc(true);
-                showInterdiscLegend(true);
+                // node colour is owned by the encoding switcher; pair citation with the
+                // interdisciplinarity spectrum on first use for figure/ground separation
+                if (nodeEncoding === 'type') {
+                    nodeEncoding = 'interdisc';
+                    const sel = document.getElementById('node-encoding-select') as HTMLSelectElement | null;
+                    if (sel) sel.value = 'interdisc';
+                    applyNodeEncoding();
+                }
                 showToast(`인용 backbone ON — ${backboneEdges.length}/${citationEdges.length} 흐름 · 노드 클릭으로 이웃 펼치기`);
             } else {
                 edgesDataset.remove(citationEdgeIds);
                 edgesDataset.update(semanticEdgeIds.map((id) => ({ id, color: { color: 'rgba(255,255,255,0.08)', highlight: 'rgba(255,215,0,0.4)' } })));
-                recolorByInterdisc(false);
-                showInterdiscLegend(false);
                 showToast('인용 레이어 OFF — 키워드 그래프 복원');
             }
             network.redraw();
@@ -3005,8 +3055,15 @@ async function main() {
         }
     });
 
+    // node-colour encoding switcher (type / interdisciplinarity / methodology)
+    document.getElementById('node-encoding-select')?.addEventListener('change', (e) => {
+        nodeEncoding = (e.target as HTMLSelectElement).value as any;
+        applyNodeEncoding();
+        logAction({ action_type: 'filter_change', context_tag: 'network', metadata: { filter: 'node_encoding', value: nodeEncoding } });
+    });
+
     // lightweight test/automation hook (used by scripts/shoot.mjs for ego-network capture)
-    (window as any).__fe = { ego: (id: string) => showCitationEgo(id), citationOn: () => citationMode };
+    (window as any).__fe = { ego: (id: string) => showCitationEgo(id), citationOn: () => citationMode, encode: (m: string) => { nodeEncoding = m as any; applyNodeEncoding(); } };
 
     // Impact filter dropdown (Q-tier browse removed from header; guard kept for safety)
     document.getElementById('impact-filter')?.addEventListener('change', (e) => {

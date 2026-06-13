@@ -221,6 +221,7 @@ def main():
     per_paper_shannon = defaultdict(list)
     venue_paper_n = Counter()
     venue_ref_resolved = Counter()
+    venue_field_counts = defaultdict(Counter)  # venue -> {cited field: count}
 
     for wid, refs in work_refs.items():
         V = work_venue[wid]
@@ -237,9 +238,17 @@ def main():
             if m["field"]:
                 fields.append(m["field"])
                 venue_ref_resolved[V] += 1
+                venue_field_counts[V][m["field"]] += 1
         if fields:
             per_paper_simpson[V].append(simpson_diversity(fields))
             per_paper_shannon[V].append(shannon_diversity(fields))
+
+    def _top_fields(vid, k=5):
+        fc = venue_field_counts.get(vid)
+        if not fc:
+            return []
+        tot = sum(fc.values())
+        return [{"field": f, "share": round(c / tot, 3)} for f, c in fc.most_common(k)]
 
     def _agg(d, vid):
         xs = [x for x in d.get(vid, []) if x is not None]
@@ -260,6 +269,7 @@ def main():
             "interdisciplinarity_shannon": _agg(per_paper_shannon, vid),
             "n_papers_sampled": venue_paper_n[vid],
             "n_refs_field_resolved": venue_ref_resolved[vid],
+            "top_fields": _top_fields(vid),
         }
 
     edges = [

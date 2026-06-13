@@ -46,7 +46,7 @@ const TOUR_STEPS: TourStep[] = [
     {
         target: '.legend',
         title: '🎨 범례',
-        content: '노드 색상의 의미를 확인하세요. 저널은 파란색, 학회는 초록색, 카테고리는 주황색입니다.',
+        content: '노드 색상의 의미를 확인하세요. 저널은 인디고, 학회는 하늘색, 카테고리는 회색 박스입니다. 헤더의 "노드색" 메뉴로 학제간성·방법론 기준 색으로도 볼 수 있어요.',
         position: 'top'
     }
 ];
@@ -83,12 +83,16 @@ export function skipTour(): void {
 
 function createOverlay(): void {
     // Create overlay
+    // NOTE: the dimming is done entirely by the spotlight's huge box-shadow spread
+    // (the cutout trick). This overlay must stay TRANSPARENT — it only blocks
+    // interaction with the app during the tour. A dark overlay here would sit over
+    // the target and defeat the spotlight cutout (the original spotlight bug).
     overlay = document.createElement('div');
     overlay.id = 'tour-overlay';
     overlay.style.cssText = `
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.7);
+        background: transparent;
         z-index: 9998;
         transition: opacity 0.3s;
     `;
@@ -175,7 +179,7 @@ function createOverlay(): void {
         }
         .tour-btn-next:hover {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.4);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
         }
     `;
     document.head.appendChild(style);

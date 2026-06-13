@@ -1121,27 +1121,28 @@
       inset: 0;
       z-index: 300;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0 22px 90px 0;
+      pointer-events: none; /* non-blocking corner toast (does not cover the viz) */
     }
 
     .whatsnew-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(6, 14, 32, 0.68);
-      backdrop-filter: blur(4px);
+      display: none; /* corner toast: no full-screen dimming over the visualization */
     }
 
     .whatsnew-container {
       position: relative;
       background: var(--bg-primary);
-      border-radius: 20px;
-      width: 90%;
-      max-width: 400px;
-      padding: 24px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(6, 14, 32, 0.4);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      width: auto;
+      max-width: 330px;
+      padding: 18px 20px;
+      text-align: left;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
       animation: popIn 0.3s ease;
+      pointer-events: auto;
     }
 
     @keyframes popIn {
@@ -4456,6 +4457,11 @@
         <button class="btn filter-btn conference active" id="filter-conf">학회</button>
         <button class="btn filter-btn cfp" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
         <button class="btn filter-btn citation" id="citation-layer-btn" title="인용 기반 엣지 오버레이 (V6: OpenAlex 인용 흐름)">🔗 인용</button>
+        <select class="category-select" id="node-encoding-select" title="노드 색 기준" style="max-width:150px">
+          <option value="type">🎨 노드색: 유형</option>
+          <option value="interdisc">🎨 노드색: 학제간성</option>
+          <option value="method">🎨 노드색: 방법론</option>
+        </select>
         <button class="btn filter-btn fit" id="submission-fit-btn" title="초록 붙여넣기 → 투고 적합도 분석">🎯 적합도</button>
         <button class="btn filter-btn meth" id="methodology-map-btn" title="방법론 문화로 venue 지형 보기">🧪 방법론</button>
         <button class="btn filter-btn quiz" id="venue-quiz-btn" title="투고처 매칭 연습 퀴즈">🎓 연습</button>
