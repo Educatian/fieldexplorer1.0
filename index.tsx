@@ -2825,15 +2825,24 @@ async function main() {
         handleNodeClick(nodeId);
     });
 
-    // Hover
+    // Hover. Re-assert the active node-colour encoding alongside the opacity
+    // change: vis reverts a node with a `group` to the group colour on the
+    // hover/blur cycle, which was wiping the interdisciplinarity/methodology
+    // colour as soon as the pointer left a node.
+    const isVenueGroup = (g?: string) => g === 'Journal' || g === 'Conference' || g === 'SubConference';
+    const opacityUpdate = (n: any, op: number) => {
+        const u: any = { id: n.id, opacity: op };
+        if (nodeEncoding !== 'type' && isVenueGroup(n.group)) u.color = nodeColorFor(n);
+        return u;
+    };
     network.on('hoverNode', (params: any) => {
         const neighbors = network.getConnectedNodes(params.node);
         neighbors.push(params.node);
-        nodesDataset.update(nodes.map(n => ({ id: n.id, opacity: neighbors.includes(n.id) ? 1 : 0.12 })));
+        nodesDataset.update(nodes.map(n => opacityUpdate(n, neighbors.includes(n.id) ? 1 : 0.12)));
     });
 
     network.on('blurNode', () => {
-        nodesDataset.update(nodes.map(n => ({ id: n.id, opacity: 1 })));
+        nodesDataset.update(nodes.map(n => opacityUpdate(n, 1)));
     });
 
     // Filters
