@@ -42,24 +42,25 @@
         }
 
         :root {
-            --surface: #060e20;
-            --surface-container-low: #091328;
-            --surface-container-high: #141f38;
-            --surface-container-highest: #192540;
-            --surface-bright: rgba(25, 37, 64, 0.78);
-            --outline: #6d758c;
-            --outline-variant: #40485d;
-            --outline-ghost: rgba(64, 72, 93, 0.2);
-            --outline-soft: rgba(64, 72, 93, 0.35);
-            --on-surface: #dee5ff;
-            --on-surface-variant: #9aa8c8;
-            --primary: #3bbffa;
-            --primary-container: #22b1ec;
-            --primary-soft: #7ad6ff;
-            --secondary: #10b981;
-            --secondary-soft: #34d3b2;
-            --tertiary: #f5a623;
-            --tertiary-soft: #ffc857;
+            /* Slate + Indigo (matches app.html) */
+            --surface: #0b0e14;
+            --surface-container-low: #11141d;
+            --surface-container-high: #181c28;
+            --surface-container-highest: #212838;
+            --surface-bright: rgba(33, 40, 56, 0.78);
+            --outline: #5b647a;
+            --outline-variant: #2c3344;
+            --outline-ghost: rgba(99, 102, 241, 0.12);
+            --outline-soft: rgba(124, 134, 160, 0.3);
+            --on-surface: #e6e9f0;
+            --on-surface-variant: #9aa3b8;
+            --primary: #6366f1;
+            --primary-container: #818cf8;
+            --primary-soft: #a5b4fc;
+            --secondary: #38bdf8;
+            --secondary-soft: #7dd3fc;
+            --tertiary: #94a3b8;
+            --tertiary-soft: #cbd5e1;
 
             --bg-primary: var(--surface);
             --bg-secondary: var(--surface-container-low);
@@ -171,11 +172,11 @@
             position: fixed;
             inset: 0;
             z-index: 0;
-            background-image:
-                linear-gradient(rgba(59, 191, 250, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(59, 191, 250, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-            animation: grid-move 30s linear infinite;
+            /* AI-generated constellation hero (Higgsfield) + left-dark gradient so
+               hero text stays legible over the artwork */
+            background:
+                linear-gradient(90deg, var(--surface) 0%, rgba(11, 14, 20, 0.82) 38%, rgba(11, 14, 20, 0.32) 72%, rgba(11, 14, 20, 0.55) 100%),
+                url('/hero-bg.jpg') no-repeat right center / cover;
         }
 
         @keyframes grid-move {

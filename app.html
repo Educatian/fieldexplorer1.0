@@ -1115,6 +1115,35 @@
       margin-top: 8px;
     }
 
+    /* ===== KELS INTRO LOADING SPLASH ===== */
+    #intro-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 11000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #0b0e14;
+      transition: opacity 0.55s ease;
+    }
+    #intro-splash.intro-show { display: flex; }
+    #intro-splash.intro-hide { opacity: 0; pointer-events: none; }
+    #intro-video { width: min(62vw, 720px); height: auto; border-radius: 12px; }
+    #intro-skip {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: rgba(124, 134, 160, 0.14);
+      color: #9aa3b8;
+      border: 1px solid rgba(124, 134, 160, 0.3);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font: 13px 'Inter', 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    #intro-skip:hover { color: #e6e9f0; border-color: #6366f1; }
+
     /* ===== WHAT'S NEW POPUP ===== */
     .whatsnew-popup {
       position: fixed;
@@ -4433,6 +4462,34 @@
       }
     }
   </script>
+
+  <!-- KELS intro loading splash (plays once per session while the app initializes) -->
+  <div id="intro-splash" aria-hidden="true">
+    <video id="intro-video" src="/kels-intro.mp4" muted playsinline preload="auto"></video>
+    <button id="intro-skip" type="button">건너뛰기</button>
+  </div>
+  <script>
+    (function () {
+      try {
+        var el = document.getElementById('intro-splash');
+        if (!el) return;
+        if (sessionStorage.getItem('fe_intro_seen')) { el.remove(); return; }
+        sessionStorage.setItem('fe_intro_seen', '1');
+        el.classList.add('intro-show');
+        var v = document.getElementById('intro-video');
+        var hide = function () { el.classList.add('intro-hide'); setTimeout(function () { el.remove(); }, 600); };
+        var skip = document.getElementById('intro-skip');
+        if (skip) skip.addEventListener('click', hide);
+        if (v) {
+          v.addEventListener('ended', hide);
+          var p = v.play && v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+        setTimeout(hide, 8000); // hard cap so the splash never blocks the app
+      } catch (e) {}
+    })();
+  </script>
+
   <header class="header">
     <div class="logo">
       <div class="logo-icon" style="background: transparent;">

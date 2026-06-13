@@ -136,34 +136,59 @@ def fetch_venue_works(source_ids, samples):
 # --------------------------------------------------------------------------
 # Phase 2 -- batch-resolve referenced works -> (source, field)
 # --------------------------------------------------------------------------
+REF_CACHE = Path("src/data/_ref_meta_cache.json")
+
+
 def resolve_refs(ref_ids):
-    """ref work id -> {'source': bare S-id, 'field': field name}."""
+    """ref work id -> {'source': bare S-id, 'field': field name}.
+
+    Hardened: retries with backoff, 429 handling, and an on-disk checkpoint so a
+    killed/throttled run resumes instead of re-fetching ~60k references from zero.
+    """
     meta = {}
-    ref_ids = list(ref_ids)
-    for i in range(0, len(ref_ids), 50):
-        batch = ref_ids[i : i + 50]
+    if REF_CACHE.exists():
+        try:
+            meta = json.loads(REF_CACHE.read_text(encoding="utf-8"))
+            print(f"    resumed {len(meta)} refs from checkpoint")
+        except Exception:
+            meta = {}
+    todo = [r for r in ref_ids if r not in meta]
+    print(f"    {len(todo)} refs to resolve ({len(ref_ids) - len(todo)} cached)")
+
+    for i in range(0, len(todo), 50):
+        batch = todo[i : i + 50]
         params = {
             "filter": "ids.openalex:" + "|".join(batch),
             "select": "id,primary_location,primary_topic",
             "per_page": 50,
             "mailto": MAILTO,
         }
-        try:
-            r = requests.get(OPENALEX_WORKS, params=params, timeout=30)
-            if r.status_code != 200:
-                continue
-            for w in r.json().get("results", []):
-                wid = _bare(w.get("id"))
-                loc = w.get("primary_location") or {}
-                src = _bare((loc.get("source") or {}).get("id"))
-                topic = w.get("primary_topic") or {}
-                field = ((topic.get("field") or {}).get("display_name"))
-                meta[wid] = {"source": src, "field": field}
-        except Exception as e:
-            print(f"    ref batch error: {e}")
+        for attempt in range(4):
+            try:
+                r = requests.get(OPENALEX_WORKS, params=params, timeout=20)
+                if r.status_code == 429:        # rate limited -> back off
+                    time.sleep(5 * (attempt + 1))
+                    continue
+                if r.status_code != 200:
+                    time.sleep(1.5 * (attempt + 1))
+                    continue
+                for w in r.json().get("results", []):
+                    wid = _bare(w.get("id"))
+                    loc = w.get("primary_location") or {}
+                    src = _bare((loc.get("source") or {}).get("id"))
+                    topic = w.get("primary_topic") or {}
+                    field = ((topic.get("field") or {}).get("display_name"))
+                    meta[wid] = {"source": src, "field": field}
+                break                            # batch ok
+            except Exception as e:
+                if attempt == 3:
+                    print(f"    ref batch giving up: {e}")
+                time.sleep(2 * (attempt + 1))
         time.sleep(DELAY)
         if (i // 50) % 20 == 0 and i:
-            print(f"    ...resolved {i}/{len(ref_ids)} refs")
+            REF_CACHE.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+            print(f"    ...resolved {len(meta)}/{len(ref_ids)} refs (checkpoint)")
+    REF_CACHE.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
     return meta
 
 
