@@ -1,5 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import semanticProfiles from './src/data/semantic_profiles.json';
+// V6 Compute/Augment layer: citation-grounded venue->venue edges + interdisciplinarity
+// (built offline by scripts/build_venue_metrics.py via OpenAlex + pySciSci diversity)
+import venueMetrics from './src/data/venue_metrics.json';
 import {
     getBuiltInOfficialCFPRecord,
     resolveCFPInfoWithOverrides,
@@ -31,25 +34,26 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey) : null;
 
 const DESIGN_COLORS = {
-    surface: '#060e20',
-    surfaceLow: '#091328',
-    surfaceHigh: '#141f38',
-    surfaceHighest: '#192540',
-    onSurface: '#dee5ff',
-    onSurfaceVariant: '#9aa8c8',
-    outline: '#6d758c',
-    outlineGhost: 'rgba(64, 72, 93, 0.2)',
-    outlineSoft: 'rgba(109, 117, 140, 0.3)',
-    outlineStrong: 'rgba(109, 117, 140, 0.5)',
-    primary: '#3bbffa',
-    primaryContainer: '#22b1ec',
-    primarySoft: '#7ad6ff',
-    secondary: '#10b981',
-    secondarySoft: '#34d3b2',
-    secondaryDeep: '#0f967d',
-    tertiary: '#f5a623',
-    tertiarySoft: '#ffc857',
-    tertiaryDeep: '#d98714'
+    // Slate + Indigo (modern dark, single signature accent) -- mirrors app.html :root
+    surface: '#0b0e14',
+    surfaceLow: '#11141d',
+    surfaceHigh: '#181c28',
+    surfaceHighest: '#212838',
+    onSurface: '#e6e9f0',
+    onSurfaceVariant: '#9aa3b8',
+    outline: '#5b647a',
+    outlineGhost: 'rgba(99, 102, 241, 0.12)',
+    outlineSoft: 'rgba(124, 134, 160, 0.3)',
+    outlineStrong: 'rgba(124, 134, 160, 0.5)',
+    primary: '#6366f1',
+    primaryContainer: '#818cf8',
+    primarySoft: '#a5b4fc',
+    secondary: '#38bdf8',
+    secondarySoft: '#7dd3fc',
+    secondaryDeep: '#0ea5e9',
+    tertiary: '#94a3b8',
+    tertiarySoft: '#cbd5e1',
+    tertiaryDeep: '#64748b'
 } as const;
 
 // ============================================================================
@@ -859,6 +863,7 @@ interface NodeData {
     cfpDeadline?: string;
     hidden?: boolean;
     mass?: number;
+    interdisc?: number | null;
 }
 
 interface EdgeData {
@@ -870,11 +875,23 @@ interface EdgeData {
     color?: any;
     dashes?: boolean | number[];
     hidden?: boolean;
+    arrows?: string;
+    smooth?: any;
+    layer?: string;
+    weight?: number;
+    backbone?: boolean;
 }
 
-function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories: string[] } {
+function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories: string[]; citationEdges: EdgeData[] } {
     const nodeMap = new Map<string, NodeData>();
     const edges: EdgeData[] = [];
+    // V6: name -> {interdisciplinarity, ...} from offline OpenAlex/pySciSci build
+    const vmVenues: Record<string, any> = (venueMetrics as any).venues || {};
+    const name2metrics: Record<string, any> = {};
+    const id2name: Record<string, string> = {};
+    for (const [vid, v] of Object.entries(vmVenues)) {
+        if ((v as any)?.name) { name2metrics[(v as any).name] = v; id2name[vid] = (v as any).name; }
+    }
     const categorySet = new Set<string>();
 
     for (const venue of venueData) {
@@ -885,13 +902,15 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
             else if (venue.impact === 'Q2') mass = 2.5;
             else if (venue.impact === 'Q3') mass = 1.5;
 
+            const vm = name2metrics[venue.name];
             nodeMap.set(venue.name, {
                 id: venue.name,
                 label: venue.name.length > 35 ? venue.name.substring(0, 32) + '...' : venue.name,
                 group: venue.type,
                 impact: venue.impact,
                 cfpDeadline: venue.cfpDeadline,
-                mass: mass
+                mass: mass,
+                interdisc: vm?.interdisciplinarity_simpson?.mean ?? null
             });
         }
 
@@ -997,10 +1016,37 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
         }
     }
 
+    // --- V6 CITATION-GROUNDED EDGES (overlay layer, off by default) ---
+    // Directed venue->venue edges from real OpenAlex citation flow. Kept OUT of the
+    // base `edges` array so the existing keyword (commodity) layer and filters are
+    // untouched; toggled on/off live via the network's edge DataSet.
+    // V6: keep ALL citation edges but mark the disparity-filter backbone (Serrano
+    // et al. 2009). The default citation view shows only the calm backbone; a node's
+    // full citation ego-network is revealed on click (focus+context).
+    const citationEdges: EdgeData[] = [];
+    for (const ce of ((venueMetrics as any).citation_edges || [])) {
+        const from = id2name[ce.source];
+        const to = id2name[ce.target];
+        if (!from || !to || !nodeMap.has(from) || !nodeMap.has(to)) continue;
+        citationEdges.push({
+            id: `citation-${ce.source}-${ce.target}`,
+            from, to,
+            value: ce.weight,
+            weight: ce.weight,
+            backbone: !!ce.backbone,
+            arrows: 'to',
+            title: `${from} → ${to}  (${ce.weight} refs${ce.backbone ? ', backbone' : ''})`,
+            color: { color: 'rgba(129, 140, 248, 0.30)', highlight: 'rgba(165, 180, 252, 0.95)' },
+            smooth: { type: 'curvedCW', roundness: 0.18 },
+            layer: 'citation'
+        });
+    }
+
     return {
         nodes: Array.from(nodeMap.values()),
         edges,
-        categories: Array.from(categorySet).sort()
+        categories: Array.from(categorySet).sort(),
+        citationEdges
     };
 }
 
@@ -2264,7 +2310,7 @@ async function main() {
         }
     } catch { /* fall back to static venues.json baseline */ }
 
-    let { nodes, edges, categories } = parseNetworkData();
+    let { nodes, edges, categories, citationEdges } = parseNetworkData();
 
     // Calculate network metrics (Scientific Evidence)
     const metrics = calculateNetworkMetrics(nodes, edges);
@@ -2272,6 +2318,10 @@ async function main() {
 
     const nodesDataset = new vis.DataSet(nodes);
     const edgesDataset = new vis.DataSet(edges);
+
+    // V6 citation overlay state (real implementations assigned in the toggle block below)
+    let citationMode = false;
+    let showCitationEgo: (nodeId: string | null) => void = () => {};
 
     // Update stats with network metrics
     const journalCount = nodes.filter(n => n.group === 'Journal').length;
@@ -2380,7 +2430,7 @@ async function main() {
         nodes: {
             borderWidth: 2,
             shadow: { enabled: true, color: 'rgba(6, 14, 32, 0.36)', size: 8, x: 2, y: 2 },
-            font: { size: 10, color: DESIGN_COLORS.onSurfaceVariant, face: 'Inter, Noto Sans KR, sans-serif' }
+            font: { size: 12, color: DESIGN_COLORS.onSurface, face: 'Inter, Noto Sans KR, sans-serif', strokeWidth: 3, strokeColor: 'rgba(11,14,20,0.92)' }
         },
         edges: {
             width: 1.5,
@@ -2720,11 +2770,13 @@ async function main() {
         if (params.nodes.length === 0) {
             hideSidebar();
             currentNodeId = null;
+            if (citationMode) showCitationEgo(null); // collapse ego back to backbone
             logAction({ action_type: 'node_deselect', context_tag: 'network' });
             return;
         }
         const nodeId = params.nodes[0];
         const node = nodes.find(n => n.id === nodeId);
+        if (citationMode && node && node.group !== 'Category') showCitationEgo(nodeId);
         logAction({
             action_type: 'node_click',
             context_tag: 'network',
@@ -2856,6 +2908,105 @@ async function main() {
             showToast('학회 필터 오류');
         }
     });
+
+    // --- V6: citation-grounded edge overlay (cognitive-load-aware) ---
+    // Design follows established network-viz practice for taming the hairball:
+    //  (1) disparity-filter BACKBONE shown by default (Serrano et al. 2009), not a
+    //      crude global threshold -> calm, ~18% of edges, periphery preserved;
+    //  (2) FOCUS+CONTEXT: a node's full citation ego-network appears only on click
+    //      (Furnas DOI / Shneiderman details-on-demand);
+    //  (3) interdisciplinarity encoded as NODE COLOR (a free perceptual channel),
+    //      not more edges.
+    const citationEdgeIds = citationEdges.map((e) => e.id!);
+    const backboneEdges = citationEdges.filter((e) => e.backbone);
+    const semanticEdgeIds = edges.filter((ed) => String(ed.id || '').startsWith('semantic-')).map((ed) => ed.id!);
+
+    const groupColor = (g?: string) => {
+        if (g === 'Journal') return { background: DESIGN_COLORS.primary, border: DESIGN_COLORS.primaryContainer };
+        if (g === 'Conference') return { background: DESIGN_COLORS.secondary, border: DESIGN_COLORS.secondaryDeep };
+        if (g === 'SubConference') return { background: DESIGN_COLORS.secondarySoft, border: DESIGN_COLORS.secondary };
+        return { background: DESIGN_COLORS.tertiary, border: DESIGN_COLORS.tertiaryDeep };
+    };
+    const venueNodes = nodes.filter((n) => n.group === 'Journal' || n.group === 'Conference' || n.group === 'SubConference');
+    const interVals = venueNodes.map((n) => n.interdisc).filter((v) => v != null) as number[];
+    const iMin = interVals.length ? Math.min(...interVals) : 0;
+    const iMax = interVals.length ? Math.max(...interVals) : 1;
+    // cividis: perceptually-uniform, colorblind-safe sequential ramp (dark blue -> yellow).
+    // Distinct from the indigo citation edges, so venue dots stay readable as figure.
+    const cividis = (t: number) => {
+        const stops = [[0, 32, 77], [124, 123, 120], [255, 233, 69]];
+        const x = Math.max(0, Math.min(1, t)) * 2;
+        const i = Math.min(1, Math.floor(x));
+        const f = x - i;
+        const a = stops[i], b = stops[i + 1];
+        return `rgb(${Math.round(a[0] + (b[0] - a[0]) * f)},${Math.round(a[1] + (b[1] - a[1]) * f)},${Math.round(a[2] + (b[2] - a[2]) * f)})`;
+    };
+    const interColor = (v: number) => cividis(iMax > iMin ? (v - iMin) / (iMax - iMin) : 0.5);
+    const recolorByInterdisc = (on: boolean) => {
+        nodesDataset.update(venueNodes.map((n) => {
+            if (on && n.interdisc != null) return { id: n.id, color: { background: interColor(n.interdisc), border: 'rgba(255,255,255,0.55)' } };
+            const gc = groupColor(n.group);
+            return { id: n.id, color: { background: gc.background, border: gc.border } };
+        }));
+    };
+    const showInterdiscLegend = (show: boolean) => {
+        let el = document.getElementById('interdisc-legend');
+        if (!show) { el?.remove(); return; }
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'interdisc-legend';
+            el.style.cssText = 'position:fixed;left:18px;bottom:96px;z-index:60;background:rgba(9,19,40,0.88);border:1px solid rgba(109,117,140,0.3);border-radius:8px;padding:8px 10px;font:11px Inter,\'Noto Sans KR\',sans-serif;color:#dee5ff;pointer-events:none';
+            el.innerHTML = '<div style="margin-bottom:5px;opacity:.85">노드 색 = 학제간성 (인용 분야 다양성)</div><div style="height:9px;width:150px;border-radius:5px;background:linear-gradient(90deg,rgb(0,32,77),rgb(124,123,120),rgb(255,233,69))"></div><div style="display:flex;justify-content:space-between;opacity:.7;margin-top:3px"><span>낮음</span><span>높음</span></div><div style="margin-top:6px;opacity:.7">선 = 인용 흐름 backbone · 노드 클릭=이웃 펼치기</div>';
+            document.body.appendChild(el);
+        }
+    };
+
+    // FOCUS+CONTEXT: reveal one venue's full citation ego-network on click
+    showCitationEgo = (nodeId: string | null) => {
+        if (!citationMode) return;
+        edgesDataset.remove(citationEdgeIds);
+        recolorByInterdisc(true); // reset any prior focus-node highlight
+        if (!nodeId) { // empty click -> back to calm backbone
+            edgesDataset.add(backboneEdges.map((e) => ({ ...e })));
+            return;
+        }
+        const incident = citationEdges.filter((e) => e.from === nodeId || e.to === nodeId);
+        const incidentIds = new Set(incident.map((e) => e.id));
+        const ctx = backboneEdges.filter((e) => !incidentIds.has(e.id)).map((e) => ({ ...e, color: { color: 'rgba(129,140,248,0.06)' } }));
+        const focus = incident.map((e) => ({ ...e, color: { color: 'rgba(165,180,252,0.9)', highlight: 'rgba(199,210,254,1)' } }));
+        edgesDataset.add([...ctx, ...focus]);
+        // make the focused venue unmistakable against the indigo fan
+        nodesDataset.update([{ id: nodeId, color: { background: '#ffffff', border: '#a5b4fc' } }]);
+        showToast(`${nodeId}: 인용 이웃 ${incident.length}개`);
+    };
+
+    document.getElementById('citation-layer-btn')?.addEventListener('click', (e) => {
+        try {
+            citationMode = !citationMode;
+            (e.currentTarget as HTMLElement).classList.toggle('active', citationMode);
+            if (citationMode) {
+                edgesDataset.add(backboneEdges); // backbone only -> calm default
+                edgesDataset.update(semanticEdgeIds.map((id) => ({ id, color: { color: 'rgba(255,255,255,0.02)' } })));
+                recolorByInterdisc(true);
+                showInterdiscLegend(true);
+                showToast(`인용 backbone ON — ${backboneEdges.length}/${citationEdges.length} 흐름 · 노드 클릭으로 이웃 펼치기`);
+            } else {
+                edgesDataset.remove(citationEdgeIds);
+                edgesDataset.update(semanticEdgeIds.map((id) => ({ id, color: { color: 'rgba(255,255,255,0.08)', highlight: 'rgba(255,215,0,0.4)' } })));
+                recolorByInterdisc(false);
+                showInterdiscLegend(false);
+                showToast('인용 레이어 OFF — 키워드 그래프 복원');
+            }
+            network.redraw();
+            logAction({ action_type: 'filter_toggle', context_tag: 'network', metadata: { filter: 'citation_layer', value: citationMode } });
+        } catch (err) {
+            console.error('Citation layer error:', err);
+            showToast('인용 레이어 오류');
+        }
+    });
+
+    // lightweight test/automation hook (used by scripts/shoot.mjs for ego-network capture)
+    (window as any).__fe = { ego: (id: string) => showCitationEgo(id), citationOn: () => citationMode };
 
     // Impact filter dropdown (Q-tier browse removed from header; guard kept for safety)
     document.getElementById('impact-filter')?.addEventListener('change', (e) => {
@@ -3657,8 +3808,8 @@ async function main() {
                 </div>
                 <div class="fit-metrics">
                     ${fitBar('주제 적합', r.topicScore, '#7ba0cc')}
-                    ${fitBar('방법론 문화', r.methodScore, '#10b981')}
-                    ${fitBar('CFP 준비도', r.cfpScore, '#f59e0b')}
+                    ${fitBar('방법론 문화', r.methodScore, '#38bdf8')}
+                    ${fitBar('CFP 준비도', r.cfpScore, '#818cf8')}
                 </div>
                 <div class="fit-foot">
                     ${cfpChip(r)}
@@ -8793,6 +8944,11 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             }
         }
 
+    });
+
+    // Mobile hamburger: toggle the mode-button row (was a dead button)
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+        document.querySelector('.header')?.classList.toggle('modes-open');
     });
 
     // Guide button

@@ -112,8 +112,8 @@ function createOverlay(): void {
     tooltip.id = 'tour-tooltip';
     tooltip.style.cssText = `
         position: fixed;
-        background: linear-gradient(135deg, #152852, #1e3a5f);
-        border: 1px solid #2a4a7a;
+        background: linear-gradient(135deg, #11141d, #181c28);
+        border: 1px solid rgba(99,102,241,0.35);
         border-radius: 12px;
         padding: 20px;
         max-width: 320px;
@@ -170,8 +170,8 @@ function createOverlay(): void {
             color: #ffffff;
         }
         .tour-btn-next {
-            background: linear-gradient(135deg, #f5a623, #e5941a);
-            color: #0d1b3e;
+            background: linear-gradient(135deg, #6366f1, #818cf8);
+            color: #ffffff;
         }
         .tour-btn-next:hover {
             transform: translateY(-1px);
