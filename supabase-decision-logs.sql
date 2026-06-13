@@ -37,11 +37,13 @@ CREATE INDEX IF NOT EXISTS idx_decision_logs_created_at ON decision_logs(created
 -- Row Level Security
 ALTER TABLE decision_logs ENABLE ROW LEVEL SECURITY;
 
--- Users can only access their own logs
+-- Users can only access their own logs (idempotent: safe to re-run)
+DROP POLICY IF EXISTS "users_own_decision_logs" ON decision_logs;
 CREATE POLICY "users_own_decision_logs"
   ON decision_logs
   FOR ALL
-  USING (auth.uid() = user_id);
+  USING (auth.uid() = user_id)
+  WITH CHECK (auth.uid() = user_id);
 
 -- Session Analytics View (for Day-0 vs Day-14 comparison)
 CREATE OR REPLACE VIEW decision_analytics AS
