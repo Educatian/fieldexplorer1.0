@@ -7,6 +7,16 @@
   <title>EDTECH FieldExplorer</title>
   <meta name="description" content="Educational Technology & Learning Sciences 분야의 학술 저널과 학회 네트워크 시각화">
   <link rel="icon" type="image/png" href="/logo.png">
+  <!-- social share -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FieldExplorer — research-network explorer">
+  <meta property="og:description" content="Navigate where to read, where to submit, and how a field fits together. A network map of edtech & learning-sciences venues.">
+  <meta property="og:image" content="https://fieldexplorer10.vercel.app/og-image.png">
+  <meta property="og:url" content="https://fieldexplorer10.vercel.app/app.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FieldExplorer — research-network explorer">
+  <meta name="twitter:description" content="Navigate where to read, where to submit, and how a field fits together.">
+  <meta name="twitter:image" content="https://fieldexplorer10.vercel.app/og-image.png">
 
   <!-- vis.js Network -->
   <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
@@ -536,6 +546,19 @@
       color: var(--text-primary);
       background: rgba(20, 31, 56, 0.96);
     }
+
+    /* professional toolbar grouping + overflow menu */
+    .tb-divider { margin-left: 8px; padding-left: 12px; border-left: 1px solid var(--outline-soft); }
+    .tb-more-wrap { position: relative; display: inline-flex; }
+    .tb-overflow {
+      position: absolute; top: calc(100% + 8px); right: 0; z-index: 200;
+      display: none; flex-direction: column; gap: 6px; padding: 8px;
+      background: var(--surface-container-high); border: 1px solid var(--glass-border);
+      border-radius: 10px; box-shadow: var(--shadow-lg); min-width: 156px;
+    }
+    .tb-overflow.open { display: flex; }
+    .tb-overflow .filter-btn { width: 100%; justify-content: flex-start; text-align: left; margin-left: 0; }
+    #tb-more-btn.active { background: var(--surface-container-highest); }
 
     .mode-btn {
       background: rgba(9, 19, 40, 0.8);
@@ -4510,25 +4533,34 @@
 
       <div class="header-zone header-zone-modes">
       <div class="filter-group">
+        <!-- View -->
         <button class="btn filter-btn active" id="filter-journal">저널</button>
         <button class="btn filter-btn conference active" id="filter-conf">학회</button>
-        <button class="btn filter-btn cfp" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
-        <button class="btn filter-btn citation" id="citation-layer-btn" title="인용 기반 엣지 오버레이 (V6: OpenAlex 인용 흐름)">🔗 인용</button>
+        <button class="btn filter-btn cfp tb-divider" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
+        <!-- Citation / lens -->
+        <button class="btn filter-btn citation tb-divider" id="citation-layer-btn" title="인용 기반 엣지 오버레이 (V6: OpenAlex 인용 흐름)">🔗 인용</button>
         <select class="category-select" id="node-encoding-select" title="노드 색 기준" style="max-width:150px">
           <option value="type">🎨 노드색: 유형</option>
           <option value="interdisc">🎨 노드색: 학제간성</option>
           <option value="method">🎨 노드색: 방법론</option>
         </select>
-        <button class="btn filter-btn fit" id="submission-fit-btn" title="초록 붙여넣기 → 투고 적합도 분석">🎯 적합도</button>
+        <!-- Analysis -->
+        <button class="btn filter-btn fit tb-divider" id="submission-fit-btn" title="초록 붙여넣기 → 투고 적합도 분석">🎯 적합도</button>
         <button class="btn filter-btn meth" id="methodology-map-btn" title="방법론 문화로 venue 지형 보기">🧪 방법론</button>
-        <button class="btn filter-btn" id="category-chord-btn" title="분야 간 인용 흐름 개요 (chord)">🪢 분야흐름</button>
-        <button class="btn filter-btn quiz" id="venue-quiz-btn" title="투고처 매칭 연습 퀴즈">🎓 연습</button>
-        <button class="btn filter-btn compare" id="compare-btn" title="비교 모드 (C)">📊 비교</button>
-        <button class="btn filter-btn korean" id="korean-network-btn" title="한국 교육공학 정체성 네트워크">🇰🇷 한국</button>
-        <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝</button>
-        <button class="btn filter-btn" id="research-topics-btn" title="연구 주제 탐색">🔬</button>
-        <button class="btn filter-btn" id="learning-mode-btn" type="button" title="학습 모드">🧭 학습</button>
-        <button class="btn filter-btn is-hidden" id="admin-btn" title="관리자">🔐</button>
+        <!-- Overflow: lower-frequency tools -->
+        <div class="tb-more-wrap">
+          <button class="btn filter-btn tb-divider" id="tb-more-btn" title="더보기" aria-haspopup="true" aria-expanded="false">⋯ 더보기</button>
+          <div class="tb-overflow" id="tb-overflow" role="menu">
+            <button class="btn filter-btn" id="category-chord-btn" title="분야 간 인용 흐름 개요 (chord)">🪢 분야흐름</button>
+            <button class="btn filter-btn compare" id="compare-btn" title="비교 모드 (C)">📊 비교</button>
+            <button class="btn filter-btn quiz" id="venue-quiz-btn" title="투고처 매칭 연습 퀴즈">🎓 연습</button>
+            <button class="btn filter-btn" id="learning-mode-btn" type="button" title="학습 모드">🧭 학습</button>
+            <button class="btn filter-btn korean" id="korean-network-btn" title="한국 교육공학 정체성 네트워크">🇰🇷 한국</button>
+            <button class="btn filter-btn" id="collab-btn" title="협업 요청">🤝 협업</button>
+            <button class="btn filter-btn" id="research-topics-btn" title="연구 주제 탐색">🔬 연구주제</button>
+            <button class="btn filter-btn is-hidden" id="admin-btn" title="관리자">🔐 관리자</button>
+          </div>
+        </div>
       </div>
       </div>
 

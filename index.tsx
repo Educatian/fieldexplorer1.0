@@ -3077,6 +3077,22 @@ async function main() {
         logAction({ action_type: 'filter_change', context_tag: 'network', metadata: { filter: 'node_encoding', value: nodeEncoding } });
     });
 
+    // toolbar overflow ("⋯ 더보기") menu for lower-frequency tools
+    const tbMoreBtn = document.getElementById('tb-more-btn');
+    const tbOverflow = document.getElementById('tb-overflow');
+    const closeOverflow = () => { tbOverflow?.classList.remove('open'); tbMoreBtn?.classList.remove('active'); tbMoreBtn?.setAttribute('aria-expanded', 'false'); };
+    tbMoreBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = tbOverflow?.classList.toggle('open');
+        tbMoreBtn.classList.toggle('active', !!open);
+        tbMoreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    tbOverflow?.addEventListener('click', () => closeOverflow());           // close after picking a tool
+    document.addEventListener('click', (e) => {
+        if (tbOverflow?.classList.contains('open') && !tbOverflow.contains(e.target as Node) && e.target !== tbMoreBtn) closeOverflow();
+    });
+    document.addEventListener('keydown', (e) => { if ((e as KeyboardEvent).key === 'Escape') closeOverflow(); });
+
     // lightweight test/automation hook (used by scripts/shoot.mjs for ego-network capture)
     (window as any).__fe = { ego: (id: string) => showCitationEgo(id), citationOn: () => citationMode, encode: (m: string) => { nodeEncoding = m as any; applyNodeEncoding(); } };
 
