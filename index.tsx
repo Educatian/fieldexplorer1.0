@@ -3,6 +3,8 @@ import semanticProfiles from './src/data/semantic_profiles.json';
 // V6 Compute/Augment layer: citation-grounded venue->venue edges + interdisciplinarity
 // (built offline by scripts/build_venue_metrics.py via OpenAlex + pySciSci diversity)
 import venueMetrics from './src/data/venue_metrics.json';
+// data-derived methodology profiles (LLM-classified abstracts; replaces lexical)
+import venueMethodology from './src/data/venue_methodology.json';
 import {
     getBuiltInOfficialCFPRecord,
     resolveCFPInfoWithOverrides,
@@ -38,6 +40,11 @@ const venueMetricsByName: Record<string, any> = {};
 {
     const _vs = (venueMetrics as any).venues || {};
     for (const k in _vs) { const v = _vs[k]; if (v && v.name) venueMetricsByName[v.name] = v; }
+}
+const methodologyByName: Record<string, any> = {};
+{
+    const _ms = (venueMethodology as any).venues || {};
+    for (const k in _ms) { const v = _ms[k]; if (v && v.name) methodologyByName[v.name] = v; }
 }
 const _interdiscVals = (Object.values((venueMetrics as any).venues || {}) as any[])
     .map((v) => v?.interdisciplinarity_simpson?.mean)
@@ -2996,10 +3003,8 @@ async function main() {
         'Experimental': '#6366f1', 'Qualitative': '#f472b6', 'Design & Dev': '#38bdf8',
         'Data & AI': '#34d399', 'Review & Meta': '#fbbf24', 'Theory': '#a78bfa'
     };
-    const methodOf = (name: string): string | null => {
-        const vec = (semanticProfiles as any)[name]?.vector;
-        return vec ? dominantMethodology(vec) : null;
-    };
+    // LLM-classified dominant methodology (data-derived); null -> no-data grey.
+    const methodOf = (name: string): string | null => methodologyByName[name]?.dominant || null;
     const nodeColorFor = (n: NodeData) => {
         if (nodeEncoding === 'interdisc') return n.interdisc != null ? { background: interColor(n.interdisc), border: 'rgba(255,255,255,0.55)' } : NO_DATA;
         if (nodeEncoding === 'method') { const m = methodOf(n.id); return m && METHOD_COLORS[m] ? { background: METHOD_COLORS[m], border: 'rgba(255,255,255,0.45)' } : NO_DATA; }
@@ -3014,7 +3019,7 @@ async function main() {
             el.innerHTML = '<div style="margin-bottom:5px;opacity:.85">노드 색 = 학제간성 (인용 분야 다양성)</div><div style="height:9px;width:160px;border-radius:5px;background:linear-gradient(90deg,rgb(0,32,77),rgb(124,123,120),rgb(255,233,69))"></div><div style="display:flex;justify-content:space-between;opacity:.7;margin-top:3px"><span>낮음</span><span>높음</span></div><div style="margin-top:6px;opacity:.6">회색 = 데이터 없음</div>';
         } else {
             const chips = Object.entries(METHOD_COLORS).map(([k, c]) => `<div style="display:flex;align-items:center;gap:6px;margin-top:3px"><span style="width:10px;height:10px;border-radius:50%;background:${c};flex:none"></span>${k}</div>`).join('');
-            el.innerHTML = `<div style="margin-bottom:4px;opacity:.85">노드 색 = 방법론 문화 (TF-IDF)</div>${chips}<div style="margin-top:6px;opacity:.6">회색 = 신호 없음</div>`;
+            el.innerHTML = `<div style="margin-bottom:4px;opacity:.85">노드 색 = 방법론 문화 (LLM 분류)</div>${chips}<div style="margin-top:6px;opacity:.6">회색 = 데이터 없음</div>`;
         }
     };
     const applyNodeEncoding = () => {
@@ -4094,7 +4099,15 @@ async function main() {
             modal.id = 'meth-modal-container';
             document.body.appendChild(modal);
         }
-        const neighborhoods = methodologyNeighborhoods(venueData.map(v => v.name));
+        // data-derived neighbourhoods: group venues by LLM-classified dominant methodology
+        const METH_CATS = ['Experimental', 'Qualitative', 'Design & Dev', 'Data & AI', 'Review & Meta', 'Theory'];
+        const neighborhoods = METH_CATS.map((category) => ({
+            category,
+            venues: (Object.values(methodologyByName) as any[])
+                .filter((m) => m.dominant === category)
+                .map((m) => ({ name: m.name, share: Math.round((m.shares?.[category] || 0) * 100) }))
+                .sort((a, b) => b.share - a.share),
+        }));
         const cards = neighborhoods.map(nb => `
             <div class="meth-card">
                 <div class="meth-card-head">${escapeHtml(nb.category)}</div>
@@ -4114,7 +4127,7 @@ async function main() {
                     <h3>🧪 방법론 지형 (Methodology Neighborhoods)</h3>
                     <button class="fit-close" id="meth-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">각 venue가 어떤 <strong>연구 문화</strong>에 가까운지 지문(OpenAlex 기반)에서 추정해 묶었습니다. 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
+                <p class="fit-sub">각 venue의 최근 초록을 <strong>LLM으로 분류</strong>해 우세 <strong>연구 문화</strong>로 묶었습니다(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
                 <div class="meth-grid">${cards}</div>
             </div>
         `;

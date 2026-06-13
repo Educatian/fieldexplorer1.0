@@ -1,0 +1,1172 @@
+{
+  "_meta": {
+    "generator": "build_venue_methodology.py",
+    "proposer": "hermes3:8b",
+    "categories": [
+      "Experimental",
+      "Qualitative",
+      "Design & Dev",
+      "Data & AI",
+      "Review & Meta",
+      "Theory"
+    ],
+    "note": "LLM proposer; Claude verifies low-confidence before trust"
+  },
+  "venues": {
+    "etrd": {
+      "name": "Educational Technology Research and Development",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.083,
+        "Design & Dev": 0.333,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.333
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "jls": {
+      "name": "Journal of the Learning Sciences",
+      "shares": {
+        "Qualitative": 0.3,
+        "Review & Meta": 0.1,
+        "Theory": 0.6
+      },
+      "dominant": "Theory",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.892
+    },
+    "ijcscl": {
+      "name": "International Journal of Computer-Supported Collaborative Learning",
+      "shares": {
+        "Experimental": 0.333,
+        "Qualitative": 0.5,
+        "Data & AI": 0.083,
+        "Theory": 0.083
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "ce": {
+      "name": "Computers & Education",
+      "shares": {
+        "Experimental": 0.5,
+        "Qualitative": 0.167,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "bjet": {
+      "name": "British Journal of Educational Technology",
+      "shares": {
+        "Experimental": 0.364,
+        "Qualitative": 0.182,
+        "Data & AI": 0.455
+      },
+      "dominant": "Data & AI",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.9
+    },
+    "li": {
+      "name": "Learning and Instruction",
+      "shares": {
+        "Experimental": 0.6,
+        "Qualitative": 0.1,
+        "Data & AI": 0.3
+      },
+      "dominant": "Experimental",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.921
+    },
+    "epr": {
+      "name": "Educational Psychology Review",
+      "shares": {
+        "Experimental": 0.167,
+        "Review & Meta": 0.583,
+        "Theory": 0.25
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.962
+    },
+    "ep": {
+      "name": "Educational Psychologist",
+      "shares": {
+        "Design & Dev": 0.083,
+        "Review & Meta": 0.333,
+        "Theory": 0.583
+      },
+      "dominant": "Theory",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "rer": {
+      "name": "Review of Educational Research",
+      "shares": {
+        "Review & Meta": 1.0
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.979
+    },
+    "aerj": {
+      "name": "American Educational Research Journal",
+      "shares": {
+        "Experimental": 0.333,
+        "Qualitative": 0.333,
+        "Review & Meta": 0.167,
+        "Theory": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.925
+    },
+    "er": {
+      "name": "Educational Researcher",
+      "shares": {
+        "Experimental": 0.4,
+        "Data & AI": 0.1,
+        "Review & Meta": 0.2,
+        "Theory": 0.3
+      },
+      "dominant": "Experimental",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.921
+    },
+    "jep": {
+      "name": "Journal of Educational Psychology",
+      "shares": {
+        "Experimental": 0.667,
+        "Qualitative": 0.083,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "ci": {
+      "name": "Cognition and Instruction",
+      "shares": {
+        "Qualitative": 0.917,
+        "Theory": 0.083
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "jcal": {
+      "name": "Journal of Computer Assisted Learning",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.083,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.25,
+        "Theory": 0.083
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "jecr": {
+      "name": "Journal of Educational Computing Research",
+      "shares": {
+        "Experimental": 0.5,
+        "Qualitative": 0.083,
+        "Design & Dev": 0.167,
+        "Review & Meta": 0.25
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.958
+    },
+    "tlt": {
+      "name": "IEEE Transactions on Learning Technologies",
+      "shares": {
+        "Experimental": 0.167,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.667
+      },
+      "dominant": "Data & AI",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "ijaied": {
+      "name": "International Journal of Artificial Intelligence in Education",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.083,
+        "Data & AI": 0.333,
+        "Review & Meta": 0.25
+      },
+      "dominant": "Data & AI",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "umuai": {
+      "name": "User Modeling and User-Adapted Interaction",
+      "shares": {
+        "Experimental": 0.222,
+        "Data & AI": 0.667,
+        "Review & Meta": 0.111
+      },
+      "dominant": "Data & AI",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.858
+    },
+    "jla": {
+      "name": "Journal of Learning Analytics",
+      "shares": {
+        "Experimental": 0.083,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.667
+      },
+      "dominant": "Data & AI",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "is": {
+      "name": "Instructional Science",
+      "shares": {
+        "Experimental": 0.667,
+        "Qualitative": 0.167,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "cep": {
+      "name": "Contemporary Educational Psychology",
+      "shares": {
+        "Experimental": 0.833,
+        "Qualitative": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.937
+    },
+    "lid": {
+      "name": "Learning and Individual Differences",
+      "shares": {
+        "Experimental": 0.583,
+        "Qualitative": 0.167,
+        "Data & AI": 0.25
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.933
+    },
+    "mca": {
+      "name": "Mind Culture and Activity",
+      "shares": {
+        "Qualitative": 0.75,
+        "Theory": 0.25
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "cs": {
+      "name": "Cognitive Science",
+      "shares": {
+        "Experimental": 0.727,
+        "Qualitative": 0.182,
+        "Theory": 0.091
+      },
+      "dominant": "Experimental",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.9
+    },
+    "err": {
+      "name": "Educational Research Review",
+      "shares": {
+        "Review & Meta": 1.0
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.979
+    },
+    "chb": {
+      "name": "Computers in Human Behavior",
+      "shares": {
+        "Experimental": 0.5,
+        "Qualitative": 0.1,
+        "Data & AI": 0.2,
+        "Review & Meta": 0.1,
+        "Theory": 0.1
+      },
+      "dominant": "Experimental",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.925
+    },
+    "ile": {
+      "name": "Interactive Learning Environments",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.25,
+        "Data & AI": 0.333,
+        "Review & Meta": 0.333
+      },
+      "dominant": "Data & AI",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "de": {
+      "name": "Distance Education",
+      "shares": {
+        "Experimental": 0.167,
+        "Qualitative": 0.333,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.167,
+        "Theory": 0.167
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "ihe": {
+      "name": "Internet and Higher Education",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.25,
+        "Data & AI": 0.25,
+        "Review & Meta": 0.083
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "ceai": {
+      "name": "Computers & Education: Artificial Intelligence",
+      "shares": {
+        "Experimental": 0.2,
+        "Qualitative": 0.2,
+        "Data & AI": 0.5,
+        "Review & Meta": 0.1
+      },
+      "dominant": "Data & AI",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.925
+    },
+    "jaid": {
+      "name": "Journal of Applied Instructional Design",
+      "shares": {
+        "Experimental": 0.1,
+        "Qualitative": 0.3,
+        "Design & Dev": 0.6
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.858
+    },
+    "jfdl": {
+      "name": "Journal of Formative Design in Learning",
+      "shares": {
+        "Experimental": 0.091,
+        "Qualitative": 0.364,
+        "Design & Dev": 0.455,
+        "Data & AI": 0.091
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.908
+    },
+    "ijdl": {
+      "name": "International Journal of Designs for Learning",
+      "shares": {
+        "Design & Dev": 1.0
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.879
+    },
+    "tt": {
+      "name": "TechTrends",
+      "shares": {
+        "Experimental": 0.273,
+        "Qualitative": 0.182,
+        "Design & Dev": 0.182,
+        "Data & AI": 0.091,
+        "Review & Meta": 0.091,
+        "Theory": 0.182
+      },
+      "dominant": "Experimental",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.929
+    },
+    "piq": {
+      "name": "Performance Improvement Quarterly",
+      "shares": {
+        "Experimental": 0.3,
+        "Qualitative": 0.2,
+        "Review & Meta": 0.4,
+        "Theory": 0.1
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 10,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.913
+    },
+    "ets": {
+      "name": "Educational Technology & Society",
+      "shares": {
+        "Experimental": 0.4,
+        "Design & Dev": 0.2,
+        "Review & Meta": 0.2,
+        "Theory": 0.2
+      },
+      "dominant": "Experimental",
+      "n_classified": 5,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.758
+    },
+    "eit": {
+      "name": "Education and Information Technologies",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.083,
+        "Data & AI": 0.333,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.933
+    },
+    "ijethe": {
+      "name": "International Journal of Educational Technology in Higher Education",
+      "shares": {
+        "Experimental": 0.364,
+        "Qualitative": 0.182,
+        "Design & Dev": 0.091,
+        "Data & AI": 0.273,
+        "Review & Meta": 0.091
+      },
+      "dominant": "Experimental",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.929
+    },
+    "jche": {
+      "name": "Journal of Computing in Higher Education",
+      "shares": {
+        "Experimental": 0.167,
+        "Qualitative": 0.417,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.083
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.929
+    },
+    "olj": {
+      "name": "Online Learning Journal",
+      "shares": {
+        "Experimental": 0.364,
+        "Qualitative": 0.182,
+        "Design & Dev": 0.273,
+        "Data & AI": 0.182
+      },
+      "dominant": "Experimental",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.904
+    },
+    "irrodl": {
+      "name": "International Review of Research in Open and Distributed Learning",
+      "shares": {
+        "Experimental": 0.222,
+        "Qualitative": 0.222,
+        "Design & Dev": 0.111,
+        "Data & AI": 0.222,
+        "Review & Meta": 0.111,
+        "Theory": 0.111
+      },
+      "dominant": "Experimental",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.862
+    },
+    "ijhci": {
+      "name": "International Journal of Human-Computer Interaction",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.25
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "hci": {
+      "name": "Human-Computer Interaction",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.25
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.954
+    },
+    "tochi": {
+      "name": "ACM Transactions on Computer-Human Interaction",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.167,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "bit": {
+      "name": "Behaviour & Information Technology",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.333,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.167,
+        "Theory": 0.083
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.929
+    },
+    "ijcci": {
+      "name": "International Journal of Child-Computer Interaction",
+      "shares": {
+        "Experimental": 0.273,
+        "Design & Dev": 0.364,
+        "Data & AI": 0.182,
+        "Review & Meta": 0.182
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.921
+    },
+    "sg": {
+      "name": "Simulation & Gaming",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.333,
+        "Data & AI": 0.167,
+        "Theory": 0.167
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "vr": {
+      "name": "Virtual Reality",
+      "shares": {
+        "Experimental": 0.667,
+        "Qualitative": 0.083,
+        "Design & Dev": 0.083,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.083
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "cexr": {
+      "name": "Computers & Education: X Reality",
+      "shares": {
+        "Experimental": 0.333,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.25,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "lmt": {
+      "name": "Learning Media and Technology",
+      "shares": {
+        "Qualitative": 0.545,
+        "Design & Dev": 0.091,
+        "Theory": 0.364
+      },
+      "dominant": "Qualitative",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.912
+    },
+    "jrst": {
+      "name": "Journal of Research in Science Teaching",
+      "shares": {
+        "Experimental": 0.222,
+        "Qualitative": 0.556,
+        "Theory": 0.222
+      },
+      "dominant": "Qualitative",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.908
+    },
+    "se": {
+      "name": "Science Education",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.667,
+        "Design & Dev": 0.083,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "ijse": {
+      "name": "International Journal of Science Education",
+      "shares": {
+        "Experimental": 0.091,
+        "Qualitative": 0.455,
+        "Design & Dev": 0.273,
+        "Theory": 0.182
+      },
+      "dominant": "Qualitative",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.9
+    },
+    "jset": {
+      "name": "Journal of Science Education and Technology",
+      "shares": {
+        "Experimental": 0.182,
+        "Qualitative": 0.364,
+        "Design & Dev": 0.273,
+        "Theory": 0.182
+      },
+      "dominant": "Qualitative",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.904
+    },
+    "sse": {
+      "name": "Studies in Science Education",
+      "shares": {
+        "Review & Meta": 0.917,
+        "Theory": 0.083
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.983
+    },
+    "jee": {
+      "name": "Journal of Engineering Education",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.583,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.25
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "cse": {
+      "name": "Computer Science Education",
+      "shares": {
+        "Qualitative": 0.091,
+        "Data & AI": 0.818,
+        "Theory": 0.091
+      },
+      "dominant": "Data & AI",
+      "n_classified": 11,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "toce": {
+      "name": "ACM Transactions on Computing Education",
+      "shares": {
+        "Experimental": 0.25,
+        "Qualitative": 0.083,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.25,
+        "Theory": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.95
+    },
+    "cbe": {
+      "name": "CBE-Life Sciences Education",
+      "shares": {
+        "Experimental": 0.5,
+        "Qualitative": 0.333,
+        "Theory": 0.167
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.937
+    },
+    "merj": {
+      "name": "Mathematics Education Research Journal",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.417,
+        "Theory": 0.5
+      },
+      "dominant": "Theory",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "isls": {
+      "name": "ISLS Annual Meeting",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "icls": {
+      "name": "ICLS",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "cscl": {
+      "name": "CSCL",
+      "shares": {
+        "Experimental": 0.4,
+        "Qualitative": 0.1,
+        "Design & Dev": 0.3,
+        "Data & AI": 0.1,
+        "Theory": 0.1
+      },
+      "dominant": "Experimental",
+      "n_classified": 10,
+      "n_abstracts": 10,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.935
+    },
+    "aera": {
+      "name": "AERA Annual Meeting",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "earli": {
+      "name": "EARLI Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "lak": {
+      "name": "LAK Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 2,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.7
+    },
+    "edm": {
+      "name": "EDM Conference",
+      "shares": {
+        "Experimental": 0.083,
+        "Data & AI": 0.917
+      },
+      "dominant": "Data & AI",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "aied": {
+      "name": "AIED Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "its": {
+      "name": "ITS Conference",
+      "shares": {
+        "Experimental": 0.25,
+        "Design & Dev": 0.625,
+        "Data & AI": 0.125
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 8,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.829
+    },
+    "chi": {
+      "name": "CHI Conference",
+      "shares": {
+        "Experimental": 0.167,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.5,
+        "Data & AI": 0.083
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "cscw": {
+      "name": "CSCW Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "uist": {
+      "name": "UIST Conference",
+      "shares": {
+        "Design & Dev": 0.714,
+        "Data & AI": 0.286
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 7,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.817
+    },
+    "idc": {
+      "name": "IDC Conference",
+      "shares": {
+        "Qualitative": 0.083,
+        "Design & Dev": 0.583,
+        "Data & AI": 0.25,
+        "Review & Meta": 0.083
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "ieeevr": {
+      "name": "IEEE VR",
+      "shares": {
+        "Experimental": 0.375,
+        "Design & Dev": 0.5,
+        "Data & AI": 0.125
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 8,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.829
+    },
+    "ismar": {
+      "name": "ISMAR",
+      "shares": {
+        "Experimental": 0.25,
+        "Design & Dev": 0.75
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 8,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.821
+    },
+    "aect": {
+      "name": "AECT Convention",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "etra": {
+      "name": "ETRA Symposium",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "las": {
+      "name": "L@S Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "sigcse": {
+      "name": "SIGCSE Technical Symposium",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "icer": {
+      "name": "ICER Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "iticse": {
+      "name": "ITiCSE Conference",
+      "shares": {
+        "Experimental": 0.222,
+        "Design & Dev": 0.667,
+        "Theory": 0.111
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.842
+    },
+    "fie": {
+      "name": "FIE Conference",
+      "shares": {
+        "Experimental": 0.333,
+        "Qualitative": 0.111,
+        "Design & Dev": 0.556
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.858
+    },
+    "asee": {
+      "name": "ASEE Annual Conference",
+      "shares": {
+        "Qualitative": 0.143,
+        "Design & Dev": 0.429,
+        "Data & AI": 0.143,
+        "Theory": 0.286
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 7,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.842
+    },
+    "jte": {
+      "name": "Journal of Teacher Education",
+      "shares": {
+        "Experimental": 0.25,
+        "Qualitative": 0.667,
+        "Review & Meta": 0.083
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "tate": {
+      "name": "Teaching and Teacher Education",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.333,
+        "Design & Dev": 0.083,
+        "Review & Meta": 0.083,
+        "Theory": 0.083
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.946
+    },
+    "ejte": {
+      "name": "European Journal of Teacher Education",
+      "shares": {
+        "Experimental": 0.417,
+        "Qualitative": 0.417,
+        "Data & AI": 0.083,
+        "Theory": 0.083
+      },
+      "dominant": "Experimental",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.938
+    },
+    "tttp": {
+      "name": "Teachers and Teaching: Theory and Practice",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.0
+    },
+    "pde": {
+      "name": "Professional Development in Education",
+      "shares": {
+        "Experimental": 0.083,
+        "Qualitative": 0.75,
+        "Review & Meta": 0.167
+      },
+      "dominant": "Qualitative",
+      "n_classified": 12,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.942
+    },
+    "ate": {
+      "name": "Action in Teacher Education",
+      "shares": {
+        "Experimental": 0.111,
+        "Qualitative": 0.667,
+        "Theory": 0.222
+      },
+      "dominant": "Qualitative",
+      "n_classified": 9,
+      "n_abstracts": 12,
+      "low_confidence_n": 0,
+      "mean_confidence": 0.875
+    }
+  }
+}
