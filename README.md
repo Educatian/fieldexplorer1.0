@@ -52,6 +52,10 @@ Click any venue and its full citation neighbourhood fans out while the rest rece
 Recolour the map by methodology culture, or open the dedicated methodology-map panel.
 <img src="docs/screenshots/methodology.png" width="900" alt="Methodology map" />
 
+### Category citation chord (overview-first)
+A dependency-free SVG chord aggregates venue→venue citation up to **field↔field** flow — the macro landscape before the venue-level hairball.
+<img src="docs/screenshots/category-chord.png" width="700" alt="Category citation chord" />
+
 ### Mobile
 <img src="docs/screenshots/mobile.png" width="300" alt="Mobile view" />
 

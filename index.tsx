@@ -3955,6 +3955,100 @@ async function main() {
     });
 
     // ========================================================================
+    // CATEGORY CITATION CHORD  (coarse "overview first" of cross-field flow)
+    // Aggregates the V6 venue->venue citation edges up to category<->category and
+    // draws a dependency-free SVG chord diagram. Overview before the venue hairball.
+    // ========================================================================
+    function buildCategoryChordSVG(): string {
+        const id2name: Record<string, string> = {};
+        for (const [vid, v] of Object.entries((venueMetrics as any).venues || {})) {
+            if ((v as any)?.name) id2name[vid] = (v as any).name;
+        }
+        const name2cat: Record<string, string> = {};
+        for (const v of venueData as any[]) {
+            const cat = (v.categories || []).find((c: string) => c !== 'Well-known') || (v.categories || [])[0];
+            if (cat) name2cat[v.name] = cat;
+        }
+        const catOf = (vid: string) => name2cat[id2name[vid]];
+        // directed category matrix from citation edges (skip intra-category)
+        const M: Record<string, Record<string, number>> = {};
+        for (const ce of ((venueMetrics as any).citation_edges || [])) {
+            const a = catOf(ce.source), b = catOf(ce.target);
+            if (!a || !b || a === b) continue;
+            (M[a] = M[a] || {})[b] = (M[a][b] || 0) + ce.weight;
+        }
+        const catset = new Set<string>();
+        for (const a in M) for (const b in M[a]) { catset.add(a); catset.add(b); }
+        const cats = [...catset].sort();
+        if (cats.length < 2) return '<p style="color:var(--text-muted);padding:24px">분야 간 인용 흐름 데이터가 부족합니다.</p>';
+        const comb: Record<string, Record<string, number>> = {};
+        cats.forEach((a) => (comb[a] = {}));
+        let grand = 0;
+        const total: Record<string, number> = {};
+        cats.forEach((a) => (total[a] = 0));
+        for (let i = 0; i < cats.length; i++) for (let j = i + 1; j < cats.length; j++) {
+            const a = cats[i], b = cats[j];
+            const w = ((M[a] || {})[b] || 0) + ((M[b] || {})[a] || 0);
+            if (w > 0) { comb[a][b] = w; comb[b][a] = w; total[a] += w; total[b] += w; grand += 2 * w; }
+        }
+        const R = 200, GAP = 0.045, ng = cats.length;
+        const span0 = 2 * Math.PI - GAP * ng;
+        const color = (i: number) => `hsl(${Math.round((232 + i * 360 / ng) % 360)},58%,62%)`;
+        const groups: Record<string, { start: number; end: number; sub: Record<string, { s: number; e: number }>; i: number }> = {};
+        let ang = -Math.PI / 2;
+        cats.forEach((a, i) => {
+            const sp = total[a] > 0 ? (total[a] / grand) * span0 : 0;
+            const start = ang; let sa = start; const sub: Record<string, { s: number; e: number }> = {};
+            cats.forEach((b) => { const w = comb[a][b] || 0; if (!w) return; const ss = (w / total[a]) * sp; sub[b] = { s: sa, e: sa + ss }; sa += ss; });
+            groups[a] = { start, end: start + sp, sub, i };
+            ang = start + sp + GAP;
+        });
+        const P = (an: number, r: number) => `${(r * Math.cos(an)).toFixed(1)},${(r * Math.sin(an)).toFixed(1)}`;
+        let svg = '';
+        // ribbons (each unordered pair once)
+        for (let i = 0; i < cats.length; i++) for (let j = i + 1; j < cats.length; j++) {
+            const a = cats[i], b = cats[j];
+            if (!comb[a][b]) continue;
+            const sa = groups[a].sub[b], sb = groups[b].sub[a];
+            const d = `M${P(sa.s, R)} A${R},${R} 0 0,1 ${P(sa.e, R)} Q0,0 ${P(sb.s, R)} A${R},${R} 0 0,1 ${P(sb.e, R)} Q0,0 ${P(sa.s, R)} Z`;
+            svg += `<path d="${d}" fill="${color(groups[a].i)}" fill-opacity="0.22" stroke="none"><title>${a} ↔ ${b}: ${comb[a][b]}</title></path>`;
+        }
+        // group arcs + labels
+        const ro = R + 13;
+        cats.forEach((a, i) => {
+            const g = groups[a]; if (g.end - g.start < 0.001) return;
+            const large = (g.end - g.start) > Math.PI ? 1 : 0;
+            const d = `M${P(g.start, R)} A${R},${R} 0 ${large},1 ${P(g.end, R)} L${P(g.end, ro)} A${ro},${ro} 0 ${large},0 ${P(g.start, ro)} Z`;
+            svg += `<path d="${d}" fill="${color(i)}"><title>${a}: ${total[a]} 인용 연결</title></path>`;
+            const mid = (g.start + g.end) / 2;
+            const lx = (ro + 10) * Math.cos(mid), ly = (ro + 10) * Math.sin(mid);
+            const anchor = Math.cos(mid) < -0.05 ? 'end' : Math.cos(mid) > 0.05 ? 'start' : 'middle';
+            const label = a.length > 18 ? a.slice(0, 17) + '…' : a;
+            svg += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="11" fill="var(--text-secondary)" text-anchor="${anchor}" dominant-baseline="middle">${label}</text>`;
+        });
+        return `<svg viewBox="-330 -270 660 540" width="100%" style="max-height:62vh">${svg}</svg>`;
+    }
+
+    function openCategoryChord() {
+        let modal = document.getElementById('fit-modal-container');
+        if (!modal) { modal = document.createElement('div'); modal.id = 'fit-modal-container'; document.body.appendChild(modal); }
+        modal.innerHTML = `
+            <div class="fit-overlay" id="fit-overlay"></div>
+            <div class="fit-modal" role="dialog" aria-label="분야 간 인용 흐름" style="max-width:760px">
+                <div class="fit-modal-head">
+                    <h3>🪢 분야 간 인용 흐름 (Category Chord)</h3>
+                    <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">venue 간 OpenAlex 인용을 <strong>연구 분야 수준</strong>으로 집계한 개요입니다. 리본 두께 = 두 분야 사이 인용량. 헤어볼 이전의 거시 지형 (sensemaking cue).</p>
+                <div style="display:flex;justify-content:center">${buildCategoryChordSVG()}</div>
+            </div>`;
+        document.getElementById('fit-close-btn')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-overlay')?.addEventListener('click', closeSubmissionFit);
+        logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'category_chord' } });
+    }
+    document.getElementById('category-chord-btn')?.addEventListener('click', openCategoryChord);
+
+    // ========================================================================
     // METHODOLOGY NEIGHBORHOOD MAP  (the angle citation maps miss)
     // Group venues by dominant research culture from the fingerprints.
     // ========================================================================
