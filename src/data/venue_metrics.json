@@ -23,7 +23,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1808
+      "n_refs_field_resolved": 1808,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.264
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.249
+        },
+        {
+          "field": "Psychology",
+          "share": 0.204
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.088
+        },
+        {
+          "field": "Medicine",
+          "share": 0.046
+        }
+      ]
     },
     "jls": {
       "name": "Journal of the Learning Sciences",
@@ -38,7 +60,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1879
+      "n_refs_field_resolved": 1879,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.535
+        },
+        {
+          "field": "Psychology",
+          "share": 0.181
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.081
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.068
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.037
+        }
+      ]
     },
     "ijcscl": {
       "name": "International Journal of Computer-Supported Collaborative Learning",
@@ -53,7 +97,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1569
+      "n_refs_field_resolved": 1569,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.511
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.18
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.161
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.037
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.027
+        }
+      ]
     },
     "ce": {
       "name": "Computers & Education",
@@ -68,7 +134,29 @@
         "n_papers": 26
       },
       "n_papers_sampled": 26,
-      "n_refs_field_resolved": 1530
+      "n_refs_field_resolved": 1530,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.312
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.273
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.234
+        },
+        {
+          "field": "Medicine",
+          "share": 0.038
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.03
+        }
+      ]
     },
     "bjet": {
       "name": "British Journal of Educational Technology",
@@ -83,7 +171,29 @@
         "n_papers": 26
       },
       "n_papers_sampled": 26,
-      "n_refs_field_resolved": 982
+      "n_refs_field_resolved": 982,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.292
+        },
+        {
+          "field": "Psychology",
+          "share": 0.228
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.222
+        },
+        {
+          "field": "Medicine",
+          "share": 0.061
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.059
+        }
+      ]
     },
     "li": {
       "name": "Learning and Instruction",
@@ -98,7 +208,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1379
+      "n_refs_field_resolved": 1379,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.476
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.299
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.049
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.043
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.032
+        }
+      ]
     },
     "epr": {
       "name": "Educational Psychology Review",
@@ -113,7 +245,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 2093
+      "n_refs_field_resolved": 2093,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.473
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.223
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.076
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.049
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.046
+        }
+      ]
     },
     "ep": {
       "name": "Educational Psychologist",
@@ -128,14 +282,37 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 2194
+      "n_refs_field_resolved": 2194,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.47
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.34
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.033
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.032
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.031
+        }
+      ]
     },
     "rer": {
       "name": "Review of Educational Research",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "aerj": {
       "name": "American Educational Research Journal",
@@ -150,7 +327,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1533
+      "n_refs_field_resolved": 1533,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.75
+        },
+        {
+          "field": "Psychology",
+          "share": 0.142
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.023
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.02
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.014
+        }
+      ]
     },
     "er": {
       "name": "Educational Researcher",
@@ -165,14 +364,37 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 625
+      "n_refs_field_resolved": 625,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.76
+        },
+        {
+          "field": "Psychology",
+          "share": 0.109
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.034
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.016
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.016
+        }
+      ]
     },
     "jep": {
       "name": "Journal of Educational Psychology",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "ci": {
       "name": "Cognition and Instruction",
@@ -187,7 +409,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1849
+      "n_refs_field_resolved": 1849,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.511
+        },
+        {
+          "field": "Psychology",
+          "share": 0.2
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.082
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.061
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.051
+        }
+      ]
     },
     "jcal": {
       "name": "Journal of Computer Assisted Learning",
@@ -202,7 +446,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1494
+      "n_refs_field_resolved": 1494,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.271
+        },
+        {
+          "field": "Psychology",
+          "share": 0.24
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.239
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.075
+        },
+        {
+          "field": "Medicine",
+          "share": 0.056
+        }
+      ]
     },
     "jecr": {
       "name": "Journal of Educational Computing Research",
@@ -217,7 +483,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1650
+      "n_refs_field_resolved": 1650,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.396
+        },
+        {
+          "field": "Psychology",
+          "share": 0.215
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.158
+        },
+        {
+          "field": "Medicine",
+          "share": 0.06
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.053
+        }
+      ]
     },
     "tlt": {
       "name": "IEEE Transactions on Learning Technologies",
@@ -232,7 +520,29 @@
         "n_papers": 8
       },
       "n_papers_sampled": 8,
-      "n_refs_field_resolved": 271
+      "n_refs_field_resolved": 271,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.561
+        },
+        {
+          "field": "Psychology",
+          "share": 0.21
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.089
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.041
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.03
+        }
+      ]
     },
     "ijaied": {
       "name": "International Journal of Artificial Intelligence in Education",
@@ -247,7 +557,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1374
+      "n_refs_field_resolved": 1374,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.405
+        },
+        {
+          "field": "Psychology",
+          "share": 0.178
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.148
+        },
+        {
+          "field": "Medicine",
+          "share": 0.109
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.042
+        }
+      ]
     },
     "umuai": {
       "name": "User Modeling and User-Adapted Interaction",
@@ -262,14 +594,37 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1381
+      "n_refs_field_resolved": 1381,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.635
+        },
+        {
+          "field": "Psychology",
+          "share": 0.161
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.059
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.037
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.032
+        }
+      ]
     },
     "jla": {
       "name": "Journal of Learning Analytics",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "is": {
       "name": "Instructional Science",
@@ -284,7 +639,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1596
+      "n_refs_field_resolved": 1596,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.398
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.306
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.064
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.06
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.034
+        }
+      ]
     },
     "cep": {
       "name": "Contemporary Educational Psychology",
@@ -299,7 +676,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1555
+      "n_refs_field_resolved": 1555,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.527
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.295
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.055
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.027
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.025
+        }
+      ]
     },
     "lid": {
       "name": "Learning and Individual Differences",
@@ -314,7 +713,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1708
+      "n_refs_field_resolved": 1708,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.556
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.204
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.095
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.043
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.039
+        }
+      ]
     },
     "mca": {
       "name": "Mind Culture and Activity",
@@ -329,7 +750,29 @@
         "n_papers": 27
       },
       "n_papers_sampled": 27,
-      "n_refs_field_resolved": 888
+      "n_refs_field_resolved": 888,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.616
+        },
+        {
+          "field": "Psychology",
+          "share": 0.172
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.057
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.028
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.019
+        }
+      ]
     },
     "cs": {
       "name": "Cognitive Science",
@@ -344,7 +787,29 @@
         "n_papers": 17
       },
       "n_papers_sampled": 17,
-      "n_refs_field_resolved": 792
+      "n_refs_field_resolved": 792,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.365
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.288
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.131
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.082
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.032
+        }
+      ]
     },
     "err": {
       "name": "Educational Research Review",
@@ -359,7 +824,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 2043
+      "n_refs_field_resolved": 2043,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.594
+        },
+        {
+          "field": "Psychology",
+          "share": 0.209
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.045
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.043
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.022
+        }
+      ]
     },
     "chb": {
       "name": "Computers in Human Behavior",
@@ -374,7 +861,29 @@
         "n_papers": 26
       },
       "n_papers_sampled": 26,
-      "n_refs_field_resolved": 1406
+      "n_refs_field_resolved": 1406,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.323
+        },
+        {
+          "field": "Psychology",
+          "share": 0.297
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.115
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.097
+        },
+        {
+          "field": "Medicine",
+          "share": 0.04
+        }
+      ]
     },
     "ile": {
       "name": "Interactive Learning Environments",
@@ -389,7 +898,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1568
+      "n_refs_field_resolved": 1568,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.262
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.26
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.234
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.059
+        },
+        {
+          "field": "Medicine",
+          "share": 0.057
+        }
+      ]
     },
     "de": {
       "name": "Distance Education",
@@ -404,7 +935,29 @@
         "n_papers": 13
       },
       "n_papers_sampled": 13,
-      "n_refs_field_resolved": 642
+      "n_refs_field_resolved": 642,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.361
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.265
+        },
+        {
+          "field": "Psychology",
+          "share": 0.193
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.093
+        },
+        {
+          "field": "Engineering",
+          "share": 0.02
+        }
+      ]
     },
     "ihe": {
       "name": "Internet and Higher Education",
@@ -419,7 +972,29 @@
         "n_papers": 27
       },
       "n_papers_sampled": 27,
-      "n_refs_field_resolved": 1491
+      "n_refs_field_resolved": 1491,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.302
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.3
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.224
+        },
+        {
+          "field": "Medicine",
+          "share": 0.042
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.034
+        }
+      ]
     },
     "ceai": {
       "name": "Computers & Education: Artificial Intelligence",
@@ -434,7 +1009,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1238
+      "n_refs_field_resolved": 1238,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.338
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.185
+        },
+        {
+          "field": "Medicine",
+          "share": 0.132
+        },
+        {
+          "field": "Psychology",
+          "share": 0.111
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.101
+        }
+      ]
     },
     "jaid": {
       "name": "Journal of Applied Instructional Design",
@@ -449,7 +1046,29 @@
         "n_papers": 2
       },
       "n_papers_sampled": 2,
-      "n_refs_field_resolved": 32
+      "n_refs_field_resolved": 32,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.625
+        },
+        {
+          "field": "Psychology",
+          "share": 0.094
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.062
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.062
+        },
+        {
+          "field": "Engineering",
+          "share": 0.062
+        }
+      ]
     },
     "jfdl": {
       "name": "Journal of Formative Design in Learning",
@@ -464,14 +1083,37 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1153
+      "n_refs_field_resolved": 1153,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.371
+        },
+        {
+          "field": "Psychology",
+          "share": 0.188
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.173
+        },
+        {
+          "field": "Engineering",
+          "share": 0.075
+        },
+        {
+          "field": "Medicine",
+          "share": 0.042
+        }
+      ]
     },
     "ijdl": {
       "name": "International Journal of Designs for Learning",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "tt": {
       "name": "TechTrends",
@@ -486,7 +1128,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1049
+      "n_refs_field_resolved": 1049,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.275
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.259
+        },
+        {
+          "field": "Psychology",
+          "share": 0.15
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.121
+        },
+        {
+          "field": "Medicine",
+          "share": 0.083
+        }
+      ]
     },
     "piq": {
       "name": "Performance Improvement Quarterly",
@@ -501,7 +1165,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1362
+      "n_refs_field_resolved": 1362,
+      "top_fields": [
+        {
+          "field": "Business, Management and Accounting",
+          "share": 0.347
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.214
+        },
+        {
+          "field": "Psychology",
+          "share": 0.193
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.054
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.054
+        }
+      ]
     },
     "ets": {
       "name": "Educational Technology & Society",
@@ -516,7 +1202,29 @@
         "n_papers": 20
       },
       "n_papers_sampled": 20,
-      "n_refs_field_resolved": 587
+      "n_refs_field_resolved": 587,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.312
+        },
+        {
+          "field": "Psychology",
+          "share": 0.276
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.256
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.073
+        },
+        {
+          "field": "Engineering",
+          "share": 0.02
+        }
+      ]
     },
     "eit": {
       "name": "Education and Information Technologies",
@@ -531,7 +1239,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1861
+      "n_refs_field_resolved": 1861,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.271
+        },
+        {
+          "field": "Psychology",
+          "share": 0.255
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.24
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.06
+        },
+        {
+          "field": "Medicine",
+          "share": 0.057
+        }
+      ]
     },
     "ijethe": {
       "name": "International Journal of Educational Technology in Higher Education",
@@ -546,7 +1276,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1617
+      "n_refs_field_resolved": 1617,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.332
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.239
+        },
+        {
+          "field": "Psychology",
+          "share": 0.192
+        },
+        {
+          "field": "Medicine",
+          "share": 0.093
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.049
+        }
+      ]
     },
     "jche": {
       "name": "Journal of Computing in Higher Education",
@@ -561,28 +1313,53 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1465
+      "n_refs_field_resolved": 1465,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.356
+        },
+        {
+          "field": "Psychology",
+          "share": 0.249
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.214
+        },
+        {
+          "field": "Medicine",
+          "share": 0.064
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.029
+        }
+      ]
     },
     "olj": {
       "name": "Online Learning Journal",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "irrodl": {
       "name": "International Review of Research in Open and Distributed Learning",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "ijhci": {
       "name": "International Journal of Human-Computer Interaction",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "hci": {
       "name": "Human-Computer Interaction",
@@ -597,7 +1374,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1740
+      "n_refs_field_resolved": 1740,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.233
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.217
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.203
+        },
+        {
+          "field": "Business, Management and Accounting",
+          "share": 0.072
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.061
+        }
+      ]
     },
     "tochi": {
       "name": "ACM Transactions on Computer-Human Interaction",
@@ -612,7 +1411,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1789
+      "n_refs_field_resolved": 1789,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.277
+        },
+        {
+          "field": "Psychology",
+          "share": 0.228
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.218
+        },
+        {
+          "field": "Medicine",
+          "share": 0.076
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.051
+        }
+      ]
     },
     "bit": {
       "name": "Behaviour & Information Technology",
@@ -627,7 +1448,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1744
+      "n_refs_field_resolved": 1744,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.268
+        },
+        {
+          "field": "Psychology",
+          "share": 0.222
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.178
+        },
+        {
+          "field": "Business, Management and Accounting",
+          "share": 0.083
+        },
+        {
+          "field": "Medicine",
+          "share": 0.068
+        }
+      ]
     },
     "ijcci": {
       "name": "International Journal of Child-Computer Interaction",
@@ -642,7 +1485,29 @@
         "n_papers": 26
       },
       "n_papers_sampled": 26,
-      "n_refs_field_resolved": 1237
+      "n_refs_field_resolved": 1237,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.283
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.264
+        },
+        {
+          "field": "Psychology",
+          "share": 0.225
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.092
+        },
+        {
+          "field": "Engineering",
+          "share": 0.029
+        }
+      ]
     },
     "sg": {
       "name": "Simulation & Gaming",
@@ -657,7 +1522,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 741
+      "n_refs_field_resolved": 741,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.266
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.196
+        },
+        {
+          "field": "Medicine",
+          "share": 0.196
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.099
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.05
+        }
+      ]
     },
     "vr": {
       "name": "Virtual Reality",
@@ -672,7 +1559,29 @@
         "n_papers": 6
       },
       "n_papers_sampled": 6,
-      "n_refs_field_resolved": 299
+      "n_refs_field_resolved": 299,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.294
+        },
+        {
+          "field": "Medicine",
+          "share": 0.231
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.221
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.12
+        },
+        {
+          "field": "Engineering",
+          "share": 0.033
+        }
+      ]
     },
     "cexr": {
       "name": "Computers & Education: X Reality",
@@ -687,7 +1596,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1079
+      "n_refs_field_resolved": 1079,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.458
+        },
+        {
+          "field": "Psychology",
+          "share": 0.164
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.103
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.066
+        },
+        {
+          "field": "Medicine",
+          "share": 0.058
+        }
+      ]
     },
     "lmt": {
       "name": "Learning Media and Technology",
@@ -702,7 +1633,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1153
+      "n_refs_field_resolved": 1153,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.505
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.218
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.09
+        },
+        {
+          "field": "Psychology",
+          "share": 0.05
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.034
+        }
+      ]
     },
     "jrst": {
       "name": "Journal of Research in Science Teaching",
@@ -717,7 +1670,29 @@
         "n_papers": 22
       },
       "n_papers_sampled": 22,
-      "n_refs_field_resolved": 1088
+      "n_refs_field_resolved": 1088,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.537
+        },
+        {
+          "field": "Psychology",
+          "share": 0.216
+        },
+        {
+          "field": "Environmental Science",
+          "share": 0.044
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.044
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.038
+        }
+      ]
     },
     "se": {
       "name": "Science Education",
@@ -732,14 +1707,37 @@
         "n_papers": 19
       },
       "n_papers_sampled": 19,
-      "n_refs_field_resolved": 1194
+      "n_refs_field_resolved": 1194,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.59
+        },
+        {
+          "field": "Psychology",
+          "share": 0.197
+        },
+        {
+          "field": "Environmental Science",
+          "share": 0.039
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.03
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.024
+        }
+      ]
     },
     "ijse": {
       "name": "International Journal of Science Education",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "jset": {
       "name": "Journal of Science Education and Technology",
@@ -754,7 +1752,29 @@
         "n_papers": 25
       },
       "n_papers_sampled": 25,
-      "n_refs_field_resolved": 491
+      "n_refs_field_resolved": 491,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.365
+        },
+        {
+          "field": "Psychology",
+          "share": 0.224
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.151
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.12
+        },
+        {
+          "field": "Engineering",
+          "share": 0.033
+        }
+      ]
     },
     "sse": {
       "name": "Studies in Science Education",
@@ -769,7 +1789,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 2142
+      "n_refs_field_resolved": 2142,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.554
+        },
+        {
+          "field": "Psychology",
+          "share": 0.152
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.066
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.058
+        },
+        {
+          "field": "Environmental Science",
+          "share": 0.038
+        }
+      ]
     },
     "jee": {
       "name": "Journal of Engineering Education",
@@ -784,14 +1826,37 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1461
+      "n_refs_field_resolved": 1461,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.413
+        },
+        {
+          "field": "Engineering",
+          "share": 0.149
+        },
+        {
+          "field": "Psychology",
+          "share": 0.101
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.092
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.065
+        }
+      ]
     },
     "cse": {
       "name": "Computer Science Education",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "toce": {
       "name": "ACM Transactions on Computing Education",
@@ -806,7 +1871,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1262
+      "n_refs_field_resolved": 1262,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.41
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.276
+        },
+        {
+          "field": "Psychology",
+          "share": 0.161
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.035
+        },
+        {
+          "field": "Engineering",
+          "share": 0.035
+        }
+      ]
     },
     "cbe": {
       "name": "CBE-Life Sciences Education",
@@ -821,7 +1908,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1821
+      "n_refs_field_resolved": 1821,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.529
+        },
+        {
+          "field": "Psychology",
+          "share": 0.237
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.032
+        },
+        {
+          "field": "Medicine",
+          "share": 0.026
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.025
+        }
+      ]
     },
     "merj": {
       "name": "Mathematics Education Research Journal",
@@ -836,21 +1945,45 @@
         "n_papers": 14
       },
       "n_papers_sampled": 14,
-      "n_refs_field_resolved": 760
+      "n_refs_field_resolved": 760,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.534
+        },
+        {
+          "field": "Psychology",
+          "share": 0.161
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.089
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.041
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.034
+        }
+      ]
     },
     "isls": {
       "name": "ISLS Annual Meeting",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "icls": {
       "name": "ICLS",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "cscl": {
       "name": "CSCL",
@@ -865,21 +1998,45 @@
         "n_papers": 14
       },
       "n_papers_sampled": 14,
-      "n_refs_field_resolved": 185
+      "n_refs_field_resolved": 185,
+      "top_fields": [
+        {
+          "field": "Psychology",
+          "share": 0.405
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.227
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.211
+        },
+        {
+          "field": "Engineering",
+          "share": 0.043
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.027
+        }
+      ]
     },
     "aera": {
       "name": "AERA Annual Meeting",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "earli": {
       "name": "EARLI Conference",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "lak": {
       "name": "LAK Conference",
@@ -894,7 +2051,29 @@
         "n_papers": 3
       },
       "n_papers_sampled": 3,
-      "n_refs_field_resolved": 27
+      "n_refs_field_resolved": 27,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.704
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.148
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.074
+        },
+        {
+          "field": "Engineering",
+          "share": 0.037
+        },
+        {
+          "field": "Business, Management and Accounting",
+          "share": 0.037
+        }
+      ]
     },
     "edm": {
       "name": "EDM Conference",
@@ -909,14 +2088,37 @@
         "n_papers": 20
       },
       "n_papers_sampled": 20,
-      "n_refs_field_resolved": 559
+      "n_refs_field_resolved": 559,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.617
+        },
+        {
+          "field": "Psychology",
+          "share": 0.106
+        },
+        {
+          "field": "Mathematics",
+          "share": 0.097
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.086
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.029
+        }
+      ]
     },
     "aied": {
       "name": "AIED Conference",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "its": {
       "name": "ITS Conference",
@@ -931,7 +2133,29 @@
         "n_papers": 7
       },
       "n_papers_sampled": 7,
-      "n_refs_field_resolved": 101
+      "n_refs_field_resolved": 101,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.881
+        },
+        {
+          "field": "Psychology",
+          "share": 0.03
+        },
+        {
+          "field": "Engineering",
+          "share": 0.03
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.03
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.01
+        }
+      ]
     },
     "chi": {
       "name": "CHI Conference",
@@ -946,14 +2170,37 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1724
+      "n_refs_field_resolved": 1724,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.436
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.18
+        },
+        {
+          "field": "Psychology",
+          "share": 0.141
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.05
+        },
+        {
+          "field": "Medicine",
+          "share": 0.048
+        }
+      ]
     },
     "cscw": {
       "name": "CSCW Conference",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "uist": {
       "name": "UIST Conference",
@@ -968,7 +2215,25 @@
         "n_papers": 5
       },
       "n_papers_sampled": 5,
-      "n_refs_field_resolved": 20
+      "n_refs_field_resolved": 20,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.8
+        },
+        {
+          "field": "Psychology",
+          "share": 0.1
+        },
+        {
+          "field": "Engineering",
+          "share": 0.05
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.05
+        }
+      ]
     },
     "idc": {
       "name": "IDC Conference",
@@ -983,7 +2248,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 793
+      "n_refs_field_resolved": 793,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.422
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.233
+        },
+        {
+          "field": "Psychology",
+          "share": 0.178
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.037
+        },
+        {
+          "field": "Medicine",
+          "share": 0.034
+        }
+      ]
     },
     "ieeevr": {
       "name": "IEEE VR",
@@ -998,7 +2285,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 510
+      "n_refs_field_resolved": 510,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.533
+        },
+        {
+          "field": "Psychology",
+          "share": 0.135
+        },
+        {
+          "field": "Engineering",
+          "share": 0.122
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.073
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.027
+        }
+      ]
     },
     "ismar": {
       "name": "ISMAR",
@@ -1013,42 +2322,69 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 522
+      "n_refs_field_resolved": 522,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.527
+        },
+        {
+          "field": "Engineering",
+          "share": 0.121
+        },
+        {
+          "field": "Psychology",
+          "share": 0.092
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.08
+        },
+        {
+          "field": "Neuroscience",
+          "share": 0.071
+        }
+      ]
     },
     "aect": {
       "name": "AECT Convention",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "etra": {
       "name": "ETRA Symposium",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "las": {
       "name": "L@S Conference",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "sigcse": {
       "name": "SIGCSE Technical Symposium",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "icer": {
       "name": "ICER Conference",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "iticse": {
       "name": "ITiCSE Conference",
@@ -1063,7 +2399,29 @@
         "n_papers": 23
       },
       "n_papers_sampled": 24,
-      "n_refs_field_resolved": 131
+      "n_refs_field_resolved": 131,
+      "top_fields": [
+        {
+          "field": "Computer Science",
+          "share": 0.649
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.16
+        },
+        {
+          "field": "Psychology",
+          "share": 0.069
+        },
+        {
+          "field": "Engineering",
+          "share": 0.046
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.023
+        }
+      ]
     },
     "fie": {
       "name": "FIE Conference",
@@ -1078,7 +2436,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 527
+      "n_refs_field_resolved": 527,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.33
+        },
+        {
+          "field": "Engineering",
+          "share": 0.205
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.197
+        },
+        {
+          "field": "Psychology",
+          "share": 0.125
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.047
+        }
+      ]
     },
     "asee": {
       "name": "ASEE Annual Conference",
@@ -1093,7 +2473,29 @@
         "n_papers": 12
       },
       "n_papers_sampled": 12,
-      "n_refs_field_resolved": 171
+      "n_refs_field_resolved": 171,
+      "top_fields": [
+        {
+          "field": "Engineering",
+          "share": 0.368
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.175
+        },
+        {
+          "field": "Social Sciences",
+          "share": 0.17
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.082
+        },
+        {
+          "field": "Psychology",
+          "share": 0.082
+        }
+      ]
     },
     "jte": {
       "name": "Journal of Teacher Education",
@@ -1108,7 +2510,29 @@
         "n_papers": 29
       },
       "n_papers_sampled": 29,
-      "n_refs_field_resolved": 1200
+      "n_refs_field_resolved": 1200,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.708
+        },
+        {
+          "field": "Psychology",
+          "share": 0.102
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.04
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.037
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.027
+        }
+      ]
     },
     "tate": {
       "name": "Teaching and Teacher Education",
@@ -1123,7 +2547,29 @@
         "n_papers": 28
       },
       "n_papers_sampled": 28,
-      "n_refs_field_resolved": 1451
+      "n_refs_field_resolved": 1451,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.552
+        },
+        {
+          "field": "Psychology",
+          "share": 0.212
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.048
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.04
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.039
+        }
+      ]
     },
     "ejte": {
       "name": "European Journal of Teacher Education",
@@ -1138,14 +2584,37 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1358
+      "n_refs_field_resolved": 1358,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.684
+        },
+        {
+          "field": "Psychology",
+          "share": 0.122
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.061
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.043
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.027
+        }
+      ]
     },
     "tttp": {
       "name": "Teachers and Teaching: Theory and Practice",
       "interdisciplinarity_simpson": null,
       "interdisciplinarity_shannon": null,
       "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0
+      "n_refs_field_resolved": 0,
+      "top_fields": []
     },
     "pde": {
       "name": "Professional Development in Education",
@@ -1160,7 +2629,29 @@
         "n_papers": 30
       },
       "n_papers_sampled": 30,
-      "n_refs_field_resolved": 1108
+      "n_refs_field_resolved": 1108,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.68
+        },
+        {
+          "field": "Psychology",
+          "share": 0.089
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.052
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.047
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.038
+        }
+      ]
     },
     "ate": {
       "name": "Action in Teacher Education",
@@ -1175,7 +2666,29 @@
         "n_papers": 24
       },
       "n_papers_sampled": 24,
-      "n_refs_field_resolved": 944
+      "n_refs_field_resolved": 944,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.807
+        },
+        {
+          "field": "Psychology",
+          "share": 0.082
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.031
+        },
+        {
+          "field": "Decision Sciences",
+          "share": 0.025
+        },
+        {
+          "field": "Agricultural and Biological Sciences",
+          "share": 0.012
+        }
+      ]
     }
   },
   "citation_edges": [
