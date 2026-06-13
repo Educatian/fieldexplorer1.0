@@ -744,6 +744,7 @@
                 <a href="#features">Features</a>
                 <a href="#login">Access</a>
                 <a href="https://github.com/Educatian/fieldexplorer1.0" target="_blank" rel="noopener">GitHub</a>
+                <button type="button" id="lang-toggle" title="한국어 / English" style="background:rgba(99,102,241,0.12);color:var(--primary);border:1px solid var(--outline-soft);border-radius:8px;padding:6px 12px;font:inherit;font-size:0.82rem;cursor:pointer">EN</button>
             </nav>
         </header>
 
@@ -753,14 +754,14 @@
                     <span>✨</span>
                     <span>The Digital Curator for Learning Sciences</span>
                 </div>
-                <h2 class="hero-title">학술 지형을<br><span>더 직관적으로</span> 탐색하세요</h2>
-                <p class="hero-subtitle">
+                <h2 class="hero-title" data-en="Explore the scholarly<br><span>landscape</span>, intuitively">학술 지형을<br><span>더 직관적으로</span> 탐색하세요</h2>
+                <p class="hero-subtitle" data-en="Journals, conferences, topics, and comparison metrics on one exploration canvas. Designed like a curated research space, not a cold list, so you can see where to look at a glance.">
                     저널, 학회, 토픽, 비교 지표를 하나의 탐색 캔버스에서 연결해 보여줍니다.
                     차가운 목록이 아니라 큐레이션된 연구 공간처럼, 어디를 봐야 할지 바로 감이 오도록 설계했습니다.
                 </p>
                 <div class="cta-buttons">
-                    <a href="#login" class="btn-primary">로그인하고 시작</a>
-                    <button type="button" class="btn-secondary" id="hero-skip-btn">로그인 건너뛰기</button>
+                    <a href="#login" class="btn-primary" data-en="Sign in to start">로그인하고 시작</a>
+                    <button type="button" class="btn-secondary" id="hero-skip-btn" data-en="Skip sign-in">로그인 건너뛰기</button>
                 </div>
                 <div class="hero-meta">
                     <div class="hero-meta-item">
@@ -776,53 +777,53 @@
                         <div class="hero-meta-label">Categories</div>
                     </div>
                 </div>
-                <p class="hero-note">로그인 없이 바로 네트워크 탐색이 가능하고, 저장과 협업 기능만 로그인 후 활성화됩니다.</p>
+                <p class="hero-note" data-en="Explore the network right away without signing in; only saving and collaboration features need an account.">로그인 없이 바로 네트워크 탐색이 가능하고, 저장과 협업 기능만 로그인 후 활성화됩니다.</p>
             </div>
 
             <div class="login-card" id="login">
                 <div class="auth-tabs">
-                    <button class="auth-tab active" data-tab="login">로그인</button>
-                    <button class="auth-tab" data-tab="signup">회원가입</button>
+                    <button class="auth-tab active" data-tab="login" data-en="Sign in">로그인</button>
+                    <button class="auth-tab" data-tab="signup" data-en="Sign up">회원가입</button>
                 </div>
 
                 <!-- Login Form -->
                 <div class="auth-form" id="login-panel">
-                    <p>계정에 로그인하여 FieldExplorer를 사용하세요</p>
+                    <p data-en="Sign in to your account to use FieldExplorer">계정에 로그인하여 FieldExplorer를 사용하세요</p>
                     <form id="login-form">
                         <div class="form-group">
-                            <label for="login-email">이메일</label>
+                            <label for="login-email" data-en="Email">이메일</label>
                             <input type="email" id="login-email" placeholder="your@email.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="login-password">비밀번호</label>
+                            <label for="login-password" data-en="Password">비밀번호</label>
                             <input type="password" id="login-password" placeholder="••••••••" required>
                         </div>
-                        <button type="submit" class="login-btn">로그인</button>
+                        <button type="submit" class="login-btn" data-en="Sign in">로그인</button>
                     </form>
                 </div>
 
                 <!-- Signup Form -->
                 <div class="auth-form" id="signup-panel" style="display: none;">
-                    <p>이메일로 간단하게 가입하세요</p>
+                    <p data-en="Sign up quickly with your email">이메일로 간단하게 가입하세요</p>
                     <form id="signup-form">
                         <div class="form-group">
-                            <label for="signup-email">이메일</label>
+                            <label for="signup-email" data-en="Email">이메일</label>
                             <input type="email" id="signup-email" placeholder="your@email.com" required>
                         </div>
                         <div class="form-group">
-                            <label for="signup-password">비밀번호</label>
-                            <input type="password" id="signup-password" placeholder="6자 이상" minlength="6" required>
+                            <label for="signup-password" data-en="Password">비밀번호</label>
+                            <input type="password" id="signup-password" placeholder="6자 이상" data-en-ph="6+ characters" minlength="6" required>
                         </div>
-                        <button type="submit" class="login-btn">가입하기</button>
+                        <button type="submit" class="login-btn" data-en="Sign up">가입하기</button>
                     </form>
                 </div>
 
-                <div class="divider"><span>또는</span></div>
-                <button type="button" class="guest-btn" id="guest-btn">skip login 하고 둘러보기</button>
+                <div class="divider"><span data-en="or">또는</span></div>
+                <button type="button" class="guest-btn" id="guest-btn" data-en="Skip login and explore">skip login 하고 둘러보기</button>
 
                 <div class="entry-helper">
-                    <h3>빠른 미리보기</h3>
-                    <p>현재 네트워크, 토픽, 비교 패널은 바로 탐색할 수 있습니다. 북마크, 의견 남기기, 계정 저장 기능만 로그인 후 사용됩니다.</p>
+                    <h3 data-en="Quick preview">빠른 미리보기</h3>
+                    <p data-en="The network, topic, and comparison panels are explorable right now. Only bookmarks, comments, and account saving require sign-in.">현재 네트워크, 토픽, 비교 패널은 바로 탐색할 수 있습니다. 북마크, 의견 남기기, 계정 저장 기능만 로그인 후 사용됩니다.</p>
                 </div>
             </div>
         </section>
@@ -831,18 +832,18 @@
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">🗺️</div>
-                    <h3>인터랙티브 네트워크</h3>
-                    <p>저널과 학회 간의 관계를 시각적으로 탐색하고, 클릭 한 번으로 상세 정보를 확인하세요.</p>
+                    <h3 data-en="Interactive network">인터랙티브 네트워크</h3>
+                    <p data-en="Explore relationships between journals and conferences visually, and see details in a single click.">저널과 학회 간의 관계를 시각적으로 탐색하고, 클릭 한 번으로 상세 정보를 확인하세요.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h3>스마트 검색</h3>
-                    <p>카테고리, 영향력 지표, 연구 방법론으로 필터링하여 적합한 저널을 찾아보세요.</p>
+                    <h3 data-en="Smart search">스마트 검색</h3>
+                    <p data-en="Filter by category, impact metrics, and research methodology to find the right venue.">카테고리, 영향력 지표, 연구 방법론으로 필터링하여 적합한 저널을 찾아보세요.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🌐</div>
-                    <h3>한/영 다국어 지원</h3>
-                    <p>한국어와 영어 간 원클릭 전환으로 글로벌 연구자 모두가 편리하게 사용할 수 있습니다.</p>
+                    <h3 data-en="Korean / English">한/영 다국어 지원</h3>
+                    <p data-en="One-click switching between Korean and English so researchers everywhere can use it comfortably.">한국어와 영어 간 원클릭 전환으로 글로벌 연구자 모두가 편리하게 사용할 수 있습니다.</p>
                 </div>
             </div>
         </section>
@@ -864,6 +865,27 @@
             dot.style.animationDelay = Math.random() * 3 + 's';
             dotsContainer.appendChild(dot);
         }
+
+        // EN / KO language toggle (landing)
+        const I18N_KEY = 'fe_lang';
+        function applyLang(lang) {
+            document.documentElement.lang = lang === 'en' ? 'en' : 'ko';
+            document.querySelectorAll('[data-en]').forEach(el => {
+                if (el.dataset.ko === undefined) el.dataset.ko = el.innerHTML;
+                el.innerHTML = lang === 'en' ? el.dataset.en : el.dataset.ko;
+            });
+            document.querySelectorAll('[data-en-ph]').forEach(el => {
+                if (el.dataset.koPh === undefined) el.dataset.koPh = el.getAttribute('placeholder') || '';
+                el.setAttribute('placeholder', lang === 'en' ? el.dataset.enPh : el.dataset.koPh);
+            });
+            const btn = document.getElementById('lang-toggle');
+            if (btn) btn.textContent = lang === 'en' ? '한국어' : 'EN';
+            try { localStorage.setItem(I18N_KEY, lang); } catch (e) {}
+        }
+        applyLang(localStorage.getItem(I18N_KEY) || 'ko');
+        document.getElementById('lang-toggle')?.addEventListener('click', () => {
+            applyLang((localStorage.getItem(I18N_KEY) || 'ko') === 'en' ? 'ko' : 'en');
+        });
 
         // Tab switching
         document.querySelectorAll('.auth-tab').forEach(tab => {
