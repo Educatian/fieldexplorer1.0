@@ -2140,8 +2140,11 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     `;
 
     const cfpInfo = getResolvedCFPInfo(node.id, node.cfpDeadline);
+    // A deadline more than ~45 days in the past is a closed annual cycle, not a
+    // "just missed" date. Mark it as such instead of showing an absurd "316일 지남".
+    const cfpPastCycle = cfpInfo.daysUntil !== null && cfpInfo.daysUntil < -45;
     const cfpStatusLabel = cfpInfo.confidence === 'official'
-        ? (cfpInfo.deadlineState === 'passed' ? '공식 확인 · 마감 지남' : '공식 확인')
+        ? (cfpPastCycle ? '공식 확인 · 지난 사이클' : cfpInfo.deadlineState === 'passed' ? '공식 확인 · 마감 지남' : '공식 확인')
         : cfpInfo.confidence === 'estimated'
             ? '추정치'
             : '정보 없음';
@@ -2149,7 +2152,9 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
         ? '마감일 계산 불가'
         : cfpInfo.daysUntil >= 0
             ? `D-${cfpInfo.daysUntil}`
-            : `${Math.abs(cfpInfo.daysUntil)}일 지남`;
+            : cfpPastCycle
+                ? '지난 사이클 마감'
+                : `${Math.abs(cfpInfo.daysUntil)}일 지남`;
     const cfpHtml = cfpInfo.confidence !== 'missing' ? `
         <div class="sidebar-section">
           <h3>📅 CFP 일정</h3>
@@ -2158,6 +2163,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
               <span class="meta-pill ${cfpInfo.confidence === 'official' ? 'meta-pill--official' : cfpInfo.confidence === 'estimated' ? 'meta-pill--estimated' : 'meta-pill--neutral'}">${cfpStatusLabel}</span>
               <span class="meta-pill">${cfpUrgencyLabel}</span>
             </div>
+            ${cfpPastCycle ? '<p class="sidebar-note-muted">이 회차는 마감되었습니다. 다음 회차 일정은 공지되는 대로 갱신됩니다.</p>' : ''}
             <p><strong>${cfpInfo.primaryDeadlineLabel}:</strong> ${cfpInfo.primaryDeadlineDisplay}</p>
             ${cfpInfo.secondaryDeadlineDisplay && cfpInfo.secondaryDeadlineLabel ? `<p><strong>${cfpInfo.secondaryDeadlineLabel}:</strong> ${cfpInfo.secondaryDeadlineDisplay}</p>` : ''}
             ${cfpInfo.timezoneLabel ? `<p><strong>기준 시간대:</strong> ${cfpInfo.timezoneLabel}</p>` : ''}
@@ -3404,7 +3410,11 @@ async function main() {
         nodesDataset.update(updates);
 
         if (!silent) {
-            showToast(`CFP ${cfpFilterDays}일 이내: 공식 ${officialCount}개 · 추정 ${estimatedCount}개`);
+            if (officialCount + estimatedCount === 0) {
+                showToast(`${cfpFilterDays}일 이내 다가오는 마감 없음 — 등록된 회차는 마감됨 (다음 회차 공지 후 갱신)`);
+            } else {
+                showToast(`CFP ${cfpFilterDays}일 이내: 공식 ${officialCount}개 · 추정 ${estimatedCount}개`);
+            }
         }
     }
 
