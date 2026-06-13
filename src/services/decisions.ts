@@ -30,6 +30,15 @@ export function startSession(): string {
 }
 
 /**
+ * Share the app's session id so decision_logs join user_logs on session_id.
+ */
+export function setSessionId(id: string): void {
+    currentSessionId = id;
+    if (!sessionStartTime) sessionStartTime = Date.now();
+    viewStartTime = Date.now();
+}
+
+/**
  * Mark when user starts viewing a new node
  */
 export function markViewStart(): void {
@@ -75,7 +84,7 @@ export async function logDecision(
         await supabase.from('decision_logs').insert({
             user_id: user.id,
             session_id: currentSessionId,
-            context,
+            context: { ...context, client_ts: Date.now() },
             inputs,
             signals,
             choice,

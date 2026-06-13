@@ -29,6 +29,8 @@ import {
 import { shouldShowTour, startTour } from './src/ui/tour';
 import { rankSubmissionFit, methodologyNeighborhoods, dominantMethodology, explainFit, type VenueFitInput, type VenueFitResult, type FitTeaching } from './src/services/submissionFit';
 import quizData from './src/data/learning-quiz.json';
+// decision-capture service (decision_logs): wires choice + latency + signals
+import { setSessionId, logFavorite, logDismiss, logCompare, markViewStart } from './src/services/decisions';
 
 declare const vis: any;
 declare const html2canvas: any;
@@ -87,10 +89,13 @@ const DESIGN_COLORS = {
 // ============================================================================
 let currentSessionId: string | null = null;
 let loggingDisabledReason: string | null = null;
+let eventSeq = 0; // per-session monotonic event counter (reliable sequence for EDM/LA)
 try {
     currentSessionId = sessionStorage.getItem('fieldexplorer_session') || crypto.randomUUID();
     sessionStorage.setItem('fieldexplorer_session', currentSessionId);
 } catch { /* fallback */ }
+// share the session id with the decision-capture service so the two log tables join
+if (currentSessionId) { try { setSessionId(currentSessionId); } catch { /* noop */ } }
 
 interface LogEntry {
     action_type: string;
@@ -114,7 +119,9 @@ async function logAction(entry: LogEntry) {
             context_tag: entry.context_tag || detectContext(),
             target_element: entry.target_element,
             target_node: entry.target_node,
-            metadata: entry.metadata || {},
+            // client_ts + seq give a reliable client-side ordering for sequence
+            // mining / process mining / ENA (server created_at can reorder under async).
+            metadata: { ...(entry.metadata || {}), client_ts: Date.now(), seq: ++eventSeq },
             screen_x: entry.screen_x,
             screen_y: entry.screen_y
         });
@@ -464,6 +471,11 @@ function saveFavorites(favorites: Set<string>, lastAction?: { action: 'add' | 'r
             context_tag: 'sidebar',
             target_node: lastAction.nodeId
         });
+        // decision_logs: a favorite is a positive venue decision; remove ~ dismissal
+        try {
+            if (lastAction.action === 'add') void logFavorite(lastAction.nodeId, { page: 'network' });
+            else void logDismiss(lastAction.nodeId, { page: 'network' });
+        } catch { /* noop */ }
     }
 }
 
@@ -2667,6 +2679,7 @@ async function main() {
             network.openCluster(nodeId);
             return;
         }
+        try { markViewStart(); } catch { /* noop */ } // start decision-latency clock on venue view
 
         // Use network.body.data.nodes to get node from current DataSet (works with setData)
         const node = network.body.data.nodes.get(nodeId);
@@ -3531,6 +3544,10 @@ async function main() {
         }
 
         renderComparisonPanel();
+        // decision_logs: a comparison is a decision episode over a venue set
+        if (comparisonState.nodes.length >= 2) {
+            try { void logCompare([...comparisonState.nodes], { page: 'network' }); } catch { /* noop */ }
+        }
         return true;
     }
 
