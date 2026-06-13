@@ -7,6 +7,8 @@ import venueMetrics from './src/data/venue_metrics.json';
 import venueMethodology from './src/data/venue_methodology.json';
 // longitudinal topic trends (research currency) — OpenAlex topic share per year
 import fieldTrends from './src/data/field_trends.json';
+// per-venue activity per year — drives the field-evolution animation
+import venueActivity from './src/data/venue_activity.json';
 import {
     getBuiltInOfficialCFPRecord,
     resolveCFPInfoWithOverrides,
@@ -4125,6 +4127,72 @@ async function main() {
         logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'trends' } });
     }
     document.getElementById('trends-btn')?.addEventListener('click', openTrendsPanel);
+
+    // ========================================================================
+    // FIELD EVOLUTION ANIMATION — node sizes pulse by yearly publication activity
+    // ========================================================================
+    const ACT: Record<string, Record<string, number>> = {};
+    for (const v of Object.values((venueActivity as any).venues || {})) {
+        if ((v as any)?.name) ACT[(v as any).name] = (v as any).counts || {};
+    }
+    const actYears: number[] = (venueActivity as any).years || [];
+    let actMax = 1;
+    for (const nm in ACT) for (const y in ACT[nm]) actMax = Math.max(actMax, ACT[nm][y]);
+    const groupBase = (g?: string) => g === 'Journal' ? 12 : g === 'Conference' ? 10 : g === 'SubConference' ? 8 : 0;
+    const groupDefaultSize = (g?: string) => g === 'Journal' ? 14 : g === 'Conference' ? 11 : g === 'SubConference' ? 9 : 14;
+    const interpCount = (name: string, t: number) => {
+        const c = ACT[name]; if (!c) return 0;
+        const lo = Math.floor(t), hi = lo + 1, f = t - lo;
+        return (c[String(lo)] || 0) * (1 - f) + (c[String(hi)] || c[String(lo)] || 0) * f;
+    };
+    const sizeForActivity = (n: NodeData, t: number) => groupBase(n.group) + Math.sqrt(interpCount(n.id, t) / actMax) * 30;
+    let evolveOn = false, evolveTimer: any = null, evolveT = actYears[0] || 2019;
+    const renderEvolveYear = (t: number) => {
+        evolveT = t;
+        nodesDataset.update(venueNodes.map((n) => ({ id: n.id, size: sizeForActivity(n, t) })));
+        const lbl = document.getElementById('evolve-year'); if (lbl) lbl.textContent = String(Math.round(t));
+        const sl = document.getElementById('evolve-slider') as HTMLInputElement | null; if (sl && document.activeElement !== sl) sl.value = String(t);
+    };
+    const stopEvolvePlay = () => { if (evolveTimer) { clearInterval(evolveTimer); evolveTimer = null; } const b = document.getElementById('evolve-play'); if (b) b.textContent = '▶'; };
+    const startEvolvePlay = () => {
+        const yMin = actYears[0], yMax = actYears[actYears.length - 1];
+        if (evolveT >= yMax) evolveT = yMin;
+        const b = document.getElementById('evolve-play'); if (b) b.textContent = '⏸';
+        evolveTimer = setInterval(() => {
+            evolveT = Math.round((evolveT + 0.06) * 100) / 100;
+            if (evolveT >= yMax) { evolveT = yMax; renderEvolveYear(evolveT); stopEvolvePlay(); return; }
+            renderEvolveYear(evolveT);
+        }, 55);
+    };
+    const buildEvolveBar = () => {
+        if (document.getElementById('evolve-bar')) return;
+        const bar = document.createElement('div');
+        bar.id = 'evolve-bar';
+        bar.style.cssText = "position:fixed;left:50%;transform:translateX(-50%);bottom:74px;z-index:60;display:flex;align-items:center;gap:12px;background:rgba(17,20,29,0.92);border:1px solid rgba(124,134,160,0.3);border-radius:10px;padding:8px 14px;font:12px Inter,'Noto Sans KR',sans-serif;color:#e6e9f0;box-shadow:0 8px 32px rgba(0,0,0,0.45)";
+        bar.innerHTML = `<button id="evolve-play" style="background:#6366f1;color:#fff;border:none;border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:13px">▶</button>
+            <input type="range" id="evolve-slider" min="${actYears[0]}" max="${actYears[actYears.length - 1]}" step="0.02" value="${actYears[0]}" style="width:240px;accent-color:#6366f1">
+            <span id="evolve-year" style="min-width:38px;font-variant-numeric:tabular-nums;font-weight:600">${actYears[0]}</span>
+            <span style="opacity:.6">노드 크기 = 연간 발표량</span>`;
+        document.body.appendChild(bar);
+        document.getElementById('evolve-play')?.addEventListener('click', () => { evolveTimer ? stopEvolvePlay() : startEvolvePlay(); });
+        document.getElementById('evolve-slider')?.addEventListener('input', (e) => { stopEvolvePlay(); renderEvolveYear(parseFloat((e.target as HTMLInputElement).value)); });
+    };
+    const toggleEvolve = () => {
+        evolveOn = !evolveOn;
+        document.getElementById('evolve-btn')?.classList.toggle('active', evolveOn);
+        if (evolveOn) {
+            buildEvolveBar();
+            evolveT = actYears[0];
+            renderEvolveYear(evolveT);
+            showToast('필드 진화 모드 — ▶로 재생, 노드 크기=연간 발표량');
+        } else {
+            stopEvolvePlay();
+            document.getElementById('evolve-bar')?.remove();
+            nodesDataset.update(venueNodes.map((n) => ({ id: n.id, size: groupDefaultSize(n.group) })));
+        }
+        logAction({ action_type: 'filter_toggle', context_tag: 'network', metadata: { filter: 'field_evolution', value: evolveOn } });
+    };
+    document.getElementById('evolve-btn')?.addEventListener('click', toggleEvolve);
 
     // ========================================================================
     // METHODOLOGY NEIGHBORHOOD MAP  (the angle citation maps miss)

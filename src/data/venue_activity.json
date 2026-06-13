@@ -1,0 +1,962 @@
+{
+  "_meta": {
+    "generator": "build_venue_activity.py",
+    "years": [
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "method": "OpenAlex group_by source per year over venue set"
+  },
+  "years": [
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "venues": {
+    "chb": {
+      "name": "Computers in Human Behavior",
+      "counts": {
+        "2019": 388,
+        "2020": 358,
+        "2021": 415,
+        "2022": 383,
+        "2023": 401,
+        "2024": 346,
+        "2025": 262
+      },
+      "total": 2553
+    },
+    "olj": {
+      "name": "Online Learning Journal",
+      "counts": {
+        "2019": 371,
+        "2020": 63,
+        "2021": 83,
+        "2022": 92,
+        "2023": 79,
+        "2024": 79,
+        "2025": 78
+      },
+      "total": 845
+    },
+    "ce": {
+      "name": "Computers & Education",
+      "counts": {
+        "2019": 252,
+        "2020": 211,
+        "2021": 196,
+        "2022": 191,
+        "2023": 158,
+        "2024": 142,
+        "2025": 196
+      },
+      "total": 1346
+    },
+    "eit": {
+      "name": "Education and Information Technologies",
+      "counts": {
+        "2019": 232,
+        "2020": 309,
+        "2021": 417,
+        "2022": 707,
+        "2023": 870,
+        "2024": 838,
+        "2025": 596
+      },
+      "total": 3969
+    },
+    "bjet": {
+      "name": "British Journal of Educational Technology",
+      "counts": {
+        "2019": 173,
+        "2020": 163,
+        "2021": 124,
+        "2022": 124,
+        "2023": 131,
+        "2024": 141,
+        "2025": 110
+      },
+      "total": 966
+    },
+    "cscl": {
+      "name": "CSCL",
+      "counts": {
+        "2019": 157,
+        "2020": 0,
+        "2021": 0,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 157
+    },
+    "bit": {
+      "name": "Behaviour & Information Technology",
+      "counts": {
+        "2019": 154,
+        "2020": 143,
+        "2021": 165,
+        "2022": 186,
+        "2023": 216,
+        "2024": 210,
+        "2025": 279
+      },
+      "total": 1353
+    },
+    "ijse": {
+      "name": "International Journal of Science Education",
+      "counts": {
+        "2019": 113,
+        "2020": 132,
+        "2021": 187,
+        "2022": 143,
+        "2023": 145,
+        "2024": 113,
+        "2025": 133
+      },
+      "total": 966
+    },
+    "ijhci": {
+      "name": "International Journal of Human-Computer Interaction",
+      "counts": {
+        "2019": 112,
+        "2020": 132,
+        "2021": 199,
+        "2022": 396,
+        "2023": 499,
+        "2024": 688,
+        "2025": 933
+      },
+      "total": 2959
+    },
+    "aerj": {
+      "name": "American Educational Research Journal",
+      "counts": {
+        "2019": 105,
+        "2020": 33,
+        "2021": 36,
+        "2022": 26,
+        "2023": 36,
+        "2024": 39,
+        "2025": 32
+      },
+      "total": 307
+    },
+    "tt": {
+      "name": "TechTrends",
+      "counts": {
+        "2019": 98,
+        "2020": 95,
+        "2021": 118,
+        "2022": 136,
+        "2023": 105,
+        "2024": 105,
+        "2025": 122
+      },
+      "total": 779
+    },
+    "etrd": {
+      "name": "Educational Technology Research and Development",
+      "counts": {
+        "2019": 92,
+        "2020": 170,
+        "2021": 167,
+        "2022": 110,
+        "2023": 147,
+        "2024": 116,
+        "2025": 134
+      },
+      "total": 936
+    },
+    "jrst": {
+      "name": "Journal of Research in Science Teaching",
+      "counts": {
+        "2019": 89,
+        "2020": 72,
+        "2021": 77,
+        "2022": 112,
+        "2023": 88,
+        "2024": 107,
+        "2025": 64
+      },
+      "total": 609
+    },
+    "edm": {
+      "name": "EDM Conference",
+      "counts": {
+        "2019": 89,
+        "2020": 101,
+        "2021": 24,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 214
+    },
+    "cse": {
+      "name": "Computer Science Education",
+      "counts": {
+        "2019": 83,
+        "2020": 36,
+        "2021": 40,
+        "2022": 42,
+        "2023": 42,
+        "2024": 48,
+        "2025": 50
+      },
+      "total": 341
+    },
+    "irrodl": {
+      "name": "International Review of Research in Open and Distributed Learning",
+      "counts": {
+        "2019": 80,
+        "2020": 58,
+        "2021": 61,
+        "2022": 56,
+        "2023": 60,
+        "2024": 60,
+        "2025": 57
+      },
+      "total": 432
+    },
+    "se": {
+      "name": "Science Education",
+      "counts": {
+        "2019": 73,
+        "2020": 262,
+        "2021": 109,
+        "2022": 101,
+        "2023": 72,
+        "2024": 87,
+        "2025": 119
+      },
+      "total": 823
+    },
+    "pde": {
+      "name": "Professional Development in Education",
+      "counts": {
+        "2019": 70,
+        "2020": 98,
+        "2021": 95,
+        "2022": 34,
+        "2023": 73,
+        "2024": 100,
+        "2025": 101
+      },
+      "total": 571
+    },
+    "vr": {
+      "name": "Virtual Reality",
+      "counts": {
+        "2019": 60,
+        "2020": 67,
+        "2021": 120,
+        "2022": 139,
+        "2023": 149,
+        "2024": 187,
+        "2025": 223
+      },
+      "total": 945
+    },
+    "ejte": {
+      "name": "European Journal of Teacher Education",
+      "counts": {
+        "2019": 59,
+        "2020": 87,
+        "2021": 70,
+        "2022": 34,
+        "2023": 60,
+        "2024": 91,
+        "2025": 80
+      },
+      "total": 481
+    },
+    "epr": {
+      "name": "Educational Psychology Review",
+      "counts": {
+        "2019": 57,
+        "2020": 68,
+        "2021": 64,
+        "2022": 65,
+        "2023": 123,
+        "2024": 138,
+        "2025": 117
+      },
+      "total": 632
+    },
+    "jecr": {
+      "name": "Journal of Educational Computing Research",
+      "counts": {
+        "2019": 53,
+        "2020": 56,
+        "2021": 66,
+        "2022": 71,
+        "2023": 55,
+        "2024": 61,
+        "2025": 69
+      },
+      "total": 431
+    },
+    "tlt": {
+      "name": "IEEE Transactions on Learning Technologies",
+      "counts": {
+        "2019": 53,
+        "2020": 46,
+        "2021": 70,
+        "2022": 109,
+        "2023": 149,
+        "2024": 103,
+        "2025": 74
+      },
+      "total": 604
+    },
+    "sg": {
+      "name": "Simulation & Gaming",
+      "counts": {
+        "2019": 52,
+        "2020": 67,
+        "2021": 29,
+        "2022": 42,
+        "2023": 43,
+        "2024": 53,
+        "2025": 40
+      },
+      "total": 326
+    },
+    "lmt": {
+      "name": "Learning Media and Technology",
+      "counts": {
+        "2019": 48,
+        "2020": 25,
+        "2021": 47,
+        "2022": 64,
+        "2023": 70,
+        "2024": 47,
+        "2025": 61
+      },
+      "total": 362
+    },
+    "mca": {
+      "name": "Mind Culture and Activity",
+      "counts": {
+        "2019": 47,
+        "2020": 34,
+        "2021": 32,
+        "2022": 25,
+        "2023": 23,
+        "2024": 27,
+        "2025": 0
+      },
+      "total": 188
+    },
+    "toce": {
+      "name": "ACM Transactions on Computing Education",
+      "counts": {
+        "2019": 47,
+        "2020": 27,
+        "2021": 49,
+        "2022": 55,
+        "2023": 44,
+        "2024": 42,
+        "2025": 91
+      },
+      "total": 355
+    },
+    "ijethe": {
+      "name": "International Journal of Educational Technology in Higher Education",
+      "counts": {
+        "2019": 44,
+        "2020": 57,
+        "2021": 68,
+        "2022": 64,
+        "2023": 63,
+        "2024": 65,
+        "2025": 77
+      },
+      "total": 438
+    },
+    "ate": {
+      "name": "Action in Teacher Education",
+      "counts": {
+        "2019": 42,
+        "2020": 26,
+        "2021": 25,
+        "2022": 18,
+        "2023": 25,
+        "2024": 33,
+        "2025": 18
+      },
+      "total": 187
+    },
+    "piq": {
+      "name": "Performance Improvement Quarterly",
+      "counts": {
+        "2019": 40,
+        "2020": 35,
+        "2021": 31,
+        "2022": 5,
+        "2023": 16,
+        "2024": 11,
+        "2025": 2
+      },
+      "total": 140
+    },
+    "umuai": {
+      "name": "User Modeling and User-Adapted Interaction",
+      "counts": {
+        "2019": 33,
+        "2020": 33,
+        "2021": 27,
+        "2022": 40,
+        "2023": 35,
+        "2024": 36,
+        "2025": 17
+      },
+      "total": 221
+    },
+    "jla": {
+      "name": "Journal of Learning Analytics",
+      "counts": {
+        "2019": 33,
+        "2020": 23,
+        "2021": 29,
+        "2022": 34,
+        "2023": 30,
+        "2024": 48,
+        "2025": 47
+      },
+      "total": 244
+    },
+    "ijcci": {
+      "name": "International Journal of Child-Computer Interaction",
+      "counts": {
+        "2019": 30,
+        "2020": 34,
+        "2021": 90,
+        "2022": 56,
+        "2023": 45,
+        "2024": 63,
+        "2025": 53
+      },
+      "total": 371
+    },
+    "de": {
+      "name": "Distance Education",
+      "counts": {
+        "2019": 27,
+        "2020": 38,
+        "2021": 36,
+        "2022": 39,
+        "2023": 44,
+        "2024": 61,
+        "2025": 24
+      },
+      "total": 269
+    },
+    "ihe": {
+      "name": "Internet and Higher Education",
+      "counts": {
+        "2019": 26,
+        "2020": 32,
+        "2021": 26,
+        "2022": 34,
+        "2023": 15,
+        "2024": 26,
+        "2025": 53
+      },
+      "total": 212
+    },
+    "ci": {
+      "name": "Cognition and Instruction",
+      "counts": {
+        "2019": 26,
+        "2020": 24,
+        "2021": 19,
+        "2022": 25,
+        "2023": 11,
+        "2024": 11,
+        "2025": 17
+      },
+      "total": 133
+    },
+    "jls": {
+      "name": "Journal of the Learning Sciences",
+      "counts": {
+        "2019": 24,
+        "2020": 20,
+        "2021": 27,
+        "2022": 17,
+        "2023": 21,
+        "2024": 24,
+        "2025": 32
+      },
+      "total": 165
+    },
+    "is": {
+      "name": "Instructional Science",
+      "counts": {
+        "2019": 21,
+        "2020": 28,
+        "2021": 38,
+        "2022": 40,
+        "2023": 48,
+        "2024": 39,
+        "2025": 73
+      },
+      "total": 287
+    },
+    "ep": {
+      "name": "Educational Psychologist",
+      "counts": {
+        "2019": 20,
+        "2020": 27,
+        "2021": 25,
+        "2022": 21,
+        "2023": 19,
+        "2024": 17,
+        "2025": 19
+      },
+      "total": 148
+    },
+    "ijdl": {
+      "name": "International Journal of Designs for Learning",
+      "counts": {
+        "2019": 19,
+        "2020": 32,
+        "2021": 35,
+        "2022": 18,
+        "2023": 22,
+        "2024": 36,
+        "2025": 48
+      },
+      "total": 210
+    },
+    "ijaied": {
+      "name": "International Journal of Artificial Intelligence in Education",
+      "counts": {
+        "2019": 18,
+        "2020": 42,
+        "2021": 52,
+        "2022": 40,
+        "2023": 59,
+        "2024": 63,
+        "2025": 84
+      },
+      "total": 358
+    },
+    "jfdl": {
+      "name": "Journal of Formative Design in Learning",
+      "counts": {
+        "2019": 12,
+        "2020": 13,
+        "2021": 11,
+        "2022": 10,
+        "2023": 14,
+        "2024": 10,
+        "2025": 14
+      },
+      "total": 84
+    },
+    "chi": {
+      "name": "CHI Conference",
+      "counts": {
+        "2019": 9,
+        "2020": 7,
+        "2021": 6,
+        "2022": 1128,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 1150
+    },
+    "sse": {
+      "name": "Studies in Science Education",
+      "counts": {
+        "2019": 6,
+        "2020": 14,
+        "2021": 11,
+        "2022": 10,
+        "2023": 5,
+        "2024": 12,
+        "2025": 10
+      },
+      "total": 68
+    },
+    "ieeevr": {
+      "name": "IEEE VR",
+      "counts": {
+        "2019": 3,
+        "2020": 524,
+        "2021": 277,
+        "2022": 453,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 1257
+    },
+    "ets": {
+      "name": "Educational Technology & Society",
+      "counts": {
+        "2019": 2,
+        "2020": 2,
+        "2021": 4,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 8
+    },
+    "idc": {
+      "name": "IDC Conference",
+      "counts": {
+        "2019": 2,
+        "2020": 9,
+        "2021": 98,
+        "2022": 91,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 200
+    },
+    "lak": {
+      "name": "LAK Conference",
+      "counts": {
+        "2019": 1,
+        "2020": 2,
+        "2021": 2,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 5
+    },
+    "cs": {
+      "name": "Cognitive Science",
+      "counts": {
+        "2019": 303,
+        "2020": 280,
+        "2021": 173,
+        "2022": 191,
+        "2023": 186,
+        "2024": 148,
+        "2025": 174
+      },
+      "total": 1455
+    },
+    "tate": {
+      "name": "Teaching and Teacher Education",
+      "counts": {
+        "2019": 249,
+        "2020": 183,
+        "2021": 269,
+        "2022": 299,
+        "2023": 351,
+        "2024": 347,
+        "2025": 329
+      },
+      "total": 2027
+    },
+    "ile": {
+      "name": "Interactive Learning Environments",
+      "counts": {
+        "2019": 192,
+        "2020": 207,
+        "2021": 241,
+        "2022": 286,
+        "2023": 253,
+        "2024": 227,
+        "2025": 382
+      },
+      "total": 1788
+    },
+    "jep": {
+      "name": "Journal of Educational Psychology",
+      "counts": {
+        "2019": 147,
+        "2020": 148,
+        "2021": 136,
+        "2022": 111,
+        "2023": 101,
+        "2024": 138,
+        "2025": 134
+      },
+      "total": 915
+    },
+    "lid": {
+      "name": "Learning and Individual Differences",
+      "counts": {
+        "2019": 99,
+        "2020": 85,
+        "2021": 96,
+        "2022": 87,
+        "2023": 96,
+        "2024": 160,
+        "2025": 173
+      },
+      "total": 796
+    },
+    "cep": {
+      "name": "Contemporary Educational Psychology",
+      "counts": {
+        "2019": 92,
+        "2020": 83,
+        "2021": 76,
+        "2022": 82,
+        "2023": 81,
+        "2024": 53,
+        "2025": 83
+      },
+      "total": 550
+    },
+    "li": {
+      "name": "Learning and Instruction",
+      "counts": {
+        "2019": 86,
+        "2020": 82,
+        "2021": 97,
+        "2022": 111,
+        "2023": 90,
+        "2024": 165,
+        "2025": 186
+      },
+      "total": 817
+    },
+    "cbe": {
+      "name": "CBE-Life Sciences Education",
+      "counts": {
+        "2019": 85,
+        "2020": 86,
+        "2021": 89,
+        "2022": 98,
+        "2023": 62,
+        "2024": 86,
+        "2025": 55
+      },
+      "total": 561
+    },
+    "jcal": {
+      "name": "Journal of Computer Assisted Learning",
+      "counts": {
+        "2019": 72,
+        "2020": 113,
+        "2021": 123,
+        "2022": 140,
+        "2023": 165,
+        "2024": 183,
+        "2025": 205
+      },
+      "total": 1001
+    },
+    "er": {
+      "name": "Educational Researcher",
+      "counts": {
+        "2019": 61,
+        "2020": 87,
+        "2021": 74,
+        "2022": 50,
+        "2023": 75,
+        "2024": 48,
+        "2025": 76
+      },
+      "total": 471
+    },
+    "jee": {
+      "name": "Journal of Engineering Education",
+      "counts": {
+        "2019": 53,
+        "2020": 45,
+        "2021": 56,
+        "2022": 74,
+        "2023": 73,
+        "2024": 72,
+        "2025": 101
+      },
+      "total": 474
+    },
+    "tochi": {
+      "name": "ACM Transactions on Computer-Human Interaction",
+      "counts": {
+        "2019": 51,
+        "2020": 45,
+        "2021": 48,
+        "2022": 115,
+        "2023": 65,
+        "2024": 65,
+        "2025": 77
+      },
+      "total": 466
+    },
+    "jche": {
+      "name": "Journal of Computing in Higher Education",
+      "counts": {
+        "2019": 43,
+        "2020": 19,
+        "2021": 36,
+        "2022": 46,
+        "2023": 45,
+        "2024": 32,
+        "2025": 61
+      },
+      "total": 282
+    },
+    "jte": {
+      "name": "Journal of Teacher Education",
+      "counts": {
+        "2019": 36,
+        "2020": 47,
+        "2021": 51,
+        "2022": 35,
+        "2023": 57,
+        "2024": 34,
+        "2025": 27
+      },
+      "total": 287
+    },
+    "merj": {
+      "name": "Mathematics Education Research Journal",
+      "counts": {
+        "2019": 34,
+        "2020": 41,
+        "2021": 24,
+        "2022": 23,
+        "2023": 22,
+        "2024": 17,
+        "2025": 20
+      },
+      "total": 181
+    },
+    "ijcscl": {
+      "name": "International Journal of Computer-Supported Collaborative Learning",
+      "counts": {
+        "2019": 22,
+        "2020": 22,
+        "2021": 22,
+        "2022": 23,
+        "2023": 28,
+        "2024": 26,
+        "2025": 22
+      },
+      "total": 165
+    },
+    "rer": {
+      "name": "Review of Educational Research",
+      "counts": {
+        "2019": 19,
+        "2020": 28,
+        "2021": 36,
+        "2022": 31,
+        "2023": 32,
+        "2024": 43,
+        "2025": 64
+      },
+      "total": 253
+    },
+    "jaid": {
+      "name": "Journal of Applied Instructional Design",
+      "counts": {
+        "2019": 0,
+        "2020": 24,
+        "2021": 55,
+        "2022": 33,
+        "2023": 10,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 122
+    },
+    "ceai": {
+      "name": "Computers & Education: Artificial Intelligence",
+      "counts": {
+        "2019": 0,
+        "2020": 6,
+        "2021": 38,
+        "2022": 73,
+        "2023": 80,
+        "2024": 158,
+        "2025": 175
+      },
+      "total": 530
+    },
+    "uist": {
+      "name": "UIST Conference",
+      "counts": {
+        "2019": 0,
+        "2020": 2,
+        "2021": 1,
+        "2022": 0,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 3
+    },
+    "its": {
+      "name": "ITS Conference",
+      "counts": {
+        "2019": 0,
+        "2020": 0,
+        "2021": 1,
+        "2022": 1,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 2
+    },
+    "fie": {
+      "name": "FIE Conference",
+      "counts": {
+        "2019": 0,
+        "2020": 0,
+        "2021": 375,
+        "2022": 381,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 756
+    },
+    "ismar": {
+      "name": "ISMAR",
+      "counts": {
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 215,
+        "2023": 0,
+        "2024": 0,
+        "2025": 0
+      },
+      "total": 215
+    },
+    "cexr": {
+      "name": "Computers & Education: X Reality",
+      "counts": {
+        "2019": 0,
+        "2020": 0,
+        "2021": 0,
+        "2022": 4,
+        "2023": 43,
+        "2024": 41,
+        "2025": 37
+      },
+      "total": 125
+    }
+  }
+}
