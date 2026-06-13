@@ -560,6 +560,12 @@
     .tb-overflow .filter-btn { width: 100%; justify-content: flex-start; text-align: left; margin-left: 0; }
     #tb-more-btn.active { background: var(--surface-container-highest); }
 
+    /* dim the default vis-network navigation buttons (off-brand sprites) so they
+       recede; brighten on hover. zoom/pan still works via scroll + drag. */
+    .vis-navigation .vis-button { opacity: 0.18 !important; transition: opacity 0.2s ease; }
+    .vis-navigation:hover .vis-button { opacity: 0.55 !important; }
+    .vis-navigation .vis-button:hover { opacity: 0.95 !important; }
+
     .mode-btn {
       background: rgba(9, 19, 40, 0.8);
       color: var(--text-secondary);
