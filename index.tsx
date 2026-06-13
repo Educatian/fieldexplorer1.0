@@ -5,6 +5,8 @@ import semanticProfiles from './src/data/semantic_profiles.json';
 import venueMetrics from './src/data/venue_metrics.json';
 // data-derived methodology profiles (LLM-classified abstracts; replaces lexical)
 import venueMethodology from './src/data/venue_methodology.json';
+// longitudinal topic trends (research currency) — OpenAlex topic share per year
+import fieldTrends from './src/data/field_trends.json';
 import {
     getBuiltInOfficialCFPRecord,
     resolveCFPInfoWithOverrides,
@@ -4077,6 +4079,52 @@ async function main() {
         logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'category_chord' } });
     }
     document.getElementById('category-chord-btn')?.addEventListener('click', openCategoryChord);
+
+    // ========================================================================
+    // RESEARCH CURRENCY — longitudinal topic trends (rising / declining)
+    // ========================================================================
+    function trendSpark(shares: number[], color: string): string {
+        const n = shares.length, w = 88, h = 24, pad = 3;
+        const mn = Math.min(...shares), mx = Math.max(...shares), rng = (mx - mn) || 1;
+        const pts = shares.map((s, i) => `${(pad + i * (w - 2 * pad) / (n - 1)).toFixed(1)},${(h - pad - (s - mn) / rng * (h - 2 * pad)).toFixed(1)}`).join(' ');
+        const last = shares.length - 1;
+        const lx = pad + last * (w - 2 * pad) / (n - 1), ly = h - pad - (shares[last] - mn) / rng * (h - 2 * pad);
+        return `<svg width="${w}" height="${h}" style="flex:none"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/><circle cx="${lx.toFixed(1)}" cy="${ly.toFixed(1)}" r="2" fill="${color}"/></svg>`;
+    }
+    function openTrendsPanel() {
+        const ft = fieldTrends as any;
+        const yrs = ft.years || [];
+        const row = (r: any, up: boolean) => `
+            <div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--outline-ghost)">
+              <span style="flex:1;font-size:0.82rem;color:var(--text-primary)">${escapeHtml(r.topic)}</span>
+              ${trendSpark(r.shares, up ? '#34d399' : '#fbbf24')}
+              <span style="width:62px;text-align:right;font-size:0.72rem;color:${up ? '#34d399' : '#fbbf24'};font-variant-numeric:tabular-nums">${up ? '▲' : '▼'} ${Math.abs(r.delta).toFixed(1)}%p</span>
+            </div>`;
+        const col = (title: string, rows: any[], up: boolean) => `
+            <div style="flex:1;min-width:0">
+              <div style="font-weight:600;margin-bottom:6px;color:var(--text-primary)">${title}</div>
+              ${rows.map((r) => row(r, up)).join('')}
+            </div>`;
+        let modal = document.getElementById('fit-modal-container');
+        if (!modal) { modal = document.createElement('div'); modal.id = 'fit-modal-container'; document.body.appendChild(modal); }
+        modal.innerHTML = `
+            <div class="fit-overlay" id="fit-overlay"></div>
+            <div class="fit-modal" role="dialog" aria-label="연구 토픽 트렌드" style="max-width:820px">
+                <div class="fit-modal-head">
+                    <h3>📈 연구 토픽 트렌드 (${yrs[0]}–${yrs[yrs.length - 1]})</h3>
+                    <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">이 커뮤니티(${ft._meta?.n_sources || ''}개 venue)의 OpenAlex 토픽 <strong>연도별 점유율 추세</strong>입니다. 스파크라인 = % 추이, %p = 최근 2년 − 초기 2년. 어디로 가고 있는지 보는 currency cue.</p>
+                <div style="display:flex;gap:28px;margin-top:8px">
+                    ${col('📈 부상 (Rising)', ft.top_rising || [], true)}
+                    ${col('📉 쇠퇴 (Declining)', ft.top_declining || [], false)}
+                </div>
+            </div>`;
+        document.getElementById('fit-close-btn')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-overlay')?.addEventListener('click', closeSubmissionFit);
+        logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'trends' } });
+    }
+    document.getElementById('trends-btn')?.addEventListener('click', openTrendsPanel);
 
     // ========================================================================
     // METHODOLOGY NEIGHBORHOOD MAP  (the angle citation maps miss)
