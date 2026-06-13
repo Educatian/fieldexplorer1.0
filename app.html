@@ -7,6 +7,15 @@
   <title>EDTECH FieldExplorer</title>
   <meta name="description" content="Educational Technology & Learning Sciences 분야의 학술 저널과 학회 네트워크 시각화">
   <link rel="icon" type="image/png" href="/logo.png">
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#0b0e14">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FieldExplorer">
+  <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
   <!-- social share -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="FieldExplorer — research-network explorer">
@@ -565,6 +574,10 @@
     .vis-navigation .vis-button { opacity: 0.18 !important; transition: opacity 0.2s ease; }
     .vis-navigation:hover .vis-button { opacity: 0.55 !important; }
     .vis-navigation .vis-button:hover { opacity: 0.95 !important; }
+    /* touch devices (tablets/phones) have no hover -> keep nav buttons tappable */
+    @media (hover: none) {
+      .vis-navigation .vis-button { opacity: 0.55 !important; }
+    }
 
     .mode-btn {
       background: rgba(9, 19, 40, 0.8);
