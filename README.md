@@ -60,6 +60,17 @@ vs declining lists with sparklines. The AI cluster rises; post-COVID online
 learning declines.
 <img src="docs/screenshots/trends.png" width="900" alt="Topic trends panel" />
 
+### Field evolution (animated)
+A timeline scrubber (2019–2025) pulses each venue's node size by its yearly
+publication activity, so the field's growth plays as motion.
+<img src="docs/screenshots/evolve-2025.png" width="900" alt="Field evolution animation" />
+
+### Peer-review practice (deliberate practice)
+Read an abstract, draft a review per rubric dimension, then reveal an expert
+checklist and self-score which points you caught. Cycles across Experimental /
+Qualitative / Data-&-AI samples.
+<img src="docs/screenshots/peer-review.png" width="760" alt="Peer-review practice module" />
+
 ### Category citation chord (overview-first)
 A dependency-free SVG chord aggregates venue→venue citation up to **field↔field** flow — the macro landscape before the venue-level hairball.
 <img src="docs/screenshots/category-chord.png" width="700" alt="Category citation chord" />

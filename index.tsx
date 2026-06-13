@@ -4195,6 +4195,106 @@ async function main() {
     document.getElementById('evolve-btn')?.addEventListener('click', toggleEvolve);
 
     // ========================================================================
+    // PEER-REVIEW PRACTICE — deliberate practice with an expert checklist
+    // Read an abstract -> draft a review per rubric dimension -> reveal what an
+    // expert would flag -> self-score (which points you caught).
+    // ========================================================================
+    const REVIEW_DIMS = ['기여 / 독창성', '방법 엄밀성', '주장 ↔ 증거 / 명료성', 'venue 적합성', '윤리'];
+    const REVIEW_SAMPLES = [
+        {
+            culture: 'Experimental',
+            title: 'Effects of an adaptive hint system on middle-school algebra achievement',
+            abstract: 'We tested whether an adaptive hint system improves algebra learning. 120 eighth-graders used either an adaptive-hint or a fixed-hint tutor for four weeks. The adaptive group scored higher on a posttest (d = 0.45). We conclude that adaptive hints support algebra learning.',
+            expert: [
+                '기여가 점증적 — 적응형 힌트는 이미 많이 연구됨. 무엇이 새로운가?',
+                '배정 방식 불명(무선?), 사전검사 동등성 미보고, n=120 검정력, 지연 파지검사 없음',
+                'd=0.45만 보고 — 신뢰구간 없음, 종속변인(검사) 타당도·설명 부재',
+                '교육공학/실험 venue 적합 (C&E, Learning and Instruction 등)',
+                '미성년자 동의·assent, IRB 언급 없음',
+            ],
+        },
+        {
+            culture: 'Qualitative',
+            title: 'How novice teachers make sense of AI tutoring tools',
+            abstract: 'Through interviews with eight novice teachers, we explored how they make sense of AI tutoring tools. Themes included trust, workload, and professional identity. Teachers saw AI as both helpful and threatening.',
+            expert: [
+                '주제가 일반적(trust/workload) — 개념적 기여가 무엇인가?',
+                'n=8 표집·모집 기준 불명, 단일 인터뷰·삼각검증 없음, 분석절차(코딩/신뢰성) 미기술',
+                '"helpful and threatening" 주장이 인용 발췌 없이 약하게 근거됨',
+                '질적 LS/교사교육 venue 적합 (JLS, Teaching and Teacher Education)',
+                'IRB/동의·교사 익명성 미언급',
+            ],
+        },
+        {
+            culture: 'Data & AI',
+            title: 'Predicting course dropout from LMS clickstream data',
+            abstract: 'We built a model predicting course dropout from the LMS clickstream of 5,000 students, achieving 0.82 AUC. Features included login frequency and time-on-task. The model can support early intervention.',
+            expert: [
+                '중도탈락 예측은 포화된 주제 — 피처/방법의 신규성은?',
+                'train/test 분할·시간적 누수(미래정보) 여부 불명, 클래스 불균형·베이스라인 비교 부재',
+                'AUC만 — 캘리브레이션·하위집단 공정성 분석 없음, "intervention 지원" 미검증',
+                'LAK/EDM/학습분석 venue 적합',
+                '학생 데이터 동의·프라이버시, 알고리즘 편향·개입 위해 미고려',
+            ],
+        },
+    ];
+    let reviewIdx = 0;
+    function openReviewPractice() {
+        const sm = REVIEW_SAMPLES[reviewIdx];
+        const dimRows = REVIEW_DIMS.map((d, i) => `
+            <div style="margin-top:10px">
+              <div style="font-weight:600;font-size:0.84rem;color:var(--text-primary)">${i + 1}. ${d}</div>
+              <textarea data-dim="${i}" rows="2" placeholder="이 차원에서 짚을 점을 적어보세요..." style="width:100%;margin-top:4px;background:var(--bg-secondary);color:var(--text-primary);border:1px solid var(--outline-soft);border-radius:6px;padding:6px 8px;font:inherit;font-size:0.82rem;box-sizing:border-box;resize:vertical"></textarea>
+            </div>`).join('');
+        const expertRows = sm.expert.map((pt, i) => `
+            <label style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:0.82rem;cursor:pointer">
+              <input type="checkbox" class="rev-check" style="margin-top:3px;accent-color:#6366f1">
+              <span><b style="color:var(--primary)">${REVIEW_DIMS[i] || ''}</b> — ${pt}</span>
+            </label>`).join('');
+        let modal = document.getElementById('fit-modal-container');
+        if (!modal) { modal = document.createElement('div'); modal.id = 'fit-modal-container'; document.body.appendChild(modal); }
+        modal.innerHTML = `
+            <div class="fit-overlay" id="fit-overlay"></div>
+            <div class="fit-modal" role="dialog" aria-label="피어리뷰 연습" style="max-width:720px">
+                <div class="fit-modal-head">
+                    <h3>🧐 피어리뷰 연습 <span style="font-weight:400;color:var(--text-muted);font-size:0.85rem">(${sm.culture})</span></h3>
+                    <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
+                </div>
+                <p class="fit-sub">초록을 읽고 차원별로 리뷰를 적은 뒤, <strong>전문가 체크리스트</strong>와 대조해 무엇을 놓쳤는지 확인하세요(숙의적 연습). 샘플 ${reviewIdx + 1}/${REVIEW_SAMPLES.length}.</p>
+                <div style="background:var(--bg-secondary);border:1px solid var(--outline-ghost);border-radius:8px;padding:12px 14px;margin-top:6px">
+                  <div style="font-weight:600;font-size:0.86rem">${sm.title}</div>
+                  <div style="font-size:0.82rem;color:var(--text-secondary);margin-top:6px;line-height:1.5">${sm.abstract}</div>
+                </div>
+                ${dimRows}
+                <div style="display:flex;gap:10px;align-items:center;margin-top:14px">
+                  <button class="btn" id="rev-reveal">전문가 체크리스트 보기</button>
+                  <button class="btn" id="rev-next" style="background:var(--surface-container-high)">다음 샘플 →</button>
+                  <span id="rev-score" style="margin-left:auto;font-weight:600;color:var(--primary)"></span>
+                </div>
+                <div id="rev-expert" style="display:none;margin-top:12px;border-top:1px solid var(--outline-soft);padding-top:10px">
+                  <div style="font-weight:600;margin-bottom:4px">전문가가 짚는 지점 — 내가 지적한 것을 체크하세요</div>
+                  ${expertRows}
+                </div>
+            </div>`;
+        document.getElementById('fit-close-btn')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-overlay')?.addEventListener('click', closeSubmissionFit);
+        const scoreEl = document.getElementById('rev-score');
+        const updateScore = () => {
+            const checks = Array.from(document.querySelectorAll('.rev-check')) as HTMLInputElement[];
+            const got = checks.filter((c) => c.checked).length;
+            if (scoreEl) scoreEl.textContent = `${got} / ${checks.length} 짚음`;
+        };
+        document.getElementById('rev-reveal')?.addEventListener('click', () => {
+            const ex = document.getElementById('rev-expert'); if (ex) ex.style.display = 'block';
+            document.querySelectorAll('.rev-check').forEach((c) => c.addEventListener('change', updateScore));
+            updateScore();
+        });
+        document.getElementById('rev-next')?.addEventListener('click', () => { reviewIdx = (reviewIdx + 1) % REVIEW_SAMPLES.length; openReviewPractice(); });
+        logAction({ action_type: 'open_panel', context_tag: 'learning', metadata: { panel: 'review_practice', sample: reviewIdx } });
+    }
+    document.getElementById('review-practice-btn')?.addEventListener('click', openReviewPractice);
+
+    // ========================================================================
     // METHODOLOGY NEIGHBORHOOD MAP  (the angle citation maps miss)
     // Group venues by dominant research culture from the fingerprints.
     // ========================================================================
