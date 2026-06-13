@@ -48,9 +48,17 @@ The 🔗 toggle overlays **real OpenAlex citation flow** between venues, reduced
 Click any venue and its full citation neighbourhood fans out while the rest recedes — *details on demand*, not everything at once.
 <img src="docs/screenshots/citation-ego.png" width="900" alt="Citation ego-network" />
 
-### Methodology neighbourhoods
-Recolour the map by methodology culture, or open the dedicated methodology-map panel.
-<img src="docs/screenshots/methodology.png" width="900" alt="Methodology map" />
+### Methodology neighbourhoods (data-derived) + teaching guide
+Venues grouped by their **LLM-classified** dominant methodology (per-abstract,
+verified), with a collapsible "어떤 연구질문에 어떤 방법?" worked-example guide that
+turns the map into a methodology-literacy teaching tool.
+<img src="docs/screenshots/methodology-guide.png" width="900" alt="Methodology map with teaching guide" />
+
+### Research-currency: topic trends
+Where the field is heading — community topic share per year (OpenAlex), as rising
+vs declining lists with sparklines. The AI cluster rises; post-COVID online
+learning declines.
+<img src="docs/screenshots/trends.png" width="900" alt="Topic trends panel" />
 
 ### Category citation chord (overview-first)
 A dependency-free SVG chord aggregates venue→venue citation up to **field↔field** flow — the macro landscape before the venue-level hairball.

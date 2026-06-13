@@ -4140,6 +4140,17 @@ async function main() {
         'Theory': '이론·프레임워크·개념 정교화 중심',
     };
 
+    // #4 Methodology literacy — teaching guide: which research question -> which
+    // method culture, with a worked example. [culture, signature, RQ stem, example]
+    const METHOD_GUIDE: [string, string, string, string][] = [
+        ['Experimental', '무선/준무선 배정·통제·효과크기·통계검정', 'X가 Y에 인과적 효과가 있는가?', '적응형 피드백이 학습 성취를 높이는가 (사전사후 RCT)'],
+        ['Qualitative', '인터뷰·관찰·담화/주제 분석·사례', '학습자는 X를 어떻게 경험·의미화하는가?', '교사는 AI 튜터 도입을 어떻게 받아들이는가 (다중사례연구)'],
+        ['Design & Dev', '설계기반연구(DBR)·프로토타입·반복 개선', 'X를 지원하는 시스템/개입을 어떻게 설계할 수 있는가?', '협력 글쓰기 스캐폴딩 도구를 설계·정련 (DBR 사이클)'],
+        ['Data & AI', '로그/트레이스 데이터·ML/LA·예측·모델링', '행동 데이터에서 X를 어떻게 모델링·예측하는가?', '클릭스트림으로 중도탈락을 조기 예측 (학습분석)'],
+        ['Review & Meta', '체계적 문헌고찰·메타분석·증거 종합', 'X에 대한 누적 증거는 무엇을 말하는가?', '게이미피케이션의 동기 효과 메타분석'],
+        ['Theory', '개념틀·논변·비평 (경험 데이터 없음)', 'X를 어떤 개념으로 이해·재구성할 수 있는가?', 'AI 리터러시 구성개념틀 정교화'],
+    ];
+
     function openMethodologyMap() {
         let modal = document.getElementById('meth-modal-container');
         if (!modal) {
@@ -4168,6 +4179,15 @@ async function main() {
                     </div>`).join('') : '<div class="meth-empty">데이터 신호 없음</div>'}
             </div>
         `).join('');
+        const guideHtml = `<details style="margin:2px 0 14px;border:1px solid var(--outline-soft);border-radius:8px;padding:8px 12px">
+            <summary style="cursor:pointer;font-weight:600;color:var(--text-primary)">📐 방법론 가이드 — 어떤 연구질문에 어떤 방법? (worked examples)</summary>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:9px">
+            ${METHOD_GUIDE.map(([c, sig, rq, ex]) => `<div style="padding-bottom:8px;border-bottom:1px solid var(--outline-ghost)">
+                <div><b style="color:var(--primary)">${c}</b> <span style="color:var(--text-secondary);font-size:0.8rem">— ${sig}</span></div>
+                <div style="font-size:0.8rem;color:var(--text-primary);margin-top:2px">RQ 형태: ${rq}</div>
+                <div style="font-size:0.78rem;color:var(--text-muted)">worked example: ${ex}</div>
+            </div>`).join('')}
+            </div></details>`;
         modal.innerHTML = `
             <div class="fit-overlay" id="meth-overlay"></div>
             <div class="fit-modal meth-modal" role="dialog" aria-label="방법론 지형">
@@ -4176,6 +4196,7 @@ async function main() {
                     <button class="fit-close" id="meth-close-btn" title="닫기">✕</button>
                 </div>
                 <p class="fit-sub">각 venue의 최근 초록을 <strong>LLM으로 분류</strong>해 우세 <strong>연구 문화</strong>로 묶었습니다(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
+                ${guideHtml}
                 <div class="meth-grid">${cards}</div>
             </div>
         `;
