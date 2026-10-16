@@ -96,30 +96,6 @@ window.LECTURES = [
     "thumbnail": "thumb-XC_5YE2YYoY.jpg"
   },
   {
-    "id": "TAqR36Cd7qk",
-    "title": "Philosophy of Instructional Technology Paper - Overview",
-    "shortTitle": "Philosophy of Instructional Technology Paper",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "2:25",
-    "summary": "An AIL 601 assignment walkthrough on connecting beliefs about learning, supporting theory or research, and design and teaching decisions. Emphasizes consistency among views of learners, teachers, strategies, and technology, expressed through your own context and reasoning.",
-    "question": "Which of your beliefs about learners and technology are you most ready to defend, and what theory or research supports them?",
-    "lab": null,
-    "thumbnail": "thumb-TAqR36Cd7qk.jpg"
-  },
-  {
-    "id": "6pqomazEPcE",
-    "title": "Case-Based Reasoning and Problem-Based Learning - Overview",
-    "shortTitle": "Case-Based Reasoning and Problem-Based Learning",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "2:25",
-    "summary": "Compares problem-based learning, driven by unfamiliar ill-structured problems, with case-based reasoning's retrieve, reuse, revise, and retain cycle. Traces PBL to medical education at McMaster University and discusses facilitation, assessment, and the debate over guidance for novices.",
-    "question": "In a scenario you know, is learning driven by a new problem or by adapting remembered cases, and how much guidance would novices need?",
-    "lab": null,
-    "thumbnail": "thumb-6pqomazEPcE.jpg"
-  },
-  {
     "id": "Cn2KU6ooubI",
     "title": "Co-Design vs Participatory Design - Overview",
     "shortTitle": "Co-Design vs Participatory Design",
@@ -168,30 +144,6 @@ window.LECTURES = [
     "thumbnail": "thumb-XN29cK9FYMY.jpg"
   },
   {
-    "id": "4Cg22ihPV6g",
-    "title": "Constructivist Frontiers - Overview",
-    "shortTitle": "Constructivist Frontiers",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "2:27",
-    "summary": "Explores Papert's constructionism, cognitive apprenticeship and its six teaching methods, collaboration scripts in CSCL, and Pintrich's phases of self-regulated learning. Includes a scenario check separating constructionism from cognitive apprenticeship.",
-    "question": "How would you support productive struggle in a learning design while keeping learners in charge of their own regulation?",
-    "lab": null,
-    "thumbnail": "thumb-4Cg22ihPV6g.jpg"
-  },
-  {
-    "id": "Fqt-ZeC48PE",
-    "title": "Evolution of the Learning Sciences - Overview",
-    "shortTitle": "Evolution of the Learning Sciences",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "2:17",
-    "summary": "Traces the learning sciences from Dewey and Piaget through Chomsky's critique of behaviorism, the cognitive revolution, and the situated turn. Explains Sfard's acquisition and participation metaphors and communities of practice, and closes with four commitments of the field.",
-    "question": "Which historical shift most shapes how you think about learning, and what might AI and immersive tools change next?",
-    "lab": null,
-    "thumbnail": "thumb-Fqt-ZeC48PE.jpg"
-  },
-  {
     "id": "A0xi0-qjIMA",
     "title": "Network Meta-Analysis - Basic",
     "shortTitle": "Network Meta-Analysis",
@@ -202,30 +154,6 @@ window.LECTURES = [
     "question": "What would you check about transitivity and consistency before trusting a ranking of treatments?",
     "lab": null,
     "thumbnail": "thumb-A0xi0-qjIMA.jpg"
-  },
-  {
-    "id": "GwxncYxy7tc",
-    "title": "Learning Sciences and IST - Overview",
-    "shortTitle": "Learning Sciences and Instructional Systems and Technology",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "2:50",
-    "summary": "Module 3 compares the learning sciences with instructional systems and technology, contrasting designing instruction to meet goals with explaining how learning unfolds in context. ADDIE, design-based research, and Universal Design for Learning illustrate iteration and a bridge between the fields.",
-    "question": "Where do design practice and learning-sciences research reinforce each other in a project you know?",
-    "lab": null,
-    "thumbnail": "thumb-GwxncYxy7tc.jpg"
-  },
-  {
-    "id": "9Rly_IaOLNw",
-    "title": "Learning Theories as Design Lenses - Overview",
-    "shortTitle": "Learning Theories as Design Lenses",
-    "category": "foundations",
-    "format": "Overview",
-    "duration": "1:47",
-    "summary": "An AIL 601 overview of how behaviorist, cognitivist, and constructivist lenses guide instructional technology design, starting from the Clark and Kozma media debate. One chatbot appears as a drill partner, a tutor, or a thinking partner.",
-    "question": "Through which learning-theory lens would you design a technology you use, and what would change under another lens?",
-    "lab": null,
-    "thumbnail": "thumb-9Rly_IaOLNw.jpg"
   },
   {
     "id": "xrfvYZc6XIY",
