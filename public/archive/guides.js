@@ -976,5 +976,35 @@ window.LECTURE_GUIDES = {
     "reviewedAt": "2026-10-16",
     "sources": [],
     "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-does-the-jigsaw-classroom-work": {
+    "id": "cscl-does-the-jigsaw-classroom-work",
+    "purpose": "Use this video to check, when a jigsaw paper reports an effect, whether the outcome was social or learning, whether the class really used expert groups and teaching back, and what it was compared with, in how many students.",
+    "distinction": "Supporters point to the founders' reports and a large synthesis effect; the randomized experiments found about zero on learning against classes that already did some group work, and a zero against such classes is not the same as a zero against lecture.",
+    "caution": "The four kids and their bike lesson are made up; the d = 1.20 figure is reported secondhand, the 2025 review counts studies rather than pooling effects, and treating social and learning claims separately is the video's own reading.",
+    "koSummary": "이 영상은 1971년 미국 텍사스의 인종 통합 학교에서 시작된 직소(jigsaw) 수업이 실제로 효과가 있는지를 묻습니다. 초기 연구와 일부 종합 연구는 큰 효과를 보고했지만, 약 850명의 6학년을 대상으로 한 무작위 실험에서는 학습 효과가 거의 0이었고, 최근 리뷰는 연구 수를 세는 방식이라 효과의 크기까지는 알려 주지 않습니다. 직소 연구를 읽을 때 결과가 사회적 관계에 관한 것인지 학습에 관한 것인지, 실제로 전문가 모둠과 서로 가르치기 단계를 거쳤는지, 무엇과 비교했고 학생 수는 얼마였는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-when-is-hard-helpful": {
+    "id": "cscl-when-is-hard-helpful",
+    "purpose": "Use this video to check, when a study reports that a difficulty helped, how long after practice the test came, whether these learners could meet the challenge, and what kind of material was used.",
+    "distinction": "Performance during practice and learning that lasts can split; van Gog and Sweller ask whether the testing benefit holds for complex material, and Karpicke and Aue reply that complexity was never defined in a measurable way.",
+    "caution": "Leo and Mia are made up, van Gog and Sweller's paper is used only through its abstract, the reply's summary of their claim is stronger than that abstract's wording, and the spacing evidence comes mostly from tests within a day with young adults.",
+    "koSummary": "이 영상은 스스로 시험 보기, 간격을 두고 공부하기, 문제 유형 섞기처럼 연습할 때는 더 어렵고 성과가 낮아 보여도 나중에 더 오래 남는다는 Bjork의 '바람직한 어려움'과, 서로 얽힌 요소가 많은 복잡한 자료에서는 그 효과가 사라질 수 있다는 van Gog와 Sweller의 문제 제기를 비교합니다. 관련 연구를 읽을 때 연습 후 얼마 뒤에 시험을 봤는지, 학습자가 그 어려움을 감당할 수 있었는지, 어떤 종류의 자료였는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-can-you-script-people-to-build-on-each-other": {
+    "id": "cscl-can-you-script-people-to-build-on-each-other",
+    "purpose": "Use this video to check whether students in a scripting study actually built on each other or were only prompted to, whether the abstract matches the results tables, and whether a gap between two groups was itself tested with enough power.",
+    "distinction": "Transactivity means working on a partner's reasoning, not just saying okay; script theory predicts that requiring it improves learning, while the same group's meta-analysis could not show that prompting it beat other scripts for subject knowledge.",
+    "caution": "Leo, Ana and the ice-cube chat are made up; the early link between transactivity and learning is correlational, the 2016 study is described from its abstract, and a non-significant gap with low power is not evidence of no effect.",
+    "koSummary": "이 영상은 협력 스크립트로 학습자들이 상대의 추론을 받아 다시 발전시키게(transactivity) 할 수 있는지, 그리고 그것이 학습에 도움이 되는지를 묻습니다. 스크립트 이론은 이를 학습 원리로 내세웠지만, 같은 연구진의 메타분석에서는 이를 유도한 스크립트와 그렇지 않은 스크립트의 차이가 통계적으로 유의하지 않았고 검정력도 낮아 아직 어느 쪽이라고 말하기 어렵습니다. 연구를 읽을 때 학생들이 실제로 서로의 생각을 발전시켰는지, 초록이 결과 표와 맞는지, 두 집단의 차이를 충분한 검정력으로 직접 검정했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
   }
 };

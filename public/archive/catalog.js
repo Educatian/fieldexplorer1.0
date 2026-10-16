@@ -793,5 +793,44 @@ window.LECTURES = [
     "question": "Pick a CSCL study you have read recently: which side of which provocation does it take, without saying so?",
     "lab": null,
     "thumbnail": "thumb-cscl-eight-provocations-for-cscl.jpg"
+  },
+  {
+    "id": "cscl-does-the-jigsaw-classroom-work",
+    "driveFileId": "10OT9edCh68syzWexKlb83ejTllLLRoUg",
+    "title": "Does the Jigsaw Classroom Work?",
+    "shortTitle": "Does the Jigsaw Classroom Work?",
+    "category": "design",
+    "format": "Debate",
+    "duration": "4:20",
+    "summary": "This video asks whether the jigsaw classroom, begun in 1971 in newly desegregated Texas schools, works. Its first study reported higher self-esteem and more liking for groupmates, with no test scores in its summary, and one synthesis puts the learning gain at d = 1.20, though that figure, as reported by Stanczak and colleagues (2022), rests on eleven small studies from one country. Stanczak and colleagues' own five randomized experiments with about 850 sixth graders found an effect of about zero, with short-term, unvalidated tests and comparison classes that already did some group work. A 2025 review of 69 studies found academic gains in about six in ten, more often in language than science, but it counted studies rather than pooling effects and most tested college students; Slavin found plain jigsaw rarely raised scores, while his own version with team goals and individual quizzes did better. A made-up class frames the video's own reading that social and learning claims need separate evidence; effects on getting along are mixed and lasting memory is little tested.",
+    "question": "Say jigsaw helped your students get along but didn't raise their scores: would you still give it class time, and why?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-does-the-jigsaw-classroom-work.jpg"
+  },
+  {
+    "id": "cscl-when-is-hard-helpful",
+    "driveFileId": "1lYx_0n4NyUfJEQbscZDrltE3wnegRW0-",
+    "title": "When Is Hard Helpful?",
+    "shortTitle": "When Is Hard Helpful?",
+    "category": "foundations",
+    "format": "Debate",
+    "duration": "4:25",
+    "summary": "This video sets Bjork's desirable difficulties, kinds of hard practice such as testing yourself, spacing sessions out and mixing problem types that can look worse during practice but last longer, against van Gog and Sweller's (2015) hedged proposal that the benefit may disappear for complex material whose parts depend on each other. In one study, rereading won after five minutes but self-testing won after a week, and in a small math study mixed practice scored about three times higher a week later. Karpicke and Aue (2015) replied that complexity was never defined measurably and that their re-analysis made a small gain four times likelier than none, though their summary of the other side is stronger than that side's abstract. The idea always had a limit built in, since a difficulty helps only if the learner can meet it; spacing almost always beat cramming across 271 comparisons, mostly tested within a day with young adults, while hard-to-read fonts failed to replicate and mixing word lists did worse than blocking. A made-up pair of siblings frames the case, and complex material and spacing with young children in school remain open.",
+    "question": "Think of a struggle you've asked learners to face: how would you tell a useful struggle from a useless one?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-when-is-hard-helpful.jpg"
+  },
+  {
+    "id": "cscl-can-you-script-people-to-build-on-each-other",
+    "driveFileId": "1ONEwuIqK5isbOSDVhdZi9DyOLMqp2XY0",
+    "title": "Can You Script People to Build on Each Other?",
+    "shortTitle": "Can You Script People to Build on Each Other?",
+    "category": "design",
+    "format": "Debate",
+    "duration": "4:03",
+    "summary": "This video asks whether collaboration scripts, prompts that tell pairs how to talk, can get learners to build on each other's reasoning (transactivity), and whether that helps them learn. The idea began in Berkowitz's research on moral-dilemma discussions; a small study (Teasley, 1997, as described by Fischer and colleagues) linked more transactive moves with more learning, though only as a correlation, and script theory (Fischer and colleagues, 2013) turned it into a principle. A meta-analysis by the same group (Vogel and colleagues, 2017) found that scripts prompting transactivity averaged d = 0.22 for subject knowledge against 0.05 for scripts that didn't, but the gap was not significant and the test would catch a real gap of that size only about one time in twelve, so the result is inconclusive rather than evidence of no effect; for collaboration skills the gap ran the other way, from only three results, and the authors proposed revising their own principle. A made-up ice-cube chat shows the moves; studies rarely report whether students actually made them, how to measure transactivity is itself debated, and one study (Vogel and colleagues, 2016, abstract) found your own moves seemed to matter more than your partner's.",
+    "question": "Say you wrote a script to get students building on each other: how would you check that they really did?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-can-you-script-people-to-build-on-each-other.jpg"
   }
 ];
