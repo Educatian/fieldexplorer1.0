@@ -1,0 +1,186 @@
+/* FieldExplorer presentation layer.
+   Intentionally scoped: no canvas geometry, graph encoding, visibility/state,
+   auth, consent, or application behavior changes. Existing theme tokens remain. */
+.fe-landing,
+.fe-app {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.fe-landing button,
+.fe-app button,
+.fe-app select,
+.fe-app input { font-family: inherit; }
+.fe-landing :is(a, button, input):focus-visible,
+.fe-app :is(a, button, select, input):focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+/* Landing: a quiet research workspace, not an illustrated product billboard. */
+.fe-landing :is(.bg-animation, .network-grid, .scan-line, .network-dots, .floating-particles) {
+  display: none;
+}
+.fe-landing .container > header {
+  width: min(100%, 1320px);
+  margin: 0 auto;
+  padding: 24px 40px;
+  gap: 24px;
+  border-bottom: 1px solid var(--outline-variant);
+}
+.fe-landing .logo { gap: 12px; }
+.fe-landing .logo-img { width: 40px; height: 40px; border-radius: 8px; }
+.fe-landing .logo h1 { font-size: 1.15rem; letter-spacing: -.035em; }
+.fe-landing .logo-subtitle { margin-top: 4px; color: var(--text-muted); letter-spacing: .025em; }
+.fe-landing .nav-links { align-items: center; gap: 24px; }
+.fe-landing .nav-links a { font-size: .82rem; white-space: nowrap; }
+.fe-landing .nav-links a:hover { color: var(--primary-container); }
+.fe-landing #lang-toggle { background: var(--surface-container-high) !important; border: 1px solid var(--outline-variant) !important; border-radius: 6px !important; box-shadow: none !important; }
+.fe-landing .hero {
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: 64px 40px 72px;
+  gap: clamp(40px, 6vw, 88px);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.fe-landing .hero-content { flex: 1; max-width: 630px; min-width: 0; }
+.fe-landing .badge {
+  padding: 0 0 0 12px;
+  border: 0;
+  border-left: 2px solid var(--secondary);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: .74rem;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+.fe-landing .hero-title {
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  font-size: clamp(2.15rem, 3.6vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.24;
+  letter-spacing: -.05em;
+  word-break: keep-all;
+  margin-bottom: 22px;
+}
+.fe-landing .hero-title span { color: var(--primary-container); }
+.fe-landing .hero-subtitle { font-size: .98rem; line-height: 1.85; max-width: 540px; margin-bottom: 26px; word-break: keep-all; }
+.fe-landing .cta-buttons { align-items: center; gap: 10px; margin-bottom: 28px; }
+.fe-landing :is(.btn-primary, .btn-secondary, .login-btn) {
+  border-radius: 7px;
+  font-size: .85rem;
+  line-height: 1.4;
+  padding: 12px 18px;
+  min-height: 44px;
+  box-shadow: none;
+  transition: background .18s, border-color .18s;
+}
+.fe-landing :is(.btn-primary, .login-btn) { background: #6366f1; color: #fff; }
+.fe-landing :is(.btn-primary, .login-btn):hover { background: #5558dd; transform: none; box-shadow: none; }
+.fe-landing .btn-secondary { border-color: var(--outline-variant); }
+.fe-landing .btn-secondary:hover { background: var(--surface-container-high); border-color: var(--outline); }
+.fe-archive-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 4px;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--secondary-soft);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: var(--outline);
+}
+.fe-archive-cta:hover { color: var(--text-primary); text-decoration-color: currentColor; }
+.fe-exploration-guide { border-block: 1px solid var(--outline-variant); padding: 20px 0; margin-bottom: 24px; }
+.fe-section-label { color: var(--text-muted); font-size: .72rem; letter-spacing: .035em; margin-bottom: 16px; }
+.fe-exploration-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; gap: 16px; }
+.fe-exploration-steps li { display: flex; flex-direction: column; gap: 7px; }
+.fe-step-index { color: var(--secondary); font-size: .7rem; font-variant-numeric: tabular-nums; }
+.fe-exploration-steps strong { font-size: .86rem; font-weight: 600; }
+.fe-exploration-steps li > span:last-child { color: var(--text-muted); font-size: .73rem; line-height: 1.5; }
+.fe-landing .hero-meta { gap: 28px; }
+.fe-landing .hero-meta-item { min-width: 82px; }
+.fe-landing .hero-meta-value { font-family: inherit; font-size: 1.25rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.fe-landing .hero-meta-label { font-size: .72rem; }
+.fe-landing .hero-note { font-size: .75rem; line-height: 1.7; max-width: 520px; margin-top: 16px; }
+.fe-landing .login-card {
+  width: 350px;
+  flex-shrink: 0;
+  padding: 26px;
+  background: var(--surface-container-low);
+  border: 1px solid var(--outline-variant);
+  border-radius: 12px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+.fe-landing .auth-tabs { border-bottom-color: var(--outline-variant); }
+.fe-landing .auth-tab { font-size: .87rem; }
+.fe-landing .auth-tab.active { color: var(--primary-container); border-bottom-color: var(--primary-container); }
+.fe-landing .login-card h2 { font-size: 1.2rem; letter-spacing: -.025em; }
+.fe-landing .login-card p { font-size: .8rem; line-height: 1.7; margin-bottom: 24px; }
+.fe-landing .form-group label { font-size: .8rem; }
+.fe-landing .form-group input { border-color: var(--outline-variant); border-radius: 6px; padding: 12px; font-size: .86rem; }
+.fe-landing .form-group input:focus { box-shadow: none; border-color: var(--primary-container); }
+.fe-landing .features { padding: 40px; border-top: 1px solid var(--outline-variant); background: var(--surface); }
+.fe-landing .features-grid { max-width: 1160px; gap: 32px; }
+.fe-landing .feature-card { padding: 8px 0 12px; border: 0; border-radius: 0; background: transparent; }
+.fe-landing .feature-card:hover { transform: none; background: transparent; }
+.fe-landing .feature-icon { width: auto; height: auto; justify-content: flex-start; background: none; color: var(--primary-container); font-size: .75rem; margin-bottom: 16px; }
+.fe-landing .feature-card h3 { font-size: .95rem; }
+.fe-landing .feature-card p { font-size: .82rem; line-height: 1.8; }
+.fe-landing footer { padding: 24px 40px; border-top: 1px solid var(--outline-variant); text-align: left; font-size: .72rem; }
+
+/* App chrome only. Preserve all active-state colors and existing breakpoints. */
+.fe-app .header { background: var(--surface-container-low); border-bottom-color: var(--outline-variant); padding: 10px 16px; gap: 16px; backdrop-filter: none; }
+.fe-app .logo { padding-top: 4px; gap: 10px; }
+.fe-app .logo-text h1 { letter-spacing: -.035em; line-height: 1.3; }
+.fe-app .fe-brand-archive { display: block; width: fit-content; padding: 5px 0; color: var(--secondary-soft); font-size: .65rem; line-height: 1.5; text-decoration: none; white-space: nowrap; }
+.fe-app .fe-brand-archive:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 3px; }
+.fe-app .header-controls { gap: 7px; }
+.fe-app .header-zone { border-radius: 7px; background: transparent; border-color: var(--outline-variant); padding: 4px; min-height: 40px; backdrop-filter: none; }
+.fe-app .header .btn,
+.fe-app .header .category-select { border-radius: 5px; }
+.fe-app .header .btn:not(.active) { background: var(--surface-container-high); border-color: var(--outline-variant); }
+.fe-app .header .btn:hover { transform: none; border-color: var(--outline); }
+.fe-app .header .category-select { background: var(--surface); border-color: var(--outline-variant); }
+.fe-app .header .search-box input { border-color: var(--outline-variant); border-radius: 5px; }
+.fe-app .header .search-box input:focus { box-shadow: none; border-color: var(--primary-container); }
+.fe-app :is(.tb-overflow, .search-autocomplete) { background: var(--surface-container-high); border-color: var(--outline); border-radius: 8px; box-shadow: none; backdrop-filter: none; }
+.fe-app .tb-overflow { padding: 8px; gap: 4px; max-height: min(70vh, 620px); overflow-y: auto; }
+.fe-app :is(.stats-panel, .metrics-panel, .legend, .network-action-dock) { background: var(--surface-container-low); border-color: var(--outline-variant); border-radius: 8px; box-shadow: none; backdrop-filter: none; }
+.fe-app .sidebar { background: var(--surface-container-low); border-color: var(--outline-variant); box-shadow: none; }
+.fe-app .sidebar-header { border-bottom-color: var(--outline-variant); }
+.fe-app .modal { border-color: var(--outline-variant); border-radius: 12px; }
+
+@media (max-width: 1024px) {
+  .fe-landing .hero { flex-direction: column; text-align: left; gap: 36px; max-width: 760px; padding-top: 44px; }
+  .fe-landing .hero-content { max-width: 100%; }
+  .fe-landing .cta-buttons, .fe-landing .hero-meta { justify-content: flex-start; }
+  .fe-landing .login-card { width: 100%; max-width: 100%; }
+  .fe-landing .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .fe-landing .nav-links { gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+}
+@media (max-width: 768px) {
+  .fe-app .header { padding: 8px 12px; gap: 8px; }
+  .fe-app .header-zone { padding: 0; border: 0; min-height: auto; }
+  .fe-app .fe-brand-archive { font-size: .65rem; min-height: 28px; }
+}
+@media (max-width: 640px) {
+  .fe-landing .container > header { padding: 18px 22px; }
+  .fe-landing .hero { padding: 36px 22px 40px; }
+  .fe-landing .hero-title { font-size: clamp(2rem, 7vw, 2.6rem); }
+  .fe-landing .hero-subtitle { font-size: .9rem; }
+  .fe-landing .badge { font-size: .67rem; }
+  .fe-landing .login-card { padding: 22px; }
+  .fe-landing .features { padding: 28px 22px; }
+  .fe-landing .features-grid { grid-template-columns: 1fr; gap: 20px; }
+  .fe-landing .feature-card + .feature-card { padding-top: 22px; border-top: 1px solid var(--outline-variant); }
+  .fe-landing footer { padding: 22px; line-height: 1.7; }
+  .fe-exploration-steps { gap: 12px; }
+  .fe-exploration-steps strong { font-size: .79rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fe-landing *, .fe-landing *::before, .fe-landing *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
