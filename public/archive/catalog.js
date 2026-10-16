@@ -1,5 +1,18 @@
 window.LECTURES = [
   {
+    "id": "knowledge-tracing-bkt-dkt",
+    "driveFileId": "1kQQds3D9izDofHlgS8UUsgUEj0SUPvoC",
+    "title": "Knowledge Tracing: From BKT to Deep Knowledge Tracing",
+    "shortTitle": "Knowledge Tracing: From BKT to DKT",
+    "category": "methods",
+    "format": "Overview",
+    "duration": "4:00",
+    "summary": "How BKT and DKT estimate learner knowledge, with a comparison of interpretability, predictive results, and evidence limits.",
+    "question": "For a tutoring decision such as moving on or alerting a teacher, which learner model would you trust, and why?",
+    "lab": null,
+    "thumbnail": "thumb-knowledge-tracing.jpg"
+  },
+  {
     "id": "iEc8Dt3ePWo",
     "title": "Micro vs Macro Adaptation in Learning Games - Overview",
     "shortTitle": "Micro vs Macro Adaptation in Learning Games",
