@@ -916,5 +916,65 @@ window.LECTURE_GUIDES = {
     "reviewedAt": "2026-10-16",
     "sources": [],
     "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-the-minimal-guidance-debate": {
+    "id": "cscl-the-minimal-guidance-debate",
+    "purpose": "Use this video to check what a guidance study compared, who its learners were (beginners or experts), and what it measured, and when.",
+    "distinction": "Kirschner, Sweller and Clark grouped discovery, problem-based and inquiry learning together as minimal guidance; Hmelo-Silver and colleagues counted those methods as heavily scaffolded, and Kuhn moved the question from how to teach to what to teach.",
+    "caution": "The two seventh-grade classes are made up, and the meta-analysis's comparison group was a mix, so its result does not show guided discovery beating direct instruction.",
+    "koSummary": "이 영상은 최소 안내 교수가 초보 학습자에게 덜 효과적이라는 Kirschner, Sweller, Clark(2006)의 주장과, 문제 기반·탐구 학습은 비계가 풍부하다는 Hmelo-Silver 등의 반론, 그리고 무엇을 가르칠지를 먼저 물은 Kuhn의 질문을 비교합니다. 안내에 관한 연구를 읽을 때 무엇과 비교했는지, 학습자가 초보자인지 숙련자인지, 무엇을 언제 측정했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-cognitive-vs-situative": {
+    "id": "cscl-cognitive-vs-situative",
+    "purpose": "Use this video to name what a study treats as the thing that learns (a person, a group, or a whole system) and whether its measures assume something acquired or a way of taking part.",
+    "distinction": "The cognitive side starts from one person's mind and the situative side from people and tools interacting; Sfard named these acquisition and participation metaphors and warned against leaning on either alone.",
+    "caution": "Ana and her fruit stall are made up; the joint paper listed points of agreement but left disputed whether the four claims were really situated learning's, and which unit of analysis to start from.",
+    "koSummary": "이 영상은 상황 학습과 연결된 네 가지 주장이 지나치다는 Anderson, Reder, Simon의 비판과, 그것은 상황 학습의 핵심 주장이 아니며 진짜 차이는 개인의 마음에서 출발하는지 사람과 도구의 상호작용에서 출발하는지에 있다는 Greeno의 반론을 따라갑니다. 연구를 읽을 때 학습하는 주체가 개인·집단·체계 중 무엇인지, 측정이 무언가를 획득한다고 보는지 참여한다고 보는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-is-childrens-knowledge-coherent": {
+    "id": "cscl-is-childrens-knowledge-coherent",
+    "purpose": "Use this video to check how strictly a study defined consistency, how many situations it asked about, and whether it used open or forced-choice questions.",
+    "distinction": "In Vosniadou's framework theory, 'theory' means a loose skeleton of ideas, not a scientist's theory; diSessa's knowledge in pieces does not claim that children's ideas are random or chaotic.",
+    "caution": "Theo is made up and both readings fit his answers; the replication's authors said they did not know why their results differed from the original study's.",
+    "koSummary": "이 영상은 아이들의 과학 개념이 상황에 따라 켜지는 작은 직관들의 모음이라는 diSessa의 관점과, 대체로 일관된 틀 이론을 이룬다는 Vosniadou의 관점을 비교합니다. 일관성을 얼마나 엄격하게 정의했는지, 몇 가지 상황을 물었는지, 개방형 질문인지 선택형 질문인지에 따라 결론이 달라질 수 있음을 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-is-transfer-real": {
+    "id": "cscl-is-transfer-real",
+    "purpose": "Use this video to check, when a paper reports no transfer, which definition it used, whether anyone could learn during the test, and who decided what counted as similar.",
+    "distinction": "Detterman counts only a repeated behavior in a new situation; Bransford and Schwartz also count being ready to learn the new thing faster, and Lobato counts the learner's own links, even wrong ones.",
+    "caution": "Sam is made up, the 2004 experiment used small groups, and the brain-training reviews concern training programs, not school learning.",
+    "koSummary": "이 영상은 전이가 드물다는 Detterman(1993)의 주장, 고립된 일회성 시험이 더 빠른 학습으로 나타나는 전이를 놓친다는 Bransford와 Schwartz의 반론, 그리고 학습자 자신의 유사성 판단을 중시하는 Lobato의 관점을 비교합니다. '전이가 없다'는 결과를 볼 때 어떤 정의를 썼는지, 시험 중에 배울 기회가 있었는지, 무엇이 유사한지를 누가 정했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-design-based-research-answer-to-what": {
+    "id": "cscl-design-based-research-answer-to-what",
+    "purpose": "Use this video to ask what a design study's question was before the design, what changed between cycles and which other explanations were checked, and what would have counted as failure.",
+    "distinction": "Proponents read a gain as tool, teacher and setting working together; critics ask for a warrant and an argumentative grammar linking methods to claims, and both sides wanted standards.",
+    "caution": "Ms. Ortiz's class and its scores are made up, and Dede's commentary is described only through others' reports, as the video notes.",
+    "koSummary": "이 영상은 실제 교실에서 설계를 반복 개선하며 이론을 검증한다는 설계 기반 연구(DBR)의 주장과, 그 주장에 근거가 있는지, 방법과 자료를 잇는 논증 문법이 있는지, 언제 설계를 멈추거나 버려야 하는지를 물은 비판을 비교합니다. DBR 논문을 읽을 때 설계 이전의 연구 질문, 주기 사이에 바뀐 것과 다른 설명의 검토 여부, 무엇이 실패로 간주되었을지를 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-will-media-influence-learning": {
+    "id": "cscl-will-media-influence-learning",
+    "purpose": "Use this video to ask what else changed when a study credits a technology with better learning: the method, the amount of practice, the novelty, or the time on task.",
+    "distinction": "Clark treats a medium as a vehicle that could be swapped for another with similar results; Kozma treats its capabilities, such as showing motion or letting you drag a model, as part of what makes a method possible.",
+    "caution": "The tablet study is made up, and the later meta-analyses compare conditions that usually change the method too, so they do not settle the dispute.",
+    "koSummary": "이 영상은 매체가 교수를 실어 나르는 수단일 뿐 학습을 일으키지 않는다는 Clark의 주장과, 좋은 설계에서는 매체의 기능이 교수 방법을 가능하게 한다는 Kozma의 반론을 비교합니다. 기술이 학습을 개선했다는 주장을 볼 때 교수 방법, 연습량, 새로움, 학습 시간 등 기술 외에 무엇이 함께 바뀌었는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
   }
 };
