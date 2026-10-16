@@ -295,7 +295,7 @@ window.LECTURES = [
     "category": "experience",
     "format": "Lecture",
     "duration": "2:25",
-    "summary": "Only the title and duration were observed for this lecture; no description was available in YouTube Studio. The title refers to multimedia learning principles under CTML.",
+    "summary": "How the cognitive theory of multimedia learning connects words, pictures, limited working memory, and design principles for different kinds of processing.",
     "question": "Which multimedia learning principle would you want to apply or check in a lesson you design?",
     "lab": null,
     "thumbnail": "thumb-Poo-UGoTyhw.jpg"
