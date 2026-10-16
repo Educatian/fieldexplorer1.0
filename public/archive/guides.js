@@ -1006,5 +1006,85 @@ window.LECTURE_GUIDES = {
     "reviewedAt": "2026-10-16",
     "sources": [],
     "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-is-it-the-explaining-or-the-extra-time": {
+    "id": "cscl-is-it-the-explaining-or-the-extra-time",
+    "purpose": "Use this video to check, when a study credits self-explanation, whether study time was equal or at least reported, what the other group got (nothing, rereading, or a good explanation), and whether the groups were assigned or sorted after the scores came in.",
+    "distinction": "Side A credits the act of explaining itself; Side B doubts both the time, since prompted learners often studied longer, and the content, asking whether a teacher's explanation could do the same (the coverage hypothesis). The review found that explaining beat being told, while much of the benefit could also come from a good explanation.",
+    "caution": "Pat, Jun and the recipe card are made up; the 1989 groups were sorted after the fact, so they show a link, not a cause; only five results held time equal and six compared a given explanation, and the 36-student study took time into account statistically, not by design.",
+    "koSummary": "이 영상은 학습자가 풀이 예제를 스스로 설명할 때 더 잘 배우는 것이 설명하는 행위 덕분인지, 아니면 더 오래 공부한 덕분인지를 묻습니다. 69개 결과를 종합한 리뷰에서 설명하기는 평균 약 0.5 표준편차만큼 도움이 되었지만, 두 집단의 학습 시간을 같게 맞춘 결과는 다섯 개뿐이었고, 교사가 제공한 좋은 설명과 비교하면 효과가 0.35로 줄었습니다. 관련 연구를 읽을 때 학습 시간이 같았는지 또는 보고되었는지, 비교 집단이 무엇을 받았는지, 집단을 미리 배정했는지 아니면 점수를 본 뒤 나눴는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-do-experts-just-remember-more": {
+    "id": "cscl-do-experts-just-remember-more",
+    "purpose": "Use this video to check, when a paper explains expertise, how many people were tested, who counted as an expert, and whether a claim says the edge vanishes or just shrinks.",
+    "distinction": "The classic study found no memory edge on random boards and credited chunks; the later review found a real but small edge, explained by masters knowing so many patterns, and added templates. Whether the edge is zero or small is something data can settle, while what counts as deep is partly a matter of definition.",
+    "caution": "The classic chess study had only three players and was the one exception in the later review, the physics sorting study was also small, and calling 'deep' partly definitional is the video's own reading.",
+    "koSummary": "이 영상은 체스 고수가 실제 경기 배치는 훨씬 잘 기억하지만 무작위 배치에서는 기억과 실력 사이에 관련이 없었다는 고전 연구(Chase와 Simon, 1973)와, 이후 13개 실험을 검토해 무작위 배치에서도 작지만 실제 우위가 남는다고 밝힌 리뷰(Gobet와 Simon, 1996)를 비교합니다. 두 입장 모두 전문가의 우위는 대부분 단순한 기억력이 아니라 의미 있는 패턴에서 온다는 데 동의하며, 수정된 것은 그 작동 방식에 대한 설명입니다. 관련 연구를 읽을 때 몇 명을 검사했는지, 누구를 전문가로 보았는지, 우위가 사라진다는 주장인지 줄어든다는 주장인지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-how-much-effort-should-common-ground-take": {
+    "id": "cscl-how-much-effort-should-common-ground-take",
+    "purpose": "Use this video to check, when a paper studies grounding, whether it measured understanding or learning, what medium people talked through, and whether common ground was actually observed or is just a name for things going well.",
+    "distinction": "Clark's least-effort view describes what people do when they talk; the collaborative-learning view, that some extra effort may help, sets a goal for designers of learning, so in the video's reading the two answer different questions rather than contradict each other.",
+    "caution": "Lena, Tomi and the bookshelf are made up; the classic evidence comes from lab tasks with strangers that measured understanding, not learning, and whether extra grounding effort helps people learn is still untested.",
+    "koSummary": "이 영상은 대화 상대와 공통 기반(common ground)을 쌓는 데 얼마나 많은 노력이 들어야 하는지를 묻습니다. Clark 등은 사람들이 지금 목적에 충분할 만큼 서로 이해했다고 믿을 때까지 확인하면서 함께 드는 노력을 줄이려 한다고 설명하고, 협력 학습 연구자들은 추가적인 노력이 더 나은 결과로 이어질 수 있으므로 설계자가 약간의 오해 여지를 남겨 두어야 한다고 봅니다. 연구를 읽을 때 이해를 측정했는지 학습을 측정했는지, 어떤 매체로 대화했는지, 공통 기반을 실제로 관찰했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-cooperation-or-collaboration": {
+    "id": "cscl-cooperation-or-collaboration",
+    "purpose": "Use this video to check, when a paper studies group work, which meaning it uses (split work or shared work), whether it looked at what the group said or only at how it was set up, and what it means by cooperative.",
+    "distinction": "For Roschelle and Teasley the line is whether people own separate pieces or build one shared picture; for Dillenbourg some split is always there, so the question is whether it stays fixed or is woven together and shifting, and what counts is how much partners change each other's thinking, not how often they talk.",
+    "caution": "The volcano slideshow and its students are made up; the classic evidence is one hand-picked pair, reading the slide-eight moment as collaboration is the video's own judgment, and a message count is not proof of collaboration.",
+    "koSummary": "이 영상은 협동(cooperation)과 협력(collaboration)의 구분이 중요한지를 묻습니다. Roschelle과 Teasley는 각자 문제의 한 부분을 맡는 것을 협동으로, 하나의 공유된 문제 이해를 함께 쌓고 유지하는 것을 협력으로 구분했고, Dillenbourg는 자세히 보면 언제나 어느 정도의 분업이 있으므로 그 분업이 처음부터 고정되어 있는지, 서로 얽히며 바뀌는지를 보아야 한다고 주장했습니다. 모둠 활동 연구를 읽을 때 이 용어를 어떤 의미로 썼는지, 모둠이 실제로 나눈 대화를 보았는지 아니면 구성 방식만 보았는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-evidence-for-knowledge-building": {
+    "id": "cscl-evidence-for-knowledge-building",
+    "purpose": "Use this video to check, when a paper reports a knowledge-building result, what it was compared with, whether success meant a standard test or how far ideas improved, and who ran it, in which schools.",
+    "distinction": "The founders judge success by how far a community's ideas improve; a standard test judges distance from the right answer. In the early study the two did not line up, so the evidence depends partly on which yardstick you choose.",
+    "caution": "The tomato class is made up; the comparison class came from another school, the three-year study is described from its summary and new students each year can't be pulled apart from the design, every study read includes a founder (a caution, not an accusation), and a good case shows that it can work, not how often.",
+    "koSummary": "이 영상은 학급이 연구 공동체처럼 함께 아이디어를 개선해 나가는 지식 구성(knowledge building) 접근의 근거를 살펴봅니다. 초기 연구에서 소프트웨어를 쓴 학급은 언어 시험에서 더 많이 향상되었지만 비교 학급은 다른 학교의 학급이었고 저자들도 엄격한 통제가 불가능했다고 밝혔으며, 표준화 시험과 이 접근의 목표가 서로 맞지 않는 결과도 있었습니다. 연구를 읽을 때 무엇과 비교했는지, 성공을 표준 시험으로 보았는지 아이디어가 개선된 정도로 보았는지, 누가 어느 학교에서 수행했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-group-awareness-mirror-or-nudge": {
+    "id": "cscl-group-awareness-mirror-or-nudge",
+    "purpose": "Use this video to check, when a paper tests a group awareness tool, whether the outcome was how the group talked or what it learned, whether students had to use the tool and did, and whether it was compared with no tool or with another version of it.",
+    "distinction": "Read as a mirror, the tool only shows information and leaves the group to decide; read as a nudge, the display is shaped to steer learners. Both readings come from the same lead author, and both depend on students choosing to use what they see.",
+    "caution": "Jun, Mia and the lab-report chat are made up; the classroom test had only three classes and a borderline result, the meta-analysis is described from its summary, and the note about running totals rests on one review.",
+    "koSummary": "이 영상은 누가 얼마나 말하는지, 또는 누가 무엇을 아는지 보여 주는 집단 인식 도구(group awareness tool)가 그저 비추는 거울인지, 학습자를 이끄는 넛지인지를 묻습니다. 한 교실 실험에서 참여도 표시는 긴 메시지를 조금 늘렸지만 참여의 균형이나 모둠 성적은 나아지지 않았고, 최근 메타분석은 학습에 중간 정도의 평균 효과를 보고하면서도 이전 결과들이 일관되지 않다고 밝힙니다. 연구를 읽을 때 결과가 대화 방식인지 학습인지, 도구 사용이 필수였는지와 실제로 사용했는지, 무엇과 비교했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-can-you-see-a-group-regulate-itself": {
+    "id": "cscl-can-you-see-a-group-regulate-itself",
+    "purpose": "Use this video to check, when a paper reports shared regulation, whether it measured what the group did or only what members said, whether there was a comparison group or only strong and weak groups side by side, and which definition it used, with feelings or only thinking.",
+    "distinction": "Co-regulation is a teammate or tool nudging someone; socially shared regulation is the whole group jointly steering its work. The levels are built into each other, and the open question is whether studies can yet tell shared regulation apart from co-regulation or from building knowledge together.",
+    "caution": "The podcast group is made up; the evidence counts come from a 2015 review whose studies were descriptive and partly self-reported, comparing strong and weak groups shows a link, not a cause, and newer experiments were outside its scope.",
+    "koSummary": "이 영상은 모둠이 스스로 학습을 조절하는 모습, 즉 사회적으로 공유된 조절(SSRL)을 실제로 관찰할 수 있는지를 묻습니다. 2015년 리뷰는 이를 공동 조절과 구분할 만한 자료가 충분하다고 주장했지만, 당시 자료가 있던 연구 13편은 모두 통제 집단 없는 기술 연구였고 일부는 학생의 자기 보고에 의존했으며, 훨씬 최근의 리뷰도 검증되지 않은 측정 도구를 지적합니다. 연구를 읽을 때 모둠이 실제로 한 일을 측정했는지, 비교 집단이 있었는지, 어떤 정의를 썼는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-smart-dashboards-or-modest-tools": {
+    "id": "cscl-smart-dashboards-or-modest-tools",
+    "purpose": "Use this video to check, when a paper reports an orchestration tool, whether there was a comparison group or only a before and after, whether it measured learning or only time and use, and what the tool decides and what stays with the teacher.",
+    "distinction": "Modest tools show little and leave decisions with the teacher; smarter tools analyze the data students leave behind and may show or decide more. The dispute is over how much a tool should show versus decide, not over whether the teacher's say matters.",
+    "caution": "The 28-student class is made up; the lamp result comes from one design study with no concurrent comparison and no learning outcome, the glasses experiment is described from its abstract and a summary, and the 2013 replies are known only through the synthesis.",
+    "koSummary": "이 영상은 교사가 교실의 여러 활동을 실시간으로 조율하는 오케스트레이션(orchestration)을 기술이 어떻게 지원해야 하는지, 즉 단순하고 절제된 도구가 나은지 학습 데이터를 분석하는 똑똑한 도구가 나은지를 다룹니다. 팀 책상의 작은 램프가 조교를 기다리며 지켜보는 시간을 크게 줄였다는 연구에는 동시 비교 집단과 학습 결과가 없었고, 실시간 데이터 안경이 학습을 높였다는 이후 실험은 초록과 요약으로만 확인했습니다. 연구를 읽을 때 비교 집단이 있었는지, 학습을 측정했는지 시간과 사용만 측정했는지, 도구가 무엇을 결정하고 무엇을 교사에게 남기는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
   }
 };
