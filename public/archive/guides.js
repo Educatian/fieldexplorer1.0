@@ -616,5 +616,265 @@ window.LECTURE_GUIDES = {
       }
     ],
     "reviewedAt": "2026-10-16"
+  },
+  "es-10-question-frameworks": {
+    "id": "es-10-question-frameworks",
+    "purpose": "Use this lecture to choose a question framework by the kind of question and to decide which elements are searched and which are only screened.",
+    "distinction": "PICO suits Maya's effects question and SPIDER suits Omar's experience question, and every element kept becomes an eligibility clause while only the elements authors reliably name become search blocks.",
+    "caution": "The Methley and colleagues comparison covers one health topic with differing numbers of search blocks, so it does not show which framework searches best for education questions.",
+    "koSummary": "이 강의는 질문의 종류에 따라 PICO, SPIDER 등 질문 프레임워크를 고르는 방법을 Maya와 Omar의 가상 사례로 설명합니다. 유지한 요소는 모두 선정 기준이 되지만, 저자들이 일관되게 쓰는 요소만 검색 블록으로 삼으라고 강조합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-01-review-families": {
+    "id": "es-01-review-families",
+    "purpose": "Use this lecture to name a review's family from its purpose sentence and Grant and Booth's four processes instead of from its title.",
+    "distinction": "Systematic, scoping, narrative, integrative, and qualitative meta-synthesis reviews differ in search, appraisal, synthesis, and analysis, and a narrative review is not automatically second rate.",
+    "caution": "The made-up review that fits only one of four rows is a teaching example, and the lecture notes that families overlap, so the row check is a judgment aid and not a fixed classification test.",
+    "koSummary": "이 강의는 리뷰의 제목이 아니라 목적 문장과 Grant와 Booth의 네 가지 과정(검색, 평가, 종합, 분석)으로 리뷰 유형을 판별합니다. 가상의 사례에서 Maya는 체계적 리뷰라는 이름이 붙은 글을 서술적 리뷰로 판단하며, 문제는 사용하지 않은 방법을 주장하는 것이라고 말합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-08-six-ways-to-synthesize": {
+    "id": "es-08-six-ways-to-synthesize",
+    "purpose": "Use this lecture to see how six kinds of synthesis treat the same pile of studies and to judge which one fits.",
+    "distinction": "Narrative, scoping, systematic, and integrative reviews are applied directly, while meta-analysis and network meta-analysis appear only as concepts, with a seesaw for weighted pooling and a common comparator for indirect comparison.",
+    "caution": "The twelve studies are made up, and the lecture itself says pooling needs comparable studies, indirect routes are usually weaker than a direct trial and rest on transitivity, and the statistics need training beyond this series.",
+    "koSummary": "이 강의는 가상의 연구 12편을 서술적, 범위, 체계적, 통합적 리뷰와 메타분석, 네트워크 메타분석이라는 여섯 방식으로 종합해 봅니다. 통계적 방법은 개념 수준으로만 다루며, 비교 가능한 연구가 필요하고 간접 비교는 보통 직접 시험보다 약하다고 주의를 줍니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-03-criteria-on-trial": {
+    "id": "es-03-criteria-on-trial",
+    "purpose": "Use this lecture to turn a vague eligibility criterion into operational clauses and test it with a partner before screening.",
+    "distinction": "A pilot of fourteen made-up records moves Cohen's kappa from 0.29 to 0.85 after a rewrite, and the clause change is logged as coming from the pilot and not from the findings.",
+    "caution": "Agreement is not correctness, because the sharper rule led both reviewers to wrongly exclude a plausible study, and the kappa values are illustrative numbers from made-up records.",
+    "koSummary": "이 강의는 모호한 선정 기준을 실행 가능한 조항으로 바꾸고 파트너와 시범 적용해 봅니다. 가상의 기록 14건에서 코헨의 카파가 0.29에서 0.85로 오르지만, 일치가 곧 정확성은 아니라는 점도 함께 보여 줍니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-04-search-strings": {
+    "id": "es-04-search-strings",
+    "purpose": "Use this lecture to treat searching as a method by building concept blocks and weighing known-study recall against the records you must screen.",
+    "distinction": "Maya compares four versions of a string, joins terms with OR within a block and AND across blocks, finds the block that let a known study slip, and logs the search with PRISMA-S.",
+    "caution": "Finding ten of ten known studies is a check and not proof, since other relevant studies may still be missing, and Maya's counts are illustrative.",
+    "koSummary": "이 강의는 Maya가 검색식을 네 번 고쳐 가며 알려진 연구 회수율과 선별할 기록 수를 저울질하는 과정을 보여 줍니다. 개념 블록 구성, 절단 검색, 플랫폼 간 구문 변환, 통제어휘, PRISMA-S 기록을 다루지만, 알려진 연구를 모두 찾았다고 해서 누락이 없다는 증거는 아니라고 경고합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-05-screening-calibration": {
+    "id": "es-05-screening-calibration",
+    "purpose": "Use this lecture to calibrate two-stage screening on a pilot before counting, then report the table, kappa, and agreement on keeps.",
+    "distinction": "Maya and Omar's forty-record pilot yields 75 percent agreement, 56 percent chance agreement, and kappa 0.43, and disagreements are sorted into ambiguity, slips, and judgement, each with its own fix.",
+    "caution": "The lecture only loosely recalls earlier work on sharpening the criterion, and its pilot figures and the rare-keeps set (92.5 percent agreement, kappa 0.36) are made-up numbers, with labels like substantial varying by source.",
+    "koSummary": "이 강의는 실제 선별 전에 Maya와 Omar가 가상의 기록 40건으로 2단계 선별을 시범 적용하고 일치율, 우연 일치, 카파를 계산하는 과정을 다룹니다. 불일치를 기준의 모호함, 실수, 판단 차이로 나누어 각각 다르게 해결하고, 표와 카파와 보유 기록 일치도를 함께 보고하라고 권합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-06-table-to-claim": {
+    "id": "es-06-table-to-claim",
+    "purpose": "Use this lecture to build a claim, its evidence, and a boundary from an extraction table by asking which way results point, for whom, and how sure.",
+    "distinction": "Counting studies by direction of effect replaces vote counting by significance, and regrouping nine made-up studies by setting and design produces a claim with a stated boundary.",
+    "caution": "Direction counting ignores effect size, uncertainty is large with few studies, and this made-up table cannot separate setting from design.",
+    "koSummary": "이 강의는 가상의 연구 9편의 추출표에서 결과가 어느 방향인지, 누구에게 해당하는지, 얼마나 확실한지를 물어 주장과 근거, 한계 범위를 만듭니다. 유의성 투표 대신 방향으로 세는 방법을 쓰되 효과 크기를 무시하고 설정과 설계를 구분하지 못한다는 한계를 분명히 합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-09-synthesis-writing": {
+    "id": "es-09-synthesis-writing",
+    "purpose": "Use this lecture to turn an author-by-author summary into a concept-centric synthesis and keep your own insight in the Discussion.",
+    "distinction": "A Webster and Watson concept matrix of five made-up studies shows agreement, a tension, and a pattern linking class discussion to deeper revision, which Maya labels as her own insight.",
+    "caution": "No study compared discussion with no discussion, so the pattern is a hypothesis for the Discussion and not a Results finding, and the lecture briefly refers back to Maya's earlier claim without requiring that video.",
+    "koSummary": "이 강의는 저자별 요약을 개념 중심 종합으로 바꾸는 방법을 Webster와 Watson의 개념 행렬로 보여 줍니다. 가상의 연구 5편에서 얻은 수업 토론과 깊은 수정의 연관성은 검증되지 않은 가설이므로 결과가 아니라 논의에 두어야 한다고 설명합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-07-prisma-flow-and-tool-audit": {
+    "id": "es-07-prisma-flow-and-tool-audit",
+    "purpose": "Use this lecture to rebuild a PRISMA 2020 flow diagram from logs and to audit an AI screening assistant before trusting it.",
+    "distinction": "The flow separates records, reports, and studies and reconciles an out-of-date draft, and the audit of a made-up assistant on five tests finds one eligible record missed.",
+    "caution": "PRISMA says what to report and not how good a review is, and the tool audit is a single made-up assistant, so it illustrates a safe default (sort but never exclude) and not any real tool's accuracy.",
+    "koSummary": "이 강의는 Maya의 기록으로 PRISMA 2020 흐름도를 상자별로 다시 만들며 기록, 보고서, 연구를 구분하고 오래된 초안을 정리합니다. 가상의 AI 선별 도구를 다섯 가지 테스트로 점검하여 적격 기록 하나를 놓친 것을 확인하고, 도구는 정렬만 하고 제외는 하지 않는 것을 기본값으로 권합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-02-review-autopsy": {
+    "id": "es-02-review-autopsy",
+    "purpose": "Use this capstone to audit a review in five moves, with every judgment backed by a quotable sentence or a recomputable number.",
+    "distinction": "The made-up scoping review on AI chatbot feedback is checked for family fit against Munn and colleagues' guidance and for protocol, search, screening, and flow against PRISMA 2020, and its flow diagram leaves four studies unaccounted for.",
+    "caution": "PRISMA checks what was reported and not how well the work was done, and silence means not reported and not that it was not done, so the audit of one made-up review does not rate real reviews.",
+    "koSummary": "이 강의는 가상의 범위 리뷰를 다섯 단계로 감사하는 종합 사례로, 모든 판단에 인용할 문장이나 다시 계산할 수 있는 숫자를 요구합니다. 흐름도에서 연구 4편이 설명되지 않음을 찾아내지만, PRISMA는 보고 여부를 볼 뿐 수행의 질을 보증하지 않으며 침묵은 하지 않았다는 뜻이 아니라고 강조합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-title-is-not-the-family": {
+    "id": "es-short-title-is-not-the-family",
+    "purpose": "Use this short to see why a review's title does not settle its family.",
+    "distinction": "Checking a made-up review labelled systematic against Grant and Booth's four processes finds only one of four rows fits and a purpose that argues a case, so it is a narrative review wearing a systematic label.",
+    "caution": "Narrative reviews have their own job, so the problem shown is claiming a method the review did not use and not the narrative form, and the example is made up.",
+    "koSummary": "이 짧은 영상은 체계적이라는 이름이 붙은 가상의 리뷰를 Grant와 Booth의 네 과정으로 점검해 제목이 유형을 정하지 않음을 보여 줍니다. 네 행 중 하나만 맞아 서술적 리뷰로 판단하며, 문제는 서술적 리뷰 자체가 아니라 쓰지 않은 방법을 내세우는 것이라고 말합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-choosing-a-review": {
+    "id": "es-short-choosing-a-review",
+    "purpose": "Use this short to move from a question to a review family and to see why no family is automatically best.",
+    "distinction": "Grant and Booth's idea of fitness for purpose guides Maya among systematic, scoping, narrative, qualitative meta-synthesis, and integrative reviews, with meta-analysis and network meta-analysis usually building on a systematic review.",
+    "caution": "Scoping still requires rigorous, transparent methods, and the statistical methods are beyond this series, so the short is a map and not a decision rule.",
+    "koSummary": "이 짧은 영상은 Maya의 질문에서 출발해 적합한 리뷰 유형을 고르는 길을 안내하며 Grant와 Booth의 목적 적합성을 근거로 어느 유형도 자동으로 최선은 아니라고 말합니다. 범위 리뷰도 엄격하고 투명한 방법이 필요하고, 통계적 방법은 이 시리즈의 범위를 벗어난다고 덧붙입니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-high-agreement-low-kappa": {
+    "id": "es-short-high-agreement-low-kappa",
+    "purpose": "Use this short to understand why two reviewers can agree often yet show a low kappa.",
+    "distinction": "Two made-up reviewers agree on 37 of 40 records (92.5 percent) yet kappa is 0.36 when keeps are rare, while a set with common keeps and the same agreement gives 0.81.",
+    "caution": "Kappa is not broken but points at the rare keeps, and these figures come from made-up records, so they show a mechanism and not typical values for real screening.",
+    "koSummary": "이 짧은 영상은 가상의 검토자 둘이 40건 중 37건(92.5%)에서 일치해도 보유 기록이 드물면 카파가 0.36에 그치는 이유를 설명합니다. 카파가 고장 난 것이 아니라 드문 보유 기록을 가리키는 것이므로 카파와 표, 보유 및 제외 일치도를 함께 보고하라고 합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-vote-counting": {
+    "id": "es-short-vote-counting",
+    "purpose": "Use this short to see why counting significant results misleads and what counting by direction offers instead.",
+    "distinction": "In nine made-up studies only two are significant but the five smallest all point up, and counting by direction gives seven up and two down, a method SWiM names and Cochrane accepts when effect sizes cannot be combined.",
+    "caution": "Direction counting ignores effect size and study size, so it shows which way the evidence leans and is not proof, and the nine studies are made up.",
+    "koSummary": "이 짧은 영상은 가상의 연구 9편에서 유의한 결과는 둘뿐이지만 작은 연구 다섯 편이 모두 긍정 방향임을 보여 유의성 세기의 오류를 설명합니다. 방향으로 세면 긍정 7편, 부정 2편이 되지만, 이는 효과 크기를 무시하므로 증거가 기우는 방향일 뿐 증명은 아니라고 주의합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-prisma-is-not-quality": {
+    "id": "es-short-prisma-is-not-quality",
+    "purpose": "Use this short to separate whether a review was reported from whether it was done well.",
+    "distinction": "PRISMA 2020's own statement says it should not be used to assess methodological quality, and a made-up flow diagram with four full texts lacking a path shows what reporting lets a reader check.",
+    "caution": "Silence about a protocol does not prove there was none, only that a reader cannot check, so a reporting check alone cannot rate a real review's quality.",
+    "koSummary": "이 짧은 영상은 리뷰가 보고되었는지와 잘 수행되었는지를 구분하며, PRISMA 2020 자체가 방법론적 질 평가에 쓰지 말라고 밝힌다는 점을 인용합니다. 가상의 흐름도에서 경로 없는 전문 4편을 찾아내고, 프로토콜 언급이 없다고 해서 없었다는 뜻은 아니며 독자가 확인할 수 없을 뿐이라고 말합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-known-study-recall": {
+    "id": "es-short-known-study-recall",
+    "purpose": "Use this short to test a search string against studies you already know belong.",
+    "distinction": "Maya's broad and tight strings both find ten of ten known studies although one returns almost five times as many records, and the Cochrane Handbook treats this as one simple test.",
+    "caution": "A known study only warns you about the words it uses, so ten of ten is not proof of completeness and needs supplementary methods and peer review of the string.",
+    "koSummary": "이 짧은 영상은 이미 알고 있는 연구를 기준으로 검색식을 시험하는 알려진 연구 회수율을 설명합니다. Maya의 넓은 검색식과 좁은 검색식은 모두 10편 중 10편을 찾지만 기록 수는 거의 다섯 배 차이가 나며, 이는 하나의 단순한 점검일 뿐 보완 방법과 검색식 동료 검토가 필요하다고 합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-ai-tools-dont-exclude": {
+    "id": "es-short-ai-tools-dont-exclude",
+    "purpose": "Use this short to see why an AI screening assistant should sort records but not exclude them.",
+    "distinction": "A made-up assistant flags five of Maya's six hand-screened includes plus four others, so one included study would have vanished had it excluded, which fits the joint Cochrane and Campbell statement on human oversight and full reporting.",
+    "caution": "This is one made-up assistant on forty records, so it shows how a loss can hide in an exclusion count and not how any real tool performs.",
+    "koSummary": "이 짧은 영상은 가상의 AI 선별 도구가 Maya가 직접 선별한 40건에서 포함 6건 중 5건과 다른 4건을 표시해, 도구가 제외했다면 포함 연구 하나가 사라졌을 것임을 보여 줍니다. 자동 제외 건수로는 어떤 연구를 잃었는지 알 수 없으므로 도구는 정렬만 하고 제외는 사람이 맡는 것을 기본값으로 권합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-disclosing-ai-use": {
+    "id": "es-short-disclosing-ai-use",
+    "purpose": "Use this short to build a brief, checkable AI-use disclosure for a review.",
+    "distinction": "The disclosure grows from the ICMJE items (which tool, for what purpose, humans responsible, AI not an author) to the joint statement's additions of version, dates, validation, and how output was verified, shown with made-up statements from Maya's drafts.",
+    "caution": "Rules differ by venue, so the example statements are not a policy and the journal, funder, or institution policy still has to be checked.",
+    "koSummary": "이 짧은 영상은 ICMJE 권고(어떤 도구, 어떤 목적, 책임지는 사람, AI는 저자가 아님)에서 시작해 증거 종합 단체들의 공동 성명이 더하는 버전, 날짜, 검증, 출력 확인 방법까지 AI 사용 공개문을 키워 갑니다. 규정은 곳마다 다르므로 저널, 연구비 지원기관, 소속 기관의 정책을 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-pico": {
+    "id": "es-short-framework-pico",
+    "purpose": "Use this short to learn what each PICO letter becomes in a review question and which letters get searched.",
+    "distinction": "PICO (population, intervention, optional comparison, outcome) comes from Richardson and colleagues' 1995 well-built clinical question, and for Maya's chatbot feedback question every element becomes an eligibility clause while usually only population and intervention become search blocks.",
+    "caution": "Cochrane finds PICO generally unsuitable for qualitative questions and calls searching every letter usually unnecessary, so PICO should not be applied by default to every question.",
+    "koSummary": "이 짧은 영상은 Richardson 등이 1995년에 제안한 PICO의 각 글자가 Maya의 챗봇 피드백 질문에서 무엇이 되는지 설명합니다. 모든 요소는 선정 기준이 되지만 보통 대상과 중재만 검색 블록이 되며, Cochrane은 질적 질문에 PICO가 대체로 맞지 않는다고 봅니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-picos-picot-picoc": {
+    "id": "es-short-framework-picos-picot-picoc",
+    "purpose": "Use this short to decide when an extra letter (study design, time, or context) earns its own search block.",
+    "distinction": "In one health review, a qualitative design block cut hits from 23,758 to 448 but lost five of eighteen relevant articles.",
+    "caution": "That design block was untested in education and T is not a publication date limit, so the one health example does not show that extra letters help or hurt elsewhere.",
+    "koSummary": "이 짧은 영상은 PICO에 연구 설계, 시간, 맥락을 더한 PICOS, PICOT, PICOC를 다루며 추가 글자가 검색 블록이 될 가치가 있는 경우를 묻습니다. 한 보건 리뷰에서 질적 설계 블록이 검색 결과를 23,758건에서 448건으로 줄였지만 관련 논문 18편 중 5편을 놓쳤고, 교육 분야에서는 검증되지 않았으며 T는 출판 연도 제한이 아니라고 주의합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-peco-peo": {
+    "id": "es-short-framework-peco-peo",
+    "purpose": "Use this short to tell an exposure (something people do unassigned) from a PICO intervention.",
+    "distinction": "Maya's question on self-initiated chatbot use and writing self-efficacy shows PECO and JBI's PEO, with attention to setting the comparator and stating outcomes non-directionally.",
+    "caution": "Both frameworks give association and not proof that something works, so an exposure question cannot support effectiveness claims.",
+    "koSummary": "이 짧은 영상은 Maya의 자발적 챗봇 사용과 글쓰기 자기효능감 질문으로, 누군가 배정한 중재와 학생이 스스로 하는 노출을 구분합니다. PECO와 JBI의 PEO, 비교 대상 설정, 결과를 방향 없이 서술하는 법을 다루며, 두 틀은 연관성만 보여 줄 뿐 효과를 증명하지 않는다고 말합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-spider": {
+    "id": "es-short-framework-spider",
+    "purpose": "Use this short to apply SPIDER to an experience question, as in Omar's question about how students experience chatbot feedback.",
+    "distinction": "SPIDER (sample, phenomenon of interest, design, evaluation, research type) from Cooke, Smith, and Booth searches only sample and phenomenon by default, and in Methley and colleagues' comparison it had higher precision but missed five of eighteen relevant studies.",
+    "caution": "That comparison covers one health topic, is untested in education, and SPIDER's own authors say it needs more testing, so its precision gain should not be assumed to carry over.",
+    "koSummary": "이 짧은 영상은 Cooke, Smith, Booth의 SPIDER(표본, 관심 현상, 설계, 평가, 연구 유형)를 학생이 챗봇 피드백을 어떻게 경험하는지를 묻는 Omar의 질문에 적용합니다. 기본적으로 표본과 현상만 검색하며, Methley 등의 비교에서 정밀도는 높았지만 관련 연구 18편 중 5편을 놓쳤고 한 보건 주제여서 교육에는 검증되지 않았다고 주의합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-pcc-pico": {
+    "id": "es-short-framework-pcc-pico",
+    "purpose": "Use this short to choose between PCC for a scoping map and PICo for a qualitative question, and to decide whether context is searched.",
+    "distinction": "JBI's PCC (population, concept, context) frames Maya's scoping map and PICo (population, phenomenon of interest, context) frames Omar's question, with people and concept searched and context usually screened because abstracts may not name settings consistently.",
+    "caution": "The short states that no study was found testing either framework for searching, so the search-or-screen advice rests on reasoning and not on tested performance.",
+    "koSummary": "이 짧은 영상은 Maya의 범위 지도에는 JBI의 PCC를, Omar의 질적 질문에는 PICo를 적용합니다. 유지한 요소는 선정 기준이 되고 대상과 개념은 검색하되, 초록이 배경을 일관되게 쓰지 않을 수 있어 맥락은 대개 선별 단계에서 다루며, 두 틀의 검색 성능을 시험한 연구는 찾지 못했다고 밝힙니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-spice-eclipse": {
+    "id": "es-short-framework-spice-eclipse",
+    "purpose": "Use this short to match SPICE to service questions and ECLIPSE to policy requests and to decide which elements to search.",
+    "distinction": "Booth's SPICE (setting, perspective, intervention, comparison, evaluation) is applied to a writing center chatbot and Wildridge and Bell's ECLIPSE to policy requests, with setting and intervention searched and the rest screened.",
+    "caution": "Searching setting and intervention is the video's advice and not Booth's rule, and no study was found testing either framework.",
+    "koSummary": "이 짧은 영상은 서비스 질문에는 Booth의 SPICE를 글쓰기센터 챗봇 사례로, 정책 요청에는 Wildridge와 Bell의 ECLIPSE를 소개합니다. 환경과 중재를 검색하고 나머지는 선별하라는 것은 Booth의 규칙이 아니라 영상의 제안이며, 두 틀을 시험한 연구는 찾지 못했다고 밝힙니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-cimo": {
+    "id": "es-short-framework-cimo",
+    "purpose": "Use this short to apply CIMO to how and in-what-circumstances questions, and to read for mechanism instead of searching it.",
+    "distinction": "CIMO (context, intervention, mechanism, outcomes) comes from management research, applied to Maya's chatbot feedback proposition, with context and intervention searched, the outcome screened, and the mechanism read for in full texts.",
+    "caution": "The short notes that no study was found testing CIMO, so the choice to leave the mechanism out of the search is advice and not demonstrated performance.",
+    "koSummary": "이 짧은 영상은 경영학 연구에서 나온 CIMO(맥락, 중재, 기제, 결과)를 어떻게와 어떤 상황에서 질문에 적용하며 Maya의 챗봇 피드백 명제와 성찰 과제를 사용합니다. 맥락과 중재는 검색하고 결과는 선별하며 기제는 검색하지 않고 전문에서 찾아 읽으라고 하고, CIMO를 시험한 연구는 찾지 못했다고 밝힙니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "es-short-framework-perspectif-behemoth": {
+    "id": "es-short-framework-perspectif-behemoth",
+    "purpose": "Use this short to choose PerSPEcTiF for qualitative reviews of complex interventions or BeHEMoTh for finding theory.",
+    "distinction": "Booth's PerSPEcTiF suits questions where context, timing, and whose view counts matter and is not meant to be searched on all seven letters, while BeHEMoTh adds exclusion terms and citation searching when looking for theory.",
+    "caution": "Neither framework has been formally evaluated, so they are structured prompts for thinking and not tested search methods.",
+    "koSummary": "이 짧은 영상은 맥락, 시점, 누구의 관점인지가 중요한 복합 중재의 질적 리뷰에는 PerSPEcTiF를, 이론 찾기에는 BeHEMoTh를 소개합니다. PerSPEcTiF의 일곱 글자를 모두 검색하는 것은 권하지 않으며 이론을 찾을 때는 제외어와 인용 검색을 더하되, 두 틀 모두 공식 평가를 받은 적이 없다고 합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
   }
 };
