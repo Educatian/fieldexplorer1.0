@@ -4489,9 +4489,10 @@
     }
   }
   </script>
+  <link rel="stylesheet" href="/fieldexplorer-refresh.css">
 </head>
 
-<body data-theme="dark">
+<body class="fe-app" data-theme="dark">
   <script>
     // Auth check - redirect to login if not authenticated
     const user = localStorage.getItem('fieldexplorer_user');
@@ -4539,6 +4540,7 @@
       </div>
       <div class="logo-text">
         <h1>FieldExplorer</h1>
+        <a class="fe-brand-archive" href="/archive/" data-en="Content archive">콘텐츠 아카이브 <span lang="en">/ Content archive</span></a>
       </div>
     </div>
 
