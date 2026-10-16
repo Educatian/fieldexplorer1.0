@@ -8,7 +8,8 @@ window.LECTURES = [
     "duration": "4:30",
     "summary": "Compares micro adaptation inside a task with macro adaptation between tasks in learning games, including VanLehn's inner and outer loops. Uses an illustrative Launch Lab simulation and Reboot Seoul 2050 to show both loops and offers checks for designing adaptivity.",
     "question": "Where in a game you know does adaptation happen inside a task, and where between tasks, and what evidence would each loop need?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-iEc8Dt3ePWo.jpg"
   },
   {
     "id": "aADMw1NjWKU",
@@ -19,7 +20,8 @@ window.LECTURES = [
     "duration": "3:29",
     "summary": "Explains Malone's theory of intrinsically motivating instruction: challenge, fantasy, curiosity, intrinsic versus extrinsic fantasy, and later control and interpersonal motivations. Notes that later studies are mixed, so intrinsic integration is a design hypothesis, not a guarantee.",
     "question": "Which of Malone's features could you add to a learning activity, and how would you check whether it is intrinsically integrated with the content?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-aADMw1NjWKU.jpg"
   },
   {
     "id": "SfIj7mrAHwI",
@@ -30,7 +32,8 @@ window.LECTURES = [
     "duration": "5:00",
     "summary": "Builds a conjecture map following Sandoval's 2014 framework with a sixth grade fractions lesson (Recipe Remix). Shows how each arrow becomes a testable sentence and how to revise a design when the middle box never happens.",
     "question": "What hidden hypothesis in your own design could you turn into a testable arrow, and what would you revise if it did not occur?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-SfIj7mrAHwI.jpg"
   },
   {
     "id": "GcsN8Ozqvec",
@@ -41,7 +44,8 @@ window.LECTURES = [
     "duration": "3:57",
     "summary": "Compares Malone's ingredients of fun activities with Keller's audience-driven ARCS process for finding and fixing motivation problems. A toy fractions-lesson audit finds the weakest ARCS category, and the video suggests diagnosing with ARCS and fixing with Malone's features.",
     "question": "In a lesson you know, which ARCS category looks weakest, and which Malone feature might address it?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-GcsN8Ozqvec.jpg"
   },
   {
     "id": "GTUT49cgqQE",
@@ -52,7 +56,8 @@ window.LECTURES = [
     "duration": "3:27",
     "summary": "Uses an invented toy fractions example and implementation research ideas to explain variation, core components, and what scaling should mean. States that the link between enacting the core and larger gains is an association, and argues for studying variation rather than averaging it away.",
     "question": "What would you treat as the core components of a design you know, and how would you study variation in how they are enacted?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-GTUT49cgqQE.jpg"
   },
   {
     "id": "Navj1yDN5-Q",
@@ -63,7 +68,8 @@ window.LECTURES = [
     "duration": "3:37",
     "summary": "Discusses a desktop-versus-VR science-lab study by Makransky, Terkildsen, and Mayer, separating presence, learning outcomes, and cognitive load. Considers broader evidence and design choices that help immersive experiences support learning rather than compete for attention.",
     "question": "How would you tell the feeling of presence apart from evidence of learning in an immersive experience you design?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-Navj1yDN5-Q.jpg"
   },
   {
     "id": "LKY8wo6KoDw",
@@ -74,7 +80,8 @@ window.LECTURES = [
     "duration": "3:39",
     "summary": "Part B shows how a Bayesian network can turn Launch Lab evidence rules into updated beliefs about player skills. Connects a Q matrix to observable nodes, explains slips and guesses, and introduces simulated parameter estimation, dynamic Bayesian networks, and an adaptive assessment loop.",
     "question": "Which skill and observable nodes would you build from a Q matrix, and how would slip and guess probabilities change your interpretation?",
-    "lab": "bayes"
+    "lab": "bayes",
+    "thumbnail": "thumb-LKY8wo6KoDw.jpg"
   },
   {
     "id": "XC_5YE2YYoY",
@@ -85,7 +92,8 @@ window.LECTURES = [
     "duration": "3:30",
     "summary": "Part A uses the Launch Lab physics-game example to introduce evidence-centered design. Shows that equal scores can reflect different approaches, so claims about skills must connect to tasks and observable evidence through competency, evidence, and task models and a defensible Q matrix.",
     "question": "What claim would you want to make about a player, and what observable gameplay evidence would justify it?",
-    "lab": "ecd"
+    "lab": "ecd",
+    "thumbnail": "thumb-XC_5YE2YYoY.jpg"
   },
   {
     "id": "TAqR36Cd7qk",
@@ -96,7 +104,8 @@ window.LECTURES = [
     "duration": "2:25",
     "summary": "An AIL 601 assignment walkthrough on connecting beliefs about learning, supporting theory or research, and design and teaching decisions. Emphasizes consistency among views of learners, teachers, strategies, and technology, expressed through your own context and reasoning.",
     "question": "Which of your beliefs about learners and technology are you most ready to defend, and what theory or research supports them?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-TAqR36Cd7qk.jpg"
   },
   {
     "id": "6pqomazEPcE",
@@ -107,7 +116,8 @@ window.LECTURES = [
     "duration": "2:25",
     "summary": "Compares problem-based learning, driven by unfamiliar ill-structured problems, with case-based reasoning's retrieve, reuse, revise, and retain cycle. Traces PBL to medical education at McMaster University and discusses facilitation, assessment, and the debate over guidance for novices.",
     "question": "In a scenario you know, is learning driven by a new problem or by adapting remembered cases, and how much guidance would novices need?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-6pqomazEPcE.jpg"
   },
   {
     "id": "Cn2KU6ooubI",
@@ -118,7 +128,8 @@ window.LECTURES = [
     "duration": "3:43",
     "summary": "Distinguishes co-design and participatory design mainly by who holds power over design decisions, using an AI writing-feedback tool example. Places each approach on Druin's ladder of children's roles, notes risks, and ends with three questions for reporting partnership honestly.",
     "question": "Who actually holds decision power in a design partnership you know, and how would you report it honestly?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-Cn2KU6ooubI.jpg"
   },
   {
     "id": "pR--9zWzm30",
@@ -129,7 +140,8 @@ window.LECTURES = [
     "duration": "4:17",
     "summary": "Traces how the learning sciences and the science of learning grew from different communities with different questions, contrasting lab-based principles with designs studied in context. Describes how the traditions increasingly meet, including in vivo experiments, and notes each one's blind spot.",
     "question": "For a claim in a reading, what kind of evidence supports it, and what would the other tradition want to know?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-pR--9zWzm30.jpg"
   },
   {
     "id": "NdaVj7XmiEU",
@@ -140,7 +152,8 @@ window.LECTURES = [
     "duration": "2:43",
     "summary": "Follows a design-based research project from first meeting to final report using an AI feedback tool in a first-year writing course. Covers five stages, Sandoval's conjecture map, macro and mini cycles, design logs, and what makes a report trustworthy.",
     "question": "What conjecture would you write for your own design, and what would you record in a design log to test it?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-NdaVj7XmiEU.jpg"
   },
   {
     "id": "XN29cK9FYMY",
@@ -151,7 +164,8 @@ window.LECTURES = [
     "duration": "3:47",
     "summary": "Compares design-based research, educational design research, and design and development research by origins, aims, and outputs, using an AI feedback tool example. Covers their shared core and a way to choose a frame based on your main contribution.",
     "question": "If you wrote one research question three ways, which frame fits your main contribution best, and why?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-XN29cK9FYMY.jpg"
   },
   {
     "id": "4Cg22ihPV6g",
@@ -162,7 +176,8 @@ window.LECTURES = [
     "duration": "2:27",
     "summary": "Explores Papert's constructionism, cognitive apprenticeship and its six teaching methods, collaboration scripts in CSCL, and Pintrich's phases of self-regulated learning. Includes a scenario check separating constructionism from cognitive apprenticeship.",
     "question": "How would you support productive struggle in a learning design while keeping learners in charge of their own regulation?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-4Cg22ihPV6g.jpg"
   },
   {
     "id": "Fqt-ZeC48PE",
@@ -173,7 +188,8 @@ window.LECTURES = [
     "duration": "2:17",
     "summary": "Traces the learning sciences from Dewey and Piaget through Chomsky's critique of behaviorism, the cognitive revolution, and the situated turn. Explains Sfard's acquisition and participation metaphors and communities of practice, and closes with four commitments of the field.",
     "question": "Which historical shift most shapes how you think about learning, and what might AI and immersive tools change next?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-Fqt-ZeC48PE.jpg"
   },
   {
     "id": "A0xi0-qjIMA",
@@ -184,7 +200,8 @@ window.LECTURES = [
     "duration": "2:43",
     "summary": "The final part of the Meta-Analysis series explains how network meta-analysis combines direct and indirect evidence to compare several treatments, using 24 smoking-cessation trials. Introduces odds ratios, transitivity, consistency, heterogeneity, and a caution that overlapping intervals can make rankings misleading.",
     "question": "What would you check about transitivity and consistency before trusting a ranking of treatments?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-A0xi0-qjIMA.jpg"
   },
   {
     "id": "GwxncYxy7tc",
@@ -195,7 +212,8 @@ window.LECTURES = [
     "duration": "2:50",
     "summary": "Module 3 compares the learning sciences with instructional systems and technology, contrasting designing instruction to meet goals with explaining how learning unfolds in context. ADDIE, design-based research, and Universal Design for Learning illustrate iteration and a bridge between the fields.",
     "question": "Where do design practice and learning-sciences research reinforce each other in a project you know?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-GwxncYxy7tc.jpg"
   },
   {
     "id": "9Rly_IaOLNw",
@@ -206,7 +224,8 @@ window.LECTURES = [
     "duration": "1:47",
     "summary": "An AIL 601 overview of how behaviorist, cognitivist, and constructivist lenses guide instructional technology design, starting from the Clark and Kozma media debate. One chatbot appears as a drill partner, a tutor, or a thinking partner.",
     "question": "Through which learning-theory lens would you design a technology you use, and what would change under another lens?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-9Rly_IaOLNw.jpg"
   },
   {
     "id": "xrfvYZc6XIY",
@@ -217,7 +236,8 @@ window.LECTURES = [
     "duration": "2:25",
     "summary": "Part 4 of the Meta-Analysis series revisits the random-effects analysis with Bayesian inference, combining priors and likelihood into posteriors. Uses the nineteen-study example to contrast a p value with the posterior probability of a positive effect, and covers credible intervals, predictions, and prior sensitivity.",
     "question": "How would your conclusion change under a different prior, and how would you report that sensitivity?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-xrfvYZc6XIY.jpg"
   },
   {
     "id": "r_tqNkORPeo",
@@ -228,7 +248,8 @@ window.LECTURES = [
     "duration": "3:49",
     "summary": "The final part of the Sequential Analytics series introduces hidden Markov models linking observed codes to unobserved states via initial, transition, and emission probabilities. The simulated example's recovered states describe those processes, not how people think.",
     "question": "What would you need to justify before interpreting a hidden state as meaningful in real learner data?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-r_tqNkORPeo.jpg"
   },
   {
     "id": "s0HYoN8dfIM",
@@ -239,7 +260,8 @@ window.LECTURES = [
     "duration": "3:07",
     "summary": "Part 1 of the Meta-Analysis series explains why studies need a common effect-size scale, using nineteen studies of teacher expectations and pupils' IQ scores. Covers standardized mean differences, variance, confidence intervals, and small-sample bias correction versus random uncertainty.",
     "question": "How would you interpret an effect size in context rather than relying on a fixed size label?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-s0HYoN8dfIM.jpg"
   },
   {
     "id": "spTunL0povM",
@@ -250,7 +272,8 @@ window.LECTURES = [
     "duration": "2:20",
     "summary": "Part 2 of the Meta-Analysis series shows how effect sizes are combined with inverse-variance weights, contrasting fixed-effect and random-effects models. Explains why a pooled estimate should be reported with heterogeneity and a prediction interval.",
     "question": "Does it make more sense to assume one true effect or varying true effects across the studies you know?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-spTunL0povM.jpg"
   },
   {
     "id": "9gPGEZsnIPg",
@@ -261,7 +284,8 @@ window.LECTURES = [
     "duration": "2:17",
     "summary": "Part 3 of the Meta-Analysis series asks why results differ and whether some may be missing, examining prior teacher contact as a moderator via subgroup analysis and meta-regression. Covers funnel plots, Egger's test, and trim-and-fill, cautioning that asymmetry may reflect study differences.",
     "question": "What alternative explanations besides publication bias could explain an asymmetric funnel plot?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-9gPGEZsnIPg.jpg"
   },
   {
     "id": "k9izMqIyRXw",
@@ -272,7 +296,8 @@ window.LECTURES = [
     "duration": "0:36",
     "summary": "A short calculus demonstration of adding rectangle areas to approach the area under y = x^2/2 from zero to three. Thinner slices shrink the gaps and the sum approaches the integral, which is exactly 4.5.",
     "question": "How does making the slices thinner change your confidence in the approximation?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-k9izMqIyRXw.jpg"
   },
   {
     "id": "dqrWUnItTi4",
@@ -283,7 +308,8 @@ window.LECTURES = [
     "duration": "3:20",
     "summary": "Part 3 of the Sequential Analytics series explains transition network analysis as a first-order Markov model, turning lag-one transition counts into probabilities shown as a network. Covers edge weights, centrality, session bootstrapping, and permutation tests, with explicit reporting of counting and uncertainty.",
     "question": "What counting procedure and model assumption would you need to state when reporting a transition network?",
-    "lab": "sequence"
+    "lab": "sequence",
+    "thumbnail": "thumb-dqrWUnItTi4.jpg"
   },
   {
     "id": "0P0xOb9frbA",
@@ -294,7 +320,8 @@ window.LECTURES = [
     "duration": "3:27",
     "summary": "Part 1 of the Sequential Analytics series introduces lag sequential analysis: given one code, how often another follows. Uses a synthetic example to explain transition counts, probabilities, expected counts, and adjusted residuals, and why sessions are the units for group inference.",
     "question": "Why might pooled transitions overstate certainty, and how would you handle sessions as the unit of analysis?",
-    "lab": "sequence"
+    "lab": "sequence",
+    "thumbnail": "thumb-0P0xOb9frbA.jpg"
   },
   {
     "id": "V5HiWnlkp5E",
@@ -305,7 +332,8 @@ window.LECTURES = [
     "duration": "3:43",
     "summary": "Part 4 of the Sequential Analytics series explains ordered network analysis (ONA), using a moving window to turn time-ordered codes into directed connections. The synthetic example treats each session as a unit and compares connection structure rather than total activity.",
     "question": "How would a four-turn look-back window shape the connections you would see in your own coded data?",
-    "lab": "sequence"
+    "lab": "sequence",
+    "thumbnail": "thumb-V5HiWnlkp5E.jpg"
   },
   {
     "id": "KHzwP0eMwTk",
@@ -316,7 +344,8 @@ window.LECTURES = [
     "duration": "3:49",
     "summary": "Part 2 of the Sequential Analytics series explains how ordered event logs become session-level sequences and how recurring patterns are counted. A synthetic example illustrates support, confidence, lift, gap rules, and minimum-support thresholds, noting that frequent patterns describe what happened, not why.",
     "question": "What would a frequent pattern in your logs tell you, and what would it not tell you?",
-    "lab": "sequence"
+    "lab": "sequence",
+    "thumbnail": "thumb-KHzwP0eMwTk.jpg"
   },
   {
     "id": "Poo-UGoTyhw",
@@ -327,6 +356,7 @@ window.LECTURES = [
     "duration": "2:25",
     "summary": "Only the title and duration were observed for this lecture; no description was available in YouTube Studio. The title refers to multimedia learning principles under CTML.",
     "question": "Which multimedia learning principle would you want to apply or check in a lesson you design?",
-    "lab": null
+    "lab": null,
+    "thumbnail": "thumb-Poo-UGoTyhw.jpg"
   }
 ];
