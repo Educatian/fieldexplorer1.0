@@ -876,5 +876,45 @@ window.LECTURE_GUIDES = {
     "reviewedAt": "2026-10-16",
     "sources": [],
     "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-who-learns-when-a-group-learns": {
+    "id": "cscl-who-learns-when-a-group-learns",
+    "purpose": "Use this video to match a claim about learning to the level (person, group, community) at which the evidence was collected.",
+    "distinction": "Stahl frames group cognition as a methodological choice about what to study, not a claim that a group mind exists; the cognitive tradition treats collaboration as a scaffold for each member's learning.",
+    "caution": "The three students and their scores are made up; the example shows why the dispute is about definitions of learning, so no single experiment can settle it.",
+    "koSummary": "이 영상은 협력 학습에서 “누가 배우는가”를 두고 Stahl의 집단 인지 관점과 개인 학습을 중시하는 인지 전통을 비교합니다. 주장이 개인·집단·공동체 중 어느 수준에 관한 것인지, 증거와 분석이 같은 수준에 있는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-collaborative-cognitive-load": {
+    "id": "cscl-collaborative-cognitive-load",
+    "purpose": "Use this video to judge when group work is likely to pay off and how a study defines task complexity, outcomes, and process.",
+    "distinction": "CCLT counts coordination talk as a transaction cost that may be productive or extraneous; group-cognition researchers treat that talk as the learning itself.",
+    "caution": "The French class is made up, and the cited average effect of collaboration is not a test of CCLT's complexity prediction, which has mixed support in the studies the video describes.",
+    "koSummary": "이 영상은 여러 사람이 작업기억을 나눠 쓰지만 조정 비용이 이득을 상쇄할 수 있다는 협력적 인지부하 이론을 소개하고, 이에 대한 세 갈래의 반론을 정리합니다. 과제가 실제로 복잡했는지, 결과가 집단 산출물인지 이후 개인 시험인지, 대화 과정을 분석했는지 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-scripts-guidance-or-straitjacket": {
+    "id": "cscl-scripts-guidance-or-straitjacket",
+    "purpose": "Use this video to decide what a collaboration script should target, how it should fade or adapt, and which outcome a study measured.",
+    "distinction": "Over-scripting can mean a script that is too rigid, or, in the script theory of guidance, one aimed at the wrong level for a particular learner.",
+    "caution": "The classroom and students are made up, and the cited reviews could not test the theory's right-level principle and share authors with the theory, as the video itself notes.",
+    "koSummary": "이 영상은 협력 스크립트가 토론을 돕는 사다리인지, 학습자를 묶는 틀인지를 과잉 스크립팅 비판과 스크립트 안내 이론을 중심으로 비교합니다. 어떤 결과를 측정했는지, 스크립트가 어느 수준을 겨냥하는지, 점차 줄이거나 조정되는지를 확인하라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "cscl-eight-provocations-for-cscl": {
+    "id": "cscl-eight-provocations-for-cscl",
+    "purpose": "Use this video to identify which assumptions a CSCL paper takes for granted and whether each claim rests on evidence, definitions, or values.",
+    "distinction": "The Provocateur and Conciliator are composites built from researchers' responses, so no line belongs to a single researcher, and the original paper deliberately offers no resolutions.",
+    "caution": "Room twelve and its ThinkBoard tool are made up; the video notes that, among the replies it checked, only the scripts-versus-agency provocation received a direct quantitative test.",
+    "koSummary": "이 영상은 Wise와 Schwarz(2017)가 가상의 두 목소리인 도발자와 조정자의 대화로 쓴 CSCL 분야의 여덟 가지 도발을 소개하고, 그중 세 가지를 가상의 학급 사례에 적용해 봅니다. 논문을 읽을 때 어떤 도발에 암묵적으로 편을 드는지, 각 주장이 증거·정의·가치 중 무엇에 관한 것인지 따져 보라고 안내합니다.",
+    "reviewedAt": "2026-10-16",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
   }
 };

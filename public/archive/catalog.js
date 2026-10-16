@@ -663,5 +663,57 @@ window.LECTURES = [
     "lab": null,
     "thumbnail": "thumb-es-short-framework-perspectif-behemoth.jpg",
     "series": "Evidence synthesis"
+  },
+  {
+    "id": "cscl-who-learns-when-a-group-learns",
+    "driveFileId": "1D3q09RZmL5hsVWksMpB1kJ0sDtFFwP5V",
+    "title": "Who Learns When a Group Learns?",
+    "shortTitle": "Who Learns When a Group Learns?",
+    "category": "foundations",
+    "format": "Debate",
+    "duration": "4:09",
+    "summary": "This video contrasts Stahl's group-cognition view, which treats the collaborating group as the unit of analysis, with the cognitive tradition's focus on individual learning within groups. A made-up dice-puzzle chat shows a correct group answer alongside uneven individual scores, and the video separates what is settled (nested data needs multilevel modelling) from what is open (which level comes first).",
+    "question": "What would you have to record to show that a group learned, and not just its members?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-who-learns-when-a-group-learns.jpg"
+  },
+  {
+    "id": "cscl-collaborative-cognitive-load",
+    "driveFileId": "186YOiXCyfQ6CyEvXz_rkOkma4Xh4WoUU",
+    "title": "Collaborative Cognitive Load",
+    "shortTitle": "Collaborative Cognitive Load",
+    "category": "foundations",
+    "format": "Debate",
+    "duration": "4:20",
+    "summary": "This video presents collaborative cognitive load theory (Kirschner, Sweller and colleagues, 2018): groups can pool working memory on complex tasks, but transaction costs can cancel the gain. It sets out three lines of pushback and uses a made-up French class to ask whether group talk is overhead or learning, then separates average meta-analytic benefits from tests of the theory's conditions.",
+    "question": "In a group task you know, which part of the talk was overhead, and which part was the learning?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-collaborative-cognitive-load.jpg"
+  },
+  {
+    "id": "cscl-scripts-guidance-or-straitjacket",
+    "driveFileId": "1sRYXYtemseXLM685KviJimjJA3Mp4hYa",
+    "title": "Scripts: Guidance or Straitjacket?",
+    "shortTitle": "Scripts: Guidance or Straitjacket?",
+    "category": "design",
+    "format": "Debate",
+    "duration": "4:52",
+    "summary": "This video weighs collaboration scripts as guidance or constraint: Dillenbourg's over-scripting concern against the script theory of guidance (Fischer and colleagues), with Tchounikine's appropriation view as a third voice. A made-up ninth-grade debate illustrates fading, and the video reports meta-analytic results while noting what they could not confirm and that review authors overlap with the theory.",
+    "question": "If a structure helps a quiet student speak up but makes a confident one go through the motions, when would you remove it, and who should decide?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-scripts-guidance-or-straitjacket.jpg"
+  },
+  {
+    "id": "cscl-eight-provocations-for-cscl",
+    "driveFileId": "1btraLsWM7dWiXe9EKe0PUsLZcvMWTwF0",
+    "title": "Eight Provocations for CSCL",
+    "shortTitle": "Eight Provocations for CSCL",
+    "category": "foundations",
+    "format": "Debate",
+    "duration": "4:33",
+    "summary": "This video introduces Wise and Schwarz's 2017 \"eight provocations\" paper, written as dialogues between two composite, invented voices: a Provocateur and a Conciliator. Three provocations (community as evidence, analytics as a priority, and the field's aim of educational change) are tested on a made-up eighth-grade class, with later replies from Tchounikine and from Hod, Sagy and Kali. The paper offers no resolutions, and the video sorts the disagreements into evidence, definitions, and values.",
+    "question": "Pick a CSCL study you have read recently: which side of which provocation does it take, without saying so?",
+    "lab": null,
+    "thumbnail": "thumb-cscl-eight-provocations-for-cscl.jpg"
   }
 ];
