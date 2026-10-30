@@ -49,6 +49,19 @@ window.LECTURES = [
     "thumbnail": "thumb-SfIj7mrAHwI.jpg"
   },
   {
+    "id": "cognitive-apprenticeship",
+    "title": "Cognitive Apprenticeship - Basic",
+    "shortTitle": "Cognitive Apprenticeship",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:27",
+    "summary": "Introduces cognitive apprenticeship (Collins, Brown, and Newman, 1989) as a way to make expert thinking visible. A made-up ladder word problem shows modeling by thinking aloud, then coaching, scaffolding with a prompt card that fades, articulation, reflection against the expert's process, and exploration. Covers sequencing tasks by increasing complexity and diversity with the whole task before its parts, groups the six methods by what they do, and cautions that the framework needs its own evaluation in each new setting.",
+    "question": "In a skill you teach, which part of the expert's thinking stays invisible, and how could you make it visible?",
+    "lab": null,
+    "thumbnail": "thumb-cognitive-apprenticeship.jpg",
+    "videoFile": "media/cognitive-apprenticeship.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",
