@@ -109,6 +109,19 @@ window.LECTURES = [
     "thumbnail": "thumb-XC_5YE2YYoY.jpg"
   },
   {
+    "id": "irt-basic",
+    "title": "Item Response Theory - Basic",
+    "shortTitle": "Item Response Theory",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "2:38",
+    "summary": "Introduces item response theory with a made-up fractions quiz that Lena took in an easy version and Sam in a hard one, both scoring six out of ten. Places students and items on one logit scale, draws the item characteristic curve, and shows difficulty, discrimination, and the Rasch, two-parameter, and three-parameter models, then joins the curves into a probability surface. Ends with two cautions: in the Rasch model the same total on the same items gives the same estimate, and IRT holds ability fixed during a test, unlike knowledge tracing.",
+    "question": "On a test you know well, which item would you expect to discriminate best, and why?",
+    "lab": null,
+    "thumbnail": "thumb-irt-basic.jpg",
+    "videoFile": "media/irt-basic.mp4"
+  },
+  {
     "id": "Cn2KU6ooubI",
     "title": "Co-Design vs Participatory Design - Overview",
     "shortTitle": "Co-Design vs Participatory Design",

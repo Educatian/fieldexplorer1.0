@@ -1086,5 +1086,15 @@ window.LECTURE_GUIDES = {
     "reviewedAt": "2026-10-16",
     "sources": [],
     "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+  },
+  "irt-basic": {
+    "id": "irt-basic",
+    "purpose": "Use this lecture to see how IRT places students and items on one scale and how an item characteristic curve encodes difficulty, discrimination, and guessing.",
+    "distinction": "A raw score depends on which items a student happened to take, while an IRT ability estimate sits on a scale shared with item difficulties, so forms calibrated together can be compared; in the Rasch model the total on the same items is still all the estimate uses.",
+    "caution": "Lena, Sam, the quiz, and every number are made up, so the video shows how the models work and is not evidence about any real test; real calibration needs many responses per item and a check that the model fits.",
+    "koSummary": "이 강의는 쉬운 버전과 어려운 버전의 분수 퀴즈에서 똑같이 10점 만점에 6점을 받은 두 학생(가상 사례)을 통해 문항반응이론(IRT)을 소개합니다. 학생의 능력과 문항의 난이도를 같은 로짓 척도에 놓고, 문항특성곡선에서 난이도·변별도·추측 모수가 각각 무엇을 뜻하는지 보여 줍니다. Rasch 모형에서는 같은 문항에서 같은 총점이면 같은 추정치를 얻는다는 점, 그리고 IRT는 검사 중 능력을 고정된 것으로 보지만 지식추적은 연습에 따른 변화를 따라간다는 점을 주의점으로 정리합니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. Further reading not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
