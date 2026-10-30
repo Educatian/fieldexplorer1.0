@@ -1176,5 +1176,45 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Dick & Carey (1978) and Dick, Carey & Carey (2015); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "kirkpatrick": {
+    "id": "kirkpatrick",
+    "purpose": "Use this lecture to sort the evidence a training evaluation collects into reaction, learning, behavior, and results, and to see why each level does not guarantee the next.",
+    "distinction": "Kirkpatrick's levels ask different questions: reaction (did participants find it useful and engaging), learning (did they gain the knowledge and skill), behavior (do they apply it on the job), and results (did the organization's outcomes change). Later versions suggest planning from the needed result back to the reaction.",
+    "caution": "Mei, the hospital, and the numbers are made up. Reactions are only weakly related to learning and transfer (Alliger et al., 1997), and results have many causes besides training, so a drop in an outcome does not by itself prove that the training worked.",
+    "koSummary": "이 강의는 교육이 효과가 있었는지 묻기 위해 Donald Kirkpatrick이 1959년에 제안한 네 수준, 곧 반응, 학습, 행동, 결과를 소개하며, 뒤로 갈수록 대개 측정하기 더 어렵다는 점을 보여 줍니다. 가상의 교육 담당자 Mei가 병원 직원을 위한 손 위생 교육을 운영하며 각 수준을 차례로 확인합니다. 교육이 끝날 때의 설문, 손을 씻어야 하는 순간에 대한 퀴즈와 손 씻기 기술 점검, 몇 주 뒤 병동에서 관찰자가 세는 손 위생 횟수, 그리고 병동의 감염률입니다. 네 수준은 사슬을 이루지만 보장된 사슬은 아니라는 점을, 반응이 학습 및 현업 적용과 약하게만 관련된다는 George Alliger와 동료들의 메타분석을 들어 보여 주며, 따라서 높은 만족도 점수만으로는 행동이나 결과에 대해 알 수 있는 것이 적다고 설명합니다. 모형의 후속판이 결과에서부터 거꾸로 계획하도록 제안한다는 점을 백워드 설계와 연결하고, 결과에는 새 비누 디스펜서나 인력 변화처럼 교육 외의 원인이 많다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Kirkpatrick (1959), Alliger, Tannenbaum, Bennett, Traver & Shotland (1997), and Kirkpatrick & Kirkpatrick (2016); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "learning-objectives": {
+    "id": "learning-objectives",
+    "purpose": "Use this lecture to rewrite a vague course goal as an observable objective and to check which kind of thinking its verb asks for.",
+    "distinction": "Mager's objectives name a performance, the conditions under which it happens, and a criterion for how well; the ABCD format adds the audience. The revised Bloom's taxonomy (Anderson & Krathwohl, 2001) sorts objectives by cognitive process (remember to create) and by kind of knowledge (factual, conceptual, procedural, metacognitive).",
+    "caution": "Ana and her course are made up. Verb lists are rough guides, since the same verb can sit at different levels, and objectives that are easy to measure can crowd out goals that matter but are hard to observe.",
+    "koSummary": "이 강의는 \"학생들은 응급처치를 이해할 것이다\"와 같은 모호한 목표를, 학습자가 무엇을 할 수 있게 될지를 다른 사람이 관찰할 수 있는 형태로 기술한 목표로 바꾸는 법을 다룹니다. Robert Mager의 세 요소(수행, 조건, 준거)와 여기에 대상(audience)을 더한 ABCD 형식을 소개합니다. 가상의 응급처치 강사 Ana가 \"CPR을 이해한다\"를 \"훈련용 마네킹이 주어지면, 학습자는 분당 100~120회의 속도로 가슴 압박 30회를 실시한다\"로 고쳐 씁니다. 이어서 동사가 사고의 종류를 드러낸다는 점을 Lorin Anderson과 David Krathwohl이 개정한 Bloom의 분류체계(기억, 이해, 적용, 분석, 평가, 창안)로 보여 주고, Ana의 목표가 이 수준들을 올라가는 모습과 개정판이 더한 지식 차원(사실적, 개념적, 절차적, 메타인지적)을 소개합니다. 좋은 목표가 평가와 활동을 이끈다는 점을 짚고, 같은 동사가 여러 수준에 놓일 수 있어 동사 목록은 대략적인 안내일 뿐이며, 측정하기 쉬운 목표가 중요하지만 관찰하기 어려운 목표를 밀어낼 수 있다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Mager (1962) and Anderson & Krathwohl (2001); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "task-analysis": {
+    "id": "task-analysis",
+    "purpose": "Use this lecture to decide whether a task can be analyzed by watching its steps or needs cognitive task analysis to surface the cues and decisions experts no longer notice they use.",
+    "distinction": "Hierarchical task analysis (Annett & Duncan, 1967) decomposes a goal into subgoals with plans for their order and suits observable procedures; cognitive task analysis targets the hidden cues, decisions, and rules of thumb behind expert performance, using methods such as the critical decision method (Klein, Calderwood & MacGregor, 1989).",
+    "caution": "Rosa, her mechanics, and the cases are made up. Cognitive task analysis takes time, and one expert’s account is still incomplete, so analysts often interview several experts and check the result against real performance.",
+    "koSummary": "이 강의는 과제를 학습자에게 필요한 단계, 의사결정, 지식으로 나누는 과제분석과, 그것이 대부분의 설계 모형에서 초기에 오는 이유를 설명합니다. 신입 정비공을 가르치는 가상의 강사 Rosa는 타이어 교체를 John Annett과 Keith Duncan의 위계적 과제분석으로 분석합니다. 목표를 하위 목표로 나누고 그 순서를 정하는 계획을 두며, 각 단계는 관찰할 수 있습니다. 이상한 소음을 진단하는 일은 다릅니다. 전문가는 그냥 들린다고 말하며, Richard Clark과 동료들은 전문가가 자신의 일을 설명할 때 의사결정의 최대 70%를 빠뜨린 연구들을 소개합니다. 인지적 과제분석은 전문가가 알아차리는 단서, 내리는 결정, 그 뒤의 경험칙처럼 숨은 지식을 되찾으려 하며, 예컨대 Gary Klein과 동료들의 결정적 의사결정 방법(critical decision method)은 실제로 어려웠던 사례의 각 결정을 캐묻습니다. Rosa의 면담으로 드러난 단서는 연습용 녹음 자료가 됩니다. 인지적 과제분석에는 시간이 들고 한 전문가의 설명은 여전히 불완전하므로, 분석가들이 여러 전문가를 면담하고 실제 수행과 대조한다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Annett & Duncan (1967), Klein, Calderwood & MacGregor (1989), and Clark, Feldon, van Merriënboer, Yates & Early (2008); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "icap": {
+    "id": "icap",
+    "purpose": "Use this lecture to classify a learning activity by what learners overtly do, and to find a small change that would move it from passive or active toward constructive or interactive.",
+    "distinction": "ICAP distinguishes passive (receiving), active (manipulating the given material), constructive (generating output beyond the material), and interactive (co-constructing with a partner who also contributes) engagement, and predicts that learning generally increases in the order I > C > A > P.",
+    "caution": "Jun and his class are made up. Modes are judged from what learners actually do, not from the task design; group work in which one student explains while others copy is not interactive; and the ordering is a general prediction that single studies do not always confirm at every step.",
+    "koSummary": "이 강의는 학습자가 실제로 무엇을 하는지에 따라 학습 활동을 분류하는 Michelene Chi와 Ruth Wylie의 ICAP 프레임워크를 소개합니다. 수동적(passive) 참여는 주의를 기울이며 정보를 받아들이는 것, 능동적(active) 참여는 멈추기, 밑줄 긋기, 베껴 쓰기처럼 주어진 자료 자체를 다루는 것, 구성적(constructive) 참여는 이유 설명하기, 개념도 그리기, 질문하기처럼 주어진 것을 넘어서는 무언가를 만들어 내는 것, 상호작용적(interactive) 참여는 둘 이상의 학습자가 서로의 생각 위에 생각을 쌓아 가는 것입니다. 가상의 생물 교사 Jun은 심장에 관한 같은 영상을 쓰되 과제를 네 양식에 걸쳐 바꾸고, 마지막에는 짝끼리 그림을 비교하며 서로의 오류를 고칩니다. 학습이 수동적, 능동적, 구성적, 상호작용적 순으로 증가한다는 ICAP 가설과 각 양식 뒤의 사고 과정(저장, 연결, 추론, 함께 추론)을 제시합니다. 양식은 계획된 과제가 아니라 학습자가 실제로 하는 행동으로 판단해야 하며, 한 학생이 설명하고 나머지는 베끼는 모둠 활동은 상호작용적이지 않고, 개별 연구가 모든 단계를 항상 확인하지는 않는다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Chi (2009) and Chi & Wylie (2014); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };

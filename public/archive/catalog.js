@@ -153,6 +153,58 @@ window.LECTURES = [
     "videoFile": "media/dick-carey.mp4"
   },
   {
+    "id": "kirkpatrick",
+    "title": "Kirkpatrick's Four Levels of Training Evaluation - Basic",
+    "shortTitle": "Kirkpatrick's Four Levels of Training Evaluation",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "2:03",
+    "summary": "Introduces the four levels Donald Kirkpatrick proposed in 1959 for asking whether a training worked: reaction, learning, behavior, and results, each usually harder to measure than the one before. A made-up trainer, Mei, runs a hand hygiene training for hospital staff and checks each level in turn: an end-of-session survey, a quiz on the moments when hands must be cleaned and a technique check, observers on the ward counting hand cleaning weeks later, and infection rates on the wards. Shows that the levels form a chain but not a guaranteed one, citing George Alliger and colleagues' meta-analysis, which found reactions only weakly related to learning and to use on the job, so a high satisfaction score says little about behavior or results. Notes that later versions of the model plan from the result down, echoing backward design, and cautions that results have many causes besides training, such as new soap dispensers or staffing changes.",
+    "question": "For a training you know, which level is actually measured, and what would it take to reach the next one?",
+    "lab": null,
+    "thumbnail": "thumb-kirkpatrick.jpg",
+    "videoFile": "media/kirkpatrick.mp4"
+  },
+  {
+    "id": "learning-objectives",
+    "title": "Writing Learning Objectives: Mager and Bloom - Basic",
+    "shortTitle": "Writing Learning Objectives: Mager and Bloom",
+    "category": "design",
+    "format": "Basic",
+    "duration": "1:57",
+    "summary": "Turns a vague goal like \"students will understand first aid\" into an objective that describes what learners will be able to do in a form someone can observe. Introduces Robert Mager's three parts (performance, conditions, and criterion) and the related ABCD format, which adds the audience. A made-up first aid instructor, Ana, rewrites \"understand CPR\" as: given a training manikin, the learner gives thirty chest compressions at a rate of 100 to 120 per minute. Then shows how the verb signals the kind of thinking, using Bloom's taxonomy as revised by Lorin Anderson and David Krathwohl (remember, understand, apply, analyze, evaluate, create), with Ana's objectives climbing those levels, and the revision's second dimension of knowledge (factual, conceptual, procedural, metacognitive). Notes that good objectives guide the assessment and the activities, and cautions that verb lists are rough guides and that easy-to-measure objectives can crowd out goals that matter but are hard to observe.",
+    "question": "Take one goal from your own course that uses a word like understand or know. What would a learner do that would show it?",
+    "lab": null,
+    "thumbnail": "thumb-learning-objectives.jpg",
+    "videoFile": "media/learning-objectives.mp4"
+  },
+  {
+    "id": "task-analysis",
+    "title": "Task Analysis and Cognitive Task Analysis - Basic",
+    "shortTitle": "Task Analysis and Cognitive Task Analysis",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:15",
+    "summary": "Explains task analysis, which breaks a task into the steps, decisions, and knowledge a learner needs, and why it comes early in most design models. A made-up trainer of new mechanics, Rosa, analyzes changing a tire with hierarchical task analysis (John Annett and Keith Duncan): a goal split into subgoals with a plan for their order, each step observable. Diagnosing a strange noise is different: the expert just hears it, and Richard Clark and colleagues describe studies in which experts left out as much as seventy percent of their decisions when explaining their work. Cognitive task analysis tries to recover that hidden knowledge (the cues experts notice, the decisions they make, and their rules of thumb), for example with the critical decision method from Gary Klein and colleagues, which probes each decision in a real, difficult case. Rosa's interviews surface the cues, which become recordings for practice. Cautions that cognitive task analysis takes time and that one expert's account is incomplete, so analysts interview several experts and check against real performance.",
+    "question": "Think of a task you could teach. Which of its steps can be seen, and which decisions happen only in the expert's head?",
+    "lab": null,
+    "thumbnail": "thumb-task-analysis.jpg",
+    "videoFile": "media/task-analysis.mp4"
+  },
+  {
+    "id": "icap",
+    "title": "The ICAP Framework: Four Modes of Engagement - Basic",
+    "shortTitle": "The ICAP Framework: Four Modes of Engagement",
+    "category": "experience",
+    "format": "Basic",
+    "duration": "2:03",
+    "summary": "Introduces Michelene Chi and Ruth Wylie's ICAP framework, which sorts learning activities by what learners actually do. Passive means receiving information while paying attention; active means doing something with the material itself, such as pausing, underlining, or copying; constructive means producing something beyond what was given, such as explaining why, drawing a concept map, or asking a question; interactive means two or more learners building on each other's ideas. A made-up biology teacher, Jun, keeps one video about the heart but changes the task through all four modes, ending with partners comparing drawings and fixing each other's mistakes. Presents the ICAP hypothesis that learning increases from passive to active to constructive to interactive, with the thinking behind each mode (storing, connecting, inferring, and inferring together). Cautions that modes are judged from what learners do rather than the task on paper, that group work where one student explains while others copy is not interactive, and that single studies do not always find every step.",
+    "question": "Pick one activity you use. Which mode do learners actually show, and what small change would move it one step up?",
+    "lab": null,
+    "thumbnail": "thumb-icap.jpg",
+    "videoFile": "media/icap.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",
