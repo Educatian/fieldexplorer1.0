@@ -1096,5 +1096,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. Further reading not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "cognitive-apprenticeship": {
+    "id": "cognitive-apprenticeship",
+    "purpose": "Use this lecture to see the six methods of cognitive apprenticeship and how each one makes an expert's thinking, or a learner's, visible.",
+    "distinction": "A traditional apprentice can watch a visible process, while cognitive apprenticeship has to externalize thinking: the expert thinks aloud, support fades as learners succeed, and learners articulate and reflect on their own reasoning.",
+    "caution": "The ladder problem, the teacher, and the students are made up, and the framework is a set of design principles rather than one tested program, so each method needs its own evaluation in a new setting.",
+    "koSummary": "이 강의는 Collins, Brown, Newman(1989)이 제안한 인지적 도제(cognitive apprenticeship)를 소개합니다. 학교에서 가장 중요한 과정인 사고는 눈에 보이지 않기 때문에, 교사가 사다리 문제(가상 사례)를 소리 내어 풀며 모델링하고, 코칭과 스캐폴딩 및 지원의 점진적 제거(fading), 학습자의 설명(articulation)과 성찰(reflection), 스스로 문제를 만드는 탐색(exploration)으로 사고를 보이게 만드는 방법을 정리합니다. 과제는 복잡성과 다양성을 높여 가며 부분보다 전체 과제를 먼저 보여 주도록 배열하고, 이 틀은 하나의 검증된 프로그램이 아니라 설계 원리이므로 새로운 맥락에서는 각 방법을 따로 평가해야 한다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Collins, Brown, and Newman (1989); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
