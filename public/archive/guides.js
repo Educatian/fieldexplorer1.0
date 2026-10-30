@@ -1146,5 +1146,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Gagné (1965) and Gagné, Briggs & Wager (1992); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "addie-sam": {
+    "id": "addie-sam",
+    "purpose": "Use this lecture to compare ADDIE and SAM as ways a design team moves from a request to a finished course, and to see where feedback from learners arrives in each.",
+    "distinction": "ADDIE names five phases of work (analysis, design, development, implementation, evaluation) and is a label for a family of systems approaches; SAM keeps similar work but organizes it as a savvy start followed by short cycles of design, prototype, and review, with alpha, beta, and gold releases tried by learners.",
+    "caution": "Omar, the warehouse, and the course are made up. Neither process guarantees learning, ADDIE in practice often loops back between phases, and fast prototypes can drift without clear objectives, so many teams combine careful analysis with iteration.",
+    "koSummary": "이 강의는 두 가지 교수설계 과정 모형인 ADDIE와 Michael Allen의 연속 근사 모형(SAM)을, 창고 직원용 짧은 안전 교육 과정을 만드는 가상의 설계자 Omar의 사례로 소개합니다. 분석, 설계, 개발, 실행, 평가의 다섯 단계를 차례로 보여 주고, 단계를 엄격히 한 방향으로만 진행하면 혼란스러운 지게차 시나리오 같은 문제가 몇 달 뒤 첫 테스트에서야 드러나 되돌리기 비싸다는 점을 보여 줍니다. ADDIE에는 단일한 원저자가 없고 체제적 접근의 한 계열을 가리키는 이름이라는 Michael Molenda의 지적을 소개한 뒤, SAM의 세비 스타트(savvy start), 설계·프로토타입·검토의 짧은 반복, 한 시간 만에 고친 종이 스케치, 알파·베타·골드 릴리스를 보여 줍니다. 어느 과정도 학습을 보장하지 않으며, 많은 팀이 신중히 분석한 뒤 반복한다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Molenda (2003) and Allen & Sites (2012); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };

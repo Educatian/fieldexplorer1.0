@@ -114,6 +114,19 @@ window.LECTURES = [
     "videoFile": "media/gagne-nine-events.mp4"
   },
   {
+    "id": "addie-sam",
+    "title": "ADDIE and SAM: Two Design Processes - Basic",
+    "shortTitle": "ADDIE and SAM: Two Design Processes",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:22",
+    "summary": "Introduces two instructional design process models, ADDIE and Michael Allen's Successive Approximation Model (SAM), using a made-up designer, Omar, who builds a short safety course for warehouse staff. Walks through analysis, design, development, implementation, and evaluation, and shows how running the phases strictly one after another lets a confusing forklift scenario surface only at a test months in. Notes Michael Molenda's point that ADDIE has no single original author and names a family of systems approaches, then shows SAM's savvy start, quick cycles of design, prototype, and review, a paper sketch fixed in an hour, and alpha, beta, and gold releases. Cautions that neither process guarantees learning and that many teams analyze carefully, then iterate.",
+    "question": "In your last design project, when did the first real learner see a working version, and what would it take to make that sooner?",
+    "lab": null,
+    "thumbnail": "thumb-addie-sam.jpg",
+    "videoFile": "media/addie-sam.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",
