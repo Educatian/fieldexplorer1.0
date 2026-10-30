@@ -1246,5 +1246,55 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Wing (2006) and Brennan & Resnick (2012); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "constructionism": {
+    "id": "constructionism",
+    "purpose": "Use this lecture to tell constructionism apart from constructivism and to judge when a making activity is likely to carry the idea you want learners to meet.",
+    "distinction": "Constructivism (Piaget) describes learners building knowledge structures in their own minds. Constructionism (Papert, 1980; Papert & Harel, 1991) adds that this happens especially well when learners are building a public artifact that others can see and question, often with objects to think with such as the Logo turtle. Design aims include a low floor, a high ceiling, and wide walls (Resnick et al., 2009).",
+    "caution": "Maya and her turtle are made up. Making without guidance can leave the big idea unnoticed, and early Logo studies found little transfer to general planning skills (Pea & Kurland, 1984), so making is often paired with talk and reflection.",
+    "koSummary": "이 강의는 화면 속 거북이에게 정사각형을 그리게 하기 전에 바닥에서 직접 정사각형을 걸어 보는 가상의 4학년 학생 Maya를 따라가며 Seymour Papert의 구성주의(constructionism)를 소개합니다. 학습자는 빈 항아리처럼 채워지는 존재가 아니라 자기 머릿속에서 지식을 짓는다는 Jean Piaget의 구성주의(constructivism)와, 여기에 더해 프로그램이나 기계, 이야기처럼 다른 사람이 보고 쓰고 질문할 수 있는 무언가를 세상에 만들 때 학습이 특히 잘 일어난다는 Papert의 생각을 대비합니다. Maya가 원을 걸어 본 뒤 작은 걸음과 작은 회전을 반복하는 반복문을 쓰는 장면으로, 생각의 도구(object to think with)로서의 Logo 거북이와 몸과 맞닿은 학습(body syntonic learning)을 보여 줍니다. 한쪽으로 쏠린 꽃 그림을 틀린 답이 아니라 찾아서 고칠 수 있는 버그로 다루며, 이것이 자기 생각에 대해 생각해 보는 기회가 된다는 점을 보여 줍니다. 낮은 바닥, 높은 천장, 넓은 벽이라는 설계 목표와 Mitchel Resnick 연구팀의 Scratch, 그리고 Resnick의 네 가지 P(프로젝트, 열정, 동료, 놀이)를 제시합니다. 만들기만으로 학습이 보장되지는 않으며, 초기 Logo 연구에서 일반적인 계획 능력으로의 전이가 거의 나타나지 않아 오늘날 많은 교사가 만들기에 대화와 성찰을 함께 짝짓는다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Papert (1980), Papert & Harel (1991), Resnick et al. (2009), and Pea & Kurland (1984); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "scaffolding-zpd": {
+    "id": "scaffolding-zpd",
+    "purpose": "Use this lecture to design help that fits what a learner shows right now and to plan when and how that help fades.",
+    "distinction": "The zone of proximal development (Vygotsky, 1978) describes where help makes a difference; scaffolding (Wood, Bruner & Ross, 1976) names the help itself. Van de Pol, Volman, and Beishuizen (2010) identify three features of scaffolding: contingency, fading, and transfer of responsibility. A contingent rule is to give more help after a failure and less after a success (Wood, Wood & Middleton, 1978).",
+    "caution": "Leo and his tutor are made up. The word scaffolding is often stretched to mean any help; support that never fades is not scaffolding. The zone is not a fixed property of a learner and changes with the task and with who is helping.",
+    "koSummary": "이 강의는 두 단계 문장제를 아직 혼자서는 풀지 못하지만 튜터의 좋은 질문 몇 개가 있으면 풀 수 있는 가상의 아홉 살 아이 Leo로 시작해, 혼자 할 수 있는 것과 도움을 받아 할 수 있는 것 사이의 간격인 Lev Vygotsky의 근접발달영역(zone of proximal development)을 소개합니다. 근접발달영역 아래의 과제는 이미 쉽고, 위의 과제는 도움을 받아도 닿지 않으며, 오늘 도움을 받아 할 수 있는 것을 내일은 혼자 할 수 있는 경우가 많다는 점을 보여 줍니다. 어린아이들이 나무 블록으로 피라미드를 쌓도록 튜터가 돕는 장면을 관찰해 그 도움에 스캐폴딩(scaffolding)이라는 이름을 붙인 David Wood, Jerome Bruner, Gail Ross의 1976년 연구와, 흥미 끌기, 과제 단순화, 목표 유지, 중요한 것 짚어 주기, 좌절 달래기, 시범 보이기라는 튜터의 여섯 가지 행동을 제시합니다. Janneke van de Pol과 동료들이 꼽은 세 가지 특징인 수반성(contingency), 점진적 철회(fading), 책임 이양(transfer of responsibility)을 설명하고, 실패하면 도움을 늘리고 성공하면 줄인다는 규칙을 보여 줍니다. 프롬프트, 문장 시작 틀, 소프트웨어 힌트처럼 도구에 담긴 스캐폴드는 학습자를 볼 수 없어 도움이 너무 많거나 너무 적을 수 있다는 점도 다룹니다. 스캐폴딩이라는 말이 흔히 모든 도움을 가리키는 데 쓰이지만 사라지지 않는 도움은 지원일 뿐 스캐폴딩이 아니며, 근접발달영역은 고정된 점수가 아니라 과제와 돕는 사람에 따라 달라진다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Vygotsky (1978), Wood, Bruner & Ross (1976), van de Pol, Volman & Beishuizen (2010), and Wood, Wood & Middleton (1978); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "cognitive-load": {
+    "id": "cognitive-load",
+    "purpose": "Use this lecture to find extraneous load in your materials and to decide when worked examples help and when they should fade.",
+    "distinction": "Intrinsic load depends on how many interacting elements a task has for a given learner; extraneous load depends on how the material is presented (Sweller, 1988; Sweller, 2010). Worked examples help novices (Sweller & Cooper, 1985), faded examples bridge to problem solving (Renkl & Atkinson, 2003), and the benefit can reverse as expertise grows (Kalyuga, Ayres, Chandler & Sweller, 2003).",
+    "caution": "Ana and her equations are made up. Cognitive load is hard to measure directly and is often rated by learners on a short scale (Paas, 1992). Most evidence comes from well-structured tasks such as math and science problems.",
+    "koSummary": "이 강의는 처음 만난 방정식을 시행착오로 풀었지만 어떻게 풀었는지 설명하지 못하는 가상의 9학년 학생 Ana로 시작해, 작업기억은 한 번에 몇 개의 새로운 항목만 다룰 수 있는 반면 장기기억은 방대한 스키마를 담을 수 있다는 John Sweller의 인지부하이론(cognitive load theory)을 소개합니다. 과제에서 함께 다뤄야 하는 요소의 수에서 오는 내재적 부하(intrinsic load)와, 배우지 않으면서 애쓰게 만드는 설계에서 오는 외재적 부하(extraneous load)를 구분하고, 스키마를 짓는 노력을 가리키던 본유적 부하(germane load)는 이론의 최신 버전에서 내재적 부하에 포함된다는 점을 짚습니다. 시행착오식 탐색이 작업기억을 소모하기 때문에 초보자는 같은 문제를 스스로 풀 때보다 풀이된 문제를 공부할 때 더 많이 배우는 경우가 많다는 풀이 예제 효과(worked example effect)와, 풀이 예제와 비슷한 문제를 짝짓고 단계를 하나씩 줄여 가는 순서를 제시합니다. 도표와 그 이름표가 멀리 떨어져 있을 때 생기는 주의 분산 효과(split attention)와, 화면의 글을 그대로 소리 내어 읽는 것처럼 같은 정보를 두 번 줄 때 생기는 중복 효과(redundancy)도 보여 줍니다. 실력이 늘면 풀이 예제가 오히려 방해가 될 수 있어 안내를 줄여야 한다는 전문성 역전 효과(expertise reversal effect)를 설명합니다. 인지부하는 직접 측정하기 어려워 짧은 자기 평정에 기대는 경우가 많고, 근거의 대부분이 수학과 과학 문제처럼 구조가 잘 짜인 과제에서 나왔다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Sweller (1988), Sweller (2010), Sweller & Cooper (1985), Renkl & Atkinson (2003), Kalyuga, Ayres, Chandler & Sweller (2003), and Paas (1992); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "situated-learning": {
+    "id": "situated-learning",
+    "purpose": "Use this lecture to see learning as growing participation in a practice and to find real but low-risk first tasks for newcomers.",
+    "distinction": "Legitimate peripheral participation (Lave & Wenger, 1991) describes how newcomers move from small, real tasks at the edge of a practice toward full participation. Situated cognition (Brown, Collins & Duguid, 1989) holds that knowledge is shaped by the activity and setting in which it is used. A community of practice combines a domain, a community, and a shared practice (Wenger, 1998; Wenger, McDermott & Snyder, 2002).",
+    "caution": "Ravi is made up. Communities can keep newcomers at the edge and can pass on poor practice as well as good. The theory is stronger at describing learning than at giving direct rules for designing instruction.",
+    "koSummary": "이 강의는 새로 온 견습생이 천을 자르는 일부터가 아니라 단추 달기와 완성된 옷 다림질처럼 공정의 끝에서부터 시작하는 재단사 작업장으로 문을 열며, 라이베리아의 견습 재단사에 대한 Jean Lave의 연구를 바탕으로 합니다. 학습은 머릿속에서만 일어나는 일이 아니라 공동체의 실천에 참여해 그 일원이 되어 가는 것이라는 Lave와 Etienne Wenger의 주장과 '합법적 주변 참여(legitimate peripheral participation)'라는 개념을 소개합니다. 신참의 일은 실제로 쓰이고 인정받는 일이며(합법적), 실수의 대가가 적은 가장자리의 작은 일에서 시작해(주변적) 점차 중심으로 옮겨 가고, 실수하면 천을 망치는 재단은 가장 마지막에 맡게 됩니다. 지식은 그것이 배워지고 쓰이는 활동과 맥락에 의해 형성되며 학교 과제는 그 맥락을 걷어 내기 쉽다는 John Seely Brown, Allan Collins, Paul Duguid의 1989년 주장도 제시합니다. 공유된 영역, 함께 배우는 공동체, 이야기와 도구와 일하는 방식으로 이루어진 실천을 공유하는 Wenger의 실천공동체(communities of practice)를 설명하고, 숙련된 간호사들 곁에서 일하며 병동의 요령과 불문율을 익히는 가상의 신입 간호사 Ravi를 통해 학습이 지켜보는 사람에서 속한 사람으로 바뀌는 정체성의 변화이기도 하다는 점을 보여 줍니다. 공동체가 신참을 가장자리에 묶어 둘 수 있고 좋은 습관만큼 나쁜 습관도 쉽게 전할 수 있으며, 이 이론은 학습을 잘 설명하지만 수업 설계를 위한 직접적인 규칙은 적게 준다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Lave & Wenger (1991), Brown, Collins & Duguid (1989), Wenger (1998), and Wenger, McDermott & Snyder (2002); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "distributed-cognition": {
+    "id": "distributed-cognition",
+    "purpose": "Use this lecture to look at a learning task as a system of people, tools, and representations, and to decide what each learner should still be able to do alone.",
+    "distinction": "Distributed cognition (Hutchins, 1995; Hollan, Hutchins & Kirsh, 2000) takes a system of people and artifacts, not one head, as the unit of analysis, and notes that tools change the task rather than only amplifying the person. Pea (1993) drew design implications for education. Salomon, Perkins, and Globerson (1991) separated effects with a technology (performance while using it) from effects of a technology (what remains without it).",
+    "caution": "Mia, Jon, and Lena are made up. When a system carries the work, individuals may learn little, and most assessments remove the tools. Because the unit of analysis is large, much of the research is careful description rather than controlled experiments.",
+    "koSummary": "이 강의는 착륙 전 조종사들이 적정 속도를 그냥 외우는 대신 카드에서 찾아 소리 내어 말하고 속도계 둘레에 스피드 버그라는 작은 표시를 꽂아 두는 조종석 장면으로 시작해, 기억이 한 사람의 머릿속이 아니라 승무원, 카드, 계기에 걸쳐 퍼져 있다는 Edwin Hutchins의 분산인지(distributed cognition)를 소개합니다. 선원 두 명이 지형지물의 방위를 재고, 한 명이 기록하고, 플로터가 해도에 선을 그어 어느 한 사람도 전체 계산을 하지 않는 해군 함정의 항해팀에 대한 Hutchins의 연구를 보여 줍니다. 스피드 버그를 꽂아 두면 조종사가 숫자를 읽고 비교하는 대신 바늘이 표시를 가리키는지만 확인하면 되듯 도구는 과제 자체를 바꾼다는 점을 설명하고, 사람들 사이, 마음과 사물 사이, 그리고 이전의 작업이 오늘의 도구에 담기는 시간에 걸쳐 인지가 퍼진다는 James Hollan, Hutchins, David Kirsh의 세 가지 분산을 제시합니다. 공유 화이트보드가 누구도 혼자 기억할 수 없는 것을 담아 주는 가상의 실험 모둠, 학습자가 도구와 함께 그리고 서로 함께 생각하는 연습을 해야 한다는 Roy Pea의 주장, 도구를 쓰는 동안의 효과(effects with)와 도구를 치웠을 때 남는 효과(effects of)를 구분한 Gavriel Salomon과 동료들의 질문이 AI 도구 시대에 다시 중요해졌다는 점을 다룹니다. 시스템이 일을 대신하면 개인은 거의 배우지 못할 수 있고 대부분의 시험은 도구를 치우며, 분석 단위가 커서 연구가 실험보다는 꼼꼼한 기술(description)인 경우가 많다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Hutchins (1995), Hollan, Hutchins & Kirsh (2000), Pea (1993), and Salomon, Perkins & Globerson (1991); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
