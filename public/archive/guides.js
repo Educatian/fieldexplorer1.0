@@ -624,8 +624,36 @@ window.LECTURE_GUIDES = {
     "caution": "The Methley and colleagues comparison covers one health topic with differing numbers of search blocks, so it does not show which framework searches best for education questions.",
     "koSummary": "이 강의는 질문의 종류에 따라 PICO, SPIDER 등 질문 프레임워크를 고르는 방법을 Maya와 Omar의 가상 사례로 설명합니다. 유지한 요소는 모두 선정 기준이 되지만, 저자들이 일관되게 쓰는 요소만 검색 블록으로 삼으라고 강조합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The well-built clinical question: A key to evidence-based decisions",
+        "authors": "W. Scott Richardson, Mark C. Wilson, Jim Nishikawa, and Robert S.A. Hayward (Eds.)",
+        "year": 1995,
+        "url": "https://doi.org/10.7326/ACPJC-1995-123-3-A12",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Beyond PICO: The SPIDER tool for qualitative evidence synthesis",
+        "authors": "Alison Cooke, Debbie Smith, and Andrew Booth",
+        "year": 2012,
+        "url": "https://doi.org/10.1177/1049732312452938",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "PICO, PICOS and SPIDER: A comparison study of specificity and sensitivity in three search tools for qualitative systematic reviews",
+        "authors": "Abigail M Methley, Stephen Campbell, Carolyn Chew-Graham, Rosalind McNally, and Sudeh Cheraghi-Sohi",
+        "year": 2014,
+        "url": "https://doi.org/10.1186/s12913-014-0579-0",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-01-review-families": {
     "id": "es-01-review-families",
@@ -634,8 +662,27 @@ window.LECTURE_GUIDES = {
     "caution": "The made-up review that fits only one of four rows is a teaching example, and the lecture notes that families overlap, so the row check is a judgment aid and not a fixed classification test.",
     "koSummary": "이 강의는 리뷰의 제목이 아니라 목적 문장과 Grant와 Booth의 네 가지 과정(검색, 평가, 종합, 분석)으로 리뷰 유형을 판별합니다. 가상의 사례에서 Maya는 체계적 리뷰라는 이름이 붙은 글을 서술적 리뷰로 판단하며, 문제는 사용하지 않은 방법을 주장하는 것이라고 말합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "A typology of reviews: An analysis of 14 review types and associated methodologies",
+        "authors": "Maria J. Grant and Andrew Booth",
+        "year": 2009,
+        "url": "https://doi.org/10.1111/j.1471-1842.2009.00848.x",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Systematic review or scoping review? Guidance for authors when choosing between a systematic or scoping review approach",
+        "authors": "Zachary Munn, Micah D. J. Peters, Cindy Stern, and colleagues",
+        "year": 2018,
+        "url": "https://doi.org/10.1186/s12874-018-0611-x",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-08-six-ways-to-synthesize": {
     "id": "es-08-six-ways-to-synthesize",
@@ -644,8 +691,27 @@ window.LECTURE_GUIDES = {
     "caution": "The twelve studies are made up, and the lecture itself says pooling needs comparable studies, indirect routes are usually weaker than a direct trial and rest on transitivity, and the statistics need training beyond this series.",
     "koSummary": "이 강의는 가상의 연구 12편을 서술적, 범위, 체계적, 통합적 리뷰와 메타분석, 네트워크 메타분석이라는 여섯 방식으로 종합해 봅니다. 통계적 방법은 개념 수준으로만 다루며, 비교 가능한 연구가 필요하고 간접 비교는 보통 직접 시험보다 약하다고 주의를 줍니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The integrative review: Updated methodology",
+        "authors": "Robin Whittemore and Kathleen Knafl",
+        "year": 2005,
+        "url": "https://doi.org/10.1111/j.1365-2648.2005.03621.x",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "A typology of reviews: An analysis of 14 review types and associated methodologies",
+        "authors": "Maria J. Grant and Andrew Booth",
+        "year": 2009,
+        "url": "https://doi.org/10.1111/j.1471-1842.2009.00848.x",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-03-criteria-on-trial": {
     "id": "es-03-criteria-on-trial",
@@ -654,8 +720,27 @@ window.LECTURE_GUIDES = {
     "caution": "Agreement is not correctness, because the sharper rule led both reviewers to wrongly exclude a plausible study, and the kappa values are illustrative numbers from made-up records.",
     "koSummary": "이 강의는 모호한 선정 기준을 실행 가능한 조항으로 바꾸고 파트너와 시범 적용해 봅니다. 가상의 기록 14건에서 코헨의 카파가 0.29에서 0.85로 오르지만, 일치가 곧 정확성은 아니라는 점도 함께 보여 줍니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "A coefficient of agreement for nominal scales",
+        "authors": "Jacob Cohen",
+        "year": 1960,
+        "url": "https://doi.org/10.1177/001316446002000104",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Interrater reliability: The kappa statistic",
+        "authors": "Marry L. McHugh",
+        "year": 2012,
+        "url": "https://doi.org/10.11613/BM.2012.031",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-04-search-strings": {
     "id": "es-04-search-strings",
@@ -664,8 +749,18 @@ window.LECTURE_GUIDES = {
     "caution": "Finding ten of ten known studies is a check and not proof, since other relevant studies may still be missing, and Maya's counts are illustrative.",
     "koSummary": "이 강의는 Maya가 검색식을 네 번 고쳐 가며 알려진 연구 회수율과 선별할 기록 수를 저울질하는 과정을 보여 줍니다. 개념 블록 구성, 절단 검색, 플랫폼 간 구문 변환, 통제어휘, PRISMA-S 기록을 다루지만, 알려진 연구를 모두 찾았다고 해서 누락이 없다는 증거는 아니라고 경고합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "PRISMA-S: An extension to the PRISMA statement for reporting literature searches in systematic reviews",
+        "authors": "Melissa L. Rethlefsen, Shona Kirtley, Siw Waffenschmidt, and colleagues",
+        "year": 2021,
+        "url": "https://doi.org/10.1186/s13643-020-01542-z",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-05-screening-calibration": {
     "id": "es-05-screening-calibration",
@@ -674,8 +769,27 @@ window.LECTURE_GUIDES = {
     "caution": "The lecture only loosely recalls earlier work on sharpening the criterion, and its pilot figures and the rare-keeps set (92.5 percent agreement, kappa 0.36) are made-up numbers, with labels like substantial varying by source.",
     "koSummary": "이 강의는 실제 선별 전에 Maya와 Omar가 가상의 기록 40건으로 2단계 선별을 시범 적용하고 일치율, 우연 일치, 카파를 계산하는 과정을 다룹니다. 불일치를 기준의 모호함, 실수, 판단 차이로 나누어 각각 다르게 해결하고, 표와 카파와 보유 기록 일치도를 함께 보고하라고 권합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "A coefficient of agreement for nominal scales",
+        "authors": "Jacob Cohen",
+        "year": 1960,
+        "url": "https://doi.org/10.1177/001316446002000104",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Interrater reliability: The kappa statistic",
+        "authors": "Marry L. McHugh",
+        "year": 2012,
+        "url": "https://doi.org/10.11613/BM.2012.031",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-06-table-to-claim": {
     "id": "es-06-table-to-claim",
@@ -684,8 +798,18 @@ window.LECTURE_GUIDES = {
     "caution": "Direction counting ignores effect size, uncertainty is large with few studies, and this made-up table cannot separate setting from design.",
     "koSummary": "이 강의는 가상의 연구 9편의 추출표에서 결과가 어느 방향인지, 누구에게 해당하는지, 얼마나 확실한지를 물어 주장과 근거, 한계 범위를 만듭니다. 유의성 투표 대신 방향으로 세는 방법을 쓰되 효과 크기를 무시하고 설정과 설계를 구분하지 못한다는 한계를 분명히 합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Synthesis without meta-analysis (SWiM) in systematic reviews: Reporting guideline",
+        "authors": "Mhairi Campbell, Joanne E McKenzie, Amanda Sowden, and colleagues",
+        "year": 2020,
+        "url": "https://doi.org/10.1136/bmj.l6890",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-09-synthesis-writing": {
     "id": "es-09-synthesis-writing",
@@ -694,8 +818,18 @@ window.LECTURE_GUIDES = {
     "caution": "No study compared discussion with no discussion, so the pattern is a hypothesis for the Discussion and not a Results finding, and the lecture briefly refers back to Maya's earlier claim without requiring that video.",
     "koSummary": "이 강의는 저자별 요약을 개념 중심 종합으로 바꾸는 방법을 Webster와 Watson의 개념 행렬로 보여 줍니다. 가상의 연구 5편에서 얻은 수업 토론과 깊은 수정의 연관성은 검증되지 않은 가설이므로 결과가 아니라 논의에 두어야 한다고 설명합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Analyzing the past to prepare for the future: Writing a literature review",
+        "authors": "Jane Webster and Richard T. Watson",
+        "year": 2002,
+        "url": "https://doi.org/10.2307/4132319",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-07-prisma-flow-and-tool-audit": {
     "id": "es-07-prisma-flow-and-tool-audit",
@@ -704,8 +838,18 @@ window.LECTURE_GUIDES = {
     "caution": "PRISMA says what to report and not how good a review is, and the tool audit is a single made-up assistant, so it illustrates a safe default (sort but never exclude) and not any real tool's accuracy.",
     "koSummary": "이 강의는 Maya의 기록으로 PRISMA 2020 흐름도를 상자별로 다시 만들며 기록, 보고서, 연구를 구분하고 오래된 초안을 정리합니다. 가상의 AI 선별 도구를 다섯 가지 테스트로 점검하여 적격 기록 하나를 놓친 것을 확인하고, 도구는 정렬만 하고 제외는 하지 않는 것을 기본값으로 권합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews",
+        "authors": "Matthew J Page, Joanne E McKenzie, Patrick M Bossuyt, and colleagues",
+        "year": 2021,
+        "url": "https://doi.org/10.1136/bmj.n71",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-02-review-autopsy": {
     "id": "es-02-review-autopsy",
@@ -714,8 +858,36 @@ window.LECTURE_GUIDES = {
     "caution": "PRISMA checks what was reported and not how well the work was done, and silence means not reported and not that it was not done, so the audit of one made-up review does not rate real reviews.",
     "koSummary": "이 강의는 가상의 범위 리뷰를 다섯 단계로 감사하는 종합 사례로, 모든 판단에 인용할 문장이나 다시 계산할 수 있는 숫자를 요구합니다. 흐름도에서 연구 4편이 설명되지 않음을 찾아내지만, PRISMA는 보고 여부를 볼 뿐 수행의 질을 보증하지 않으며 침묵은 하지 않았다는 뜻이 아니라고 강조합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews",
+        "authors": "Matthew J Page, Joanne E McKenzie, Patrick M Bossuyt, and colleagues",
+        "year": 2021,
+        "url": "https://doi.org/10.1136/bmj.n71",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Systematic review or scoping review? Guidance for authors when choosing between a systematic or scoping review approach",
+        "authors": "Zachary Munn, Micah D. J. Peters, Cindy Stern, and colleagues",
+        "year": 2018,
+        "url": "https://doi.org/10.1186/s12874-018-0611-x",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "PRISMA extension for scoping reviews (PRISMA-ScR): Checklist and explanation",
+        "authors": "Andrea C. Tricco, Erin Lillie, Wasifa Zarin, and colleagues",
+        "year": 2018,
+        "url": "https://doi.org/10.7326/M18-0850",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-title-is-not-the-family": {
     "id": "es-short-title-is-not-the-family",
@@ -724,8 +896,18 @@ window.LECTURE_GUIDES = {
     "caution": "Narrative reviews have their own job, so the problem shown is claiming a method the review did not use and not the narrative form, and the example is made up.",
     "koSummary": "이 짧은 영상은 체계적이라는 이름이 붙은 가상의 리뷰를 Grant와 Booth의 네 과정으로 점검해 제목이 유형을 정하지 않음을 보여 줍니다. 네 행 중 하나만 맞아 서술적 리뷰로 판단하며, 문제는 서술적 리뷰 자체가 아니라 쓰지 않은 방법을 내세우는 것이라고 말합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "A typology of reviews: An analysis of 14 review types and associated methodologies",
+        "authors": "Maria J. Grant and Andrew Booth",
+        "year": 2009,
+        "url": "https://doi.org/10.1111/j.1471-1842.2009.00848.x",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-choosing-a-review": {
     "id": "es-short-choosing-a-review",
@@ -734,8 +916,27 @@ window.LECTURE_GUIDES = {
     "caution": "Scoping still requires rigorous, transparent methods, and the statistical methods are beyond this series, so the short is a map and not a decision rule.",
     "koSummary": "이 짧은 영상은 Maya의 질문에서 출발해 적합한 리뷰 유형을 고르는 길을 안내하며 Grant와 Booth의 목적 적합성을 근거로 어느 유형도 자동으로 최선은 아니라고 말합니다. 범위 리뷰도 엄격하고 투명한 방법이 필요하고, 통계적 방법은 이 시리즈의 범위를 벗어난다고 덧붙입니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "A typology of reviews: An analysis of 14 review types and associated methodologies",
+        "authors": "Maria J. Grant and Andrew Booth",
+        "year": 2009,
+        "url": "https://doi.org/10.1111/j.1471-1842.2009.00848.x",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Systematic review or scoping review? Guidance for authors when choosing between a systematic or scoping review approach",
+        "authors": "Zachary Munn, Micah D. J. Peters, Cindy Stern, and colleagues",
+        "year": 2018,
+        "url": "https://doi.org/10.1186/s12874-018-0611-x",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-high-agreement-low-kappa": {
     "id": "es-short-high-agreement-low-kappa",
@@ -744,8 +945,27 @@ window.LECTURE_GUIDES = {
     "caution": "Kappa is not broken but points at the rare keeps, and these figures come from made-up records, so they show a mechanism and not typical values for real screening.",
     "koSummary": "이 짧은 영상은 가상의 검토자 둘이 40건 중 37건(92.5%)에서 일치해도 보유 기록이 드물면 카파가 0.36에 그치는 이유를 설명합니다. 카파가 고장 난 것이 아니라 드문 보유 기록을 가리키는 것이므로 카파와 표, 보유 및 제외 일치도를 함께 보고하라고 합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "High agreement but low kappa: I. The problems of two paradoxes",
+        "authors": "Alvan R. Feinstein and Domenic V. Cicchetti",
+        "year": 1990,
+        "url": "https://doi.org/10.1016/0895-4356(90)90158-L",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Interrater reliability: The kappa statistic",
+        "authors": "Marry L. McHugh",
+        "year": 2012,
+        "url": "https://doi.org/10.11613/BM.2012.031",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-vote-counting": {
     "id": "es-short-vote-counting",
@@ -754,8 +974,27 @@ window.LECTURE_GUIDES = {
     "caution": "Direction counting ignores effect size and study size, so it shows which way the evidence leans and is not proof, and the nine studies are made up.",
     "koSummary": "이 짧은 영상은 가상의 연구 9편에서 유의한 결과는 둘뿐이지만 작은 연구 다섯 편이 모두 긍정 방향임을 보여 유의성 세기의 오류를 설명합니다. 방향으로 세면 긍정 7편, 부정 2편이 되지만, 이는 효과 크기를 무시하므로 증거가 기우는 방향일 뿐 증명은 아니라고 주의합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Synthesis without meta-analysis (SWiM) in systematic reviews: Reporting guideline",
+        "authors": "Mhairi Campbell, Joanne E McKenzie, Amanda Sowden, and colleagues",
+        "year": 2020,
+        "url": "https://doi.org/10.1136/bmj.l6890",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Synthesizing and presenting findings using other methods",
+        "authors": "Joanne E McKenzie and Sue E Brennan",
+        "year": 2019,
+        "url": "https://doi.org/10.1002/9781119536604.ch12",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-prisma-is-not-quality": {
     "id": "es-short-prisma-is-not-quality",
@@ -764,8 +1003,27 @@ window.LECTURE_GUIDES = {
     "caution": "Silence about a protocol does not prove there was none, only that a reader cannot check, so a reporting check alone cannot rate a real review's quality.",
     "koSummary": "이 짧은 영상은 리뷰가 보고되었는지와 잘 수행되었는지를 구분하며, PRISMA 2020 자체가 방법론적 질 평가에 쓰지 말라고 밝힌다는 점을 인용합니다. 가상의 흐름도에서 경로 없는 전문 4편을 찾아내고, 프로토콜 언급이 없다고 해서 없었다는 뜻은 아니며 독자가 확인할 수 없을 뿐이라고 말합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The PRISMA 2020 statement: An updated guideline for reporting systematic reviews",
+        "authors": "Matthew J Page, Joanne E McKenzie, Patrick M Bossuyt, and colleagues",
+        "year": 2021,
+        "url": "https://doi.org/10.1136/bmj.n71",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "PRISMA 2020 explanation and elaboration: Updated guidance and exemplars for reporting systematic reviews",
+        "authors": "Matthew J Page, David Moher, Patrick M Bossuyt, and colleagues",
+        "year": 2021,
+        "url": "https://doi.org/10.1136/bmj.n160",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-known-study-recall": {
     "id": "es-short-known-study-recall",
@@ -774,8 +1032,18 @@ window.LECTURE_GUIDES = {
     "caution": "A known study only warns you about the words it uses, so ten of ten is not proof of completeness and needs supplementary methods and peer review of the string.",
     "koSummary": "이 짧은 영상은 이미 알고 있는 연구를 기준으로 검색식을 시험하는 알려진 연구 회수율을 설명합니다. Maya의 넓은 검색식과 좁은 검색식은 모두 10편 중 10편을 찾지만 기록 수는 거의 다섯 배 차이가 나며, 이는 하나의 단순한 점검일 뿐 보완 방법과 검색식 동료 검토가 필요하다고 합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Searching for and selecting studies",
+        "authors": "Carol Lefebvre, Julie Glanville, Simon Briscoe, and colleagues",
+        "year": 2019,
+        "url": "https://doi.org/10.1002/9781119536604.ch4",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-ai-tools-dont-exclude": {
     "id": "es-short-ai-tools-dont-exclude",
@@ -784,8 +1052,18 @@ window.LECTURE_GUIDES = {
     "caution": "This is one made-up assistant on forty records, so it shows how a loss can hide in an exclusion count and not how any real tool performs.",
     "koSummary": "이 짧은 영상은 가상의 AI 선별 도구가 Maya가 직접 선별한 40건에서 포함 6건 중 5건과 다른 4건을 표시해, 도구가 제외했다면 포함 연구 하나가 사라졌을 것임을 보여 줍니다. 자동 제외 건수로는 어떤 연구를 잃었는지 알 수 없으므로 도구는 정렬만 하고 제외는 사람이 맡는 것을 기본값으로 권합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Position statement on artificial intelligence (AI) use in evidence synthesis across Cochrane, the Campbell Collaboration, JBI, and the Collaboration for Environmental Evidence 2025",
+        "authors": "Ella Flemyng, Anna Noel-Storr, Biljana Macura, and colleagues",
+        "year": 2025,
+        "url": "https://doi.org/10.11124/jbies-25-00480",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-disclosing-ai-use": {
     "id": "es-short-disclosing-ai-use",
@@ -794,8 +1072,26 @@ window.LECTURE_GUIDES = {
     "caution": "Rules differ by venue, so the example statements are not a policy and the journal, funder, or institution policy still has to be checked.",
     "koSummary": "이 짧은 영상은 ICMJE 권고(어떤 도구, 어떤 목적, 책임지는 사람, AI는 저자가 아님)에서 시작해 증거 종합 단체들의 공동 성명이 더하는 버전, 날짜, 검증, 출력 확인 방법까지 AI 사용 공개문을 키워 갑니다. 규정은 곳마다 다르므로 저널, 연구비 지원기관, 소속 기관의 정책을 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Position statement on artificial intelligence (AI) use in evidence synthesis across Cochrane, the Campbell Collaboration, JBI, and the Collaboration for Environmental Evidence 2025",
+        "authors": "Ella Flemyng, Anna Noel-Storr, Biljana Macura, and colleagues",
+        "year": 2025,
+        "url": "https://doi.org/10.11124/jbies-25-00480",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Recommendations for the conduct, reporting, editing, and publication of scholarly work in medical journals",
+        "authors": "International Committee of Medical Journal Editors",
+        "url": "https://www.icmje.org/recommendations/",
+        "relationship": "Further reading",
+        "access": "Open access · website",
+        "verificationNote": "ICMJE page opens and its text carries this title; the recommendations are updated over time."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-pico": {
     "id": "es-short-framework-pico",
@@ -804,8 +1100,18 @@ window.LECTURE_GUIDES = {
     "caution": "Cochrane finds PICO generally unsuitable for qualitative questions and calls searching every letter usually unnecessary, so PICO should not be applied by default to every question.",
     "koSummary": "이 짧은 영상은 Richardson 등이 1995년에 제안한 PICO의 각 글자가 Maya의 챗봇 피드백 질문에서 무엇이 되는지 설명합니다. 모든 요소는 선정 기준이 되지만 보통 대상과 중재만 검색 블록이 되며, Cochrane은 질적 질문에 PICO가 대체로 맞지 않는다고 봅니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The well-built clinical question: A key to evidence-based decisions",
+        "authors": "W. Scott Richardson, Mark C. Wilson, Jim Nishikawa, and Robert S.A. Hayward (Eds.)",
+        "year": 1995,
+        "url": "https://doi.org/10.7326/ACPJC-1995-123-3-A12",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-picos-picot-picoc": {
     "id": "es-short-framework-picos-picot-picoc",
@@ -814,8 +1120,18 @@ window.LECTURE_GUIDES = {
     "caution": "That design block was untested in education and T is not a publication date limit, so the one health example does not show that extra letters help or hurt elsewhere.",
     "koSummary": "이 짧은 영상은 PICO에 연구 설계, 시간, 맥락을 더한 PICOS, PICOT, PICOC를 다루며 추가 글자가 검색 블록이 될 가치가 있는 경우를 묻습니다. 한 보건 리뷰에서 질적 설계 블록이 검색 결과를 23,758건에서 448건으로 줄였지만 관련 논문 18편 중 5편을 놓쳤고, 교육 분야에서는 검증되지 않았으며 T는 출판 연도 제한이 아니라고 주의합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "PICO, PICOS and SPIDER: A comparison study of specificity and sensitivity in three search tools for qualitative systematic reviews",
+        "authors": "Abigail M Methley, Stephen Campbell, Carolyn Chew-Graham, Rosalind McNally, and Sudeh Cheraghi-Sohi",
+        "year": 2014,
+        "url": "https://doi.org/10.1186/s12913-014-0579-0",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-peco-peo": {
     "id": "es-short-framework-peco-peo",
@@ -824,8 +1140,18 @@ window.LECTURE_GUIDES = {
     "caution": "Both frameworks give association and not proof that something works, so an exposure question cannot support effectiveness claims.",
     "koSummary": "이 짧은 영상은 Maya의 자발적 챗봇 사용과 글쓰기 자기효능감 질문으로, 누군가 배정한 중재와 학생이 스스로 하는 노출을 구분합니다. PECO와 JBI의 PEO, 비교 대상 설정, 결과를 방향 없이 서술하는 법을 다루며, 두 틀은 연관성만 보여 줄 뿐 효과를 증명하지 않는다고 말합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Identifying the PECO: A framework for formulating good questions to explore the association of environmental and other exposures with health outcomes",
+        "authors": "Rebecca L. Morgan, Paul Whaley, Kristina A. Thayer, and Holger J. Schünemann",
+        "year": 2018,
+        "url": "https://doi.org/10.1016/j.envint.2018.07.015",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-spider": {
     "id": "es-short-framework-spider",
@@ -834,8 +1160,27 @@ window.LECTURE_GUIDES = {
     "caution": "That comparison covers one health topic, is untested in education, and SPIDER's own authors say it needs more testing, so its precision gain should not be assumed to carry over.",
     "koSummary": "이 짧은 영상은 Cooke, Smith, Booth의 SPIDER(표본, 관심 현상, 설계, 평가, 연구 유형)를 학생이 챗봇 피드백을 어떻게 경험하는지를 묻는 Omar의 질문에 적용합니다. 기본적으로 표본과 현상만 검색하며, Methley 등의 비교에서 정밀도는 높았지만 관련 연구 18편 중 5편을 놓쳤고 한 보건 주제여서 교육에는 검증되지 않았다고 주의합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Beyond PICO: The SPIDER tool for qualitative evidence synthesis",
+        "authors": "Alison Cooke, Debbie Smith, and Andrew Booth",
+        "year": 2012,
+        "url": "https://doi.org/10.1177/1049732312452938",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "PICO, PICOS and SPIDER: A comparison study of specificity and sensitivity in three search tools for qualitative systematic reviews",
+        "authors": "Abigail M Methley, Stephen Campbell, Carolyn Chew-Graham, Rosalind McNally, and Sudeh Cheraghi-Sohi",
+        "year": 2014,
+        "url": "https://doi.org/10.1186/s12913-014-0579-0",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-pcc-pico": {
     "id": "es-short-framework-pcc-pico",
@@ -844,8 +1189,27 @@ window.LECTURE_GUIDES = {
     "caution": "The short states that no study was found testing either framework for searching, so the search-or-screen advice rests on reasoning and not on tested performance.",
     "koSummary": "이 짧은 영상은 Maya의 범위 지도에는 JBI의 PCC를, Omar의 질적 질문에는 PICo를 적용합니다. 유지한 요소는 선정 기준이 되고 대상과 개념은 검색하되, 초록이 배경을 일관되게 쓰지 않을 수 있어 맥락은 대개 선별 단계에서 다루며, 두 틀의 검색 성능을 시험한 연구는 찾지 못했다고 밝힙니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Guidance for conducting systematic scoping reviews",
+        "authors": "Micah D.J. Peters, Christina M. Godfrey, Hanan Khalil, and colleagues",
+        "year": 2015,
+        "url": "https://doi.org/10.1097/XEB.0000000000000050",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Developing the review question and inclusion criteria",
+        "authors": "Cindy Stern, Zoe Jordan, and Alexa McArthur",
+        "year": 2014,
+        "url": "https://doi.org/10.1097/01.NAJ.0000445689.67800.86",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-spice-eclipse": {
     "id": "es-short-framework-spice-eclipse",
@@ -854,8 +1218,27 @@ window.LECTURE_GUIDES = {
     "caution": "Searching setting and intervention is the video's advice and not Booth's rule, and no study was found testing either framework.",
     "koSummary": "이 짧은 영상은 서비스 질문에는 Booth의 SPICE를 글쓰기센터 챗봇 사례로, 정책 요청에는 Wildridge와 Bell의 ECLIPSE를 소개합니다. 환경과 중재를 검색하고 나머지는 선별하라는 것은 Booth의 규칙이 아니라 영상의 제안이며, 두 틀을 시험한 연구는 찾지 못했다고 밝힙니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Clear and present questions: Formulating questions for evidence based practice",
+        "authors": "Andrew Booth",
+        "year": 2006,
+        "url": "https://doi.org/10.1108/07378830610692127",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "How CLIP became ECLIPSE: A mnemonic to assist in searching for health policy/management information",
+        "authors": "Valerie Wildridge and Lucy Bell",
+        "year": 2002,
+        "url": "https://doi.org/10.1046/j.1471-1842.2002.00378.x",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-cimo": {
     "id": "es-short-framework-cimo",
@@ -864,8 +1247,18 @@ window.LECTURE_GUIDES = {
     "caution": "The short notes that no study was found testing CIMO, so the choice to leave the mechanism out of the search is advice and not demonstrated performance.",
     "koSummary": "이 짧은 영상은 경영학 연구에서 나온 CIMO(맥락, 중재, 기제, 결과)를 어떻게와 어떤 상황에서 질문에 적용하며 Maya의 챗봇 피드백 명제와 성찰 과제를 사용합니다. 맥락과 중재는 검색하고 결과는 선별하며 기제는 검색하지 않고 전문에서 찾아 읽으라고 하고, CIMO를 시험한 연구는 찾지 못했다고 밝힙니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Developing design propositions through research synthesis",
+        "authors": "David Denyer, David Tranfield, and Joan Ernst van Aken",
+        "year": 2008,
+        "url": "https://doi.org/10.1177/0170840607088020",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "es-short-framework-perspectif-behemoth": {
     "id": "es-short-framework-perspectif-behemoth",
@@ -874,8 +1267,27 @@ window.LECTURE_GUIDES = {
     "caution": "Neither framework has been formally evaluated, so they are structured prompts for thinking and not tested search methods.",
     "koSummary": "이 짧은 영상은 맥락, 시점, 누구의 관점인지가 중요한 복합 중재의 질적 리뷰에는 PerSPEcTiF를, 이론 찾기에는 BeHEMoTh를 소개합니다. PerSPEcTiF의 일곱 글자를 모두 검색하는 것은 권하지 않으며 이론을 찾을 때는 제외어와 인용 검색을 더하되, 두 틀 모두 공식 평가를 받은 적이 없다고 합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Formulating questions to explore complex interventions within qualitative evidence synthesis",
+        "authors": "Andrew Booth, Jane Noyes, Kate Flemming, and colleagues",
+        "year": 2019,
+        "url": "https://doi.org/10.1136/bmjgh-2018-001107",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Systematic searching for theory to inform systematic reviews: Is it feasible? Is it desirable?",
+        "authors": "Andrew Booth and Christopher Carroll",
+        "year": 2015,
+        "url": "https://doi.org/10.1111/hir.12108",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-who-learns-when-a-group-learns": {
     "id": "cscl-who-learns-when-a-group-learns",
@@ -884,8 +1296,18 @@ window.LECTURE_GUIDES = {
     "caution": "The three students and their scores are made up; the example shows why the dispute is about definitions of learning, so no single experiment can settle it.",
     "koSummary": "이 영상은 협력 학습에서 “누가 배우는가”를 두고 Stahl의 집단 인지 관점과 개인 학습을 중시하는 인지 전통을 비교합니다. 주장이 개인·집단·공동체 중 어느 수준에 관한 것인지, 증거와 분석이 같은 수준에 있는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Group cognition: Computer support for building collaborative knowledge",
+        "authors": "Gerry Stahl",
+        "year": 2006,
+        "url": "https://doi.org/10.7551/mitpress/3372.001.0001",
+        "relationship": "Further reading",
+        "access": "Book · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-collaborative-cognitive-load": {
     "id": "cscl-collaborative-cognitive-load",
@@ -894,8 +1316,18 @@ window.LECTURE_GUIDES = {
     "caution": "The French class is made up, and the cited average effect of collaboration is not a test of CCLT's complexity prediction, which has mixed support in the studies the video describes.",
     "koSummary": "이 영상은 여러 사람이 작업기억을 나눠 쓰지만 조정 비용이 이득을 상쇄할 수 있다는 협력적 인지부하 이론을 소개하고, 이에 대한 세 갈래의 반론을 정리합니다. 과제가 실제로 복잡했는지, 결과가 집단 산출물인지 이후 개인 시험인지, 대화 과정을 분석했는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "From cognitive load theory to collaborative cognitive load theory",
+        "authors": "Paul A. Kirschner, John Sweller, Femke Kirschner, and Jimmy Zambrano R.",
+        "year": 2018,
+        "url": "https://doi.org/10.1007/s11412-018-9277-y",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-scripts-guidance-or-straitjacket": {
     "id": "cscl-scripts-guidance-or-straitjacket",
@@ -904,8 +1336,27 @@ window.LECTURE_GUIDES = {
     "caution": "The classroom and students are made up, and the cited reviews could not test the theory's right-level principle and share authors with the theory, as the video itself notes.",
     "koSummary": "이 영상은 협력 스크립트가 토론을 돕는 사다리인지, 학습자를 묶는 틀인지를 과잉 스크립팅 비판과 스크립트 안내 이론을 중심으로 비교합니다. 어떤 결과를 측정했는지, 스크립트가 어느 수준을 겨냥하는지, 점차 줄이거나 조정되는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Toward a script theory of guidance in computer-supported collaborative learning",
+        "authors": "Frank Fischer, Ingo Kollar, Karsten Stegmann, and Christof Wecker",
+        "year": 2013,
+        "url": "https://doi.org/10.1080/00461520.2012.748005",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Contribution to a theory of CSCL scripts: Taking into account the appropriation of scripts by learners",
+        "authors": "Pierre Tchounikine",
+        "year": 2016,
+        "url": "https://doi.org/10.1007/s11412-016-9240-8",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-eight-provocations-for-cscl": {
     "id": "cscl-eight-provocations-for-cscl",
@@ -914,8 +1365,18 @@ window.LECTURE_GUIDES = {
     "caution": "Room twelve and its ThinkBoard tool are made up; the video notes that, among the replies it checked, only the scripts-versus-agency provocation received a direct quantitative test.",
     "koSummary": "이 영상은 Wise와 Schwarz(2017)가 가상의 두 목소리인 도발자와 조정자의 대화로 쓴 CSCL 분야의 여덟 가지 도발을 소개하고, 그중 세 가지를 가상의 학급 사례에 적용해 봅니다. 논문을 읽을 때 어떤 도발에 암묵적으로 편을 드는지, 각 주장이 증거·정의·가치 중 무엇에 관한 것인지 따져 보라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Visions of CSCL: Eight provocations for the future of the field",
+        "authors": "Alyssa Friend Wise and Baruch B. Schwarz",
+        "year": 2017,
+        "url": "https://doi.org/10.1007/s11412-017-9267-5",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-the-minimal-guidance-debate": {
     "id": "cscl-the-minimal-guidance-debate",
@@ -924,8 +1385,36 @@ window.LECTURE_GUIDES = {
     "caution": "The two seventh-grade classes are made up, and the meta-analysis's comparison group was a mix, so its result does not show guided discovery beating direct instruction.",
     "koSummary": "이 영상은 최소 안내 교수가 초보 학습자에게 덜 효과적이라는 Kirschner, Sweller, Clark(2006)의 주장과, 문제 기반·탐구 학습은 비계가 풍부하다는 Hmelo-Silver 등의 반론, 그리고 무엇을 가르칠지를 먼저 물은 Kuhn의 질문을 비교합니다. 안내에 관한 연구를 읽을 때 무엇과 비교했는지, 학습자가 초보자인지 숙련자인지, 무엇을 언제 측정했는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Why minimal guidance during instruction does not work",
+        "authors": "Paul A. Kirschner, John Sweller, and Richard E. Clark",
+        "year": 2006,
+        "url": "https://doi.org/10.1207/s15326985ep4102_1",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Scaffolding and achievement in problem-based and inquiry learning: A response to Kirschner, Sweller, and Clark",
+        "authors": "Cindy E. Hmelo-Silver, Ravit Golan Duncan, and Clark A. Chinn",
+        "year": 2007,
+        "url": "https://doi.org/10.1080/00461520701263368",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Does discovery-based instruction enhance learning?",
+        "authors": "Louis Alfieri, Patricia J. Brooks, Naomi J. Aldrich, and Harriet R. Tenenbaum",
+        "year": 2011,
+        "url": "https://doi.org/10.1037/a0021017",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-cognitive-vs-situative": {
     "id": "cscl-cognitive-vs-situative",
@@ -934,8 +1423,36 @@ window.LECTURE_GUIDES = {
     "caution": "Ana and her fruit stall are made up; the joint paper listed points of agreement but left disputed whether the four claims were really situated learning's, and which unit of analysis to start from.",
     "koSummary": "이 영상은 상황 학습과 연결된 네 가지 주장이 지나치다는 Anderson, Reder, Simon의 비판과, 그것은 상황 학습의 핵심 주장이 아니며 진짜 차이는 개인의 마음에서 출발하는지 사람과 도구의 상호작용에서 출발하는지에 있다는 Greeno의 반론을 따라갑니다. 연구를 읽을 때 학습하는 주체가 개인·집단·체계 중 무엇인지, 측정이 무언가를 획득한다고 보는지 참여한다고 보는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Situated learning and education",
+        "authors": "John R. Anderson, Lynne M. Reder, and Herbert A. Simon",
+        "year": 1996,
+        "url": "https://doi.org/10.3102/0013189X025004005",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "On claims that answer the wrong questions",
+        "authors": "James G. Greeno",
+        "year": 1997,
+        "url": "https://doi.org/10.3102/0013189X026001005",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "On two metaphors for learning and the dangers of choosing just one",
+        "authors": "Anna Sfard",
+        "year": 1998,
+        "url": "https://doi.org/10.3102/0013189X027002004",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-is-childrens-knowledge-coherent": {
     "id": "cscl-is-childrens-knowledge-coherent",
@@ -944,8 +1461,18 @@ window.LECTURE_GUIDES = {
     "caution": "Theo is made up and both readings fit his answers; the replication's authors said they did not know why their results differed from the original study's.",
     "koSummary": "이 영상은 아이들의 과학 개념이 상황에 따라 켜지는 작은 직관들의 모음이라는 diSessa의 관점과, 대체로 일관된 틀 이론을 이룬다는 Vosniadou의 관점을 비교합니다. 일관성을 얼마나 엄격하게 정의했는지, 몇 가지 상황을 물었는지, 개방형 질문인지 선택형 질문인지에 따라 결론이 달라질 수 있음을 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Mental models of the earth: A study of conceptual change in childhood",
+        "authors": "Stella Vosniadou and William F Brewer",
+        "year": 1992,
+        "url": "https://doi.org/10.1016/0010-0285(92)90018-W",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-is-transfer-real": {
     "id": "cscl-is-transfer-real",
@@ -954,8 +1481,36 @@ window.LECTURE_GUIDES = {
     "caution": "Sam is made up, the 2004 experiment used small groups, and the brain-training reviews concern training programs, not school learning.",
     "koSummary": "이 영상은 전이가 드물다는 Detterman(1993)의 주장, 고립된 일회성 시험이 더 빠른 학습으로 나타나는 전이를 놓친다는 Bransford와 Schwartz의 반론, 그리고 학습자 자신의 유사성 판단을 중시하는 Lobato의 관점을 비교합니다. '전이가 없다'는 결과를 볼 때 어떤 정의를 썼는지, 시험 중에 배울 기회가 있었는지, 무엇이 유사한지를 누가 정했는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Rethinking transfer: A simple proposal with multiple implications",
+        "authors": "John D. Bransford and Daniel L. Schwartz",
+        "year": 1999,
+        "url": "https://doi.org/10.3102/0091732X024001061",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Alternative perspectives on the transfer of learning: History, issues, and challenges for future research",
+        "authors": "Joanne Lobato",
+        "year": 2006,
+        "url": "https://doi.org/10.1207/s15327809jls1504_1",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Inventing to prepare for future learning",
+        "authors": "Daniel L. Schwartz and Taylor Martin",
+        "year": 2004,
+        "url": "https://doi.org/10.1207/s1532690xci2202_1",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-design-based-research-answer-to-what": {
     "id": "cscl-design-based-research-answer-to-what",
@@ -964,8 +1519,36 @@ window.LECTURE_GUIDES = {
     "caution": "Ms. Ortiz's class and its scores are made up, and Dede's commentary is described only through others' reports, as the video notes.",
     "koSummary": "이 영상은 실제 교실에서 설계를 반복 개선하며 이론을 검증한다는 설계 기반 연구(DBR)의 주장과, 그 주장에 근거가 있는지, 방법과 자료를 잇는 논증 문법이 있는지, 언제 설계를 멈추거나 버려야 하는지를 물은 비판을 비교합니다. DBR 논문을 읽을 때 설계 이전의 연구 질문, 주기 사이에 바뀐 것과 다른 설명의 검토 여부, 무엇이 실패로 간주되었을지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Design-based research: An emerging paradigm for educational inquiry",
+        "authors": "The Design-Based Research Collective",
+        "year": 2003,
+        "url": "https://doi.org/10.3102/0013189X032001005",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Design research in education: Yes, but is it methodological?",
+        "authors": "Anthony (Eamonn) Kelly",
+        "year": 2004,
+        "url": "https://doi.org/10.1207/s15327809jls1301_6",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Conjecture mapping: An approach to systematic educational design research",
+        "authors": "William Sandoval",
+        "year": 2014,
+        "url": "https://doi.org/10.1080/10508406.2013.778204",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Crossref lists the online-first year 2013; the journal issue is 2014. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-will-media-influence-learning": {
     "id": "cscl-will-media-influence-learning",
@@ -974,8 +1557,36 @@ window.LECTURE_GUIDES = {
     "caution": "The tablet study is made up, and the later meta-analyses compare conditions that usually change the method too, so they do not settle the dispute.",
     "koSummary": "이 영상은 매체가 교수를 실어 나르는 수단일 뿐 학습을 일으키지 않는다는 Clark의 주장과, 좋은 설계에서는 매체의 기능이 교수 방법을 가능하게 한다는 Kozma의 반론을 비교합니다. 기술이 학습을 개선했다는 주장을 볼 때 교수 방법, 연습량, 새로움, 학습 시간 등 기술 외에 무엇이 함께 바뀌었는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Media will never influence learning",
+        "authors": "Richard E. Clark",
+        "year": 1994,
+        "url": "https://doi.org/10.1007/BF02299088",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Will media influence learning? Reframing the debate",
+        "authors": "Robert B. Kozma",
+        "year": 1994,
+        "url": "https://doi.org/10.1007/BF02299087",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Reconsidering research on learning from media",
+        "authors": "Richard E. Clark",
+        "year": 1983,
+        "url": "https://doi.org/10.3102/00346543053004445",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-does-the-jigsaw-classroom-work": {
     "id": "cscl-does-the-jigsaw-classroom-work",
@@ -984,8 +1595,27 @@ window.LECTURE_GUIDES = {
     "caution": "The four kids and their bike lesson are made up; the d = 1.20 figure is reported secondhand, the 2025 review counts studies rather than pooling effects, and treating social and learning claims separately is the video's own reading.",
     "koSummary": "이 영상은 1971년 미국 텍사스의 인종 통합 학교에서 시작된 직소(jigsaw) 수업이 실제로 효과가 있는지를 묻습니다. 초기 연구와 일부 종합 연구는 큰 효과를 보고했지만, 약 850명의 6학년을 대상으로 한 무작위 실험에서는 학습 효과가 거의 0이었고, 최근 리뷰는 연구 수를 세는 방식이라 효과의 크기까지는 알려 주지 않습니다. 직소 연구를 읽을 때 결과가 사회적 관계에 관한 것인지 학습에 관한 것인지, 실제로 전문가 모둠과 서로 가르치기 단계를 거쳤는지, 무엇과 비교했고 학생 수는 얼마였는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Does jigsaw classroom improve learning outcomes? Five experiments and an internal meta-analysis",
+        "authors": "Arnaud Stanczak, PROFAN Consortium, Céline Darnon, and colleagues",
+        "year": 2022,
+        "url": "https://doi.org/10.1037/edu0000730",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Interdependence in the classroom: A field study",
+        "authors": "Nancy T. Blaney, Cookie Stephan, David Rosenfield, Elliot Aronson, and Jev Sikes",
+        "year": 1977,
+        "url": "https://doi.org/10.1037/0022-0663.69.2.121",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-when-is-hard-helpful": {
     "id": "cscl-when-is-hard-helpful",
@@ -994,8 +1624,36 @@ window.LECTURE_GUIDES = {
     "caution": "Leo and Mia are made up, van Gog and Sweller's paper is used only through its abstract, the reply's summary of their claim is stronger than that abstract's wording, and the spacing evidence comes mostly from tests within a day with young adults.",
     "koSummary": "이 영상은 스스로 시험 보기, 간격을 두고 공부하기, 문제 유형 섞기처럼 연습할 때는 더 어렵고 성과가 낮아 보여도 나중에 더 오래 남는다는 Bjork의 '바람직한 어려움'과, 서로 얽힌 요소가 많은 복잡한 자료에서는 그 효과가 사라질 수 있다는 van Gog와 Sweller의 문제 제기를 비교합니다. 관련 연구를 읽을 때 연습 후 얼마 뒤에 시험을 봤는지, 학습자가 그 어려움을 감당할 수 있었는지, 어떤 종류의 자료였는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Not new, but nearly forgotten: The testing effect decreases or even disappears as the complexity of learning materials increases",
+        "authors": "Tamara van Gog and John Sweller",
+        "year": 2015,
+        "url": "https://doi.org/10.1007/s10648-015-9310-x",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "The testing effect is alive and well with complex materials",
+        "authors": "Jeffrey D. Karpicke and William R. Aue",
+        "year": 2015,
+        "url": "https://doi.org/10.1007/s10648-015-9309-3",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Test-enhanced learning: Taking memory tests improves long-term retention",
+        "authors": "Henry L. Roediger and Jeffrey D. Karpicke",
+        "year": 2006,
+        "url": "https://doi.org/10.1111/j.1467-9280.2006.01693.x",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-can-you-script-people-to-build-on-each-other": {
     "id": "cscl-can-you-script-people-to-build-on-each-other",
@@ -1004,8 +1662,27 @@ window.LECTURE_GUIDES = {
     "caution": "Leo, Ana and the ice-cube chat are made up; the early link between transactivity and learning is correlational, the 2016 study is described from its abstract, and a non-significant gap with low power is not evidence of no effect.",
     "koSummary": "이 영상은 협력 스크립트로 학습자들이 상대의 추론을 받아 다시 발전시키게(transactivity) 할 수 있는지, 그리고 그것이 학습에 도움이 되는지를 묻습니다. 스크립트 이론은 이를 학습 원리로 내세웠지만, 같은 연구진의 메타분석에서는 이를 유도한 스크립트와 그렇지 않은 스크립트의 차이가 통계적으로 유의하지 않았고 검정력도 낮아 아직 어느 쪽이라고 말하기 어렵습니다. 연구를 읽을 때 학생들이 실제로 서로의 생각을 발전시켰는지, 초록이 결과 표와 맞는지, 두 집단의 차이를 충분한 검정력으로 직접 검정했는지 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Socio-cognitive scaffolding with computer-supported collaboration scripts: A meta-analysis",
+        "authors": "Freydis Vogel, Christof Wecker, Ingo Kollar, and Frank Fischer",
+        "year": 2017,
+        "url": "https://doi.org/10.1007/s10648-016-9361-7",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Crossref lists the online-first year 2016; the journal issue is 2017. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Toward a script theory of guidance in computer-supported collaborative learning",
+        "authors": "Frank Fischer, Ingo Kollar, Karsten Stegmann, and Christof Wecker",
+        "year": 2013,
+        "url": "https://doi.org/10.1080/00461520.2012.748005",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-can-you-see-a-group-regulate-itself": {
     "id": "cscl-can-you-see-a-group-regulate-itself",
@@ -1014,8 +1691,18 @@ window.LECTURE_GUIDES = {
     "caution": "Chloé and the podcast group are made up, and the example of coding only talk about time and plans is the video's illustration; all thirteen reviewed studies were descriptive without a control group, the 103-teacher study used student reports and compared strong and weak groups, and stronger students may have worked this way all along; the 2015 review predates newer studies, so check the date.",
     "koSummary": "이 영상은 집단이 스스로 학습을 조절하는 모습(사회적으로 공유된 조절, SSRL)을 실제로 관찰하고 구분할 수 있는지를 묻습니다. 2015년 리뷰는 공유된 조절을 공동 조절과 구분해 다룰 근거가 있다고 했지만, 13개 연구는 모두 기술적 연구였고 통제 집단이 없었으며 구성원의 보고에 의존한 연구도 많아 효과를 단정하기 어렵다고 합니다. 논문을 읽을 때는 집단의 행동을 측정했는지, 비교 집단이 있었는지, 정의에 감정과 동기가 포함되었는지를 확인하고 발표 연도도 살피라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Socially shared regulation of learning: A review",
+        "authors": "Ernesto Panadero and Sanna Järvelä",
+        "year": 2015,
+        "url": "https://doi.org/10.1027/1016-9040/a000226",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-cooperation-or-collaboration": {
     "id": "cscl-cooperation-or-collaboration",
@@ -1024,8 +1711,18 @@ window.LECTURE_GUIDES = {
     "caution": "The three volcano students, including Jun and Mia, are made up; the sharp-line argument rests on one teenage pair picked as among the most collaborative and shows how shared understanding is built, not how often; the video says neither side ran a test, and reading the Jun-and-Mia version as collaboration at slide eight is the video's own reading.",
     "koSummary": "이 영상은 일을 나눠 맡은 뒤 이어 붙이는 모둠 활동이 협력(cooperation)인지 협동·협업(collaboration)인지를 둘러싼 논쟁을 다룹니다. 한 연구팀은 각자 한 조각을 맡으면 cooperation, 문제에 대한 하나의 공유된 그림을 함께 만들면 collaboration이라고 선을 긋고, Dillenbourg는 그 선이 더 흐릿하며 분업이 처음부터 고정되어 있는지 아니면 역할이 계속 바뀌며 엮이는지를 보아야 한다고 말합니다. 논문을 읽을 때는 어떤 의미로 쓰였는지, 집단이 실제로 한 말을 보았는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "The construction of shared knowledge in collaborative problem solving",
+        "authors": "Jeremy Roschelle and Stephanie D. Teasley",
+        "year": 1995,
+        "url": "https://doi.org/10.1007/978-3-642-85098-1_5",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Computer Supported Collaborative Learning."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-do-experts-just-remember-more": {
     "id": "cscl-do-experts-just-remember-more",
@@ -1034,8 +1731,36 @@ window.LECTURE_GUIDES = {
     "caution": "The classic study had only three players, so one tiny study is never the last word; the video frames the two sides as a self-correction since Simon co-wrote both papers; the novice-versus-expert abstraction contrast in physics is questioned by critics who attribute it to study set-up, and the video's two-kinds-of-question split is its own reading.",
     "koSummary": "이 영상은 전문가가 단지 기억을 더 많이 하는 것인지를 체스 배치 기억 연구로 따져 봅니다. 고전 연구는 세 명만 비교해 무작위 배치에서 기억과 실력의 관계가 없다고 보고 '청크'로 설명했고, 이후 13개 체스 실험 리뷰는 무작위 배치에서도 작지만 실제 이점이 남는다고 보고했습니다. 두 쪽 모두 전문성의 핵심이 단순한 기억량이 아니라 의미라는 데 동의하며, 논문을 읽을 때는 표본 규모와 전문가의 기준, 이점이 사라진다는 주장인지 줄어든다는 주장인지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Perception in chess",
+        "authors": "William G. Chase and Herbert A. Simon",
+        "year": 1973,
+        "url": "https://doi.org/10.1016/0010-0285(73)90004-2",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Recall of random and distorted chess positions: Implications for the theory of expertise",
+        "authors": "Fernand Gobet and Herbert A. Simon",
+        "year": 1996,
+        "url": "https://doi.org/10.3758/BF03200937",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Categorization and representation of physics problems by experts and novices",
+        "authors": "Michelene T. H. Chi, Paul J. Feltovich, and Robert Glaser",
+        "year": 1981,
+        "url": "https://doi.org/10.1207/s15516709cog0502_2",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-evidence-for-knowledge-building": {
     "id": "cscl-evidence-for-knowledge-building",
@@ -1044,8 +1769,18 @@ window.LECTURE_GUIDES = {
     "caution": "The tomato class is made up; the early comparison was not rigorous by its authors' own statement, the three-year redesign study cannot separate students from design, every study read has a founder among its authors, no meta-analysis was found, and a good case shows that it can work, not how often it works.",
     "koSummary": "이 영상은 아이디어를 계속 개선하는 데 초점을 둔 지식 구축(knowledge building) 수업의 증거를 살펴봅니다. 초기 비교 연구는 저자들 스스로 엄격한 통제가 불가능했다고 밝혔고, 표준 검사 성과와 설명을 구하는 질문 같은 접근법 고유의 목표가 서로 다른 방향을 가리켰습니다. 이 영상은 검토한 연구마다 창시자가 저자로 포함되어 있고 메타분석은 찾지 못했다고 하며, 논문을 읽을 때는 무엇과 비교했는지, 성공을 어떻게 정의했는지, 누가 어느 학교에서 진행했는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Computer support for knowledge-building communities",
+        "authors": "Marlene Scardamalia and Carl Bereiter",
+        "year": 1994,
+        "url": "https://doi.org/10.1207/s15327809jls0303_3",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-how-much-effort-should-common-ground-take": {
     "id": "cscl-how-much-effort-should-common-ground-take",
@@ -1054,8 +1789,27 @@ window.LECTURE_GUIDES = {
     "caution": "The siblings and the labeling app are made up; the leave-room-for-misunderstanding idea is a design idea, not a tested law; the classic evidence comes from lab tasks with strangers and measures understanding, not learning; the video says the sides are not letters back and forth, and whether extra effort helps learning remains open.",
     "koSummary": "이 영상은 함께 배울 때 공통 기반(common ground)을 만드는 노력을 줄이는 것이 늘 좋은지를 묻습니다. Clark 연구진은 사람들이 당장 충분히 이해했다고 믿을 때까지 확인하되 공동 작업을 최소로 유지한다고 설명하고, 협력 학습 연구는 그 추가 노력이 느리게 만들더라도 학습에 도움이 될 수 있다고 보지만 이는 검증된 법칙이 아니라 설계 아이디어입니다. 논문을 읽을 때는 이해를 측정했는지 학습을 측정했는지, 어떤 매체로 대화했는지, 공통 기반을 실제로 관찰했는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Grounding in communication",
+        "authors": "Herbert H. Clark and Susan E. Brennan",
+        "year": 1991,
+        "url": "https://doi.org/10.1037/10096-006",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Perspectives on socially shared cognition.."
+      },
+      {
+        "title": "Referring as a collaborative process",
+        "authors": "Herbert H. Clark and Deanna Wilkes-Gibbs",
+        "year": 1986,
+        "url": "https://doi.org/10.1016/0010-0277(86)90010-7",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists it as open access."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-is-it-the-explaining-or-the-extra-time": {
     "id": "cscl-is-it-the-explaining-or-the-extra-time",
@@ -1064,8 +1818,36 @@ window.LECTURE_GUIDES = {
     "caution": "Pat and Jun are made up; the early physics study had four students per group sorted after the scores, which shows a link rather than a cause; the equal-time result (about 0.4) rests on only five results and the given-explanation comparison (about 0.35) on six, and the gap between time-controlled and other results was not significant; the 36-student clue and the point that self-explaining differs from summarizing or teaching a friend are stated as limits.",
     "koSummary": "이 영상은 스스로 설명하기가 효과적인 이유가 설명 자체 때문인지, 아니면 더 오래 공부했기 때문인지를 묻습니다. 초기 연구들은 설명을 많이 한 학생이 더 잘 배웠다고 보였지만 표본이 작고 시간이 통제되지 않았고, 69개 결과를 모은 리뷰에서는 시간을 같게 한 경우에도 효과가 남지만 더 작았고(약 0.4, 5개 결과), 교사의 좋은 설명과 비교하면 더 작았습니다(약 0.35, 6개 결과). 논문을 읽을 때는 학습 시간이 같았는지, 비교 집단이 무엇을 받았는지, 집단이 무작위로 배정되었는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Self-explanations: How students study and use examples in learning to solve problems",
+        "authors": "Michelene T.H. Chi, Miriam Bassok, Matthew W. Lewis, Peter Reimann, and Robert Glaser",
+        "year": 1989,
+        "url": "https://doi.org/10.1207/s15516709cog1302_1",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
+      },
+      {
+        "title": "Eliciting self-explanations improves understanding",
+        "authors": "Michelene T.H. Chi, Nicholas De Leeuw, Mei‐Hung Chiu, and Christian Lavancher",
+        "year": 1994,
+        "url": "https://doi.org/10.1207/s15516709cog1803_3",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Inducing self-explanation: A meta-analysis",
+        "authors": "Kiran Bisra, Qing Liu, John C. Nesbit, Farimah Salimi, and Philip H. Winne",
+        "year": 2018,
+        "url": "https://doi.org/10.1007/s10648-018-9434-x",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-smart-dashboards-or-modest-tools": {
     "id": "cscl-smart-dashboards-or-modest-tools",
@@ -1074,8 +1856,27 @@ window.LECTURE_GUIDES = {
     "caution": "The 28-student class is made up; the physics figures (62, 16 and 6 percent) are estimates from a design study without a concurrent comparison class or learning outcomes, and the authors called minimalism a hypothesis; the smart-glasses result is known only from an abstract and summary, and the replies are read only via the synthesis.",
     "koSummary": "이 영상은 수업 중 교사가 여러 모둠을 동시에 조율(orchestration)할 때 기술이 교사에게 더 많이 보여 줘야 하는지 적게 보여 줘야 하는지를 묻습니다. 한쪽은 도구를 단순하게 하고 교사가 통제권을 갖게 하자고 하며 물리 실습에서 대기 시간이 크게 줄었다고 보고했지만, 이는 동시 비교 집단이나 학습 성과가 없는 설계 연구입니다. 다른 쪽은 학생 데이터를 활용한 스마트 도구의 가능성을 말하며, 논문을 읽을 때는 비교 집단과 학습 측정이 있었는지, 도구가 무엇을 결정하는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Design for classroom orchestration",
+        "authors": "Pierre Dillenbourg",
+        "year": 2013,
+        "url": "https://doi.org/10.1016/j.compedu.2013.04.013",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Student learning benefits of a mixed-reality teacher awareness tool in AI-enhanced classrooms",
+        "authors": "Kenneth Holstein, Bruce M. McLaren, and Vincent Aleven",
+        "year": 2018,
+        "url": "https://doi.org/10.1007/978-3-319-93843-1_12",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Lecture Notes in Computer Science."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "cscl-group-awareness-mirror-or-nudge": {
     "id": "cscl-group-awareness-mirror-or-nudge",
@@ -1084,8 +1885,36 @@ window.LECTURE_GUIDES = {
     "caution": "The four students, including Jun and Mia, are made up; the one test the video found had only three whole classes, and its long-messages result was borderline, with no gain in equal participation or group grade, in a setting where the tool was optional and participation was already fairly equal; the 46-study meta-analysis is known only from its summary, and researchers rarely measure the awareness itself.",
     "koSummary": "이 영상은 집단 인식(group awareness) 도구가 중립적인 거울인지, 학습자를 이끄는 넛지인지를 묻습니다. 같은 제1저자의 두 관점은 도구가 명령 없이 정보만 보여 준다는 점과 정보를 골라 좋은 습관으로 유도한다는 점을 각각 강조하며, 네덜란드 11학년 연구에서는 긴 메시지가 약간 늘었지만 경계 수준이었고 참여의 평등이나 집단 성적은 나아지지 않았습니다. 논문을 읽을 때는 결과가 대화 방식인지 학습인지, 학생이 도구를 써야 했고 실제로 썼는지, 무엇과 비교했는지를 확인하라고 안내합니다.",
     "reviewedAt": "2026-10-16",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide; external references not independently rechecked in this update."
+    "sources": [
+      {
+        "title": "Coordinated computer-supported collaborative learning: Awareness and awareness tools",
+        "authors": "Jeroen Janssen and Daniel Bodemer",
+        "year": 2013,
+        "url": "https://doi.org/10.1080/00461520.2012.749153",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Visualization of participation: Does it contribute to successful computer-supported collaborative learning?",
+        "authors": "Jeroen Janssen, Gijsbert Erkens, Gellof Kanselaar, and Jos Jaspers",
+        "year": 2007,
+        "url": "https://doi.org/10.1016/j.compedu.2006.01.004",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check. OpenAlex lists an open repository copy."
+      },
+      {
+        "title": "Group awareness in CSCL environments",
+        "authors": "Daniel Bodemer and Jessica Dehler",
+        "year": 2011,
+        "url": "https://doi.org/10.1016/j.chb.2010.07.014",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
   },
   "irt-basic": {
     "id": "irt-basic",
@@ -1110,7 +1939,7 @@ window.LECTURE_GUIDES = {
         "url": "https://doi.org/10.4324/9781410605269",
         "relationship": "Further reading",
         "access": "Book · publisher page",
-        "verificationNote": "DOI resolves to the publisher page with this title."
+        "verificationNote": "DOI resolves to the publisher page titled Item Response Theory for Psychologists. The DOI is the 2013 reissue of the 2000 book, and Crossref lists the title as Item Response Theory."
       }
     ],
     "verificationNote": "Caption-based editorial guide. Further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
@@ -1417,13 +2246,13 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title, authors, year); DOI resolves to the publisher page."
       },
       {
-        "title": "Attaining self-regulation: A social cognitive perspective",
+        "title": "Attaining self-regulation",
         "authors": "Barry J. Zimmerman",
         "year": 2000,
         "url": "https://doi.org/10.1016/B978-012109890-2/50031-7",
         "relationship": "Further reading",
         "access": "Book chapter · publisher page",
-        "verificationNote": "Crossref record matched (title, authors, year); DOI resolves to the publisher site, which showed a browser check. Chapter in the Handbook of Self-Regulation."
+        "verificationNote": "Crossref record matched (title, authors, year); DOI resolves to the publisher site, which showed a browser check. Chapter in the Handbook of Self-Regulation. Title follows the Crossref and OpenAlex records, which list no subtitle."
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Zimmerman (2000) and Zimmerman (2002); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
