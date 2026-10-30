@@ -1296,5 +1296,55 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Hutchins (1995), Hollan, Hutchins & Kirsh (2000), Pea (1993), and Salomon, Perkins & Globerson (1991); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "learning-engineering": {
+    "id": "learning-engineering",
+    "purpose": "Use this lecture to frame course improvement as an iterative, team-based cycle that applies learning science and checks its effects with data.",
+    "distinction": "Learning engineering, in the IEEE ICICLE description, is a process and practice that applies the learning sciences using human-centered engineering design methodologies and data-informed decision making to support learners. Simon (1967) first called for learning engineers. The work is commonly described as a repeating cycle of challenge, creation, implementation, and investigation.",
+    "caution": "Dana and her course are made up. Logged clicks are not the same as learning, and what is easy to measure is not always what matters. Collecting and using learner data carries obligations of privacy, consent, and fairness across groups.",
+    "koSummary": "이 강의는 매주 수천 명의 학생이 공부하고 그들이 밟는 모든 단계가 기록되는 온라인 대수 강좌를 운영하는 팀으로 시작해, 그 데이터를 강좌 개선에 어떻게 써야 하는지 묻습니다. 1967년 Herbert Simon이 엔지니어가 물리학을 적용하듯 학습과학을 설계에 적용하는 러닝 엔지니어가 대학에 필요하다고 주장한 데서 그 기원을 찾습니다. 러닝 엔지니어링을 인간 중심 공학 설계와 데이터 기반 의사결정을 통해 학습과학을 적용해 학습자를 지원하는 과정이자 실천으로 보는 IEEE 러닝 엔지니어링 커뮤니티의 설명을 제시합니다. 이 작업을 과제 정의, 설계·제작, 실행, 조사로 이어지고 다시 시작되는 순환으로 보여 줍니다. 한 연습 세트에서 많은 학생이 그만두는 이유가 힌트가 답을 너무 일찍 알려 주기 때문임을 발견하고, 힌트를 다시 설계해 작은 실험을 돌린 뒤 더 많은 학생이 끝까지 하는지와 다음 퀴즈 성적이 나아지는지를 함께 확인하는 가상의 러닝 엔지니어 Dana를 따라갑니다. 러닝 엔지니어링은 교사, 설계자, 데이터 과학자, 학습자 자신이 함께하는 팀 작업이라고 설명합니다. 클릭은 학습이 아니고 기록하기 쉬운 것이 늘 중요한 것은 아니며, 학습자 데이터에는 개인정보 보호, 동의, 집단 간 공정성이라는 책임이 따른다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Simon (1967) and the IEEE ICICLE description of learning engineering; further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "knowledge-components": {
+    "id": "knowledge-components",
+    "purpose": "Use this lecture to break a task into knowledge components, read learning curves, and spot when one label hides two skills.",
+    "distinction": "The Knowledge-Learning-Instruction framework (Koedinger, Corbett & Perfetti, 2012) describes learning as the acquisition of knowledge components. A knowledge component model, or Q matrix, maps task steps to components; learning curves plot error rate against practice opportunities for each component, and a smooth decline suggests a good model. DataShop in LearnSphere supports comparing such models.",
+    "caution": "The tutor and its curves are made up. Components are inferred from data, several models can fit equally well, and skills that do not appear as discrete steps, such as explaining or designing, are hard to model this way.",
+    "koSummary": "이 강의는 연습할수록 대부분의 오류 곡선이 내려가지만 한 곡선만 평평하게 남는 기하 튜터로 시작해 그 이유를 묻습니다. 원의 넓이 구하기처럼 학습자가 한 단계에서 쓰는 작은 기술이나 지식 단위인 지식 요소(knowledge component)로 학습을 설명하는 Kenneth Koedinger, Albert Corbett, Charles Perfetti의 관점을 소개합니다. 과제의 각 단계에 필요한 지식 요소를 표시하는 지도, 곧 지식 요소 모형 또는 Q 행렬을 보여 줍니다. 한 지식 요소의 오류율을 연습 기회에 따라 그리면, 좋은 모형은 처음에 빠르게 그리고 점차 느리게 내려가는 매끄러운 학습 곡선을 보인다는 점을 설명합니다. 가상의 예에서 울퉁불퉁한 곡선을 단서로, 원의 넓이를 단독으로 구하는 것과 더 큰 도형 안에서 구하는 것이 사실 두 개의 지식 요소였음을 찾아내고, 이를 나누자 두 곡선이 매끄러워지며 예측도 좋아지는 과정을 보여 주고, DataShop 같은 공개 도구로 모형을 비교할 수 있다고 덧붙입니다. 계속 어려운 요소에는 연습을 더 주고 이미 숙달한 요소는 줄이는 식으로 모형이 연습 설계를 안내한다는 점도 다룹니다. 지식 요소는 관찰이 아니라 추론된 것이고 여러 모형이 같은 데이터에 맞을 수 있으며, 설명하기나 설계하기처럼 깔끔한 단계로 드러나지 않는 기술은 이런 방식으로 포착하기 어렵다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Koedinger, Corbett & Perfetti (2012) and DataShop; further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "intelligent-tutoring": {
+    "id": "intelligent-tutoring",
+    "purpose": "Use this lecture to describe what an intelligent tutor does inside and across problems, and to judge claims about tutoring systems, including chat-based ones.",
+    "distinction": "Intelligent tutoring systems have an inner loop (step-level feedback and hints within a problem) and an outer loop (task selection across problems) (VanLehn, 2006). Model tracing matches student steps to a cognitive model of expert steps (Anderson, Corbett, Koedinger & Pelletier, 1995). In VanLehn's (2011) review, step-based tutoring systems (effect size about 0.76) were nearly as effective as human tutoring (about 0.79) relative to no tutoring.",
+    "caution": "Omar and his tutor are made up. Tutors are expensive to author for each domain, students may game the system by abusing hints (Baker, Corbett, Koedinger & Wagner, 2004), and fluent chat from language models still needs testing for accurate step-level feedback.",
+    "koSummary": "이 강의는 튜터링 시스템이 어떤 올바른 풀이 경로에도 맞지 않는 단계를 곧바로 표시하고 힌트를 건네는 가상의 학생 Omar를 따라가며, 학습자마다 맞춘 단계별 안내를 주는 지능형 튜터링 시스템(intelligent tutoring systems)을 소개합니다. Kurt VanLehn이 말한 두 개의 고리를 제시합니다. 내부 고리는 한 문제 안에서 각 단계에 피드백을 주고 요청하면 가벼운 귀띔부터 다음 단계 전체까지 힌트를 주며, 외부 고리는 문제와 문제 사이에서 각 기술의 숙달 시점을 추정해 다음에 무엇을 연습할지 고릅니다. 전문가가 밟을 수 있는 단계 모형에 학생의 각 단계를 맞춰 보는 모형 추적(model tracing)을 John Anderson과 동료들의 Cognitive Tutor를 예로 설명하고, 제약 조건을 검사하거나 풀이 예제를 따르거나 자연어 대화를 나누는 튜터도 있다고 짚습니다. 단계 기반 튜터링 시스템이 인간 튜터에 거의 맞먹을 만큼 효과적이었고 둘 다 튜터링이 없을 때보다 분명히 나았다는 VanLehn의 2011년 리뷰를 전하며, 대규모 언어 모델의 유창한 대화가 정확한 단계별 피드백과 같지 않아 여전히 검증이 필요하다고 말합니다. 튜터는 영역마다 만드는 비용이 크고, 힌트가 너무 쉽게 나오면 일부 학생이 힌트를 계속 눌러 답에 도달하는 식으로 시스템을 악용(gaming the system)한다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names VanLehn (2006), Anderson, Corbett, Koedinger & Pelletier (1995), VanLehn (2011), and Baker, Corbett, Koedinger & Wagner (2004); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "edm-learning-analytics": {
+    "id": "edm-learning-analytics",
+    "purpose": "Use this lecture to tell educational data mining and learning analytics apart, name their common methods, and judge a prediction by the action it supports.",
+    "distinction": "Siemens and Baker (2012) contrast educational data mining, which emphasizes automated discovery and modeling, with learning analytics, which emphasizes human judgment and use of data in context. Common methods include prediction, clustering, relationship mining, and discovery with models (Baker & Yacef, 2009). Early-warning systems such as Course Signals (Arnold & Pistilli, 2012) show that the value of a prediction depends on the intervention it triggers.",
+    "caution": "Sam and his team are made up. Course Signals' reported retention effects were later questioned. Predictive models can reproduce historical inequities and should be checked across groups, learners should be told what is collected and why, and click data are a thin trace of learning.",
+    "koSummary": "이 강의는 일부 1학년 학생이 3주차쯤 강좌에 접속하지 않게 되는 것을 알아챈 대학으로 시작해, 데이터가 이들을 제때 찾아낼 수 있는지, 그다음엔 무엇을 해야 하는지 묻습니다. 둘 다 학습 데이터를 다루지만 George Siemens와 Ryan Baker가 말하듯 강조점이 다른 두 연구 공동체, 교육 데이터 마이닝(educational data mining)과 학습 분석(learning analytics)을 소개합니다. 교육 데이터 마이닝은 누가 어려움을 겪을지, 어떤 단계에 어떤 기술이 필요한지 예측하는 모형을 만드는 것처럼 자동화된 방법에 기울고, 학습 분석은 교사와 학습자를 위한 대시보드나 맥락 속의 의사결정처럼 데이터를 쓰는 사람에 기울며, 실제로는 둘이 겹친다고 설명합니다. 예측, 군집화, 관계 마이닝, 그리고 한 모형의 결과가 다음 연구의 입력이 되는 모형을 이용한 발견(discovery with models) 같은 대표적인 방법을 제시합니다. 접속이 줄어든 학생을 모형이 표시하면 상담자가 연락하는 가상의 Sam 팀을 따라가며, 예측만으로는 아무것도 바뀌지 않고 그 예측이 어떤 행동으로 이어지며 그 행동이 실제로 도움이 되는지가 중요하다고 강조합니다. 초기의 잘 알려진 시스템인 퍼듀 대학의 Course Signals가 보고한 학업 지속률 향상이 나중에 의문을 받았다는 점도 짚습니다. 과거 학생으로 학습한 모형은 과거의 불공정을 이어받을 수 있으므로 집단마다 얼마나 잘 맞는지 확인해야 하고, 학습자는 무엇이 왜 수집되는지 알 권리가 있으며, 클릭은 학습의 희미한 흔적일 뿐이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Siemens & Baker (2012), Baker & Yacef (2009), and Arnold & Pistilli (2012); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "learning-experiments": {
+    "id": "learning-experiments",
+    "purpose": "Use this lecture to plan a fair randomized comparison inside a learning platform, from the outcome measure to the unit of randomization.",
+    "distinction": "Random assignment makes groups comparable on average, so outcome differences can be attributed to the version. Platforms such as ASSISTments support randomized studies within authentic homework (Heffernan & Heffernan, 2014). Randomizing within classes risks contamination; randomizing whole classes avoids it but needs more clusters. Immediate performance and delayed learning can diverge.",
+    "caution": "Priya and her team are made up. All versions should be defensible instruction, studies require ethical review and notice to learners, small effects need large samples and preplanned analyses, and an average effect can mask subgroups for whom a version is worse.",
+    "koSummary": "이 강의는 풀이 단계 하나를 보여 주는 힌트와 질문을 던지는 힌트, 두 가지 숙제 힌트 중 어느 쪽이 더 도움이 되는지 추측하는 대신 플랫폼에서 둘 다 시험해 볼 수 있다는 장면으로 시작합니다. A/B 테스트에서는 학생마다 한 버전에 무작위로 배정되기 때문에 두 집단이 평균적으로 비슷해지고, 결과의 차이를 버전의 차이로 돌릴 수 있다고 설명합니다. ASSISTments 같은 플랫폼에서는 실제 학생과 실제 내용으로 이루어진 실제 숙제 안에서 무작위 연구를 할 수 있다는 점을 짚습니다. 클릭 수나 학습 시간만이 아니라 이후 문제 수행이나 지연 시험처럼 학습을 보여 주는 결과 지표를 먼저 정해야 한다고 강조합니다. 한 반 안에서 학생 단위로 무작위 배정하면 비용은 적지만 친구끼리 이야기하며 버전이 섞일 수 있고, 반 전체를 배정하면 이를 막을 수 있지만 훨씬 많은 반이 필요하며, 효과가 작은 경우가 많아 많은 학생이 필요하고 데이터를 보기 전에 분석 방법을 정해야 한다는 점을 보여 줍니다. 질문형 힌트가 바로 다음 문제에서는 이겼지만 일주일 뒤 지연 시험에서는 차이가 없었던 가상의 Priya 팀을 통해, 지금의 수행을 돕는 것이 나중의 학습을 돕는 것과 다를 수 있다는 흔한 패턴을 보여 줍니다. 어느 버전이든 가르치는 방법으로서 타당해야 하고, 연구에는 윤리 심의와 학습자에 대한 명확한 안내가 필요하며, 평균 효과가 어떤 집단에서는 오히려 나빠지는 결과를 가릴 수 있다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names ASSISTments (Heffernan & Heffernan, 2014); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
