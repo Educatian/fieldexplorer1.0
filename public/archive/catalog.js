@@ -101,6 +101,19 @@ window.LECTURES = [
     "videoFile": "media/backward-design.mp4"
   },
   {
+    "id": "gagne-nine-events",
+    "title": "Gagné's Nine Events of Instruction - Basic",
+    "shortTitle": "Gagné's Nine Events of Instruction",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:19",
+    "summary": "Introduces the nine events of instruction that Robert Gagné tied to the conditions of learning, using a made-up trainer, Priya, who teaches new lab assistants to use a micropipette. Walks through each event in order: gaining attention with two samples that should match but do not, stating the objective, recalling how to read a measuring cylinder, presenting the plunger's two stops, giving a cue to repeat, practice, feedback from a scale that catches an air bubble, a final check with no hints, and carrying the skill into a real experiment. Shows how Gagné paired the events with processes inside the learner, from attention to generalization, and cautions that the events are a checklist of conditions rather than a fixed script.",
+    "question": "In a lesson you teach, which of the nine events is missing, and which one could you drop without losing anything?",
+    "lab": null,
+    "thumbnail": "thumb-gagne-nine-events.jpg",
+    "videoFile": "media/gagne-nine-events.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",

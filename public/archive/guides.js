@@ -1136,5 +1136,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Wiggins & McTighe (1998) and Biggs (1996); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "gagne-nine-events": {
+    "id": "gagne-nine-events",
+    "purpose": "Use this lecture to see Gagné's nine events of instruction and how one short lab lesson can include all of them.",
+    "distinction": "The nine events are what the instructor arranges outside the learner, from gaining attention to supporting transfer; each one is meant to support a process inside the learner, such as attention, expectancy, retrieval, encoding, and generalization.",
+    "caution": "Priya, her lab, and the samples are made up, and the events are a checklist of conditions rather than a fixed script: their order can change, and not every lesson needs all nine.",
+    "koSummary": "이 강의는 Robert Gagné가 학습의 조건과 연결해 제시한 아홉 가지 수업 사태(nine events of instruction)를, 신입 실험 보조원에게 마이크로피펫 사용법을 가르치는 가상의 트레이너 Priya의 사례로 소개합니다. 같아야 할 두 시료가 다르게 나온 장면으로 주의를 끌고, 학습 목표를 알리고, 메스실린더 눈금 읽는 법을 떠올리게 한 뒤, 플런저의 두 단계 멈춤점을 제시하고, 따라 말할 수 있는 단서로 학습을 안내합니다. 이어 반복 연습, 저울로 공기 방울을 잡아내는 피드백, 힌트 없는 최종 확인, 실제 실험으로의 전이를 차례로 보여 줍니다. Gagné가 각 사태를 주의부터 일반화까지 학습자 내부의 과정과 짝지었다는 점을 계단으로 그리고, 아홉 사태는 고정된 대본이 아니라 조건의 점검표라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Gagné (1965) and Gagné, Briggs & Wager (1992); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
