@@ -1126,5 +1126,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names David Merrill (2002); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "backward-design": {
+    "id": "backward-design",
+    "purpose": "Use this lecture to see the three stages of backward design and how constructive alignment checks that outcomes, activities, and assessment point at the same thing.",
+    "distinction": "Backward design is a planning order: decide the desired results, then the evidence that would show them, and only then the learning activities. Constructive alignment is the check that the intended outcomes, the learning activities, and the assessment all target the same performance.",
+    "caution": "Nadia, her unit, and the chart are made up, and an aligned unit still needs evidence that students actually learn, so treat alignment as a design check rather than a guarantee.",
+    "koSummary": "이 강의는 Grant Wiggins와 Jay McTighe가 제시한 역방향 설계(backward design)와, John Biggs가 말한 밀접한 개념인 구성적 정렬(constructive alignment)을, 뉴스 속 차트 단원을 계획하는 가상의 교사 Nadia의 사례로 소개합니다. 활동을 먼저 정하고 시험을 마지막에 만드는 순방향 계획에서는 어떤 활동도 준비시키지 않은 것을 시험이 측정할 수 있다는 점을 보여 주고, 기대하는 결과, 증거, 학습 경험이라는 세 단계를 차례로 설명합니다. 세로축이 50에서 시작하는 뉴스 차트와 0부터 다시 그린 같은 차트를 비교하고, 활동 중심 설계와 진도 중심 설계라는 두 가지 함정을 보여 주며, 목표·활동·평가를 3D 삼각형으로 그려 평가가 목표에서 벗어났다가 다시 정렬되는 모습을 보여 줍니다. 정렬은 학습을 보장하는 것이 아니라 설계 점검이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Wiggins & McTighe (1998) and Biggs (1996); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
