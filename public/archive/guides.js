@@ -2822,5 +2822,186 @@ window.LECTURE_GUIDES = {
     ],
     "verificationNote": "Caption-based editorial guide. The video names Carroll (1963), Bloom (1968), Bloom (1984), and Kulik, Kulik & Bangert-Drowns (1990); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
     "reviewedAt": "2026-10-30"
+  },
+  "ena-basic": {
+    "id": "ena-basic",
+    "purpose": "Use this lecture to plan an epistemic network analysis of coded talk, choose a stanza window, compare groups with difference networks, and tie network features back to the talk.",
+    "distinction": "ENA models the structure of connections among codes by accumulating co-occurrences within a moving stanza window for each unit of analysis, normalizing the resulting vectors, and projecting them into a shared space where node positions make network points interpretable (Shaffer, Collier & Ruis, 2016; Shaffer, 2018). Ordered network analysis extends this with directed, ordered connections.",
+    "caution": "Leah, Omar, and their teams are made up. The network depends on code validity and inter-rater agreement, the stanza window size changes what counts as connected and should be reported and varied, and a point in the space is a summary that must be interpreted against the talk.",
+    "koSummary": "이 강의는 비용, 안전, 사용자 요구라는 같은 아이디어를 쓰면서도 결과물의 질이 달라진 두 가상의 공학 설계 팀으로 시작해, 두 팀의 대화에서 무엇이 달랐는지 묻습니다. David Williamson Shaffer의 인식 네트워크 분석(epistemic network analysis, ENA)을 소개하는데, 이 방법은 전문성을 어떤 아이디어를 쓰느냐만이 아니라 아이디어들을 어떻게 연결하느냐로 봅니다. 대화의 각 줄에 코드를 붙이고, 스탠자(stanza)라 부르는 최근 몇 줄의 이동 창 안에서 함께 나타나는 코드를 세어, 팀마다 연결이 잦을수록 선이 굵어지는 네트워크로 바꾸는 과정을 따라갑니다. 여러 네트워크를 하나의 공유 공간에 놓아 각 네트워크를 점 하나로 나타내고 그 위치를 연결 구조로 읽는 방법과, 한 팀의 네트워크에서 다른 팀의 것을 빼 차이 네트워크(difference network)를 만드는 방법을 보여 줍니다. 굵은 연결 뒤에 있는 실제 대화를 다시 읽는 해석의 고리 닫기를 강조하고, 방향이 없는 ENA의 연결을 어떤 아이디어가 먼저 나왔는지까지 보는 순서 네트워크 분석과 대비합니다.",
+    "sources": [
+      {
+        "title": "A tutorial on epistemic network analysis: Analyzing the structure of connections in cognitive, social, and interaction data",
+        "authors": "David Williamson Shaffer, Wesley Collier, and A. R. Ruis",
+        "year": 2016,
+        "url": "https://doi.org/10.18608/jla.2016.33.3",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Epistemic network analysis",
+        "authors": "David Williamson Shaffer",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-50",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Shaffer, Collier & Ruis (2016) and Shaffer (2018); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "coding-collaboration": {
+    "id": "coding-collaboration",
+    "purpose": "Use this lecture to plan how collaborative talk becomes numbers: the unit of segmentation, the coding scheme, the reliability check, and aggregation that respects group nesting.",
+    "distinction": "Chi (1997) lays out the steps of quantifying verbal data. Strijbos and colleagues (2006) show that the choice of unit of analysis affects coding results. Weinberger and Fischer (2006) offer a multi-dimensional framework for argumentative knowledge construction. Reliability is reported as chance-corrected agreement, and counts from group members are nested in groups.",
+    "caution": "Ines, Theo, and the chat are made up. Counts measure frequency, not quality; rare events can matter most; a scheme built for one task may not transfer; and totals from different units of segmentation are not comparable.",
+    "koSummary": "이 강의는 어떤 채팅 도구를 쓴 집단이 논증을 40퍼센트 더 많이 했다는 연구 주장으로 시작해, 그 숫자가 어디서 나왔는지 묻습니다. Michelene Chi의 언어 데이터 정량화 실무 안내를 따라 대화를 숫자로 바꾸는 결정들을 하나씩 짚습니다. 먼저 대화를 단위로 나누는데(segmentation), Jan-Willem Strijbos와 동료들은 메시지, 문장, 아이디어 가운데 무엇을 단위로 삼느냐에 따라 세는 결과가 달라진다는 것을 보였습니다. 다음으로 Armin Weinberger와 Frank Fischer의 논증적 지식 구성 다차원 틀 같은 코딩 체계로 각 단위에 코드를 붙이고, 두 코더가 같은 표본을 따로 코딩해 Cohen의 카파처럼 우연을 넘는 일치도를 보고하는 신뢰도 점검을 거친 뒤, 조건 간 비교나 이후 학습과의 관계를 보기 위해 횟수로 집계합니다. 같은 채팅에서 한 사람은 메시지 단위로 세어 논증 5개를, 다른 사람은 아이디어 단위로 세어 9개를 찾는 가상의 예를 보여 주고, 집단 구성원의 횟수는 서로 독립적이지 않으므로 사람을 집단 안에 내포된(nested) 것으로 다뤄야 한다고 짚습니다.",
+    "sources": [
+      {
+        "title": "Quantifying qualitative analyses of verbal data: A practical guide",
+        "authors": "Michelene T.H. Chi",
+        "year": 1997,
+        "url": "https://doi.org/10.1207/s15327809jls0603_1",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Content analysis: What are they talking about?",
+        "authors": "Jan-Willem Strijbos, Rob L. Martens, Frans J. Prins, and Wim M.G. Jochems",
+        "year": 2006,
+        "url": "https://doi.org/10.1016/j.compedu.2005.04.002",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "A framework to analyze argumentative knowledge construction in computer-supported collaborative learning",
+        "authors": "Armin Weinberger and Frank Fischer",
+        "year": 2006,
+        "url": "https://doi.org/10.1016/j.compedu.2005.04.003",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Quantifying qualities of collaborative learning processes",
+        "authors": "Freydis Vogel and Armin Weinberger",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-48",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Chi (1997), Strijbos et al. (2006), and Weinberger & Fischer (2006); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "video-research": {
+    "id": "video-research",
+    "purpose": "Use this lecture to plan a video study from camera placement to episode selection, analysis in data sessions, and consent for viewing and reuse.",
+    "distinction": "Derry and colleagues (2010) frame video research around selection, analysis, technology, and ethics. Interaction analysis (Jordan & Henderson, 1995) grounds claims in repeated collaborative viewing of recorded interaction. Content logs index a corpus; detailed transcripts of selected episodes capture talk, gesture, and objects.",
+    "caution": "Nia, her team, and the classroom are made up. Recording can change behavior at first, video shows behavior rather than thought, selection of striking episodes can bias claims, and consent for one use does not automatically cover reuse.",
+    "koSummary": "이 강의는 소그룹 과학 활동을 40시간 녹화해 두고도 드라이브에 그대로 묵혀 둔 교사로 시작해, 어디서부터 손을 대야 할지 묻습니다. Sharon Derry와 동료들을 따라 비디오 연구를 선택, 분석, 기술, 윤리라는 네 가지 질문으로 정리합니다. 카메라가 어디를 향하느냐가 나중에 연구할 수 있는 것을 정하므로 선택은 녹화 전부터 시작되며, 녹화 후에도 어떤 에피소드를 분석할지 고르고 그 기준을 밝히는 일로 이어진다는 점을 보여 줍니다. 시간 순서대로 사건을 적는 콘텐츠 로그(content log)와 몸짓과 사물까지 담는 상세 전사, 그리고 여러 명이 함께 영상을 보며 자주 멈추고 모든 주장을 화면과 대조하는 Brigitte Jordan과 Austin Henderson의 상호작용 분석(interaction analysis)을 설명합니다. 가상의 데이터 세션에서는 바로 다음 10초 영상에 학생이 다시 추측하는 모습이 나오자 학생의 이해에 대한 주장이 좁혀집니다. 코드를 시간 기록에 연결하는 도구를 다루고, 얼굴과 목소리로 사람을 알아볼 수 있으므로 비디오에는 특별한 윤리적 책임이 따르며, 동의서에 누가 어떤 목적으로 영상을 볼지 밝혀야 한다는 점도 짚습니다.",
+    "sources": [
+      {
+        "title": "Conducting video research in the learning sciences: Guidance on selection, analysis, technology, and ethics",
+        "authors": "Sharon J. Derry, Roy D. Pea, Brigid Barron, and colleagues",
+        "year": 2010,
+        "url": "https://doi.org/10.1080/10508400903452884",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Interaction analysis: Foundations and practice",
+        "authors": "Brigitte Jordan and Austin Henderson",
+        "year": 1995,
+        "url": "https://doi.org/10.1207/s15327809jls0401_2",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Video research methods for learning scientists",
+        "authors": "Sharon J. Derry, Lana M. Minshew, Kelly J. Barber-Lester, and Rebekah Duke",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-47",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Derry et al. (2010) and Jordan & Henderson (1995); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "mixed-methods": {
+    "id": "mixed-methods",
+    "purpose": "Use this lecture to choose a basic mixed methods design and plan where and how the quantitative and qualitative strands will be integrated.",
+    "distinction": "Johnson and Onwuegbuzie (2004) present mixed methods research as a pragmatic paradigm. Convergent, explanatory sequential, and exploratory sequential designs differ in timing and purpose. Fetters, Curry and Creswell (2013) describe integration at the design, methods, and interpretation levels, including joint displays.",
+    "caution": "Rae, her study, and the students are made up. Two parallel studies are not mixed methods unless they are integrated, each strand must meet its own quality standards, and divergent strands should be reported as a finding rather than smoothed over.",
+    "koSummary": "이 강의는 동료 피드백 도구를 쓴 학생들의 글이 더 좋아졌다는 설문 결과로 시작해, 숫자는 그 이유를 말해 주지 못하지만 인터뷰는 말해 줄 수 있다고 짚습니다. 혼합 방법 연구(mixed methods research)를 한 연구 안에서 양적 자료와 질적 자료를 의도적으로 결합하는 연구로 정의하고, 2004년 Burke Johnson과 Anthony Onwuegbuzie가 실용주의를 근거로 이를 주장했다는 점을 소개합니다. 두 자료를 동시에 모아 비교하는 수렴 설계, 숫자를 먼저 보고 질적 자료로 그 이유를 설명하는 설명적 순차 설계, 질적 탐색을 먼저 하고 그 결과로 측정 도구나 개입을 만드는 탐색적 순차 설계라는 세 가지 기본 설계를 설명합니다. Michael Fetters와 동료들을 인용해 통합(integration)을 강조하고, 숫자와 인용문을 나란히 놓는 공동 제시표(joint display)를 보여 줍니다. 가상의 연구자 Rae가 향상 폭이 가장 큰 학생과 가장 작은 학생을 인터뷰해, 가장 많이 향상된 학생은 동료 의견을 읽고 다시 썼다는 것을 알게 되면서, 결론이 도구가 도움이 되었다는 것에서 언제 도움이 되었는가로 나아갑니다.",
+    "sources": [
+      {
+        "title": "Mixed methods research: A research paradigm whose time has come",
+        "authors": "R. Burke Johnson and Anthony J. Onwuegbuzie",
+        "year": 2004,
+        "url": "https://doi.org/10.3102/0013189X033007014",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Achieving integration in mixed methods designs: Principles and practices",
+        "authors": "Michael D. Fetters, Leslie A. Curry, and John W. Creswell",
+        "year": 2013,
+        "url": "https://doi.org/10.1111/1475-6773.12117",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Mixed methods research as a pragmatic toolkit",
+        "authors": "Filitsa Dingyloudi and Jan-Willem Strijbos",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-43",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Johnson & Onwuegbuzie (2004) and Fetters, Curry & Creswell (2013); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "multivocal-analysis": {
+    "id": "multivocal-analysis",
+    "purpose": "Use this lecture to set up an analysis in which several methods examine the same data, and to compare their results without forcing a single answer.",
+    "distinction": "Productive multivocality (Suthers, Lund, Rosé, Teplovs & Law, 2013) brings analysts from different traditions to a shared corpus and compares their analyses, often around pivotal moments, to surface what each method reveals and the assumptions behind it (Lund & Suthers, 2018).",
+    "caution": "Kai's group and the analysts are made up. Multivocal work needs time and trust across teams, the shared data must support every method, and differences in vocabulary can be mistaken for differences in findings.",
+    "koSummary": "이 강의는 학생들이 함께 문제를 푸는 같은 10분짜리 영상을 다섯 연구자가 서로 다른 관점으로 보는 장면으로 시작해, 이들이 과연 같은 것을 연구하고 있는지 묻습니다. Daniel Suthers, Kristine Lund와 동료들이 서로 다른 전통의 분석자들에게 같은 자료를 분석하게 한 프로젝트를 소개하는데, 그 목표는 생산적 다성성(productive multivocality)이었습니다. 방법은 간단히 말해 공유할 자료를 정하고, 각 분석자가 자기 방법을 적용한 뒤, 결과를 나란히 비교하는 것이며, 상호작용의 흐름을 바꾸는 중심 순간(pivotal moment)이 만나는 지점이 됩니다. 가상의 예에서 코딩, 대화 분석, 네트워크 분석이 각기 다른 이유로 모두 6분 지점을 짚고, 코더가 아무것도 없다고 센 침묵 구간에서 몸짓 분석자는 모둠이 같은 도표를 가리키는 모습을 봅니다. 목표는 하나로 합친 답이 아니라 각 방법이 무엇을 드러내고 무엇을 가리는지 보고 그 가정을 드러내는 것이라고 말합니다.",
+    "sources": [
+      {
+        "title": "Productive multivocality in the analysis of group interactions",
+        "authors": "Daniel D. Suthers, Kristine Lund, Carolyn Penstein Rosé, Chris Teplovs, and Nancy Law (Eds.)",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-8960-3",
+        "relationship": "Further reading",
+        "access": "Book · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Multivocal analysis",
+        "authors": "Kristine Lund and Daniel Suthers",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-44",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Suthers, Lund, Rosé, Teplovs & Law (2013) and Lund & Suthers (2018); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
   }
 };
