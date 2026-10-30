@@ -62,6 +62,19 @@ window.LECTURES = [
     "videoFile": "media/cognitive-apprenticeship.mp4"
   },
   {
+    "id": "4cid-basic",
+    "title": "The 4C/ID Model - Basic",
+    "shortTitle": "The 4C/ID Model",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:31",
+    "summary": "Introduces the four-component instructional design model (4C/ID), developed by Jeroen van Merriënboer, for complex skills, using a made-up course that teaches literature searching. Shows learning tasks as whole, realistic tasks grouped into task classes from simple to complex; support that fades within each class and resets in the next, drawn as a saw; supportive information for the parts that call for reasoning; procedural information given just in time for routine steps; and part-task practice mixed in only where steps must become automatic. Ends with the full blueprint and a caution that it is a detailed model, not a quick recipe.",
+    "question": "In a complex skill you teach, which parts are done the same way every time, and which call for reasoning?",
+    "lab": null,
+    "thumbnail": "thumb-4cid-basic.jpg",
+    "videoFile": "media/4cid-basic.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",
