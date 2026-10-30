@@ -1346,5 +1346,55 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names ASSISTments (Heffernan & Heffernan, 2014); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "multilevel-basic": {
+    "id": "multilevel-basic",
+    "purpose": "Use this lecture to check whether an analysis matches the level at which a treatment was assigned, and to read the intraclass correlation, the design effect, and a multilevel model in plain terms.",
+    "distinction": "When treatment is assigned to clusters such as classes, the cluster is the unit of assignment and analysis should respect it. The intraclass correlation is the share of score variance that lies between clusters; the design effect, 1 + (m - 1) x ICC for clusters of size m, gives how much clustering shrinks the effective sample. Multilevel (hierarchical linear) models estimate between-cluster variance, partially pool cluster estimates toward the overall mean, and can let slopes vary by cluster (Raudenbush & Bryk, 2002).",
+    "caution": "The study, classes, scores, and numbers are made up. A multilevel model gives honest standard errors for nested data but does not add information: with three classes per group the treatment comparison stays very uncertain, and variance estimates themselves are unstable with few clusters.",
+    "koSummary": "이 강의는 튜터링 앱을 세 학급에 주고 다른 세 학급을 비교군으로 둔, 학급당 20명인 가상의 연구로 시작해, 학생 120명을 각각 따로 분석하면 연구가 보여 줄 수 있는 것보다 결과를 부풀리게 되는 이유를 보여 줍니다. 같은 학급 학생들은 교사와 일정, 서로를 공유하므로 점수가 함께 움직이기 때문입니다. 분석 단위는 처치가 배정된 수준에 맞춰야 하므로 이 연구의 단위는 학생 120명이 아니라 학급 6개입니다. 점수의 변동을 학급 간 차이와 학급 내 차이로 나누어 급내상관(intraclass correlation)을 정의하고, 급내상관 0.2를 설계 효과(design effect) 4.8로 바꾸어 학생 120명이 독립된 학생 약 25명만큼의 정보를 지닌다는 점을 계산합니다. 이어 다층 모형(multilevel model)이 이 위계 구조를 분석에 반영하고, 학급 사이에서 정보를 빌려 작은 학급의 추정치를 전체 평균 쪽으로 당기며, 기울기가 학급마다 다를 수 있게 한다는 점을 보여 줍니다. 마지막으로 모형은 설계가 모으지 않은 정보를 만들어 낼 수 없으므로, 학급 단위로 처치를 배정하는 연구에는 많은 학급이 필요하다고 강조합니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names no sources on screen; the guide cites Raudenbush & Bryk (2002). Further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "formative-feedback": {
+    "id": "formative-feedback",
+    "purpose": "Use this lecture to tell formative from summative uses of assessment, plan a feedback move, and check whether learners get a chance to act on it.",
+    "distinction": "Assessment is formative when evidence is used to adapt teaching and learning (Black & Wiliam, 1998). Wiliam and Thompson (2007) describe five key strategies. Hattie and Timperley (2007) model feedback as answering where am I going, how am I going, and where to next, at the task, process, self-regulation, or self level; feedback about the self is least effective. Kluger and DeNisi (1996) found that over a third of feedback interventions lowered performance.",
+    "caution": "Rosa and her class are made up. Feedback effects vary widely and can be negative; grades given with comments can draw attention away from the comments, and feedback that learners have no time or chance to use does little.",
+    "koSummary": "이 강의는 분수 퀴즈를 채점해 각 장에 점수를 적고 곧바로 소수 단원으로 넘어가는 가상의 교사 Rosa로 시작해, 그 퀴즈가 학습에 무엇을 해 주었는지 묻습니다. 학습에 대한 증거를 아직 손쓸 시간이 있을 때 가르침과 배움을 조정하는 데 쓰면 그 평가는 형성적(formative)이라고 정의하고, 이 실천을 강화하면 성취가 높아진다는 Paul Black과 Dylan Wiliam의 1998년 리뷰를 소개합니다. Wiliam의 다섯 가지 전략, 곧 목표와 성공 기준을 분명히 하기, 학생의 생각을 끌어내기, 학습을 앞으로 나아가게 하는 피드백 주기, 학생을 서로의 자원으로 삼기, 학생이 자기 학습의 주인이 되게 하기를 정리합니다. John Hattie와 Helen Timperley를 따라 좋은 피드백을 세 질문(어디로 가는가, 어떻게 가고 있는가, 다음은 어디인가)과 네 수준(과제, 과정, 자기조절, 자기 자신)으로 설명하고, 사람 자체에 대한 칭찬은 효과가 가장 작다고 짚습니다. Avraham Kluger와 Angelo DeNisi가 검토한 사례의 3분의 1 이상에서 피드백이 수행을 오히려 떨어뜨렸다는 점도 다룹니다. 끝으로 Rosa가 답안을 분류해 많은 학생이 분모끼리 더한다는 것을 찾아내고, 다음 날 그 오류로 수업을 시작해 학생들이 체크리스트로 자기 답을 고치게 하는 장면으로 돌아갑니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Black & Wiliam (1998), Wiliam & Thompson (2007), Hattie & Timperley (2007), and Kluger & DeNisi (1996); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "validity-argument": {
+    "id": "validity-argument",
+    "purpose": "Use this lecture to state what a score is supposed to mean and support, lay out the inferences behind that use, and find the link with the least evidence.",
+    "distinction": "Validity is the degree to which evidence and theory support the interpretations of test scores for proposed uses (AERA, APA & NCME, 2014). Messick (1989) treated validity as a unified evaluative judgment that includes the consequences of score use. Kane (2013) frames validation as evaluating an interpretation/use argument built from inferences such as scoring, generalization, extrapolation, and decision. The Standards list five sources of evidence: content, response processes, internal structure, relations to other variables, and consequences.",
+    "caution": "Tom and his test are made up. A score can be well supported for one use and poorly supported for another, and a high reliability coefficient supports the generalization inference only, not the whole argument.",
+    "koSummary": "이 강의는 짧은 읽기 시험으로 신입생을 보충 과정에 배치하는 대학으로 시작해, 그 시험이 타당한지 묻습니다. 그런데 이 질문은 조금 빗나가 있습니다. 교육·심리 검사 표준(Standards)은 타당도를 시험의 속성이 아니라, 주어진 용도에 대해 점수의 해석을 증거와 이론이 얼마나 잘 뒷받침하는지로 정의하기 때문입니다. 여기에 타당도는 점수 사용의 결과까지 포함하는 하나의 통합된 판단이라는 Samuel Messick의 관점을 더합니다. 이어 Michael Kane의 논증 기반 접근을 하나하나 점검할 수 있는 추론의 사슬로 펼칩니다. 채점, 다른 문항지·채점자·날짜로의 일반화, 실제 수업의 읽기로의 외삽, 그리고 학생을 배치하는 결정입니다. 각 고리가 기댈 수 있는 증거의 원천으로 시험 내용, 응답 과정, 내적 구조, 다른 측정치와의 관계, 결과를 듭니다. 끝으로 가상의 연구자 Tom이 점수는 일관되지만 배치된 학생이 배치되지 않은 비슷한 학생보다 나아지지 않았음을 발견해, 결정 고리가 약하므로 대학이 점수 사용 방식을 고치는 장면을 보여 줍니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names the AERA, APA & NCME Standards (2014), Messick (1989), and Kane (2013); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "stealth-assessment": {
+    "id": "stealth-assessment",
+    "purpose": "Use this lecture to plan how gameplay can serve as assessment evidence, and to check that the evidence model, not only the game, has been tested.",
+    "distinction": "Stealth assessment embeds evidence-centered design in a game so that assessment runs during play without interrupting it (Shute, 2011). Evidence-centered design links a competency model, evidence models, and task models (Mislevy, Steinberg & Almond, 2003); Bayesian networks are a common way to update competency estimates from observed actions. Physics Playground is a well-known example whose estimates have been compared with external physics tests.",
+    "caution": "Mia and her levels are made up. Hidden assessment should not be secret: learners and teachers should know what is measured and why. Game actions also reflect familiarity with the game, so evidence rules need validation, and building a stealth assessment takes substantial design work.",
+    "koSummary": "이 강의는 물리 게임에서 경사로와 지렛대를 그려 공을 풍선까지 보내는 가상의 플레이어 Mia로 시작합니다. 퀴즈는 한 번도 나오지 않는데, 게임이 Mia가 무엇을 이해하는지 알 수 있을지 묻습니다. 플레이를 끊지 않을 만큼 게임 속에 촘촘히 짜 넣은 평가인 Valerie Shute의 스텔스 평가(stealth assessment)를 소개하고, 이를 증거 중심 설계(evidence-centered design)에 기대어 설명합니다. 알고 싶은 것을 정하는 역량 모형, 어떤 행동이 얼마나 강한 증거인지 정하는 증거 모형, 그 역량을 보여 줄 기회를 주는 레벨을 정하는 과제 모형입니다. 행동 하나하나가 흔히 베이지안 네트워크(Bayesian network) 안에서 추정치를 갱신하는 모습을 보여 주는데, 지렛대로 레벨을 풀면 토크에 대한 증거가 되고, 경사로 레벨에서 여러 번 다시 시작하면 빈틈을 가리킬 수 있습니다. Shute와 동료들이 이런 방식으로 Physics Playground를 만들고 게임의 추정치를 일반 물리 시험과 견주어 확인했다는 점도 다룹니다. 추정치가 힌트, 새 레벨, 교사용 보고서를 이끌 수 있음을 보여 준 뒤, 지렛대를 피해 토크 추정치가 불확실하게 남은 Mia에게 게임이 지렛대가 필요한 레벨을 내미는 장면으로 돌아갑니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Shute (2011), Mislevy, Steinberg & Almond (2003), and Physics Playground; further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "mastery-learning": {
+    "id": "mastery-learning",
+    "purpose": "Use this lecture to describe the mastery learning cycle, read the two sigma claim with its later evidence, and plan where time and help could vary in a course.",
+    "distinction": "Carroll's (1963) model treats learning as a function of time spent relative to time needed. Bloom (1968) proposed mastery learning: formative tests, correctives, enrichment, and parallel second tests. Bloom (1984) reported that one-to-one tutoring with mastery procedures produced about a two standard deviation advantage. Kulik, Kulik and Bangert-Drowns (1990) found an average effect of about 0.5 SD for mastery learning programs; tutoring systems often use knowledge tracing to decide mastery.",
+    "caution": "Ben and his class are made up. The two sigma figure came from small, short studies and has not been matched at scale; correctives need time that schedules may not have, fast learners can end up waiting, mastery cutoffs are judgment calls, and passing a short test does not show retention.",
+    "koSummary": "이 강의는 시간은 고정되고 학습 결과는 제각각인 흔한 교실로 시작합니다. 모두가 분수에 2주를 쓰고, 준비가 되었든 안 되었든 다음 단원으로 넘어갑니다. 이어 John Carroll의 학교 학습 모형을 바탕으로 1968년 Benjamin Bloom이 제안한 완전학습(mastery learning)을 소개합니다. 학습을 고정하고 시간과 도움을 달리하는 접근입니다. 단원을 가르치고, 짧은 형성평가를 보고, 숙달 기준에 이른 학생은 심화 활동으로, 나머지는 교정 학습으로 보낸 뒤, 다음 단원 전에 평행 검사를 한 번 더 보는 순환을 따라갑니다. 숙달 확인을 곁들여 일대일로 튜터링을 받은 학생이 일반 학급보다 약 2 표준편차 높은 점수를 받아, 평균적인 튜터링 학생이 그 학급의 98퍼센트보다 잘했다는 Bloom의 1984년 보고와, 집단 수업이 감당할 만한 비용으로 이에 얼마나 가까이 갈 수 있는가라는 2 시그마 문제(two sigma problem)를 다룹니다. 이후 리뷰들은 효과가 더 작지만 실재한다고 보았는데, 1990년의 완전학습 프로그램 리뷰에서는 평균 약 0.5 표준편차였고, 2 시그마 연구 상당수는 작고 짧았습니다. 지식 추적으로 숙달을 판단하는 지능형 튜터로 이 생각을 이어 간 뒤, 소그룹 교정 학습으로 남은 3분의 1 학생 대부분을 숙달에 이르게 하는 가상의 교사 Ben을 따라갑니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Carroll (1963), Bloom (1968), Bloom (1984), and Kulik, Kulik & Bangert-Drowns (1990); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
