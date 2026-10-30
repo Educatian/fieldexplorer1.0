@@ -140,6 +140,19 @@ window.LECTURES = [
     "videoFile": "media/theory-model-framework.mp4"
   },
   {
+    "id": "srl",
+    "title": "Self-Regulated Learning: Zimmerman's Three Phases - Basic",
+    "shortTitle": "Self-Regulated Learning: Zimmerman's Three Phases",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "1:53",
+    "summary": "Contrasts two students who study for the same hours, one who plans, checks, and adjusts and one who rereads until time runs out, to introduce self-regulated learning: how learners steer their own learning. Follows Barry Zimmerman's cycle of three phases with a made-up nursing student, Sofia, learning to calculate drug doses. In forethought she sets a goal (twenty problems with no errors by Friday), plans a strategy (worked examples, then mixed practice), and believes she can do it, which is self-efficacy. In performance she uses the strategy, talks through each step, and logs every error. In self-reflection she compares results with her goal, finds most errors come from converting units, explains them by her method rather than her ability, and adds a unit check. Shows that the phases form a cycle and that reflection pointing to strategy gives the learner something to change, while blaming ability tends to lower effort. Cautions that self-regulation is not only willpower, that it can be taught, and that questionnaires about study habits do not always match what learners do.",
+    "question": "Think of the last time you studied something hard. Which phase did you skip, and what would you change next time?",
+    "lab": null,
+    "thumbnail": "thumb-srl.jpg",
+    "videoFile": "media/srl.mp4"
+  },
+  {
     "id": "dick-carey",
     "title": "The Dick and Carey Systematic Design Model - Basic",
     "shortTitle": "The Dick and Carey Systematic Design Model",

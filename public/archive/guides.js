@@ -1216,5 +1216,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Chi (2009) and Chi & Wylie (2014); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "srl": {
+    "id": "srl",
+    "purpose": "Use this lecture to trace one learner's study through forethought, performance, and self-reflection, and to see how the way errors are explained shapes the next round.",
+    "distinction": "Zimmerman's cyclical model separates forethought (goal setting, strategic planning, and self-efficacy beliefs), performance (using strategies and self-observation, such as self-talk and error logs), and self-reflection (self-evaluation against the goal, causal attribution, and adjustment), which feeds the next forethought phase.",
+    "caution": "Sofia and her course are made up. Self-regulation is not only willpower: it depends on knowing strategies and can be taught. Much of the research relies on self-report questionnaires, which do not always match what learners actually do.",
+    "koSummary": "이 강의는 같은 시간 동안 공부하지만 한 명은 계획하고 점검하고 조정하며, 다른 한 명은 시간이 다 될 때까지 노트를 다시 읽기만 하는 두 학생을 대비해 자기조절학습, 곧 학습자가 자신의 학습을 스스로 이끄는 방식을 소개합니다. 약물 용량 계산을 배우는 가상의 간호학생 Sofia의 사례로 Barry Zimmerman의 세 단계 순환을 따라갑니다. 사전 숙고(forethought) 단계에서 그녀는 금요일까지 20문제를 오류 없이 푼다는 목표를 세우고, 풀이 예제 다음에 혼합 연습을 하는 전략을 계획하며, 해낼 수 있다고 믿습니다. 이 믿음이 자기효능감입니다. 수행 단계에서는 전략을 쓰면서 자신을 관찰하고, 각 단계를 말로 짚으며 모든 오류를 기록합니다. 자기성찰 단계에서는 결과를 목표와 비교하고, 오류 대부분이 단위 변환에서 나온다는 것을 찾아, 능력이 아니라 방법의 문제로 설명하고 단위 확인 단계를 추가합니다. 세 단계가 순환을 이루며, 전략을 가리키는 성찰은 바꿀 거리를 주지만 능력을 탓하는 성찰은 노력을 줄이는 경향이 있다는 점을 보여 줍니다. 자기조절은 의지력만의 문제가 아니며 가르칠 수 있고, 공부 습관에 관한 설문 응답이 실제 행동과 항상 일치하지는 않는다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Zimmerman (2000) and Zimmerman (2002); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
