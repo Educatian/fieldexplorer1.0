@@ -75,6 +75,19 @@ window.LECTURES = [
     "videoFile": "media/4cid-basic.mp4"
   },
   {
+    "id": "first-principles",
+    "title": "Merrill's First Principles of Instruction - Basic",
+    "shortTitle": "Merrill's First Principles of Instruction",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:12",
+    "summary": "Introduces the first principles of instruction that David Merrill distilled in 2002 from a wide range of instructional design theories, using a made-up workshop where new teaching assistants learn to write multiple-choice quiz questions. Follows Leo through each principle: a real task instead of a list of rules, recalling a trick question that once cost him points, a weak and a strong question shown side by side, writing and revising his own question with feedback, and using it with his students and colleagues. Draws the four phases as a cycle around the problem, notes that problems can grow from simple to complex, and cautions that the principles are a design guide.",
+    "question": "In a course you know, which of the five principles is missing, and what would it take to add it?",
+    "lab": null,
+    "thumbnail": "thumb-first-principles.jpg",
+    "videoFile": "media/first-principles.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",

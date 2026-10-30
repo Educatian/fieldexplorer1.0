@@ -1116,5 +1116,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Jeroen van Merriënboer as the model's developer; further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "first-principles": {
+    "id": "first-principles",
+    "purpose": "Use this lecture to see Merrill's five first principles and how one workshop can apply all of them around a single real task.",
+    "distinction": "Problem-centered instruction organizes the lesson around a real task, while activation, demonstration, application, and integration are the phases that cycle around it: recalling experience, seeing the skill shown, using it with feedback, and carrying it into the learner's own world.",
+    "caution": "The workshop, Leo, and the questions are made up, and Merrill drew these principles from existing theories rather than from one experiment, so treat them as a design guide and check how they work with your own learners.",
+    "koSummary": "이 강의는 David Merrill이 2002년 여러 교수설계 이론을 비교해 정리한 교수의 제1원리(first principles of instruction)를, 신임 조교들이 객관식 퀴즈 문항 작성법을 배우는 가상 워크숍으로 소개합니다. 조교 Leo를 따라 규칙 목록 대신 실제 과제로 시작하는 문제 중심 원리, 예전에 점수를 잃었던 함정 문항을 떠올리는 활성화, 약한 문항과 좋은 문항을 나란히 보여 주는 시연, 직접 문항을 쓰고 피드백을 받아 고치는 적용, 자신의 수업과 동료에게 가져가는 통합을 차례로 보여 줍니다. 네 단계를 문제를 둘러싼 순환으로 그리고, 문제는 단순한 것에서 복잡한 것으로 커질 수 있다고 설명하며, 이 원리들은 하나의 실험이 아니라 기존 이론에서 끌어낸 설계 지침이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names David Merrill (2002); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
