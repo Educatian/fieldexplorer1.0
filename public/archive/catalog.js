@@ -283,6 +283,19 @@ window.LECTURES = [
     "videoFile": "media/intelligent-tutoring.mp4"
   },
   {
+    "id": "mastery-learning",
+    "title": "Mastery Learning and the Two Sigma Problem - Basic",
+    "shortTitle": "Mastery Learning and the Two Sigma Problem",
+    "category": "design",
+    "format": "Basic",
+    "duration": "1:58",
+    "summary": "Opens with the usual classroom, where time is fixed and learning varies: everyone gets two weeks on fractions, then the class moves on, ready or not. Introduces Benjamin Bloom's mastery learning, proposed in 1968 and built on John Carroll's model of school learning, which holds learning fixed and lets time and help vary. Walks through the cycle: teach a unit, give a short formative test, send students who reach mastery to enrichment and give the others correctives, then give a second, parallel test before the next unit. Presents Bloom's 1984 report that students tutored one to one with mastery checks scored about two standard deviations above a regular class, so the average tutored student did better than 98 percent of that class, and his two sigma problem: how group teaching could come close at an affordable cost. Notes that later reviews found smaller but real gains, about half a standard deviation in a 1990 review of mastery learning programs, and that many two sigma studies were small and short. Connects the idea to intelligent tutors that use knowledge tracing to judge mastery, and follows a made-up teacher, Ben, whose correctives in small groups bring most of the remaining third of the class to mastery.",
+    "question": "In a course you know, what is held fixed: time, or learning? What would it take to let time vary?",
+    "lab": null,
+    "thumbnail": "thumb-mastery-learning.jpg",
+    "videoFile": "media/mastery-learning.mp4"
+  },
+  {
     "id": "learning-experiments",
     "title": "A/B Experiments in Learning Platforms - Basic",
     "shortTitle": "A/B Experiments in Learning Platforms",
@@ -296,6 +309,19 @@ window.LECTURES = [
     "videoFile": "media/learning-experiments.mp4"
   },
   {
+    "id": "multilevel-basic",
+    "title": "Unit of Analysis and Multilevel Models - Basic",
+    "shortTitle": "Unit of Analysis and Multilevel Models",
+    "category": "methods",
+    "format": "Basic",
+    "duration": "2:39",
+    "summary": "Opens with a made-up study that gives a tutoring app to three classes and keeps three more for comparison, twenty students in each, and shows why analyzing one hundred and twenty separate students overstates what the study can show: classmates share a teacher, a schedule, and each other, so their scores move together. Matches the unit of analysis to the level where the treatment was assigned, six classes rather than one hundred and twenty students. Splits score variation into differences between and within classes to define the intraclass correlation, then turns an intraclass correlation of 0.2 into a design effect of 4.8, so the students carry about as much information as twenty-five independent students. Shows how a multilevel model writes this nesting into the analysis, borrows strength across classes by pulling small classes toward the overall mean, and lets slopes differ by class. Ends by noting that a model cannot create information the design never collected: studies that assign whole classes need many classes.",
+    "question": "In a study you know, at what level was the treatment assigned, and at what level were the results analyzed?",
+    "lab": null,
+    "thumbnail": "thumb-multilevel-basic.jpg",
+    "videoFile": "media/multilevel-basic.mp4"
+  },
+  {
     "id": "edm-learning-analytics",
     "title": "Educational Data Mining and Learning Analytics - Basic",
     "shortTitle": "Educational Data Mining and Learning Analytics",
@@ -307,6 +333,45 @@ window.LECTURES = [
     "lab": null,
     "thumbnail": "thumb-edm-learning-analytics.jpg",
     "videoFile": "media/edm-learning-analytics.mp4"
+  },
+  {
+    "id": "formative-feedback",
+    "title": "Formative Assessment and Feedback - Basic",
+    "shortTitle": "Formative Assessment and Feedback",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "1:51",
+    "summary": "Opens with a made-up teacher, Rosa, who grades a fractions quiz, writes a score on each page, and moves the class on to decimals, and asks what the quiz did for learning. Defines assessment as formative when evidence about learning is used to adjust teaching and learning while there is still time to act, and cites Paul Black and Dylan Wiliam's 1998 review, which found that strengthening this practice raised achievement. Lists Wiliam's five strategies: clear goals and success criteria, drawing out evidence of student thinking, feedback that moves learning forward, students as resources for one another, and students as owners of their learning. Frames good feedback, after John Hattie and Helen Timperley, as answers to three questions (where am I going, how am I going, where to next) and four levels (task, process, self-regulation, and the self), noting that praise of the person tends to help least. Notes that Avraham Kluger and Angelo DeNisi found feedback made performance worse in more than a third of the cases they reviewed. Returns to Rosa, who sorts answers, finds that many students add the bottom numbers of fractions, starts the next day with that error, and has students fix their own work with a checklist.",
+    "question": "Think of the last feedback you gave. Which of the three questions did it answer, and did the learner get a chance to use it?",
+    "lab": null,
+    "thumbnail": "thumb-formative-feedback.jpg",
+    "videoFile": "media/formative-feedback.mp4"
+  },
+  {
+    "id": "validity-argument",
+    "title": "Validity as an Argument - Basic",
+    "shortTitle": "Validity as an Argument",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "1:47",
+    "summary": "Opens with a college that uses a short reading test to place new students in a support course and asks whether the test is valid. Explains that the question is slightly off: the Standards for educational and psychological testing define validity as how well evidence and theory support an interpretation of scores for a given use, not as a property of a test. Adds Samuel Messick's view that validity is one unified judgment that includes the consequences of using scores. Lays out Michael Kane's argument-based approach as a chain of inferences, each of which can be checked: scoring, generalization across forms, raters, and days, extrapolation to reading in real courses, and the decision to place students. Names the sources of evidence each link can draw on: test content, response processes, internal structure, relations with other measures, and consequences. Follows a made-up researcher, Tom, who finds consistent scores but no benefit for placed students over similar students who were not placed, so the decision link is weak and the college revises how the score is used.",
+    "question": "Pick a score you use to make a decision. Which link in its argument has the least evidence?",
+    "lab": null,
+    "thumbnail": "thumb-validity-argument.jpg",
+    "videoFile": "media/validity-argument.mp4"
+  },
+  {
+    "id": "stealth-assessment",
+    "title": "Stealth Assessment in Games - Basic",
+    "shortTitle": "Stealth Assessment in Games",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "1:43",
+    "summary": "Opens with a made-up player, Mia, who draws ramps and levers in a physics game to guide a ball to a balloon while no quiz ever appears, and asks whether the game can still tell what she understands. Introduces Valerie Shute's stealth assessment, assessment woven into a game so tightly that play is not interrupted, and grounds it in evidence-centered design: a competency model of what we want to know, an evidence model of which actions count and how strongly, and a task model of the levels that give players chances to show it. Shows each action updating the estimate, often in a Bayesian network, with a lever solution counting as evidence about torque and many restarts on ramp levels pointing to a gap. Notes that Shute and colleagues built Physics Playground this way and checked the game's estimates against regular physics tests. Shows the estimates guiding a hint, a new level, or a teacher report, and returns to Mia, whose avoided levers leave the torque estimate uncertain, so the game offers a level that needs a lever.",
+    "question": "In a game or simulation you know, which player action would be good evidence of a skill, and what else might explain it?",
+    "lab": null,
+    "thumbnail": "thumb-stealth-assessment.jpg",
+    "videoFile": "media/stealth-assessment.mp4"
   },
   {
     "id": "dick-carey",
