@@ -88,6 +88,19 @@ window.LECTURES = [
     "videoFile": "media/first-principles.mp4"
   },
   {
+    "id": "backward-design",
+    "title": "Backward Design and Constructive Alignment - Basic",
+    "shortTitle": "Backward Design and Constructive Alignment",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:17",
+    "summary": "Introduces backward design, described by Grant Wiggins and Jay McTighe, and John Biggs's closely related idea of constructive alignment, using a made-up teacher, Nadia, who plans a unit on charts in the news. Contrasts forward planning, where the test is written last and can measure something no activity prepared students for, with the three stages of backward design: desired results, evidence, and learning experiences. Shows a news chart whose axis starts at fifty and the same chart redrawn from zero, names the activity-focused and coverage-focused traps, and draws outcomes, activities, and assessment as a 3D triangle whose assessment drifts away and back into line. Cautions that alignment is a design check, not a guarantee of learning.",
+    "question": "In a course you teach, does every assessment match an outcome you stated, and does every activity prepare students for it?",
+    "lab": null,
+    "thumbnail": "thumb-backward-design.jpg",
+    "videoFile": "media/backward-design.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",
