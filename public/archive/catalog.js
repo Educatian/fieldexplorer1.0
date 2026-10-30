@@ -153,6 +153,32 @@ window.LECTURES = [
     "videoFile": "media/srl.mp4"
   },
   {
+    "id": "embodied-cognition",
+    "title": "Embodied Cognition and Learning - Basic",
+    "shortTitle": "Embodied Cognition and Learning",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "2:20",
+    "summary": "Opens with a math-equivalence problem (3 + 4 + 5 = __ + 5) that many children answer with 12 or 17, and with studies by Susan Goldin-Meadow and colleagues in which children taught a grouping gesture solved more problems after the lesson and, in one study, kept those gains weeks later. Introduces embodied cognition, the idea that thinking is shaped by the body and by action, by contrasting the mind-as-computer view with Lawrence Barsalou's grounded cognition. Shows Arthur Glenberg and colleagues' finding that young readers who acted out a story with toys understood and remembered it better than those who reread it, and that imagining the moves later helped too. Presents congruence as the design key, with a full-body asteroid simulation by Robb Lindgren and colleagues and a made-up teacher, Nora, whose arms become a balance for the equal sign. Cautions that movement is not automatically helpful, that mismatched movement and attention-grabbing objects can distract, that concrete objects tend to help most when they fade toward symbols (concreteness fading), and that the strong claim that all thinking is bodily is still debated.",
+    "question": "Pick one concept you teach. What movement would match it, and what movement might only distract?",
+    "lab": null,
+    "thumbnail": "thumb-embodied-cognition.jpg",
+    "videoFile": "media/embodied-cognition.mp4"
+  },
+  {
+    "id": "computational-thinking",
+    "title": "Computational Thinking - Basic",
+    "shortTitle": "Computational Thinking",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "1:57",
+    "summary": "Follows a made-up sixth grader, Kai, who wants to build a game in which a cat catches falling fish, to introduce computational thinking, which Jeannette Wing in 2006 argued is a skill for everyone, not only programmers. Walks through four practices that many school frameworks name: decomposition (splitting the game into a moving cat, falling fish, and a score), pattern recognition (every fish behaves the same way, so one set of instructions serves them all), abstraction (keeping position and speed, leaving out color), and an algorithm (forever move down; if touching the cat, add one to the score and go back to the top). Shows testing and debugging when a missed fish stays at the bottom and Kai adds a step. Presents Karen Brennan and Mitchel Resnick's three dimensions: concepts, practices, and perspectives. Cautions that there is no single agreed definition, so studies often measure different things, and that the hope that it improves problem solving in general, far beyond computing, has limited evidence so far.",
+    "question": "Pick a task your learners do often. Which part could they break down, and which pattern repeats?",
+    "lab": null,
+    "thumbnail": "thumb-computational-thinking.jpg",
+    "videoFile": "media/computational-thinking.mp4"
+  },
+  {
     "id": "dick-carey",
     "title": "The Dick and Carey Systematic Design Model - Basic",
     "shortTitle": "The Dick and Carey Systematic Design Model",

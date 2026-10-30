@@ -1226,5 +1226,25 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Zimmerman (2000) and Zimmerman (2002); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-30"
+  },
+  "embodied-cognition": {
+    "id": "embodied-cognition",
+    "purpose": "Use this lecture to judge when gesture, action, or physical objects are likely to support learning a concept, and when they are likely to distract.",
+    "distinction": "Embodied (grounded) cognition holds that concepts draw on perception and action systems (Barsalou, 2008), in contrast to views in which the body only supplies input and carries out output. In instruction, the movement should be congruent with the idea it stands for, as with grouping gestures for equivalence (Goldin-Meadow, Cook & Mitchell, 2009) or acting out sentences while reading (Glenberg et al., 2004).",
+    "caution": "Nora and her class are made up. Movement is not automatically helpful: incongruent movement and perceptually rich objects can distract, and concrete materials tend to help most when they fade toward symbols (Fyfe et al., 2014). How strong the embodiment claim is remains debated.",
+    "koSummary": "이 강의는 많은 아이가 12나 17로 답하는 등식 문제(3 + 4 + 5 = __ + 5)와, 묶기 제스처를 배운 아이들이 수업 뒤 더 많은 문제를 풀었고 한 연구에서는 몇 주 뒤에도 그 향상을 유지했다는 Susan Goldin-Meadow와 동료들의 연구로 시작합니다. 사고가 머릿속 기호 처리만이 아니라 몸과 행동에 의해 형성된다는 체화된 인지(embodied cognition)를, 마음을 컴퓨터로 보는 관점과 Lawrence Barsalou의 근거 인지(grounded cognition)를 대비해 소개합니다. 장난감으로 이야기를 직접 재연한 어린 독자들이 다시 읽기만 한 아이들보다 이야기를 더 잘 이해하고 기억했으며, 나중에는 움직임을 상상하는 것만으로도 도움이 되었다는 Arthur Glenberg와 동료들의 연구를 보여 줍니다. 설계의 핵심으로 일치성(congruence), 곧 움직임이 그것이 나타내는 개념과 맞아야 한다는 점을 Robb Lindgren과 동료들의 전신 소행성 시뮬레이션과, 등호를 팔로 만든 저울로 보여 주는 가상의 교사 Nora로 설명합니다. 움직임이 저절로 도움이 되지는 않으며, 개념과 맞지 않는 움직임이나 주의를 끄는 화려한 사물은 방해가 될 수 있고, 구체물은 점차 기호로 옮겨 갈 때(concreteness fading) 가장 도움이 되는 경향이 있으며, 모든 사고가 신체적이라는 강한 주장은 여전히 논쟁 중이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Goldin-Meadow, Cook & Mitchell (2009), Cook, Mitchell & Goldin-Meadow (2008), Barsalou (2008), Glenberg et al. (2004), Lindgren et al. (2016), and Fyfe et al. (2014); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "computational-thinking": {
+    "id": "computational-thinking",
+    "purpose": "Use this lecture to name the computational-thinking practices in a learning task and to see concepts, practices, and perspectives as separate things to teach and assess.",
+    "distinction": "Many school frameworks describe computational thinking through decomposition, pattern recognition, abstraction, and algorithms (after Wing, 2006). Brennan and Resnick (2012) instead describe three dimensions: computational concepts (such as loops and conditionals), practices (such as testing and debugging, reusing, abstracting), and perspectives (such as seeing oneself as able to create with computing).",
+    "caution": "Kai and his game are made up. Definitions of computational thinking vary, so studies often measure different things, and evidence that it improves general problem solving beyond computing is limited so far.",
+    "koSummary": "이 강의는 고양이가 떨어지는 물고기를 잡는 게임을 만들고 싶은 가상의 6학년 학생 Kai를 따라가며, Jeannette Wing이 2006년에 프로그래머만이 아니라 모든 사람의 기술이라고 주장한 컴퓨팅 사고(computational thinking)를 소개합니다. 많은 학교 프레임워크가 꼽는 네 가지 실천을 차례로 보여 줍니다. 분해(decomposition)는 게임을 움직이는 고양이, 떨어지는 물고기, 점수로 나누는 것이고, 패턴 인식은 모든 물고기가 같은 방식으로 움직이므로 하나의 명령 집합으로 모두를 다룰 수 있음을 알아차리는 것이며, 추상화는 색은 버리고 위치와 속도만 남기는 것, 알고리즘은 \"계속 아래로 이동하고, 고양이에 닿으면 점수를 1 더하고 맨 위로 돌아간다\"처럼 정확한 순서의 단계입니다. 놓친 물고기가 바닥에 머무는 버그를 찾아 단계를 추가하는 테스트와 디버깅도 보여 줍니다. Karen Brennan과 Mitchel Resnick의 세 차원인 개념, 실천, 관점을 제시합니다. 합의된 단일 정의가 없어 연구마다 측정하는 것이 다르고, 컴퓨팅을 넘어 일반적인 문제 해결력이 향상된다는 기대에는 아직 근거가 제한적이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Wing (2006) and Brennan & Resnick (2012); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
