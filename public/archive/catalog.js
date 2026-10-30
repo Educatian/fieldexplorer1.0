@@ -127,6 +127,32 @@ window.LECTURES = [
     "videoFile": "media/addie-sam.mp4"
   },
   {
+    "id": "theory-model-framework",
+    "title": "Theory, Model, or Framework? - Basic",
+    "shortTitle": "Theory, Model, or Framework?",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "2:39",
+    "summary": "Separates three words that instructional designers often use interchangeably. A theory explains and predicts, as cognitive load theory explains why novices learn more from worked examples and predicts that the benefit fades with expertise, so it can be tested and can turn out wrong. A model is a simplified picture of how something is done, either what a lesson contains (Gagné's nine events) or the steps a team follows (ADDIE), and it guides action without saying why each step works. A framework, such as the Community of Inquiry, organizes concepts so you know what to look at, without steps or predictions. A made-up designer, Lena, uses all three on one online statistics course, and a triangle of explain, guide, and organize places each one, with 4C/ID leaning from guide toward explain. Cautions that authors use these labels inconsistently, as Reigeluth called prescriptive guidance instructional-design theory.",
+    "question": "Pick one theory, model, or framework from your own work. Does it explain, guide, or organize, and what else would you need to use it well?",
+    "lab": null,
+    "thumbnail": "thumb-theory-model-framework.jpg",
+    "videoFile": "media/theory-model-framework.mp4"
+  },
+  {
+    "id": "dick-carey",
+    "title": "The Dick and Carey Systematic Design Model - Basic",
+    "shortTitle": "The Dick and Carey Systematic Design Model",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:43",
+    "summary": "Introduces Walter Dick and Lou Carey's systematic design model, first published in 1978, which treats instruction as a system of interdependent parts and lays out ten steps from identifying a goal to evaluating the finished instruction. A made-up designer, Tomás, builds training for new bank tellers on spotting counterfeit bills: he names the goal, analyzes the steps an expert follows and, alongside, the learners and their busy counter, writes a performance objective with a condition, behavior, and criterion, and develops the test before any teaching is planned. He then builds the strategy and materials, tries the training with one teller, a small group, and a branch, and revises the analysis and practice when tellers skip the security thread. The return arrow, which lets revision reach back to any earlier step, is shown as the heart of the model, followed by summative evaluation. Notes links to backward design and Gagné's learning hierarchies, and cautions that the full model can feel heavy for small, fast projects.",
+    "question": "In a course you designed, which step did you skip, and what did that cost you later?",
+    "lab": null,
+    "thumbnail": "thumb-dick-carey.jpg",
+    "videoFile": "media/dick-carey.mp4"
+  },
+  {
     "id": "GcsN8Ozqvec",
     "title": "ARCS Model vs Malone's Intrinsic Motivation - Overview",
     "shortTitle": "ARCS Model vs Malone's Intrinsic Motivation",

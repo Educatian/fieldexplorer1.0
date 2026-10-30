@@ -1156,5 +1156,25 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Molenda (2003) and Allen & Sites (2012); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "theory-model-framework": {
+    "id": "theory-model-framework",
+    "purpose": "Use this lecture to sort the ideas you draw on in design work by what they do: explain why, guide what to do, or organize what to look at.",
+    "distinction": "A theory explains and predicts and can be tested; a model is a simplified picture of how something is done and guides action; a framework organizes concepts into a structure that tells you what to look at, without steps or predictions of its own.",
+    "caution": "Lena and her course are made up. Authors do not use these labels consistently (Reigeluth called prescriptive guidance instructional-design theory), so judge a work by what it does, not only by what it is called.",
+    "koSummary": "이 강의는 교수설계에서 자주 섞어 쓰이는 이론, 모형, 프레임워크를 구분합니다. 이론은 설명하고 예측합니다. 인지부하 이론은 초보자가 스스로 문제를 푸는 것보다 풀이 예제로 더 많이 배우는 이유를 설명하고, 전문성이 쌓이면 그 이점이 사라진다고 예측하므로 검증될 수 있고 틀릴 수도 있습니다. 모형은 무언가를 하는 방식을 단순화한 그림으로, 수업에 들어갈 요소(Gagné의 9가지 수업사태)나 설계 팀이 따르는 단계(ADDIE)를 보여 주며 행동을 안내하지만 각 단계가 왜 효과적인지는 대개 말하지 않습니다. 탐구공동체(Community of Inquiry)와 같은 프레임워크는 개념을 구조로 묶어 무엇을 볼지 알려 주지만 단계나 예측을 제시하지는 않습니다. 가상의 설계자 Lena가 온라인 통계 강좌 하나에 세 가지를 모두 쓰는 사례를 보여 주고, 설명·안내·조직의 삼각형 위에 각각을 놓으며 4C/ID가 안내에서 설명 쪽으로 기운다는 점을 보여 줍니다. 저자들이 이 이름을 일관되게 쓰지 않는다는 점(Reigeluth는 처방적 지침을 교수설계 이론이라 불렀음)을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Sweller (1988), Garrison, Anderson & Archer (2000), and Reigeluth (1999); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
+  },
+  "dick-carey": {
+    "id": "dick-carey",
+    "purpose": "Use this lecture to walk through the ten steps of the Dick and Carey model on one small project and to see where formative evaluation sends a designer back to earlier steps.",
+    "distinction": "Dick and Carey treat instruction as a system: the goal, instructional analysis, learner and context analysis, objectives, assessments, strategy, and materials depend on one another, assessments are written before the strategy, and revision after formative evaluation can reach back to any earlier step; summative evaluation comes later and asks whether to keep the instruction.",
+    "caution": "Tomás, the bank, and the training are made up. Drawn as boxes and arrows, the model can look rigid, and its full form can feel heavy for small or fast projects, so many designers scale the steps to the project.",
+    "koSummary": "이 강의는 1978년에 처음 출판된 Walter Dick과 Lou Carey의 체제적 교수설계 모형을 소개합니다. 이 모형은 수업을 서로 의존하는 부분들의 체제로 보고, 목표 확인부터 완성된 수업의 평가까지 열 단계를 제시합니다. 가상의 설계자 Tomás가 신입 은행 창구 직원을 위한 위조지폐 식별 교육을 만드는 사례에서, 목표를 정하고, 전문가가 따르는 단계를 분석하면서 동시에 학습자와 바쁜 창구라는 맥락을 분석하며, 조건·행동·준거를 갖춘 수행목표를 쓰고, 가르칠 내용을 계획하기 전에 평가 도구를 먼저 개발합니다. 이어서 교수전략과 자료를 만들고, 한 명, 소집단, 한 지점 단위로 형성평가를 하며, 직원들이 보안 실을 확인하지 않는다는 점이 드러나자 분석과 연습을 수정합니다. 수정이 앞의 어느 단계로든 되돌아갈 수 있다는 되돌림 화살표를 모형의 핵심으로 보여 주고, 이어 총괄평가를 다룹니다. 백워드 설계 및 Gagné의 학습 위계와의 연결을 짚고, 작고 빠른 프로젝트에는 모형 전체가 무겁게 느껴질 수 있어 많은 설계자가 단계를 프로젝트 규모에 맞춘다는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Dick & Carey (1978) and Dick, Carey & Carey (2015); further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-30"
   }
 };
