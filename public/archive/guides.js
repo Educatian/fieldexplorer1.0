@@ -1106,5 +1106,15 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "Caption-based editorial guide. The video names Collins, Brown, and Newman (1989); further-reading links are not yet added or checked.",
     "reviewedAt": "2026-10-29"
+  },
+  "4cid-basic": {
+    "id": "4cid-basic",
+    "purpose": "Use this lecture to see the four components of 4C/ID and how they fit together in a blueprint for teaching a complex skill.",
+    "distinction": "Supportive information serves the non-routine parts of a task, which call for reasoning and are never done the same way twice, while procedural information serves the routine parts, given just in time and removed once learners no longer need it.",
+    "caution": "The search course, its tasks, and its learners are made up, and 4C/ID is a detailed design model rather than a quick recipe, so a real blueprint needs an analysis of the skill and a tryout with its own learners.",
+    "koSummary": "이 강의는 Jeroen van Merriënboer가 개발한 4C/ID(네 요소 교수설계) 모형을 문헌 검색을 가르치는 가상 강좌로 소개합니다. 실제적인 전체 과제로 이루어진 학습 과제를 단순한 과제군에서 복잡한 과제군으로 배열하고, 각 과제군 안에서는 지원이 줄어들었다가 다음 과제군에서 다시 높아지는 톱니 모양 지원을 보여 줍니다. 추론이 필요한 부분에는 지원 정보를, 매번 같은 방식으로 하는 절차적 부분에는 필요한 순간에 주는 절차 정보를, 자동화가 필요한 단계에는 전체 과제 사이에 섞어 넣는 부분 과제 연습을 둡니다. 마지막으로 전체 청사진을 보여 주고, 빠른 처방이 아니라 기술 분석과 실제 학습자 대상 시행이 필요한 상세한 설계 모형이라는 점을 주의점으로 둡니다.",
+    "sources": [],
+    "verificationNote": "Caption-based editorial guide. The video names Jeroen van Merriënboer as the model's developer; further-reading links are not yet added or checked.",
+    "reviewedAt": "2026-10-29"
   }
 };
