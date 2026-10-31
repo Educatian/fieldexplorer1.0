@@ -54,6 +54,16 @@ export function getVenueByName(name: string): VenueInfo | undefined {
     return venueByName.get(name);
 }
 
+// Labels that describe a venue but are not research fields: shown as tags, never as map nodes.
+export const TAG_CATEGORIES = new Set(['Well-known', 'ISLS', 'Critical Perspectives', 'Eye-tracking', 'Learning at Scale']);
+export const TAG_LABEL_KO: Record<string, string> = {
+    'Well-known': '대표 학술지', 'ISLS': 'ISLS 학회', 'Critical Perspectives': '비판적 관점',
+    'Eye-tracking': '시선 추적', 'Learning at Scale': '대규모 학습',
+};
+// Category names that equal a venue name get another node id (a journal is called "Human-Computer Interaction").
+export const CATEGORY_ALIAS: Record<string, string> = { 'Human-Computer Interaction': 'HCI' };
+export const canonicalCategory = (cat: string): string => CATEGORY_ALIAS[cat] || cat;
+
 export function getAllVenues(): VenueInfo[] {
     return venueData;
 }

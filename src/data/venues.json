@@ -461,6 +461,7 @@
         "name": "Learning Media and Technology",
         "type": "Journal",
         "categories": [
+            "Technology-Enhanced Learning",
             "Critical Perspectives"
         ],
         "impact": "Q1"
@@ -706,6 +707,7 @@
         "name": "ETRA Symposium",
         "type": "Conference",
         "categories": [
+            "Human-Computer Interaction",
             "Eye-tracking"
         ],
         "cfpDeadline": "January"
@@ -715,6 +717,8 @@
         "name": "L@S Conference",
         "type": "Conference",
         "categories": [
+            "Online Learning",
+            "Learning Analytics",
             "Learning at Scale"
         ],
         "cfpDeadline": "January"
