@@ -1,6 +1,9 @@
 """
 build_venue_methodology.py  --  data-derived methodology profiles (LLM proposer).
 
+SUPERSEDED by build_venue_methodology_jev.py (Jev, two wordings per construct, reliability in
+_meta). Running this script would overwrite venue_methodology.json with the older format.
+
 Replaces the fragile lexical keyword-matching of methodology with per-abstract
 LLM classification, then venue-level aggregation. Follows the house pattern:
 LOCAL LLM proposes (Ollama / hermes3:8b), Claude verifies a sample afterwards.

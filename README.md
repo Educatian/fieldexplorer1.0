@@ -136,8 +136,11 @@ FieldExplorer follows a three-layer pipeline wrapped in a pedagogical **scaffold
 | `scripts/update_semantic_profiles.py` | `semantic_profiles.json` | TF-IDF fingerprints from each venue's recent OpenAlex abstracts (methodology / domain tagged). |
 | `scripts/build_venue_metrics.py` | `venue_metrics.json` | Venue→venue **citation edges**, per-venue **interdisciplinarity** (Simpson / Shannon), and top cited-field distribution. Hardened with retry/back-off and an on-disk checkpoint. |
 | `scripts/disparity_backbone.py` | `backbone` flags in `venue_metrics.json` | **Multiscale disparity filter** (Serrano, Boguñá & Vespignani 2009) — keeps each node's statistically significant citation edges, preserving hubs *and* periphery. |
+| `scripts/build_venue_methodology_jev.py` | `venue_methodology.json` | Research profile per venue from recent abstracts (complete years, articles and reviews in proportion). Each abstract is coded by **Jev** (`jev-1.14.0`) with two wordings per construct: six methodology constructs, primary approach, learner level, six technology areas. `_meta.reliability` keeps A/B agreement and κ per construct; venues whose regular papers have no OpenAlex abstracts are listed without a profile. Run `fetch`, `code` (needs `TYPESAFE_API_KEY`), `build`; about $0.5 for all venues. |
 
 Interdisciplinarity is computed with the same formulation as **pySciSci** (`methods.diversity`, after Stirling 2007): diversity over the OpenAlex top-level fields a venue cites.
+
+Activity, topic trends and the citation layer refresh monthly in `.github/workflows/refresh-openalex-layers.yml` (OpenAlex allows about 1,000 free requests a day, so the job keeps a reference cache and runs on three days). Every data file records `_meta.generated_at`, and the app shows it next to each cue.
 
 ```bash
 # refresh the citation / interdisciplinarity layer

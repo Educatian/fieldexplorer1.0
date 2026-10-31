@@ -216,6 +216,20 @@ def fetch_conference_data(name):
         print(f"  Error: {e}")
         return None
 
+# Journals whose name search lands on a bigger journal with overlapping words (for example
+# 'Human-Computer Interaction' -> International Journal of Human-Computer Interaction).
+# Each id was checked against OpenAlex /sources/issn:<ISSN>.
+PINNED_SOURCES = {
+    'Educational Research Review': 'S43764696',  # ISSN 1747-938X
+    'Human-Computer Interaction': 'S2481449237',  # ISSN 0737-0024
+    'International Journal of Science Education': 'S54332258',  # ISSN 0950-0693
+    'Journal of Science Education and Technology': 'S158654976',  # ISSN 1059-0145
+    'Journal of Engineering Education': 'S73400788',  # ISSN 1069-4730
+    'Computer Science Education': 'S97147119',  # ISSN 0899-3408
+    'Mathematics Education Research Journal': 'S2764537291',  # ISSN 1033-2170
+}
+
+
 def resolve_source_id(journal_name):
     """Resolve a venue NAME to a concrete OpenAlex Source ID.
 
@@ -224,6 +238,8 @@ def resolve_source_id(journal_name):
     endpoint ranks by relevance+works_count, so the top journal-type hit
     whose name reasonably overlaps the query is the right venue.
     """
+    if journal_name in PINNED_SOURCES:
+        return PINNED_SOURCES[journal_name], journal_name
     try:
         params = {'search': journal_name, 'filter': 'type:journal',
                   'per_page': 5, 'select': 'id,display_name,works_count', 'mailto': MAILTO}
@@ -234,7 +250,12 @@ def resolve_source_id(journal_name):
         if not results:
             return None, None
         qn = set(_norm(journal_name).split())
-        # Prefer the highest-works_count source whose name shares >=60% of query tokens.
+        # An exact name match wins (ignoring a leading 'The'); otherwise prefer the
+        # highest-works_count source whose name shares >=60% of query tokens.
+        strip_the = lambda t: t[4:] if t.startswith('the ') else t
+        exact = [src for src in results if strip_the(_norm(src.get('display_name'))) == strip_the(_norm(journal_name))]
+        if exact:
+            return (exact[0].get('id') or '').rsplit('/', 1)[-1], exact[0].get('display_name')
         best = None
         for src in results:
             sn = set(_norm(src.get('display_name')).split())

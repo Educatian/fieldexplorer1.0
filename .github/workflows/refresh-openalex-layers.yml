@@ -1,0 +1,89 @@
+name: Refresh OpenAlex layers
+
+# Rebuilds the citation/interdisciplinarity layer (venue_metrics.json), yearly activity
+# (venue_activity.json) and topic trends (field_trends.json) from OpenAlex each month.
+# The free OpenAlex budget is about 1,000 requests a day, so the referenced-works cache is
+# kept between runs and the job runs on three days: a run that hits the budget checkpoints
+# and the next day's run finishes it. Each file is committed only when its script succeeded.
+
+on:
+  schedule:
+    - cron: '0 7 2-4 * *'   # 2nd-4th of each month, 07:00 UTC (after the semantic-profile job)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-openalex-layers
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Restore referenced-works cache
+        uses: actions/cache/restore@v4
+        with:
+          path: src/data/_ref_meta_cache.json
+          key: openalex-refs-${{ github.run_id }}
+          restore-keys: openalex-refs-
+
+      - name: Skip if this month is already done
+        id: done
+        run: |
+          month=$(date -u +%Y-%m)
+          built=$(python -c "import json;print(json.load(open('src/data/venue_metrics.json'))['_meta'].get('generated_at',''))")
+          if [ "${built:0:7}" = "$month" ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; else echo "skip=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Activity and topic trends
+        id: light
+        if: steps.done.outputs.skip != 'true'
+        continue-on-error: true
+        run: |
+          python scripts/build_venue_activity.py
+          python scripts/build_field_trends.py
+
+      - name: Citation layer and backbone
+        id: metrics
+        if: steps.done.outputs.skip != 'true'
+        continue-on-error: true
+        run: |
+          python scripts/build_venue_metrics.py --samples 30
+          python scripts/disparity_backbone.py
+
+      - name: Save referenced-works cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: src/data/_ref_meta_cache.json
+          key: openalex-refs-${{ github.run_id }}
+
+      - name: Commit what succeeded
+        if: steps.done.outputs.skip != 'true'
+        run: |
+          files=""
+          if [ "${{ steps.light.outcome }}" = "success" ]; then files="src/data/venue_activity.json src/data/field_trends.json"; fi
+          if [ "${{ steps.metrics.outcome }}" = "success" ]; then files="$files src/data/venue_metrics.json"; fi
+          # drop half-written output of a step that did not finish
+          for f in src/data/venue_activity.json src/data/field_trends.json src/data/venue_metrics.json; do
+            case " $files " in *" $f "*) ;; *) git checkout -- "$f" 2>/dev/null || true ;; esac
+          done
+          [ -z "$files" ] && { echo "Nothing finished this run."; exit 0; }
+          echo "Files to commit: $files"
+          if git diff --quiet -- $files; then echo "No changes."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add $files
+          git commit -m "chore: monthly refresh of OpenAlex layers (activity, trends, citation)"
+          git push

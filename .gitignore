@@ -29,3 +29,4 @@ __pycache__/
 # build caches
 src/data/_ref_meta_cache.json
 scripts/_*.log
+data-cache/
