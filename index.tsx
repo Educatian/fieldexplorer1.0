@@ -2160,7 +2160,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const profileHtml = mp?.no_article_abstracts ? `
       <div class="sidebar-section">
         <h3>🧪 연구 방법·맥락 (초록 코딩)</h3>
-        <p class="sidebar-note-muted">OpenAlex에 이 학회의 일반 논문 초록이 없어 코딩하지 않았습니다 (초록이 있는 것은 리뷰 ${mp.reviews_with_abstracts || 0}편뿐). 리뷰만으로는 학회의 연구 방법을 대표하지 못합니다.</p>
+        <p class="sidebar-note-muted">OpenAlex에 이 학회의 일반 논문 초록이 없고 다른 공개 출처에서도 구하지 못해 코딩하지 않았습니다${mp.reviews_with_abstracts ? ` (OpenAlex에 초록이 있는 것은 리뷰 ${mp.reviews_with_abstracts}편뿐이며, 리뷰만으로는 학회의 연구 방법을 대표하지 못합니다)` : ''}.</p>
       </div>` : (mp && mp.n_abstracts) ? (() => {
         const bars = Object.entries(mp.shares || {}).sort((a: any, b: any) => b[1] - a[1]).slice(0, 4).map(([k, v]: any) => `
         <div class="detail-progress-row">
@@ -2184,7 +2184,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
             const links = lectureLinksHtml([...(LECTURES_BY_METHOD[mp.dominant] || []).slice(0, 2), ...(topTech ? (LECTURES_BY_TECH[topTech[0]] || []).slice(0, 1) : [])]);
             return links ? `<p class="sidebar-meta-caption">아카이브에서 배우기</p><div class="archive-lecture-links">${links}</div>` : '';
         })()}
-        <p class="sidebar-note-muted">OpenAlex 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))}` : ''}</p>
+        <p class="sidebar-note-muted">${escapeHtml(mp.abstract_source || 'OpenAlex')} 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))}` : ''}</p>
       </div>`;
     })() : '';
 

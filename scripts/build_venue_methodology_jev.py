@@ -226,7 +226,7 @@ def code(key, venues_cap, per_venue):
                 done.add((rec["vid"], rec["wid"]))
     todo = []
     for vid in list(store)[: venues_cap or None]:
-        if (store[vid].get("openalex_counts") or {}).get("article", 1) == 0:
+        if no_abstracts(store[vid]):
             continue
         for w in store[vid]["works"][: per_venue or None]:
             if (vid, w["wid"]) not in done:
@@ -257,6 +257,11 @@ def code(key, venues_cap, per_venue):
     print(f"code done: {n} coded, {errs} errors, input tokens {tok}")
 
 
+def no_abstracts(d):
+    """OpenAlex has no regular-paper abstracts and scripts/fetch_alt_abstracts.py found no other source."""
+    return (d.get("openalex_counts") or {}).get("article", 1) == 0 and not d.get("alt_source")
+
+
 # ------------------------------------------------------------------ build
 def kappa(a, b):
     n = len(a)
@@ -279,7 +284,7 @@ def build():
     store = json.loads(ABSTRACTS.read_text(encoding="utf-8"))
     titles = {(vid, w["wid"]): w["title"] for vid, d in store.items() for w in d["works"]}
     years = [w["year"] for d in store.values() for w in d["works"] if w.get("year")]
-    skip = {vid for vid, d in store.items() if (d.get("openalex_counts") or {}).get("article", 1) == 0}
+    skip = {vid for vid, d in store.items() if no_abstracts(d)}
     recs = [r for r in (json.loads(l) for l in CODES.read_text(encoding="utf-8").splitlines())
             if r["battery_hash"] == bh and (r["vid"], r["wid"]) in titles and r["vid"] not in skip]  # current sample only
     by_venue = defaultdict(list)
@@ -312,7 +317,7 @@ def build():
     for vid, d in store.items():
         # OpenAlex holds abstracts only for this venue's occasional reviews, not its regular papers:
         # coding them would misread the venue, so it is listed without a profile.
-        if (d.get("openalex_counts") or {}).get("article", 1) == 0:
+        if no_abstracts(d):
             out[vid] = {"name": d["name"], "shares": {}, "dominant": None, "n_classified": 0, "n_abstracts": 0,
                         "n_research": 0, "no_article_abstracts": True, "reviews_with_abstracts": d["openalex_counts"].get("review", 0)}
     for vid, rs in by_venue.items():
@@ -355,12 +360,13 @@ def build():
             "mean_confidence": round(sum(confs) / len(confs), 3) if confs else 0.0,
             "ab_disagreements": disagree,
             "low_sample": n_res < MIN_RESEARCH,
+            "abstract_source": (store[vid].get("alt_source") or {}).get("source", "OpenAlex"),
         }
     meta = {
         "generator": "build_venue_methodology_jev.py",
         "coder": MODEL, "codebook": CODEBOOK_VERSION, "battery_hash": bh,
         "generated_at": date.today().isoformat(),
-        "source": "OpenAlex abstracts; articles and reviews sampled in proportion to their counts in the window",
+        "source": "OpenAlex abstracts (articles and reviews in proportion to their counts); venues without OpenAlex abstracts use scripts/fetch_alt_abstracts.py (abstract_source per venue)",
         "works_window": [SINCE, UNTIL], "works_years": [min(years), max(years)] if years else None,
         "n_abstracts": len(recs), "n_venues": len(out),
         "categories": [v[0] for v in METHODS.values()],
