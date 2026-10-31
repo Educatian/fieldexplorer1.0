@@ -443,7 +443,15 @@ window.LECTURE_GUIDES = {
         "access": "abstract"
       }
     ],
-    "reviewedAt": "2026-10-16"
+    "reviewedAt": "2026-10-16",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/design-design-based-research/",
+      "topic": "Design and Design-Based Research",
+      "speakers": "Sadhana Puntambekar",
+      "videos": "a full webinar (75 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "XN29cK9FYMY": {
     "id": "XN29cK9FYMY",
@@ -1307,7 +1315,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/group-cognition/",
+      "topic": "Group Cognition",
+      "speakers": "Gerry Stahl",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (90 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-collaborative-cognitive-load": {
     "id": "cscl-collaborative-cognitive-load",
@@ -1356,7 +1372,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/collaboration-scripts-for-cscl/",
+      "topic": "Collaboration Scripts for CSCL",
+      "speakers": "Frank Fischer, Ingo Kollar, and Christof Wecker",
+      "videos": "a full webinar (101 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-eight-provocations-for-cscl": {
     "id": "cscl-eight-provocations-for-cscl",
@@ -1452,7 +1476,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/situative-cognition/",
+      "topic": "Situative Cognition",
+      "speakers": "James Greeno and Timothy Nokes-Malach",
+      "videos": "a full webinar (98 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-is-childrens-knowledge-coherent": {
     "id": "cscl-is-childrens-knowledge-coherent",
@@ -1548,7 +1580,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Crossref lists the online-first year 2013; the journal issue is 2014. OpenAlex lists an open repository copy."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/design-design-based-research/",
+      "topic": "Design and Design-Based Research",
+      "speakers": "Sadhana Puntambekar",
+      "videos": "a full webinar (75 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-will-media-influence-learning": {
     "id": "cscl-will-media-influence-learning",
@@ -1682,7 +1722,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/collaboration-scripts-for-cscl/",
+      "topic": "Collaboration Scripts for CSCL",
+      "speakers": "Frank Fischer, Ingo Kollar, and Christof Wecker",
+      "videos": "a full webinar (101 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-can-you-see-a-group-regulate-itself": {
     "id": "cscl-can-you-see-a-group-regulate-itself",
@@ -1702,7 +1750,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists an open repository copy."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/shared-regulation-cscl/",
+      "topic": "Shared Regulation in CSCL",
+      "speakers": "Sanna Järvelä",
+      "videos": "a full webinar (79 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-cooperation-or-collaboration": {
     "id": "cscl-cooperation-or-collaboration",
@@ -1780,7 +1836,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. OpenAlex lists it as open access."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/knowledge-building/",
+      "topic": "Knowledge Building",
+      "speakers": "Marlene Scardamalia, Carl Bereiter, Jan van Aalst, and Carol Chan",
+      "videos": "an interview and a full webinar (123 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-how-much-effort-should-common-ground-take": {
     "id": "cscl-how-much-effort-should-common-ground-take",
@@ -1876,7 +1940,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Lecture Notes in Computer Science."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/classroom-orchestration/",
+      "topic": "Classroom Orchestration",
+      "speakers": "Pierre Dillenbourg",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (74 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cscl-group-awareness-mirror-or-nudge": {
     "id": "cscl-group-awareness-mirror-or-nudge",
@@ -1914,7 +1986,15 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
       }
     ],
-    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30."
+    "verificationNote": "Caption-based editorial guide; further-reading links were checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/group-awareness-tools/",
+      "topic": "Group Awareness Tools",
+      "speakers": "Jeroen Janssen",
+      "videos": "a full webinar (95 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "irt-basic": {
     "id": "irt-basic",
@@ -1963,7 +2043,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Collins, Brown, and Newman (1989); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-29"
+    "reviewedAt": "2026-10-29",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/cognitive-apprenticeship/",
+      "topic": "Cognitive Apprenticeship",
+      "speakers": "Allan Collins",
+      "videos": "a full webinar (85 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "4cid-basic": {
     "id": "4cid-basic",
@@ -2313,7 +2401,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Goldin-Meadow, Cook & Mitchell (2009), Cook, Mitchell & Goldin-Meadow (2008), Barsalou (2008), Glenberg et al. (2004), Lindgren et al. (2016), and Fyfe et al. (2014); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/embodiment-and-embodied-design/",
+      "topic": "Embodiment and Embodied Design",
+      "speakers": "Dor Abrahamson",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (86 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "computational-thinking": {
     "id": "computational-thinking",
@@ -2400,7 +2496,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Vygotsky (1978), Wood, Bruner & Ross (1976), van de Pol, Volman & Beishuizen (2010), and Wood, Wood & Middleton (1978); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/distributed-scaffolding/",
+      "topic": "Distributed Scaffolding",
+      "speakers": "Iris Tabak, Brian Reiser, and Sadhana Puntambekar",
+      "videos": "a short introduction, a talk, an interview, and full webinars (69 and 83 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "cognitive-load": {
     "id": "cognitive-load",
@@ -2438,7 +2542,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Sweller (1988), Sweller (2010), Sweller & Cooper (1985), Renkl & Atkinson (2003), Kalyuga, Ayres, Chandler & Sweller (2003), and Paas (1992); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/example-based-learning/",
+      "topic": "Example-Based Learning",
+      "speakers": "Nikol Rummel",
+      "videos": "a full webinar (103 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "situated-learning": {
     "id": "situated-learning",
@@ -2476,7 +2588,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Lave & Wenger (1991), Brown, Collins & Duguid (1989), Wenger (1998), and Wenger, McDermott & Snyder (2002); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/situative-cognition/",
+      "topic": "Situative Cognition",
+      "speakers": "James Greeno and Timothy Nokes-Malach",
+      "videos": "a full webinar (98 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "distributed-cognition": {
     "id": "distributed-cognition",
@@ -2601,7 +2721,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names VanLehn (2006), Anderson, Corbett, Koedinger & Pelletier (1995), VanLehn (2011), and Baker, Corbett, Koedinger & Wagner (2004); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/cognitive-tutors/",
+      "topic": "Cognitive Tutors",
+      "speakers": "Vincent Aleven",
+      "videos": "a full webinar (96 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "edm-learning-analytics": {
     "id": "edm-learning-analytics",
@@ -2639,7 +2767,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Siemens & Baker (2012), Baker & Yacef (2009), and Arnold & Pistilli (2012); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/automated-collaborative-process-analysis/",
+      "topic": "Automated Collaborative Process Analysis",
+      "speakers": "Carolyn Rosé",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (84 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "learning-experiments": {
     "id": "learning-experiments",
@@ -2688,7 +2824,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names no sources on screen; the guide cites Raudenbush & Bryk (2002); further-reading links were checked against Crossref, OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/multilevel-analysis/",
+      "topic": "Multilevel Analysis",
+      "speakers": "Ulrike Cress",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (106 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "formative-feedback": {
     "id": "formative-feedback",
@@ -2869,7 +3013,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Shaffer, Collier & Ruis (2016) and Shaffer (2018); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/quantitative-ethnography/",
+      "topic": "Quantitative Ethnography",
+      "speakers": "David Williamson Shaffer",
+      "videos": "a full webinar (74 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "coding-collaboration": {
     "id": "coding-collaboration",
@@ -2916,7 +3068,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Chi (1997), Strijbos et al. (2006), and Weinberger & Fischer (2006); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/analysis-of-discourse-data/",
+      "topic": "Analysis of Discourse Data",
+      "speakers": "Karsten Stegmann and Armin Weinberger",
+      "videos": "a full webinar (91 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "video-research": {
     "id": "video-research",
@@ -3059,7 +3219,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Penuel, Fishman, Cheng & Sabelli (2011); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/design-based-implementation-research/",
+      "topic": "Design-Based Implementation Research",
+      "speakers": "William Penuel",
+      "videos": "a short introduction",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "tpack": {
     "id": "tpack",
@@ -3182,7 +3350,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Kapur (2008, 2016) and Sinha & Kapur (2021); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/learning-through-problem-solving/",
+      "topic": "Learning through Problem-Solving",
+      "speakers": "Cindy Hmelo-Silver",
+      "videos": "a full webinar (107 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "interest-development": {
     "id": "interest-development",
@@ -3448,7 +3624,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Chinn & Sandoval (2018), Hofer & Pintrich (1997), and Chinn, Buckland & Samarapungavan (2011); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/epistemic-cognition/",
+      "topic": "Epistemic Cognition",
+      "speakers": "William Sandoval and Clark Chinn",
+      "videos": "a short introduction, a talk, an interview, and full webinars (81 and 84 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "multiple-representations": {
     "id": "multiple-representations",
@@ -3486,7 +3670,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Ainsworth (2006); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/representational-learning/",
+      "topic": "Representational Learning",
+      "speakers": "Shaaron Ainsworth",
+      "videos": "a short introduction, a talk, and a full webinar (77 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "multiple-sources": {
     "id": "multiple-sources",
@@ -3533,7 +3725,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Goldman & Brand-Gruwel (2018), Wineburg (1991), Bråten, Strømsø & Britt (2009), and Wineburg & McGrew (2019); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/information-problem-solving/",
+      "topic": "Information Problem Solving",
+      "speakers": "Saskia Brand-Gruwel",
+      "videos": "a full webinar (87 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "complex-systems": {
     "id": "complex-systems",
@@ -3580,7 +3780,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Jacobson & Wilensky (2006), Chi (2005), and Hmelo-Silver & Pfeffer (2004); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/complexity-and-the-learning-sciences/",
+      "topic": "Complexity and the Learning Sciences",
+      "speakers": "Michael J. Jacobson and Peter Reimann",
+      "videos": "a short introduction, a talk, an interview, and a full webinar (102 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "neuromyths": {
     "id": "neuromyths",
@@ -3627,7 +3835,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Dekker et al. (2012), Howard-Jones (2014), Pashler et al. (2008), and Varma et al. (2018); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/neurocognitive-foundations-learning-sciences/",
+      "topic": "Neurocognitive Foundations for the Learning Sciences",
+      "speakers": "Sashank Varma",
+      "videos": "a full webinar (97 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "learning-progressions": {
     "id": "learning-progressions",
@@ -3674,7 +3890,15 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Smith, Wiser, Anderson & Krajcik (2006), Duncan & Rivet (2018), and Alonzo & Steedle (2009); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
-    "reviewedAt": "2026-10-30"
+    "reviewedAt": "2026-10-30",
+    "researchers": {
+      "url": "https://www.isls.org/research-topics/learning-progressions-in-science-education/",
+      "topic": "Learning Progressions in Science Education",
+      "speakers": "Ravit Duncan",
+      "videos": "a full webinar (90 min)",
+      "checked": "2026-10-31",
+      "captions": false
+    }
   },
   "design-cases": {
     "id": "design-cases",
