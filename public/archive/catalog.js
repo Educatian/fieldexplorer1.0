@@ -608,6 +608,19 @@ window.LECTURES = [
     "videoFile": "media/tpack.mp4"
   },
   {
+    "id": "archive-guide",
+    "title": "Getting Started with the Lecture Archive",
+    "shortTitle": "Archive Guide",
+    "category": "guide",
+    "format": "Guide",
+    "duration": "6:09",
+    "summary": "A screen walkthrough of this archive for new viewers. Shows the three ways in (all lectures, research questions, and viewing paths), filtering by field and sorting by length, and searching titles, summaries, study guides, Korean summaries, and English transcripts, including opening a lecture at the matching transcript line. On a lecture page, it covers the player, the timestamp and copy timed link, and the four tabs: Overview (what the lecture helps explain, the key distinction, what not to conclude, the Korean summary, and a Pause and consider question), Transcript (jump to a line, search within the lecture, download SRT or VTT), Sources and updates (further reading with access labels and check notes, audio status, reuse), and Review status. It also shows Share and embed, a research question card, a viewing path with its step navigation, the About section, and Report a problem, and closes with a short study routine and tips for teachers.",
+    "question": "Which lecture will you start with, and what will you do with its Pause and consider question?",
+    "lab": null,
+    "thumbnail": "thumb-archive-guide.jpg",
+    "videoFile": "media/archive-guide.mp4"
+  },
+  {
     "id": "ill-structured-problems",
     "title": "Well-Structured and Ill-Structured Problems - Basic",
     "shortTitle": "Well- and Ill-Structured Problems",
