@@ -2040,9 +2040,28 @@ window.LECTURE_GUIDES = {
     "distinction": "The nine events are what the instructor arranges outside the learner, from gaining attention to supporting transfer; each one is meant to support a process inside the learner, such as attention, expectancy, retrieval, encoding, and generalization.",
     "caution": "Priya, her lab, and the samples are made up, and the events are a checklist of conditions rather than a fixed script: their order can change, and not every lesson needs all nine.",
     "koSummary": "이 강의는 Robert Gagné가 학습의 조건과 연결해 제시한 아홉 가지 수업 사태(nine events of instruction)를, 신입 실험 보조원에게 마이크로피펫 사용법을 가르치는 가상의 트레이너 Priya의 사례로 소개합니다. 같아야 할 두 시료가 다르게 나온 장면으로 주의를 끌고, 학습 목표를 알리고, 메스실린더 눈금 읽는 법을 떠올리게 한 뒤, 플런저의 두 단계 멈춤점을 제시하고, 따라 말할 수 있는 단서로 학습을 안내합니다. 이어 반복 연습, 저울로 공기 방울을 잡아내는 피드백, 힌트 없는 최종 확인, 실제 실험으로의 전이를 차례로 보여 줍니다. Gagné가 각 사태를 주의부터 일반화까지 학습자 내부의 과정과 짝지었다는 점을 계단으로 그리고, 아홉 사태는 고정된 대본이 아니라 조건의 점검표라는 점을 주의점으로 둡니다.",
-    "sources": [],
-    "verificationNote": "Caption-based editorial guide. The video names Gagné (1965) and Gagné, Briggs & Wager (1992); further-reading links are not yet added or checked.",
-    "reviewedAt": "2026-10-29"
+    "sources": [
+      {
+        "title": "Learning outcomes and their effects: Useful categories of human performance",
+        "authors": "Robert M. Gagné",
+        "year": 1984,
+        "url": "https://doi.org/10.1037/0003-066x.39.4.377",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Integrative goals for instructional design",
+        "authors": "Robert M. Gagné and M. David Merrill",
+        "year": 1990,
+        "url": "https://doi.org/10.1007/bf02298245",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Gagné (1965) and Gagné, Briggs & Wager (1992), books without DOI records; the further reading below was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
   },
   "addie-sam": {
     "id": "addie-sam",
@@ -3002,6 +3021,328 @@ window.LECTURE_GUIDES = {
       }
     ],
     "verificationNote": "Caption-based editorial guide. The video names Suthers, Lund, Rosé, Teplovs & Law (2013) and Lund & Suthers (2018); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "dbir": {
+    "id": "dbir",
+    "purpose": "Use this lecture to frame a research-practice partnership around a problem of practice and to plan design and study at the level of a system, including the supports that implementation needs.",
+    "distinction": "DBIR (Penuel, Fishman, Haugan Cheng & Sabelli, 2011) extends design-based research from single classrooms to systems through four principles: a focus on persistent problems of practice from multiple stakeholders' perspectives, a commitment to iterative, collaborative design, a concern with developing theory related to both classroom learning and implementation through systematic inquiry, and a concern with developing capacity for sustaining change in systems.",
+    "caution": "Mina's team and the district are made up. Partnerships take years and trust, shared decisions can be slow, and when many supports change at once it is hard to attribute an effect to any one of them.",
+    "koSummary": "이 강의는 한 시범 학급에서 효과가 확인된 새 과학 교육과정이 2년 뒤 몇몇 교실에서만 쓰이고 있는 가상의 교육청으로 시작해, 무엇이 빠져 있었는지 묻습니다. William Penuel, Barry Fishman과 동료들이 혁신이 한 교실을 넘어 시스템 전체에서 어떻게 작동하는지 연구하고 개선하기 위해 제안한 설계 기반 실행 연구(design-based implementation research, DBIR)를 소개합니다. 여러 이해관계자가 보는 지속적인 실천 문제에 초점을 두기, 교사와 관리자를 파트너로 삼아 반복적이고 협력적으로 설계하기, 체계적인 탐구를 통해 교실 학습과 실행 모두에 대한 이론을 세우기, 연구자가 떠난 뒤에도 변화를 지속할 역량을 기르기라는 네 가지 원칙을 돌아가는 3D 기둥으로 그립니다. 가상의 연구팀은 교사들에게 새 실험을 익힐 시간이 없고 시험 일정에도 여유가 없다는 실제 문제를 찾아, 단원만이 아니라 교사 연수와 진도 계획까지 다시 설계하고, 학생의 학습과 지원이 학교들로 퍼지는 과정을 함께 연구합니다. 설계 기반 연구와 비교하면 변화의 단위가 교실에서 시스템으로 커지고, 실행이 나중 단계가 아니라 설계하고 연구할 대상이 된다고 정리합니다.",
+    "sources": [
+      {
+        "title": "Organizing research and development at the intersection of learning, implementation, and design",
+        "authors": "William R. Penuel, Barry J. Fishman, Britte Haugan Cheng, and Nora Sabelli",
+        "year": 2011,
+        "url": "https://doi.org/10.3102/0013189X11421826",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Design-based implementation research: An emerging model for transforming the relationship of research and practice",
+        "authors": "Barry J. Fishman, William R. Penuel, Anna-Ruth Allen, Britte Haugan Cheng, and Nora Sabelli",
+        "year": 2013,
+        "url": "https://doi.org/10.1177/016146811311501415",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Design-based implementation research",
+        "authors": "Barry Fishman and William Penuel",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-38",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Penuel, Fishman, Cheng & Sabelli (2011); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "tpack": {
+    "id": "tpack",
+    "purpose": "Use this lecture to plan or critique a technology-supported lesson by asking how the tool, the teaching method, and the content fit together in a given context.",
+    "distinction": "TPACK (Mishra & Koehler, 2006) adds technology to Shulman's (1986) pedagogical content knowledge, giving three bodies of knowledge, their pairwise intersections (PCK, TCK, TPK), and their joint intersection, all situated in context (Koehler et al., 2014).",
+    "caution": "Jae and his lesson are made up. The separate kinds of knowledge are hard to measure apart, self-report surveys may not reflect what teachers do in class, and the framework describes knowledge rather than prescribing a lesson.",
+    "koSummary": "이 강의는 영상 도구를 능숙하게 다루고 역사 내용도 깊이 아는 가상의 역사 교사가 다큐멘터리 영상 만들기 수업에서 도구가 수업을 차지하고 역사적 사고는 사라져 버린 장면으로 시작합니다. Punya Mishra와 Matthew Koehler가 교사가 기술을 활용해 잘 가르치는 데 필요한 지식을 설명하려고 제안한 테크놀로지 교수 내용 지식(technological pedagogical content knowledge, TPACK)을 소개하는데, 이는 Lee Shulman의 교수 내용 지식(PCK)을 바탕으로 합니다. 기술, 교수법, 내용이라는 세 원을 겹쳐 그리고 두 원씩 겹치는 영역을 차례로 밝힌 뒤, 카메라가 가운데로 다가가 특정한 기술이 특정한 맥락에서 특정한 개념을 가르치는 특정한 방식을 어떻게 도울 수 있는지 아는 지식이 TPACK이라고 설명합니다. 교사는 역사가들이 실제로 하는 일, 즉 사료를 비교해 따지는 일에 맞춰 과제를 바꾸고, 학생들은 같은 사건에 대한 두 사료를 비교하며 어디서 어긋나는지 보여 주는 짧은 영상을 만듭니다. 원 그림은 유용한 렌즈일 뿐 각 지식을 따로 측정하기 어렵고, 자기보고 설문이 실제 수업과 다를 수 있으며, 맥락이 모든 선택에 영향을 준다는 점도 짚습니다.",
+    "sources": [
+      {
+        "title": "Technological pedagogical content knowledge: A framework for teacher knowledge",
+        "authors": "Punya Mishra and Matthew J. Koehler",
+        "year": 2006,
+        "url": "https://doi.org/10.1111/j.1467-9620.2006.00684.x",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Those who understand: Knowledge growth in teaching",
+        "authors": "Lee S. Shulman",
+        "year": 1986,
+        "url": "https://doi.org/10.3102/0013189X015002004",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "The technological pedagogical content knowledge framework",
+        "authors": "Matthew J. Koehler, Punya Mishra, Kristen Kereluik, Tae Seob Shin, and Charles R. Graham",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-3185-5_9",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Handbook of Research on Educational Communications and Technology. Crossref lists the online year 2013; the print handbook is dated 2014."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Mishra & Koehler (2006) and Shulman; further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "ill-structured-problems": {
+    "id": "ill-structured-problems",
+    "purpose": "Use this lecture to classify the problems in a course by structure and type, and to plan instruction and assessment for ill-structured problem solving.",
+    "distinction": "Jonassen (1997) distinguishes well-structured from ill-structured problems and argues that they require different instructional design models; Jonassen (2000) proposes a typology of problems, from story problems and troubleshooting to design problems and dilemmas, each calling for different support; Jonassen (2014) addresses how to assess problem solving.",
+    "caution": "Ada and her class are made up. Structure is a continuum rather than two categories, practice on well-structured problems still builds tools that ill-structured work needs, and open problems without support can overwhelm novices.",
+    "koSummary": "이 강의는 간단한 일차방정식과 마을 전체가 쓸 공원을 설계하는 과제를 나란히 놓고, 둘 다 문제이지만 성격이 매우 다르다는 점에서 시작합니다. 문제마다 구조가 다르며 그에 따라 문제 해결을 가르치고 평가하는 방식도 달라져야 한다는 David Jonassen의 주장을 소개합니다. 시작 상태가 분명하고 목표가 알려져 있으며 규칙을 따르면 정답 하나에 이르는 잘 구조화된 문제(well-structured problem)와, 목표가 불분명하고 가능한 해법이 여럿이며 판단 기준도 여러 개인 비구조화된 문제(ill-structured problem)를 대비하고, 후자는 판단과 왜 한 해법이 더 나은지에 대한 논증을 요구한다고 설명합니다. 이야기 문제와 고장 진단에서 설계 문제와 딜레마에 이르는 Jonassen의 문제 유형 스펙트럼도 보여 줍니다. 첫 개방형 설계 과제에서 학생들이 얼어붙었던 가상의 공학 교사는 비구조화된 과제를 앞당겨, 학생들이 두 다리 설계를 비교하고 사용한 기준을 밝히며 동료 앞에서 선택을 변호하게 하고, 계산은 더 큰 논증 안의 도구가 됩니다. 문제를 어떻게 규정하고 어떤 기준을 따지며 해법을 얼마나 잘 정당화하는지를 보는 평가를 설명하고, 구조는 두 칸이 아니라 연속선이며 잘 구조화된 문제 연습도 여전히 중요하고 지원 없는 개방형 문제는 초보자를 압도할 수 있다고 짚습니다.",
+    "sources": [
+      {
+        "title": "Instructional design models for well-structured and ill-structured problem-solving learning outcomes",
+        "authors": "David H. Jonassen",
+        "year": 1997,
+        "url": "https://doi.org/10.1007/BF02299613",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Toward a design theory of problem solving",
+        "authors": "David H. Jonassen",
+        "year": 2000,
+        "url": "https://doi.org/10.1007/BF02300500",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Assessing problem solving",
+        "authors": "David H. Jonassen",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-3185-5_22",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Handbook of Research on Educational Communications and Technology. Crossref lists the online year 2013; the print handbook is dated 2014."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Jonassen; further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "productive-failure": {
+    "id": "productive-failure",
+    "purpose": "Use this lecture to decide whether and how to sequence problem solving before instruction, and to design the generation problem and the consolidation that must follow.",
+    "distinction": "Productive failure (Kapur, 2008, 2016) sequences a generation phase on a problem students cannot yet solve before instruction that consolidates the canonical solution. Sinha and Kapur (2021) found an overall advantage for problem solving followed by instruction, moderated by fidelity to productive failure design, learner age, and type of outcome (see also Hmelo-Silver, Kapur & Hamstra, 2018).",
+    "caution": "Noor and her class are made up. Productive failure is not unguided discovery: the problems are designed and instruction follows. It is not suited to every topic or age, and struggle without consolidation is simply failure.",
+    "koSummary": "이 강의는 표준편차를 배우는 두 학급, 즉 공식을 먼저 배우고 연습하는 학급과 먼저 흩어짐을 재는 방법을 스스로 만들어 보려 애쓴 뒤 공식을 배우는 학급을 보여 주고, 어느 쪽이 더 많이 배우는지 묻습니다. Manu Kapur가 생산적 실패(productive failure)라고 부른 두 번째 설계를 소개하는데, 학생들이 아직 풀 준비가 되지 않은 문제에 먼저 해법을 만들어 보고 이후 교사가 정식 개념을 정리해 주는 방식입니다. 비구조화된 물리 문제를 먼저 다룬 모둠은 해법의 질이 낮았지만 이후 개인 시험에서는 잘 구조화된 문제를 다룬 또래보다 높은 성과를 보인 Kapur의 2008년 연구를 설명합니다. 해법을 만들어 보는 활동이 선행 지식을 활성화하고, 자기 방법의 한계를 보여 주며, 정식 해법이 무엇을 해내는지 알아차릴 준비를 시킨다는 세 가지 이유를 듭니다. 53편의 연구에서 166개 비교를 종합한 Tanmay Sinha와 Kapur의 2021년 메타분석에서 중간 정도의 이점(Hedges' g = 0.36)이 나타났고, 생산적 실패 원칙을 충실히 따른 설계에서 효과가 더 컸으며, 2~5학년 학습자와 영역 일반적 기술에서는 오히려 반대였다는 결과를 보여 줍니다. 가상의 통계 수업에서는 학생들이 세 농구팀 점수의 흩어짐을 재는 방법을 먼저 만들어 본 뒤 표준편차를 배웁니다.",
+    "sources": [
+      {
+        "title": "Productive failure",
+        "authors": "Manu Kapur",
+        "year": 2008,
+        "url": "https://doi.org/10.1080/07370000802212669",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Examining productive failure, productive success, unproductive failure, and unproductive success in learning",
+        "authors": "Manu Kapur",
+        "year": 2016,
+        "url": "https://doi.org/10.1080/00461520.2016.1155457",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "When problem solving followed by instruction works: Evidence for productive failure",
+        "authors": "Tanmay Sinha and Manu Kapur",
+        "year": 2021,
+        "url": "https://doi.org/10.3102/00346543211019105",
+        "relationship": "Further reading",
+        "access": "Open access",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Learning through problem solving",
+        "authors": "Cindy E. Hmelo-Silver, Manu Kapur, and Miki Hamstra",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-21",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Kapur (2008, 2016) and Sinha & Kapur (2021); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "interest-development": {
+    "id": "interest-development",
+    "purpose": "Use this lecture to judge which phase of interest a learner is in and to match support to that phase, from triggering attention to sustaining independent pursuit.",
+    "distinction": "Hidi and Renninger (2006) describe four phases of interest development: triggered situational, maintained situational, emerging individual, and well-developed individual interest, each with characteristic affect, knowledge, and value, and each calling for different support (see also Renninger & Hidi, 2015; Renninger, Ren & Kern, 2018).",
+    "caution": "Theo and his bridges are made up. Interest can stall or fall back without support, a triggering event rarely sustains interest on its own, and interest is not the same as learning.",
+    "koSummary": "이 강의는 박물관 다리 전시에서 오후 한나절 관심을 보인 가상의 학생이 몇 년 뒤 재미로 다리를 설계하게 되는 이야기로 시작해, 잠깐의 불꽃이 어떻게 오래가는 흥미가 되는지 묻습니다. Suzanne Hidi와 Ann Renninger의 4단계 흥미 발달 모델을 소개하는데, 흥미는 감정과 지식이 함께 자라며 발달한다고 봅니다. 주변 환경의 무언가가 주의를 끄는 촉발된 상황적 흥미, 과제가 의미 있게 느껴지고 주변의 지원이 있어 주의가 유지되는 유지된 상황적 흥미, 학습자가 스스로 그 주제로 돌아와 자기 질문을 던지기 시작하는 떠오르는 개인적 흥미, 깊은 지식과 가치, 어려움 속의 끈기를 갖춘 잘 발달된 개인적 흥미라는 네 단계를 계단으로 그립니다. 학생이 각 단계를 거쳐 가는 과정을 따라가며, 초기에는 환경이 대부분의 역할을 하지만 나중에는 학습자가 자기 질문을 추구할 여지와 아는 만큼에 맞는 도전이 필요하다고 설명합니다. 단계는 고정된 사다리가 아니며 지원이 없으면 흥미가 멈추거나 뒷걸음질할 수 있고, 불꽃만으로는 오래가지 않으며, 촉발된 흥미가 곧 학습은 아니라는 점도 짚습니다.",
+    "sources": [
+      {
+        "title": "The four-phase model of interest development",
+        "authors": "Suzanne Hidi and K. Ann Renninger",
+        "year": 2006,
+        "url": "https://doi.org/10.1207/s15326985ep4102_4",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "The power of interest for motivation and engagement",
+        "authors": "K. Ann Renninger and Suzanne E. Hidi",
+        "year": 2015,
+        "url": "https://doi.org/10.4324/9781315771045",
+        "relationship": "Further reading",
+        "access": "Book · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Motivation, engagement, and interest",
+        "authors": "K. Ann Renninger, Yanyan Ren, and Heidi M. Kern",
+        "year": 2018,
+        "url": "https://doi.org/10.4324/9781315617572-12",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in International Handbook of the Learning Sciences."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Hidi & Renninger (2006); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "achievement-emotions": {
+    "id": "achievement-emotions",
+    "purpose": "Use this lecture to diagnose achievement emotions through perceived control and value, and to design changes that raise control and value without lowering challenge.",
+    "distinction": "Pekrun's (2006) control-value theory explains achievement emotions as outcomes of control and value appraisals and distinguishes emotions by valence and activation (see also Pekrun, Goetz, Titz & Perry, 2002). D'Mello and Graesser (2012) describe how confusion can be productive when resolved and can shift to frustration and boredom when not.",
+    "caution": "Mei and her class are made up. Emotions shift within a lesson, self-reports capture only part of them, raising value can raise anxiety when control stays low, and no single emotion is always good or bad for learning.",
+    "koSummary": "이 강의는 같은 통계 시험을 앞둔 세 가상의 학생, 즉 희망을 느끼는 학생과 불안한 학생, 그리고 그저 지루한 학생으로 시작해, 이런 감정이 어디서 오는지, 학습에 중요한지 묻습니다. 학습 활동과 성공이나 실패에 연결된 감정인 성취 정서(achievement emotions)를 설명하는 Reinhard Pekrun의 통제-가치 이론을 소개하는데, 이 감정은 내가 해낼 수 있는가라는 통제 평가와 이것이 내게 중요한가라는 가치 평가에서 비롯됩니다. 통제와 가치의 격자 위에 감정을 놓아, 통제와 가치가 모두 높으면 즐거움이나 희망이, 통제는 낮고 가치는 높으면 불안이나 절망이, 가치가 낮으면 지루함이 생긴다고 보여 줍니다. 감정은 활성화 수준에서도 달라서, 불안은 힘을 북돋우기도 막기도 하고, 지루함과 절망은 노력을 소진시키는 경향이 있다고 설명합니다. 복잡한 학습 중의 혼란은 해소되면 도움이 되지만 해소되지 않으면 좌절, 이어서 지루함으로 바뀔 수 있다는 Sidney D'Mello와 Art Graesser의 연구도 덧붙입니다. 가상의 교사는 피드백이 있는 연습 퀴즈로 통제감을 높이고 학급이 직접 모은 학교 자료로 가치를 높입니다.",
+    "sources": [
+      {
+        "title": "The control-value theory of achievement emotions: Assumptions, corollaries, and implications for educational research and practice",
+        "authors": "Reinhard Pekrun",
+        "year": 2006,
+        "url": "https://doi.org/10.1007/s10648-006-9029-9",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Academic emotions in students' self-regulated learning and achievement: A program of qualitative and quantitative research",
+        "authors": "Reinhard Pekrun, Thomas Goetz, Wolfram Titz, and Raymond P. Perry",
+        "year": 2002,
+        "url": "https://doi.org/10.1207/S15326985EP3702_4",
+        "relationship": "Further reading",
+        "access": "Paywalled · open repository copy listed",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Dynamics of affective states during complex learning",
+        "authors": "Sidney D’Mello and Art Graesser",
+        "year": 2012,
+        "url": "https://doi.org/10.1016/j.learninstruc.2011.10.001",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "Emotions and motivation in learning and performance",
+        "authors": "ChanMin Kim and Reinhard Pekrun",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-3185-5_6",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Handbook of Research on Educational Communications and Technology. Crossref lists the online year 2013; the print handbook is dated 2014."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Pekrun (2006) and D'Mello & Graesser (2012); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "pedagogical-agents": {
+    "id": "pedagogical-agents",
+    "purpose": "Use this lecture to decide whether an on-screen agent is worth adding and, if so, how its gestures, gaze, and voice should support rather than compete with the content.",
+    "distinction": "Lester and colleagues (1997) reported the persona effect on learner perceptions. Schroeder, Adesope and Gilbert (2013) meta-analyzed agent effects on learning. Mayer and DaPra (2012) found an embodiment effect on transfer when humanlike movement was paired with a human voice (see also Veletsianos & Russell, 2014).",
+    "caution": "Leo's team and their tutor are made up. Effects are small and depend on design, liking an agent is not the same as learning from it, and AI agents that generate their own speech need checks for accuracy.",
+    "koSummary": "이 강의는 과학 수업 화면 속 캐릭터가 학생에게 인사하고 도표를 가리키며 태양전지의 작동 원리를 설명하는 장면으로 시작해, 이 캐릭터가 학습에 도움이 되는지 아니면 장식일 뿐인지 묻습니다. 교수 에이전트(pedagogical agent)를 설명하기, 힌트 주기, 질문하기, 기술 시범 보이기로 수업을 돕는 화면 속 캐릭터로 정의합니다. 생동감 있는 에이전트가 있는 수업을 학생들이 더 긍정적으로 본 James Lester와 동료들의 페르소나 효과(persona effect)와, 43편의 연구와 3,088명의 참여자를 검토해 학습에 작지만 유의한 효과가 있었고 그 효과는 대학생보다 초중등 학생에게서 더 컸다는 Noah Schroeder와 동료들의 메타분석을 설명합니다. 사람 같은 몸짓, 시선, 표정을 쓰는 에이전트가 사람 목소리로 말할 때에만 전이를 높였다는 Richard Mayer와 Cynthia DaPra의 결과도 소개합니다. 가상의 설계팀은 계속 손을 흔들고 웃는 에이전트를, 설명하는 부분을 가리키고 바라본 뒤 가만히 있는 에이전트로 바꾸고, 학생의 시선이 그 손짓을 따라갑니다.",
+    "sources": [
+      {
+        "title": "The persona effect: Affective impact of animated pedagogical agents",
+        "authors": "James C. Lester, Sharolyn A. Converse, Susan E. Kahler, and colleagues",
+        "year": 1997,
+        "url": "https://doi.org/10.1145/258549.258797",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "How effective are pedagogical agents for learning? A meta-analytic review",
+        "authors": "Noah L. Schroeder, Olusola O. Adesope, and Rachel Barouch Gilbert",
+        "year": 2013,
+        "url": "https://doi.org/10.2190/EC.49.1.a",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to the publisher site, which showed a browser check."
+      },
+      {
+        "title": "An embodiment effect in computer-based learning with animated pedagogical agents",
+        "authors": "Richard E. Mayer and C. Scott DaPra",
+        "year": 2012,
+        "url": "https://doi.org/10.1037/a0028616",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Pedagogical agents",
+        "authors": "George Veletsianos and Gregory S. Russell",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-3185-5_61",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Handbook of Research on Educational Communications and Technology. Crossref lists the online year 2013; the print handbook is dated 2014."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Lester et al. (1997), Schroeder, Adesope & Gilbert (2013), and Mayer & DaPra (2012); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
+    "reviewedAt": "2026-10-30"
+  },
+  "authentic-learning": {
+    "id": "authentic-learning",
+    "purpose": "Use this lecture to audit a course against the nine elements of authentic learning and to redesign a task so that context, roles, coaching, and assessment work together.",
+    "distinction": "Herrington and Oliver (2000) derived nine elements of authentic learning environments from situated learning research: authentic context, authentic tasks, expert performances, multiple roles and perspectives, collaborative construction, reflection, articulation, coaching and scaffolding, and authentic assessment (see also Herrington, Reeves & Oliver, 2014).",
+    "caution": "Dana and her course are made up. Authentic tasks still need scaffolding for novices, realism takes time, and a realistic surface does not guarantee expert-like thinking.",
+    "koSummary": "이 강의는 공중보건 수업에서 학생들이 발병(outbreak)의 정의를 외운 뒤 마지막 과제로 실제 발병을 조사하라는 요구를 받자 어디서부터 시작할지 모르는 가상의 장면으로 시작합니다. 상황 학습 연구를 바탕으로 한 Jan Herrington과 Ron Oliver의 진정한 학습 환경 설계 틀을 소개하고, 그 아홉 가지 요소를 카메라가 줄마다 훑는 격자로 그립니다. 그 요소는 진정한 맥락, 진정한 과제, 전문가 수행에 대한 접근, 다양한 역할과 관점, 지식의 협력적 구성, 성찰, 명료화, 적시의 코칭과 스캐폴딩, 그리고 과제 안에 녹아 있는 진정한 평가입니다. 가상의 교수자는 수업을 다시 설계해 팀들이 한 학기 동안 가상의 발병을 조사하고, 실제 보건 기관의 보고서를 읽고, 역학자와 기자 같은 역할을 맡아 패널 앞에서 발표하게 하며, 팀이 막힐 때 코칭하고 별도의 퀴즈가 아니라 조사 자체를 평가합니다. 진정성이 구조가 없다는 뜻은 아니며, 현실감에는 일정이 허락하지 않을 수 있는 시간이 들고, 겉보기에 현실적인 과제가 전문가다운 사고를 요구하지 않을 수도 있다는 점을 짚습니다.",
+    "sources": [
+      {
+        "title": "An instructional design framework for authentic learning environments",
+        "authors": "Jan Herrington and Ron Oliver",
+        "year": 2000,
+        "url": "https://doi.org/10.1007/BF02319856",
+        "relationship": "Further reading",
+        "access": "Abstract · full text paywalled",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Authentic learning environments",
+        "authors": "Jan Herrington, Thomas C. Reeves, and Ron Oliver",
+        "year": 2013,
+        "url": "https://doi.org/10.1007/978-1-4614-3185-5_32",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title. Chapter in Handbook of Research on Educational Communications and Technology. Crossref lists the online year 2013; the print handbook is dated 2014."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Herrington & Oliver (2000); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
     "reviewedAt": "2026-10-30"
   }
 };
