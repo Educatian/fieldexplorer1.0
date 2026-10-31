@@ -9,6 +9,7 @@ over all venue sources -> topic counts per year -> share per year -> linear slop
 Output: src/data/field_trends.json
 """
 import json
+from datetime import date
 import time
 from collections import defaultdict
 from pathlib import Path
@@ -19,7 +20,7 @@ OA = "https://api.openalex.org/works"
 MAILTO = "jewoong.moon@gmail.com"
 SOURCES_CACHE = Path("src/data/venue_sources.json")
 OUT = Path("src/data/field_trends.json")
-YEARS = list(range(2019, 2026))   # 2019-2025 (full years)
+YEARS = list(range(2019, date.today().year))   # complete calendar years only
 MIN_VOL = 60                      # ignore topics with tiny total volume (noise)
 
 
@@ -97,6 +98,7 @@ def main():
     rows.sort(key=lambda r: r["slope"], reverse=True)
     out = {
         "_meta": {"generator": "build_field_trends.py", "years": YEARS,
+                  "generated_at": date.today().isoformat(), "source": "OpenAlex",
                   "n_sources": len(all_ids), "min_volume": MIN_VOL,
                   "method": "OpenAlex primary_topic counts per year over venue set; linear slope of % share"},
         "years": YEARS,

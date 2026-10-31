@@ -33,6 +33,7 @@ Usage:
 
 import argparse
 import json
+from datetime import date
 import math
 import re
 import time
@@ -155,18 +156,21 @@ def resolve_refs(ref_ids):
     todo = [r for r in ref_ids if r not in meta]
     print(f"    {len(todo)} refs to resolve ({len(ref_ids) - len(todo)} cached)")
 
-    for i in range(0, len(todo), 50):
-        batch = todo[i : i + 50]
+    for i in range(0, len(todo), 100):
+        batch = todo[i : i + 100]
         params = {
             "filter": "ids.openalex:" + "|".join(batch),
             "select": "id,primary_location,primary_topic",
-            "per_page": 50,
+            "per_page": 100,
             "mailto": MAILTO,
         }
         for attempt in range(4):
             try:
                 r = requests.get(OPENALEX_WORKS, params=params, timeout=20)
                 if r.status_code == 429:        # rate limited -> back off
+                    if attempt == 3:            # daily budget gone: stop rather than build on partial refs
+                        REF_CACHE.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
+                        raise SystemExit("OpenAlex budget exhausted; refs checkpointed, rerun after the reset")
                     time.sleep(5 * (attempt + 1))
                     continue
                 if r.status_code != 200:
@@ -185,7 +189,7 @@ def resolve_refs(ref_ids):
                     print(f"    ref batch giving up: {e}")
                 time.sleep(2 * (attempt + 1))
         time.sleep(DELAY)
-        if (i // 50) % 20 == 0 and i:
+        if (i // 100) % 10 == 0 and i:
             REF_CACHE.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
             print(f"    ...resolved {len(meta)}/{len(ref_ids)} refs (checkpoint)")
     REF_CACHE.write_text(json.dumps(meta, ensure_ascii=False), encoding="utf-8")
@@ -221,6 +225,7 @@ def main():
     # citing_work -> venue ; citing_work -> [ref ids]
     work_venue = {}
     work_refs = {}
+    work_year = {}
     for v in venues:
         sids = sources.get(v["id"]) or []
         if not sids:
@@ -233,6 +238,7 @@ def main():
                 continue
             work_venue[wid] = v["id"]
             work_refs[wid] = refs
+            work_year[wid] = w.get("publication_year")
         print(f"  [{v['id']}] {len([w for w in works if w.get('referenced_works')])} works w/ refs")
         time.sleep(DELAY)
 
@@ -310,6 +316,9 @@ def main():
             "interdisciplinarity_method": "Simpson/Shannon over OpenAlex top-level fields of references; formula per pySciSci methods.diversity (Stirling 2007)",
             "disruption": "DEFERRED to Phase 2 (needs bidirectional citation crawl / snapshot)",
             "samples_per_venue": args.samples,
+            "generated_at": date.today().isoformat(),
+            "source": "OpenAlex",
+            "works_years": [min(ys), max(ys)] if (ys := [y for y in work_year.values() if y]) else None,
             "n_venues": len(venues),
             "n_edges": len(edges),
         },

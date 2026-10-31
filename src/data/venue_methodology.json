@@ -1,7 +1,21 @@
 {
   "_meta": {
-    "generator": "build_venue_methodology.py",
-    "proposer": "hermes3:8b",
+    "generator": "build_venue_methodology_jev.py",
+    "coder": "jev-1.14.0",
+    "codebook": "fe-venue-codebook-1.2",
+    "battery_hash": "1f1f89166272",
+    "generated_at": "2026-10-31",
+    "source": "OpenAlex abstracts; articles and reviews sampled in proportion to their counts in the window",
+    "works_window": [
+      "2023-01-01",
+      "2025-12-31"
+    ],
+    "works_years": [
+      2023,
+      2025
+    ],
+    "n_abstracts": 3528,
+    "n_venues": 78,
     "categories": [
       "Experimental",
       "Qualitative",
@@ -10,1028 +24,201 @@
       "Review & Meta",
       "Theory"
     ],
-    "note": "LLM proposer; Claude verifies low-confidence before trust"
+    "tech_areas": [
+      "AI and intelligent systems",
+      "VR and AR",
+      "Games and play",
+      "Collaborative learning",
+      "Analytics and dashboards",
+      "Online and blended"
+    ],
+    "levels": [
+      "k12",
+      "higher_ed",
+      "workplace",
+      "informal",
+      "mixed_or_unspecified"
+    ],
+    "rule": "shares = primary methodology among research papers; uses/tech = share of research papers where the mean of two wordings is >= .5",
+    "reliability": {
+      "m_experimental": {
+        "label": "Experimental",
+        "agreement": 0.919,
+        "kappa": 0.809,
+        "present_share": 0.305
+      },
+      "m_qualitative": {
+        "label": "Qualitative",
+        "agreement": 0.949,
+        "kappa": 0.892,
+        "present_share": 0.384
+      },
+      "m_design_dev": {
+        "label": "Design & Dev",
+        "agreement": 0.914,
+        "kappa": 0.746,
+        "present_share": 0.215
+      },
+      "m_data_ai": {
+        "label": "Data & AI",
+        "agreement": 0.896,
+        "kappa": 0.515,
+        "present_share": 0.12
+      },
+      "m_review_meta": {
+        "label": "Review & Meta",
+        "agreement": 0.963,
+        "kappa": 0.859,
+        "present_share": 0.156
+      },
+      "m_theory": {
+        "label": "Theory",
+        "agreement": 0.932,
+        "kappa": 0.738,
+        "present_share": 0.152
+      },
+      "t_ai": {
+        "label": "AI and intelligent systems",
+        "agreement": 0.915,
+        "kappa": 0.724,
+        "present_share": 0.189
+      },
+      "t_immersive": {
+        "label": "VR and AR",
+        "agreement": 0.99,
+        "kappa": 0.926,
+        "present_share": 0.073
+      },
+      "t_games": {
+        "label": "Games and play",
+        "agreement": 0.981,
+        "kappa": 0.808,
+        "present_share": 0.051
+      },
+      "t_collaboration": {
+        "label": "Collaborative learning",
+        "agreement": 0.943,
+        "kappa": 0.759,
+        "present_share": 0.136
+      },
+      "t_analytics": {
+        "label": "Analytics and dashboards",
+        "agreement": 0.942,
+        "kappa": 0.52,
+        "present_share": 0.064
+      },
+      "t_online": {
+        "label": "Online and blended",
+        "agreement": 0.98,
+        "kappa": 0.882,
+        "present_share": 0.096
+      }
+    },
+    "planted_controls": {
+      "n": 314,
+      "correct": 312
+    }
   },
   "venues": {
-    "etrd": {
-      "name": "Educational Technology Research and Development",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.083,
-        "Design & Dev": 0.333,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.333
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "jls": {
-      "name": "Journal of the Learning Sciences",
-      "shares": {
-        "Qualitative": 0.3,
-        "Review & Meta": 0.1,
-        "Theory": 0.6
-      },
-      "dominant": "Theory",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.892
-    },
-    "ijcscl": {
-      "name": "International Journal of Computer-Supported Collaborative Learning",
-      "shares": {
-        "Experimental": 0.333,
-        "Qualitative": 0.5,
-        "Data & AI": 0.083,
-        "Theory": 0.083
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "ce": {
-      "name": "Computers & Education",
-      "shares": {
-        "Experimental": 0.5,
-        "Qualitative": 0.167,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "bjet": {
-      "name": "British Journal of Educational Technology",
-      "shares": {
-        "Experimental": 0.364,
-        "Qualitative": 0.182,
-        "Data & AI": 0.455
-      },
-      "dominant": "Data & AI",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.9
-    },
-    "li": {
-      "name": "Learning and Instruction",
-      "shares": {
-        "Experimental": 0.6,
-        "Qualitative": 0.1,
-        "Data & AI": 0.3
-      },
-      "dominant": "Experimental",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.921
-    },
-    "epr": {
-      "name": "Educational Psychology Review",
-      "shares": {
-        "Experimental": 0.167,
-        "Review & Meta": 0.583,
-        "Theory": 0.25
-      },
-      "dominant": "Review & Meta",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.962
-    },
-    "ep": {
-      "name": "Educational Psychologist",
-      "shares": {
-        "Design & Dev": 0.083,
-        "Review & Meta": 0.333,
-        "Theory": 0.583
-      },
-      "dominant": "Theory",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "rer": {
-      "name": "Review of Educational Research",
-      "shares": {
-        "Review & Meta": 1.0
-      },
-      "dominant": "Review & Meta",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.979
-    },
-    "aerj": {
-      "name": "American Educational Research Journal",
-      "shares": {
-        "Experimental": 0.333,
-        "Qualitative": 0.333,
-        "Review & Meta": 0.167,
-        "Theory": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.925
-    },
-    "er": {
-      "name": "Educational Researcher",
-      "shares": {
-        "Experimental": 0.4,
-        "Data & AI": 0.1,
-        "Review & Meta": 0.2,
-        "Theory": 0.3
-      },
-      "dominant": "Experimental",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.921
-    },
-    "jep": {
-      "name": "Journal of Educational Psychology",
-      "shares": {
-        "Experimental": 0.667,
-        "Qualitative": 0.083,
-        "Data & AI": 0.083,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "ci": {
-      "name": "Cognition and Instruction",
-      "shares": {
-        "Qualitative": 0.917,
-        "Theory": 0.083
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "jcal": {
-      "name": "Journal of Computer Assisted Learning",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.083,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.25,
-        "Theory": 0.083
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "jecr": {
-      "name": "Journal of Educational Computing Research",
-      "shares": {
-        "Experimental": 0.5,
-        "Qualitative": 0.083,
-        "Design & Dev": 0.167,
-        "Review & Meta": 0.25
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.958
-    },
-    "tlt": {
-      "name": "IEEE Transactions on Learning Technologies",
-      "shares": {
-        "Experimental": 0.167,
-        "Design & Dev": 0.167,
-        "Data & AI": 0.667
-      },
-      "dominant": "Data & AI",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "ijaied": {
-      "name": "International Journal of Artificial Intelligence in Education",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.083,
-        "Data & AI": 0.333,
-        "Review & Meta": 0.25
-      },
-      "dominant": "Data & AI",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "umuai": {
-      "name": "User Modeling and User-Adapted Interaction",
-      "shares": {
-        "Experimental": 0.222,
-        "Data & AI": 0.667,
-        "Review & Meta": 0.111
-      },
-      "dominant": "Data & AI",
-      "n_classified": 9,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.858
-    },
-    "jla": {
-      "name": "Journal of Learning Analytics",
-      "shares": {
-        "Experimental": 0.083,
-        "Design & Dev": 0.25,
-        "Data & AI": 0.667
-      },
-      "dominant": "Data & AI",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "is": {
-      "name": "Instructional Science",
-      "shares": {
-        "Experimental": 0.667,
-        "Qualitative": 0.167,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "cep": {
-      "name": "Contemporary Educational Psychology",
-      "shares": {
-        "Experimental": 0.833,
-        "Qualitative": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.937
-    },
-    "lid": {
-      "name": "Learning and Individual Differences",
-      "shares": {
-        "Experimental": 0.583,
-        "Qualitative": 0.167,
-        "Data & AI": 0.25
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.933
-    },
-    "mca": {
-      "name": "Mind Culture and Activity",
-      "shares": {
-        "Qualitative": 0.75,
-        "Theory": 0.25
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "cs": {
-      "name": "Cognitive Science",
-      "shares": {
-        "Experimental": 0.727,
-        "Qualitative": 0.182,
-        "Theory": 0.091
-      },
-      "dominant": "Experimental",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.9
-    },
-    "err": {
-      "name": "Educational Research Review",
-      "shares": {
-        "Review & Meta": 1.0
-      },
-      "dominant": "Review & Meta",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.979
-    },
-    "chb": {
-      "name": "Computers in Human Behavior",
-      "shares": {
-        "Experimental": 0.5,
-        "Qualitative": 0.1,
-        "Data & AI": 0.2,
-        "Review & Meta": 0.1,
-        "Theory": 0.1
-      },
-      "dominant": "Experimental",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.925
-    },
-    "ile": {
-      "name": "Interactive Learning Environments",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.25,
-        "Data & AI": 0.333,
-        "Review & Meta": 0.333
-      },
-      "dominant": "Data & AI",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "de": {
-      "name": "Distance Education",
-      "shares": {
-        "Experimental": 0.167,
-        "Qualitative": 0.333,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.167,
-        "Theory": 0.167
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "ihe": {
-      "name": "Internet and Higher Education",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.25,
-        "Data & AI": 0.25,
-        "Review & Meta": 0.083
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "ceai": {
-      "name": "Computers & Education: Artificial Intelligence",
-      "shares": {
-        "Experimental": 0.2,
-        "Qualitative": 0.2,
-        "Data & AI": 0.5,
-        "Review & Meta": 0.1
-      },
-      "dominant": "Data & AI",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.925
-    },
-    "jaid": {
-      "name": "Journal of Applied Instructional Design",
-      "shares": {
-        "Experimental": 0.1,
-        "Qualitative": 0.3,
-        "Design & Dev": 0.6
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.858
-    },
-    "jfdl": {
-      "name": "Journal of Formative Design in Learning",
-      "shares": {
-        "Experimental": 0.091,
-        "Qualitative": 0.364,
-        "Design & Dev": 0.455,
-        "Data & AI": 0.091
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.908
-    },
-    "ijdl": {
-      "name": "International Journal of Designs for Learning",
-      "shares": {
-        "Design & Dev": 1.0
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.879
-    },
-    "tt": {
-      "name": "TechTrends",
-      "shares": {
-        "Experimental": 0.273,
-        "Qualitative": 0.182,
-        "Design & Dev": 0.182,
-        "Data & AI": 0.091,
-        "Review & Meta": 0.091,
-        "Theory": 0.182
-      },
-      "dominant": "Experimental",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.929
-    },
-    "piq": {
-      "name": "Performance Improvement Quarterly",
-      "shares": {
-        "Experimental": 0.3,
-        "Qualitative": 0.2,
-        "Review & Meta": 0.4,
-        "Theory": 0.1
-      },
-      "dominant": "Review & Meta",
-      "n_classified": 10,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.913
-    },
     "ets": {
       "name": "Educational Technology & Society",
-      "shares": {
-        "Experimental": 0.4,
-        "Design & Dev": 0.2,
-        "Review & Meta": 0.2,
-        "Theory": 0.2
-      },
-      "dominant": "Experimental",
-      "n_classified": 5,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.758
-    },
-    "eit": {
-      "name": "Education and Information Technologies",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.083,
-        "Data & AI": 0.333,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.933
-    },
-    "ijethe": {
-      "name": "International Journal of Educational Technology in Higher Education",
-      "shares": {
-        "Experimental": 0.364,
-        "Qualitative": 0.182,
-        "Design & Dev": 0.091,
-        "Data & AI": 0.273,
-        "Review & Meta": 0.091
-      },
-      "dominant": "Experimental",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.929
-    },
-    "jche": {
-      "name": "Journal of Computing in Higher Education",
-      "shares": {
-        "Experimental": 0.167,
-        "Qualitative": 0.417,
-        "Design & Dev": 0.167,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.083
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.929
-    },
-    "olj": {
-      "name": "Online Learning Journal",
-      "shares": {
-        "Experimental": 0.364,
-        "Qualitative": 0.182,
-        "Design & Dev": 0.273,
-        "Data & AI": 0.182
-      },
-      "dominant": "Experimental",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.904
-    },
-    "irrodl": {
-      "name": "International Review of Research in Open and Distributed Learning",
-      "shares": {
-        "Experimental": 0.222,
-        "Qualitative": 0.222,
-        "Design & Dev": 0.111,
-        "Data & AI": 0.222,
-        "Review & Meta": 0.111,
-        "Theory": 0.111
-      },
-      "dominant": "Experimental",
-      "n_classified": 9,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.862
-    },
-    "ijhci": {
-      "name": "International Journal of Human-Computer Interaction",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.25,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.25
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "hci": {
-      "name": "Human-Computer Interaction",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.25,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.25
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.954
-    },
-    "tochi": {
-      "name": "ACM Transactions on Computer-Human Interaction",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.167,
-        "Design & Dev": 0.25,
-        "Data & AI": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "bit": {
-      "name": "Behaviour & Information Technology",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.333,
-        "Design & Dev": 0.167,
-        "Data & AI": 0.167,
-        "Review & Meta": 0.167,
-        "Theory": 0.083
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.929
-    },
-    "ijcci": {
-      "name": "International Journal of Child-Computer Interaction",
-      "shares": {
-        "Experimental": 0.273,
-        "Design & Dev": 0.364,
-        "Data & AI": 0.182,
-        "Review & Meta": 0.182
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.921
-    },
-    "sg": {
-      "name": "Simulation & Gaming",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.333,
-        "Data & AI": 0.167,
-        "Theory": 0.167
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "vr": {
-      "name": "Virtual Reality",
-      "shares": {
-        "Experimental": 0.667,
-        "Qualitative": 0.083,
-        "Design & Dev": 0.083,
-        "Data & AI": 0.083,
-        "Review & Meta": 0.083
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "cexr": {
-      "name": "Computers & Education: X Reality",
-      "shares": {
-        "Experimental": 0.333,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.25,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "lmt": {
-      "name": "Learning Media and Technology",
-      "shares": {
-        "Qualitative": 0.545,
-        "Design & Dev": 0.091,
-        "Theory": 0.364
-      },
-      "dominant": "Qualitative",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.912
-    },
-    "jrst": {
-      "name": "Journal of Research in Science Teaching",
-      "shares": {
-        "Experimental": 0.222,
-        "Qualitative": 0.556,
-        "Theory": 0.222
-      },
-      "dominant": "Qualitative",
-      "n_classified": 9,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.908
-    },
-    "se": {
-      "name": "Science Education",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.667,
-        "Design & Dev": 0.083,
-        "Review & Meta": 0.167
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "ijse": {
-      "name": "International Journal of Science Education",
-      "shares": {
-        "Experimental": 0.091,
-        "Qualitative": 0.455,
-        "Design & Dev": 0.273,
-        "Theory": 0.182
-      },
-      "dominant": "Qualitative",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.9
-    },
-    "jset": {
-      "name": "Journal of Science Education and Technology",
-      "shares": {
-        "Experimental": 0.182,
-        "Qualitative": 0.364,
-        "Design & Dev": 0.273,
-        "Theory": 0.182
-      },
-      "dominant": "Qualitative",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.904
-    },
-    "sse": {
-      "name": "Studies in Science Education",
-      "shares": {
-        "Review & Meta": 0.917,
-        "Theory": 0.083
-      },
-      "dominant": "Review & Meta",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.983
-    },
-    "jee": {
-      "name": "Journal of Engineering Education",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.583,
-        "Data & AI": 0.083,
-        "Review & Meta": 0.25
-      },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "cse": {
-      "name": "Computer Science Education",
-      "shares": {
-        "Qualitative": 0.091,
-        "Data & AI": 0.818,
-        "Theory": 0.091
-      },
-      "dominant": "Data & AI",
-      "n_classified": 11,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "toce": {
-      "name": "ACM Transactions on Computing Education",
-      "shares": {
-        "Experimental": 0.25,
-        "Qualitative": 0.083,
-        "Design & Dev": 0.167,
-        "Data & AI": 0.083,
-        "Review & Meta": 0.25,
-        "Theory": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.95
-    },
-    "cbe": {
-      "name": "CBE-Life Sciences Education",
-      "shares": {
-        "Experimental": 0.5,
-        "Qualitative": 0.333,
-        "Theory": 0.167
-      },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.937
-    },
-    "merj": {
-      "name": "Mathematics Education Research Journal",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.417,
-        "Theory": 0.5
-      },
-      "dominant": "Theory",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "isls": {
-      "name": "ISLS Annual Meeting",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "icls": {
-      "name": "ICLS",
-      "shares": {},
-      "dominant": null,
-      "n_classified": 0,
-      "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 0
     },
     "cscl": {
       "name": "CSCL",
-      "shares": {
-        "Experimental": 0.4,
-        "Qualitative": 0.1,
-        "Design & Dev": 0.3,
-        "Data & AI": 0.1,
-        "Theory": 0.1
-      },
-      "dominant": "Experimental",
-      "n_classified": 10,
-      "n_abstracts": 10,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.935
-    },
-    "aera": {
-      "name": "AERA Annual Meeting",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "earli": {
-      "name": "EARLI Conference",
-      "shares": {},
-      "dominant": null,
-      "n_classified": 0,
-      "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 1
     },
     "lak": {
       "name": "LAK Conference",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
-      "n_abstracts": 2,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.7
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 3
     },
     "edm": {
       "name": "EDM Conference",
-      "shares": {
-        "Experimental": 0.083,
-        "Data & AI": 0.917
-      },
-      "dominant": "Data & AI",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "aied": {
-      "name": "AIED Conference",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 0
     },
     "its": {
       "name": "ITS Conference",
-      "shares": {
-        "Experimental": 0.25,
-        "Design & Dev": 0.625,
-        "Data & AI": 0.125
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 8,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.829
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 0
     },
     "chi": {
       "name": "CHI Conference",
-      "shares": {
-        "Experimental": 0.167,
-        "Qualitative": 0.25,
-        "Design & Dev": 0.5,
-        "Data & AI": 0.083
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
-    },
-    "cscw": {
-      "name": "CSCW Conference",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 23
     },
     "uist": {
       "name": "UIST Conference",
-      "shares": {
-        "Design & Dev": 0.714,
-        "Data & AI": 0.286
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 7,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.817
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 0
     },
     "idc": {
       "name": "IDC Conference",
-      "shares": {
-        "Qualitative": 0.083,
-        "Design & Dev": 0.583,
-        "Data & AI": 0.25,
-        "Review & Meta": 0.083
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 2
     },
     "ieeevr": {
       "name": "IEEE VR",
-      "shares": {
-        "Experimental": 0.375,
-        "Design & Dev": 0.5,
-        "Data & AI": 0.125
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 8,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.829
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 1
     },
     "ismar": {
       "name": "ISMAR",
-      "shares": {
-        "Experimental": 0.25,
-        "Design & Dev": 0.75
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 8,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.821
-    },
-    "aect": {
-      "name": "AECT Convention",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "etra": {
-      "name": "ETRA Symposium",
-      "shares": {},
-      "dominant": null,
-      "n_classified": 0,
-      "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "las": {
-      "name": "L@S Conference",
-      "shares": {},
-      "dominant": null,
-      "n_classified": 0,
-      "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 2
     },
     "sigcse": {
       "name": "SIGCSE Technical Symposium",
@@ -1039,134 +226,2716 @@
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 4
     },
-    "icer": {
-      "name": "ICER Conference",
+    "iticse": {
+      "name": "ITiCSE Conference",
       "shares": {},
       "dominant": null,
       "n_classified": 0,
       "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "iticse": {
-      "name": "ITiCSE Conference",
-      "shares": {
-        "Experimental": 0.222,
-        "Design & Dev": 0.667,
-        "Theory": 0.111
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 9,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.842
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 3
     },
     "fie": {
       "name": "FIE Conference",
-      "shares": {
-        "Experimental": 0.333,
-        "Qualitative": 0.111,
-        "Design & Dev": 0.556
-      },
-      "dominant": "Design & Dev",
-      "n_classified": 9,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.858
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 38
     },
     "asee": {
       "name": "ASEE Annual Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "no_article_abstracts": true,
+      "reviews_with_abstracts": 0
+    },
+    "jls": {
+      "name": "Journal of the Learning Sciences",
       "shares": {
-        "Qualitative": 0.143,
+        "Experimental": 0.145,
+        "Qualitative": 0.709,
+        "Design & Dev": 0.055,
+        "Data & AI": 0.018,
+        "Theory": 0.073
+      },
+      "dominant": "Qualitative",
+      "n_classified": 55,
+      "n_abstracts": 60,
+      "n_research": 57,
+      "survey_correlational_n": 2,
+      "not_research_n": 3,
+      "uses": {
+        "Experimental": 0.158,
+        "Qualitative": 0.895,
+        "Design & Dev": 0.158,
+        "Data & AI": 0.035,
+        "Review & Meta": 0.035,
+        "Theory": 0.088
+      },
+      "tech": {
+        "AI and intelligent systems": 0.018,
+        "VR and AR": 0.018,
+        "Games and play": 0.018,
+        "Collaborative learning": 0.404,
+        "Analytics and dashboards": 0.018,
+        "Online and blended": 0.088
+      },
+      "level": {
+        "k12": 0.491,
+        "higher_ed": 0.193,
+        "informal": 0.035,
+        "mixed_or_unspecified": 0.281
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.917,
+      "ab_disagreements": 24,
+      "low_sample": false
+    },
+    "ijcscl": {
+      "name": "International Journal of Computer-Supported Collaborative Learning",
+      "shares": {
+        "Experimental": 0.222,
+        "Qualitative": 0.417,
+        "Design & Dev": 0.139,
+        "Data & AI": 0.111,
+        "Review & Meta": 0.056,
+        "Theory": 0.056
+      },
+      "dominant": "Qualitative",
+      "n_classified": 36,
+      "n_abstracts": 37,
+      "n_research": 37,
+      "survey_correlational_n": 1,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.243,
+        "Qualitative": 0.595,
+        "Design & Dev": 0.324,
+        "Data & AI": 0.216,
+        "Review & Meta": 0.054,
+        "Theory": 0.108
+      },
+      "tech": {
+        "AI and intelligent systems": 0.135,
+        "VR and AR": 0.135,
+        "Games and play": 0.054,
+        "Collaborative learning": 0.973,
+        "Analytics and dashboards": 0.135,
+        "Online and blended": 0.216
+      },
+      "level": {
+        "k12": 0.27,
+        "higher_ed": 0.243,
+        "workplace": 0.027,
+        "informal": 0.027,
+        "mixed_or_unspecified": 0.432
+      },
+      "low_confidence_n": 1,
+      "mean_confidence": 0.904,
+      "ab_disagreements": 27,
+      "low_sample": false
+    },
+    "ep": {
+      "name": "Educational Psychologist",
+      "shares": {
+        "Design & Dev": 0.022,
+        "Review & Meta": 0.239,
+        "Theory": 0.739
+      },
+      "dominant": "Theory",
+      "n_classified": 46,
+      "n_abstracts": 52,
+      "n_research": 46,
+      "survey_correlational_n": 0,
+      "not_research_n": 6,
+      "uses": {
+        "Experimental": 0.087,
+        "Qualitative": 0.0,
+        "Design & Dev": 0.022,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.543,
+        "Theory": 0.87
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.022,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.065,
+        "mixed_or_unspecified": 0.935
+      },
+      "low_confidence_n": 2,
+      "mean_confidence": 0.933,
+      "ab_disagreements": 23,
+      "low_sample": false
+    },
+    "bjet": {
+      "name": "British Journal of Educational Technology",
+      "shares": {
+        "Experimental": 0.38,
+        "Qualitative": 0.28,
+        "Design & Dev": 0.08,
+        "Data & AI": 0.12,
+        "Review & Meta": 0.1,
+        "Theory": 0.04
+      },
+      "dominant": "Experimental",
+      "n_classified": 50,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 10,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.4,
+        "Qualitative": 0.383,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.267,
+        "Review & Meta": 0.1,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.533,
+        "VR and AR": 0.1,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.217,
+        "Analytics and dashboards": 0.183,
+        "Online and blended": 0.167
+      },
+      "level": {
+        "k12": 0.25,
+        "higher_ed": 0.45,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.283
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.923,
+      "ab_disagreements": 39,
+      "low_sample": false
+    },
+    "rer": {
+      "name": "Review of Educational Research",
+      "shares": {
+        "Review & Meta": 0.983,
+        "Theory": 0.017
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 60,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 0,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.15,
+        "Qualitative": 0.167,
+        "Design & Dev": 0.0,
+        "Data & AI": 0.0,
+        "Review & Meta": 1.0,
+        "Theory": 0.367
+      },
+      "tech": {
+        "AI and intelligent systems": 0.017,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.017,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.3,
+        "higher_ed": 0.167,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.517
+      },
+      "low_confidence_n": 0,
+      "mean_confidence": 0.984,
+      "ab_disagreements": 47,
+      "low_sample": false
+    },
+    "aerj": {
+      "name": "American Educational Research Journal",
+      "shares": {
+        "Experimental": 0.459,
+        "Qualitative": 0.405,
+        "Design & Dev": 0.027,
+        "Data & AI": 0.054,
+        "Review & Meta": 0.054
+      },
+      "dominant": "Experimental",
+      "n_classified": 37,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 23,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.483,
+        "Qualitative": 0.333,
+        "Design & Dev": 0.033,
+        "Data & AI": 0.033,
+        "Review & Meta": 0.033,
+        "Theory": 0.017
+      },
+      "tech": {
+        "AI and intelligent systems": 0.033,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.083,
+        "Analytics and dashboards": 0.033,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.783,
+        "higher_ed": 0.017,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.183
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.888,
+      "ab_disagreements": 17,
+      "low_sample": false
+    },
+    "jep": {
+      "name": "Journal of Educational Psychology",
+      "shares": {
+        "Experimental": 0.73,
+        "Qualitative": 0.054,
+        "Design & Dev": 0.027,
+        "Data & AI": 0.081,
+        "Review & Meta": 0.108
+      },
+      "dominant": "Experimental",
+      "n_classified": 37,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 22,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.508,
+        "Qualitative": 0.085,
+        "Design & Dev": 0.102,
+        "Data & AI": 0.153,
+        "Review & Meta": 0.068,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.051,
+        "VR and AR": 0.0,
+        "Games and play": 0.034,
+        "Collaborative learning": 0.051,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.559,
+        "higher_ed": 0.186,
+        "informal": 0.051,
+        "mixed_or_unspecified": 0.203
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.942,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "ci": {
+      "name": "Cognition and Instruction",
+      "shares": {
+        "Qualitative": 0.889,
+        "Design & Dev": 0.083,
+        "Data & AI": 0.028
+      },
+      "dominant": "Qualitative",
+      "n_classified": 36,
+      "n_abstracts": 37,
+      "n_research": 37,
+      "survey_correlational_n": 1,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.027,
+        "Qualitative": 0.973,
+        "Design & Dev": 0.162,
+        "Data & AI": 0.027,
+        "Review & Meta": 0.0,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.054,
+        "Collaborative learning": 0.378,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.027
+      },
+      "level": {
+        "k12": 0.568,
+        "higher_ed": 0.189,
+        "informal": 0.054,
+        "mixed_or_unspecified": 0.189
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.896,
+      "ab_disagreements": 14,
+      "low_sample": false
+    },
+    "tlt": {
+      "name": "IEEE Transactions on Learning Technologies",
+      "shares": {
+        "Experimental": 0.414,
+        "Design & Dev": 0.259,
+        "Data & AI": 0.155,
+        "Review & Meta": 0.155,
+        "Theory": 0.017
+      },
+      "dominant": "Experimental",
+      "n_classified": 58,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 2,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.55,
+        "Qualitative": 0.167,
+        "Design & Dev": 0.567,
+        "Data & AI": 0.4,
+        "Review & Meta": 0.15,
+        "Theory": 0.15
+      },
+      "tech": {
+        "AI and intelligent systems": 0.717,
+        "VR and AR": 0.183,
+        "Games and play": 0.05,
+        "Collaborative learning": 0.067,
+        "Analytics and dashboards": 0.217,
+        "Online and blended": 0.083
+      },
+      "level": {
+        "k12": 0.15,
+        "higher_ed": 0.25,
+        "workplace": 0.067,
+        "mixed_or_unspecified": 0.533
+      },
+      "low_confidence_n": 11,
+      "mean_confidence": 0.836,
+      "ab_disagreements": 67,
+      "low_sample": false
+    },
+    "ijaied": {
+      "name": "International Journal of Artificial Intelligence in Education",
+      "shares": {
+        "Experimental": 0.288,
+        "Qualitative": 0.068,
+        "Design & Dev": 0.186,
+        "Data & AI": 0.373,
+        "Review & Meta": 0.085
+      },
+      "dominant": "Data & AI",
+      "n_classified": 59,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 1,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.467,
+        "Qualitative": 0.25,
+        "Design & Dev": 0.417,
+        "Data & AI": 0.633,
+        "Review & Meta": 0.1,
+        "Theory": 0.1
+      },
+      "tech": {
+        "AI and intelligent systems": 0.883,
+        "VR and AR": 0.017,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.117,
+        "Analytics and dashboards": 0.283,
+        "Online and blended": 0.067
+      },
+      "level": {
+        "k12": 0.133,
+        "higher_ed": 0.4,
+        "mixed_or_unspecified": 0.467
+      },
+      "low_confidence_n": 15,
+      "mean_confidence": 0.783,
+      "ab_disagreements": 81,
+      "low_sample": false
+    },
+    "umuai": {
+      "name": "User Modeling and User-Adapted Interaction",
+      "shares": {
+        "Experimental": 0.306,
+        "Design & Dev": 0.327,
+        "Data & AI": 0.184,
+        "Review & Meta": 0.163,
+        "Theory": 0.02
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 49,
+      "n_abstracts": 52,
+      "n_research": 52,
+      "survey_correlational_n": 3,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.596,
+        "Qualitative": 0.019,
+        "Design & Dev": 0.5,
+        "Data & AI": 0.231,
+        "Review & Meta": 0.173,
+        "Theory": 0.154
+      },
+      "tech": {
+        "AI and intelligent systems": 0.288,
+        "VR and AR": 0.0,
+        "Games and play": 0.038,
+        "Collaborative learning": 0.019,
+        "Analytics and dashboards": 0.038,
+        "Online and blended": 0.077
+      },
+      "level": {
+        "higher_ed": 0.019,
+        "workplace": 0.019,
+        "informal": 0.019,
+        "mixed_or_unspecified": 0.942
+      },
+      "low_confidence_n": 14,
+      "mean_confidence": 0.788,
+      "ab_disagreements": 67,
+      "low_sample": false
+    },
+    "jla": {
+      "name": "Journal of Learning Analytics",
+      "shares": {
+        "Experimental": 0.153,
+        "Qualitative": 0.136,
+        "Design & Dev": 0.085,
+        "Data & AI": 0.407,
+        "Review & Meta": 0.186,
+        "Theory": 0.034
+      },
+      "dominant": "Data & AI",
+      "n_classified": 59,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 1,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.3,
+        "Qualitative": 0.267,
+        "Design & Dev": 0.183,
+        "Data & AI": 0.583,
+        "Review & Meta": 0.2,
+        "Theory": 0.133
+      },
+      "tech": {
+        "AI and intelligent systems": 0.567,
+        "VR and AR": 0.017,
+        "Games and play": 0.05,
+        "Collaborative learning": 0.233,
+        "Analytics and dashboards": 0.433,
+        "Online and blended": 0.183
+      },
+      "level": {
+        "k12": 0.217,
+        "higher_ed": 0.283,
+        "mixed_or_unspecified": 0.5
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.865,
+      "ab_disagreements": 76,
+      "low_sample": false
+    },
+    "is": {
+      "name": "Instructional Science",
+      "shares": {
+        "Experimental": 0.527,
+        "Qualitative": 0.273,
+        "Design & Dev": 0.091,
+        "Data & AI": 0.055,
+        "Theory": 0.055
+      },
+      "dominant": "Experimental",
+      "n_classified": 55,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 5,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.55,
+        "Qualitative": 0.5,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.05,
+        "Review & Meta": 0.05,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.033,
+        "VR and AR": 0.017,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.2,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.05
+      },
+      "level": {
+        "k12": 0.333,
+        "higher_ed": 0.383,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.25
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.889,
+      "ab_disagreements": 25,
+      "low_sample": false
+    },
+    "cep": {
+      "name": "Contemporary Educational Psychology",
+      "shares": {
+        "Experimental": 0.679,
+        "Qualitative": 0.071,
+        "Design & Dev": 0.107,
+        "Data & AI": 0.071,
+        "Review & Meta": 0.071
+      },
+      "dominant": "Experimental",
+      "n_classified": 28,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 31,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.39,
+        "Qualitative": 0.136,
+        "Design & Dev": 0.068,
+        "Data & AI": 0.153,
+        "Review & Meta": 0.051,
+        "Theory": 0.017
+      },
+      "tech": {
+        "AI and intelligent systems": 0.051,
+        "VR and AR": 0.0,
+        "Games and play": 0.034,
+        "Collaborative learning": 0.0,
+        "Analytics and dashboards": 0.034,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.508,
+        "higher_ed": 0.254,
+        "workplace": 0.034,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.186
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.91,
+      "ab_disagreements": 42,
+      "low_sample": false
+    },
+    "lid": {
+      "name": "Learning and Individual Differences",
+      "shares": {
+        "Experimental": 0.269,
+        "Design & Dev": 0.077,
+        "Data & AI": 0.115,
+        "Review & Meta": 0.231,
+        "Theory": 0.308
+      },
+      "dominant": "Theory",
+      "n_classified": 26,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 34,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.183,
+        "Qualitative": 0.033,
+        "Design & Dev": 0.05,
+        "Data & AI": 0.167,
+        "Review & Meta": 0.133,
+        "Theory": 0.167
+      },
+      "tech": {
+        "AI and intelligent systems": 0.067,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.0,
+        "Analytics and dashboards": 0.05,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.4,
+        "higher_ed": 0.183,
+        "mixed_or_unspecified": 0.417
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.917,
+      "ab_disagreements": 36,
+      "low_sample": false
+    },
+    "mca": {
+      "name": "Mind Culture and Activity",
+      "shares": {
+        "Qualitative": 0.763,
+        "Design & Dev": 0.105,
+        "Theory": 0.132
+      },
+      "dominant": "Qualitative",
+      "n_classified": 38,
+      "n_abstracts": 40,
+      "n_research": 38,
+      "survey_correlational_n": 0,
+      "not_research_n": 2,
+      "uses": {
+        "Experimental": 0.0,
+        "Qualitative": 0.842,
+        "Design & Dev": 0.211,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.0,
+        "Theory": 0.132
+      },
+      "tech": {
+        "AI and intelligent systems": 0.026,
+        "VR and AR": 0.0,
+        "Games and play": 0.026,
+        "Collaborative learning": 0.316,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.316,
+        "higher_ed": 0.132,
+        "workplace": 0.026,
+        "informal": 0.184,
+        "mixed_or_unspecified": 0.342
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.901,
+      "ab_disagreements": 18,
+      "low_sample": false
+    },
+    "de": {
+      "name": "Distance Education",
+      "shares": {
+        "Experimental": 0.022,
+        "Qualitative": 0.444,
+        "Design & Dev": 0.133,
+        "Data & AI": 0.178,
+        "Review & Meta": 0.111,
+        "Theory": 0.111
+      },
+      "dominant": "Qualitative",
+      "n_classified": 45,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 15,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.083,
+        "Qualitative": 0.483,
+        "Design & Dev": 0.133,
+        "Data & AI": 0.15,
+        "Review & Meta": 0.083,
+        "Theory": 0.1
+      },
+      "tech": {
+        "AI and intelligent systems": 0.067,
+        "VR and AR": 0.033,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.2,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.867
+      },
+      "level": {
+        "k12": 0.083,
+        "higher_ed": 0.633,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.25
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.93,
+      "ab_disagreements": 36,
+      "low_sample": false
+    },
+    "ihe": {
+      "name": "Internet and Higher Education",
+      "shares": {
+        "Experimental": 0.267,
+        "Qualitative": 0.2,
+        "Design & Dev": 0.133,
+        "Data & AI": 0.333,
+        "Review & Meta": 0.067
+      },
+      "dominant": "Data & AI",
+      "n_classified": 15,
+      "n_abstracts": 22,
+      "n_research": 22,
+      "survey_correlational_n": 7,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.273,
+        "Qualitative": 0.409,
+        "Design & Dev": 0.182,
+        "Data & AI": 0.364,
+        "Review & Meta": 0.045,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.364,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.227,
+        "Analytics and dashboards": 0.045,
+        "Online and blended": 0.5
+      },
+      "level": {
+        "higher_ed": 0.864,
+        "mixed_or_unspecified": 0.136
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.888,
+      "ab_disagreements": 19,
+      "low_sample": false
+    },
+    "jaid": {
+      "name": "Journal of Applied Instructional Design",
+      "shares": {
+        "Experimental": 0.143,
+        "Qualitative": 0.286,
         "Design & Dev": 0.429,
-        "Data & AI": 0.143,
-        "Theory": 0.286
+        "Theory": 0.143
       },
       "dominant": "Design & Dev",
       "n_classified": 7,
-      "n_abstracts": 12,
+      "n_abstracts": 9,
+      "n_research": 7,
+      "survey_correlational_n": 0,
+      "not_research_n": 2,
+      "uses": {
+        "Experimental": 0.143,
+        "Qualitative": 0.429,
+        "Design & Dev": 0.571,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.0,
+        "Theory": 0.286
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.429,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.143
+      },
+      "level": {
+        "k12": 0.143,
+        "higher_ed": 0.714,
+        "mixed_or_unspecified": 0.143
+      },
+      "low_confidence_n": 2,
+      "mean_confidence": 0.834,
+      "ab_disagreements": 5,
+      "low_sample": true
+    },
+    "jfdl": {
+      "name": "Journal of Formative Design in Learning",
+      "shares": {
+        "Qualitative": 0.417,
+        "Design & Dev": 0.583
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 12,
+      "n_abstracts": 15,
+      "n_research": 15,
+      "survey_correlational_n": 3,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.067,
+        "Qualitative": 0.667,
+        "Design & Dev": 0.667,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.0,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.133,
+        "VR and AR": 0.067,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.133,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.133
+      },
+      "level": {
+        "k12": 0.2,
+        "higher_ed": 0.6,
+        "workplace": 0.133,
+        "mixed_or_unspecified": 0.067
+      },
       "low_confidence_n": 0,
-      "mean_confidence": 0.842
+      "mean_confidence": 0.909,
+      "ab_disagreements": 8,
+      "low_sample": false
+    },
+    "ijdl": {
+      "name": "International Journal of Designs for Learning",
+      "shares": {
+        "Design & Dev": 1.0
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 55,
+      "n_abstracts": 60,
+      "n_research": 55,
+      "survey_correlational_n": 0,
+      "not_research_n": 5,
+      "uses": {
+        "Experimental": 0.018,
+        "Qualitative": 0.164,
+        "Design & Dev": 1.0,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.0,
+        "Theory": 0.418
+      },
+      "tech": {
+        "AI and intelligent systems": 0.364,
+        "VR and AR": 0.036,
+        "Games and play": 0.164,
+        "Collaborative learning": 0.2,
+        "Analytics and dashboards": 0.055,
+        "Online and blended": 0.273
+      },
+      "level": {
+        "k12": 0.2,
+        "higher_ed": 0.473,
+        "workplace": 0.073,
+        "informal": 0.109,
+        "mixed_or_unspecified": 0.145
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.909,
+      "ab_disagreements": 40,
+      "low_sample": false
+    },
+    "tt": {
+      "name": "TechTrends",
+      "shares": {
+        "Experimental": 0.114,
+        "Qualitative": 0.386,
+        "Design & Dev": 0.136,
+        "Data & AI": 0.045,
+        "Review & Meta": 0.182,
+        "Theory": 0.136
+      },
+      "dominant": "Qualitative",
+      "n_classified": 44,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 16,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.117,
+        "Qualitative": 0.45,
+        "Design & Dev": 0.233,
+        "Data & AI": 0.017,
+        "Review & Meta": 0.167,
+        "Theory": 0.2
+      },
+      "tech": {
+        "AI and intelligent systems": 0.283,
+        "VR and AR": 0.1,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.1
+      },
+      "level": {
+        "k12": 0.267,
+        "higher_ed": 0.433,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.267
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.889,
+      "ab_disagreements": 44,
+      "low_sample": false
+    },
+    "piq": {
+      "name": "Performance Improvement Quarterly",
+      "shares": {
+        "Experimental": 0.143,
+        "Qualitative": 0.286,
+        "Design & Dev": 0.214,
+        "Review & Meta": 0.357
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 14,
+      "n_abstracts": 23,
+      "n_research": 21,
+      "survey_correlational_n": 7,
+      "not_research_n": 2,
+      "uses": {
+        "Experimental": 0.143,
+        "Qualitative": 0.286,
+        "Design & Dev": 0.143,
+        "Data & AI": 0.048,
+        "Review & Meta": 0.238,
+        "Theory": 0.19
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.048,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.048,
+        "higher_ed": 0.095,
+        "workplace": 0.571,
+        "mixed_or_unspecified": 0.286
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.9,
+      "ab_disagreements": 8,
+      "low_sample": false
+    },
+    "ijethe": {
+      "name": "International Journal of Educational Technology in Higher Education",
+      "shares": {
+        "Experimental": 0.405,
+        "Qualitative": 0.095,
+        "Design & Dev": 0.238,
+        "Data & AI": 0.119,
+        "Review & Meta": 0.143
+      },
+      "dominant": "Experimental",
+      "n_classified": 42,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 18,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.367,
+        "Qualitative": 0.3,
+        "Design & Dev": 0.217,
+        "Data & AI": 0.2,
+        "Review & Meta": 0.1,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.6,
+        "VR and AR": 0.0,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.267,
+        "Analytics and dashboards": 0.15,
+        "Online and blended": 0.233
+      },
+      "level": {
+        "higher_ed": 0.85,
+        "mixed_or_unspecified": 0.15
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.901,
+      "ab_disagreements": 57,
+      "low_sample": false
+    },
+    "jche": {
+      "name": "Journal of Computing in Higher Education",
+      "shares": {
+        "Experimental": 0.167,
+        "Qualitative": 0.222,
+        "Design & Dev": 0.083,
+        "Data & AI": 0.194,
+        "Review & Meta": 0.194,
+        "Theory": 0.139
+      },
+      "dominant": "Qualitative",
+      "n_classified": 36,
+      "n_abstracts": 47,
+      "n_research": 47,
+      "survey_correlational_n": 11,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.191,
+        "Qualitative": 0.298,
+        "Design & Dev": 0.149,
+        "Data & AI": 0.191,
+        "Review & Meta": 0.149,
+        "Theory": 0.191
+      },
+      "tech": {
+        "AI and intelligent systems": 0.128,
+        "VR and AR": 0.021,
+        "Games and play": 0.021,
+        "Collaborative learning": 0.128,
+        "Analytics and dashboards": 0.128,
+        "Online and blended": 0.447
+      },
+      "level": {
+        "higher_ed": 0.617,
+        "mixed_or_unspecified": 0.383
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.895,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "irrodl": {
+      "name": "International Review of Research in Open and Distributed Learning",
+      "shares": {
+        "Experimental": 0.265,
+        "Qualitative": 0.204,
+        "Design & Dev": 0.143,
+        "Data & AI": 0.061,
+        "Review & Meta": 0.286,
+        "Theory": 0.041
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 49,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 10,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.271,
+        "Qualitative": 0.322,
+        "Design & Dev": 0.153,
+        "Data & AI": 0.068,
+        "Review & Meta": 0.254,
+        "Theory": 0.136
+      },
+      "tech": {
+        "AI and intelligent systems": 0.136,
+        "VR and AR": 0.017,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.119,
+        "Analytics and dashboards": 0.085,
+        "Online and blended": 0.644
+      },
+      "level": {
+        "k12": 0.102,
+        "higher_ed": 0.458,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.424
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.928,
+      "ab_disagreements": 45,
+      "low_sample": false
+    },
+    "tochi": {
+      "name": "ACM Transactions on Computer-Human Interaction",
+      "shares": {
+        "Experimental": 0.19,
+        "Qualitative": 0.362,
+        "Design & Dev": 0.31,
+        "Data & AI": 0.017,
+        "Review & Meta": 0.103,
+        "Theory": 0.017
+      },
+      "dominant": "Qualitative",
+      "n_classified": 58,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 2,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.267,
+        "Qualitative": 0.583,
+        "Design & Dev": 0.383,
+        "Data & AI": 0.033,
+        "Review & Meta": 0.1,
+        "Theory": 0.1
+      },
+      "tech": {
+        "AI and intelligent systems": 0.133,
+        "VR and AR": 0.1,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.05,
+        "higher_ed": 0.067,
+        "workplace": 0.1,
+        "informal": 0.05,
+        "mixed_or_unspecified": 0.733
+      },
+      "low_confidence_n": 8,
+      "mean_confidence": 0.841,
+      "ab_disagreements": 41,
+      "low_sample": false
+    },
+    "ijcci": {
+      "name": "International Journal of Child-Computer Interaction",
+      "shares": {
+        "Experimental": 0.193,
+        "Qualitative": 0.404,
+        "Design & Dev": 0.193,
+        "Data & AI": 0.035,
+        "Review & Meta": 0.14,
+        "Theory": 0.035
+      },
+      "dominant": "Qualitative",
+      "n_classified": 57,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 3,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.183,
+        "Qualitative": 0.617,
+        "Design & Dev": 0.4,
+        "Data & AI": 0.067,
+        "Review & Meta": 0.15,
+        "Theory": 0.167
+      },
+      "tech": {
+        "AI and intelligent systems": 0.1,
+        "VR and AR": 0.133,
+        "Games and play": 0.1,
+        "Collaborative learning": 0.133,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.633,
+        "higher_ed": 0.05,
+        "informal": 0.117,
+        "mixed_or_unspecified": 0.2
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.862,
+      "ab_disagreements": 46,
+      "low_sample": false
+    },
+    "sg": {
+      "name": "Simulation & Gaming",
+      "shares": {
+        "Experimental": 0.208,
+        "Qualitative": 0.188,
+        "Design & Dev": 0.292,
+        "Data & AI": 0.104,
+        "Review & Meta": 0.104,
+        "Theory": 0.104
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 48,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 12,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.217,
+        "Qualitative": 0.35,
+        "Design & Dev": 0.35,
+        "Data & AI": 0.1,
+        "Review & Meta": 0.117,
+        "Theory": 0.133
+      },
+      "tech": {
+        "AI and intelligent systems": 0.083,
+        "VR and AR": 0.117,
+        "Games and play": 0.6,
+        "Collaborative learning": 0.1,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.117,
+        "higher_ed": 0.25,
+        "workplace": 0.1,
+        "mixed_or_unspecified": 0.533
+      },
+      "low_confidence_n": 12,
+      "mean_confidence": 0.837,
+      "ab_disagreements": 60,
+      "low_sample": false
+    },
+    "cexr": {
+      "name": "Computers & Education: X Reality",
+      "shares": {
+        "Experimental": 0.333,
+        "Qualitative": 0.111,
+        "Design & Dev": 0.352,
+        "Data & AI": 0.037,
+        "Review & Meta": 0.13,
+        "Theory": 0.037
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 54,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 5,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.373,
+        "Qualitative": 0.305,
+        "Design & Dev": 0.492,
+        "Data & AI": 0.085,
+        "Review & Meta": 0.136,
+        "Theory": 0.136
+      },
+      "tech": {
+        "AI and intelligent systems": 0.119,
+        "VR and AR": 0.915,
+        "Games and play": 0.153,
+        "Collaborative learning": 0.169,
+        "Analytics and dashboards": 0.085,
+        "Online and blended": 0.051
+      },
+      "level": {
+        "k12": 0.068,
+        "higher_ed": 0.39,
+        "workplace": 0.102,
+        "mixed_or_unspecified": 0.441
+      },
+      "low_confidence_n": 8,
+      "mean_confidence": 0.862,
+      "ab_disagreements": 45,
+      "low_sample": false
+    },
+    "jrst": {
+      "name": "Journal of Research in Science Teaching",
+      "shares": {
+        "Experimental": 0.078,
+        "Qualitative": 0.608,
+        "Design & Dev": 0.02,
+        "Data & AI": 0.039,
+        "Review & Meta": 0.059,
+        "Theory": 0.196
+      },
+      "dominant": "Qualitative",
+      "n_classified": 51,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 8,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.119,
+        "Qualitative": 0.661,
+        "Design & Dev": 0.034,
+        "Data & AI": 0.034,
+        "Review & Meta": 0.102,
+        "Theory": 0.22
+      },
+      "tech": {
+        "AI and intelligent systems": 0.034,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.119,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.034
+      },
+      "level": {
+        "k12": 0.441,
+        "higher_ed": 0.22,
+        "informal": 0.051,
+        "mixed_or_unspecified": 0.288
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.909,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "se": {
+      "name": "Science Education",
+      "shares": {
+        "Experimental": 0.077,
+        "Qualitative": 0.404,
+        "Design & Dev": 0.115,
+        "Data & AI": 0.038,
+        "Review & Meta": 0.038,
+        "Theory": 0.327
+      },
+      "dominant": "Qualitative",
+      "n_classified": 52,
+      "n_abstracts": 60,
+      "n_research": 56,
+      "survey_correlational_n": 4,
+      "not_research_n": 4,
+      "uses": {
+        "Experimental": 0.107,
+        "Qualitative": 0.607,
+        "Design & Dev": 0.179,
+        "Data & AI": 0.054,
+        "Review & Meta": 0.036,
+        "Theory": 0.304
+      },
+      "tech": {
+        "AI and intelligent systems": 0.018,
+        "VR and AR": 0.036,
+        "Games and play": 0.036,
+        "Collaborative learning": 0.196,
+        "Analytics and dashboards": 0.036,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.482,
+        "higher_ed": 0.196,
+        "informal": 0.036,
+        "mixed_or_unspecified": 0.286
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.903,
+      "ab_disagreements": 26,
+      "low_sample": false
+    },
+    "sse": {
+      "name": "Studies in Science Education",
+      "shares": {
+        "Review & Meta": 0.962,
+        "Theory": 0.038
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 26,
+      "n_abstracts": 26,
+      "n_research": 26,
+      "survey_correlational_n": 0,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.0,
+        "Qualitative": 0.192,
+        "Design & Dev": 0.038,
+        "Data & AI": 0.0,
+        "Review & Meta": 1.0,
+        "Theory": 0.538
+      },
+      "tech": {
+        "AI and intelligent systems": 0.038,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.038,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.269,
+        "higher_ed": 0.115,
+        "mixed_or_unspecified": 0.615
+      },
+      "low_confidence_n": 1,
+      "mean_confidence": 0.964,
+      "ab_disagreements": 19,
+      "low_sample": false
+    },
+    "cbe": {
+      "name": "CBE-Life Sciences Education",
+      "shares": {
+        "Experimental": 0.119,
+        "Qualitative": 0.619,
+        "Design & Dev": 0.119,
+        "Data & AI": 0.024,
+        "Review & Meta": 0.048,
+        "Theory": 0.071
+      },
+      "dominant": "Qualitative",
+      "n_classified": 42,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 17,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.169,
+        "Qualitative": 0.627,
+        "Design & Dev": 0.136,
+        "Data & AI": 0.051,
+        "Review & Meta": 0.051,
+        "Theory": 0.068
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.085,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.017,
+        "higher_ed": 0.881,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.085
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.88,
+      "ab_disagreements": 26,
+      "low_sample": false
     },
     "jte": {
       "name": "Journal of Teacher Education",
       "shares": {
-        "Experimental": 0.25,
-        "Qualitative": 0.667,
-        "Review & Meta": 0.083
+        "Experimental": 0.1,
+        "Qualitative": 0.72,
+        "Design & Dev": 0.04,
+        "Review & Meta": 0.04,
+        "Theory": 0.1
       },
       "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "tate": {
-      "name": "Teaching and Teacher Education",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.333,
-        "Design & Dev": 0.083,
-        "Review & Meta": 0.083,
-        "Theory": 0.083
+      "n_classified": 50,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 9,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.119,
+        "Qualitative": 0.661,
+        "Design & Dev": 0.051,
+        "Data & AI": 0.051,
+        "Review & Meta": 0.068,
+        "Theory": 0.136
       },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.946
-    },
-    "ejte": {
-      "name": "European Journal of Teacher Education",
-      "shares": {
-        "Experimental": 0.417,
-        "Qualitative": 0.417,
-        "Data & AI": 0.083,
-        "Theory": 0.083
+      "tech": {
+        "AI and intelligent systems": 0.102,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.153,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.017
       },
-      "dominant": "Experimental",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.938
-    },
-    "tttp": {
-      "name": "Teachers and Teaching: Theory and Practice",
-      "shares": {},
-      "dominant": null,
-      "n_classified": 0,
-      "n_abstracts": 0,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.0
-    },
-    "pde": {
-      "name": "Professional Development in Education",
-      "shares": {
-        "Experimental": 0.083,
-        "Qualitative": 0.75,
-        "Review & Meta": 0.167
+      "level": {
+        "k12": 0.203,
+        "higher_ed": 0.475,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.305
       },
-      "dominant": "Qualitative",
-      "n_classified": 12,
-      "n_abstracts": 12,
-      "low_confidence_n": 0,
-      "mean_confidence": 0.942
+      "low_confidence_n": 8,
+      "mean_confidence": 0.899,
+      "ab_disagreements": 20,
+      "low_sample": false
     },
     "ate": {
       "name": "Action in Teacher Education",
       "shares": {
-        "Experimental": 0.111,
-        "Qualitative": 0.667,
-        "Theory": 0.222
+        "Experimental": 0.038,
+        "Qualitative": 0.83,
+        "Design & Dev": 0.094,
+        "Theory": 0.038
       },
       "dominant": "Qualitative",
-      "n_classified": 9,
-      "n_abstracts": 12,
+      "n_classified": 53,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 6,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.017,
+        "Qualitative": 0.831,
+        "Design & Dev": 0.203,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.017,
+        "Theory": 0.068
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.186,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.051
+      },
+      "level": {
+        "k12": 0.254,
+        "higher_ed": 0.61,
+        "mixed_or_unspecified": 0.136
+      },
+      "low_confidence_n": 8,
+      "mean_confidence": 0.879,
+      "ab_disagreements": 18,
+      "low_sample": false
+    },
+    "etrd": {
+      "name": "Educational Technology Research and Development",
+      "shares": {
+        "Experimental": 0.327,
+        "Qualitative": 0.2,
+        "Design & Dev": 0.255,
+        "Data & AI": 0.055,
+        "Review & Meta": 0.109,
+        "Theory": 0.055
+      },
+      "dominant": "Experimental",
+      "n_classified": 55,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 5,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.35,
+        "Qualitative": 0.35,
+        "Design & Dev": 0.383,
+        "Data & AI": 0.1,
+        "Review & Meta": 0.117,
+        "Theory": 0.167
+      },
+      "tech": {
+        "AI and intelligent systems": 0.2,
+        "VR and AR": 0.167,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.183,
+        "Analytics and dashboards": 0.15,
+        "Online and blended": 0.233
+      },
+      "level": {
+        "k12": 0.267,
+        "higher_ed": 0.35,
+        "workplace": 0.05,
+        "mixed_or_unspecified": 0.333
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.905,
+      "ab_disagreements": 50,
+      "low_sample": false
+    },
+    "ce": {
+      "name": "Computers & Education",
+      "shares": {
+        "Experimental": 0.479,
+        "Qualitative": 0.042,
+        "Design & Dev": 0.125,
+        "Data & AI": 0.125,
+        "Review & Meta": 0.229
+      },
+      "dominant": "Experimental",
+      "n_classified": 48,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 12,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.467,
+        "Qualitative": 0.2,
+        "Design & Dev": 0.2,
+        "Data & AI": 0.233,
+        "Review & Meta": 0.183,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.317,
+        "VR and AR": 0.1,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.117,
+        "Analytics and dashboards": 0.1,
+        "Online and blended": 0.1
+      },
+      "level": {
+        "k12": 0.333,
+        "higher_ed": 0.417,
+        "mixed_or_unspecified": 0.25
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.929,
+      "ab_disagreements": 53,
+      "low_sample": false
+    },
+    "li": {
+      "name": "Learning and Instruction",
+      "shares": {
+        "Experimental": 0.762,
+        "Qualitative": 0.071,
+        "Design & Dev": 0.024,
+        "Data & AI": 0.119,
+        "Review & Meta": 0.024
+      },
+      "dominant": "Experimental",
+      "n_classified": 42,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 18,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.633,
+        "Qualitative": 0.217,
+        "Design & Dev": 0.083,
+        "Data & AI": 0.15,
+        "Review & Meta": 0.017,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.067,
+        "VR and AR": 0.033,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.133,
+        "Analytics and dashboards": 0.083,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.483,
+        "higher_ed": 0.267,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.233
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.903,
+      "ab_disagreements": 26,
+      "low_sample": false
+    },
+    "epr": {
+      "name": "Educational Psychology Review",
+      "shares": {
+        "Experimental": 0.105,
+        "Qualitative": 0.018,
+        "Design & Dev": 0.035,
+        "Data & AI": 0.035,
+        "Review & Meta": 0.544,
+        "Theory": 0.263
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 57,
+      "n_abstracts": 60,
+      "n_research": 58,
+      "survey_correlational_n": 1,
+      "not_research_n": 2,
+      "uses": {
+        "Experimental": 0.328,
+        "Qualitative": 0.069,
+        "Design & Dev": 0.052,
+        "Data & AI": 0.034,
+        "Review & Meta": 0.655,
+        "Theory": 0.431
+      },
+      "tech": {
+        "AI and intelligent systems": 0.103,
+        "VR and AR": 0.017,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.017,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.172,
+        "higher_ed": 0.138,
+        "mixed_or_unspecified": 0.69
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.917,
+      "ab_disagreements": 28,
+      "low_sample": false
+    },
+    "er": {
+      "name": "Educational Researcher",
+      "shares": {
+        "Experimental": 0.325,
+        "Qualitative": 0.025,
+        "Data & AI": 0.075,
+        "Review & Meta": 0.125,
+        "Theory": 0.45
+      },
+      "dominant": "Theory",
+      "n_classified": 40,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 20,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.433,
+        "Qualitative": 0.033,
+        "Design & Dev": 0.017,
+        "Data & AI": 0.05,
+        "Review & Meta": 0.1,
+        "Theory": 0.333
+      },
+      "tech": {
+        "AI and intelligent systems": 0.05,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.017,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.333,
+        "higher_ed": 0.183,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.45
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.881,
+      "ab_disagreements": 28,
+      "low_sample": false
+    },
+    "jcal": {
+      "name": "Journal of Computer Assisted Learning",
+      "shares": {
+        "Experimental": 0.56,
+        "Qualitative": 0.06,
+        "Design & Dev": 0.06,
+        "Data & AI": 0.14,
+        "Review & Meta": 0.18
+      },
+      "dominant": "Experimental",
+      "n_classified": 50,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 10,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.617,
+        "Qualitative": 0.317,
+        "Design & Dev": 0.233,
+        "Data & AI": 0.25,
+        "Review & Meta": 0.15,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.417,
+        "VR and AR": 0.183,
+        "Games and play": 0.183,
+        "Collaborative learning": 0.133,
+        "Analytics and dashboards": 0.067,
+        "Online and blended": 0.117
+      },
+      "level": {
+        "k12": 0.317,
+        "higher_ed": 0.367,
+        "workplace": 0.017,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.283
+      },
+      "low_confidence_n": 2,
+      "mean_confidence": 0.948,
+      "ab_disagreements": 53,
+      "low_sample": false
+    },
+    "jecr": {
+      "name": "Journal of Educational Computing Research",
+      "shares": {
+        "Experimental": 0.722,
+        "Design & Dev": 0.019,
+        "Data & AI": 0.056,
+        "Review & Meta": 0.204
+      },
+      "dominant": "Experimental",
+      "n_classified": 54,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 5,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.763,
+        "Qualitative": 0.22,
+        "Design & Dev": 0.322,
+        "Data & AI": 0.169,
+        "Review & Meta": 0.186,
+        "Theory": 0.068
+      },
+      "tech": {
+        "AI and intelligent systems": 0.593,
+        "VR and AR": 0.186,
+        "Games and play": 0.136,
+        "Collaborative learning": 0.136,
+        "Analytics and dashboards": 0.136,
+        "Online and blended": 0.034
+      },
+      "level": {
+        "k12": 0.305,
+        "higher_ed": 0.288,
+        "mixed_or_unspecified": 0.407
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.931,
+      "ab_disagreements": 53,
+      "low_sample": false
+    },
+    "cs": {
+      "name": "Cognitive Science",
+      "shares": {
+        "Experimental": 0.833,
+        "Qualitative": 0.042,
+        "Design & Dev": 0.021,
+        "Data & AI": 0.021,
+        "Review & Meta": 0.021,
+        "Theory": 0.062
+      },
+      "dominant": "Experimental",
+      "n_classified": 48,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 12,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.667,
+        "Qualitative": 0.067,
+        "Design & Dev": 0.017,
+        "Data & AI": 0.033,
+        "Review & Meta": 0.05,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.017,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.05,
+        "higher_ed": 0.017,
+        "informal": 0.033,
+        "mixed_or_unspecified": 0.9
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.884,
+      "ab_disagreements": 19,
+      "low_sample": false
+    },
+    "chb": {
+      "name": "Computers in Human Behavior",
+      "shares": {
+        "Experimental": 0.682,
+        "Qualitative": 0.136,
+        "Design & Dev": 0.023,
+        "Data & AI": 0.091,
+        "Review & Meta": 0.045,
+        "Theory": 0.023
+      },
+      "dominant": "Experimental",
+      "n_classified": 44,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 16,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.6,
+        "Qualitative": 0.15,
+        "Design & Dev": 0.033,
+        "Data & AI": 0.05,
+        "Review & Meta": 0.033,
+        "Theory": 0.017
+      },
+      "tech": {
+        "AI and intelligent systems": 0.083,
+        "VR and AR": 0.083,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.033,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.133,
+        "higher_ed": 0.05,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.8
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.901,
+      "ab_disagreements": 43,
+      "low_sample": false
+    },
+    "ile": {
+      "name": "Interactive Learning Environments",
+      "shares": {
+        "Experimental": 0.395,
+        "Qualitative": 0.233,
+        "Design & Dev": 0.093,
+        "Data & AI": 0.093,
+        "Review & Meta": 0.14,
+        "Theory": 0.047
+      },
+      "dominant": "Experimental",
+      "n_classified": 43,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 17,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.383,
+        "Qualitative": 0.417,
+        "Design & Dev": 0.183,
+        "Data & AI": 0.2,
+        "Review & Meta": 0.1,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.55,
+        "VR and AR": 0.133,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.267,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.133
+      },
+      "level": {
+        "k12": 0.233,
+        "higher_ed": 0.367,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.383
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.881,
+      "ab_disagreements": 50,
+      "low_sample": false
+    },
+    "ceai": {
+      "name": "Computers & Education: Artificial Intelligence",
+      "shares": {
+        "Experimental": 0.353,
+        "Qualitative": 0.118,
+        "Design & Dev": 0.157,
+        "Data & AI": 0.157,
+        "Review & Meta": 0.196,
+        "Theory": 0.02
+      },
+      "dominant": "Experimental",
+      "n_classified": 51,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 9,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.35,
+        "Qualitative": 0.317,
+        "Design & Dev": 0.267,
+        "Data & AI": 0.4,
+        "Review & Meta": 0.183,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.95,
+        "VR and AR": 0.033,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.067,
+        "Analytics and dashboards": 0.283,
+        "Online and blended": 0.05
+      },
+      "level": {
+        "k12": 0.183,
+        "higher_ed": 0.467,
+        "mixed_or_unspecified": 0.35
+      },
+      "low_confidence_n": 9,
+      "mean_confidence": 0.863,
+      "ab_disagreements": 72,
+      "low_sample": false
+    },
+    "eit": {
+      "name": "Education and Information Technologies",
+      "shares": {
+        "Experimental": 0.477,
+        "Qualitative": 0.273,
+        "Design & Dev": 0.159,
+        "Data & AI": 0.045,
+        "Review & Meta": 0.045
+      },
+      "dominant": "Experimental",
+      "n_classified": 44,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 16,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.383,
+        "Qualitative": 0.433,
+        "Design & Dev": 0.283,
+        "Data & AI": 0.183,
+        "Review & Meta": 0.033,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.4,
+        "VR and AR": 0.117,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.1,
+        "Analytics and dashboards": 0.15,
+        "Online and blended": 0.1
+      },
+      "level": {
+        "k12": 0.383,
+        "higher_ed": 0.4,
+        "mixed_or_unspecified": 0.217
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.895,
+      "ab_disagreements": 54,
+      "low_sample": false
+    },
+    "olj": {
+      "name": "Online Learning Journal",
+      "shares": {
+        "Experimental": 0.25,
+        "Qualitative": 0.389,
+        "Design & Dev": 0.194,
+        "Data & AI": 0.028,
+        "Review & Meta": 0.139
+      },
+      "dominant": "Qualitative",
+      "n_classified": 36,
+      "n_abstracts": 60,
+      "n_research": 57,
+      "survey_correlational_n": 21,
+      "not_research_n": 3,
+      "uses": {
+        "Experimental": 0.228,
+        "Qualitative": 0.491,
+        "Design & Dev": 0.175,
+        "Data & AI": 0.018,
+        "Review & Meta": 0.088,
+        "Theory": 0.053
+      },
+      "tech": {
+        "AI and intelligent systems": 0.088,
+        "VR and AR": 0.0,
+        "Games and play": 0.018,
+        "Collaborative learning": 0.246,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.789
+      },
+      "level": {
+        "k12": 0.105,
+        "higher_ed": 0.702,
+        "workplace": 0.018,
+        "mixed_or_unspecified": 0.175
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.906,
+      "ab_disagreements": 33,
+      "low_sample": false
+    },
+    "ijhci": {
+      "name": "International Journal of Human-Computer Interaction",
+      "shares": {
+        "Experimental": 0.479,
+        "Qualitative": 0.125,
+        "Design & Dev": 0.208,
+        "Data & AI": 0.021,
+        "Review & Meta": 0.146,
+        "Theory": 0.021
+      },
+      "dominant": "Experimental",
+      "n_classified": 48,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 12,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.467,
+        "Qualitative": 0.317,
+        "Design & Dev": 0.217,
+        "Data & AI": 0.033,
+        "Review & Meta": 0.117,
+        "Theory": 0.133
+      },
+      "tech": {
+        "AI and intelligent systems": 0.167,
+        "VR and AR": 0.067,
+        "Games and play": 0.067,
+        "Collaborative learning": 0.0,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.033,
+        "higher_ed": 0.067,
+        "workplace": 0.133,
+        "informal": 0.05,
+        "mixed_or_unspecified": 0.717
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.898,
+      "ab_disagreements": 52,
+      "low_sample": false
+    },
+    "bit": {
+      "name": "Behaviour & Information Technology",
+      "shares": {
+        "Experimental": 0.537,
+        "Qualitative": 0.22,
+        "Design & Dev": 0.098,
+        "Data & AI": 0.049,
+        "Review & Meta": 0.073,
+        "Theory": 0.024
+      },
+      "dominant": "Experimental",
+      "n_classified": 41,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 19,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.433,
+        "Qualitative": 0.283,
+        "Design & Dev": 0.1,
+        "Data & AI": 0.017,
+        "Review & Meta": 0.05,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.083,
+        "VR and AR": 0.083,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.067,
+        "higher_ed": 0.083,
+        "workplace": 0.167,
+        "mixed_or_unspecified": 0.683
+      },
+      "low_confidence_n": 2,
+      "mean_confidence": 0.956,
+      "ab_disagreements": 44,
+      "low_sample": false
+    },
+    "vr": {
+      "name": "Virtual Reality",
+      "shares": {
+        "Experimental": 0.724,
+        "Design & Dev": 0.155,
+        "Data & AI": 0.034,
+        "Review & Meta": 0.069,
+        "Theory": 0.017
+      },
+      "dominant": "Experimental",
+      "n_classified": 58,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 2,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.767,
+        "Qualitative": 0.117,
+        "Design & Dev": 0.517,
+        "Data & AI": 0.067,
+        "Review & Meta": 0.1,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.05,
+        "VR and AR": 0.983,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "higher_ed": 0.083,
+        "workplace": 0.15,
+        "mixed_or_unspecified": 0.767
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.894,
+      "ab_disagreements": 47,
+      "low_sample": false
+    },
+    "lmt": {
+      "name": "Learning Media and Technology",
+      "shares": {
+        "Qualitative": 0.667,
+        "Design & Dev": 0.05,
+        "Data & AI": 0.017,
+        "Review & Meta": 0.033,
+        "Theory": 0.233
+      },
+      "dominant": "Qualitative",
+      "n_classified": 60,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 0,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.0,
+        "Qualitative": 0.717,
+        "Design & Dev": 0.067,
+        "Data & AI": 0.033,
+        "Review & Meta": 0.067,
+        "Theory": 0.3
+      },
+      "tech": {
+        "AI and intelligent systems": 0.317,
+        "VR and AR": 0.0,
+        "Games and play": 0.05,
+        "Collaborative learning": 0.067,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.25,
+        "higher_ed": 0.183,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.55
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.911,
+      "ab_disagreements": 31,
+      "low_sample": false
+    },
+    "toce": {
+      "name": "ACM Transactions on Computing Education",
+      "shares": {
+        "Experimental": 0.196,
+        "Qualitative": 0.196,
+        "Design & Dev": 0.275,
+        "Data & AI": 0.039,
+        "Review & Meta": 0.157,
+        "Theory": 0.137
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 51,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 9,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.267,
+        "Qualitative": 0.383,
+        "Design & Dev": 0.3,
+        "Data & AI": 0.117,
+        "Review & Meta": 0.133,
+        "Theory": 0.167
+      },
+      "tech": {
+        "AI and intelligent systems": 0.2,
+        "VR and AR": 0.017,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.167,
+        "Analytics and dashboards": 0.133,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.2,
+        "higher_ed": 0.517,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.25
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.898,
+      "ab_disagreements": 40,
+      "low_sample": false
+    },
+    "tate": {
+      "name": "Teaching and Teacher Education",
+      "shares": {
+        "Experimental": 0.122,
+        "Qualitative": 0.659,
+        "Design & Dev": 0.049,
+        "Data & AI": 0.049,
+        "Review & Meta": 0.122
+      },
+      "dominant": "Qualitative",
+      "n_classified": 41,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 19,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.1,
+        "Qualitative": 0.567,
+        "Design & Dev": 0.033,
+        "Data & AI": 0.067,
+        "Review & Meta": 0.083,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.083,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.083,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.333,
+        "higher_ed": 0.3,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.35
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.93,
+      "ab_disagreements": 31,
+      "low_sample": false
+    },
+    "ejte": {
+      "name": "European Journal of Teacher Education",
+      "shares": {
+        "Experimental": 0.049,
+        "Qualitative": 0.61,
+        "Design & Dev": 0.171,
+        "Data & AI": 0.049,
+        "Review & Meta": 0.122
+      },
+      "dominant": "Qualitative",
+      "n_classified": 41,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 18,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.017,
+        "Qualitative": 0.559,
+        "Design & Dev": 0.186,
+        "Data & AI": 0.068,
+        "Review & Meta": 0.085,
+        "Theory": 0.068
+      },
+      "tech": {
+        "AI and intelligent systems": 0.169,
+        "VR and AR": 0.017,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.119,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.136,
+        "higher_ed": 0.593,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.254
+      },
+      "low_confidence_n": 5,
+      "mean_confidence": 0.927,
+      "ab_disagreements": 31,
+      "low_sample": false
+    },
+    "pde": {
+      "name": "Professional Development in Education",
+      "shares": {
+        "Experimental": 0.019,
+        "Qualitative": 0.774,
+        "Design & Dev": 0.113,
+        "Review & Meta": 0.057,
+        "Theory": 0.038
+      },
+      "dominant": "Qualitative",
+      "n_classified": 53,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 7,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.0,
+        "Qualitative": 0.817,
+        "Design & Dev": 0.15,
+        "Data & AI": 0.017,
+        "Review & Meta": 0.067,
+        "Theory": 0.083
+      },
+      "tech": {
+        "AI and intelligent systems": 0.033,
+        "VR and AR": 0.017,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.25,
+        "Analytics and dashboards": 0.033,
+        "Online and blended": 0.05
+      },
+      "level": {
+        "k12": 0.417,
+        "higher_ed": 0.133,
+        "workplace": 0.1,
+        "mixed_or_unspecified": 0.35
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.939,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "err": {
+      "name": "Educational Research Review",
+      "shares": {
+        "Review & Meta": 0.967,
+        "Theory": 0.033
+      },
+      "dominant": "Review & Meta",
+      "n_classified": 60,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 0,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.217,
+        "Qualitative": 0.167,
+        "Design & Dev": 0.0,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.967,
+        "Theory": 0.283
+      },
+      "tech": {
+        "AI and intelligent systems": 0.033,
+        "VR and AR": 0.0,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.033,
+        "Analytics and dashboards": 0.017,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.183,
+        "higher_ed": 0.2,
+        "workplace": 0.05,
+        "informal": 0.033,
+        "mixed_or_unspecified": 0.533
+      },
       "low_confidence_n": 0,
-      "mean_confidence": 0.875
+      "mean_confidence": 0.988,
+      "ab_disagreements": 32,
+      "low_sample": false
+    },
+    "hci": {
+      "name": "Human-Computer Interaction",
+      "shares": {
+        "Experimental": 0.244,
+        "Qualitative": 0.133,
+        "Design & Dev": 0.356,
+        "Review & Meta": 0.089,
+        "Theory": 0.178
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 45,
+      "n_abstracts": 48,
+      "n_research": 47,
+      "survey_correlational_n": 2,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.277,
+        "Qualitative": 0.362,
+        "Design & Dev": 0.404,
+        "Data & AI": 0.043,
+        "Review & Meta": 0.149,
+        "Theory": 0.319
+      },
+      "tech": {
+        "AI and intelligent systems": 0.106,
+        "VR and AR": 0.149,
+        "Games and play": 0.106,
+        "Collaborative learning": 0.043,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.021
+      },
+      "level": {
+        "k12": 0.021,
+        "higher_ed": 0.021,
+        "workplace": 0.128,
+        "informal": 0.043,
+        "mixed_or_unspecified": 0.787
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.859,
+      "ab_disagreements": 28,
+      "low_sample": false
+    },
+    "ijse": {
+      "name": "International Journal of Science Education",
+      "shares": {
+        "Experimental": 0.318,
+        "Qualitative": 0.432,
+        "Design & Dev": 0.136,
+        "Data & AI": 0.068,
+        "Review & Meta": 0.023,
+        "Theory": 0.023
+      },
+      "dominant": "Qualitative",
+      "n_classified": 44,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 16,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.25,
+        "Qualitative": 0.567,
+        "Design & Dev": 0.233,
+        "Data & AI": 0.067,
+        "Review & Meta": 0.017,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.067,
+        "VR and AR": 0.017,
+        "Games and play": 0.017,
+        "Collaborative learning": 0.083,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.617,
+        "higher_ed": 0.25,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.117
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.881,
+      "ab_disagreements": 40,
+      "low_sample": false
+    },
+    "jset": {
+      "name": "Journal of Science Education and Technology",
+      "shares": {
+        "Experimental": 0.25,
+        "Qualitative": 0.125,
+        "Design & Dev": 0.268,
+        "Data & AI": 0.196,
+        "Review & Meta": 0.125,
+        "Theory": 0.036
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 56,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 4,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.333,
+        "Qualitative": 0.533,
+        "Design & Dev": 0.4,
+        "Data & AI": 0.267,
+        "Review & Meta": 0.117,
+        "Theory": 0.05
+      },
+      "tech": {
+        "AI and intelligent systems": 0.3,
+        "VR and AR": 0.117,
+        "Games and play": 0.083,
+        "Collaborative learning": 0.167,
+        "Analytics and dashboards": 0.1,
+        "Online and blended": 0.083
+      },
+      "level": {
+        "k12": 0.4,
+        "higher_ed": 0.383,
+        "mixed_or_unspecified": 0.217
+      },
+      "low_confidence_n": 10,
+      "mean_confidence": 0.846,
+      "ab_disagreements": 45,
+      "low_sample": false
+    },
+    "jee": {
+      "name": "Journal of Engineering Education",
+      "shares": {
+        "Experimental": 0.163,
+        "Qualitative": 0.551,
+        "Design & Dev": 0.02,
+        "Data & AI": 0.102,
+        "Review & Meta": 0.143,
+        "Theory": 0.02
+      },
+      "dominant": "Qualitative",
+      "n_classified": 49,
+      "n_abstracts": 60,
+      "n_research": 57,
+      "survey_correlational_n": 8,
+      "not_research_n": 3,
+      "uses": {
+        "Experimental": 0.175,
+        "Qualitative": 0.632,
+        "Design & Dev": 0.053,
+        "Data & AI": 0.14,
+        "Review & Meta": 0.14,
+        "Theory": 0.035
+      },
+      "tech": {
+        "AI and intelligent systems": 0.105,
+        "VR and AR": 0.0,
+        "Games and play": 0.018,
+        "Collaborative learning": 0.123,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.053
+      },
+      "level": {
+        "k12": 0.053,
+        "higher_ed": 0.825,
+        "workplace": 0.018,
+        "mixed_or_unspecified": 0.105
+      },
+      "low_confidence_n": 4,
+      "mean_confidence": 0.944,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "cse": {
+      "name": "Computer Science Education",
+      "shares": {
+        "Experimental": 0.146,
+        "Qualitative": 0.562,
+        "Design & Dev": 0.104,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.083,
+        "Theory": 0.021
+      },
+      "dominant": "Qualitative",
+      "n_classified": 48,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 12,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.133,
+        "Qualitative": 0.633,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.083,
+        "Review & Meta": 0.083,
+        "Theory": 0.067
+      },
+      "tech": {
+        "AI and intelligent systems": 0.033,
+        "VR and AR": 0.0,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.15,
+        "Analytics and dashboards": 0.05,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.583,
+        "higher_ed": 0.267,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.133
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.895,
+      "ab_disagreements": 29,
+      "low_sample": false
+    },
+    "merj": {
+      "name": "Mathematics Education Research Journal",
+      "shares": {
+        "Experimental": 0.089,
+        "Qualitative": 0.533,
+        "Design & Dev": 0.133,
+        "Review & Meta": 0.178,
+        "Theory": 0.067
+      },
+      "dominant": "Qualitative",
+      "n_classified": 45,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 15,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.117,
+        "Qualitative": 0.517,
+        "Design & Dev": 0.167,
+        "Data & AI": 0.05,
+        "Review & Meta": 0.133,
+        "Theory": 0.117
+      },
+      "tech": {
+        "AI and intelligent systems": 0.0,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.083,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.717,
+        "higher_ed": 0.133,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.133
+      },
+      "low_confidence_n": 6,
+      "mean_confidence": 0.884,
+      "ab_disagreements": 32,
+      "low_sample": false
     }
   }
 }

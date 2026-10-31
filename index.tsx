@@ -3,7 +3,7 @@ import semanticProfiles from './src/data/semantic_profiles.json';
 // V6 Compute/Augment layer: citation-grounded venue->venue edges + interdisciplinarity
 // (built offline by scripts/build_venue_metrics.py via OpenAlex + pySciSci diversity)
 import venueMetrics from './src/data/venue_metrics.json';
-// data-derived methodology profiles (LLM-classified abstracts; replaces lexical)
+// data-derived methodology profiles (Jev-coded abstracts, two wordings per construct)
 import venueMethodology from './src/data/venue_methodology.json';
 // longitudinal topic trends (research currency) — OpenAlex topic share per year
 import fieldTrends from './src/data/field_trends.json';
@@ -52,6 +52,22 @@ const methodologyByName: Record<string, any> = {};
     const _ms = (venueMethodology as any).venues || {};
     for (const k in _ms) { const v = _ms[k]; if (v && v.name) methodologyByName[v.name] = v; }
 }
+// Data basis shown next to every data-derived cue: when it was built and from what sample.
+const dataBasis = (meta: any, extra = ''): string =>
+    [meta?.generated_at ? `기준 ${meta.generated_at}` : '기준일 기록 없음', extra].filter(Boolean).join(' · ');
+const METHOD_META: any = (venueMethodology as any)._meta || {};
+const METHOD_LABEL_KO: Record<string, string> = {
+    'Experimental': '실험·준실험', 'Qualitative': '질적 연구', 'Design & Dev': '설계·개발', 'Data & AI': '데이터·AI 분석',
+    'Review & Meta': '리뷰·메타분석', 'Theory': '이론·개념',
+    'AI and intelligent systems': 'AI·지능형 시스템', 'VR and AR': 'VR·AR', 'Games and play': '게임', 'Collaborative learning': '협력학습',
+    'Analytics and dashboards': '학습분석·대시보드', 'Online and blended': '온라인·블렌디드',
+};
+const LEVEL_LABEL_KO: Record<string, string> = {
+    k12: '초중등', higher_ed: '고등교육', workplace: '직무·전문 교육', informal: '비형식 학습', mixed_or_unspecified: '여러 수준·미명시',
+};
+// constructs whose two wordings agree only moderately (kappa < .6): named next to the numbers they feed
+const METHOD_WEAK: string[] = (Object.values(METHOD_META.reliability || {}) as any[])
+    .filter((r) => r && r.kappa != null && r.kappa < 0.6).map((r) => METHOD_LABEL_KO[r.label] || r.label);
 const _interdiscVals = (Object.values((venueMetrics as any).venues || {}) as any[])
     .map((v) => v?.interdisciplinarity_simpson?.mean)
     .filter((x) => x != null) as number[];
@@ -2116,12 +2132,46 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       <div class="sidebar-section">
         <h3 title="venue가 인용하는 OpenAlex 최상위 분야의 다양성(Simpson). pySciSci/Stirling 기반.">🧭 학제간성 (인용 분야 다양성)</h3>
         <p class="sidebar-note-muted">다양성 ${vm.interdisciplinarity_simpson.mean.toFixed(2)} · 상위 ${interdiscTopPercent(vm.interdisciplinarity_simpson.mean)}% · 여러 분야를 얼마나 폭넓게 인용하는지 보여주는 sensemaking cue (평가점수 아님)</p>
+        <p class="sidebar-meta-caption">OpenAlex · ${dataBasis((venueMetrics as any)._meta, `최근 논문 ${vm.n_papers_sampled}편의 참고문헌 ${vm.n_refs_field_resolved}건`)}</p>
         ${(vm.top_fields && vm.top_fields.length) ? `<p class="sidebar-meta-caption">주로 인용하는 분야</p>` + vm.top_fields.slice(0, 4).map((f: any) => `
         <div class="detail-progress-row">
           <div class="detail-progress-head"><span>${f.field}</span><span class="detail-progress-value">${Math.round(f.share * 100)}%</span></div>
           <div class="detail-progress-track"><div class="detail-progress-fill" style="width: ${Math.round(f.share * 100)}%;"></div></div>
         </div>`).join('') : ''}
       </div>` : '';
+
+    // Research profile coded from recent abstracts (scripts/build_venue_methodology_jev.py)
+    const mp = methodologyByName[node.id];
+    const pct = (x: number) => Math.round(x * 100);
+    const ko = (k: string) => METHOD_LABEL_KO[k] || k;
+    const pills = (obj: any, min: number) => Object.entries(obj || {})
+        .filter(([, v]: any) => v >= min).sort((a: any, b: any) => b[1] - a[1])
+        .map(([k, v]: any) => `<span class="meta-pill">${escapeHtml(ko(k))} ${pct(v)}%</span>`).join('');
+    const profileHtml = mp?.no_article_abstracts ? `
+      <div class="sidebar-section">
+        <h3>🧪 연구 방법·맥락 (초록 코딩)</h3>
+        <p class="sidebar-note-muted">OpenAlex에 이 학회의 일반 논문 초록이 없어 코딩하지 않았습니다 (초록이 있는 것은 리뷰 ${mp.reviews_with_abstracts || 0}편뿐). 리뷰만으로는 학회의 연구 방법을 대표하지 못합니다.</p>
+      </div>` : (mp && mp.n_abstracts) ? (() => {
+        const bars = Object.entries(mp.shares || {}).sort((a: any, b: any) => b[1] - a[1]).slice(0, 4).map(([k, v]: any) => `
+        <div class="detail-progress-row">
+          <div class="detail-progress-head"><span>${escapeHtml(ko(k))}</span><span class="detail-progress-value">${pct(v)}%</span></div>
+          <div class="detail-progress-track"><div class="detail-progress-fill" style="width: ${pct(v)}%;"></div></div>
+        </div>`).join('');
+        const uses = pills(mp.uses, 0.15), tech = pills(mp.tech, 0.1);
+        const lv = Object.entries(mp.level || {}).sort((a: any, b: any) => b[1] - a[1])[0] as any;
+        const win = METHOD_META.works_window ? `${String(METHOD_META.works_window[0]).slice(0, 4)}–${String(METHOD_META.works_window[1]).slice(0, 4)}` : '';
+        return `
+      <div class="sidebar-section">
+        <h3 title="최근 논문 초록마다 같은 질문을 두 가지 문장으로 물어 코딩했습니다 (Jev). 두 문장의 평균이 .5 이상이면 해당으로 셉니다.">🧪 연구 방법·맥락 (초록 코딩)</h3>
+        ${mp.low_sample ? `<p class="sidebar-note-muted">초록이 있는 연구 논문이 ${mp.n_research}편뿐이라 참고용입니다.</p>` : ''}
+        <p class="sidebar-meta-caption">주된 연구 방법</p>
+        ${bars || '<p>정보 없음</p>'}
+        ${uses ? `<p class="sidebar-meta-caption">방법별로 쓰인 논문 비율 (중복 가능)</p><div class="meta-pill-row">${uses}</div>` : ''}
+        ${tech ? `<p class="sidebar-meta-caption">다루는 기술 영역</p><div class="meta-pill-row">${tech}</div>` : ''}
+        ${lv ? `<p class="sidebar-meta-caption">가장 많은 학습자 수준: ${escapeHtml(LEVEL_LABEL_KO[lv[0]] || lv[0])} ${pct(lv[1])}%</p>` : ''}
+        <p class="sidebar-note-muted">OpenAlex 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))}` : ''}</p>
+      </div>`;
+    })() : '';
 
     const methodologyHtml = methodologyData.length
         ? methodologyData.map((m: any) => `
@@ -2166,6 +2216,8 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     // A deadline more than ~45 days in the past is a closed annual cycle, not a
     // "just missed" date. Mark it as such instead of showing an absurd "316일 지남".
     const cfpPastCycle = cfpInfo.daysUntil !== null && cfpInfo.daysUntil < -45;
+    // Verified more than ~4 months ago: the call may have changed since.
+    const cfpVerifyStale = !!cfpInfo.verifiedAt && (Date.now() - new Date(cfpInfo.verifiedAt).getTime()) / 86400000 > 120;
     const cfpStatusLabel = cfpInfo.confidence === 'official'
         ? (cfpPastCycle ? '공식 확인 · 지난 사이클' : cfpInfo.deadlineState === 'passed' ? '공식 확인 · 마감 지남' : '공식 확인')
         : cfpInfo.confidence === 'estimated'
@@ -2190,7 +2242,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
             <p><strong>${cfpInfo.primaryDeadlineLabel}:</strong> ${cfpInfo.primaryDeadlineDisplay}</p>
             ${cfpInfo.secondaryDeadlineDisplay && cfpInfo.secondaryDeadlineLabel ? `<p><strong>${cfpInfo.secondaryDeadlineLabel}:</strong> ${cfpInfo.secondaryDeadlineDisplay}</p>` : ''}
             ${cfpInfo.timezoneLabel ? `<p><strong>기준 시간대:</strong> ${cfpInfo.timezoneLabel}</p>` : ''}
-            ${cfpInfo.verifiedAt ? `<p><strong>마지막 검증:</strong> ${cfpInfo.verifiedAt}</p>` : ''}
+            ${cfpInfo.verifiedAt ? `<p><strong>마지막 검증:</strong> ${cfpInfo.verifiedAt}${cfpVerifyStale ? ' <span class="meta-pill meta-pill--estimated">확인한 지 오래됨</span>' : ''}</p>` : ''}
             <p class="sidebar-note sidebar-link-row">${cfpInfo.note}</p>
             ${cfpInfo.sourceUrl && cfpInfo.sourceLabel ? `<p class="sidebar-link-row"><a href="${cfpInfo.sourceUrl}" target="_blank" rel="noopener">${cfpInfo.sourceLabel} ↗</a></p>` : ''}
           </div>
@@ -2220,6 +2272,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     </div>
 
     ${interdiscHtml}
+    ${profileHtml}
 
     <div class="sidebar-section">
       <h3 title="학술지 키워드 분석(TF-IDF)을 바탕으로 산출된 경향성 지표입니다.">연구 성향 프로필</h3>
@@ -3020,7 +3073,7 @@ async function main() {
         'Experimental': '#6366f1', 'Qualitative': '#f472b6', 'Design & Dev': '#38bdf8',
         'Data & AI': '#34d399', 'Review & Meta': '#fbbf24', 'Theory': '#a78bfa'
     };
-    // LLM-classified dominant methodology (data-derived); null -> no-data grey.
+    // Jev-coded dominant methodology (data-derived); null -> no-data grey.
     const methodOf = (name: string): string | null => methodologyByName[name]?.dominant || null;
     const nodeColorFor = (n: NodeData) => {
         if (nodeEncoding === 'interdisc') return n.interdisc != null ? { background: interColor(n.interdisc), border: 'rgba(255,255,255,0.55)' } : NO_DATA;
@@ -3036,7 +3089,7 @@ async function main() {
             el.innerHTML = '<div style="margin-bottom:5px;opacity:.85">노드 색 = 학제간성 (인용 분야 다양성)</div><div style="height:9px;width:160px;border-radius:5px;background:linear-gradient(90deg,rgb(0,32,77),rgb(124,123,120),rgb(255,233,69))"></div><div style="display:flex;justify-content:space-between;opacity:.7;margin-top:3px"><span>낮음</span><span>높음</span></div><div style="margin-top:6px;opacity:.6">회색 = 데이터 없음</div>';
         } else {
             const chips = Object.entries(METHOD_COLORS).map(([k, c]) => `<div style="display:flex;align-items:center;gap:6px;margin-top:3px"><span style="width:10px;height:10px;border-radius:50%;background:${c};flex:none"></span>${k}</div>`).join('');
-            el.innerHTML = `<div style="margin-bottom:4px;opacity:.85">노드 색 = 방법론 문화 (LLM 분류)</div>${chips}<div style="margin-top:6px;opacity:.6">회색 = 데이터 없음</div>`;
+            el.innerHTML = `<div style="margin-bottom:4px;opacity:.85">노드 색 = 주된 연구 방법 (초록 코딩)</div>${chips}<div style="margin-top:6px;opacity:.6">회색 = 데이터 없음 · ${dataBasis(METHOD_META)}</div>`;
         }
     };
     const applyNodeEncoding = () => {
@@ -4133,7 +4186,7 @@ async function main() {
                     <h3>📈 연구 토픽 트렌드 (${yrs[0]}–${yrs[yrs.length - 1]})</h3>
                     <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">이 커뮤니티(${ft._meta?.n_sources || ''}개 venue)의 OpenAlex 토픽 <strong>연도별 점유율 추세</strong>입니다. 스파크라인 = % 추이, %p = 최근 2년 − 초기 2년. 어디로 가고 있는지 보는 currency cue.</p>
+                <p class="fit-sub">이 커뮤니티(${ft._meta?.n_sources || ''}개 venue)의 OpenAlex 토픽 <strong>연도별 점유율 추세</strong>입니다 (${dataBasis(ft._meta, '끝난 해만 집계')}). 스파크라인 = % 추이, %p = 최근 2년 − 초기 2년. 어디로 가고 있는지 보는 currency cue.</p>
                 <div style="display:flex;gap:28px;margin-top:8px">
                     ${col('📈 부상 (Rising)', ft.top_rising || [], true)}
                     ${col('📉 쇠퇴 (Declining)', ft.top_declining || [], false)}
@@ -4189,7 +4242,7 @@ async function main() {
         bar.innerHTML = `<button id="evolve-play" style="background:#6366f1;color:#fff;border:none;border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:13px">▶</button>
             <input type="range" id="evolve-slider" min="${actYears[0]}" max="${actYears[actYears.length - 1]}" step="0.02" value="${actYears[0]}" style="width:240px;accent-color:#6366f1">
             <span id="evolve-year" style="min-width:38px;font-variant-numeric:tabular-nums;font-weight:600">${actYears[0]}</span>
-            <span style="opacity:.6">노드 크기 = 연간 발표량</span>`;
+            <span style="opacity:.6">노드 크기 = 연간 발표량 · OpenAlex ${dataBasis((venueActivity as any)._meta)}</span>`;
         document.body.appendChild(bar);
         document.getElementById('evolve-play')?.addEventListener('click', () => { evolveTimer ? stopEvolvePlay() : startEvolvePlay(); });
         document.getElementById('evolve-slider')?.addEventListener('input', (e) => { stopEvolvePlay(); renderEvolveYear(parseFloat((e.target as HTMLInputElement).value)); });
@@ -4343,7 +4396,7 @@ async function main() {
             modal.id = 'meth-modal-container';
             document.body.appendChild(modal);
         }
-        // data-derived neighbourhoods: group venues by LLM-classified dominant methodology
+        // data-derived neighbourhoods: group venues by Jev-coded dominant methodology
         const METH_CATS = ['Experimental', 'Qualitative', 'Design & Dev', 'Data & AI', 'Review & Meta', 'Theory'];
         const neighborhoods = METH_CATS.map((category) => ({
             category,
@@ -4380,7 +4433,7 @@ async function main() {
                     <h3>🧪 방법론 지형 (Methodology Neighborhoods)</h3>
                     <button class="fit-close" id="meth-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">각 venue의 최근 초록을 <strong>LLM으로 분류</strong>해 우세 <strong>연구 문화</strong>로 묶었습니다(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
+                <p class="fit-sub">각 venue의 최근 초록을 <strong>Jev로 코딩</strong>(질문마다 두 문장, ${dataBasis(METHOD_META, `초록 ${METHOD_META.n_abstracts || 0}편`)})해 우세 <strong>연구 문화</strong>로 묶었습니다(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
                 ${guideHtml}
                 <div class="meth-grid">${cards}</div>
             </div>

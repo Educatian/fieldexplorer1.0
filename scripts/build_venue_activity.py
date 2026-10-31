@@ -8,6 +8,7 @@ group_by primary_location.source.id per year (aggregate; cheap, ~1 req/year).
 Output: src/data/venue_activity.json
 """
 import json
+from datetime import date
 import time
 from collections import defaultdict
 from pathlib import Path
@@ -19,7 +20,7 @@ MAILTO = "jewoong.moon@gmail.com"
 SOURCES_CACHE = Path("src/data/venue_sources.json")
 METRICS = Path("src/data/venue_metrics.json")
 OUT = Path("src/data/venue_activity.json")
-YEARS = list(range(2019, 2026))
+YEARS = list(range(2019, date.today().year))  # complete calendar years only
 
 
 def batches(ids, size=60):
@@ -78,6 +79,7 @@ def main():
 
     OUT.write_text(json.dumps({
         "_meta": {"generator": "build_venue_activity.py", "years": YEARS,
+                  "generated_at": date.today().isoformat(), "source": "OpenAlex",
                   "method": "OpenAlex group_by source per year over venue set"},
         "years": YEARS, "venues": venues,
     }, indent=2, ensure_ascii=False), encoding="utf-8")
