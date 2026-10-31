@@ -3809,5 +3809,15 @@ window.LECTURE_GUIDES = {
     ],
     "verificationNote": "Caption-based editorial guide. The video names Koeppen et al. (2008), Ufer & Neumann (2018), and Blömeke, Gustafsson & Shavelson (2015); further reading was checked against Crossref (title words, first author, year), OpenAlex, and the linked pages on 2026-10-30.",
     "reviewedAt": "2026-10-30"
+  },
+  "archive-guide": {
+    "id": "archive-guide",
+    "purpose": "Use this guide to find your way around the archive: finding a lecture, studying it with the guide, transcript, and sources, and sharing or embedding it.",
+    "distinction": "Research questions and viewing paths are editorial starting points, not required courses or method recommendations. Review labels are independent records, not quality grades. Embedding is for viewing and does not grant reuse rights.",
+    "caution": "The guide shows the archive as of October 31, 2026; buttons and counts may change as lectures are added. The typed problem report in the walkthrough was not submitted.",
+    "koSummary": "이 영상은 처음 방문한 사람을 위해 아카이브를 실제 화면으로 안내합니다. 전체 강의, 연구 질문, 시청 경로라는 세 가지 진입 방법, 분야별 필터와 짧은 영상 순 정렬, 그리고 제목·요약·학습 가이드·한국어 요약·영어 스크립트를 함께 찾는 검색과, 검색된 스크립트 줄에서 바로 그 시점의 강의를 여는 방법을 보여 줍니다. 강의 페이지에서는 플레이어, 타임스탬프와 시점 링크 복사, 그리고 네 개의 탭을 다룹니다. 개요 탭은 강의가 설명하는 것, 핵심 구분, 예시에서 결론 내리지 말아야 할 것, 한국어 요약, 생각해 볼 질문을 담고, 스크립트 탭은 줄 선택으로 이동, 강의 내 검색, SRT·VTT 내려받기를, 출처 탭은 접근 표시와 확인 메모가 있는 더 읽을거리와 음성 제작 방식·재사용 안내를, 검토 상태 탭은 독립적인 확인 기록을 보여 줍니다. 공유와 임베드, 연구 질문 카드, 단계 이동이 있는 시청 경로, 아카이브 소개, 문제 신고 방법도 보여 주며, 짧은 학습 루틴과 교수자를 위한 활용 팁으로 마무리합니다.",
+    "sources": [],
+    "verificationNote": "How-to guide recorded from the archive itself; no further reading. Narration was checked automatically against the script.",
+    "reviewedAt": "2026-10-30"
   }
 };
