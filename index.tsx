@@ -5,6 +5,8 @@ import semanticProfiles from './src/data/semantic_profiles.json';
 import venueMetrics from './src/data/venue_metrics.json';
 // data-derived methodology profiles (Jev-coded abstracts, two wordings per construct)
 import venueMethodology from './src/data/venue_methodology.json';
+import { TAG_CATEGORIES, TAG_LABEL_KO, canonicalCategory } from './src/data/venues';
+import { ARCHIVE_LECTURES, LECTURES_BY_TOPIC, LECTURES_BY_METHOD, LECTURES_BY_TECH, lectureUrl } from './src/data/archive_links';
 // longitudinal topic trends (research currency) — OpenAlex topic share per year
 import fieldTrends from './src/data/field_trends.json';
 // per-venue activity per year — drives the field-evolution animation
@@ -64,6 +66,12 @@ const METHOD_LABEL_KO: Record<string, string> = {
 };
 const LEVEL_LABEL_KO: Record<string, string> = {
     k12: '초중등', higher_ed: '고등교육', workplace: '직무·전문 교육', informal: '비형식 학습', mixed_or_unspecified: '여러 수준·미명시',
+};
+// Archive lecture links (src/data/archive_links.ts), opened in the same tab's archive
+const lectureLinksHtml = (ids: string[], max = 3): string => {
+    const seen = new Set<string>();
+    return ids.filter((id) => ARCHIVE_LECTURES[id] && !seen.has(id) && seen.add(id)).slice(0, max).map((id) =>
+        `<a class="archive-lecture-link" href="${lectureUrl(id)}" target="_blank" rel="noopener">🎬 ${escapeHtml(ARCHIVE_LECTURES[id].title)} <span>${escapeHtml(ARCHIVE_LECTURES[id].duration)}</span></a>`).join('');
 };
 // constructs whose two wordings agree only moderately (kappa < .6): named next to the numbers they feed
 const METHOD_WEAK: string[] = (Object.values(METHOD_META.reliability || {}) as any[])
@@ -370,7 +378,7 @@ const venueData: VenueInfo[] = [
     { name: "Simulation & Gaming", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
     { name: "Virtual Reality", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
     { name: "Computers & Education: X Reality", type: "Journal", categories: ["Immersive Technology"], impact: "Q3" },
-    { name: "Learning Media and Technology", type: "Journal", categories: ["Critical Perspectives"], impact: "Q1" },
+    { name: "Learning Media and Technology", type: "Journal", categories: ["Technology-Enhanced Learning", "Critical Perspectives"], impact: "Q1" },
 
     // STEM Education Journals
     { name: "Journal of Research in Science Teaching", type: "Journal", categories: ["STEM Education"], impact: "Q1" },
@@ -409,8 +417,8 @@ const venueData: VenueInfo[] = [
     { name: "IEEE VR", type: "Conference", categories: ["Immersive Technology"], cfpDeadline: "September" },
     { name: "ISMAR", type: "Conference", categories: ["Immersive Technology"], cfpDeadline: "April" },
     { name: "AECT Convention", type: "Conference", categories: ["Instructional Design"], cfpDeadline: "March" },
-    { name: "ETRA Symposium", type: "Conference", categories: ["Eye-tracking"], cfpDeadline: "January" },
-    { name: "L@S Conference", type: "Conference", categories: ["Learning at Scale"], cfpDeadline: "January" },
+    { name: "ETRA Symposium", type: "Conference", categories: ["Human-Computer Interaction", "Eye-tracking"], cfpDeadline: "January" },
+    { name: "L@S Conference", type: "Conference", categories: ["Online Learning", "Learning Analytics", "Learning at Scale"], cfpDeadline: "January" },
     { name: "SIGCSE Technical Symposium", type: "Conference", categories: ["STEM Education"], cfpDeadline: "August" },
     { name: "ICER Conference", type: "Conference", categories: ["STEM Education"], cfpDeadline: "March" },
     { name: "ITiCSE Conference", type: "Conference", categories: ["STEM Education"], cfpDeadline: "January" },
@@ -968,7 +976,9 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
             });
         }
 
-        for (const cat of venue.categories) {
+        for (const rawCat of venue.categories) {
+            if (TAG_CATEGORIES.has(rawCat)) continue;  // a label, shown as a tag in the venue panel
+            const cat = canonicalCategory(rawCat);
             categorySet.add(cat);
             if (!nodeMap.has(cat)) {
                 nodeMap.set(cat, {
@@ -989,7 +999,7 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
     // Add category-to-category edges for closely related research areas
     const categoryLinks: Array<{ from: string; to: string }> = [
         { from: 'Learning Analytics', to: 'AIED' },
-        { from: 'AIED', to: 'Human-Computer Interaction' },
+        { from: 'AIED', to: 'HCI' },
         { from: 'Learning Sciences', to: 'Educational Psychology' },
         { from: 'Teacher Education', to: 'Educational Psychology' },
         { from: 'Teacher Education', to: 'Learning Sciences' },
@@ -2169,6 +2179,11 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
         ${uses ? `<p class="sidebar-meta-caption">방법별로 쓰인 논문 비율 (중복 가능)</p><div class="meta-pill-row">${uses}</div>` : ''}
         ${tech ? `<p class="sidebar-meta-caption">다루는 기술 영역</p><div class="meta-pill-row">${tech}</div>` : ''}
         ${lv ? `<p class="sidebar-meta-caption">가장 많은 학습자 수준: ${escapeHtml(LEVEL_LABEL_KO[lv[0]] || lv[0])} ${pct(lv[1])}%</p>` : ''}
+        ${(() => {
+            const topTech = Object.entries(mp.tech || {}).filter(([, v]: any) => v >= 0.2).sort((a: any, b: any) => b[1] - a[1])[0] as any;
+            const links = lectureLinksHtml([...(LECTURES_BY_METHOD[mp.dominant] || []).slice(0, 2), ...(topTech ? (LECTURES_BY_TECH[topTech[0]] || []).slice(0, 1) : [])]);
+            return links ? `<p class="sidebar-meta-caption">아카이브에서 배우기</p><div class="archive-lecture-links">${links}</div>` : '';
+        })()}
         <p class="sidebar-note-muted">OpenAlex 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))}` : ''}</p>
       </div>`;
     })() : '';
@@ -2187,6 +2202,14 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       `).join('')
         : '<p>정보 없음</p>';
 
+    const venueCats: string[] = venueData.find((v) => v.name === node.id)?.categories || [];
+    const fieldCats = venueCats.filter((c) => !TAG_CATEGORIES.has(c)).map(canonicalCategory);
+    const tagCats = venueCats.filter((c) => TAG_CATEGORIES.has(c));
+    const categoryChipsHtml = (fieldCats.length || tagCats.length) ? `
+      <div class="meta-pill-row">
+        ${fieldCats.map((c) => `<span class="meta-pill">${escapeHtml(c)}</span>`).join('')}
+        ${tagCats.map((c) => `<span class="meta-pill meta-pill--official">${escapeHtml(TAG_LABEL_KO[c] || c)}</span>`).join('')}
+      </div>` : '';
     const contentStatusHtml = `
       <div class="sidebar-status-row">
         <span class="sidebar-status-chip sidebar-status-chip--primary">
@@ -2262,6 +2285,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     <div class="sidebar-section">
       <h3>개요</h3>
       ${contentStatusHtml}
+      ${categoryChipsHtml}
       <p>${desc}</p>
       ${website ? `<p class="sidebar-link-inline"><a href="${website}" target="_blank" rel="noopener">${audit.website?.status === 'official' ? '공식 페이지 방문' : '퍼블리셔 페이지 방문'} ↗</a></p>` : ''}
     </div>
@@ -4070,7 +4094,7 @@ async function main() {
         }
         const name2cat: Record<string, string> = {};
         for (const v of venueData as any[]) {
-            const cat = (v.categories || []).find((c: string) => c !== 'Well-known') || (v.categories || [])[0];
+            const cat = canonicalCategory((v.categories || []).find((c: string) => !TAG_CATEGORIES.has(c)) || (v.categories || [])[0]);
             if (cat) name2cat[v.name] = cat;
         }
         const catOf = (vid: string) => name2cat[id2name[vid]];
@@ -4151,6 +4175,81 @@ async function main() {
         logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'category_chord' } });
     }
     document.getElementById('category-chord-btn')?.addEventListener('click', openCategoryChord);
+
+    // ========================================================================
+    // TABLE VIEW — the map's venue data as a sortable table (screen readers, keyboard, quick scanning)
+    // ========================================================================
+    function openVenueTable() {
+        const actYrs: number[] = (venueActivity as any).years || [];
+        const lastYr = actYrs[actYrs.length - 1];
+        const actByName: Record<string, any> = {};
+        for (const v of Object.values((venueActivity as any).venues || {})) if ((v as any)?.name) actByName[(v as any).name] = (v as any).counts || {};
+        const rows = venueData.map((v) => {
+            const mp = methodologyByName[v.name];
+            const vm = venueMetricsByName[v.name];
+            return {
+                name: v.name,
+                type: v.type === 'Journal' ? '저널' : '학회',
+                fields: v.categories.filter((c) => !TAG_CATEGORIES.has(c)).map(canonicalCategory).join(', '),
+                tags: v.categories.filter((c) => TAG_CATEGORIES.has(c)).map((c) => TAG_LABEL_KO[c] || c).join(', '),
+                impact: v.impact || '',
+                method: mp?.dominant ? (METHOD_LABEL_KO[mp.dominant] || mp.dominant) : (mp?.no_article_abstracts ? '초록 없음' : ''),
+                interdisc: vm?.interdisciplinarity_simpson?.mean ?? null,
+                output: lastYr && actByName[v.name] ? (actByName[v.name][String(lastYr)] ?? null) : null,
+            };
+        });
+        const cols: Array<[keyof typeof rows[number], string]> = [
+            ['name', '이름'], ['type', '유형'], ['fields', '분야'], ['tags', '태그'], ['impact', 'Q등급(참고)'],
+            ['method', '주된 연구 방법'], ['interdisc', '학제간성'], ['output', `${lastYr || ''} 발표 수`],
+        ];
+        let sortKey: string = 'name', sortDir = 1;
+        const cell = (r: any, k: string) => k === 'interdisc' ? (r.interdisc == null ? '—' : r.interdisc.toFixed(2))
+            : k === 'output' ? (r.output == null ? '—' : String(r.output)) : (r[k] ? escapeHtml(String(r[k])) : '—');
+        const body = () => [...rows].sort((x: any, y: any) => {
+            const a = x[sortKey], b = y[sortKey];
+            if (a == null || a === '') return 1; if (b == null || b === '') return -1;
+            return (typeof a === 'number' ? a - b : String(a).localeCompare(String(b))) * sortDir;
+        }).map((r) => `<tr>${cols.map(([k], i) => i === 0
+            ? `<th scope="row"><button class="venue-table-go" data-venue="${escapeHtml(r.name)}">${escapeHtml(r.name)}</button></th>`
+            : `<td${k === 'interdisc' || k === 'output' ? ' class="num"' : ''}>${cell(r, k)}</td>`).join('')}</tr>`).join('');
+        let modal = document.getElementById('fit-modal-container');
+        if (!modal) { modal = document.createElement('div'); modal.id = 'fit-modal-container'; document.body.appendChild(modal); }
+        modal.innerHTML = `
+            <div class="fit-overlay" id="fit-overlay"></div>
+            <div class="fit-modal" role="dialog" aria-modal="true" aria-labelledby="venue-table-title" style="max-width:1100px">
+                <div class="fit-modal-head">
+                    <h3 id="venue-table-title">📋 학술지·학회 표</h3>
+                    <button class="fit-close" id="fit-close-btn" title="닫기" aria-label="닫기">✕</button>
+                </div>
+                <p class="fit-sub">네트워크 그림과 같은 정보를 표로 봅니다. 열 제목을 누르면 정렬되고, 이름을 누르면 맵에서 그 노드를 엽니다. 학제간성: ${dataBasis((venueMetrics as any)._meta)} · 연구 방법: ${dataBasis(METHOD_META, '초록 코딩')} · 발표 수: OpenAlex ${dataBasis((venueActivity as any)._meta)}. Q등급은 참고용입니다.</p>
+                <div class="venue-table-wrap">
+                    <table class="venue-table">
+                        <caption class="sr-only">학술지와 학회 ${rows.length}곳의 분야, 연구 방법, 학제간성, 발표 수</caption>
+                        <thead><tr>${cols.map(([k, label]) => `<th scope="col" aria-sort="${k === sortKey ? 'ascending' : 'none'}"><button data-sort="${k}">${escapeHtml(label)}</button></th>`).join('')}</tr></thead>
+                        <tbody>${body()}</tbody>
+                    </table>
+                </div>
+            </div>`;
+        const table = modal.querySelector('.venue-table') as HTMLTableElement;
+        const bindRows = () => table.querySelectorAll<HTMLButtonElement>('.venue-table-go').forEach((btn) => btn.addEventListener('click', () => {
+            closeSubmissionFit(); navigateToVenue(btn.getAttribute('data-venue') || '');
+        }));
+        table.querySelectorAll<HTMLButtonElement>('thead button').forEach((btn) => btn.addEventListener('click', () => {
+            const k = btn.getAttribute('data-sort') || 'name';
+            sortDir = k === sortKey ? -sortDir : (k === 'interdisc' || k === 'output' ? -1 : 1);
+            sortKey = k;
+            table.querySelectorAll('thead th').forEach((th) => th.setAttribute('aria-sort', 'none'));
+            btn.parentElement?.setAttribute('aria-sort', sortDir === 1 ? 'ascending' : 'descending');
+            table.tBodies[0].innerHTML = body();
+            bindRows();
+        }));
+        bindRows();
+        document.getElementById('fit-close-btn')?.addEventListener('click', closeSubmissionFit);
+        document.getElementById('fit-overlay')?.addEventListener('click', closeSubmissionFit);
+        (modal.querySelector('thead button') as HTMLButtonElement | null)?.focus();
+        logAction({ action_type: 'open_panel', context_tag: 'network', metadata: { panel: 'venue_table' } });
+    }
+    document.getElementById('venue-table-btn')?.addEventListener('click', openVenueTable);
 
     // ========================================================================
     // RESEARCH CURRENCY — longitudinal topic trends (rising / declining)
@@ -4409,6 +4508,7 @@ async function main() {
             <div class="meth-card">
                 <div class="meth-card-head">${escapeHtml(nb.category)}</div>
                 <div class="meth-blurb">${escapeHtml(METHODOLOGY_BLURB[nb.category] || '')}</div>
+                ${(LECTURES_BY_METHOD[nb.category] || []).length ? `<div class="archive-lecture-links archive-lecture-links--compact">${lectureLinksHtml(LECTURES_BY_METHOD[nb.category], 2)}</div>` : ''}
                 ${nb.venues.length ? nb.venues.map(v => `
                     <div class="meth-venue" data-venue="${escapeHtml(v.name)}" tabindex="0" role="button">
                         <span class="meth-venue-name">${escapeHtml(v.name)}</span>
@@ -4789,7 +4889,7 @@ async function main() {
     }
 
     function formatAdminDateTime(dateString?: string | null) {
-        if (!dateString) return 'ì—†ìŒ';
+        if (!dateString) return '없음';
         try {
             return new Date(dateString).toLocaleString('ko-KR');
         } catch {
@@ -4798,11 +4898,11 @@ async function main() {
     }
 
     function getRefreshStatusLabel(state: CFPRefreshState | null) {
-        if (!state) return 'ë¯¸ì„¤ì •';
-        if (state.status === 'running') return 'ì‹¤í–‰ ì¤‘';
-        if (state.status === 'completed') return 'ì •ìƒ';
-        if (state.status === 'failed') return 'ì‹¤íŒ¨';
-        return 'ëŒ€ê¸°';
+        if (!state) return '미설정';
+        if (state.status === 'running') return '실행 중';
+        if (state.status === 'completed') return '정상';
+        if (state.status === 'failed') return '실패';
+        return '대기';
     }
 
     function getRefreshStatusTone(state: CFPRefreshState | null) {
@@ -4894,9 +4994,9 @@ async function main() {
             root.innerHTML = `
                 <div class="admin-refresh-card-grid">
                     <div class="admin-refresh-card">
-                        <div class="admin-refresh-label">ìžë™ ê°±ì‹ </div>
-                        <div class="admin-refresh-value">ë¯¸ì„¤ì •</div>
-                        <div class="admin-refresh-meta">cfp_refresh_state í…Œì´ë¸”ì„ ì°¾ì§€ ëª»í–ˆìŠµë‹ˆë‹¤.</div>
+                        <div class="admin-refresh-label">자동 갱신</div>
+                        <div class="admin-refresh-value">미설정</div>
+                        <div class="admin-refresh-meta">cfp_refresh_state 테이블을 찾지 못했습니다.</div>
                     </div>
                 </div>
             `;
@@ -4908,9 +5008,9 @@ async function main() {
             root.innerHTML = `
                 <div class="admin-refresh-card-grid">
                     <div class="admin-refresh-card">
-                        <div class="admin-refresh-label">ìžë™ ê°±ì‹ </div>
-                        <div class="admin-refresh-value">ëŒ€ê¸°</div>
-                        <div class="admin-refresh-meta">ì•„ì§ ì‹¤í–‰ ê¸°ë¡ì´ ì—†ìŠµë‹ˆë‹¤.</div>
+                        <div class="admin-refresh-label">자동 갱신</div>
+                        <div class="admin-refresh-value">대기</div>
+                        <div class="admin-refresh-meta">아직 실행 기록이 없습니다.</div>
                     </div>
                 </div>
             `;
@@ -4920,28 +5020,28 @@ async function main() {
         root.innerHTML = `
             <div class="admin-refresh-card-grid">
                 <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">ìžë™ ê°±ì‹  ìƒíƒœ</div>
+                    <div class="admin-refresh-label">자동 갱신 상태</div>
                     <div class="admin-refresh-value">${getRefreshStatusLabel(state)}</div>
                     <div class="admin-chip ${getRefreshStatusTone(state)} mt-8">${state.status}</div>
                 </div>
                 <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">ë§ˆì§€ë§‰ ì„±ê³µ</div>
+                    <div class="admin-refresh-label">마지막 성공</div>
                     <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.lastSuccessAt)}</div>
-                    <div class="admin-refresh-meta">ì™„ë£Œ ${formatAdminDateTime(state.completedAt)}</div>
+                    <div class="admin-refresh-meta">완료 ${formatAdminDateTime(state.completedAt)}</div>
                 </div>
                 <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">ë‹¤ìŒ ì˜ˆì •</div>
+                    <div class="admin-refresh-label">다음 예정</div>
                     <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.nextDueAt)}</div>
-                    <div class="admin-refresh-meta">ì¼ì¼ cronì´ 15ì¼ ì£¼ê¸°ë¡œ íŒì •í•©ë‹ˆë‹¤.</div>
+                    <div class="admin-refresh-meta">일일 cron이 15일 주기로 판정합니다.</div>
                 </div>
                 <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">ìµœê·¼ ë°˜ì˜</div>
+                    <div class="admin-refresh-label">최근 반영</div>
                     <div class="admin-refresh-value">${state.lastResultCount}</div>
-                    <div class="admin-refresh-meta">${state.targetNames.length}ê°œ venue ëŒ€ìƒ</div>
+                    <div class="admin-refresh-meta">${state.targetNames.length}개 venue 대상</div>
                 </div>
             </div>
             <div class="admin-refresh-footnote">
-                ${state.lastError ? `ë§ˆì§€ë§‰ ì˜¤ë¥˜: ${escapeHtml(state.lastError)}` : 'ìµœê·¼ ì˜¤ë¥˜ ì—†ìŒ'}
+                ${state.lastError ? `마지막 오류: ${escapeHtml(state.lastError)}` : '최근 오류 없음'}
             </div>
         `;
     }
@@ -6446,6 +6546,11 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     <h4>🔗 관련 주제</h4>
                     <div class="related-topics-container">${related}</div>
                 </div>
+                ${(LECTURES_BY_TOPIC[topic.id] || []).length ? `
+                <div class="topic-detail-related">
+                    <h4>🎬 아카이브 강의</h4>
+                    <div class="archive-lecture-links">${lectureLinksHtml(LECTURES_BY_TOPIC[topic.id])}</div>
+                </div>` : ''}
                 <div class="topic-detail-link">
                     <a href="https://www.isls.org/research-topics/${topic.id}" target="_blank" rel="noopener noreferrer" class="isls-link-btn">
                         🌐 ISLS 위키에서 더 보기

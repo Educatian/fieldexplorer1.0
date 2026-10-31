@@ -977,6 +977,22 @@
     .meth-card { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 14px; background: var(--bg-secondary); }
     .meth-card-head { font-weight: 800; font-size: 0.9rem; color: var(--text-primary); }
     .meth-blurb { font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 8px; }
+    .venue-table-wrap { max-height: 65vh; overflow: auto; border: 1px solid var(--outline-ghost); border-radius: 8px; }
+    .venue-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+    .venue-table th, .venue-table td { padding: 6px 8px; border-bottom: 1px solid var(--outline-ghost); text-align: left; vertical-align: top; color: var(--text-primary); word-break: keep-all; }
+    .venue-table thead th { position: sticky; top: 0; background: var(--surface-container-high); z-index: 1; }
+    .venue-table thead button, .venue-table-go { background: none; border: 0; padding: 0; color: inherit; font: inherit; cursor: pointer; text-align: left; }
+    .venue-table thead button { font-weight: 600; white-space: nowrap; }
+    .venue-table th[aria-sort="ascending"] button::after { content: " ▲"; }
+    .venue-table th[aria-sort="descending"] button::after { content: " ▼"; }
+    .venue-table-go { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+    .venue-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .archive-lecture-links { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 8px; }
+    .archive-lecture-link { display: flex; justify-content: space-between; gap: 10px; font-size: 0.78rem; line-height: 1.45; color: var(--primary); text-decoration: none; padding: 5px 8px; border: 1px solid var(--outline-ghost); border-radius: 6px; }
+    .archive-lecture-link:hover { border-color: var(--primary); }
+    .archive-lecture-link span { color: var(--text-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .archive-lecture-links--compact .archive-lecture-link { font-size: 0.7rem; padding: 3px 6px; }
     .meth-venue { display: flex; align-items: center; gap: 7px; padding: 3px 0; cursor: pointer; border-radius: 6px; }
     .meth-venue:hover, .meth-venue:focus { background: rgba(123,160,204,.12); outline: none; }
     .meth-venue-name { flex: 1; font-size: 0.74rem; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -4572,6 +4588,7 @@
         <div class="tb-more-wrap">
           <button class="btn filter-btn tb-divider" id="tb-more-btn" title="더보기" aria-haspopup="true" aria-expanded="false">⋯ 더보기</button>
           <div class="tb-overflow" id="tb-overflow" role="menu">
+            <button class="btn filter-btn" id="venue-table-btn" title="모든 학술지·학회를 표로 보기 (화면 낭독기·키보드 지원)">📋 표로 보기</button>
             <button class="btn filter-btn" id="category-chord-btn" title="분야 간 인용 흐름 개요 (chord)">🪢 분야흐름</button>
             <button class="btn filter-btn" id="trends-btn" title="연구 토픽 트렌드 (부상/쇠퇴)">📈 트렌드</button>
             <button class="btn filter-btn" id="evolve-btn" title="필드 진화 애니메이션 (연도별 발표 활동)">⏱ 진화</button>

@@ -3,7 +3,7 @@
  * Now includes semantic similarity edges between venues
  */
 
-import { getAllVenues, type VenueInfo } from '../data/venues';
+import { getAllVenues, TAG_CATEGORIES, canonicalCategory, type VenueInfo } from '../data/venues';
 import semanticProfiles from '../data/semantic_profiles.json';
 
 // ============================================================================
@@ -137,7 +137,9 @@ export function parseNetworkData(): NetworkData {
             venueNames.push(venue.name);
         }
 
-        for (const cat of venue.categories) {
+        for (const rawCat of venue.categories) {
+            if (TAG_CATEGORIES.has(rawCat)) continue;
+            const cat = canonicalCategory(rawCat);
             categorySet.add(cat);
             if (!nodeMap.has(cat)) {
                 nodeMap.set(cat, {
