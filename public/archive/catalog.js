@@ -161,6 +161,20 @@ window.LECTURES = [
     "thumbnail": "thumb-srl.jpg"
   },
   {
+    "id": "metacognitive-monitoring",
+    "driveFileId": "1mdiyQkw21k95i32Mhnm16xJSOdQEnpMq",
+    "narration": "synthetic",
+    "title": "Metacognitive Monitoring and Judgments of Learning - Basic",
+    "shortTitle": "Metacognitive Monitoring",
+    "category": "experience",
+    "format": "Basic",
+    "duration": "2:17",
+    "summary": "Opens with a learner who rereads a chapter twice, feels it is familiar, stops studying, and fails a test a week later, and asks what went wrong. Defines judgments of learning as predictions of how well one will remember what was just studied, and reports Robert Bjork, John Dunlosky, and Nate Kornell's review showing that learners often hold a faulty model of how they learn, so they misjudge and mismanage study, with judgments leaning on current performance and the feeling of fluency. Describes Kornell and Bjork's 2008 study, in which mixing artists' paintings helped people recognize new ones, yet people rated one artist at a time as more effective even after their own test showed the opposite. Shows that judgments steer study: Metcalfe and Finn found that study choices followed judgments of learning even when the judgments were illusory, and Dunlosky and Katherine Rawson found that college students who judged their recall more accurately retained more two days later. Reports Matthew Rhodes and Sarah Tauber's meta-analysis of 112 effect sizes from 4,554 participants, in which delayed judgments were far more accurate than immediate ones (g = 0.93) while the direct benefit to memory was small (g = 0.08). A made-up nursing student changes a flashcard routine to wait, recall, and then judge.",
+    "question": "When your learners say they know something, what evidence are they using, and how could you give them a better test of their own knowledge?",
+    "lab": null,
+    "thumbnail": "thumb-metacognitive-monitoring.jpg"
+  },
+  {
     "id": "embodied-cognition",
     "driveFileId": "163lJ-XQRl-3Z2qGC2_4_KrXmqdxat7dk",
     "narration": "synthetic",
@@ -173,6 +187,20 @@ window.LECTURES = [
     "question": "Pick one concept you teach. What movement would match it, and what movement might only distract?",
     "lab": null,
     "thumbnail": "thumb-embodied-cognition.jpg"
+  },
+  {
+    "id": "gesture-learning",
+    "driveFileId": "1powgKz4lZdnNNIHnJ0SNLVywMa95lRyk",
+    "narration": "synthetic",
+    "title": "Gesture and Learning - Basic",
+    "shortTitle": "Gesture and Learning",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "2:14",
+    "summary": "Opens with a child whose words describe one strategy for a math problem while her hands show another, and asks which the teacher should attend to. Draws on Susan Goldin-Meadow and Martha Alibali's review: gesture reflects speakers' thoughts, often unspoken ones, so it can be a window onto thinking, and gesture can also change those thoughts. Presents Martha Alibali and Mitchell Nathan's argument, from teachers' and learners' gestures, that mathematical thinking is embodied: pointing grounds ideas in the physical world and representational gestures show mental simulations of action and perception. Describes a 2009 math lesson study by Goldin-Meadow and colleagues in which children told to make correct gestures learned more than children told to make partly correct gestures, who learned more than children told not to gesture, a gain that depended on children adding gesture-only information to their speech. Reports Nicole Dargue, Naomi Sweller and Michael Jones's 2019 meta-analysis of 83 samples: a moderate benefit of gesture for comprehension, with larger average effects in studies of producing than of watching gestures, and dependent on gesture type and function, learner age and the measure. A made-up fourth grade class solves an equivalence problem while the teacher reads one student's grouping gesture.",
+    "question": "In a lesson you teach, which idea could learners show with their hands before they can say it, and how would you watch for it?",
+    "lab": null,
+    "thumbnail": "thumb-gesture-learning.jpg"
   },
   {
     "id": "computational-thinking",
@@ -301,6 +329,34 @@ window.LECTURES = [
     "thumbnail": "thumb-epistemic-cognition.jpg"
   },
   {
+    "id": "knowledge-integration",
+    "driveFileId": "1prwskkgitOBgtkYN4_30aoheBpQJnhE7",
+    "narration": "synthetic",
+    "title": "Inquiry Learning and Knowledge Integration - Basic",
+    "shortTitle": "Inquiry Learning and Knowledge Integration",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:21",
+    "summary": "Opens with the question how far light goes and the many answers a class brings from lessons, experience, and friends. Introduces Marcia Linn's knowledge integration framework: learners hold multiple, conflicting, and often confusing ideas, and instruction is effective and durable when teachers start from those ideas. Follows the process in which learners state their ideas, add new ones including visualizations, sort them out in different contexts, connect them, and build criteria for judging them, and shows how Linn's team built it into online inquiry projects such as WISE, the Web-based Inquiry Science Environment, designed by teams of teachers, technologists, subject experts, and researchers and customized by teachers. Turns to how much guidance inquiry needs: Alfieri and colleagues found unassisted discovery worse than explicit instruction (d = -0.38) and enhanced discovery better than other instruction (d = 0.30); Lazonder and Harmsen's 72 studies showed guidance helping learning activities, performance, and outcomes (d = 0.50 for outcomes); studies with teacher-led inquiry had mean effect sizes about 0.40 larger than studies with student-led inquiry; and automated guidance outperformed typical teacher guidance, especially for students with low prior knowledge. A made-up class works out why a metal spoon feels colder than a wooden one.",
+    "question": "In a unit you teach, which everyday ideas could your students state first, and what guidance would help them sort those ideas out?",
+    "lab": null,
+    "thumbnail": "thumb-knowledge-integration.jpg"
+  },
+  {
+    "id": "argumentation-learning",
+    "driveFileId": "1_cglw593CIwvcnzlp4NLxhjxYl7AKJWU",
+    "narration": "synthetic",
+    "title": "Argumentation and Learning - Basic",
+    "shortTitle": "Argumentation and Learning",
+    "category": "foundations",
+    "format": "Basic",
+    "duration": "2:10",
+    "summary": "Opens with two students who disagree about a science claim, one who states the answer and one who must give a reason, hear an objection and answer it, and asks whether the second is only learning to argue or also learning the science. Separates two goals: learning to argue, where argument is a skill to teach, and arguing to learn, where argument is a way to understand content. Draws on Jerry Andriessen's contrast between point-scoring argument and collaborative argumentation, in which both sides work together to resolve an issue. Notes that online environments can support sharing, building and representing arguments, and that Omid Noroozi and colleagues reviewed 108 publications on argumentation-based computer-supported collaborative learning from 1995 to 2011. Reports Christof Wecker and Frank Fischer's 2014 meta-analysis of 17 comparisons from 12 studies: interventions improved argumentation (d = 0.39), but their effect on domain knowledge was equivocal and larger argumentation gains did not predict larger knowledge gains. Adds Christa Asterhan and Baruch Schwarz's point that causal evidence is not abundant and that argumentation and learning are often loosely defined. A made-up biology class debates online where plants get their mass, and the teacher checks content knowledge afterward.",
+    "question": "In a topic you teach, what question would students genuinely disagree about, and how would you check whether arguing helped them learn it?",
+    "lab": null,
+    "thumbnail": "thumb-argumentation-learning.jpg"
+  },
+  {
     "id": "multiple-representations",
     "driveFileId": "1OXDBwnxrbb3hBzYb9GI8lc9KPBzrUAih",
     "narration": "synthetic",
@@ -369,6 +425,20 @@ window.LECTURES = [
     "question": "In a course you know, what is one change you could test, and what data would show whether it helped?",
     "lab": null,
     "thumbnail": "thumb-learning-engineering.jpg"
+  },
+  {
+    "id": "learning-at-scale",
+    "driveFileId": "1rST6_VLi-1jKC1Wv14XqYdg2ppqCnKE7",
+    "narration": "synthetic",
+    "title": "Learning at Scale: What MOOCs Taught Us - Basic",
+    "shortTitle": "Learning at Scale",
+    "category": "experience",
+    "format": "Basic",
+    "duration": "2:20",
+    "summary": "Opens with the 2012 promise of massive open online courses, video lectures from the best professors reaching the farthest corners of the networked world, and asks what actually happened. Reports Katy Jordan's compilation of public figures, in which the average MOOC enrolled about 43,000 students and 6.5% completed. Describes René Kizilcec, Chris Piech, and Emily Schneider's classification of learners by how they used videos and assessments, which found four typical engagement trajectories in three computer science MOOCs, the most notable being learners who stayed engaged without taking assessments. Summarizes Justin Reich and José Ruipérez-Valiente's look at six years of Harvard and MIT data on edX: most learners never returned after their first year, growth came almost entirely from the most affluent countries, completion rates had not improved, and the field moved toward online master's degrees for professionals. Reports Kizilcec and colleagues' test of established behavioral interventions in 247 courses with about a quarter million students, which found small benefits instead of the expected medium to large effects: self-regulation prompts raised early engagement but not completion, and value-relevance activities raised completion in developing countries only in courses with a global gap. A made-up course designer looks past certificates to who watches, practices, and returns.",
+    "question": "For an online course you know, what would count as success for different learners, and how could you see it beyond completion?",
+    "lab": null,
+    "thumbnail": "thumb-learning-at-scale.jpg"
   },
   {
     "id": "knowledge-components",
@@ -539,6 +609,20 @@ window.LECTURES = [
     "thumbnail": "thumb-formative-feedback.jpg"
   },
   {
+    "id": "peer-assessment",
+    "driveFileId": "1aXM5HVG3fIh0VvK8Uyp6zJX-AMRuSTBP",
+    "narration": "synthetic",
+    "title": "Peer Assessment - Basic",
+    "shortTitle": "Peer Assessment",
+    "category": "assessment",
+    "format": "Basic",
+    "duration": "2:15",
+    "summary": "Opens with one teacher facing thirty lab reports in a weekend and asks whether students' judgments of each other's drafts would be any good, and whether anyone would learn. Defines peer assessment as students judging the quality of a peer's work with marks, comments or both, and, following David Nicol and colleagues, describes peer review as reciprocal. Reports Keith Topping's 1998 review, which proposed a definition and typology and found adequate reliability and validity and formative effects on achievement as good as or better than teacher assessment. Gives Hongli Li and colleagues' 2016 meta-analysis: an average peer-teacher correlation of 0.63, higher when raters gave comments as well as scores and helped develop the criteria. Reports Kit Double, Joshua McGrane and Therese Hopfenbeck's 2020 meta-analysis of 54 studies: a small to medium effect on academic performance (g = 0.31), better than no assessment and teacher assessment, not clearly better than self-assessment, and robust across contexts. Explains, after Nicol and colleagues, that writing reviews engages students in evaluative judgment about a peer's work and their own. A made-up chemistry class builds a rubric, practices on a sample, reviews two drafts and revises.",
+    "question": "In your next assignment, what would students need to practice before their reviews could help both the writer and themselves?",
+    "lab": null,
+    "thumbnail": "thumb-peer-assessment.jpg"
+  },
+  {
     "id": "validity-argument",
     "driveFileId": "1JRL-khPSUVQ0goJ7TKfgYocmVrWs047O",
     "narration": "synthetic",
@@ -679,6 +763,20 @@ window.LECTURES = [
     "thumbnail": "thumb-ill-structured-problems.jpg"
   },
   {
+    "id": "problem-based-learning",
+    "driveFileId": "1wPRh9YHVNclwrzBzT57FRkizFdRzd_XU",
+    "narration": "synthetic",
+    "title": "Problem-Based Learning - Basic",
+    "shortTitle": "Problem-Based Learning",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:23",
+    "summary": "Opens with medical students who meet a patient case before any lecture and must first work out what they need to learn. Notes that problem-based learning in its current form began in medical education and that, as Howard Barrows warned, the term covers many designs of varying quality. Follows Cindy Hmelo-Silver's description of the cycle: a complex problem with no single answer, groups identifying what they need to learn, self-directed study, applying it to the problem, and reflection, with the teacher as facilitator, and lists its goals. Names Henk Schmidt's three principles of learning: activating prior knowledge, elaboration, and encoding specificity. Reports Walker and Leary's meta-analysis of 82 studies and 201 outcomes, which favored problem-based learning with a small effect (d = 0.13) that varied widely; Strobel and van Barneveld's synthesis, in which problem-based learning led on long-term retention, skills, and satisfaction while traditional teaching led on short-term retention in board exams; and a meta-analysis in which gains were largest when tests asked about principles linking concepts. A made-up ninth-grade health class investigates why several families fell ill. Closes with the debate over guidance and the thin evidence outside medical and gifted education.",
+    "question": "For a topic you teach, what messy problem could start the learning, and what support would keep students from getting lost?",
+    "lab": null,
+    "thumbnail": "thumb-problem-based-learning.jpg"
+  },
+  {
     "id": "productive-failure",
     "driveFileId": "10Wbfox1XP3ABkeK1UJhkKgOCOOzd9DrP",
     "narration": "synthetic",
@@ -721,6 +819,20 @@ window.LECTURES = [
     "thumbnail": "thumb-design-cases.jpg"
   },
   {
+    "id": "learning-by-design",
+    "driveFileId": "1fMno1Ktt3jm1su6z--jo9y2w9CVrcE0m",
+    "narration": "synthetic",
+    "title": "Learning by Design - Basic",
+    "shortTitle": "Learning by Design",
+    "category": "design",
+    "format": "Basic",
+    "duration": "2:20",
+    "summary": "Opens with a sixth-grade class designing artificial lungs and building partial working models, who must find out how real lungs work to make the design work. Introduces Janet Kolodner and colleagues' Learning by Design, a project-based inquiry approach to middle-school science in which students learn science through design-and-build challenges. Traces its two roots, problem-based learning and case-based reasoning, which studies analogy in solving real-world problems by retrieving and adapting past cases, and the ritualized, sequenced activities through which students and teachers take up the practices of scientists, engineers, and group members. Reports the lungs study, in which design students learned more than students taught directly and saw the respiratory system more as a system but understood structure better than function, and its lessons: define challenges by function, give dynamic feedback, allow several iterations, and give the whole cycle time. Adds a separate design-based study in which 587 eighth graders who designed alarm systems gained more in core science concepts than 466 in scripted inquiry, with the largest help for low-achieving African American students, and Puntambekar and Kolodner's finding that no single tool can carry all the scaffolding. A made-up class iterates on a box that keeps an ice cube from melting.",
+    "question": "What could your students design whose success depends on the science you want them to learn, and how would they find out that it failed?",
+    "lab": null,
+    "thumbnail": "thumb-learning-by-design.jpg"
+  },
+  {
     "id": "accessibility-udl",
     "driveFileId": "10U0zGUJIdE4PaLZzYYJUSwql_kKCJ6bR",
     "narration": "synthetic",
@@ -761,6 +873,34 @@ window.LECTURES = [
     "question": "For a learner you know, which phase is their interest in your subject, and what support would help it move to the next one?",
     "lab": null,
     "thumbnail": "thumb-interest-development.jpg"
+  },
+  {
+    "id": "self-determination",
+    "driveFileId": "1Vi4403yFhpbNzZlPSvKfY4SIJMdgsDb3",
+    "narration": "synthetic",
+    "title": "Self-Determination Theory and Motivation - Basic",
+    "shortTitle": "Self-Determination Theory",
+    "category": "experience",
+    "format": "Basic",
+    "duration": "2:24",
+    "summary": "Opens with two made-up students who finish the same reading, one because the topic grabs her and one only because of a quiz, and asks whether the reason matters. Introduces Edward Deci and Richard Ryan's self-determination theory, in which motivation can come from intrinsic interest, personal value, ego involvement, or rewards and punishments. Presents the theory's three basic psychological needs, competence, autonomy, and relatedness, whose satisfaction raises self-motivation and well-being and whose thwarting lowers both, and Ryan and Deci's 2020 review linking need support to intrinsic and well-internalized motivation across school levels and cultures. Reports Deci, Koestner, and Ryan's 1999 meta-analysis of 128 studies, in which rewards for simply doing a task lowered free-choice intrinsic motivation (d = -0.40), positive feedback raised it (d = 0.33), and tangible rewards tended to harm children more than college students. Summarizes Joshua Howard and colleagues' 2021 meta-analysis of 344 samples, which linked intrinsic motivation to success and well-being, personal value to persistence, and reward- or punishment-driven motivation to lower well-being but not to performance. A made-up science teacher offers choice, feedback on what went well, and teamwork, one change for each need.",
+    "question": "In a course you know, why do most students do the work, and which of the three needs could you support next week?",
+    "lab": null,
+    "thumbnail": "thumb-self-determination.jpg"
+  },
+  {
+    "id": "self-efficacy",
+    "driveFileId": "19ma3a3PTPmGG2U-cQzDAmIiwowU6F0jE",
+    "narration": "synthetic",
+    "title": "Self-Efficacy - Basic",
+    "shortTitle": "Self-Efficacy",
+    "category": "experience",
+    "format": "Basic",
+    "duration": "2:23",
+    "summary": "Opens with two made-up students who get the same score on a first math quiz, one who thinks they can get better and one who thinks they are not a math person, and asks who keeps trying. Introduces Albert Bandura's 1977 theory of self-efficacy, in which efficacy expectations decide whether people start a hard task, how much effort they spend, and how long they persist past obstacles. Names Bandura's four sources of these beliefs: performance accomplishments, vicarious experience, verbal persuasion, and physiological states. Reports Ellen Usher and Frank Pajares's review of school research, in which mastery experience is typically the most influential source but the sources' strength differs with gender, ethnicity, ability, and subject. Describes Karen Multon, Steven Brown, and Robert Lent's 1991 meta-analysis, which found positive, significant relations between self-efficacy and both academic performance and persistence, varying across studies, and Kate Talsma and colleagues' 2018 cross-lagged meta-analysis of 11 longitudinal studies (N = 2,688), in which past performance predicted later self-efficacy (beta = 0.205) more than self-efficacy predicted later performance (beta = 0.071), and in children only the first path held. A made-up algebra teacher draws on each source in one lesson.",
+    "question": "For a task your learners avoid, which source of self-efficacy could you build first, and how would you know it worked?",
+    "lab": null,
+    "thumbnail": "thumb-self-efficacy.jpg"
   },
   {
     "id": "achievement-emotions",

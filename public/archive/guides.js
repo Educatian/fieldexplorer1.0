@@ -4043,5 +4043,475 @@ window.LECTURE_GUIDES = {
     "sources": [],
     "verificationNote": "How-to guide recorded from the archive itself; no further reading. Narration was checked automatically against the script.",
     "reviewedAt": "2026-10-30"
+  },
+  "problem-based-learning": {
+    "id": "problem-based-learning",
+    "purpose": "Use this lecture to decide whether a problem-based design fits a unit, to plan the problem, the self-directed study and the facilitation it needs, and to read the evidence on what problem-based learning does and does not improve.",
+    "distinction": "Problem-based learning (Barrows, 1986; Hmelo-Silver, 2004) puts a complex, ill-defined problem first: groups identify what they need to learn, study it, apply it, and reflect, with the teacher as facilitator. Barrows (1986) stresses that the label covers many methods. Meta-analytic work finds a small overall advantage that varies across studies (Walker & Leary, 2009), advantages for long-term retention and skills but not short-term exam retention (Strobel & van Barneveld, 2009), and the largest effects on understanding the principles that link concepts (Gijbels et al., 2005). Kirschner, Sweller, and Clark (2006) argue that minimal guidance fails novices; Hmelo-Silver, Duncan, and Chinn (2007) reply that problem-based learning is heavily scaffolded.",
+    "caution": "Ms. Rivera and her class are made up. Problem-based learning is not unguided discovery: it needs designed problems and active facilitation. The pooled effect is small and varies widely, short-term exam retention can favor traditional teaching, and much of the early evidence comes from medical and gifted education.",
+    "koSummary": "이 강의는 강의를 듣기 전에 환자 사례부터 접하고, 먼저 무엇을 배워야 하는지 스스로 정해야 하는 의대생들의 모습으로 시작합니다. 오늘날 형태의 문제기반학습(problem-based learning)은 의학교육에서 시작되었으며, Howard Barrows는 이 용어가 하나의 방법이 아니라 질이 제각각인 여러 설계를 가리킨다고 경고했습니다. Cindy Hmelo-Silver가 설명한 순환 과정, 즉 정답이 하나가 아닌 복잡한 문제, 모둠이 배워야 할 것을 찾아내기, 자기주도적 학습, 문제에 적용하기, 성찰하기를 따라가며, 교사는 지식을 전달하기보다 과정을 촉진한다는 점과 이 접근의 목표들을 소개합니다. Henk Schmidt가 제시한 세 가지 학습 원리인 선행 지식 활성화, 정교화, 부호화 특수성도 짚습니다. 82편의 연구와 201개 결과를 종합한 Walker와 Leary의 메타분석은 문제기반학습에 유리했지만 효과가 작고(d = 0.13) 연구마다 크게 달랐으며, Strobel과 van Barneveld의 종합에서는 장기 기억, 기술 발달, 만족도에서 앞섰지만 국가시험으로 잰 단기 기억에서는 전통적 수업이 나았고, 또 다른 메타분석에서는 개념을 잇는 원리를 묻는 평가에서 효과가 가장 컸습니다. 가상의 9학년 보건 수업에서는 한 마을의 여러 가족이 같은 주에 병이 난 사례를 탐구합니다. 마지막으로 안내가 얼마나 필요한지에 대한 논쟁과, 2004년 검토에서 지적한 의학교육과 영재교육 밖의 연구 부족를 짚고 성찰 질문으로 마무리합니다.",
+    "sources": [
+      {
+        "title": "A taxonomy of problem-based learning methods",
+        "authors": "Howard S. Barrows",
+        "year": 1986,
+        "url": "https://doi.org/10.1111/j.1365-2923.1986.tb01386.x",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Problem-based learning: What and how do students learn?",
+        "authors": "Cindy E. Hmelo-Silver",
+        "year": 2004,
+        "url": "https://doi.org/10.1023/b:edpr.0000034022.16470.f3",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "A problem based learning meta analysis: Differences across problem types, implementation types, disciplines, and assessment levels",
+        "authors": "Andrew Walker and Heather Leary",
+        "year": 2009,
+        "url": "https://doi.org/10.7771/1541-5015.1061",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "When is PBL more effective? A meta-synthesis of meta-analyses comparing PBL to conventional classrooms",
+        "authors": "Johannes Strobel and Angela van Barneveld",
+        "year": 2009,
+        "url": "https://doi.org/10.7771/1541-5015.1046",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Barrows (1986), Hmelo-Silver (2004), Schmidt (1983), Walker & Leary (2009), Strobel & van Barneveld (2009), Gijbels et al. (2005), Kirschner, Sweller & Clark (2006) and Hmelo-Silver, Duncan & Chinn (2007). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "learning-by-design": {
+    "id": "learning-by-design",
+    "purpose": "Use this lecture to plan a design-and-build challenge that carries science content, and to decide which iterations, feedback, classroom rituals and spread-out supports it will need.",
+    "distinction": "Learning by Design (Kolodner et al., 2003) is a project-based inquiry approach to middle-school science rooted in problem-based learning and in case-based reasoning, which models analogy as retrieving and adapting past cases (Kolodner, 1997). An early Learning by Design experiment had sixth graders design artificial lungs (Hmelo, Holton & Kolodner, 2000). Puntambekar and Kolodner (2005) proposed distributed scaffolding after finding that no single tool could provide all the support. A separate design-based study (Mehalik et al., 2008) compared design with scripted inquiry in eighth-grade science.",
+    "caution": "Mr. Cole and his class are made up. Kolodner's team found that a carefully crafted design is not enough without a collaborative classroom culture and a teacher who is both learner and facilitator. In short units, students may understand structures before functions and causal behavior. The alarm-system study is a separate design-based approach, not Learning by Design itself, and compares classes in one district.",
+    "koSummary": "이 강의는 인공 폐를 설계하고 부분적으로 작동하는 모형을 만드는 6학년 학급으로 시작하는데, 설계가 작동하려면 학생들은 실제 폐가 어떻게 작동하는지 알아내야 합니다. Janet Kolodner와 동료들이 만든 설계를 통한 학습(Learning by Design)은 중학교 과학을 위한 프로젝트 기반 탐구 접근으로, 학생들은 설계하고 만드는 과제를 해결하면서 과학을 배웁니다. 이 접근의 두 뿌리인 문제기반학습과, 과거 사례를 떠올려 고쳐 쓰는 방식으로 실제 문제 해결 속 유추를 연구하는 사례기반추론을 설명하고, 학생과 교사가 과학자, 공학자, 모둠 구성원의 실천을 익히도록 돕는 순서화된 의례적 활동을 소개합니다. 폐 연구에서 설계 학급 학생들은 직접 교수를 받은 학생보다 더 많이 배웠고 호흡계를 하나의 체계로 보게 되었지만, 기능보다 구조를 더 잘 이해했습니다. 연구진은 과제를 기능으로 정의하고, 즉각적인 피드백을 주고, 여러 번 반복하게 하며, 전체 주기에 충분한 시간을 주라는 교훈을 끌어냈습니다. 별도의 설계 기반 연구에서는 경보 장치를 설계한 8학년 587명이 대본식 탐구를 한 466명보다 핵심 과학 개념에서 더 많이 성장했고, 특히 성취가 낮은 아프리카계 미국인 학생들에게 가장 도움이 되었으며, Puntambekar와 Kolodner는 어떤 한 가지 도구도 모든 비계를 감당할 수 없다는 점에서 분산된 비계 개념을 제시했습니다. 가상의 학급이 얼음이 녹지 않게 하는 상자를 반복 설계하는 예와 주의점, 성찰 질문으로 마무리합니다.",
+    "sources": [
+      {
+        "title": "Problem-based learning meets case-based reasoning in the middle-school science classroom: Putting Learning by Design into practice",
+        "authors": "Janet L. Kolodner, Paul J. Camp, David Crismond, Barbara Fasse, Jackie Gray, Jennifer Holbrook, Sadhana Puntambekar, and Mike Ryan",
+        "year": 2003,
+        "url": "https://doi.org/10.1207/s15327809jls1204_2",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Educational implications of analogy: A view from case-based reasoning",
+        "authors": "Janet L. Kolodner",
+        "year": 1997,
+        "url": "https://doi.org/10.1037/0003-066x.52.1.57",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Designing to learn about complex systems",
+        "authors": "Cindy E. Hmelo, Douglas L. Holton, and Janet L. Kolodner",
+        "year": 2000,
+        "url": "https://doi.org/10.1207/s15327809jls0903_2",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Toward implementing distributed scaffolding: Helping students learn science from design",
+        "authors": "Sadhana Puntambekar and Janet L. Kolodner",
+        "year": 2005,
+        "url": "https://doi.org/10.1002/tea.20048",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Kolodner et al. (2003), Kolodner (1997), Hmelo, Holton & Kolodner (2000), Mehalik et al. (2008) and Puntambekar & Kolodner (2005). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "knowledge-integration": {
+    "id": "knowledge-integration",
+    "purpose": "Use this lecture to design inquiry that starts from students' own ideas and to decide how much and what kind of guidance it needs, from the teacher or from software.",
+    "distinction": "The knowledge integration perspective (Linn, 2005; Linn et al., 2006) treats learners' multiple, conflicting ideas as the starting point and supports them to state, add, sort out, connect, and evaluate ideas; WISE (Linn, Clark & Slotta, 2003) builds this into customizable online inquiry projects. Meta-analyses on guidance show that unassisted discovery underperforms explicit instruction while enhanced discovery outperforms other instruction (Alfieri et al., 2011), that guidance improves inquiry activities, performance, and outcomes (Lazonder & Harmsen, 2016), that studies with teacher-led inquiry had larger average effects than studies with student-led inquiry (Furtak et al., 2012), and that automated guidance outperforms typical teacher guidance (Gerard et al., 2015).",
+    "caution": "Ms. Park and her class are made up. Inquiry is not leaving students alone: unassisted discovery did not help learners. Guidance can come from the teacher or from software, and there are too few studies to say how guidance should change with learners' age.",
+    "koSummary": "이 강의는 빛이 얼마나 멀리 가는지 묻고, 학생들이 수업과 경험, 친구에게서 얻은 여러 답을 한꺼번에 내놓는 장면으로 시작합니다. Marcia Linn의 지식 통합(knowledge integration) 관점에서 학습자는 여러 개의 서로 충돌하고 때로 혼란스러운 생각을 지니며, 교사가 그 생각을 출발점으로 삼을 때 수업이 효과적이고 오래 남습니다. 학습자가 자기 생각을 말하고, 시각화를 포함한 새 생각을 더하고, 여러 맥락에서 생각을 가려내고, 서로 연결하고, 어떤 생각이 타당한지 판단할 기준을 세우는 과정을 따라가며, Linn의 연구팀이 이를 교사, 기술자, 교과 전문가, 연구자가 함께 설계하고 교사가 자기 수업에 맞게 고치는 온라인 탐구 환경 WISE에 담은 방식을 보여 줍니다. 이어서 탐구에 안내가 얼마나 필요한지 다룹니다. Alfieri와 동료들은 아무 도움 없는 발견학습이 명시적 교수보다 못했고(d = -0.38), 피드백, 풀이 예제, 비계, 설명을 더한 발견학습은 다른 수업보다 나았다(d = 0.30)고 보고했습니다. 72편의 연구를 종합한 Lazonder와 Harmsen은 안내가 학습 활동, 탐구 중 수행, 학습 성과(d = 0.50)를 모두 높였다고 밝혔고, 다른 메타분석에서는 교사 주도 탐구를 포함한 연구들의 평균 효과크기가 학생 주도 탐구 연구들보다 약 0.40 컸으며, 자동화된 안내가 일반적인 교사 안내보다 효과적이었고 특히 사전 지식이 적은 학생에게 도움이 되었습니다. 가상의 학급이 금속 숟가락이 나무 숟가락보다 차갑게 느껴지는 이유를 탐구하는 예와 주의점, 성찰 질문으로 마무리합니다.",
+    "sources": [
+      {
+        "title": "The knowledge integration perspective on learning and instruction",
+        "authors": "Marcia C. Linn",
+        "year": 2005,
+        "url": "https://doi.org/10.1017/cbo9780511816833.016",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31). Chapter in The Cambridge Handbook of the Learning Sciences; Crossref dates the online chapter 2005."
+      },
+      {
+        "title": "WISE design for knowledge integration",
+        "authors": "Marcia C. Linn, Douglas Clark, and James D. Slotta",
+        "year": 2003,
+        "url": "https://doi.org/10.1002/sce.10086",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Meta-analysis of inquiry-based learning: Effects of guidance",
+        "authors": "Ard W. Lazonder and Ruth Harmsen",
+        "year": 2016,
+        "url": "https://doi.org/10.3102/0034654315627366",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Does discovery-based instruction enhance learning?",
+        "authors": "Louis Alfieri, Patricia J. Brooks, Naomi J. Aldrich, and Harriet R. Tenenbaum",
+        "year": 2011,
+        "url": "https://doi.org/10.1037/a0021017",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Linn (2000, 2005), Linn et al. (2006), Linn, Clark & Slotta (2003), Alfieri et al. (2011), Lazonder & Harmsen (2016), Furtak et al. (2012) and Gerard et al. (2015). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "argumentation-learning": {
+    "id": "argumentation-learning",
+    "purpose": "Use this lecture to tell apart the two goals of argumentation in class, learning to argue and arguing to learn, and to plan how you would check each one separately when you design an argumentation activity, online or face to face.",
+    "distinction": "Learning to argue treats argument as the skill being taught; arguing to learn treats it as a route to understanding content (Andriessen, 2005; Noroozi et al., 2012). Collaborative argumentation, in which partners work toward resolving an issue, differs from point-scoring debate (Andriessen, 2005). Interventions in computer-supported collaborative learning improved argumentation, but evidence that this improved domain knowledge was equivocal (Wecker & Fischer, 2014), and causal evidence for arguing to learn remains limited (Asterhan & Schwarz, 2016).",
+    "caution": "Lena and her class are made up. Arguing well and learning the content are different outcomes, so measure both. Point-scoring debate is not the goal. The evidence that arguing causes content learning is thinner than the theory, and the meta-analysis covered only 17 comparisons from 12 studies.",
+    "koSummary": "이 강의는 과학 수업에서 의견이 갈린 두 학생, 즉 답만 말하는 학생과 이유를 대고 반론을 듣고 다시 답해야 하는 학생을 보여 주며, 두 번째 학생이 논증하는 법만 배우는지 과학 내용도 배우는지 묻습니다. 논증 교육의 두 목표를 구분하는데, '논증하는 법 배우기'는 논증을 가르칠 기술로 보고, '논증하며 배우기'는 논증을 내용 이해의 수단으로 봅니다. Jerry Andriessen은 점수 따기식 논쟁과, 양쪽이 함께 쟁점을 해결해 가는 협력적 논증을 구분합니다. Omid Noroozi와 동료들은 1995년부터 2011년까지의 논증 기반 컴퓨터 지원 협력학습 문헌 108편을 검토했습니다. Christof Wecker와 Frank Fischer의 2014년 메타분석(12편 연구의 17개 비교)에서 개입은 논증의 질을 높였지만(d = 0.39), 영역 지식에 대한 효과는 분명하지 않았고 논증이 더 좋아진 연구에서 지식 향상이 더 크지도 않았습니다. Christa Asterhan과 Baruch Schwarz는 이론적 근거는 강하지만 인과적 증거가 많지 않고 논증과 학습의 정의가 느슨한 경우가 많다고 지적합니다. 가상의 생물 수업에서는 식물이 질량을 어디서 얻는지 온라인으로 토론한 뒤, 교사가 학생들의 내용 이해를 따로 확인합니다.",
+    "sources": [
+      {
+        "title": "Arguing to learn",
+        "authors": "Jerry Andriessen",
+        "year": 2005,
+        "url": "https://doi.org/10.1017/cbo9780511816833.027",
+        "relationship": "Further reading",
+        "access": "Book chapter · publisher page",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a Cambridge Core page showing this title. Chapter in The Cambridge Handbook of the Learning Sciences."
+      },
+      {
+        "title": "Argumentation-based computer supported collaborative learning (ABCSCL): A synthesis of 15 years of research",
+        "authors": "Omid Noroozi, Armin Weinberger, Harm J. A. Biemans, Martin Mulder, and Mohammad Chizari",
+        "year": 2012,
+        "url": "https://doi.org/10.1016/j.edurev.2011.11.006",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a ScienceDirect page showing this title (a first attempt showed a browser check)."
+      },
+      {
+        "title": "Where is the evidence? A meta-analysis on the role of argumentation for the acquisition of domain-specific knowledge in computer-supported collaborative learning",
+        "authors": "Christof Wecker and Frank Fischer",
+        "year": 2014,
+        "url": "https://doi.org/10.1016/j.compedu.2014.02.016",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a ScienceDirect page showing this title (a first attempt showed a browser check)."
+      },
+      {
+        "title": "Argumentation for learning: Well-trodden paths and unexplored territories",
+        "authors": "Christa S. C. Asterhan and Baruch B. Schwarz",
+        "year": 2016,
+        "url": "https://doi.org/10.1080/00461520.2016.1155458",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Andriessen (2005), Noroozi et al. (2012), Wecker & Fischer (2014), and Asterhan & Schwarz (2016); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from the abstract or chapter opening (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "peer-assessment": {
+    "id": "peer-assessment",
+    "purpose": "Use this lecture to decide what peer assessment can and cannot do in your course, and to design it: shared criteria, practice before rating, scores with comments, and time to revise.",
+    "distinction": "Peer assessment has students judge the quality of peers' work; peer review is reciprocal, with students both producing and receiving reviews (Topping, 1998; Nicol, Thomson & Breslin, 2014). Peer ratings agree moderately with teacher ratings (r = .63; Li et al., 2016), and peer assessment improved academic performance with a small to medium effect (g = 0.31), not clearly different from self-assessment (Double, McGrane & Hopfenbeck, 2020). Producing reviews engages evaluative judgment about others' and one's own work (Nicol et al., 2014).",
+    "caution": "Dario and his class are made up. Peer and teacher ratings agree only moderately, so peer marks are better used as feedback than as final grades. Agreement was higher when raters helped build the criteria and gave comments as well as scores. Peer assessment was not clearly better than self-assessment, and Topping's 1998 review covered higher education.",
+    "koSummary": "이 강의는 주말 동안 실험 보고서 서른 편을 채점해야 하는 교사를 보여 주며, 학생들이 먼저 서로의 초안을 평가한다면 그 판단이 쓸 만한지, 그리고 누가 배우게 되는지 묻습니다. 동료평가는 학생이 동료의 과제 품질을 점수나 코멘트, 또는 둘 다로 판단하는 것이며, David Nicol과 동료들은 동료 리뷰를 리뷰를 쓰기도 하고 받기도 하는 상호적 과정으로 설명합니다. Keith Topping의 1998년 리뷰는 동료평가의 정의와 유형을 제안했고, 여러 적용에서 신뢰도와 타당도가 적절하며 성취에 대한 형성적 효과가 교사 평가만큼 또는 그보다 좋다고 보고했습니다. Hongli Li와 동료들의 2016년 메타분석에서 동료 평정과 교사 평정의 평균 상관은 0.63으로 중간 이상이었고, 평가자가 점수와 함께 코멘트를 주거나 평가 기준 개발에 참여할 때 더 높았습니다. Kit Double, Joshua McGrane, Therese Hopfenbeck의 2020년 메타분석(54편 연구)에서 동료평가는 학업 성취에 작거나 중간 정도의 효과(g = 0.31)를 보였고, 평가가 없을 때나 교사 평가보다 나았지만 자기평가와는 뚜렷한 차이가 없었으며, 다양한 맥락에서 효과가 견고했습니다. 리뷰를 쓰는 일은 동료의 과제와 자신의 과제에 대한 평가적 판단을 이끌어 냅니다. 가상의 화학 수업에서는 학생들이 함께 루브릭을 만들고, 예시 보고서로 연습한 뒤, 두 동료의 초안을 평가하고 자기 초안을 고칩니다.",
+    "sources": [
+      {
+        "title": "Peer assessment between students in colleges and universities",
+        "authors": "Keith Topping",
+        "year": 1998,
+        "url": "https://doi.org/10.3102/00346543068003249",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a SAGE page showing this title. Crossref also lists a JSTOR DOI for this article, which did not resolve to the article."
+      },
+      {
+        "title": "Peer assessment in the digital age: A meta-analysis comparing peer and teacher ratings",
+        "authors": "Hongli Li, Yao Xiong, Xiaojiao Zang, Mindy L. Kornhaber, Youngsun Lyu, Kyung Sun Chung, and Hoi K. Suen",
+        "year": 2016,
+        "url": "https://doi.org/10.1080/02602938.2014.999746",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "The impact of peer assessment on academic performance: A meta-analysis of control group studies",
+        "authors": "Kit S. Double, Joshua A. McGrane, and Therese N. Hopfenbeck",
+        "year": 2020,
+        "url": "https://doi.org/10.1007/s10648-019-09510-3",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a Springer page showing this title."
+      },
+      {
+        "title": "Rethinking feedback practices in higher education: A peer review perspective",
+        "authors": "David Nicol, Avril Thomson, and Caroline Breslin",
+        "year": 2014,
+        "url": "https://doi.org/10.1080/02602938.2013.795518",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Topping (1998), Li et al. (2016), Double, McGrane & Hopfenbeck (2020), and Nicol, Thomson & Breslin (2014); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "self-determination": {
+    "id": "self-determination",
+    "purpose": "Use this lecture to look at why learners do the work in a course, and to plan small changes that support competence, autonomy, and relatedness instead of relying on rewards alone.",
+    "distinction": "Self-determination theory (Ryan & Deci, 2000, 2020) distinguishes kinds of motivation by how autonomous they are and proposes three basic needs, competence, autonomy, and relatedness, whose support enhances intrinsic and well-internalized motivation. Deci, Koestner, and Ryan (1999) found that expected, tangible, and task-contingent rewards undermined free-choice intrinsic motivation while positive feedback enhanced it; Howard et al. (2021) related each type of motivation to student performance, persistence, and well-being across 344 samples.",
+    "caution": "Ms. Rivera and her class are made up. Reward effects depend on the kind of reward and on the learner's age, and positive feedback is itself a reward that helped. The 2021 meta-analysis reports associations between motivation types and outcomes, not causes.",
+    "koSummary": "이 강의는 같은 읽기 과제를 마친 두 학생, 즉 주제가 흥미로워서 읽은 학생과 퀴즈가 있어서 읽은 학생을 보여 주며 이유가 중요한지 묻습니다. Edward Deci와 Richard Ryan의 자기결정성 이론(self-determination theory)을 소개하는데, 이 이론에서 동기는 내재적 흥미, 개인적 가치, 자아 관여, 또는 보상과 처벌에서 나올 수 있습니다. 유능감, 자율성, 관계성이라는 세 가지 기본 심리 욕구가 충족되면 자기 동기와 안녕감이 높아지고 좌절되면 둘 다 낮아진다는 점과, 이 욕구를 지원할 때 내재적 동기와 잘 내면화된 동기가 자란다는 Ryan과 Deci의 2020년 리뷰를 설명합니다. 128편의 연구를 종합한 Deci, Koestner, Ryan의 1999년 메타분석에서는 과제를 하는 것만으로 주는 보상이 자유 선택 상황의 내재적 동기를 낮췄고(d = -0.40), 긍정적 피드백은 오히려 높였으며(d = 0.33), 물질적 보상은 대학생보다 아동에게 더 해로운 경향이 있었습니다. 344개 표본을 다룬 Howard 등의 2021년 메타분석은 내재적 동기가 성공 및 안녕감과, 개인적 가치가 지속성과 관련되며, 보상이나 처벌에 따른 동기는 수행과는 관련이 없고 낮은 안녕감과 관련됨을 보여 주었습니다. 가상의 과학 교사는 탐구 질문 선택, 잘한 점에 대한 피드백, 팀 활동으로 세 욕구를 하나씩 지원합니다. 강의는 보상의 종류와 학습자의 나이에 따라 효과가 다르고, 메타분석 결과가 인과가 아닌 관련성이라는 점을 주의 사항으로 덧붙입니다.",
+    "sources": [
+      {
+        "title": "Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being",
+        "authors": "Richard M. Ryan and Edward L. Deci",
+        "year": 2000,
+        "url": "https://doi.org/10.1037/0003-066x.55.1.68",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an APA PsycNet page showing this title."
+      },
+      {
+        "title": "A meta-analytic review of experiments examining the effects of extrinsic rewards on intrinsic motivation",
+        "authors": "Edward L. Deci, Richard Koestner, and Richard M. Ryan",
+        "year": 1999,
+        "url": "https://doi.org/10.1037/0033-2909.125.6.627",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an APA PsycNet page showing this title."
+      },
+      {
+        "title": "Intrinsic and extrinsic motivation from a self-determination theory perspective: Definitions, theory, practices, and future directions",
+        "authors": "Richard M. Ryan and Edward L. Deci",
+        "year": 2020,
+        "url": "https://doi.org/10.1016/j.cedpsych.2020.101860",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a ScienceDirect page showing this title (on a second try; the first showed a browser check)."
+      },
+      {
+        "title": "Student motivation and associated outcomes: A meta-analysis from self-determination theory",
+        "authors": "Joshua L. Howard, Julien Bureau, Frédéric Guay, Jane X. Y. Chong, and Richard M. Ryan",
+        "year": 2021,
+        "url": "https://doi.org/10.1177/1745691620966789",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a SAGE page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Deci and Ryan (2000, 2020), Deci, Koestner and Ryan (1999), and Howard et al. (2021); every number in the narration was checked against the retrieved abstracts (PubMed, Semantic Scholar, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. Details in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "self-efficacy": {
+    "id": "self-efficacy",
+    "purpose": "Use this lecture to plan how learners can build realistic self-efficacy for a task they avoid, starting from the source most likely to work for them, and to remember that success feeds belief.",
+    "distinction": "Self-efficacy (Bandura, 1977) is a person's expectation of personal efficacy, derived from performance accomplishments, vicarious experience, verbal persuasion, and physiological states. In school settings mastery experience is typically the most influential source, though the sources vary with context (Usher & Pajares, 2008). Self-efficacy relates positively to academic performance and persistence (Multon, Brown & Lent, 1991), and the relation is reciprocal for adults, with performance affecting later self-efficacy more than the reverse (Talsma et al., 2018).",
+    "caution": "Ms. Lopez and her class are made up. The sources work differently for different learners and subjects. Belief does not replace skill: over time, performance feeds belief more than belief feeds performance, and encouragement alone is usually weaker than real success.",
+    "koSummary": "이 강의는 첫 수학 퀴즈에서 같은 점수를 받은 두 학생, 즉 더 잘할 수 있다고 생각하는 학생과 자신은 수학형 인간이 아니라고 생각하는 학생을 보여 주며 누가 계속 노력할지 묻습니다. Albert Bandura가 1977년에 제시한 자기효능감(self-efficacy) 이론을 소개하는데, 효능 기대가 어려운 과제를 시작할지, 얼마나 노력할지, 장애물 앞에서 얼마나 오래 버틸지를 결정한다고 봅니다. 자기효능감의 네 가지 원천으로 수행 성취, 대리 경험, 언어적 설득, 생리적 상태를 제시합니다. Ellen Usher와 Frank Pajares의 학교 연구 리뷰에 따르면 숙달 경험이 대체로 가장 강력한 원천이지만, 각 원천의 힘은 성별, 민족, 능력, 교과에 따라 달라집니다. Multon, Brown, Lent의 1991년 메타분석은 자기효능감이 학업 수행 및 지속성과 유의한 정적 관계를 가지며 그 크기가 연구마다 다름을 보여 주었습니다. Talsma 등의 2018년 메타분석(종단 연구 11편, 2,688명)에서는 이전 수행이 이후 자기효능감을 예측하는 정도(beta = 0.205)가 자기효능감이 이후 수행을 예측하는 정도(beta = 0.071)보다 컸고, 아동에서는 수행에서 신념으로 가는 경로만 유지되었습니다. 가상의 대수 교사는 한 수업에서 네 원천을 하나씩 활용합니다.",
+    "sources": [
+      {
+        "title": "Self-efficacy: Toward a unifying theory of behavioral change",
+        "authors": "Albert Bandura",
+        "year": 1977,
+        "url": "https://doi.org/10.1037/0033-295x.84.2.191",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an APA PsycNet page showing this title."
+      },
+      {
+        "title": "Sources of self-efficacy in school: Critical review of the literature and future directions",
+        "authors": "Ellen L. Usher and Frank Pajares",
+        "year": 2008,
+        "url": "https://doi.org/10.3102/0034654308321456",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a SAGE page showing this title."
+      },
+      {
+        "title": "Relation of self-efficacy beliefs to academic outcomes: A meta-analytic investigation",
+        "authors": "Karen D. Multon, Steven D. Brown, and Robert W. Lent",
+        "year": 1991,
+        "url": "https://doi.org/10.1037/0022-0167.38.1.30",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an APA PsycNet page showing this title."
+      },
+      {
+        "title": "I believe, therefore I achieve (and vice versa): A meta-analytic cross-lagged panel analysis of self-efficacy and academic performance",
+        "authors": "Kate Talsma, Benjamin Schüz, Ralf Schwarzer, and Kimberley Norris",
+        "year": 2018,
+        "url": "https://doi.org/10.1016/j.lindif.2017.11.015",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a ScienceDirect page showing this title (on a second try; the first showed a browser check)."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Bandura (1977), Usher and Pajares (2008), Multon, Brown and Lent (1991), and Talsma et al. (2018); every number in the narration was checked against the retrieved abstracts (Semantic Scholar, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. Details in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "learning-at-scale": {
+    "id": "learning-at-scale",
+    "purpose": "Use this lecture to judge open online courses by more than completion, and to weigh claims that free courses or light-touch interventions will reach and help every learner.",
+    "distinction": "Early MOOC figures showed large enrolments and low completion (Jordan, 2014), but learners follow several engagement trajectories, including staying engaged without taking assessments (Kizilcec, Piech & Schneider, 2013). Six years of edX data showed low return, growth concentrated in affluent countries, and unchanged completion (Reich & Ruipérez-Valiente, 2019), and established behavioral interventions tested across 247 courses had small, context-dependent benefits (Kizilcec et al., 2020).",
+    "caution": "Dana is made up. Much of this evidence comes from a few elite providers. Open access did not mean equal access, and an intervention that works in one course may not work in the next.",
+    "koSummary": "이 강의는 2012년 대규모 공개 온라인 강좌(MOOC)가 최고 교수의 강의 영상을 네트워크로 연결된 세계 곳곳에 전할 것이라던 약속을 보여 주며 실제로 무슨 일이 있었는지 묻습니다. Katy Jordan이 공개된 수치를 모아 보니 평균적인 MOOC의 등록자는 약 43,000명이었고 그중 6.5%만 강좌를 마쳤습니다. René Kizilcec, Chris Piech, Emily Schneider는 학습자를 영상과 평가를 이용한 방식에 따라 분류해 세 개의 컴퓨터과학 MOOC에서 네 가지 전형적인 참여 궤적을 찾았고, 가장 눈에 띄는 집단은 평가를 치르지 않으면서도 끝까지 참여한 학습자였습니다. Justin Reich와 José Ruipérez-Valiente가 하버드와 MIT의 6년치 edX 자료를 살펴본 결과, 대부분의 학습자는 첫해 이후 돌아오지 않았고, 성장은 거의 전적으로 가장 부유한 나라에서 나왔으며, 낮은 이수율은 나아지지 않았고, 분야는 직장인을 위한 온라인 석사 과정으로 옮겨 갔습니다. Kizilcec 등은 247개 강좌, 약 25만 명을 대상으로 기존 행동과학 개입을 검증했는데, 기대했던 중간에서 큰 효과 대신 작은 이점만 나타났습니다. 자기조절 개입은 처음 몇 주의 참여를 높였지만 최종 이수율은 높이지 못했고, 가치 관련성 개입은 전 지구적 격차가 있는 강좌에 한해 개발도상국 학습자의 이수율을 높였습니다. 가상의 강좌 설계자는 수료증 대신 누가 보고, 연습하고, 다시 오는지를 살핍니다.",
+    "sources": [
+      {
+        "title": "The MOOC pivot",
+        "authors": "Justin Reich and José A. Ruipérez-Valiente",
+        "year": 2019,
+        "url": "https://doi.org/10.1126/science.aav7958",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a Science page showing this title."
+      },
+      {
+        "title": "Deconstructing disengagement: Analyzing learner subpopulations in massive open online courses",
+        "authors": "René F. Kizilcec, Chris Piech, and Emily Schneider",
+        "year": 2013,
+        "url": "https://doi.org/10.1145/2460296.2460330",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an ACM Digital Library page showing this title. Paper in the Proceedings of the Third International Conference on Learning Analytics and Knowledge."
+      },
+      {
+        "title": "Initial trends in enrolment and completion of massive open online courses",
+        "authors": "Katy Jordan",
+        "year": 2014,
+        "url": "https://doi.org/10.19173/irrodl.v15i1.1651",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an IRRODL page showing this title."
+      },
+      {
+        "title": "Scaling up behavioral science interventions in online education",
+        "authors": "René F. Kizilcec, Justin Reich, Michael Yeomans, Christoph Dann, Emma Brunskill, Glenn Lopez, Selen Turkay, Joseph Jay Williams, and Dustin Tingley",
+        "year": 2020,
+        "url": "https://doi.org/10.1073/pnas.1921417117",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); landing unverified: the DOI resolves to the PNAS site, which showed a browser check on both tries."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Jordan (2014), Kizilcec, Piech and Schneider (2013), Reich and Ruipérez-Valiente (2019), and Kizilcec et al. (2020); every number in the narration was checked against the retrieved abstracts (Semantic Scholar, OpenAlex, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. The PNAS landing page showed a browser check, so that landing is unverified. Details in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "metacognitive-monitoring": {
+    "id": "metacognitive-monitoring",
+    "purpose": "Use this lecture to help learners notice when a feeling of knowing is misleading, and to design study routines in which judgments of learning are made from delayed recall attempts rather than from familiarity.",
+    "distinction": "Judgments of learning are predictions of later memory performance (Rhodes & Tauber, 2011). Learners' ongoing assessments are influenced by current performance and the subjective sense of fluency, so they can misassess and mismanage their learning (Bjork, Dunlosky & Kornell, 2013; Kornell & Bjork, 2008). Judgments directly influence study choices (Metcalfe & Finn, 2008), more accurate judgments go with better retention (Dunlosky & Rawson, 2012), and delaying judgments substantially improves their relative accuracy (Rhodes & Tauber, 2011).",
+    "caution": "Sam is made up. Delaying judgments mainly improves relative accuracy, telling known items from unknown ones; its direct benefit to memory was small. Better judgments help only if learners act on them when choosing what to study.",
+    "koSummary": "이 강의는 한 장을 두 번 다시 읽고 익숙하게 느껴져 공부를 멈췄다가 일주일 뒤 시험에서 틀리는 학습자를 보여 주며 무엇이 잘못되었는지 묻습니다. 학습 판단(judgments of learning)을 방금 공부한 내용을 얼마나 잘 기억할지에 대한 예측으로 정의하고, 학습자들이 자신이 어떻게 배우는지에 대해 잘못된 모형을 갖고 있어 학습을 잘못 평가하고 관리하며, 그 판단이 현재 수행과 유창성의 느낌에 기대고 있다는 Bjork, Dunlosky, Kornell의 리뷰를 소개합니다. Kornell과 Bjork의 2008년 연구에서는 여러 화가의 그림을 섞어 볼 때 새 그림을 더 잘 알아보았지만, 사람들은 자신의 시험 결과를 본 뒤에도 한 화가씩 보는 방식이 더 효과적이라고 평가했습니다. Metcalfe와 Finn은 학습 판단이 착각일 때에도 학습 선택이 그 판단을 따른다는 것을, Dunlosky와 Rawson은 회상을 더 정확히 판단한 대학생이 이틀 뒤 더 많이 기억한다는 것을 보여 주었습니다. Rhodes와 Tauber의 메타분석(112개 효과크기, 4,554명)에서는 지연된 판단이 즉시 판단보다 훨씬 정확했지만(g = 0.93) 기억 자체에 대한 직접적 이점은 작았습니다(g = 0.08). 가상의 간호학과 학생은 카드 학습을 기다린 뒤 떠올려 보고 그 시도로 판단하는 방식으로 바꿉니다.",
+    "sources": [
+      {
+        "title": "Self-regulated learning: Beliefs, techniques, and illusions",
+        "authors": "Robert A. Bjork, John Dunlosky, and Nate Kornell",
+        "year": 2013,
+        "url": "https://doi.org/10.1146/annurev-psych-113011-143823",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an Annual Reviews page showing this title."
+      },
+      {
+        "title": "The influence of delaying judgments of learning on metacognitive accuracy: A meta-analytic review",
+        "authors": "Matthew G. Rhodes and Sarah K. Tauber",
+        "year": 2011,
+        "url": "https://doi.org/10.1037/a0021705",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to an APA PsycNet page showing this title."
+      },
+      {
+        "title": "Evidence that judgments of learning are causally related to study choice",
+        "authors": "J. Metcalfe and B. Finn",
+        "year": 2008,
+        "url": "https://doi.org/10.3758/pbr.15.1.174",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a Springer page showing this title."
+      },
+      {
+        "title": "Overconfidence produces underachievement: Inaccurate self evaluations undermine students' learning and retention",
+        "authors": "John Dunlosky and Katherine A. Rawson",
+        "year": 2012,
+        "url": "https://doi.org/10.1016/j.learninstruc.2011.08.003",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a ScienceDirect page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Bjork, Dunlosky and Kornell (2013), Kornell and Bjork (2008), Metcalfe and Finn (2008), Dunlosky and Rawson (2012), and Rhodes and Tauber (2011); every number in the narration was checked against the retrieved abstracts (OpenAlex, PubMed, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. Kornell and Bjork (2008, https://doi.org/10.1111/j.1467-9280.2008.02127.x) passed the same checks and is cited in the narration. Details in refs.json.",
+    "reviewedAt": "2026-11-01"
+  },
+  "gesture-learning": {
+    "id": "gesture-learning",
+    "purpose": "Use this lecture to treat learners' gestures as evidence of their thinking, to decide when asking learners to gesture, or gesturing yourself, is likely to help, and to plan how you would watch for ideas that appear in the hands before they appear in words.",
+    "distinction": "Gesture works in two directions: it reflects thinking, often thinking not yet in speech, and it can change thinking (Goldin-Meadow & Alibali, 2013). In mathematics, teachers' and learners' gestures are evidence that thinking is embodied (Alibali & Nathan, 2012). Producing correct gestures during a lesson improved learning (Goldin-Meadow, Cook & Mitchell, 2009), and across 83 samples gesture moderately helped comprehension, with larger average effects in studies of producing than of observing gestures (Dargue, Sweller & Jones, 2019).",
+    "caution": "Sam and the class are made up. A gesture is evidence to interpret, not a way to read minds. Not every gesture helps: in the meta-analysis the benefit depended on the type and function of the gesture, the learner's age, and how comprehension was measured. Asking learners to move their hands works best when the movement carries the idea; partly correct gestures helped less than correct ones.",
+    "koSummary": "이 강의는 수학 문제를 어떻게 풀었는지 설명하는 아이가 말로는 한 가지 전략을 말하지만 손으로는 다른 방식을 보여 주는 장면으로 시작해, 교사가 어느 쪽에 주목해야 하는지 묻습니다. Susan Goldin-Meadow와 Martha Alibali의 리뷰에 따르면 제스처는 말로 드러나지 않은 생각까지 반영하므로 사고를 들여다보는 창이 될 수 있고, 동시에 그 생각을 바꿀 수도 있습니다. Martha Alibali와 Mitchell Nathan은 교사와 학습자의 제스처를 근거로 수학적 사고가 체화되어 있다고 주장하는데, 가리키기 제스처는 생각을 물리적 환경에 연결하고 표상적 제스처는 행위와 지각의 정신적 시뮬레이션을 드러냅니다. 2009년 Goldin-Meadow와 동료들의 수학 수업 연구에서는 올바른 제스처를 하도록 한 아이들이 부분적으로 올바른 제스처를 한 아이들보다, 그리고 이들이 제스처를 하지 않은 아이들보다 더 많이 배웠으며, 이 효과는 손으로만 표현한 정보를 말에 더했는지에 달려 있었습니다. Nicole Dargue, Naomi Sweller, Michael Jones의 2019년 메타분석(83개 표본)에서 제스처는 이해에 중간 정도의 도움을 주었고, 직접 제스처를 하는 연구들의 평균 효과가 관찰 연구들보다 더 컸으며, 제스처의 유형과 기능, 학습자 연령, 측정 방식에 따라 달라졌습니다. 가상의 4학년 수업에서는 교사가 등식 문제를 푸는 학생의 묶는 손동작을 알아차리고 그것을 말로 옮겨 보게 합니다.",
+    "sources": [
+      {
+        "title": "Gesture's role in speaking, learning, and creating language",
+        "authors": "Susan Goldin-Meadow and Martha Wagner Alibali",
+        "year": 2013,
+        "url": "https://doi.org/10.1146/annurev-psych-113011-143802",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to an Annual Reviews page showing this title."
+      },
+      {
+        "title": "Embodiment in mathematics teaching and learning: Evidence from learners' and teachers' gestures",
+        "authors": "Martha W. Alibali and Mitchell J. Nathan",
+        "year": 2012,
+        "url": "https://doi.org/10.1080/10508406.2011.611446",
+        "relationship": "Further reading",
+        "access": "Abstract · full-text access not verified",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
+      },
+      {
+        "title": "Gesturing gives children new ideas about math",
+        "authors": "Susan Goldin-Meadow, Susan Wagner Cook, and Zachary A. Mitchell",
+        "year": 2009,
+        "url": "https://doi.org/10.1111/j.1467-9280.2009.02297.x",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a SAGE page showing this title."
+      },
+      {
+        "title": "When our hands help us understand: A meta-analysis into the effects of gesture on comprehension",
+        "authors": "Nicole Dargue, Naomi Sweller, and Michael P. Jones",
+        "year": 2019,
+        "url": "https://doi.org/10.1037/bul0000202",
+        "relationship": "Further reading",
+        "access": "Open-access copy indexed; full-text access not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to an APA PsycNET page showing this title."
+      }
+    ],
+    "verificationNote": "Caption-based editorial guide. The video names Goldin-Meadow & Alibali (2013), Alibali & Nathan (2012), Goldin-Meadow, Cook & Mitchell (2009), and Dargue, Sweller & Jones (2019); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json.",
+    "reviewedAt": "2026-11-01"
   }
 };
