@@ -2,11 +2,10 @@
  * Submission Fit Scorecard
  *
  * The headline differentiator: paste an abstract, get ranked SUBMISSION TARGETS
- * (not papers) scored by three signals that no incumbent combines:
+ * (not papers) scored by two signals that no incumbent combines:
  *   1. Topic fit      -- cosine between the abstract and the venue's TF-IDF fingerprint
  *   2. Methodology fit -- alignment of *research culture* (experimental / qualitative /
  *                         design / data-AI / review / theory), the thing citation maps ignore
- *   3. CFP readiness   -- how submittable the venue is right now, from verified deadlines
  *
  * Pure and dependency-light so it is unit-testable. The UI layer (index.tsx) builds
  * the VenueFitInput list from app data and renders the results.
@@ -115,26 +114,10 @@ function hasSignal(v: TermVector): boolean {
     return false;
 }
 
-/** CFP readiness in [0,1] from days-until-deadline and verification state. */
-export function cfpReadiness(daysUntil: number | null | undefined, verified?: boolean): number {
-    let base: number;
-    if (daysUntil === null || daysUntil === undefined) base = 0.3;      // unknown deadline
-    else if (daysUntil < 0) base = 0.15;                                 // already passed (next cycle)
-    else if (daysUntil <= 14) base = 1.0;
-    else if (daysUntil <= 45) base = 0.85;
-    else if (daysUntil <= 90) base = 0.65;
-    else if (daysUntil <= 180) base = 0.45;
-    else base = 0.3;
-    if (verified && base > 0.15) base = Math.min(1, base + 0.05);
-    return base;
-}
-
 export interface VenueFitInput {
     name: string;
     type?: string;
     impact?: string;            // Q1..Q4
-    cfpDaysUntil?: number | null;
-    cfpVerified?: boolean;
 }
 
 export interface VenueFitResult {
@@ -144,14 +127,11 @@ export interface VenueFitResult {
     overall: number;            // 0..100
     topicScore: number;         // 0..100
     methodScore: number | null; // 0..100, null when abstract has no methodology signal
-    cfpScore: number;           // 0..100
-    cfpDaysUntil: number | null;
-    cfpVerified: boolean;
     sharedTerms: string[];      // top overlapping fingerprint terms (the "why")
     topMethodology: string | null;
 }
 
-const WEIGHTS = { topic: 0.65, method: 0.15, cfp: 0.2 };
+const WEIGHTS = { topic: 0.65, method: 0.15 };
 // A venue's fingerprint must devote at least this share of its mass to methodology
 // vocabulary before we trust a methodology-fit score. Below it, the per-venue
 // estimate is too sparse (it would saturate to 100%), so we report "no signal".
@@ -169,7 +149,7 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
 
     // PASS 1: compute raw signals per venue.
     interface Interim {
-        v: VenueFitInput; rawTopic: number; method: number | null; cfp: number;
+        v: VenueFitInput; rawTopic: number; method: number | null;
         shared: string[]; topMethodology: string | null;
     }
     const interim: Interim[] = [];
@@ -193,7 +173,6 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
         const method = (abstractHasMethod && aDomMethod && methCoverage >= METH_COVERAGE_MIN)
             ? (vShares[aDomMethod] ?? 0)
             : null;
-        const cfp = cfpReadiness(v.cfpDaysUntil, v.cfpVerified);
 
         const vTopic = expandForTopic(vVec);
         const shared = Object.keys(aTopic)
@@ -208,7 +187,7 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
             ? (Object.entries(vShares).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null)
             : null;
 
-        interim.push({ v, rawTopic, method, cfp, shared, topMethodology });
+        interim.push({ v, rawTopic, method, shared, topMethodology });
     }
 
     if (interim.length === 0) return [];
@@ -220,14 +199,11 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
 
     const results: VenueFitResult[] = interim.map(x => {
         const topicNorm = maxTopic > 0 ? x.rawTopic / maxTopic : 0; // 0..1 relative
-        let overall: number;
-        if (x.method === null) {
-            const t = WEIGHTS.topic / (WEIGHTS.topic + WEIGHTS.cfp);
-            const c = WEIGHTS.cfp / (WEIGHTS.topic + WEIGHTS.cfp);
-            overall = t * topicNorm + c * x.cfp;
-        } else {
-            overall = WEIGHTS.topic * topicNorm + WEIGHTS.method * x.method + WEIGHTS.cfp * x.cfp;
-        }
+        // Without a methodology signal the ranking is topic fit alone; otherwise the
+        // two signals are blended at their relative weights.
+        const overall = x.method === null
+            ? topicNorm
+            : (WEIGHTS.topic * topicNorm + WEIGHTS.method * x.method) / (WEIGHTS.topic + WEIGHTS.method);
         return {
             name: x.v.name,
             type: x.v.type,
@@ -235,9 +211,6 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
             overall: Math.round(overall * 100),
             topicScore: Math.round(topicNorm * 100),
             methodScore: x.method === null ? null : Math.round(x.method * 100),
-            cfpScore: Math.round(x.cfp * 100),
-            cfpDaysUntil: x.v.cfpDaysUntil ?? null,
-            cfpVerified: !!x.v.cfpVerified,
             sharedTerms: x.shared,
             topMethodology: x.topMethodology,
         };
@@ -251,7 +224,7 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
 // Turn the ranked output into a contrasting-cases / worked-example explanation:
 // why #1 fits (discourse signal), how it differs from #2 (what to attend to),
 // and a metacognitive "check it yourself" prompt. Grounded ONLY in real result
-// fields (sharedTerms, topMethodology, impact, cfp). The scorecard is framed as
+// fields (sharedTerms, topMethodology, impact). The scorecard is framed as
 // a heuristic mentor, never ground truth.
 // ============================================================================
 
@@ -268,7 +241,7 @@ export interface FitTeaching {
     contrast: string | null;
     /** Methodology-culture note across #1/#2, or null when unavailable. */
     methodNote: string | null;
-    /** Q-tier / CFP tradeoff note, or null when nothing notable differs. */
+    /** Q-tier tradeoff note, or null when nothing notable differs. */
     tradeoff: string | null;
     /** Metacognitive self-check the learner should verify against real issues. */
     nextCheck: string;
@@ -301,7 +274,7 @@ export function explainFit(results: VenueFitResult[]): FitTeaching | null {
         : `주제 어휘가 이 venue의 관심사와 겹쳐요`;
     const headline = top.sharedTerms.length
         ? `${top.name}이(가) 1순위인 까닭: 당신 초록이 ${joinTerms(top.sharedTerms.slice(0, 3))} 같은 어휘를 이 venue의 지문과 공유합니다. ${cultureClause}.`
-        : `${top.name}이(가) 1순위지만 공유 어휘 신호는 약합니다. 주제 정합보다 CFP 준비도가 순위를 끌어올렸을 수 있어요.`;
+        : `${top.name}이(가) 1순위지만 공유 어휘 신호는 약합니다. 다른 후보와 점수 차가 작을 수 있으니 순위는 참고만 하세요.`;
 
     // (b) Contrast #1 vs #2 — contrasting cases.
     let contrast: string | null = null;
@@ -323,26 +296,16 @@ export function explainFit(results: VenueFitResult[]): FitTeaching | null {
     let methodNote: string | null = null;
     if (runner && top.topMethodology && runner.topMethodology) {
         methodNote = top.topMethodology === runner.topMethodology
-            ? `두 venue 모두 ${top.topMethodology} 색채가 강합니다. 그렇다면 방법론이 아니라 주제 적합과 CFP 타이밍으로 결정하세요.`
+            ? `두 venue 모두 ${top.topMethodology} 색채가 강합니다. 그렇다면 방법론이 아니라 주제 적합으로 결정하세요.`
             : `연구문화가 갈립니다: ${top.name}=${top.topMethodology}, ${runner.name}=${runner.topMethodology}. 당신 연구의 방법론 정체성에 맞는 쪽을 고르세요.`;
     } else if (top.topMethodology) {
         methodNote = `${top.name}의 우세 방법론은 ${top.topMethodology}입니다. 당신 연구가 이 결과보다 ${top.topMethodology}와 거리가 멀면 순위를 의심하세요.`;
     }
 
-    // Q-tier / CFP tradeoff.
+    // Q-tier tradeoff.
     let tradeoff: string | null = null;
-    if (runner) {
-        const bits: string[] = [];
-        if (top.impact && runner.impact && top.impact !== runner.impact) {
-            bits.push(`등급은 ${top.name}=${top.impact} vs ${runner.name}=${runner.impact}`);
-        }
-        const topSoon = top.cfpDaysUntil !== null && top.cfpDaysUntil >= 0;
-        const runnerSoon = runner.cfpDaysUntil !== null && runner.cfpDaysUntil >= 0;
-        if (topSoon && runnerSoon && Math.abs((top.cfpDaysUntil as number) - (runner.cfpDaysUntil as number)) >= 14) {
-            const sooner = (top.cfpDaysUntil as number) < (runner.cfpDaysUntil as number) ? top : runner;
-            bits.push(`마감은 ${sooner.name}이(가) 더 임박(D-${sooner.cfpDaysUntil})`);
-        }
-        if (bits.length) tradeoff = bits.join(' · ') + '. 적합도와 현실(등급·마감)을 함께 저울질하세요.';
+    if (runner && top.impact && runner.impact && top.impact !== runner.impact) {
+        tradeoff = `등급은 ${top.name}=${top.impact} vs ${runner.name}=${runner.impact}. 적합도와 등급을 함께 저울질하세요.`;
     }
 
     // (c) Metacognitive self-check.

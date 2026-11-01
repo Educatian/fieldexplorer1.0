@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-    vectorizeText, cosine, methodologyDistribution, cfpReadiness, rankSubmissionFit,
+    vectorizeText, cosine, methodologyDistribution, rankSubmissionFit,
     methodologyNeighborhoods, explainFit, type VenueFitResult,
 } from './submissionFit';
 
@@ -10,9 +10,6 @@ function mkResult(over: Partial<VenueFitResult> & { name: string }): VenueFitRes
         overall: over.overall ?? 50,
         topicScore: over.topicScore ?? 50,
         methodScore: over.methodScore ?? null,
-        cfpScore: over.cfpScore ?? 30,
-        cfpDaysUntil: over.cfpDaysUntil ?? null,
-        cfpVerified: over.cfpVerified ?? false,
         sharedTerms: over.sharedTerms ?? [],
         topMethodology: over.topMethodology ?? null,
         type: over.type,
@@ -50,16 +47,6 @@ describe('methodologyDistribution', () => {
             'qualitative case study interview ethnographic thematic analysis'));
         const top = Object.entries(d).sort((a, b) => b[1] - a[1])[0][0];
         expect(top).toBe('Qualitative');
-    });
-});
-
-describe('cfpReadiness', () => {
-    it('is highest for imminent deadlines and decays', () => {
-        expect(cfpReadiness(7)).toBeGreaterThan(cfpReadiness(30));
-        expect(cfpReadiness(30)).toBeGreaterThan(cfpReadiness(120));
-        expect(cfpReadiness(-3)).toBeLessThan(cfpReadiness(200));
-        expect(cfpReadiness(null)).toBeGreaterThan(0);
-        expect(cfpReadiness(10, true)).toBeGreaterThanOrEqual(cfpReadiness(10, false));
     });
 });
 
@@ -106,14 +93,19 @@ describe('rankSubmissionFit', () => {
         expect(nb.some(c => c.venues.length > 0)).toBe(true);
     });
 
-    it('rewards CFP readiness when topic is held roughly constant', () => {
-        const abstract = 'learning analytics online education feedback digital students engagement';
-        const soon = rankSubmissionFit(abstract, [{ name: 'Computers & Education', cfpDaysUntil: 7, cfpVerified: true }]);
-        const far = rankSubmissionFit(abstract, [{ name: 'Computers & Education', cfpDaysUntil: 300 }]);
-        if (soon.length && far.length) {
-            expect(soon[0].cfpScore).toBeGreaterThan(far[0].cfpScore);
-            expect(soon[0].overall).toBeGreaterThanOrEqual(far[0].overall);
+    it('scores by topic fit alone when the abstract has no methodology signal', () => {
+        const abstract = 'online education feedback digital students engagement motivation classrooms';
+        const ranked = rankSubmissionFit(abstract, [
+            { name: 'Computers & Education', type: 'Journal' },
+            { name: 'Journal of the Learning Sciences', type: 'Journal' },
+        ]);
+        expect(ranked.length).toBeGreaterThan(0);
+        for (const r of ranked) {
+            expect(r.methodScore).toBeNull();
+            expect(r.overall).toBe(r.topicScore);
         }
+        // The strongest topical match anchors the pool at 100.
+        expect(ranked[0].overall).toBe(100);
     });
 });
 
@@ -140,8 +132,8 @@ describe('explainFit (scorecard teaching moment)', () => {
 
     it('contrasts #1 vs #2 on distinctive terms and methodology culture', () => {
         const t = explainFit([
-            mkResult({ name: 'ijCSCL', sharedTerms: ['collaborative', 'discourse', 'group'], topMethodology: 'Qualitative', impact: 'Q1', cfpDaysUntil: 10 }),
-            mkResult({ name: 'Computers & Education', sharedTerms: ['collaborative', 'analytics', 'platform'], topMethodology: 'Data & AI', impact: 'Q1', cfpDaysUntil: 120 }),
+            mkResult({ name: 'ijCSCL', sharedTerms: ['collaborative', 'discourse', 'group'], topMethodology: 'Qualitative', impact: 'Q1' }),
+            mkResult({ name: 'Computers & Education', sharedTerms: ['collaborative', 'analytics', 'platform'], topMethodology: 'Data & AI', impact: 'Q2' }),
         ]);
         expect(t).not.toBeNull();
         expect(t!.runnerName).toBe('Computers & Education');
@@ -152,8 +144,9 @@ describe('explainFit (scorecard teaching moment)', () => {
         expect(t!.contrast).toBeTruthy();
         expect(t!.methodNote).toContain('Qualitative');
         expect(t!.methodNote).toContain('Data & AI');
-        // CFP gap >= 14 days → tradeoff surfaces the sooner deadline
-        expect(t!.tradeoff).toContain('ijCSCL');
+        // Q-tier differs → tradeoff surfaces both tiers
+        expect(t!.tradeoff).toContain('ijCSCL=Q1');
+        expect(t!.tradeoff).toContain('Computers & Education=Q2');
     });
 
     it('degrades gracefully when there is no methodology or term signal', () => {

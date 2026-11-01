@@ -70,15 +70,6 @@ export function renderVenueDetails(data: VenueDetails, node: NodeData, recommend
     ).join('')}</ul>`
     : '<p>정보 없음</p>';
 
-  const cfpHtml = node.cfpDeadline ? `
-    <div class="sidebar-section">
-      <h3>📅 CFP 일정</h3>
-      <div class="cfp-info">
-        <p><strong>마감 시기:</strong> ${node.cfpDeadline}</p>
-      </div>
-    </div>
-  ` : '';
-
   const recsHtml = recommendations.length ? `
     <div class="sidebar-section">
       <h3>🎓 유사한 저널/학회</h3>
@@ -116,7 +107,6 @@ export function renderVenueDetails(data: VenueDetails, node: NodeData, recommend
       ${contributorsHtml}
     </div>
 
-    ${cfpHtml}
     ${recsHtml}
   `;
 }

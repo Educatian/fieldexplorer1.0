@@ -22,16 +22,6 @@ export type Snapshot<T> = {
 // - Stale data: auto-decay based on age
 
 /**
- * CFP (Call for Papers) Information
- */
-export interface CFPInfo {
-    deadline?: string;        // ISO date string
-    notification?: string;    // ISO date string
-    conferenceDate?: string;  // ISO date string
-    url?: string;
-}
-
-/**
  * Impact Factor data point
  */
 export interface ImpactFactor {
@@ -62,7 +52,6 @@ export interface VenueMetadata {
  */
 export interface VenueData {
     id: string;               // Stable slug identifier
-    cfp: Snapshot<CFPInfo>;
     impact: Snapshot<ImpactFactor[]>;
     metadata: Snapshot<VenueMetadata>;
 }
@@ -71,7 +60,7 @@ export interface VenueData {
  * Rule Signal for Recommendation Pipeline
  */
 export interface RuleSignal {
-    type: 'deadline_boost' | 'if_trend_boost' | 'similarity_boost' | 'recency_boost';
+    type: 'if_trend_boost' | 'similarity_boost' | 'recency_boost';
     category: 'time' | 'trust' | 'relevance' | 'behavior';
     weight: number;
     reason: string;
