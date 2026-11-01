@@ -67,6 +67,179 @@ const METHOD_LABEL_KO: Record<string, string> = {
 const LEVEL_LABEL_KO: Record<string, string> = {
     k12: '초중등', higher_ed: '고등교육', workplace: '직무·전문 교육', informal: '비형식 학습', mixed_or_unspecified: '여러 수준·미명시',
 };
+// ----------------------------------------------------------------------------
+// Formula tooltips. Each entry restates what the build scripts compute (scripts/*.py named in `src`);
+// numbers that change with a rebuild (dates, n, kappa) are read from the data files at render time.
+// ----------------------------------------------------------------------------
+const _mm: any = (venueMetrics as any)._meta || {};
+const _ft: any = (fieldTrends as any)._meta || {};
+const _kappaLines = (): string[] => Object.values(METHOD_META.reliability || {}).map((r: any) =>
+    `${METHOD_LABEL_KO[r.label] || r.label}: 일치 ${Math.round((r.agreement || 0) * 100)}%, κ ${r.kappa ?? '—'}`);
+const FORMULAS: Record<string, { title: string; lines: () => string[]; src: string }> = {
+    interdisc: {
+        title: '학제간성 (Simpson 다양성)',
+        lines: () => [
+            '논문 하나의 참고문헌을 OpenAlex 최상위 분야로 묶습니다.',
+            'pᶠ = 분야 f 참고문헌 수 ÷ 분야가 확인된 참고문헌 수',
+            'D = 1 − Σᶠ pᶠ²   (0 = 한 분야만, 1에 가까울수록 여러 분야를 고르게)',
+            `학술지 값 = 최근 논문(학술지당 최대 ${_mm.samples_per_venue || '?'}편)의 D 평균`,
+            '상위 x% = 이 값보다 D가 높은 학술지 수 ÷ 전체 학술지 수 × 100 (최소 1%)',
+            `기준 ${_mm.generated_at || '—'} · Stirling(2007) 다양성, pySciSci와 같은 식`,
+        ],
+        src: 'scripts/build_venue_metrics.py',
+    },
+    topfields: {
+        title: '주로 인용하는 분야',
+        lines: () => [
+            '최근 논문들의 참고문헌을 모두 합쳐 OpenAlex 최상위 분야별로 셉니다.',
+            '비율ᶠ = 분야 f 참고문헌 수 ÷ 분야가 확인된 참고문헌 전체',
+            '상위 4개 분야만 표시합니다.',
+        ],
+        src: 'scripts/build_venue_metrics.py',
+    },
+    primary: {
+        title: '주된 연구 방법',
+        lines: () => [
+            '초록마다 Jev에 "이 연구의 주된 접근은?"을 8개 선택지로 묻고, 확률이 가장 높은 선택지를 그 논문의 주된 방법으로 봅니다.',
+            '비율ᶜ = 주된 방법이 c인 논문 수 ÷ 6개 방법 중 하나로 분류된 논문 수',
+            '분모에서 빠지는 것: 사설·비연구, 설문·상관 연구(6개 범주 밖)',
+            '방법론 지도와 노드 색은 비율이 가장 큰 방법(우세 방법)을 씁니다.',
+        ],
+        src: 'scripts/build_venue_methodology_jev.py',
+    },
+    uses: {
+        title: '방법별로 쓰인 논문 비율',
+        lines: () => [
+            '방법마다 같은 뜻의 질문을 두 문장(A, B)으로 묻고, 각각 0–1 점수를 받습니다.',
+            '해당 = (A + B) ÷ 2 ≥ 0.5',
+            '비율 = 해당 논문 수 ÷ 연구 논문 수 (한 논문이 여러 방법에 해당할 수 있어 합이 100%를 넘습니다)',
+            '15% 이상만 표시합니다.',
+        ],
+        src: 'scripts/build_venue_methodology_jev.py',
+    },
+    tech: {
+        title: '다루는 기술 영역',
+        lines: () => [
+            '기술 영역 6개(AI, VR·AR, 게임, 협력학습, 학습분석, 온라인)마다 두 문장(A, B)으로 묻습니다.',
+            '해당 = (A + B) ÷ 2 ≥ 0.5,   비율 = 해당 논문 수 ÷ 연구 논문 수',
+            '10% 이상만 표시합니다.',
+        ],
+        src: 'scripts/build_venue_methodology_jev.py',
+    },
+    level: {
+        title: '학습자 수준',
+        lines: () => [
+            '초록마다 학습자 수준을 5개 선택지(초중등, 고등교육, 직무·전문, 비형식, 여러 수준·미명시)로 묻고 확률이 가장 높은 것을 고릅니다.',
+            '비율 = 그 수준으로 분류된 연구 논문 수 ÷ 연구 논문 수',
+        ],
+        src: 'scripts/build_venue_methodology_jev.py',
+    },
+    coding: {
+        title: '초록 표본과 코딩',
+        lines: () => [
+            `기간: ${(METHOD_META.works_window || []).join(' ~ ')} (끝난 해만)`,
+            '표본: 학술지당 최대 60편, 초록 40단어 이상. 일반 논문과 리뷰는 OpenAlex의 실제 편수 비율대로 뽑습니다.',
+            'OpenAlex에 일반 논문 초록이 없는 학회는 Semantic Scholar(출판사 DOI로 확인), Zenodo, ISLS 저장소, 학술지 홈페이지에서 가져옵니다(출처를 함께 표시).',
+            `코더: ${METHOD_META.coder || '—'}, 코드북 ${METHOD_META.codebook || '—'}, 초록 ${METHOD_META.n_abstracts || 0}편`,
+            `점검: 제목에 설계가 드러난 논문 ${(METHOD_META.planted_controls || {}).correct ?? '—'}/${(METHOD_META.planted_controls || {}).n ?? '—'}편 일치`,
+        ],
+        src: 'scripts/build_venue_methodology_jev.py, scripts/fetch_alt_abstracts.py',
+    },
+    kappa: {
+        title: '두 문장 사이 일치도 (Cohen κ)',
+        lines: () => [
+            'A, B 점수를 0.5 기준으로 해당/비해당으로 나눈 뒤:',
+            'pₒ = 두 문장의 판단이 같은 비율',
+            'pₑ = p_A·p_B + (1 − p_A)(1 − p_B)   (우연히 같을 비율)',
+            'κ = (pₒ − pₑ) ÷ (1 − pₑ)   (κ < 0.6이면 "중간 수준"으로 표시)',
+            ..._kappaLines(),
+        ],
+        src: 'scripts/build_venue_methodology_jev.py',
+    },
+    activity: {
+        title: '연간 발표량과 노드 크기',
+        lines: () => [
+            '발표 수(v, y) = OpenAlex에서 출처가 학술지 v이고 출판 연도가 y인 문헌 수 (끝난 해만)',
+            '노드 크기 = 기본 크기 + 30 × √(발표 수 ÷ 전체 최댓값)',
+            '연도 사이는 두 해 값을 선형 보간합니다.',
+            `기준 ${((venueActivity as any)._meta || {}).generated_at || '—'}`,
+        ],
+        src: 'scripts/build_venue_activity.py',
+    },
+    trends: {
+        title: '토픽 점유율과 추세',
+        lines: () => [
+            '점유율(t, y) = 100 × 토픽 t가 주제인 문헌 수 ÷ 그해 이 학술지·학회 전체 문헌 수',
+            '%p = 최근 2년 점유율 평균 − 처음 2년 점유율 평균',
+            '기울기 = 연도별 점유율의 최소제곱 직선 기울기. 부상·쇠퇴 목록은 기울기 상위·하위 12개입니다.',
+            `전체 기간 ${_ft.min_volume || 60}편 이상인 토픽만 · 기준 ${_ft.generated_at || '—'}`,
+        ],
+        src: 'scripts/build_field_trends.py',
+    },
+    backbone: {
+        title: '인용 흐름과 backbone',
+        lines: () => [
+            'w(i→j) = 학술지 i의 최근 논문이 학술지 j의 논문을 인용한 횟수 (2회 이상만)',
+            'p = w ÷ s,  s = 노드의 전체 인용 강도,  k = 연결 수',
+            'α = min[(1 − w/s_out(i))^(k_out(i)−1), (1 − w/s_in(j))^(k_in(j)−1)]',
+            `α < 0.1이면 backbone(유의한 흐름)으로 표시 · ${_mm.n_backbone_edges ?? '—'}/${_mm.n_edges ?? '—'}개 흐름`,
+            'Serrano, Boguñá & Vespignani (2009) 분산 필터',
+        ],
+        src: 'scripts/build_venue_metrics.py, scripts/disparity_backbone.py',
+    },
+    chord: {
+        title: '분야 간 인용 흐름',
+        lines: () => [
+            '학술지마다 첫 번째 분야(태그 제외)를 정합니다.',
+            '리본 두께(A→B) = 분야 A 학술지가 분야 B 학술지를 인용한 횟수의 합 (같은 분야 안은 제외)',
+        ],
+        src: 'index.tsx buildCategoryChordSVG',
+    },
+    similarity: {
+        title: '주제 유사도 연결선',
+        lines: () => [
+            '학술지마다 최근 초록의 단어 TF-IDF 가중치 벡터를 만듭니다.',
+            'cos(a, b) = Σₖ aₖbₖ ÷ (√Σₖ aₖ² · √Σₖ bₖ²)',
+            'cos > 0.03이면 회색 연결선을 그립니다.',
+        ],
+        src: 'scripts/update_semantic_profiles.py',
+    },
+};
+const formulaTip = (key: string): string => FORMULAS[key]
+    ? `<span class="formula-tip" tabindex="0" role="button" data-formula="${key}" aria-label="계산 방법: ${escapeHtml(FORMULAS[key].title)}">ⓘ</span>`
+    : '';
+const formulaText = (key: string): string => {
+    const f = FORMULAS[key];
+    return f ? [f.title, ...f.lines(), `출처: ${f.src}`].join('\n') : '';
+};
+{
+    let tipEl: HTMLDivElement | null = null;
+    const show = (target: HTMLElement) => {
+        const f = FORMULAS[target.dataset.formula || ''];
+        if (!f) return;
+        if (!tipEl) { tipEl = document.createElement('div'); tipEl.id = 'formula-tooltip'; tipEl.setAttribute('role', 'tooltip'); document.body.appendChild(tipEl); }
+        tipEl.innerHTML = `<strong>${escapeHtml(f.title)}</strong>${f.lines().map((l) => `<div>${escapeHtml(l)}</div>`).join('')}<div class="formula-src">출처: ${escapeHtml(f.src)}</div>`;
+        tipEl.style.display = 'block';
+        target.setAttribute('aria-describedby', 'formula-tooltip');
+        const r = target.getBoundingClientRect(), w = tipEl.offsetWidth, h = tipEl.offsetHeight;
+        const left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), window.innerWidth - w - 8);
+        const top = r.bottom + 8 + h < window.innerHeight ? r.bottom + 8 : Math.max(8, r.top - h - 8);
+        tipEl.style.left = `${left}px`; tipEl.style.top = `${top}px`;
+    };
+    const hide = () => { if (tipEl) tipEl.style.display = 'none'; };
+    const tipOf = (e: Event) => (e.target as HTMLElement)?.closest?.('[data-formula]') as HTMLElement | null;
+    document.addEventListener('mouseover', (e) => { const t = tipOf(e); if (t) show(t); });
+    document.addEventListener('mouseout', (e) => { if (tipOf(e)) hide(); });
+    document.addEventListener('focusin', (e) => { const t = tipOf(e); if (t) show(t); else hide(); });
+    document.addEventListener('focusout', (e) => { if (tipOf(e)) hide(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+    // focusing a tip scrolls it into view: keep a focused tip's tooltip and move it, hide a hovered one
+    document.addEventListener('scroll', () => {
+        const a = document.activeElement as HTMLElement | null;
+        if (a?.dataset?.formula) show(a); else hide();
+    }, true);
+}
+
 // Archive lecture links (src/data/archive_links.ts), opened in the same tab's archive
 const lectureLinksHtml = (ids: string[], max = 3): string => {
     const seen = new Set<string>();
@@ -1060,7 +1233,7 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
                 // Add an edge if similarity is high enough
                 if (similarity > 0.03) { // Lowered from 0.1 to 0.03 for denser TF-IDF matching
                     const tooltip = [
-                        `Cosine Similarity: ${Math.round(similarity * 100)}%`,
+                        `Cosine Similarity: ${Math.round(similarity * 100)}%  (cos = Σaₖbₖ ÷ (‖a‖·‖b‖), TF-IDF, 0.03 초과 시 연결)`,
                         sharedMeth.length > 0 ? `🛠️ Method: ${sharedMeth.slice(0, 5).join(', ')}` : '',
                         sharedDomain.length > 0 ? `📚 Domain: ${sharedDomain.slice(0, 5).join(', ')}` : ''
                     ].filter(Boolean).join('\n');
@@ -1099,7 +1272,7 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
             weight: ce.weight,
             backbone: !!ce.backbone,
             arrows: 'to',
-            title: `${from} → ${to}  (${ce.weight} refs${ce.backbone ? ', backbone' : ''})`,
+            title: `${from} → ${to}  (${ce.weight} refs${ce.backbone ? `, backbone α=${ce.alpha}` : ''})\n\n${formulaText('backbone')}`,
             color: { color: 'rgba(129, 140, 248, 0.30)', highlight: 'rgba(165, 180, 252, 0.95)' },
             smooth: { type: 'curvedCW', roundness: 0.18 },
             layer: 'citation'
@@ -2140,10 +2313,10 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const vm = venueMetricsByName[node.id];
     const interdiscHtml = (vm && vm.interdisciplinarity_simpson) ? `
       <div class="sidebar-section">
-        <h3 title="venue가 인용하는 OpenAlex 최상위 분야의 다양성(Simpson). pySciSci/Stirling 기반.">🧭 학제간성 (인용 분야 다양성)</h3>
+        <h3 title="venue가 인용하는 OpenAlex 최상위 분야의 다양성(Simpson). pySciSci/Stirling 기반.">🧭 학제간성 (인용 분야 다양성) ${formulaTip('interdisc')}</h3>
         <p class="sidebar-note-muted">다양성 ${vm.interdisciplinarity_simpson.mean.toFixed(2)} · 상위 ${interdiscTopPercent(vm.interdisciplinarity_simpson.mean)}% · 여러 분야를 얼마나 폭넓게 인용하는지 보여주는 sensemaking cue (평가점수 아님)</p>
         <p class="sidebar-meta-caption">OpenAlex · ${dataBasis((venueMetrics as any)._meta, `최근 논문 ${vm.n_papers_sampled}편의 참고문헌 ${vm.n_refs_field_resolved}건`)}</p>
-        ${(vm.top_fields && vm.top_fields.length) ? `<p class="sidebar-meta-caption">주로 인용하는 분야</p>` + vm.top_fields.slice(0, 4).map((f: any) => `
+        ${(vm.top_fields && vm.top_fields.length) ? `<p class="sidebar-meta-caption">주로 인용하는 분야 ${formulaTip('topfields')}</p>` + vm.top_fields.slice(0, 4).map((f: any) => `
         <div class="detail-progress-row">
           <div class="detail-progress-head"><span>${f.field}</span><span class="detail-progress-value">${Math.round(f.share * 100)}%</span></div>
           <div class="detail-progress-track"><div class="detail-progress-fill" style="width: ${Math.round(f.share * 100)}%;"></div></div>
@@ -2174,17 +2347,17 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       <div class="sidebar-section">
         <h3 title="최근 논문 초록마다 같은 질문을 두 가지 문장으로 물어 코딩했습니다 (Jev). 두 문장의 평균이 .5 이상이면 해당으로 셉니다.">🧪 연구 방법·맥락 (초록 코딩)</h3>
         ${mp.low_sample ? `<p class="sidebar-note-muted">초록이 있는 연구 논문이 ${mp.n_research}편뿐이라 참고용입니다.</p>` : ''}
-        <p class="sidebar-meta-caption">주된 연구 방법</p>
+        <p class="sidebar-meta-caption">주된 연구 방법 ${formulaTip('primary')}</p>
         ${bars || '<p>정보 없음</p>'}
-        ${uses ? `<p class="sidebar-meta-caption">방법별로 쓰인 논문 비율 (중복 가능)</p><div class="meta-pill-row">${uses}</div>` : ''}
-        ${tech ? `<p class="sidebar-meta-caption">다루는 기술 영역</p><div class="meta-pill-row">${tech}</div>` : ''}
-        ${lv ? `<p class="sidebar-meta-caption">가장 많은 학습자 수준: ${escapeHtml(LEVEL_LABEL_KO[lv[0]] || lv[0])} ${pct(lv[1])}%</p>` : ''}
+        ${uses ? `<p class="sidebar-meta-caption">방법별로 쓰인 논문 비율 (중복 가능) ${formulaTip('uses')}</p><div class="meta-pill-row">${uses}</div>` : ''}
+        ${tech ? `<p class="sidebar-meta-caption">다루는 기술 영역 ${formulaTip('tech')}</p><div class="meta-pill-row">${tech}</div>` : ''}
+        ${lv ? `<p class="sidebar-meta-caption">가장 많은 학습자 수준: ${escapeHtml(LEVEL_LABEL_KO[lv[0]] || lv[0])} ${pct(lv[1])}% ${formulaTip('level')}</p>` : ''}
         ${(() => {
             const topTech = Object.entries(mp.tech || {}).filter(([, v]: any) => v >= 0.2).sort((a: any, b: any) => b[1] - a[1])[0] as any;
             const links = lectureLinksHtml([...(LECTURES_BY_METHOD[mp.dominant] || []).slice(0, 2), ...(topTech ? (LECTURES_BY_TECH[topTech[0]] || []).slice(0, 1) : [])]);
             return links ? `<p class="sidebar-meta-caption">아카이브에서 배우기</p><div class="archive-lecture-links">${links}</div>` : '';
         })()}
-        <p class="sidebar-note-muted">${escapeHtml(mp.abstract_source || 'OpenAlex')} 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))}` : ''}</p>
+        <p class="sidebar-note-muted">${escapeHtml(mp.abstract_source || 'OpenAlex')} 초록 ${mp.n_abstracts}편 (${win}, 연구 논문 ${mp.n_research}편) · ${escapeHtml(METHOD_META.coder || '')} 이중 문항 코딩 · ${dataBasis(METHOD_META)} ${formulaTip('coding')}${METHOD_WEAK.length ? ` · 문항 간 일치도가 중간 수준인 항목: ${escapeHtml(METHOD_WEAK.join(', '))} ${formulaTip('kappa')}` : ''}</p>
       </div>`;
     })() : '';
 
@@ -4164,7 +4337,7 @@ async function main() {
             <div class="fit-overlay" id="fit-overlay"></div>
             <div class="fit-modal" role="dialog" aria-label="분야 간 인용 흐름" style="max-width:760px">
                 <div class="fit-modal-head">
-                    <h3>🪢 분야 간 인용 흐름 (Category Chord)</h3>
+                    <h3>🪢 분야 간 인용 흐름 (Category Chord) ${formulaTip('chord')}</h3>
                     <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
                 </div>
                 <p class="fit-sub">venue 간 OpenAlex 인용을 <strong>연구 분야 수준</strong>으로 집계한 개요입니다. 리본 두께 = 두 분야 사이 인용량. 헤어볼 이전의 거시 지형 (sensemaking cue).</p>
@@ -4225,7 +4398,7 @@ async function main() {
                 <div class="venue-table-wrap">
                     <table class="venue-table">
                         <caption class="sr-only">학술지와 학회 ${rows.length}곳의 분야, 연구 방법, 학제간성, 발표 수</caption>
-                        <thead><tr>${cols.map(([k, label]) => `<th scope="col" aria-sort="${k === sortKey ? 'ascending' : 'none'}"><button data-sort="${k}">${escapeHtml(label)}</button></th>`).join('')}</tr></thead>
+                        <thead><tr>${cols.map(([k, label]) => `<th scope="col" aria-sort="${k === sortKey ? 'ascending' : 'none'}"><button data-sort="${k}">${escapeHtml(label)}</button>${formulaTip(k === 'interdisc' ? 'interdisc' : k === 'method' ? 'primary' : k === 'output' ? 'activity' : '')}</th>`).join('')}</tr></thead>
                         <tbody>${body()}</tbody>
                     </table>
                 </div>
@@ -4282,7 +4455,7 @@ async function main() {
             <div class="fit-overlay" id="fit-overlay"></div>
             <div class="fit-modal" role="dialog" aria-label="연구 토픽 트렌드" style="max-width:820px">
                 <div class="fit-modal-head">
-                    <h3>📈 연구 토픽 트렌드 (${yrs[0]}–${yrs[yrs.length - 1]})</h3>
+                    <h3>📈 연구 토픽 트렌드 (${yrs[0]}–${yrs[yrs.length - 1]}) ${formulaTip('trends')}</h3>
                     <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
                 </div>
                 <p class="fit-sub">이 커뮤니티(${ft._meta?.n_sources || ''}개 venue)의 OpenAlex 토픽 <strong>연도별 점유율 추세</strong>입니다 (${dataBasis(ft._meta, '끝난 해만 집계')}). 스파크라인 = % 추이, %p = 최근 2년 − 초기 2년. 어디로 가고 있는지 보는 currency cue.</p>
@@ -4341,7 +4514,7 @@ async function main() {
         bar.innerHTML = `<button id="evolve-play" style="background:#6366f1;color:#fff;border:none;border-radius:6px;width:30px;height:28px;cursor:pointer;font-size:13px">▶</button>
             <input type="range" id="evolve-slider" min="${actYears[0]}" max="${actYears[actYears.length - 1]}" step="0.02" value="${actYears[0]}" style="width:240px;accent-color:#6366f1">
             <span id="evolve-year" style="min-width:38px;font-variant-numeric:tabular-nums;font-weight:600">${actYears[0]}</span>
-            <span style="opacity:.6">노드 크기 = 연간 발표량 · OpenAlex ${dataBasis((venueActivity as any)._meta)}</span>`;
+            <span style="opacity:.6">노드 크기 = 연간 발표량 · OpenAlex ${dataBasis((venueActivity as any)._meta)}</span> ${formulaTip('activity')}`;
         document.body.appendChild(bar);
         document.getElementById('evolve-play')?.addEventListener('click', () => { evolveTimer ? stopEvolvePlay() : startEvolvePlay(); });
         document.getElementById('evolve-slider')?.addEventListener('input', (e) => { stopEvolvePlay(); renderEvolveYear(parseFloat((e.target as HTMLInputElement).value)); });
@@ -4533,7 +4706,7 @@ async function main() {
                     <h3>🧪 방법론 지형 (Methodology Neighborhoods)</h3>
                     <button class="fit-close" id="meth-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">각 venue의 최근 초록을 <strong>Jev로 코딩</strong>(질문마다 두 문장, ${dataBasis(METHOD_META, `초록 ${METHOD_META.n_abstracts || 0}편`)})해 우세 <strong>연구 문화</strong>로 묶었습니다(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
+                <p class="fit-sub">각 venue의 최근 초록을 <strong>Jev로 코딩</strong>(질문마다 두 문장, ${dataBasis(METHOD_META, `초록 ${METHOD_META.n_abstracts || 0}편`)})해 우세 <strong>연구 문화</strong>로 묶었습니다 ${formulaTip('primary')} ${formulaTip('coding')}(분야별 비율 표기). 인용 네트워크가 아니라 "어떻게 연구하는가"의 지형입니다. venue를 누르면 네트워크에서 해당 노드로 이동합니다.</p>
                 ${guideHtml}
                 <div class="meth-grid">${cards}</div>
             </div>

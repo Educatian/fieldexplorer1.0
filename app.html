@@ -977,6 +977,12 @@
     .meth-card { border: 1px solid var(--border-color); border-radius: 12px; padding: 12px 14px; background: var(--bg-secondary); }
     .meth-card-head { font-weight: 800; font-size: 0.9rem; color: var(--text-primary); }
     .meth-blurb { font-size: 0.72rem; color: var(--text-secondary); margin: 2px 0 8px; }
+    .formula-tip { display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; margin-left: 3px; border: 1px solid var(--outline-soft, #3a445d); border-radius: 50%; font-size: 10px; line-height: 1; color: var(--text-secondary); cursor: help; vertical-align: middle; font-weight: 600; font-style: normal; }
+    .formula-tip:hover, .formula-tip:focus-visible { color: var(--primary); border-color: var(--primary); outline: none; }
+    #formula-tooltip { position: fixed; z-index: 10000; display: none; max-width: min(360px, calc(100vw - 16px)); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--outline-soft, #3a445d); background: var(--surface-container-highest, #212838); color: var(--text-primary); font-size: 12px; line-height: 1.6; box-shadow: 0 10px 30px rgba(0,0,0,.45); pointer-events: none; word-break: keep-all; }
+    #formula-tooltip strong { display: block; margin-bottom: 4px; font-size: 12.5px; color: var(--primary); }
+    #formula-tooltip div { margin: 2px 0; }
+    #formula-tooltip .formula-src { margin-top: 6px; font-size: 11px; color: var(--text-muted); }
     .venue-table-wrap { max-height: 65vh; overflow: auto; border: 1px solid var(--outline-ghost); border-radius: 8px; }
     .venue-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
     .venue-table th, .venue-table td { padding: 6px 8px; border-bottom: 1px solid var(--outline-ghost); text-align: left; vertical-align: top; color: var(--text-primary); word-break: keep-all; }
