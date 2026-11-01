@@ -5,7 +5,6 @@ Last app-wide review: 2026-03-31
 ## What is now treated as verified
 
 - Venue links that point to official conference or publisher pages.
-- CFP records that use the structured verification flow in `src/data/cfp.ts` and the Supabase admin workflow.
 
 ## What is now treated as editorial or reference-only
 

@@ -88,11 +88,10 @@ A dependency-free SVG chord aggregates venue→venue citation up to **field↔fi
 | **Compute** | Degree & normalized degree, PageRank, clustering coefficient, hub scores, community detection, network density. |
 | **Citation layer (V6)** | Directed venue→venue citation flow from OpenAlex, shown as a statistically-significant *backbone*; per-venue **interdisciplinarity** (Simpson / Shannon over cited fields). |
 | **Node-colour lens** | Switch node encoding between **type / interdisciplinarity / methodology**, independent of the citation layer. Legends + "no data" greying included. |
-| **Venue scorecard** | Per-venue overview, interdisciplinarity value + percentile + top cited fields, methodology profile, Q-tier (reference only), CFP schedule with honest expired-cycle labelling. |
+| **Venue scorecard** | Per-venue overview, interdisciplinarity value + percentile + top cited fields, methodology profile, Q-tier (reference only). |
 | **Submission-fit** | Paste an abstract → cosine-similarity ranking against venue fingerprints, with a teaching panel (worked examples / contrasting cases). |
 | **Methodology map** | Venues grouped into six methodology neighbourhoods (Experimental, Qualitative, Design & Dev, Data & AI, Review & Meta, Theory). |
 | **Learning layer** | Guided onboarding tour, venue-matching quiz, Socratic "Sage" tutor (grounded RAG, graph-aware retrieval). |
-| **CFP tracking** | Verified call-for-paper deadlines with confidence tiers and past-cycle marking. |
 | **Korean identity network** | A separate view of the Korean educational-technology researcher network. |
 | **Community** | Annotations, favourites, anonymous interaction logging for design-based research. |
 
@@ -112,7 +111,7 @@ FieldExplorer follows a three-layer pipeline wrapped in a pedagogical **scaffold
    ─────────                    ───────                      ───────
    force-directed network   →   degree · PageRank        →   annotations
    venues + categories          clustering · community       RAG "Sage" tutor (Gemini + pgvector)
-   keyword/category edges       hub · bridge nodes           verified CFP
+   keyword/category edges       hub · bridge nodes           citation layer
         │                            │                        citation-grounded layer (V6)
         │                            │                            │
         ▼                            ▼                            ▼
@@ -123,7 +122,7 @@ FieldExplorer follows a three-layer pipeline wrapped in a pedagogical **scaffold
 
 **Frontend.** A single `index.tsx` builds the network model (`parseNetworkData`), computes metrics (`calculateNetworkMetrics`), and drives a `vis-network` canvas. The landing (`index.html`), app (`app.html`), and admin (`admin.html`) are separate Vite entry points.
 
-**Backend / data.** Supabase (annotations, logs, community venues, CFP, pgvector for RAG). Static research data ships as JSON in `src/data/`. Deployed on Vercel.
+**Backend / data.** Supabase (annotations, logs, community venues, pgvector for RAG). Static research data ships as JSON in `src/data/`. Deployed on Vercel.
 
 **Offline data pipeline (Python).** Bibliometric signals are precomputed offline from the **OpenAlex** API and merged into the graph — never fetched at runtime.
 
@@ -176,7 +175,7 @@ The visualization is deliberately **cognitive-load-aware** — the network-viz h
 ```
 index.html          landing page (hero, auth)
 app.html            main application shell + styles
-admin.html          CFP / content admin
+admin.html          content admin
 index.tsx           network model, metrics, rendering, all interactions
 src/
   data/             venues, semantic_profiles, venue_metrics, quiz, korean network
@@ -223,7 +222,6 @@ If no generation key is set, the floating tutor still works in local retrieval m
 
 ### Operations docs
 
-- [CFP-OPERATIONS.md](./CFP-OPERATIONS.md) — call-for-paper verification (`supabase-cfp.sql`, `supabase-cfp-seed.sql`, `cfp-seed.json`).
 - [CONTENT-FACTCHECK.md](./CONTENT-FACTCHECK.md) — content fact-check scope.
 - [RAG-OPERATIONS.md](./RAG-OPERATIONS.md) — RAG retrieval operations.
 

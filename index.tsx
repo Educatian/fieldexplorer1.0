@@ -12,13 +12,6 @@ import fieldTrends from './src/data/field_trends.json';
 // per-venue activity per year — drives the field-evolution animation
 import venueActivity from './src/data/venue_activity.json';
 import {
-    getBuiltInOfficialCFPRecord,
-    resolveCFPInfoWithOverrides,
-    type CFPRecordMap,
-    type OfficialCFPRecord,
-    type ResolvedCFPInfo
-} from './src/data/cfp';
-import {
     CONTRIBUTORS_SUPPRESSED_NOTE,
     IMPACT_REFERENCE_NOTE,
     METHODOLOGY_REFERENCE_NOTE,
@@ -574,7 +567,7 @@ const venueData: VenueInfo[] = [
     { name: "Professional Development in Education", type: "Journal", categories: ["Teacher Education"], impact: "Q1" },
     { name: "Action in Teacher Education", type: "Journal", categories: ["Teacher Education"], impact: "Q2" },
 
-    // Conferences with CFP deadlines
+    // Conferences
     { name: "ISLS Annual Meeting", type: "Conference", categories: ["Learning Sciences"], cfpDeadline: "November" },
     { name: "ICLS", type: "SubConference", categories: ["ISLS", "Learning Sciences"], cfpDeadline: "November" },
     { name: "CSCL", type: "SubConference", categories: ["ISLS", "Learning Sciences"], cfpDeadline: "November" },
@@ -605,51 +598,15 @@ const venueData: VenueInfo[] = [
 // ============================================================================
 
 const FAVORITES_KEY = 'fieldexplorer_favorites';
-const CFP_OVERRIDES_KEY = 'fieldexplorer_cfp_overrides';
-const CFP_HISTORY_KEY = 'fieldexplorer_cfp_history';
 const DEEP_RESEARCH_USAGE_KEY = 'fieldexplorer_deep_research_usage';
 const DEEP_RESEARCH_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
 const venueCache: Record<string, any> = {};
-let cfpOverrideCache: CFPRecordMap = {};
-let cfpHistoryCache: CFPHistoryEntry[] = [];
-let cfpPersistenceMode: 'cloud' | 'local' | 'unavailable' = 'local';
-let cfpPersistenceDetail = '로컬 브라우저 저장 중';
-let cfpHistoryCloudAvailable: boolean | null = null;
-let cfpRefreshStateCache: CFPRefreshState | null = null;
-let cfpRefreshStateAvailable: boolean | null = null;
-let refreshCFPDerivedViews = () => { /* assigned inside main */ };
 
 interface StoredUser {
     email?: string;
     loggedIn?: boolean;
     isGuest?: boolean;
     isNewUser?: boolean;
-}
-
-interface CFPHistoryEntry {
-    id: string;
-    venueName: string;
-    action: 'upsert' | 'delete';
-    storageMode: 'cloud' | 'local';
-    snapshot?: OfficialCFPRecord;
-    changedAt: string;
-    changedBy?: string | null;
-}
-
-interface CFPRefreshState {
-    id: string;
-    status: 'idle' | 'running' | 'completed' | 'failed';
-    interactionId?: string | null;
-    interactionStartedAt?: string | null;
-    lastCheckedAt?: string | null;
-    completedAt?: string | null;
-    lastSuccessAt?: string | null;
-    nextDueAt?: string | null;
-    lastError?: string | null;
-    lastResultCount: number;
-    lastReport?: string | null;
-    targetNames: string[];
-    updatedAt?: string | null;
 }
 
 function getFavorites(): Set<string> {
@@ -758,333 +715,6 @@ function formatRagMessageHtml(value: string): string {
         }
     );
     return linked.replace(/\n/g, '<br>');
-}
-
-function getCFPOverrides(): CFPRecordMap {
-    try {
-        const stored = localStorage.getItem(CFP_OVERRIDES_KEY);
-        return stored ? JSON.parse(stored) : {};
-    } catch {
-        return {};
-    }
-}
-
-cfpOverrideCache = getCFPOverrides();
-
-function getLocalCFPHistory(): CFPHistoryEntry[] {
-    try {
-        const stored = localStorage.getItem(CFP_HISTORY_KEY);
-        return stored ? JSON.parse(stored) : [];
-    } catch {
-        return [];
-    }
-}
-
-function saveLocalCFPHistory(history: CFPHistoryEntry[]) {
-    cfpHistoryCache = [...history];
-    localStorage.setItem(CFP_HISTORY_KEY, JSON.stringify(history));
-}
-
-cfpHistoryCache = getLocalCFPHistory();
-
-function saveCFPOverrides(overrides: CFPRecordMap) {
-    cfpOverrideCache = { ...overrides };
-    localStorage.setItem(CFP_OVERRIDES_KEY, JSON.stringify(overrides));
-}
-
-function getResolvedCFPInfo(venueName: string, legacyPattern?: string, now = new Date()): ResolvedCFPInfo {
-    return resolveCFPInfoWithOverrides(venueName, legacyPattern, cfpOverrideCache, now);
-}
-
-function toCloudCFPRow(record: OfficialCFPRecord, userId?: string | null) {
-    return {
-        venue_name: record.venueName,
-        submission_deadline: record.submissionDeadline,
-        submission_label: record.submissionLabel,
-        abstract_deadline: record.abstractDeadline || null,
-        abstract_label: record.abstractLabel || null,
-        source_url: record.sourceUrl,
-        source_label: record.sourceLabel,
-        verified_at: record.verifiedAt,
-        timezone: record.timezone,
-        notes: record.notes || null,
-        verified_by: userId || null
-    };
-}
-
-function fromCloudCFPRows(rows: any[]): CFPRecordMap {
-    const mapped: CFPRecordMap = {};
-    rows.forEach(row => {
-        mapped[row.venue_name] = {
-            venueName: row.venue_name,
-            submissionDeadline: row.submission_deadline,
-            submissionLabel: row.submission_label,
-            abstractDeadline: row.abstract_deadline || undefined,
-            abstractLabel: row.abstract_label || undefined,
-            sourceUrl: row.source_url,
-            sourceLabel: row.source_label,
-            verifiedAt: row.verified_at,
-            timezone: row.timezone,
-            notes: row.notes || undefined
-        };
-    });
-    return mapped;
-}
-
-function fromCloudCFPHistoryRows(rows: any[]): CFPHistoryEntry[] {
-    return (rows || []).map((row: any) => ({
-        id: row.id,
-        venueName: row.venue_name,
-        action: row.action,
-        storageMode: row.storage_mode,
-        snapshot: row.snapshot || undefined,
-        changedAt: row.changed_at,
-        changedBy: row.changed_by || null
-    }));
-}
-
-function fromCloudCFPRefreshStateRow(row: any): CFPRefreshState | null {
-    if (!row?.id) return null;
-    return {
-        id: row.id,
-        status: row.status || 'idle',
-        interactionId: row.interaction_id || null,
-        interactionStartedAt: row.interaction_started_at || null,
-        lastCheckedAt: row.last_checked_at || null,
-        completedAt: row.completed_at || null,
-        lastSuccessAt: row.last_success_at || null,
-        nextDueAt: row.next_due_at || null,
-        lastError: row.last_error || null,
-        lastResultCount: typeof row.last_result_count === 'number' ? row.last_result_count : 0,
-        lastReport: row.last_report || null,
-        targetNames: Array.isArray(row.target_names) ? row.target_names : [],
-        updatedAt: row.updated_at || null
-    };
-}
-
-function createLocalCFPHistoryEntry(
-    action: 'upsert' | 'delete',
-    storageMode: 'cloud' | 'local',
-    venueName: string,
-    snapshot?: OfficialCFPRecord,
-    changedBy?: string | null
-): CFPHistoryEntry {
-    return {
-        id: crypto.randomUUID(),
-        venueName,
-        action,
-        storageMode,
-        snapshot,
-        changedAt: new Date().toISOString(),
-        changedBy: changedBy || getStoredUser().email || null
-    };
-}
-
-function appendLocalCFPHistory(entry: CFPHistoryEntry) {
-    const nextHistory = [entry, ...cfpHistoryCache].slice(0, 80);
-    saveLocalCFPHistory(nextHistory);
-}
-
-async function loadCFPOverridesFromCloud(): Promise<CFPRecordMap | null> {
-    if (!supabase) {
-        cfpPersistenceMode = 'unavailable';
-        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
-        return null;
-    }
-
-    const { data, error } = await supabase
-        .from('cfp_verifications')
-        .select('venue_name, submission_deadline, submission_label, abstract_deadline, abstract_label, source_url, source_label, verified_at, timezone, notes')
-        .order('verified_at', { ascending: false });
-
-    if (error) {
-        console.warn('[CFP] Cloud load failed:', error.message);
-        cfpPersistenceMode = 'local';
-        cfpPersistenceDetail = error.message.includes('cfp_verifications')
-            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
-            : `원격 로드 실패: ${error.message}`;
-        return null;
-    }
-
-    cfpPersistenceMode = 'cloud';
-    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
-    return fromCloudCFPRows(data || []);
-}
-
-async function loadCFPHistoryFromCloud(): Promise<CFPHistoryEntry[] | null> {
-    if (!supabase || cfpHistoryCloudAvailable === false) return null;
-
-    const { data, error } = await supabase
-        .from('cfp_verification_history')
-        .select('id, venue_name, action, snapshot, storage_mode, changed_by, changed_at')
-        .order('changed_at', { ascending: false })
-        .limit(40);
-
-    if (error) {
-        if (
-            error.message.includes('cfp_verification_history') ||
-            error.message.includes('schema cache') ||
-            error.code === 'PGRST204'
-        ) {
-            cfpHistoryCloudAvailable = false;
-            console.info('[CFP] Cloud history table unavailable, using local history fallback.');
-            return null;
-        }
-        console.warn('[CFP] Cloud history load failed:', error.message);
-        return null;
-    }
-
-    cfpHistoryCloudAvailable = true;
-    return fromCloudCFPHistoryRows(data || []);
-}
-
-async function loadCFPRefreshStateFromCloud(): Promise<CFPRefreshState | null> {
-    if (!supabase || cfpRefreshStateAvailable === false) return null;
-
-    const { data, error } = await supabase
-        .from('cfp_refresh_state')
-        .select('*')
-        .eq('id', 'cfp-auto-refresh')
-        .maybeSingle();
-
-    if (error) {
-        if (
-            error.message.includes('cfp_refresh_state') ||
-            error.message.includes('schema cache') ||
-            error.code === 'PGRST204'
-        ) {
-            cfpRefreshStateAvailable = false;
-            console.info('[CFP] Auto refresh state table unavailable.');
-            return null;
-        }
-        console.warn('[CFP] Auto refresh state load failed:', error.message);
-        return null;
-    }
-
-    cfpRefreshStateAvailable = true;
-    cfpRefreshStateCache = fromCloudCFPRefreshStateRow(data);
-    return cfpRefreshStateCache;
-}
-
-async function initializeCFPOverrides() {
-    cfpOverrideCache = getCFPOverrides();
-    const cloudOverrides = await loadCFPOverridesFromCloud();
-    if (cloudOverrides) {
-        cfpOverrideCache = cloudOverrides;
-        localStorage.setItem(CFP_OVERRIDES_KEY, JSON.stringify(cloudOverrides));
-    }
-
-    const cloudHistory = await loadCFPHistoryFromCloud();
-    if (cloudHistory) {
-        saveLocalCFPHistory(cloudHistory);
-    } else {
-        cfpHistoryCache = getLocalCFPHistory();
-    }
-
-    refreshCFPDerivedViews();
-}
-
-async function logCFPHistory(
-    action: 'upsert' | 'delete',
-    storageMode: 'cloud' | 'local',
-    venueName: string,
-    snapshot?: OfficialCFPRecord
-) {
-    const userEmail = getStoredUser().email || null;
-    const localEntry = createLocalCFPHistoryEntry(action, storageMode, venueName, snapshot, userEmail);
-    appendLocalCFPHistory(localEntry);
-
-    if (!supabase || storageMode !== 'cloud' || cfpHistoryCloudAvailable === false) return;
-
-    const { data: { user } } = await supabase.auth.getUser();
-    const { error } = await supabase
-        .from('cfp_verification_history')
-        .insert({
-            venue_name: venueName,
-            action,
-            snapshot: snapshot || {},
-            storage_mode: storageMode,
-            changed_by: user?.id || null
-        });
-
-    if (error) {
-        if (
-            error.message.includes('cfp_verification_history') ||
-            error.message.includes('schema cache') ||
-            error.code === 'PGRST204'
-        ) {
-            cfpHistoryCloudAvailable = false;
-            console.info('[CFP] Cloud history writes disabled, local history will continue.');
-            return;
-        }
-        console.warn('[CFP] History write failed:', error.message);
-    }
-}
-
-async function saveCFPRecord(record: OfficialCFPRecord) {
-    const localOverrides = { ...cfpOverrideCache, [record.venueName]: record };
-    saveCFPOverrides(localOverrides);
-
-    if (!supabase) {
-        cfpPersistenceMode = 'local';
-        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
-        await logCFPHistory('upsert', 'local', record.venueName, record);
-        return { ok: true, mode: 'local' as const, message: '로컬에 저장되었습니다.' };
-    }
-
-    const { data: { user } } = await supabase.auth.getUser();
-    const { error } = await supabase
-        .from('cfp_verifications')
-        .upsert(toCloudCFPRow(record, user?.id), { onConflict: 'venue_name' });
-
-    if (error) {
-        console.warn('[CFP] Cloud save failed:', error.message);
-        cfpPersistenceMode = 'local';
-        cfpPersistenceDetail = error.message.includes('cfp_verifications')
-            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
-            : `원격 저장 실패: ${error.message}`;
-        await logCFPHistory('upsert', 'local', record.venueName, record);
-        return { ok: true, mode: 'local' as const, message: `원격 저장 실패로 로컬에만 저장했습니다: ${error.message}` };
-    }
-
-    cfpPersistenceMode = 'cloud';
-    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
-    await logCFPHistory('upsert', 'cloud', record.venueName, record);
-    return { ok: true, mode: 'cloud' as const, message: 'Supabase에 저장되었습니다.' };
-}
-
-async function clearCFPRecordOverride(venueName: string) {
-    const snapshot = cfpOverrideCache[venueName];
-    const localOverrides = { ...cfpOverrideCache };
-    delete localOverrides[venueName];
-    saveCFPOverrides(localOverrides);
-
-    if (!supabase) {
-        cfpPersistenceMode = 'local';
-        cfpPersistenceDetail = 'Supabase 미설정으로 로컬 저장만 사용 중';
-        await logCFPHistory('delete', 'local', venueName, snapshot);
-        return { ok: true, mode: 'local' as const, message: '로컬 override를 제거했습니다.' };
-    }
-
-    const { error } = await supabase
-        .from('cfp_verifications')
-        .delete()
-        .eq('venue_name', venueName);
-
-    if (error) {
-        console.warn('[CFP] Cloud delete failed:', error.message);
-        cfpPersistenceMode = 'local';
-        cfpPersistenceDetail = error.message.includes('cfp_verifications')
-            ? 'Supabase 테이블 없음, 로컬 저장 사용 중'
-            : `원격 삭제 실패: ${error.message}`;
-        await logCFPHistory('delete', 'local', venueName, snapshot);
-        return { ok: true, mode: 'local' as const, message: `원격 삭제 실패로 로컬 override만 제거했습니다: ${error.message}` };
-    }
-
-    cfpPersistenceMode = 'cloud';
-    cfpPersistenceDetail = 'Supabase 공용 저장 사용 중';
-    await logCFPHistory('delete', 'cloud', venueName, snapshot);
-    return { ok: true, mode: 'cloud' as const, message: 'Supabase override를 제거했습니다.' };
 }
 
 // ============================================================================
@@ -2418,43 +2048,6 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       </div>
     `;
 
-    const cfpInfo = getResolvedCFPInfo(node.id, node.cfpDeadline);
-    // A deadline more than ~45 days in the past is a closed annual cycle, not a
-    // "just missed" date. Mark it as such instead of showing an absurd "316일 지남".
-    const cfpPastCycle = cfpInfo.daysUntil !== null && cfpInfo.daysUntil < -45;
-    // Verified more than ~4 months ago: the call may have changed since.
-    const cfpVerifyStale = !!cfpInfo.verifiedAt && (Date.now() - new Date(cfpInfo.verifiedAt).getTime()) / 86400000 > 120;
-    const cfpStatusLabel = cfpInfo.confidence === 'official'
-        ? (cfpPastCycle ? '공식 확인 · 지난 사이클' : cfpInfo.deadlineState === 'passed' ? '공식 확인 · 마감 지남' : '공식 확인')
-        : cfpInfo.confidence === 'estimated'
-            ? '추정치'
-            : '정보 없음';
-    const cfpUrgencyLabel = cfpInfo.daysUntil === null
-        ? '마감일 계산 불가'
-        : cfpInfo.daysUntil >= 0
-            ? `D-${cfpInfo.daysUntil}`
-            : cfpPastCycle
-                ? '지난 사이클 마감'
-                : `${Math.abs(cfpInfo.daysUntil)}일 지남`;
-    const cfpHtml = cfpInfo.confidence !== 'missing' ? `
-        <div class="sidebar-section">
-          <h3>📅 CFP 일정</h3>
-          <div class="cfp-info">
-            <div class="meta-pill-row">
-              <span class="meta-pill ${cfpInfo.confidence === 'official' ? 'meta-pill--official' : cfpInfo.confidence === 'estimated' ? 'meta-pill--estimated' : 'meta-pill--neutral'}">${cfpStatusLabel}</span>
-              <span class="meta-pill">${cfpUrgencyLabel}</span>
-            </div>
-            ${cfpPastCycle ? '<p class="sidebar-note-muted">이 회차는 마감되었습니다. 다음 회차 일정은 공지되는 대로 갱신됩니다.</p>' : ''}
-            <p><strong>${cfpInfo.primaryDeadlineLabel}:</strong> ${cfpInfo.primaryDeadlineDisplay}</p>
-            ${cfpInfo.secondaryDeadlineDisplay && cfpInfo.secondaryDeadlineLabel ? `<p><strong>${cfpInfo.secondaryDeadlineLabel}:</strong> ${cfpInfo.secondaryDeadlineDisplay}</p>` : ''}
-            ${cfpInfo.timezoneLabel ? `<p><strong>기준 시간대:</strong> ${cfpInfo.timezoneLabel}</p>` : ''}
-            ${cfpInfo.verifiedAt ? `<p><strong>마지막 검증:</strong> ${cfpInfo.verifiedAt}${cfpVerifyStale ? ' <span class="meta-pill meta-pill--estimated">확인한 지 오래됨</span>' : ''}</p>` : ''}
-            <p class="sidebar-note sidebar-link-row">${cfpInfo.note}</p>
-            ${cfpInfo.sourceUrl && cfpInfo.sourceLabel ? `<p class="sidebar-link-row"><a href="${cfpInfo.sourceUrl}" target="_blank" rel="noopener">${cfpInfo.sourceLabel} ↗</a></p>` : ''}
-          </div>
-        </div>
-    ` : '';
-
     const recsHtml = recommendations.length ? `
     <div class="sidebar-section">
       <h3>🎓 유사한 저널/학회</h3>
@@ -2489,7 +2082,6 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       </p>
     </div>
     ${contentAuditHtml}
-    ${cfpHtml}
     ${recsHtml}
   `;
 }
@@ -2708,7 +2300,6 @@ async function main() {
         impact: string;
         journalsEnabled: boolean;
         conferencesEnabled: boolean;
-        cfpDays: number;
         compareNodes: string[];
         koreanNetwork: boolean;
         topicsOpen: boolean;
@@ -2725,7 +2316,6 @@ async function main() {
 
     function parseExplorerStateFromUrl(): ExplorerShareState {
         const params = new URLSearchParams(window.location.search);
-        const parsedCfpDays = Number(params.get('cfp'));
 
         return {
             nodeId: params.get('node'),
@@ -2733,7 +2323,6 @@ async function main() {
             impact: params.get('impact') || '',
             journalsEnabled: params.get('journals') !== '0',
             conferencesEnabled: params.get('confs') !== '0',
-            cfpDays: [30, 60, 90].includes(parsedCfpDays) ? parsedCfpDays : 0,
             compareNodes: params.getAll('compare').filter(id => nodes.some(node => node.id === id)),
             koreanNetwork: params.get('korean') === '1',
             topicsOpen: params.get('topics') === '1',
@@ -3671,88 +3260,6 @@ async function main() {
         });
     });
 
-    // CFP Deadline filter - highlight nodes with upcoming CFP deadlines
-    let cfpFilterDays = 0; // 0 = off, 30/60/90 = days
-
-    function getCFPEntries() {
-        const entries: Array<{ venueId: string; info: ResolvedCFPInfo; daysUntil: number }> = [];
-        const now = new Date();
-
-        for (const venue of venueData) {
-            if (!venue.cfpDeadline) continue;
-            const info = getResolvedCFPInfo(venue.name, venue.cfpDeadline, now);
-            if (info.daysUntil === null) continue;
-            entries.push({ venueId: venue.name, info, daysUntil: info.daysUntil });
-        }
-
-        return entries.sort((a, b) => a.daysUntil - b.daysUntil);
-    }
-
-    function applyCFPFilter(silent = false) {
-        if (cfpFilterDays === 0) {
-            nodesDataset.update(nodes.map(n => ({ id: n.id, borderWidth: 1, color: { border: undefined } })));
-            if (!silent) {
-                showToast('CFP 필터 해제');
-            }
-            return;
-        }
-
-        const cfpEntries = getCFPEntries();
-        const urgentEntries = cfpEntries.filter(e => e.daysUntil >= 0 && e.daysUntil <= cfpFilterDays);
-        const officialCount = urgentEntries.filter(entry => entry.info.confidence === 'official').length;
-        const estimatedCount = urgentEntries.filter(entry => entry.info.confidence === 'estimated').length;
-
-        // Highlight urgent nodes
-        const updates = nodes.map(n => {
-            const entry = urgentEntries.find(item => item.venueId === n.id);
-            if (entry) {
-                return {
-                    id: n.id,
-                    borderWidth: 4,
-                    color: { border: entry.info.confidence === 'official' ? DESIGN_COLORS.tertiary : DESIGN_COLORS.primary }
-                };
-            }
-            return { id: n.id, borderWidth: 1, color: { border: undefined } };
-        });
-        nodesDataset.update(updates);
-
-        if (!silent) {
-            if (officialCount + estimatedCount === 0) {
-                showToast(`${cfpFilterDays}일 이내 다가오는 마감 없음 — 등록된 회차는 마감됨 (다음 회차 공지 후 갱신)`);
-            } else {
-                showToast(`CFP ${cfpFilterDays}일 이내: 공식 ${officialCount}개 · 추정 ${estimatedCount}개`);
-            }
-        }
-    }
-
-    // CFP filter button toggle (if exists)
-    const cfpFilterBtn = document.getElementById('cfp-filter-btn');
-    function updateCFPFilterButton() {
-        if (!cfpFilterBtn) return;
-        cfpFilterBtn.classList.toggle('active', cfpFilterDays > 0);
-        cfpFilterBtn.textContent = cfpFilterDays > 0 ? `📅 D-${cfpFilterDays}` : '📅 CFP';
-    }
-
-    if (cfpFilterBtn) {
-        cfpFilterBtn.addEventListener('click', () => {
-            // Cycle through: 0 -> 30 -> 60 -> 90 -> 0
-            cfpFilterDays = cfpFilterDays === 0 ? 30 :
-                cfpFilterDays === 30 ? 60 :
-                    cfpFilterDays === 60 ? 90 : 0;
-            updateCFPFilterButton();
-            applyCFPFilter();
-        });
-    }
-
-    refreshCFPDerivedViews = () => {
-        applyCFPFilter(true);
-        if (currentNodeId) {
-            void handleNodeClick(currentNodeId);
-        }
-    };
-
-    void initializeCFPOverrides();
-
     // ========================================================================
     // COMPARISON MODE (Phase 3)
     // ========================================================================
@@ -3813,13 +3320,11 @@ async function main() {
 
     function getVenueDataForComparison(nodeId: string) {
         const venue = venueData.find(v => v.name === nodeId);
-        const cfpInfo = venue ? getResolvedCFPInfo(venue.name, venue.cfpDeadline) : null;
         return venue ? {
             id: venue.name,
             name: venue.name,
             type: venue.type,
             impact: venue.impact,
-            cfpInfo,
             categories: venue.categories
         } : null;
     }
@@ -3859,7 +3364,6 @@ async function main() {
                     <div class="compare-body">
                         <div class="compare-row"><span class="compare-label">유형</span><span class="compare-value">${v!.type}</span></div>
                         <div class="compare-row"><span class="compare-label">참고 등급</span><span class="compare-value ${v!.impact ? 'impact-' + v!.impact : ''}" title="${IMPACT_REFERENCE_NOTE}">${v!.impact || '-'}</span></div>
-                        ${v!.cfpInfo && v!.cfpInfo.confidence !== 'missing' ? `<div class="compare-row"><span class="compare-label">CFP</span><span class="compare-value">${v!.cfpInfo.primaryDeadlineDisplay} ${v!.cfpInfo.confidence === 'official' ? '(공식)' : '(추정)'}</span></div>` : ''}
                     </div>
                     <div class="compare-actions">
                         <button class="btn compare-favorite" data-id="${v!.id}">♡ 즐겨찾기</button>
@@ -4113,22 +3617,16 @@ async function main() {
 
     // ========================================================================
     // SUBMISSION FIT SCORECARD  (headline differentiator)
-    // Paste an abstract -> rank venues as SUBMISSION TARGETS by topic fit,
-    // methodology-culture fit, and live CFP readiness.
+    // Paste an abstract -> rank venues as SUBMISSION TARGETS by topic fit
+    // and methodology-culture fit.
     // ========================================================================
 
     function buildFitInputs(): VenueFitInput[] {
-        const now = new Date();
-        return venueData.map(v => {
-            const info = v.cfpDeadline ? getResolvedCFPInfo(v.name, v.cfpDeadline, now) : null;
-            return {
-                name: v.name,
-                type: v.type,
-                impact: v.impact,
-                cfpDaysUntil: info ? info.daysUntil : null,
-                cfpVerified: info ? info.confidence === 'official' : false,
-            };
-        });
+        return venueData.map(v => ({
+            name: v.name,
+            type: v.type,
+            impact: v.impact,
+        }));
     }
 
     function fitBar(label: string, value: number | null, color: string): string {
@@ -4139,14 +3637,6 @@ async function main() {
         return `<div class="fit-metric"><span class="fit-metric-label">${label}</span>
             <span class="fit-bar"><span class="fit-bar-fill" style="width:${Math.max(2, value)}%;background:${color}"></span></span>
             <span class="fit-metric-val">${value}</span></div>`;
-    }
-
-    function cfpChip(r: VenueFitResult): string {
-        if (r.cfpDaysUntil === null) return '<span class="fit-cfp fit-cfp-unknown">마감일 미확인</span>';
-        if (r.cfpDaysUntil < 0) return `<span class="fit-cfp fit-cfp-passed">지난 주기 (${Math.abs(r.cfpDaysUntil)}일 지남)</span>`;
-        const tag = r.cfpVerified ? '✅ 검증' : '~추정';
-        const cls = r.cfpDaysUntil <= 45 ? 'fit-cfp-soon' : 'fit-cfp-open';
-        return `<span class="fit-cfp ${cls}">D-${r.cfpDaysUntil} · ${tag}</span>`;
     }
 
     function renderFitTeaching(t: FitTeaching | null): string {
@@ -4187,10 +3677,8 @@ async function main() {
                 <div class="fit-metrics">
                     ${fitBar('주제 적합', r.topicScore, '#7ba0cc')}
                     ${fitBar('방법론 문화', r.methodScore, '#38bdf8')}
-                    ${fitBar('CFP 준비도', r.cfpScore, '#818cf8')}
                 </div>
                 <div class="fit-foot">
-                    ${cfpChip(r)}
                     ${r.topMethodology ? `<span class="fit-meth">우세 방법론: ${escapeHtml(r.topMethodology)}</span>` : ''}
                 </div>
                 ${r.sharedTerms.length ? `<div class="fit-why">왜: ${r.sharedTerms.map(t => `<span class="fit-term">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
@@ -4237,7 +3725,7 @@ async function main() {
                     <h3>🎯 투고 적합도 스코어카드</h3>
                     <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">초록을 붙여넣으면 주제 적합 + 방법론 문화 + CFP 준비도를 결합해 투고처를 추천합니다. (논문 검색이 아니라 <strong>제출 타깃</strong> 추천)</p>
+                <p class="fit-sub">초록을 붙여넣으면 주제 적합 + 방법론 문화를 결합해 투고처를 추천합니다. (논문 검색이 아니라 <strong>제출 타깃</strong> 추천)</p>
                 <textarea id="fit-input" class="fit-textarea" placeholder="여기에 영어 초록(또는 핵심 단락)을 붙여넣으세요..."></textarea>
                 <div class="fit-actions">
                     <button class="btn" id="fit-run-btn">분석</button>
@@ -4764,16 +4252,12 @@ async function main() {
     }
 
     function gradeQuizItem(item: any): VenueFitResult[] {
-        const now = new Date();
         const inputs: VenueFitInput[] = (item.options as string[]).map((name) => {
             const v = venueData.find((x) => x.name === name);
-            const info = v?.cfpDeadline ? getResolvedCFPInfo(v.name, v.cfpDeadline, now) : null;
             return {
                 name,
                 type: v?.type,
                 impact: v?.impact,
-                cfpDaysUntil: info ? info.daysUntil : null,
-                cfpVerified: info ? info.confidence === 'official' : false,
             };
         });
         return rankSubmissionFit(item.abstract, inputs);
@@ -5003,369 +4487,6 @@ async function main() {
 
     adminBtn?.addEventListener('click', openAdminPopup);
 
-    function getCFPReviewRows() {
-        return venueData
-            .filter(venue => Boolean(venue.cfpDeadline))
-            .map(venue => {
-                const info = getResolvedCFPInfo(venue.name, venue.cfpDeadline);
-                return {
-                    venueName: venue.name,
-                    legacyPattern: venue.cfpDeadline || '',
-                    info,
-                    hasOverride: Boolean(cfpOverrideCache[venue.name])
-                };
-            })
-            .sort((a, b) => {
-                const score = (row: { info: ResolvedCFPInfo }) => {
-                    if (row.info.confidence === 'estimated') return 0;
-                    if (row.info.deadlineState === 'passed') return 1;
-                    return 2;
-                };
-                return score(a) - score(b) || a.venueName.localeCompare(b.venueName);
-            });
-    }
-
-    function getCFPVerificationAgeDays(info: ResolvedCFPInfo) {
-        if (!info.verifiedAt) return null;
-        const verifiedDate = new Date(`${info.verifiedAt}T00:00:00Z`);
-        return Math.floor((Date.now() - verifiedDate.getTime()) / (1000 * 60 * 60 * 24));
-    }
-
-    function getCFPReviewBadge(info: ResolvedCFPInfo) {
-        const ageDays = getCFPVerificationAgeDays(info);
-
-        if (info.confidence !== 'official') {
-            return {
-                label: '공식 검증 필요',
-                color: DESIGN_COLORS.tertiary
-            };
-        }
-
-        if (info.deadlineState === 'passed' || info.isStale || (ageDays !== null && ageDays >= 180)) {
-            return {
-                label: '재검증 필요',
-                color: DESIGN_COLORS.primary
-            };
-        }
-
-        if (ageDays !== null && ageDays >= 90) {
-            return {
-                label: '곧 재검토',
-                color: DESIGN_COLORS.tertiary
-            };
-        }
-
-        return {
-            label: '최신',
-            color: DESIGN_COLORS.secondarySoft
-        };
-    }
-
-    function getCFPConfidenceClass(confidence: ResolvedCFPInfo['confidence']) {
-        if (confidence === 'official') return 'official';
-        if (confidence === 'estimated') return 'estimated';
-        return 'neutral';
-    }
-
-    function getCFPStorageToneClass(mode: CFPStorageMode) {
-        return mode === 'cloud' ? 'tone-success' : mode === 'local' ? 'tone-warn' : '';
-    }
-
-    function formatAdminDateTime(dateString?: string | null) {
-        if (!dateString) return '없음';
-        try {
-            return new Date(dateString).toLocaleString('ko-KR');
-        } catch {
-            return dateString;
-        }
-    }
-
-    function getRefreshStatusLabel(state: CFPRefreshState | null) {
-        if (!state) return '미설정';
-        if (state.status === 'running') return '실행 중';
-        if (state.status === 'completed') return '정상';
-        if (state.status === 'failed') return '실패';
-        return '대기';
-    }
-
-    function getRefreshStatusTone(state: CFPRefreshState | null) {
-        if (!state) return 'admin-chip--estimated';
-        if (state.status === 'completed') return 'admin-chip--official';
-        if (state.status === 'running') return 'admin-chip--aging';
-        if (state.status === 'failed') return 'admin-chip--stale';
-        return 'admin-chip--estimated';
-    }
-
-    function getCFPReviewToneClass(info: ResolvedCFPInfo) {
-        const ageDays = getCFPVerificationAgeDays(info);
-        if (info.confidence !== 'official') return 'admin-chip--estimated';
-        if (info.deadlineState === 'passed' || (ageDays !== null && ageDays >= 180)) return 'admin-chip--stale';
-        if (ageDays !== null && ageDays >= 90) return 'admin-chip--aging';
-        return 'admin-chip--official';
-    }
-
-    function renderAdminCFPHistory() {
-        const historyEl = document.getElementById('admin-cfp-history-list');
-        if (!historyEl) return;
-
-        if (cfpHistoryCache.length === 0) {
-            historyEl.innerHTML = '<div class="admin-empty">아직 저장된 검증 이력이 없습니다.</div>';
-            return;
-        }
-
-        historyEl.innerHTML = cfpHistoryCache.slice(0, 12).map(entry => `
-            <div class="admin-review-divider">
-                <div class="admin-review-head">
-                    <span class="admin-review-title">${escapeHtml(entry.venueName)}</span>
-                    <span class="admin-review-confidence ${entry.storageMode === 'cloud' ? 'official' : 'estimated'}">
-                        ${entry.action === 'upsert' ? '저장' : '삭제'} · ${entry.storageMode === 'cloud' ? '공용' : '로컬'}
-                    </span>
-                </div>
-                <div class="admin-meta-line">
-                    ${new Date(entry.changedAt).toLocaleString('ko-KR')}
-                    ${entry.snapshot?.sourceLabel ? ` · ${escapeHtml(entry.snapshot.sourceLabel)}` : ''}
-                    ${entry.snapshot?.verifiedAt ? ` · 검증일 ${escapeHtml(entry.snapshot.verifiedAt)}` : ''}
-                </div>
-            </div>
-        `).join('');
-    }
-
-    function renderAdminCFPPreview(venueName: string) {
-        const preview = document.getElementById('admin-cfp-preview');
-        if (!preview) return;
-
-        const venue = venueData.find(item => item.name === venueName);
-        const info = venue ? getResolvedCFPInfo(venue.name, venue.cfpDeadline) : null;
-
-        if (!venue || !info) {
-            preview.innerHTML = '<span class="admin-empty">선택한 학회의 CFP 미리보기를 불러올 수 없습니다.</span>';
-            return;
-        }
-
-        preview.innerHTML = `
-            <div class="admin-preview-pills">
-                <span class="admin-preview-pill ${getCFPConfidenceClass(info.confidence)}">
-                    ${info.confidence === 'official' ? '공식 확인' : info.confidence === 'estimated' ? '추정치' : '정보 없음'}
-                </span>
-                <span class="admin-preview-pill">
-                    ${info.daysUntil === null ? '계산 불가' : info.daysUntil >= 0 ? `D-${info.daysUntil}` : `${Math.abs(info.daysUntil)}일 지남`}
-                </span>
-            </div>
-            <div class="admin-meta-line">
-                <div><strong>${info.primaryDeadlineLabel}:</strong> ${info.primaryDeadlineDisplay}</div>
-                ${info.secondaryDeadlineDisplay && info.secondaryDeadlineLabel ? `<div><strong>${info.secondaryDeadlineLabel}:</strong> ${info.secondaryDeadlineDisplay}</div>` : ''}
-                ${info.verifiedAt ? `<div><strong>마지막 검증:</strong> ${info.verifiedAt}</div>` : ''}
-                ${info.sourceUrl ? `<div><strong>출처:</strong> <a href="${info.sourceUrl}" target="_blank" rel="noopener">${info.sourceLabel || '공식 링크'}</a></div>` : ''}
-                <div class="admin-meta-line">${info.note}</div>
-            </div>
-        `;
-    }
-
-    function renderCFPPersistenceStatus() {
-        const statusEl = document.getElementById('admin-cfp-storage-status');
-        if (!statusEl) return;
-
-        statusEl.className = `admin-storage-status ${getCFPStorageToneClass(cfpPersistenceMode)}`.trim();
-        statusEl.innerHTML = `<strong>${cfpPersistenceMode === 'cloud' ? '공용 저장' : '로컬 저장'}</strong> · ${cfpPersistenceDetail}`;
-    }
-
-    function renderAdminCFPRefreshState() {
-        const root = document.getElementById('admin-cfp-refresh-state');
-        if (!root) return;
-
-        if (cfpRefreshStateAvailable === false) {
-            root.innerHTML = `
-                <div class="admin-refresh-card-grid">
-                    <div class="admin-refresh-card">
-                        <div class="admin-refresh-label">자동 갱신</div>
-                        <div class="admin-refresh-value">미설정</div>
-                        <div class="admin-refresh-meta">cfp_refresh_state 테이블을 찾지 못했습니다.</div>
-                    </div>
-                </div>
-            `;
-            return;
-        }
-
-        const state = cfpRefreshStateCache;
-        if (!state) {
-            root.innerHTML = `
-                <div class="admin-refresh-card-grid">
-                    <div class="admin-refresh-card">
-                        <div class="admin-refresh-label">자동 갱신</div>
-                        <div class="admin-refresh-value">대기</div>
-                        <div class="admin-refresh-meta">아직 실행 기록이 없습니다.</div>
-                    </div>
-                </div>
-            `;
-            return;
-        }
-
-        root.innerHTML = `
-            <div class="admin-refresh-card-grid">
-                <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">자동 갱신 상태</div>
-                    <div class="admin-refresh-value">${getRefreshStatusLabel(state)}</div>
-                    <div class="admin-chip ${getRefreshStatusTone(state)} mt-8">${state.status}</div>
-                </div>
-                <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">마지막 성공</div>
-                    <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.lastSuccessAt)}</div>
-                    <div class="admin-refresh-meta">완료 ${formatAdminDateTime(state.completedAt)}</div>
-                </div>
-                <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">다음 예정</div>
-                    <div class="admin-refresh-value admin-refresh-value--small">${formatAdminDateTime(state.nextDueAt)}</div>
-                    <div class="admin-refresh-meta">일일 cron이 15일 주기로 판정합니다.</div>
-                </div>
-                <div class="admin-refresh-card">
-                    <div class="admin-refresh-label">최근 반영</div>
-                    <div class="admin-refresh-value">${state.lastResultCount}</div>
-                    <div class="admin-refresh-meta">${state.targetNames.length}개 venue 대상</div>
-                </div>
-            </div>
-            <div class="admin-refresh-footnote">
-                ${state.lastError ? `마지막 오류: ${escapeHtml(state.lastError)}` : '최근 오류 없음'}
-            </div>
-        `;
-    }
-
-    function fillAdminCFPForm(venueName: string) {
-        const venue = venueData.find(item => item.name === venueName);
-        const overrides = getCFPOverrides();
-        const record = overrides[venueName] || getBuiltInOfficialCFPRecord(venueName);
-
-        (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)!.value = venueName;
-        (document.getElementById('admin-cfp-source-url') as HTMLInputElement | null)!.value = record?.sourceUrl || '';
-        (document.getElementById('admin-cfp-source-label') as HTMLInputElement | null)!.value = record?.sourceLabel || '';
-        (document.getElementById('admin-cfp-verified-at') as HTMLInputElement | null)!.value = record?.verifiedAt || new Date().toISOString().slice(0, 10);
-        (document.getElementById('admin-cfp-submission-deadline') as HTMLInputElement | null)!.value = record?.submissionDeadline || '';
-        (document.getElementById('admin-cfp-submission-label') as HTMLInputElement | null)!.value = record?.submissionLabel || 'Paper submission deadline';
-        (document.getElementById('admin-cfp-abstract-deadline') as HTMLInputElement | null)!.value = record?.abstractDeadline || '';
-        (document.getElementById('admin-cfp-abstract-label') as HTMLInputElement | null)!.value = record?.abstractLabel || '';
-        (document.getElementById('admin-cfp-timezone') as HTMLSelectElement | null)!.value = record?.timezone || 'AoE';
-        (document.getElementById('admin-cfp-notes') as HTMLTextAreaElement | null)!.value = record?.notes || (venue?.cfpDeadline ? `Legacy month pattern: ${venue.cfpDeadline}` : '');
-
-        renderAdminCFPPreview(venueName);
-    }
-
-    function getAdminCFPFormRecord(): OfficialCFPRecord | null {
-        const venueName = (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)?.value;
-        const sourceUrl = (document.getElementById('admin-cfp-source-url') as HTMLInputElement | null)?.value.trim() || '';
-        const sourceLabel = (document.getElementById('admin-cfp-source-label') as HTMLInputElement | null)?.value.trim() || '';
-        const verifiedAt = (document.getElementById('admin-cfp-verified-at') as HTMLInputElement | null)?.value || '';
-        const submissionDeadline = (document.getElementById('admin-cfp-submission-deadline') as HTMLInputElement | null)?.value || '';
-        const submissionLabel = (document.getElementById('admin-cfp-submission-label') as HTMLInputElement | null)?.value.trim() || '';
-        const abstractDeadline = (document.getElementById('admin-cfp-abstract-deadline') as HTMLInputElement | null)?.value || '';
-        const abstractLabel = (document.getElementById('admin-cfp-abstract-label') as HTMLInputElement | null)?.value.trim() || '';
-        const timezone = (document.getElementById('admin-cfp-timezone') as HTMLSelectElement | null)?.value as OfficialCFPRecord['timezone'];
-        const notes = (document.getElementById('admin-cfp-notes') as HTMLTextAreaElement | null)?.value.trim() || '';
-
-        if (!venueName || !sourceUrl || !sourceLabel || !verifiedAt || !submissionDeadline || !submissionLabel) {
-            return null;
-        }
-
-        return {
-            venueName,
-            sourceUrl,
-            sourceLabel,
-            verifiedAt,
-            submissionDeadline,
-            submissionLabel,
-            abstractDeadline: abstractDeadline || undefined,
-            abstractLabel: abstractDeadline ? (abstractLabel || 'Abstract deadline') : undefined,
-            timezone: timezone || 'AoE',
-            notes: notes || undefined
-        };
-    }
-
-    function bindAdminCFPEvents() {
-        const venueSelect = document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null;
-        const reviewButtons = document.querySelectorAll('.admin-cfp-review-item');
-
-        venueSelect?.addEventListener('change', () => {
-            if (venueSelect.value) {
-                fillAdminCFPForm(venueSelect.value);
-            }
-        });
-
-        reviewButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const venueName = button.getAttribute('data-venue');
-                if (venueName) {
-                    fillAdminCFPForm(venueName);
-                }
-            });
-        });
-
-        document.getElementById('admin-cfp-save')?.addEventListener('click', async () => {
-            const record = getAdminCFPFormRecord();
-            const result = document.getElementById('admin-cfp-result');
-            if (!record) {
-                if (result) {
-                    result.className = 'admin-result tone-warn';
-                    result.textContent = '필수 항목을 모두 입력하세요.';
-                }
-                return;
-            }
-
-            const saveResult = await saveCFPRecord(record);
-            renderAdminCFPPreview(record.venueName);
-            renderCFPPersistenceStatus();
-            renderAdminCFPHistory();
-            applyCFPFilter(true);
-
-            if (currentNodeId === record.venueName) {
-                void handleNodeClick(record.venueName);
-            }
-
-            if (result) {
-                result.className = `admin-result ${getCFPStorageToneClass(saveResult.mode)}`.trim();
-                result.textContent = `✅ ${saveResult.message}`;
-            }
-        });
-
-        document.getElementById('admin-cfp-clear')?.addEventListener('click', async () => {
-            const venueName = (document.getElementById('admin-cfp-venue-select') as HTMLSelectElement | null)?.value;
-            const result = document.getElementById('admin-cfp-result');
-            if (!venueName) return;
-
-            const clearResult = await clearCFPRecordOverride(venueName);
-            fillAdminCFPForm(venueName);
-            renderCFPPersistenceStatus();
-            renderAdminCFPHistory();
-            applyCFPFilter(true);
-
-            if (currentNodeId === venueName) {
-                void handleNodeClick(venueName);
-            }
-
-            if (result) {
-                result.className = `admin-result ${clearResult.mode === 'cloud' ? 'tone-info' : 'tone-warn'}`.trim();
-                result.textContent = `↺ ${clearResult.message}`;
-            }
-        });
-
-        document.getElementById('admin-cfp-export')?.addEventListener('click', async () => {
-            const overrides = cfpOverrideCache;
-            const result = document.getElementById('admin-cfp-result');
-            try {
-                await navigator.clipboard.writeText(JSON.stringify(overrides, null, 2));
-                if (result) {
-                    result.className = 'admin-result tone-success';
-                    result.textContent = '📋 현재 CFP override JSON을 클립보드에 복사했습니다.';
-                }
-            } catch {
-                if (result) {
-                    result.className = 'admin-result tone-warn';
-                    result.textContent = '클립보드 복사에 실패했습니다.';
-                }
-            }
-        });
-
-        renderCFPPersistenceStatus();
-        renderAdminCFPHistory();
-    }
-
     async function openAdminPopup() {
         if (!supabase) return;
 
@@ -5379,27 +4500,13 @@ async function main() {
         }
 
         // Get stats
-        const [usersRes, threadsRes, refreshState] = await Promise.all([
+        const [usersRes, threadsRes] = await Promise.all([
             supabase.from('user_roles').select('*', { count: 'exact' }),
-            supabase.from('collaboration_threads').select('*', { count: 'exact' }),
-            loadCFPRefreshStateFromCloud()
+            supabase.from('collaboration_threads').select('*', { count: 'exact' })
         ]);
 
         const userCount = usersRes.count || 0;
         const threadCount = threadsRes.count || 0;
-        const cfpRows = getCFPReviewRows();
-        const officialCFPCount = cfpRows.filter(row => row.info.confidence === 'official').length;
-        const estimatedCFPCount = cfpRows.filter(row => row.info.confidence === 'estimated').length;
-        const recheckCFPCount = cfpRows.filter(row => row.info.confidence !== 'official' || row.info.deadlineState === 'passed').length;
-        const staleCFPCount = cfpRows.filter(row => {
-            const age = getCFPVerificationAgeDays(row.info);
-            return row.info.confidence === 'official' && (row.info.isStale || row.info.deadlineState === 'passed' || (age !== null && age >= 180));
-        }).length;
-        const agingCFPCount = cfpRows.filter(row => {
-            const age = getCFPVerificationAgeDays(row.info);
-            return row.info.confidence === 'official' && age !== null && age >= 90 && age < 180 && row.info.deadlineState !== 'passed';
-        }).length;
-        cfpRefreshStateCache = refreshState;
 
         // Get recent users
         const { data: users } = await supabase
@@ -5428,94 +4535,6 @@ async function main() {
                             <div class="admin-stat-card">
                                 <div class="admin-stat-value">${threadCount}</div>
                                 <div class="admin-stat-label">협업 쓰레드</div>
-                            </div>
-                        </div>
-
-                        <!-- CFP Verification -->
-                        <div class="surface-panel">
-                            <div class="admin-section-header">
-                                <div>
-                                    <h3 class="admin-section-title">📅 CFP 팩트체크 워크플로</h3>
-                                    <p class="admin-section-copy">공식 링크, 마감일, 검증일을 저장하면 전역 데이터와 관리자 워크플로에 즉시 반영됩니다.</p>
-                                </div>
-                                <div class="admin-chip-row">
-                                    <span class="admin-chip admin-chip--official">공식 ${officialCFPCount}</span>
-                                    <span class="admin-chip admin-chip--estimated">추정 ${estimatedCFPCount}</span>
-                                    <span class="admin-chip admin-chip--recheck">재검토 ${recheckCFPCount}</span>
-                                    <span class="admin-chip admin-chip--stale">stale ${staleCFPCount}</span>
-                                    <span class="admin-chip admin-chip--aging">90일+ ${agingCFPCount}</span>
-                                </div>
-                            </div>
-                            <div id="admin-cfp-storage-status" class="admin-storage-status"></div>
-                            <div id="admin-cfp-refresh-state" class="admin-refresh-state-wrap"></div>
-
-                            <div class="admin-split-grid">
-                                <div class="admin-subpanel">
-                                    <div class="admin-subpanel-title">검토 우선 목록</div>
-                                    <div class="admin-list-scroll">
-                                        ${cfpRows.slice(0, 16).map(row => {
-                                            const badge = getCFPReviewBadge(row.info);
-                                            return `
-                                            <button class="admin-cfp-review-item admin-review-item" data-venue="${row.venueName}">
-                                                <div class="admin-review-head">
-                                                    <span class="admin-review-title">${row.venueName}</span>
-                                                    <span class="admin-review-confidence ${getCFPConfidenceClass(row.info.confidence)}">
-                                                        ${row.info.confidence === 'official' ? '공식' : row.info.confidence === 'estimated' ? '추정' : '없음'}
-                                                    </span>
-                                                </div>
-                                                <div class="admin-review-meta">${row.info.primaryDeadlineDisplay}</div>
-                                                <div class="admin-chip ${getCFPReviewToneClass(row.info)} mt-8">${badge.label}</div>
-                                                <div class="admin-review-submeta">
-                                                    ${row.info.deadlineState === 'passed' ? '다음 cycle 재검증 필요' : row.hasOverride ? 'override 적용 중' : `기존 패턴: ${row.legacyPattern}`}
-                                                </div>
-                                            </button>
-                                        `;
-                                        }).join('')}
-                                    </div>
-                                </div>
-
-                                <div class="admin-subpanel">
-                                    <div class="admin-subpanel-title">검증 레코드 편집</div>
-                                    <select id="admin-cfp-venue-select" class="admin-select-input">
-                                        <option value="">학회 선택...</option>
-                                        ${venueData.filter(venue => Boolean(venue.cfpDeadline)).map(venue => `<option value="${venue.name}">${venue.name}</option>`).join('')}
-                                    </select>
-                                    <input id="admin-cfp-source-url" type="url" placeholder="공식 CFP URL" class="admin-text-input">
-                                    <input id="admin-cfp-source-label" type="text" placeholder="출처 라벨" class="admin-text-input">
-                                    <div class="field-grid-2">
-                                        <input id="admin-cfp-verified-at" type="date" class="admin-text-input">
-                                        <select id="admin-cfp-timezone" class="admin-select-input">
-                                            <option value="AoE">AoE</option>
-                                            <option value="PT">PT</option>
-                                            <option value="Local">Local</option>
-                                        </select>
-                                    </div>
-                                    <div class="field-grid-2">
-                                        <input id="admin-cfp-submission-deadline" type="date" class="admin-text-input">
-                                        <input id="admin-cfp-submission-label" type="text" placeholder="주 마감 라벨" class="admin-text-input">
-                                    </div>
-                                    <div class="field-grid-2">
-                                        <input id="admin-cfp-abstract-deadline" type="date" class="admin-text-input">
-                                        <input id="admin-cfp-abstract-label" type="text" placeholder="보조 마감 라벨" class="admin-text-input">
-                                    </div>
-                                    <textarea id="admin-cfp-notes" placeholder="검증 메모" class="admin-textarea"></textarea>
-                                    <div id="admin-cfp-preview" class="admin-preview">
-                                        검증 레코드를 선택하면 현재 적용 상태가 여기에 표시됩니다.
-                                    </div>
-                                    <div class="button-row">
-                                        <button id="admin-cfp-save" class="btn">저장</button>
-                                        <button id="admin-cfp-clear" class="btn btn-secondary-ghost">override 제거</button>
-                                        <button id="admin-cfp-export" class="btn btn-secondary-accent">JSON 복사</button>
-                                    </div>
-                                    <div id="admin-cfp-result" class="admin-result"></div>
-                                </div>
-                            </div>
-                            <div class="admin-subpanel mt-16">
-                                <div class="admin-section-header">
-                                    <div class="admin-subpanel-title">최근 검증 이력</div>
-                                    <div class="admin-review-meta">최대 12건</div>
-                                </div>
-                                <div id="admin-cfp-history-list"></div>
                             </div>
                         </div>
 
@@ -5563,11 +4582,6 @@ async function main() {
 
         document.getElementById('admin-overlay')?.addEventListener('click', closeAdminPopup);
         document.getElementById('admin-close')?.addEventListener('click', closeAdminPopup);
-        bindAdminCFPEvents();
-        if (cfpRows[0]) {
-            fillAdminCFPForm(cfpRows[0].venueName);
-        }
-        renderAdminCFPRefreshState();
 
         // Search user
         document.getElementById('admin-search-btn')?.addEventListener('click', async () => {
@@ -6949,14 +5963,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     const ragMode = import.meta.env.VITE_RAG_MODE === 'local' ? 'local' : 'auto';
     const defaultRagSuggestions = [
         'CSCL 입문자에게 추천 저널 3개',
-        '마감 임박한 CFP 보여줘',
+        'AIED 관련 학회 알려줘',
         'JLS와 Computers & Education 비교해줘',
         'Learning Analytics 관련 주제 알려줘'
     ];
 
     type RagSourceTone = 'official' | 'reference' | 'editorial';
     type RagActionType = 'focus-node' | 'add-compare' | 'open-topic' | 'open-topics' | 'open-link';
-    type RagDocumentType = 'venue' | 'topic' | 'cfp' | 'glossary' | 'context' | 'graph';
+    type RagDocumentType = 'venue' | 'topic' | 'glossary' | 'context' | 'graph';
 
     interface RagChatSource {
         label: string;
@@ -7035,13 +6049,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     let lastRagPrompt = '';
     let ragTutorMode = false;
     const ragGlossaryDocs = [
-        {
-            id: 'glossary-cfp',
-            keywords: ['cfp', '마감', 'deadline', 'submission'],
-            title: 'CFP',
-            summary: '학회 논문 모집 공고와 투고 마감 정보를 뜻합니다.',
-            body: 'CFP는 Call for Papers의 약자입니다. 실제 사용 시에는 마감일, abstract deadline, notification, camera-ready 일정을 함께 확인하는 것이 중요합니다.'
-        },
         {
             id: 'glossary-q',
             keywords: ['q1', 'q2', 'q3', 'q4', '등급', 'quartile'],
@@ -7169,8 +6176,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const currentVenueName = getCurrentRagVenueName();
         if (currentVenueName) {
             return isKorean
-                ? `${currentVenueName} 기준으로 최근 흐름, 관련 학회, 공식 링크, CFP까지 심층 정리해줘`
-                : `Deep research on ${currentVenueName}: recent trends, related venues, official links, and CFP status`;
+                ? `${currentVenueName} 기준으로 최근 흐름, 관련 학회, 공식 링크까지 심층 정리해줘`
+                : `Deep research on ${currentVenueName}: recent trends, related venues, and official links`;
         }
         return isKorean
             ? 'CSCL 입문자를 위한 저널, 학회, 공식 링크, 최근 흐름을 심층 정리해줘'
@@ -7183,8 +6190,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             ragMessages.push({
                 role: 'assistant',
                 text: isKorean
-                    ? '질문을 주시면 먼저 앱 내부의 저널, 학회, CFP, 연구 주제 문서를 검색하고, 가능하면 AI로 짧게 정리해드릴게요. 더 긴 분석이 필요하면 오른쪽 위 심층 버튼으로 웹 리서치도 시작할 수 있습니다.'
-                    : 'Ask a question and I will search journals, conferences, CFPs, and topic documents first, then summarize with AI when available. Use the Deep button for a longer web research pass.',
+                    ? '질문을 주시면 먼저 앱 내부의 저널, 학회, 연구 주제 문서를 검색하고, 가능하면 AI로 짧게 정리해드릴게요. 더 긴 분석이 필요하면 오른쪽 위 심층 버튼으로 웹 리서치도 시작할 수 있습니다.'
+                    : 'Ask a question and I will search journals, conferences, and topic documents first, then summarize with AI when available. Use the Deep button for a longer web research pass.',
                 suggestions: defaultRagSuggestions,
                 meta: getRagModeLabel()
             });
@@ -7342,7 +6349,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const normalizedQuery = normalizeRagText(query);
         const queryTokens = tokenizeRagText(query);
         const wantsJournal = /저널|journal/.test(normalizedQuery);
-        const wantsConference = /학회|conference|cfp|deadline|마감/.test(normalizedQuery);
+        const wantsConference = /학회|conference/.test(normalizedQuery);
 
         return venueData
             .map(venue => {
@@ -7369,7 +6376,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 if (wantsJournal && venue.type === 'Journal') score += 3;
                 if (wantsConference && venue.type.includes('Conference')) score += 3;
                 if (/추천|recommend|어디|입문|start/.test(normalizedQuery) && venue.type === 'Journal') score += 1;
-                if (/cfp|deadline|마감/.test(normalizedQuery) && venue.cfpDeadline) score += 4;
 
                 return { venue, details, audit, score };
             })
@@ -7576,7 +6582,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const venueMatches = buildVenueMatches(query);
         const topicMatches = buildTopicMatches(query);
         const currentVenueName = getCurrentRagVenueName();
-        const cfpEntries = getCFPEntries();
         const documents: RagRetrievalDocument[] = [];
         const graphDocuments = buildGraphRagDocuments(query, venueMatches, topicMatches, currentVenueName);
 
@@ -7600,7 +6605,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         }
 
         venueMatches.slice(0, 4).forEach(match => {
-            const cfp = cfpEntries.find(entry => entry.venueId === match.venue.name);
             const methodology = match.details.methodologyProfile
                 .slice(0, 3)
                 .map(item => `${item.methodology} ${item.prevalence}%`)
@@ -7616,8 +6620,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     `카테고리: ${match.venue.categories.join(', ')}`,
                     `대표 토픽: ${match.details.topics.join(', ')}`,
                     methodology ? `방법론 경향: ${methodology}` : '',
-                    match.venue.impact ? `참고 등급: ${match.venue.impact}` : '',
-                    cfp ? `CFP: ${cfp.info.primaryDeadlineDisplay} (${cfp.info.confidence === 'official' ? '공식 확인' : cfp.info.confidence === 'estimated' ? '추정치' : '정보 없음'})` : ''
+                    match.venue.impact ? `참고 등급: ${match.venue.impact}` : ''
                 ].filter(Boolean).join('\n'),
                 sourceLabel: `${match.venue.name} · ${getVenueTypeKorean(match.venue.type)} · ${match.audit.website?.status === 'official' ? '공식 링크 확인' : '편집 요약'}`,
                 sourceTone: match.audit.website?.status === 'official' ? 'official' : 'editorial',
@@ -7644,35 +6647,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 topicId: match.topic.id
             });
         });
-
-        if (/cfp|deadline|마감|투고|submission/.test(normalizedQuery)) {
-            cfpEntries
-                .filter(entry => entry.daysUntil >= -30)
-                .filter(entry => {
-                    if (venueMatches.length === 0) return true;
-                    return venueMatches.some(match => match.venue.name === entry.venueId);
-                })
-                .slice(0, 4)
-                .forEach(entry => {
-                    documents.push({
-                        id: `cfp:${entry.venueId}`,
-                        type: 'cfp',
-                        title: `${entry.venueId} CFP`,
-                        summary: `${entry.info.primaryDeadlineDisplay} · ${entry.daysUntil >= 0 ? `D-${entry.daysUntil}` : `${Math.abs(entry.daysUntil)}일 지남`}`,
-                        body: [
-                            `주 마감: ${entry.info.primaryDeadlineDisplay}`,
-                            entry.info.abstractDeadlineDisplay ? `추가 마감: ${entry.info.abstractDeadlineDisplay}` : '',
-                            `검증 상태: ${entry.info.confidence === 'official' ? '공식 확인' : entry.info.confidence === 'estimated' ? '추정치' : '정보 없음'}`,
-                            entry.info.verifiedAt ? `마지막 검증: ${entry.info.verifiedAt}` : '',
-                            entry.info.notes || ''
-                        ].filter(Boolean).join('\n'),
-                        sourceLabel: `${entry.venueId} · ${entry.info.confidence === 'official' ? '공식 CFP' : '추정 CFP'}`,
-                        sourceTone: entry.info.confidence === 'official' ? 'official' : 'reference',
-                        sourceUrl: entry.info.sourceUrl,
-                        venueName: entry.venueId
-                    });
-                });
-        }
 
         ragGlossaryDocs.forEach(doc => {
             if (doc.keywords.some(keyword => normalizedQuery.includes(normalizeRagText(keyword)))) {
@@ -7740,7 +6714,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (linkDoc?.sourceUrl) {
             actions.push({
                 type: 'open-link',
-                label: linkDoc.type === 'cfp' ? '공식 CFP 열기' : '공식 링크 열기',
+                label: '공식 링크 열기',
                 target: linkDoc.sourceUrl
             });
         }
@@ -7777,7 +6751,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 text: `그래프 연결 기준으로 보면 ${pathDocument.title}는 ${pathDocument.summary} 구조로 이어집니다.\n${pathDocument.body}\n즉, 단순 키워드 매치뿐 아니라 공유 카테고리 경로에서도 두 venue가 가깝습니다.`,
                 sources: buildRagSourcesFromDocuments(graphDocuments),
                 actions: buildRagActionsFromDocuments(query, graphDocuments),
-                suggestions: ['공유 카테고리 기준으로 더 비교', '이 경로에서 CFP 있는 학회만 보기']
+                suggestions: ['공유 카테고리 기준으로 더 비교', '이 경로에서 학회만 보기']
             };
         }
 
@@ -7810,7 +6784,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const topicMatches = buildTopicMatches(query);
         const currentVenueName = getCurrentRagVenueName();
         const compareIntent = /비교|compare|차이|difference|vs/.test(normalizedQuery);
-        const cfpIntent = /cfp|deadline|마감|투고|submission/.test(normalizedQuery);
         const topicIntent = /주제|topic|개념|설명|learning analytics|cscl|aied|methodolog/.test(normalizedQuery);
         const currentContextIntent = Boolean(currentVenueName && /현재|선택|이 저널|이 학회|이 노드|this|selected/.test(normalizedQuery));
 
@@ -7842,40 +6815,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     { type: 'add-compare', label: `${first.venue.name} 비교 추가`, target: first.venue.name },
                     { type: 'add-compare', label: `${second.venue.name} 비교 추가`, target: second.venue.name }
                 ],
-                suggestions: ['이 둘의 CFP나 학회 연결도 보여줘', `${first.venue.name} 입문자에게 괜찮아?`]
+                suggestions: ['이 둘의 학회 연결도 보여줘', `${first.venue.name} 입문자에게 괜찮아?`]
             };
-        }
-
-        if (cfpIntent) {
-            const relevantEntries = getCFPEntries()
-                .filter(entry => {
-                    if (venueMatches.length === 0) return true;
-                    return venueMatches.some(match => match.venue.name === entry.venueId || match.venue.categories.some(category => normalizeRagText(query).includes(normalizeRagText(category))));
-                })
-                .filter(entry => entry.daysUntil >= -30)
-                .slice(0, 4);
-
-            if (relevantEntries.length > 0) {
-                const summary = relevantEntries.map(entry => {
-                    const status = entry.info.confidence === 'official' ? '공식 확인' : entry.info.confidence === 'estimated' ? '추정치' : '정보 없음';
-                    const due = entry.daysUntil >= 0 ? `D-${entry.daysUntil}` : `${Math.abs(entry.daysUntil)}일 지남`;
-                    return `• ${entry.venueId}: ${due} · ${entry.info.primaryDeadlineDisplay} · ${status}`;
-                }).join('\n');
-                const topEntry = relevantEntries[0];
-                return {
-                    role: 'assistant',
-                    text: `질문과 가장 가까운 CFP 후보를 추려보면:\n${summary}\n공식 검증이 붙은 항목은 아래에서 바로 열 수 있어요.`,
-                    sources: relevantEntries.map(entry => ({
-                        label: `${entry.venueId} · ${entry.info.confidence === 'official' ? '공식 CFP' : '추정 CFP'}`,
-                        tone: entry.info.confidence === 'official' ? 'official' : 'reference'
-                    })),
-                    actions: [
-                        { type: 'focus-node', label: `${topEntry.venueId} 보기`, target: topEntry.venueId },
-                        ...(topEntry.info.sourceUrl ? [{ type: 'open-link' as const, label: '공식 CFP 열기', target: topEntry.info.sourceUrl }] : [])
-                    ],
-                    suggestions: ['공식 확인된 CFP만 다시 보여줘', '이 중 Learning Sciences 쪽만 골라줘']
-                };
-            }
         }
 
         if (currentContextIntent && currentVenueName) {
@@ -7938,10 +6879,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         return {
             role: 'assistant',
-            text: '질문과 바로 맞는 내부 근거를 많이 찾지 못했어요. 저널명, 학회명, 토픽명, 혹은 CFP/비교처럼 원하는 작업을 조금 더 구체적으로 적어주시면 더 정확하게 안내할 수 있습니다.',
+            text: '질문과 바로 맞는 내부 근거를 많이 찾지 못했어요. 저널명, 학회명, 토픽명, 혹은 비교처럼 원하는 작업을 조금 더 구체적으로 적어주시면 더 정확하게 안내할 수 있습니다.',
             suggestions: [
                 'CSCL 관련 대표 저널 알려줘',
-                '공식 확인된 CFP만 보여줘',
+                'JLS와 Computers & Education 비교해줘',
                 'Learning Analytics 입문 순서 추천',
                 '현재 선택 노드 설명해줘'
             ]
@@ -8110,9 +7051,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const normalizedQuery = normalizeRagText(query);
         const suggestions = [];
 
-        if (/cfp|deadline|마감|submission/.test(normalizedQuery)) {
-            suggestions.push('공식 CFP만 다시 요약');
-        }
         if (/cscl|learning analytics|aied|topic|주제/.test(normalizedQuery)) {
             suggestions.push('관련 학회 흐름 비교');
         }
@@ -8409,7 +7347,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             impactFilterEl.value = impactFilter;
         }
 
-        updateCFPFilterButton();
         compareBtn?.classList.toggle('active', comparisonState.isActive);
     }
 
@@ -8421,11 +7358,9 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         filterJournal = state.journalsEnabled;
         filterConference = state.conferencesEnabled;
         impactFilter = state.impact;
-        cfpFilterDays = state.cfpDays;
 
         syncFilterControls();
         applyFilters();
-        applyCFPFilter(true);
 
         if (state.koreanNetwork && !isKoreanNetworkActive) {
             (document.getElementById('korean-network-btn') as HTMLButtonElement | null)?.click();
@@ -8827,8 +7762,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const ragInputEl = document.getElementById('rag-chatbot-input') as HTMLTextAreaElement | null;
         if (ragInputEl) {
             ragInputEl.placeholder = isKorean
-                ? '예: CSCL 입문자에게 추천 저널 3개, 마감 임박 CFP, JLS와 C&E 비교'
-                : 'Try: 3 journals for CSCL beginners, urgent CFPs, compare JLS and C&E';
+                ? '예: CSCL 입문자에게 추천 저널 3개, AIED 관련 학회, JLS와 C&E 비교'
+                : 'Try: 3 journals for CSCL beginners, AIED conferences, compare JLS and C&E';
         }
 
         const ragHint = document.getElementById('rag-chatbot-hint');
@@ -8939,7 +7874,6 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (impactFilter) url.searchParams.set('impact', impactFilter);
         if (!filterJournal) url.searchParams.set('journals', '0');
         if (!filterConference) url.searchParams.set('confs', '0');
-        if (cfpFilterDays > 0) url.searchParams.set('cfp', String(cfpFilterDays));
         if (isKoreanNetworkActive) url.searchParams.set('korean', '1');
         if (topicsPopupOpen) url.searchParams.set('topics', '1');
 

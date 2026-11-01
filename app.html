@@ -603,117 +603,6 @@
       color: var(--primary);
     }
 
-    /* ===== CFP CALENDAR STYLES ===== */
-    .cfp-timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 10px 0;
-    }
-
-    .cfp-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 10px 12px;
-      background: var(--bg-tertiary);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .cfp-item:hover {
-      background: var(--bg-secondary);
-      transform: translateX(4px);
-    }
-
-    .cfp-date {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 45px;
-      padding: 6px;
-      background: var(--bg-primary);
-      border-radius: 6px;
-      text-align: center;
-    }
-
-    .cfp-month {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .cfp-day {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .cfp-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .cfp-name {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-primary);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 4px;
-    }
-
-    .cfp-empty {
-      padding: 20px;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    /* Urgency Badges */
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 600;
-    }
-
-    .badge-urgent {
-      background: rgba(245, 166, 35, 0.18);
-      color: var(--tertiary-soft);
-    }
-
-    .badge-soon {
-      background: rgba(59, 191, 250, 0.18);
-      color: var(--primary);
-    }
-
-    .badge-upcoming {
-      background: rgba(16, 185, 129, 0.18);
-      color: var(--secondary-soft);
-    }
-
-    .badge-normal {
-      background: rgba(107, 114, 128, 0.2);
-      color: var(--text-muted);
-    }
-
-    .badge-expired {
-      background: rgba(107, 114, 128, 0.3);
-      color: var(--text-muted);
-      text-decoration: line-through;
-    }
-
-    /* CFP Filter Button */
-    .filter-btn.cfp.active {
-      background: linear-gradient(135deg, var(--tertiary), var(--tertiary-soft));
-      border-color: transparent;
-      color: var(--surface);
-    }
-
     /* ===== COMPARISON PANEL ===== */
     .comparison-panel {
       position: fixed;
@@ -952,11 +841,6 @@
     .fit-metric-val { width: 26px; text-align: right; font-variant-numeric: tabular-nums; }
     .fit-metric-na { font-style: italic; opacity: .7; }
     .fit-foot { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 2px; }
-    .fit-cfp { font-size: 0.7rem; padding: 2px 8px; border-radius: 8px; font-weight: 600; }
-    .fit-cfp-soon { background: rgba(245,158,11,.18); color: #b45309; }
-    .fit-cfp-open { background: rgba(16,185,129,.16); color: #047857; }
-    .fit-cfp-passed { background: rgba(120,130,150,.16); color: var(--text-secondary); }
-    .fit-cfp-unknown { background: rgba(120,130,150,.12); color: var(--text-secondary); }
     .fit-meth { font-size: 0.7rem; color: var(--text-secondary); }
     .fit-why { margin-top: 8px; font-size: 0.72rem; color: var(--text-secondary); }
     .fit-term { display: inline-block; background: rgba(123,160,204,.16); border-radius: 6px; padding: 1px 7px; margin: 2px 4px 0 0; }
@@ -2902,23 +2786,6 @@
       border-color: var(--color-accent);
     }
 
-    /* CFP Calendar */
-    .cfp-info {
-      background: var(--bg-tertiary);
-      border-radius: 8px;
-      padding: 10px;
-      margin-top: 8px;
-    }
-
-    .cfp-info p {
-      font-size: 0.75rem;
-      margin-bottom: 4px;
-    }
-
-    .cfp-info p:last-child {
-      margin-bottom: 0;
-    }
-
     /* ===== ANNOTATIONS ===== */
     .annotations-section {
       border-top: 1px solid var(--border-color);
@@ -4579,7 +4446,6 @@
         <!-- View -->
         <button class="btn filter-btn active" id="filter-journal">저널</button>
         <button class="btn filter-btn conference active" id="filter-conf">학회</button>
-        <button class="btn filter-btn cfp tb-divider" id="cfp-filter-btn" title="CFP 마감일 필터">📅 CFP</button>
         <!-- Citation / lens -->
         <button class="btn filter-btn citation tb-divider" id="citation-layer-btn" title="인용 기반 엣지 오버레이 (V6: OpenAlex 인용 흐름)">🔗 인용</button>
         <select class="category-select" id="node-encoding-select" title="노드 색 기준" style="max-width:150px">
@@ -4793,7 +4659,7 @@
         <h3>🎯 주요 기능</h3>
         <ul>
           <li>🔎 <strong>검색:</strong> 상단 검색창에서 저널/학회 이름으로 검색</li>
-          <li>🏷️ <strong>필터링:</strong> 저널/학회별, CFP 마감, 비교, 한국 네트워크 모드 필터</li>
+          <li>🏷️ <strong>필터링:</strong> 저널/학회별, 비교, 한국 네트워크 모드 필터</li>
           <li>📦 <strong>클러스터:</strong> 카테고리별로 노드 그룹화</li>
           <li>⭐ <strong>즐겨찾기:</strong> 관심 저널을 저장하여 빠르게 접근</li>
           <li>💬 <strong>어노테이션:</strong> 노드에 코멘트와 평점 남기기</li>
@@ -4809,7 +4675,7 @@
         </div>
 
         <h3 style="margin-top: 16px;">📊 데이터 출처</h3>
-        <p>CFP는 공식 페이지 기준 검증 레코드를 우선 사용합니다. 개요와 토픽은 학습용 편집 요약이며, Q 등급과 연구 성향은 탐색을 돕는 참고 정보로 제공됩니다.</p>
+        <p>개요와 토픽은 학습용 편집 요약이며, Q 등급과 연구 성향은 탐색을 돕는 참고 정보로 제공됩니다.</p>
 
         <div
           style="margin-top: 16px; padding: 12px; background: var(--bg-tertiary); border-radius: 8px; font-size: 0.8rem; color: var(--text-muted); text-align: center;">
@@ -4907,10 +4773,10 @@
                 <article class="track-card">
                   <div class="track-meta">학회 탐색</div>
                   <h4>학회 구조 이해하기</h4>
-                  <p>학회와 저널이 어떻게 연결되는지 이해하고 CFP 흐름까지 같이 보려는 학습자용입니다.</p>
+                  <p>학회와 저널이 어떻게 연결되는지 이해하려는 학습자용입니다.</p>
                   <ul class="track-steps">
                     <li>대표 학회를 중심으로 관련 저널을 확인합니다.</li>
-                    <li>CFP 버튼으로 마감 임박 학회를 같이 봅니다.</li>
+                    <li>🔗 인용 레이어로 학회와 저널 사이의 인용 흐름을 봅니다.</li>
                     <li>학회와 저널의 역할 차이를 비교합니다.</li>
                   </ul>
                   <button class="track-action" type="button" data-learning-action="focus" data-learning-target="ISLS Annual Meeting">학회부터 보기</button>
@@ -4955,10 +4821,10 @@
                 <article class="track-card">
                   <div class="track-meta">입문 경로 · 투고</div>
                   <h4>AIED 논문 투고</h4>
-                  <p>AI in Education 분야에 첫 투고를 준비하는 경로입니다. 마감과 적합도를 함께 봅니다.</p>
+                  <p>AI in Education 분야에 첫 투고를 준비하는 경로입니다. 주제와 방법론 적합도를 함께 봅니다.</p>
                   <ul class="track-steps">
-                    <li>AIED Conference로 이동해 CFP 마감(D-day)을 확인합니다.</li>
-                    <li>📅 CFP로 마감 임박 venue를 함께 훑습니다.</li>
+                    <li>AIED Conference로 이동해 개요와 주요 토픽을 확인합니다.</li>
+                    <li>🧪 방법론으로 AIED 계열 venue의 연구문화를 함께 훑습니다.</li>
                     <li>🎯 적합도에 초록을 붙여 AIED 계열 적합도를 점검합니다.</li>
                   </ul>
                   <button class="track-action" type="button" data-learning-action="focus" data-learning-target="AIED Conference">AIED부터 보기</button>
@@ -4971,7 +4837,7 @@
                   <ul class="track-steps">
                     <li>Journal of Learning Analytics에서 분야 지형을 잡습니다.</li>
                     <li>🧪 방법론에서 Data & AI 이웃 venue를 함께 봅니다.</li>
-                    <li>연관 학회(LAK)와 CFP 흐름으로 확장합니다.</li>
+                    <li>연관 학회(LAK)까지 연결을 따라 확장합니다.</li>
                   </ul>
                   <button class="track-action" type="button" data-learning-action="focus" data-learning-target="Journal of Learning Analytics">LA부터 보기</button>
                 </article>
@@ -4981,10 +4847,6 @@
             <section>
               <div class="learning-section-title">Glossary</div>
               <div class="glossary-grid">
-                <article class="glossary-card">
-                  <h4>CFP</h4>
-                  <p>Call for Papers의 약자입니다. 학회나 특집호가 논문 제출을 받는 공고이며, 마감 시기가 실제 탐색과 투고 계획에 큰 영향을 줍니다.</p>
-                </article>
                 <article class="glossary-card">
                   <h4>Q1 / Q2 / Q3</h4>
                   <p>영향력 지표를 기반으로 한 대략적 구간입니다. 절대적인 품질보다 분야 안에서의 상대적 위치를 읽는 보조 지표로 이해하는 것이 좋습니다.</p>
@@ -5037,7 +4899,7 @@
       <div class="rag-chatbot-messages" id="rag-chatbot-messages"></div>
       <div class="rag-chatbot-footer">
         <form class="rag-chatbot-form" id="rag-chatbot-form">
-          <textarea class="rag-chatbot-input" id="rag-chatbot-input" placeholder="예: CSCL 입문자에게 추천 저널 3개, 마감 임박 CFP, JLS와 C&E 비교" rows="2"></textarea>
+          <textarea class="rag-chatbot-input" id="rag-chatbot-input" placeholder="예: CSCL 입문자에게 추천 저널 3개, AIED 관련 학회, JLS와 C&E 비교" rows="2"></textarea>
           <button class="rag-chatbot-send" type="submit" id="rag-chatbot-send" title="보내기">➜</button>
         </form>
         <div class="rag-chatbot-hint" id="rag-chatbot-hint">근거 칩, 관련 노드 보기, 비교 추가, 공식 링크 열기까지 함께 제공합니다.</div>

@@ -12,7 +12,6 @@ export interface VenueRuleInput {
     venueName: string;
     type: 'Journal' | 'Conference' | 'SubConference';
     impact?: string;
-    cfpDeadline?: string;
     categories?: string[];
     ifHistory?: Array<{ year: number; value: number }>;
     userFavorites?: Set<string>;
@@ -28,10 +27,6 @@ export interface RuleEngineResult {
 
 // Rule weights configuration
 const RULE_WEIGHTS = {
-    DEADLINE_BOOST_7DAYS: 3,
-    DEADLINE_BOOST_14DAYS: 2.5,
-    DEADLINE_BOOST_30DAYS: 2,
-    DEADLINE_BOOST_60DAYS: 1,
     IF_Q1_BOOST: 2.5,
     IF_Q2_BOOST: 1.5,
     IF_TREND_CONSECUTIVE_3: 2,
@@ -51,18 +46,8 @@ export function runRuleEngine(venue: VenueRuleInput, context: {
 } = {}): RuleEngineResult {
     const signals: RuleSignal[] = [];
     const explanation: string[] = [];
-    const now = context.currentDate || new Date();
 
-    // 1. Deadline boost (time-sensitive)
-    if (venue.cfpDeadline) {
-        const deadlineSignal = checkDeadlineBoost(venue.cfpDeadline, now);
-        if (deadlineSignal) {
-            signals.push(deadlineSignal);
-            explanation.push(deadlineSignal.reason);
-        }
-    }
-
-    // 2. Impact factor boost (trust)
+    // 1. Impact factor boost (trust)
     if (venue.impact) {
         const impactSignal = checkImpactBoost(venue.impact);
         if (impactSignal) {
@@ -71,7 +56,7 @@ export function runRuleEngine(venue: VenueRuleInput, context: {
         }
     }
 
-    // 3. IF Trend boost (trust)
+    // 2. IF Trend boost (trust)
     if (venue.ifHistory && venue.ifHistory.length >= 2) {
         const trendSignal = checkIFTrendBoost(venue.ifHistory);
         if (trendSignal) {
@@ -80,7 +65,7 @@ export function runRuleEngine(venue: VenueRuleInput, context: {
         }
     }
 
-    // 4. Category match boost (relevance)
+    // 3. Category match boost (relevance)
     if (venue.categories && context.userCategories) {
         const categorySignal = checkCategoryMatch(venue.categories, context.userCategories);
         if (categorySignal) {
@@ -89,7 +74,7 @@ export function runRuleEngine(venue: VenueRuleInput, context: {
         }
     }
 
-    // 5. Recently viewed penalty (behavior)
+    // 4. Recently viewed penalty (behavior)
     if (context.viewedNodes?.includes(venue.venueId)) {
         signals.push({
             type: 'recency_boost',
@@ -109,64 +94,6 @@ export function runRuleEngine(venue: VenueRuleInput, context: {
         totalScore,
         explanation
     };
-}
-
-/**
- * Check deadline boost
- */
-function checkDeadlineBoost(cfpMonth: string, now: Date): RuleSignal | null {
-    const monthMap: Record<string, number> = {
-        'January': 0, 'February': 1, 'March': 2, 'April': 3,
-        'May': 4, 'June': 5, 'July': 6, 'August': 7,
-        'September': 8, 'October': 9, 'November': 10, 'December': 11
-    };
-
-    const firstMonth = cfpMonth.split('/')[0];
-    const monthIndex = monthMap[firstMonth];
-    if (monthIndex === undefined) return null;
-
-    let deadline = new Date(now.getFullYear(), monthIndex, 15);
-    if (deadline < now) {
-        deadline = new Date(now.getFullYear() + 1, monthIndex, 15);
-    }
-
-    const daysUntil = Math.ceil((deadline.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (daysUntil <= 7) {
-        return {
-            type: 'deadline_boost',
-            category: 'time',
-            weight: RULE_WEIGHTS.DEADLINE_BOOST_7DAYS,
-            reason: '마감 임박 (7일 이내)',
-            expiresAt: deadline
-        };
-    } else if (daysUntil <= 14) {
-        return {
-            type: 'deadline_boost',
-            category: 'time',
-            weight: RULE_WEIGHTS.DEADLINE_BOOST_14DAYS,
-            reason: '마감 임박 (2주 이내)',
-            expiresAt: deadline
-        };
-    } else if (daysUntil <= 30) {
-        return {
-            type: 'deadline_boost',
-            category: 'time',
-            weight: RULE_WEIGHTS.DEADLINE_BOOST_30DAYS,
-            reason: '마감 다가옴 (1개월 이내)',
-            expiresAt: deadline
-        };
-    } else if (daysUntil <= 60) {
-        return {
-            type: 'deadline_boost',
-            category: 'time',
-            weight: RULE_WEIGHTS.DEADLINE_BOOST_60DAYS,
-            reason: '여유 있음 (2개월 이내)',
-            expiresAt: deadline
-        };
-    }
-
-    return null;
 }
 
 /**

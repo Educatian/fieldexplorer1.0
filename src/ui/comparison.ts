@@ -84,7 +84,6 @@ export interface VenueCompareData {
     name: string;
     type: string;
     impact?: string;
-    cfpDeadline?: string;
     categories?: string[];
 }
 
@@ -116,12 +115,6 @@ export function renderComparisonPanel(venues: VenueCompareData[]): string {
           <span class="compare-label">등급</span>
           <span class="compare-value ${v.impact ? 'impact-' + v.impact : ''}">${v.impact || '-'}</span>
         </div>
-        ${v.cfpDeadline ? `
-        <div class="compare-row">
-          <span class="compare-label">CFP 마감</span>
-          <span class="compare-value">${v.cfpDeadline}</span>
-        </div>
-        ` : ''}
       </div>
       <div class="compare-actions">
         <button class="btn compare-favorite" data-id="${v.id}">♡ 즐겨찾기</button>
