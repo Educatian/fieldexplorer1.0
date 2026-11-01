@@ -45,19 +45,34 @@ S2_VENUES = {
     "ismar": ("International Symposium on Mixed and Augmented Reality", "10.1109/"),
     "fie": ("Frontiers in Education Conference", "10.1109/"),
     "its": ("Intelligent Tutoring Systems", "10.1007/"),
+    "aied": ("International Conference on Artificial Intelligence in Education", "10.1007/"),
+    "etra": ("Eye Tracking Research & Application", "10.1145/"),
+    "las": ("ACM Conference on Learning @ Scale", "10.1145/"),
+    "icer": ("International Computing Education Research Workshop", "10.1145/"),
 }
+# ISLS proceedings DOIs (10.22318/<conf><year>.<n>): which conference prefixes belong to each venue
+ISLS_PATTERNS = {"cscl": r"/cscl20\d\d\.", "icls": r"/icls20\d\d\.", "isls": r"/(?:icls|cscl)20\d\d\."}
 
 
 def get(url, **kw):
-    for attempt in range(6):
+    for attempt in range(8):  # Semantic Scholar's anonymous pool throttles often: back off up to ~6 min in total
         try:
             r = requests.get(url, headers=HEADERS, timeout=60, **kw)
         except requests.RequestException:
             time.sleep(3 * (attempt + 1)); continue
         if r.status_code == 429 or r.status_code >= 500:
-            time.sleep(5 * (attempt + 1)); continue
+            time.sleep(float(r.headers.get("retry-after", 0) or 0) or 10 * (attempt + 1)); continue
         return r
     raise RuntimeError(f"giving up on {url}")
+
+
+def save_venue(path, vid, entry):
+    """Write one venue into the shared abstract cache, re-reading it first so concurrent fetches do not drop each other's venues."""
+    cur = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    cur[vid] = entry
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(cur, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(path)
 
 
 def sample(works, seed):
@@ -126,7 +141,7 @@ def from_isls(vid):
             "rows": 1000, "cursor": cursor, "select": "DOI"}).json()["message"]
         dois += [i["DOI"] for i in m["items"]]
         cursor = m.get("next-cursor") if m["items"] else None
-    dois = sorted(d for d in dois if re.search(r"/cscl20\d\d\.", d.lower()))
+    dois = sorted(d for d in dois if re.search(ISLS_PATTERNS[vid], d.lower()))
     random.Random(vid).shuffle(dois)
     works = []
     for doi in dois:
@@ -135,10 +150,39 @@ def from_isls(vid):
         t = get("https://doi.org/" + doi, allow_redirects=True).text
         meta = lambda name: html.unescape((re.search(rf'<meta name="{name}"[^>]*content="([^"]*)"', t) or [None, ""])[1])
         works.append({"wid": "doi:" + doi.lower(), "title": meta("DC.title") or meta("citation_title"),
-                      "year": int(re.search(r"cscl(20\d\d)", doi.lower()).group(1)), "type": meta("DC.description"),
+                      "year": int(re.search(r"(?:icls|cscl)(20\d\d)", doi.lower()).group(1)), "type": meta("DC.description"),
                       "abstract": meta("DCTERMS.abstract")[:3000], "doi": doi})
         time.sleep(1.0)
     return works, {"source": "ISLS repository (DOI landing pages)", "listed": len(dois)}
+
+
+# From 2025 ACM numbers PACM HCI issues instead of labelling them; ACM DL tables of contents (checked 2026-11-01)
+# show volume 9 issues 2 (May) and 7 (November) as CSCW. Add new volumes here as they appear.
+CSCW_NUMBERED = {("9", "2"), ("9", "7")}
+
+
+def is_cscw(item):
+    return str(item.get("issue", "")).upper().startswith("CSCW") or (str(item.get("volume")), str(item.get("issue"))) in CSCW_NUMBERED
+
+
+def from_cscw(vid):
+    """CSCW papers appear in Proceedings of the ACM on Human-Computer Interaction (ISSN 2573-0142), issues CSCW1/CSCW2."""
+    items, cursor = [], "*"
+    while cursor:
+        m = get("https://api.crossref.org/journals/2573-0142/works", params={
+            "filter": f"from-pub-date:{SINCE}-01-01,until-pub-date:{UNTIL}-12-31", "rows": 1000, "cursor": cursor,
+            "select": "DOI,title,issue,volume,abstract,issued"}).json()["message"]
+        items += m["items"]
+        cursor = m.get("next-cursor") if m["items"] else None
+    works = []
+    for i in items:
+        if not is_cscw(i):
+            continue
+        ab = html.unescape(re.sub(r"<[^>]+>", " ", i.get("abstract") or ""))
+        ab = re.sub(r"^\s*Abstract\s*", "", re.sub(r"\s+", " ", ab)).strip()
+        works.append({"wid": "doi:" + i["DOI"].lower(), "title": (i.get("title") or [""])[0], "type": i.get("issue"),
+                      "year": ((i.get("issued") or {}).get("date-parts") or [[None]])[0][0], "abstract": ab[:3000], "doi": i["DOI"]})
+    return works, {"source": "Crossref, Proceedings of the ACM on HCI CSCW issues", "listed": len(works)}
 
 
 def from_ets(vid):
@@ -156,7 +200,8 @@ def from_ets(vid):
     return works, {"source": "Educational Technology & Society issue pages (j-ets.net)", "listed": len(works)}
 
 
-FETCHERS = {**{v: from_s2 for v in S2_VENUES}, "edm": from_edm, "cscl": from_isls, "ets": from_ets}
+FETCHERS = {**{v: from_s2 for v in S2_VENUES}, "edm": from_edm, **{v: from_isls for v in ISLS_PATTERNS},
+            "cscw": from_cscw, "ets": from_ets}
 
 
 def main():
@@ -176,7 +221,7 @@ def main():
         prev = store.get(vid) or {}
         store[vid] = {"name": venues[vid], "fetched_at": date.today().isoformat(), "window": [f"{SINCE}-01-01", f"{UNTIL}-12-31"],
                       "openalex_counts": prev.get("openalex_counts"), "alt_source": {**info, "eligible": eligible}, "works": take}
-        CACHE.write_text(json.dumps(store, ensure_ascii=False), encoding="utf-8")
+        save_venue(CACHE, vid, store[vid])
         print(f"  [{vid}] {len(take)} abstracts from {info['source']} ({eligible} eligible)")
         time.sleep(1.5)
 

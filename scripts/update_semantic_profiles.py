@@ -227,6 +227,7 @@ PINNED_SOURCES = {
     'Journal of Engineering Education': 'S73400788',  # ISSN 1069-4730
     'Computer Science Education': 'S97147119',  # ISSN 0899-3408
     'Mathematics Education Research Journal': 'S2764537291',  # ISSN 1033-2170
+    'Teachers and Teaching: Theory and Practice': 'S53559421',  # ISSN 1354-0602 (OpenAlex name: Teachers and Teaching)
 }
 
 
@@ -317,6 +318,31 @@ def fetch_journal_data(journal_name):
         print(f"  Error: {e}")
         return None
 
+def add_alt_texts(venues, journal_texts):
+    import fetch_alt_abstracts as alt
+    cache = {}
+    if alt.CACHE.exists():
+        cache = json.loads(alt.CACHE.read_text(encoding='utf-8'))
+    used = []
+    for venue in venues:
+        vid, name = venue.get('id'), venue['name']
+        if name in journal_texts or vid not in alt.FETCHERS:
+            continue
+        works = (cache.get(vid) or {}).get('works') if (cache.get(vid) or {}).get('alt_source') else None
+        if works is None:
+            try:
+                fetched, _ = alt.FETCHERS[vid](vid)
+                works, _ = alt.sample(fetched, vid)
+            except Exception as e:  # throttled or offline: keep the venue out rather than fail the whole run
+                print(f"  alt source failed for {vid}: {e}")
+                continue
+        text = " ".join(f"{w['abstract']} {w['title']}" for w in works if len(w['abstract'].split()) >= MIN_ABSTRACT_WORDS)
+        if text.strip():
+            journal_texts[name] = text
+            used.append(vid)
+    return used
+
+
 def main():
     if not VENUES_JSON_PATH.exists(): return
 
@@ -340,6 +366,11 @@ def main():
             journal_texts[venue['name']] = text
         time.sleep(DELAY)
     print(f"\nConferences: {conf_ok} profiled, {conf_skip} skipped (insufficient OpenAlex coverage).")
+
+    # Venues whose papers have no abstracts in OpenAlex: use the open sources in fetch_alt_abstracts.py
+    # (the local data-cache when present, else a live fetch). A failed source leaves the venue out, as before.
+    alt_used = add_alt_texts(venues, journal_texts)
+    print(f"Alternate abstract sources: {len(alt_used)} venues ({', '.join(alt_used)})")
 
     # 1. Calculate TF
     journal_tfs = {name: get_weighted_ngrams(text) for name, text in journal_texts.items()}

@@ -50,6 +50,8 @@ window.LECTURES = [
   },
   {
     "id": "cognitive-apprenticeship",
+    "driveFileId": "1Ug5bxxt60AmKKkSZV4hQZh4pofjXX6K1",
+    "narration": "synthetic",
     "title": "Cognitive Apprenticeship - Basic",
     "shortTitle": "Cognitive Apprenticeship",
     "category": "design",
@@ -58,11 +60,12 @@ window.LECTURES = [
     "summary": "Introduces cognitive apprenticeship (Collins, Brown, and Newman, 1989) as a way to make expert thinking visible. A made-up ladder word problem shows modeling by thinking aloud, then coaching, scaffolding with a prompt card that fades, articulation, reflection against the expert's process, and exploration. Covers sequencing tasks by increasing complexity and diversity with the whole task before its parts, groups the six methods by what they do, and cautions that the framework needs its own evaluation in each new setting.",
     "question": "In a skill you teach, which part of the expert's thinking stays invisible, and how could you make it visible?",
     "lab": null,
-    "thumbnail": "thumb-cognitive-apprenticeship.jpg",
-    "videoFile": "media/cognitive-apprenticeship.mp4"
+    "thumbnail": "thumb-cognitive-apprenticeship.jpg"
   },
   {
     "id": "4cid-basic",
+    "driveFileId": "1LYADBgtBbbfSDoOcY2e6CbdZdub395I2",
+    "narration": "synthetic",
     "title": "The 4C/ID Model - Basic",
     "shortTitle": "The 4C/ID Model",
     "category": "design",
@@ -71,11 +74,12 @@ window.LECTURES = [
     "summary": "Introduces the four-component instructional design model (4C/ID), developed by Jeroen van Merriënboer, for complex skills, using a made-up course that teaches literature searching. Shows learning tasks as whole, realistic tasks grouped into task classes from simple to complex; support that fades within each class and resets in the next, drawn as a saw; supportive information for the parts that call for reasoning; procedural information given just in time for routine steps; and part-task practice mixed in only where steps must become automatic. Ends with the full blueprint and a caution that it is a detailed model, not a quick recipe.",
     "question": "In a complex skill you teach, which parts are done the same way every time, and which call for reasoning?",
     "lab": null,
-    "thumbnail": "thumb-4cid-basic.jpg",
-    "videoFile": "media/4cid-basic.mp4"
+    "thumbnail": "thumb-4cid-basic.jpg"
   },
   {
     "id": "first-principles",
+    "driveFileId": "1FuXS6f-6WyeloJe2fsijxwBPbLYOf0am",
+    "narration": "synthetic",
     "title": "Merrill's First Principles of Instruction - Basic",
     "shortTitle": "Merrill's First Principles of Instruction",
     "category": "design",
@@ -84,11 +88,12 @@ window.LECTURES = [
     "summary": "Introduces the first principles of instruction that David Merrill distilled in 2002 from a wide range of instructional design theories, using a made-up workshop where new teaching assistants learn to write multiple-choice quiz questions. Follows Leo through each principle: a real task instead of a list of rules, recalling a trick question that once cost him points, a weak and a strong question shown side by side, writing and revising his own question with feedback, and using it with his students and colleagues. Draws the four phases as a cycle around the problem, notes that problems can grow from simple to complex, and cautions that the principles are a design guide.",
     "question": "In a course you know, which of the five principles is missing, and what would it take to add it?",
     "lab": null,
-    "thumbnail": "thumb-first-principles.jpg",
-    "videoFile": "media/first-principles.mp4"
+    "thumbnail": "thumb-first-principles.jpg"
   },
   {
     "id": "backward-design",
+    "driveFileId": "1r_--jvFHpA6WlpRvKH6wCtcqbyoZlepo",
+    "narration": "synthetic",
     "title": "Backward Design and Constructive Alignment - Basic",
     "shortTitle": "Backward Design and Constructive Alignment",
     "category": "design",
@@ -97,11 +102,12 @@ window.LECTURES = [
     "summary": "Introduces backward design, described by Grant Wiggins and Jay McTighe, and John Biggs's closely related idea of constructive alignment, using a made-up teacher, Nadia, who plans a unit on charts in the news. Contrasts forward planning, where the test is written last and can measure something no activity prepared students for, with the three stages of backward design: desired results, evidence, and learning experiences. Shows a news chart whose axis starts at fifty and the same chart redrawn from zero, names the activity-focused and coverage-focused traps, and draws outcomes, activities, and assessment as a 3D triangle whose assessment drifts away and back into line. Cautions that alignment is a design check, not a guarantee of learning.",
     "question": "In a course you teach, does every assessment match an outcome you stated, and does every activity prepare students for it?",
     "lab": null,
-    "thumbnail": "thumb-backward-design.jpg",
-    "videoFile": "media/backward-design.mp4"
+    "thumbnail": "thumb-backward-design.jpg"
   },
   {
     "id": "gagne-nine-events",
+    "driveFileId": "1gvtH4L8rjd-l9lbfOZGJMQfWDdQsj7f4",
+    "narration": "synthetic",
     "title": "Gagné's Nine Events of Instruction - Basic",
     "shortTitle": "Gagné's Nine Events of Instruction",
     "category": "design",
@@ -110,11 +116,12 @@ window.LECTURES = [
     "summary": "Introduces the nine events of instruction that Robert Gagné tied to the conditions of learning, using a made-up trainer, Priya, who teaches new lab assistants to use a micropipette. Walks through each event in order: gaining attention with two samples that should match but do not, stating the objective, recalling how to read a measuring cylinder, presenting the plunger's two stops, giving a cue to repeat, practice, feedback from a scale that catches an air bubble, a final check with no hints, and carrying the skill into a real experiment. Shows how Gagné paired the events with processes inside the learner, from attention to generalization, and cautions that the events are a checklist of conditions rather than a fixed script.",
     "question": "In a lesson you teach, which of the nine events is missing, and which one could you drop without losing anything?",
     "lab": null,
-    "thumbnail": "thumb-gagne-nine-events.jpg",
-    "videoFile": "media/gagne-nine-events.mp4"
+    "thumbnail": "thumb-gagne-nine-events.jpg"
   },
   {
     "id": "addie-sam",
+    "driveFileId": "1saxis4WMU5kEpCMNwP4R0Rtkj6xnwsLE",
+    "narration": "synthetic",
     "title": "ADDIE and SAM: Two Design Processes - Basic",
     "shortTitle": "ADDIE and SAM: Two Design Processes",
     "category": "design",
@@ -123,11 +130,12 @@ window.LECTURES = [
     "summary": "Introduces two instructional design process models, ADDIE and Michael Allen's Successive Approximation Model (SAM), using a made-up designer, Omar, who builds a short safety course for warehouse staff. Walks through analysis, design, development, implementation, and evaluation, and shows how running the phases strictly one after another lets a confusing forklift scenario surface only at a test months in. Notes Michael Molenda's point that ADDIE has no single original author and names a family of systems approaches, then shows SAM's savvy start, quick cycles of design, prototype, and review, a paper sketch fixed in an hour, and alpha, beta, and gold releases. Cautions that neither process guarantees learning and that many teams analyze carefully, then iterate.",
     "question": "In your last design project, when did the first real learner see a working version, and what would it take to make that sooner?",
     "lab": null,
-    "thumbnail": "thumb-addie-sam.jpg",
-    "videoFile": "media/addie-sam.mp4"
+    "thumbnail": "thumb-addie-sam.jpg"
   },
   {
     "id": "theory-model-framework",
+    "driveFileId": "1V344mLZzi33i8YRXRN5kuz_rCtTGqBW9",
+    "narration": "synthetic",
     "title": "Theory, Model, or Framework? - Basic",
     "shortTitle": "Theory, Model, or Framework?",
     "category": "foundations",
@@ -136,11 +144,12 @@ window.LECTURES = [
     "summary": "Separates three words that instructional designers often use interchangeably. A theory explains and predicts, as cognitive load theory explains why novices learn more from worked examples and predicts that the benefit fades with expertise, so it can be tested and can turn out wrong. A model is a simplified picture of how something is done, either what a lesson contains (Gagné's nine events) or the steps a team follows (ADDIE), and it guides action without saying why each step works. A framework, such as the Community of Inquiry, organizes concepts so you know what to look at, without steps or predictions. A made-up designer, Lena, uses all three on one online statistics course, and a triangle of explain, guide, and organize places each one, with 4C/ID leaning from guide toward explain. Cautions that authors use these labels inconsistently, as Reigeluth called prescriptive guidance instructional-design theory.",
     "question": "Pick one theory, model, or framework from your own work. Does it explain, guide, or organize, and what else would you need to use it well?",
     "lab": null,
-    "thumbnail": "thumb-theory-model-framework.jpg",
-    "videoFile": "media/theory-model-framework.mp4"
+    "thumbnail": "thumb-theory-model-framework.jpg"
   },
   {
     "id": "srl",
+    "driveFileId": "1M9Yt-7mVBctj8awRmDrFird11Q1OJjIR",
+    "narration": "synthetic",
     "title": "Self-Regulated Learning: Zimmerman's Three Phases - Basic",
     "shortTitle": "Self-Regulated Learning: Zimmerman's Three Phases",
     "category": "foundations",
@@ -149,11 +158,12 @@ window.LECTURES = [
     "summary": "Contrasts two students who study for the same hours, one who plans, checks, and adjusts and one who rereads until time runs out, to introduce self-regulated learning: how learners steer their own learning. Follows Barry Zimmerman's cycle of three phases with a made-up nursing student, Sofia, learning to calculate drug doses. In forethought she sets a goal (twenty problems with no errors by Friday), plans a strategy (worked examples, then mixed practice), and believes she can do it, which is self-efficacy. In performance she uses the strategy, talks through each step, and logs every error. In self-reflection she compares results with her goal, finds most errors come from converting units, explains them by her method rather than her ability, and adds a unit check. Shows that the phases form a cycle and that reflection pointing to strategy gives the learner something to change, while blaming ability tends to lower effort. Cautions that self-regulation is not only willpower, that it can be taught, and that questionnaires about study habits do not always match what learners do.",
     "question": "Think of the last time you studied something hard. Which phase did you skip, and what would you change next time?",
     "lab": null,
-    "thumbnail": "thumb-srl.jpg",
-    "videoFile": "media/srl.mp4"
+    "thumbnail": "thumb-srl.jpg"
   },
   {
     "id": "embodied-cognition",
+    "driveFileId": "163lJ-XQRl-3Z2qGC2_4_KrXmqdxat7dk",
+    "narration": "synthetic",
     "title": "Embodied Cognition and Learning - Basic",
     "shortTitle": "Embodied Cognition and Learning",
     "category": "foundations",
@@ -162,11 +172,12 @@ window.LECTURES = [
     "summary": "Opens with a math-equivalence problem (3 + 4 + 5 = __ + 5) that many children answer with 12 or 17, and with studies by Susan Goldin-Meadow and colleagues in which children taught a grouping gesture solved more problems after the lesson and, in one study, kept those gains weeks later. Introduces embodied cognition, the idea that thinking is shaped by the body and by action, by contrasting the mind-as-computer view with Lawrence Barsalou's grounded cognition. Shows Arthur Glenberg and colleagues' finding that young readers who acted out a story with toys understood and remembered it better than those who reread it, and that imagining the moves later helped too. Presents congruence as the design key, with a full-body asteroid simulation by Robb Lindgren and colleagues and a made-up teacher, Nora, whose arms become a balance for the equal sign. Cautions that movement is not automatically helpful, that mismatched movement and attention-grabbing objects can distract, that concrete objects tend to help most when they fade toward symbols (concreteness fading), and that the strong claim that all thinking is bodily is still debated.",
     "question": "Pick one concept you teach. What movement would match it, and what movement might only distract?",
     "lab": null,
-    "thumbnail": "thumb-embodied-cognition.jpg",
-    "videoFile": "media/embodied-cognition.mp4"
+    "thumbnail": "thumb-embodied-cognition.jpg"
   },
   {
     "id": "computational-thinking",
+    "driveFileId": "1aVTt7Ob3H0-wyAcM0_uxFfkvis8y4yP0",
+    "narration": "synthetic",
     "title": "Computational Thinking - Basic",
     "shortTitle": "Computational Thinking",
     "category": "foundations",
@@ -175,11 +186,12 @@ window.LECTURES = [
     "summary": "Follows a made-up sixth grader, Kai, who wants to build a game in which a cat catches falling fish, to introduce computational thinking, which Jeannette Wing in 2006 argued is a skill for everyone, not only programmers. Walks through four practices that many school frameworks name: decomposition (splitting the game into a moving cat, falling fish, and a score), pattern recognition (every fish behaves the same way, so one set of instructions serves them all), abstraction (keeping position and speed, leaving out color), and an algorithm (forever move down; if touching the cat, add one to the score and go back to the top). Shows testing and debugging when a missed fish stays at the bottom and Kai adds a step. Presents Karen Brennan and Mitchel Resnick's three dimensions: concepts, practices, and perspectives. Cautions that there is no single agreed definition, so studies often measure different things, and that the hope that it improves problem solving in general, far beyond computing, has limited evidence so far.",
     "question": "Pick a task your learners do often. Which part could they break down, and which pattern repeats?",
     "lab": null,
-    "thumbnail": "thumb-computational-thinking.jpg",
-    "videoFile": "media/computational-thinking.mp4"
+    "thumbnail": "thumb-computational-thinking.jpg"
   },
   {
     "id": "constructionism",
+    "driveFileId": "1qxgSxG5i_t6p_i8tjIH8Z8-z3YPGFg-F",
+    "narration": "synthetic",
     "title": "Constructionism - Basic",
     "shortTitle": "Constructionism",
     "category": "foundations",
@@ -188,11 +200,12 @@ window.LECTURES = [
     "summary": "Follows a made-up fourth grader, Maya, who walks a square on the floor before telling a screen turtle to draw one, to introduce Seymour Papert's constructionism. Contrasts Jean Piaget's constructivism, in which learners build knowledge in their own heads rather than being filled like empty jars, with Papert's addition: learning goes especially well when learners make something out in the world, such as a program, a machine, or a story, that others can see, use, and question. Shows the Logo turtle as an object to think with and body syntonic learning, as Maya walks a circle and then writes a loop of small steps and small turns. Treats a lopsided flower as a bug to find and fix rather than a wrong answer, a chance to think about one's own thinking. Presents the design aims of a low floor, a high ceiling, and wide walls, with Scratch from Mitchel Resnick's group, and Resnick's four Ps: projects, passion, peers, and play. Cautions that making alone does not guarantee learning, that early studies of Logo found little transfer to general planning skills, and that many teachers now pair making with talk and reflection.",
     "question": "What could your learners make and share that would carry the big idea you want them to meet?",
     "lab": null,
-    "thumbnail": "thumb-constructionism.jpg",
-    "videoFile": "media/constructionism.mp4"
+    "thumbnail": "thumb-constructionism.jpg"
   },
   {
     "id": "scaffolding-zpd",
+    "driveFileId": "1Z08oE7tOhzQHFwL3RxhwUTmaJ4szfjQ4",
+    "narration": "synthetic",
     "title": "Scaffolding and the Zone of Proximal Development - Basic",
     "shortTitle": "Scaffolding and the ZPD",
     "category": "foundations",
@@ -201,11 +214,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up nine-year-old, Leo, who cannot yet solve a two-step word problem alone but can with a few good questions from his tutor, to introduce Lev Vygotsky's zone of proximal development: the gap between what a learner can do alone and what they can do with help. Shows tasks below the zone as already easy and tasks above it as out of reach even with help, and that what a learner can do with help today, they can often do alone tomorrow. Presents David Wood, Jerome Bruner, and Gail Ross's 1976 study of a tutor helping young children build a wooden block pyramid, which named the help scaffolding, and the tutor's six moves: catching interest, simplifying the task, keeping the goal in view, pointing out what matters, easing frustration, and showing how. Names three features from Janneke van de Pol and colleagues (contingency, fading, and transfer of responsibility), with the rule of giving more help after a failure and less after a success. Shows scaffolds built into tools, such as prompts, sentence starters, and hints, which cannot see the learner and so may give too much help or too little. Cautions that the word is often used for any help, that help that never fades is support but not scaffolding, and that the zone is not a fixed score but changes with the task and the helper.",
     "question": "Think of one support you give your learners. How would you know when to take it away?",
     "lab": null,
-    "thumbnail": "thumb-scaffolding-zpd.jpg",
-    "videoFile": "media/scaffolding-zpd.mp4"
+    "thumbnail": "thumb-scaffolding-zpd.jpg"
   },
   {
     "id": "cognitive-load",
+    "driveFileId": "1TrsjuG5vY9omSz2NYTvWwN0_-T99bFQP",
+    "narration": "synthetic",
     "title": "Cognitive Load Theory and Worked Examples - Basic",
     "shortTitle": "Cognitive Load and Worked Examples",
     "category": "foundations",
@@ -214,11 +228,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up ninth grader, Ana, who solves her first equations by trial and error but cannot say how, to introduce John Sweller's cognitive load theory: working memory can juggle only a few new items at once, while long-term memory holds a huge store of schemas. Separates intrinsic load, which comes from how many elements of the task must be handled together, from extraneous load, which comes from a design that makes learners work without learning, and notes that germane load, once the effort that builds schemas, is folded into intrinsic load in newer versions of the theory. Presents the worked example effect, in which novices often learn more from studying solved problems than from solving the same problems, because a trial-and-error search uses up working memory, and a sequence that pairs examples with similar problems and fades the steps one at a time. Shows two related effects: split attention, when a diagram and its labels sit far apart, and redundancy, when the same information is given twice, such as a full text read aloud word for word. Presents the expertise reversal effect, in which worked examples can get in the way as skill grows, so guidance should fade. Cautions that load is hard to measure and often rests on short self-ratings, and that most evidence comes from well-structured tasks such as math and science problems.",
     "question": "Look at one handout or slide you use. What makes your learners work without learning?",
     "lab": null,
-    "thumbnail": "thumb-cognitive-load.jpg",
-    "videoFile": "media/cognitive-load.mp4"
+    "thumbnail": "thumb-cognitive-load.jpg"
   },
   {
     "id": "situated-learning",
+    "driveFileId": "1sXkqXIR2Za-cbsXPTRfe0Eo3ggzaE3SR",
+    "narration": "synthetic",
     "title": "Situated Learning and Communities of Practice - Basic",
     "shortTitle": "Situated Learning and Communities of Practice",
     "category": "foundations",
@@ -227,11 +242,12 @@ window.LECTURES = [
     "summary": "Opens in a tailor's shop, where a new apprentice does not start by cutting cloth but at the end, sewing on buttons and pressing finished clothes, drawing on Jean Lave's studies of apprentice tailors in Liberia. Introduces Lave and Etienne Wenger's argument that learning is not only something in a head but becoming part of a community's practice, and their term legitimate peripheral participation: the newcomer's work is real and counts, and it starts small, at the edge, where mistakes cost little, then moves toward the center, with cutting last because a mistake there ruins the cloth. Presents John Seely Brown, Allan Collins, and Paul Duguid's 1989 argument that knowledge is situated, shaped by the activity and setting where it is learned and used, and that school tasks can strip that setting away. Describes Wenger's communities of practice, which share a domain, a community that learns together, and a practice of stories, tools, and ways of working, with a made-up new nurse, Ravi, who learns a unit's shortcuts and unwritten rules beside experienced nurses, and learning as a change from someone who watches to someone who belongs. Cautions that communities can keep newcomers stuck at the edge and pass on bad habits as easily as good ones, and that the theory describes learning well but gives fewer direct rules for designing a class.",
     "question": "Where are your learners on the edge? What real but low-risk part of the practice could they take on first?",
     "lab": null,
-    "thumbnail": "thumb-situated-learning.jpg",
-    "videoFile": "media/situated-learning.mp4"
+    "thumbnail": "thumb-situated-learning.jpg"
   },
   {
     "id": "distributed-cognition",
+    "driveFileId": "1r5IzGbsId0BPm7T-AxMWrEwJote6y8DL",
+    "narration": "synthetic",
     "title": "Distributed Cognition - Basic",
     "shortTitle": "Distributed Cognition",
     "category": "foundations",
@@ -240,11 +256,12 @@ window.LECTURES = [
     "summary": "Opens in a cockpit before landing, where pilots do not simply remember the right speeds but look them up on a card, say them aloud, and set small markers called speed bugs around the airspeed dial, to introduce Edwin Hutchins's distributed cognition: the memory is spread across the crew, the card, and the dial rather than held in one head. Shows Hutchins's study of a navy ship's navigation team, in which sailors take bearings on landmarks, one records them, and a plotter draws the lines on a chart, so no single person does the whole computation. Explains that tools change the task, since with speed bugs set a pilot only checks whether the needle points at the bug instead of reading and comparing numbers, and presents James Hollan, Hutchins, and David Kirsh's three ways cognition is spread: across people, between minds and things, and across time. Moves to a made-up lab group whose shared whiteboard holds what none of them could keep in mind alone, Roy Pea's argument that learners should practice thinking with tools and with each other, and Gavriel Salomon and colleagues' distinction between effects with a tool and effects of a tool, a question that matters again with AI tools. Cautions that when the system does the work each person may learn little, that most tests take the tools away, and that because the unit of study is large, research is often careful description rather than experiments.",
     "question": "In your learners' work, what is held by tools and partners, and what should each person be able to do alone?",
     "lab": null,
-    "thumbnail": "thumb-distributed-cognition.jpg",
-    "videoFile": "media/distributed-cognition.mp4"
+    "thumbnail": "thumb-distributed-cognition.jpg"
   },
   {
     "id": "activity-theory",
+    "driveFileId": "1ULSRiYqegPMCAHpgSq76PohrxFTHQwMO",
+    "narration": "synthetic",
     "title": "Activity Theory and Activity Systems - Basic",
     "shortTitle": "Activity Theory",
     "category": "foundations",
@@ -253,11 +270,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up school that gives every student a reading tablet, only to find a year later that most tablets are used for games while teachers blame the students, and suggests looking at the whole system instead. Traces activity theory from Lev Vygotsky's work on mediation and Alexei Leontiev's work on activity to Yrjö Engeström's model of an activity system, built node by node: a subject works on an object using tools, within rules, a community, and a division of labor. Presents contradictions within and between these parts as the engine of change, so a tension shows where the system needs to develop. A made-up literacy coach maps the system and finds that the reading goal rewards finishing assigned books while the app offers only short free titles; the school changes rules and tools together, and reading on the tablets rises, an example of what Engeström calls expansive learning. Cautions that the triangle is a lens rather than a checklist, that naming contradictions takes careful data, and that the theory says less about individual learning.",
     "question": "In a setting you know, where do the tools, rules, and division of labor pull against the goal people are working toward?",
     "lab": null,
-    "thumbnail": "thumb-activity-theory.jpg",
-    "videoFile": "media/activity-theory.mp4"
+    "thumbnail": "thumb-activity-theory.jpg"
   },
   {
     "id": "maker-movement",
+    "driveFileId": "1Wdj0bF84X0Dj_IPOymzmymH5AFZSh9wI",
+    "narration": "synthetic",
     "title": "The Maker Movement and Learning - Basic",
     "shortTitle": "The Maker Movement and Learning",
     "category": "foundations",
@@ -266,11 +284,12 @@ window.LECTURES = [
     "summary": "Opens in a made-up school library where students solder circuits, sew glowing patches, and print parts for a robot, and asks whether this is learning or just a fun break from it. Introduces Erica Halverson and Kimberly Sheridan's account of the maker movement in education as making things, often with digital tools, in communities that share what they make, and traces its roots to Seymour Papert's constructionism, the idea that people learn especially well when they make things others can see and use. Presents their three frames as turning 3D blocks: making as an activity, doing and tinkering; as spaces, from libraries to community workshops; and as an identity, being a maker, each with its own research question about what people learn, how spaces support it, and who gets to see themselves as a maker. A made-up librarian whose makerspace first draws the same few students adds projects linked to students' interests, such as wearable art and repairing family devices, and invites families in, and more varied students begin to come.",
     "question": "In a setting you know, what could learners make that would carry an important idea, and who might not see themselves as makers yet?",
     "lab": null,
-    "thumbnail": "thumb-maker-movement.jpg",
-    "videoFile": "media/maker-movement.mp4"
+    "thumbnail": "thumb-maker-movement.jpg"
   },
   {
     "id": "epistemic-cognition",
+    "driveFileId": "1zjD7AYkTBW7MmkWbngr15BsTzxKreb16",
+    "narration": "synthetic",
     "title": "Epistemic Cognition - Basic",
     "shortTitle": "Epistemic Cognition",
     "category": "foundations",
@@ -279,11 +298,12 @@ window.LECTURES = [
     "summary": "Opens with two made-up students reading a website that claims a new diet cures tiredness: one accepts it because it sounds scientific, the other asks who wrote it, what evidence it gives, and how the claim could be checked. Introduces epistemic cognition, which Clark Chinn and William Sandoval describe as thinking about knowledge and knowing, such as how we know a claim is true and what counts as good evidence. Draws the beliefs about knowledge reviewed by Barbara Hofer and Paul Pintrich as sliders: whether knowledge is certain or tentative, simple or complex, where it comes from, and how claims are justified. Presents the five components proposed by Chinn, Buckland, and Samarapungavan in 2011: epistemic aims and their value, the structure of knowledge, sources and justification, epistemic virtues and vices, and reliable processes for reaching epistemic aims. Notes that epistemic cognition is situated, so it is best taught inside real practices. A made-up science class agrees on criteria before ranking two claims about a river's water quality.",
     "question": "In a subject you teach, what counts as good evidence, and how would your students learn to tell?",
     "lab": null,
-    "thumbnail": "thumb-epistemic-cognition.jpg",
-    "videoFile": "media/epistemic-cognition.mp4"
+    "thumbnail": "thumb-epistemic-cognition.jpg"
   },
   {
     "id": "multiple-representations",
+    "driveFileId": "1OXDBwnxrbb3hBzYb9GI8lc9KPBzrUAih",
+    "narration": "synthetic",
     "title": "Learning with Multiple Representations - Basic",
     "shortTitle": "Learning with Multiple Representations",
     "category": "foundations",
@@ -292,11 +312,12 @@ window.LECTURES = [
     "summary": "Opens with a chemistry student who sees one reaction as an equation, a particle diagram, and a graph of concentration over time, and asks whether three views help or just add load. Introduces Shaaron Ainsworth's DeFT framework, for design, functions, and tasks, which explains when learning with multiple representations works. Shows the three functions as small live stages the camera visits: representations can complement each other by showing different information, one representation can constrain how another is read, and representations can help learners construct deeper understanding by abstracting what they share. Lists the tasks learners face: understanding each format, relating it to the content, choosing or building a representation, and translating between representations, which is often where novices struggle. A made-up chemistry teacher links the equation and the particle diagram by having students circle each molecule in both and then sketch the next step themselves, so translation is practiced instead of assumed.",
     "question": "In a topic you teach, which two representations must learners connect, and what would help them translate between them?",
     "lab": null,
-    "thumbnail": "thumb-multiple-representations.jpg",
-    "videoFile": "media/multiple-representations.mp4"
+    "thumbnail": "thumb-multiple-representations.jpg"
   },
   {
     "id": "multiple-sources",
+    "driveFileId": "1NG0uCIKAq9ei2xfMbScTmtKNEpEA_2Vr",
+    "narration": "synthetic",
     "title": "Learning from Multiple Sources - Basic",
     "shortTitle": "Learning from Multiple Sources",
     "category": "foundations",
@@ -305,11 +326,12 @@ window.LECTURES = [
     "summary": "Opens with a student researching a new dam who finds a government report, a blog, a news story, and a video that disagree, and asks how to build one understanding from all of them. Introduces Susan Goldman and Saskia Brand-Gruwel's view that learning from multiple sources means finding sources, evaluating them, and integrating what they say. Describes Sam Wineburg's comparison of historians and high school students reading documents about the same event: historians used sourcing, contextualization, and corroboration, while students more often read for facts and many trusted the textbook excerpt most. Reports that Ivar Bråten, Helge Strømsø, and Anne Britt found students understood global warming better across seven texts when they rated the most reliable documents as more trustworthy and judged documents by their type. Shows Wineburg and Sarah McGrew's finding that professional fact checkers read laterally, leaving a site to see what others say about it, while historians and students stayed on the page. A made-up class keeps a source log and writes a claim that names where sources agree and disagree.",
     "question": "In a topic you teach, which two sources disagree, and how would your students decide which to trust?",
     "lab": null,
-    "thumbnail": "thumb-multiple-sources.jpg",
-    "videoFile": "media/multiple-sources.mp4"
+    "thumbnail": "thumb-multiple-sources.jpg"
   },
   {
     "id": "complex-systems",
+    "driveFileId": "1_sJse17ckjbOCPvGhCVr6-CJSQZv9XG-",
+    "narration": "synthetic",
     "title": "Complex Systems and Learning - Basic",
     "shortTitle": "Complex Systems and Learning",
     "category": "foundations",
@@ -318,11 +340,12 @@ window.LECTURES = [
     "summary": "Opens with a traffic jam that moves backward along a highway even while every car moves forward, with no driver planning it, and asks where it comes from. Introduces Michael Jacobson and Uri Wilensky's argument that complex systems, where many simple parts interact and produce patterns at a higher level, matter in science and in the learning sciences. Shows emergence, self-organization without a leader, and feedback as three live panels. Explains Michelene Chi's account of why emergent processes are hard to learn: students treat them as direct processes in which one agent or cause makes the pattern happen, and this misconception is robust. Describes Cindy Hmelo-Silver and Merav Pfeffer's comparison of experts and novices thinking about an aquarium, in which novices focused on structures while experts also reasoned about behaviors and functions. A made-up biology class builds a simple agent-based fish tank model, removes the bacteria, watches waste build up and the fish die, and explains the result by tracing interactions.",
     "question": "In a topic you teach, which pattern emerges from many interactions, and how could students trace it back to the parts?",
     "lab": null,
-    "thumbnail": "thumb-complex-systems.jpg",
-    "videoFile": "media/complex-systems.mp4"
+    "thumbnail": "thumb-complex-systems.jpg"
   },
   {
     "id": "neuromyths",
+    "driveFileId": "1EeG99lc89yEfOd5yAxG6KotiLEihd05Y",
+    "narration": "synthetic",
     "title": "Neuromyths in Education - Basic",
     "shortTitle": "Neuromyths in Education",
     "category": "foundations",
@@ -331,11 +354,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up teacher workshop claiming that students learn best in their preferred learning style and that we use only ten percent of our brains, and stamps both as myths. Reports Sanne Dekker and colleagues' survey of teachers in the United Kingdom and the Netherlands, who on average believed about half of the myths presented, with teachers who knew more about the brain in general believing more of them, not fewer. Summarizes Paul Howard-Jones's description of neuromyths as distortions of real findings kept alive by a gap between neuroscience and education. Explains what Harold Pashler and colleagues said a fair test of learning styles needs, learners grouped by style, random assignment to matched or mismatched teaching, and a crossover in results, and that very few studies used this design while several that did contradicted the idea. Notes other myths, such as left- and right-brained learners, and adds Sashank Varma and colleagues' review of what cognitive neuroscience can offer the learning sciences and the obstacles to applying it. A made-up teacher lets the content decide the format for every student.",
     "question": "Which claim about the brain have you heard where you work, and what evidence would you ask for before acting on it?",
     "lab": null,
-    "thumbnail": "thumb-neuromyths.jpg",
-    "videoFile": "media/neuromyths.mp4"
+    "thumbnail": "thumb-neuromyths.jpg"
   },
   {
     "id": "learning-engineering",
+    "driveFileId": "1C7xGGoEv_03uxEdCLhc9F90izeY2hoKK",
+    "narration": "synthetic",
     "title": "Learning Engineering - Basic",
     "shortTitle": "Learning Engineering",
     "category": "design",
@@ -344,11 +368,12 @@ window.LECTURES = [
     "summary": "Opens with a team running an online algebra course in which every step thousands of students take is logged, and asks how the team should use those data to improve the course. Traces the idea to Herbert Simon, who argued in 1967 that universities needed learning engineers who apply the science of learning to design the way engineers apply physics. Presents the IEEE learning engineering community's description of learning engineering as a process and practice that applies the learning sciences, using human-centered engineering design and data-informed decisions, to support learners. Shows the work as a loop of challenge, creation, implementation, and investigation that starts again. Follows a made-up learning engineer, Dana, who finds that many students quit on one practice set because its hints give away the answer too early, redesigns the hints, runs a small experiment, and checks both whether more students finish and whether they do better on the next quiz. Describes learning engineering as a team effort of teachers, designers, data scientists, and learners. Cautions that clicks are not learning, that what is easy to log is not always what matters, and that data about learners carries duties of privacy, consent, and fairness across groups.",
     "question": "In a course you know, what is one change you could test, and what data would show whether it helped?",
     "lab": null,
-    "thumbnail": "thumb-learning-engineering.jpg",
-    "videoFile": "media/learning-engineering.mp4"
+    "thumbnail": "thumb-learning-engineering.jpg"
   },
   {
     "id": "knowledge-components",
+    "driveFileId": "1Ml3IyEZEyKW0dCiibwXJNIEwFYP5MtOi",
+    "narration": "synthetic",
     "title": "Knowledge Components and Learning Curves - Basic",
     "shortTitle": "Knowledge Components and Learning Curves",
     "category": "assessment",
@@ -357,11 +382,12 @@ window.LECTURES = [
     "summary": "Opens with a geometry tutor whose error lines mostly fall with practice while one line stays flat, and asks why. Introduces Kenneth Koedinger, Albert Corbett, and Charles Perfetti's account of learning in terms of knowledge components, small units of skill or knowledge, such as finding the area of a circle, that a learner uses on a step. Shows each step of a task tagged with the components it needs, a map called a knowledge component model or Q matrix. Plots the error rate for one component against practice opportunities to show that a good model gives a smooth learning curve that falls quickly at first and then more slowly. In a made-up example, a bumpy curve reveals that finding the area of a circle on its own and finding it inside a larger figure were really two components, and splitting them gives two smooth curves and better predictions; public tools such as DataShop let teams compare models this way. Shows how the model guides practice, with more practice on components that stay hard and less on ones already mastered. Cautions that components are inferred rather than observed, that several models can fit the same data, and that skills without clean steps, such as explaining or designing, are hard to capture this way.",
     "question": "Pick one task you teach. Which components does it need, and where might one label be hiding two skills?",
     "lab": null,
-    "thumbnail": "thumb-knowledge-components.jpg",
-    "videoFile": "media/knowledge-components.mp4"
+    "thumbnail": "thumb-knowledge-components.jpg"
   },
   {
     "id": "intelligent-tutoring",
+    "driveFileId": "1UT92-6d9rZ80QKvY_l6QeAmy2QSZBKd2",
+    "narration": "synthetic",
     "title": "Intelligent Tutoring Systems - Basic",
     "shortTitle": "Intelligent Tutoring Systems",
     "category": "design",
@@ -370,11 +396,12 @@ window.LECTURES = [
     "summary": "Follows a made-up student, Omar, whose tutoring system flags a step that does not fit any correct path and offers a hint, to introduce intelligent tutoring systems, which give step-by-step guidance shaped to each learner. Presents Kurt VanLehn's two loops: an inner loop within a problem that gives feedback on each step and hints on request, from a gentle nudge up to the full next step, and an outer loop across problems that chooses what to practice next, often by estimating when each skill is mastered. Explains model tracing, in which the system matches each student step against a model of steps an expert might take, as in the Cognitive Tutors built by John Anderson and colleagues, and notes tutors that check constraints, follow worked examples, or hold a dialogue in natural language. Reports VanLehn's 2011 review, which found step-based tutoring systems nearly as effective as human tutors, with both clearly better than no tutoring, and cautions that fluent chat from large language models is not the same as accurate step-level feedback and still needs testing. Cautions that tutors are costly to build for each domain and that when hints come too easily some students game the system by clicking through hints to reach the answer.",
     "question": "In a skill you teach, what would step-level feedback look like, and when should the tutor stay quiet?",
     "lab": null,
-    "thumbnail": "thumb-intelligent-tutoring.jpg",
-    "videoFile": "media/intelligent-tutoring.mp4"
+    "thumbnail": "thumb-intelligent-tutoring.jpg"
   },
   {
     "id": "mastery-learning",
+    "driveFileId": "1BcA04GT7D_1OHPBbqVfQZ6gYKvJ2hCa0",
+    "narration": "synthetic",
     "title": "Mastery Learning and the Two Sigma Problem - Basic",
     "shortTitle": "Mastery Learning and the Two Sigma Problem",
     "category": "design",
@@ -383,11 +410,12 @@ window.LECTURES = [
     "summary": "Opens with the usual classroom, where time is fixed and learning varies: everyone gets two weeks on fractions, then the class moves on, ready or not. Introduces Benjamin Bloom's mastery learning, proposed in 1968 and built on John Carroll's model of school learning, which holds learning fixed and lets time and help vary. Walks through the cycle: teach a unit, give a short formative test, send students who reach mastery to enrichment and give the others correctives, then give a second, parallel test before the next unit. Presents Bloom's 1984 report that students tutored one to one with mastery checks scored about two standard deviations above a regular class, so the average tutored student did better than 98 percent of that class, and his two sigma problem: how group teaching could come close at an affordable cost. Notes that later reviews found smaller but real gains, about half a standard deviation in a 1990 review of mastery learning programs, and that many two sigma studies were small and short. Connects the idea to intelligent tutors that use knowledge tracing to judge mastery, and follows a made-up teacher, Ben, whose correctives in small groups bring most of the remaining third of the class to mastery.",
     "question": "In a course you know, what is held fixed: time, or learning? What would it take to let time vary?",
     "lab": null,
-    "thumbnail": "thumb-mastery-learning.jpg",
-    "videoFile": "media/mastery-learning.mp4"
+    "thumbnail": "thumb-mastery-learning.jpg"
   },
   {
     "id": "learning-experiments",
+    "driveFileId": "1FupPcIapoefuGryFXtFRuv7-OCGMsFp6",
+    "narration": "synthetic",
     "title": "A/B Experiments in Learning Platforms - Basic",
     "shortTitle": "A/B Experiments in Learning Platforms",
     "category": "methods",
@@ -396,11 +424,12 @@ window.LECTURES = [
     "summary": "Opens with two versions of a homework hint, one that shows a worked step and one that asks a question, and shows that a platform can test both instead of guessing. Explains that in an A/B test each student is randomly assigned to one version, so the groups are alike on average and a difference in outcomes can be traced to the version. Notes that platforms such as ASSISTments let researchers run randomized studies inside real homework with real students and real content. Stresses choosing a clear learning outcome, such as performance on a later problem or a delayed test, rather than only clicks or time on task. Shows that randomizing students within one class is cheap but lets versions leak as classmates talk, while randomizing whole classes avoids that but needs many more classes, and that small effects require many students and an analysis decided before looking at the data. Follows a made-up team, led by Priya, whose question version wins on the next problem but ties on a delayed test a week later, a common pattern in which a version helps performance now without helping learning later. Cautions that every version must be a reasonable way to teach, that studies need ethical review and clear notice to learners, and that an average effect can hide groups for whom a version works worse.",
     "question": "What is one small design choice in your course you could test, and what outcome would really show learning?",
     "lab": null,
-    "thumbnail": "thumb-learning-experiments.jpg",
-    "videoFile": "media/learning-experiments.mp4"
+    "thumbnail": "thumb-learning-experiments.jpg"
   },
   {
     "id": "multilevel-basic",
+    "driveFileId": "1TO0hvLBiLL0e3iphg2doVRSuwQ6KBpeV",
+    "narration": "synthetic",
     "title": "Unit of Analysis and Multilevel Models - Basic",
     "shortTitle": "Unit of Analysis and Multilevel Models",
     "category": "methods",
@@ -409,11 +438,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up study that gives a tutoring app to three classes and keeps three more for comparison, twenty students in each, and shows why analyzing one hundred and twenty separate students overstates what the study can show: classmates share a teacher, a schedule, and each other, so their scores move together. Matches the unit of analysis to the level where the treatment was assigned, six classes rather than one hundred and twenty students. Splits score variation into differences between and within classes to define the intraclass correlation, then turns an intraclass correlation of 0.2 into a design effect of 4.8, so the students carry about as much information as twenty-five independent students. Shows how a multilevel model writes this nesting into the analysis, borrows strength across classes by pulling small classes toward the overall mean, and lets slopes differ by class. Ends by noting that a model cannot create information the design never collected: studies that assign whole classes need many classes.",
     "question": "In a study you know, at what level was the treatment assigned, and at what level were the results analyzed?",
     "lab": null,
-    "thumbnail": "thumb-multilevel-basic.jpg",
-    "videoFile": "media/multilevel-basic.mp4"
+    "thumbnail": "thumb-multilevel-basic.jpg"
   },
   {
     "id": "ena-basic",
+    "driveFileId": "1fpBIRHLbfMaxpp4O82pLhY2HSyPmJFdQ",
+    "narration": "synthetic",
     "title": "Epistemic Network Analysis - Basic",
     "shortTitle": "Epistemic Network Analysis",
     "category": "methods",
@@ -422,11 +452,12 @@ window.LECTURES = [
     "summary": "Opens with two made-up engineering design teams who use the same ideas, cost, safety, and user needs, yet end with designs of different quality, and asks what was different about their talk. Introduces David Williamson Shaffer's epistemic network analysis (ENA), which treats expertise as how ideas are connected, not only which ideas are used. Walks through coding each line of talk, counting which codes appear together inside a moving window of recent lines called a stanza, and turning each team's counts into a network whose thicker lines mark more frequent connections. Shows how ENA places many networks in a shared space where each network becomes a point whose position can be read from its connections, and how subtracting one team's network from another gives a difference network. Stresses closing the interpretive loop by reading the lines behind a thick connection, and contrasts ENA's undirected connections with ordered network analysis, which adds which idea came first.",
     "question": "In talk you have recorded, which two ideas would you expect strong learners to connect, and how would you check it in the lines themselves?",
     "lab": null,
-    "thumbnail": "thumb-ena-basic.jpg",
-    "videoFile": "media/ena-basic.mp4"
+    "thumbnail": "thumb-ena-basic.jpg"
   },
   {
     "id": "coding-collaboration",
+    "driveFileId": "11lvH-8jDZuhVFhrfdzSycfq7nlxFEzx7",
+    "narration": "synthetic",
     "title": "Coding and Counting Collaborative Talk - Basic",
     "shortTitle": "Coding and Counting Collaborative Talk",
     "category": "methods",
@@ -435,11 +466,12 @@ window.LECTURES = [
     "summary": "Opens with a study claiming that one chat tool produced forty percent more arguments and asks where that number came from. Follows Michelene Chi's practical guide to quantifying verbal data through the decisions that turn talk into numbers. Segmenting comes first, and Jan-Willem Strijbos and colleagues showed that the unit, a message, a sentence, or an idea, changes what is counted. Coding with a scheme such as Armin Weinberger and Frank Fischer's multi-dimensional framework for argumentative knowledge construction comes next, then a reliability check in which two coders code the same sample independently and report agreement beyond chance, such as Cohen's kappa, and finally aggregation into counts compared across conditions or related to later learning. A made-up example shows two analysts finding five and nine arguments in the same chat because one counts messages and the other ideas, and the video notes that group members' counts are not independent, so people should be treated as nested in groups.",
     "question": "In talk you might analyze, what would one unit be, and how would a different choice change your count?",
     "lab": null,
-    "thumbnail": "thumb-coding-collaboration.jpg",
-    "videoFile": "media/coding-collaboration.mp4"
+    "thumbnail": "thumb-coding-collaboration.jpg"
   },
   {
     "id": "video-research",
+    "driveFileId": "1Q8RfG1erfnp48IRAjDtSjEdAH12xQHZg",
+    "narration": "synthetic",
     "title": "Video Research in the Learning Sciences - Basic",
     "shortTitle": "Video Research in the Learning Sciences",
     "category": "methods",
@@ -448,11 +480,12 @@ window.LECTURES = [
     "summary": "Opens with a teacher whose forty hours of recorded small-group science sit unused on a drive, and asks where to start. Organizes video research, following Sharon Derry and colleagues, around four questions: selection, analysis, technology, and ethics. Shows that selection begins before recording, since where the camera points decides what can ever be studied, and continues afterward in choosing which episodes to analyze and saying how they were chosen. Describes content logs and detailed transcripts that include gestures and objects, and Brigitte Jordan and Austin Henderson's interaction analysis, in which a group watches a clip together, stops often, and tests each claim against the screen. A made-up data session narrows a claim about a student's understanding after the next ten seconds of video show another guess. Notes that tools can tie codes to time stamps and that video raises particular ethical duties because faces and voices identify people, so consent should name who sees the video and for what purpose.",
     "question": "For a question you care about, where would you put the camera, and what would it miss?",
     "lab": null,
-    "thumbnail": "thumb-video-research.jpg",
-    "videoFile": "media/video-research.mp4"
+    "thumbnail": "thumb-video-research.jpg"
   },
   {
     "id": "mixed-methods",
+    "driveFileId": "1JKEAIpatA1MVFA1Ob2KEfXLsJVtV9GLS",
+    "narration": "synthetic",
     "title": "Mixed Methods Research - Basic",
     "shortTitle": "Mixed Methods Research",
     "category": "methods",
@@ -461,11 +494,12 @@ window.LECTURES = [
     "summary": "Opens with a survey showing that students who used a peer feedback tool improved their essays more, and notes that the numbers cannot say why while interviews might. Defines mixed methods research as combining quantitative and qualitative data in one study on purpose, as Burke Johnson and Anthony Onwuegbuzie argued in 2004 on pragmatic grounds. Describes three basic designs: convergent, where both kinds of data are collected at once and compared; explanatory sequential, where numbers come first and qualitative data explains them; and exploratory sequential, where qualitative work comes first and shapes a measure or intervention. Stresses integration, citing Michael Fetters and colleagues and the joint display that places numbers and quotes side by side. A made-up researcher interviews students with the biggest and smallest gains and finds that those who gained most rewrote after reading peers' comments, so the finding becomes when the tool helped.",
     "question": "In a study you are planning, what would numbers tell you, what would they miss, and where would the two strands meet?",
     "lab": null,
-    "thumbnail": "thumb-mixed-methods.jpg",
-    "videoFile": "media/mixed-methods.mp4"
+    "thumbnail": "thumb-mixed-methods.jpg"
   },
   {
     "id": "multivocal-analysis",
+    "driveFileId": "1vvt82WbRpEQJGgpdenwSTQCo0gy9LYzI",
+    "narration": "synthetic",
     "title": "Multivocal Analysis - Basic",
     "shortTitle": "Multivocal Analysis",
     "category": "methods",
@@ -474,11 +508,12 @@ window.LECTURES = [
     "summary": "Opens with five researchers watching the same ten minutes of students solving a problem together, each through a different lens, and asks whether they are studying the same thing. Introduces the project in which Daniel Suthers, Kristine Lund, and colleagues had analysts from different traditions analyze shared data, aiming for productive multivocality. States the method simply: agree on a shared corpus, let each analyst apply their own method, and compare the results side by side, using pivotal moments, moments that change where the interaction goes, as a meeting point. A made-up example shows coding, conversation analysis, and network analysis each marking minute six for different reasons, and a silence that the coder counts as nothing while a gesture analyst sees the group pointing at the same diagram. Argues that the goal is not one merged answer but seeing what each method shows and hides and making its assumptions visible.",
     "question": "For data you know well, what would an analyst from another tradition see that your method hides?",
     "lab": null,
-    "thumbnail": "thumb-multivocal-analysis.jpg",
-    "videoFile": "media/multivocal-analysis.mp4"
+    "thumbnail": "thumb-multivocal-analysis.jpg"
   },
   {
     "id": "edm-learning-analytics",
+    "driveFileId": "1On4nIic4Wud8agSmwJsTWQDj-XQu-562",
+    "narration": "synthetic",
     "title": "Educational Data Mining and Learning Analytics - Basic",
     "shortTitle": "Educational Data Mining and Learning Analytics",
     "category": "methods",
@@ -487,11 +522,12 @@ window.LECTURES = [
     "summary": "Opens with a university that sees some first-year students stop logging in by week three and asks whether data can flag them in time and what should happen next. Introduces educational data mining and learning analytics, two communities that both study data from learning but, as George Siemens and Ryan Baker describe, with different emphases: data mining leans toward automated methods such as building models that predict who will struggle or which skill a step needs, while learning analytics leans toward people using data, such as dashboards for teachers and learners and decisions made in context, and in practice the two overlap. Lists common methods: prediction, clustering, relationship mining, and discovery with models, where one model's output becomes input to the next study. Follows a made-up team, led by Sam, whose model flags students whose logins drop so that an advisor can reach out, and stresses that a prediction alone changes nothing; what matters is the action it triggers and whether that action helps. Notes that Purdue's Course Signals was a well-known early system whose reported retention gains were later questioned. Cautions that models trained on past students can carry past unfairness, so their accuracy should be checked across groups, that learners deserve to know what is collected and why, and that clicks are only a thin trace of learning.",
     "question": "If a model flagged one of your learners tomorrow, what would you do, and how would you know it helped?",
     "lab": null,
-    "thumbnail": "thumb-edm-learning-analytics.jpg",
-    "videoFile": "media/edm-learning-analytics.mp4"
+    "thumbnail": "thumb-edm-learning-analytics.jpg"
   },
   {
     "id": "formative-feedback",
+    "driveFileId": "1oTcIuVS6vLqbkg5DC6Hx1NGomNVVALkj",
+    "narration": "synthetic",
     "title": "Formative Assessment and Feedback - Basic",
     "shortTitle": "Formative Assessment and Feedback",
     "category": "assessment",
@@ -500,11 +536,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up teacher, Rosa, who grades a fractions quiz, writes a score on each page, and moves the class on to decimals, and asks what the quiz did for learning. Defines assessment as formative when evidence about learning is used to adjust teaching and learning while there is still time to act, and cites Paul Black and Dylan Wiliam's 1998 review, which found that strengthening this practice raised achievement. Lists Wiliam's five strategies: clear goals and success criteria, drawing out evidence of student thinking, feedback that moves learning forward, students as resources for one another, and students as owners of their learning. Frames good feedback, after John Hattie and Helen Timperley, as answers to three questions (where am I going, how am I going, where to next) and four levels (task, process, self-regulation, and the self), noting that praise of the person tends to help least. Notes that Avraham Kluger and Angelo DeNisi found feedback made performance worse in more than a third of the cases they reviewed. Returns to Rosa, who sorts answers, finds that many students add the bottom numbers of fractions, starts the next day with that error, and has students fix their own work with a checklist.",
     "question": "Think of the last feedback you gave. Which of the three questions did it answer, and did the learner get a chance to use it?",
     "lab": null,
-    "thumbnail": "thumb-formative-feedback.jpg",
-    "videoFile": "media/formative-feedback.mp4"
+    "thumbnail": "thumb-formative-feedback.jpg"
   },
   {
     "id": "validity-argument",
+    "driveFileId": "1JRL-khPSUVQ0goJ7TKfgYocmVrWs047O",
+    "narration": "synthetic",
     "title": "Validity as an Argument - Basic",
     "shortTitle": "Validity as an Argument",
     "category": "assessment",
@@ -513,11 +550,12 @@ window.LECTURES = [
     "summary": "Opens with a college that uses a short reading test to place new students in a support course and asks whether the test is valid. Explains that the question is slightly off: the Standards for educational and psychological testing define validity as how well evidence and theory support an interpretation of scores for a given use, not as a property of a test. Adds Samuel Messick's view that validity is one unified judgment that includes the consequences of using scores. Lays out Michael Kane's argument-based approach as a chain of inferences, each of which can be checked: scoring, generalization across forms, raters, and days, extrapolation to reading in real courses, and the decision to place students. Names the sources of evidence each link can draw on: test content, response processes, internal structure, relations with other measures, and consequences. Follows a made-up researcher, Tom, who finds consistent scores but no benefit for placed students over similar students who were not placed, so the decision link is weak and the college revises how the score is used.",
     "question": "Pick a score you use to make a decision. Which link in its argument has the least evidence?",
     "lab": null,
-    "thumbnail": "thumb-validity-argument.jpg",
-    "videoFile": "media/validity-argument.mp4"
+    "thumbnail": "thumb-validity-argument.jpg"
   },
   {
     "id": "stealth-assessment",
+    "driveFileId": "1GKHvFgNejmLve38Qo_FjcOlEk651MxkE",
+    "narration": "synthetic",
     "title": "Stealth Assessment in Games - Basic",
     "shortTitle": "Stealth Assessment in Games",
     "category": "assessment",
@@ -526,11 +564,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up player, Mia, who draws ramps and levers in a physics game to guide a ball to a balloon while no quiz ever appears, and asks whether the game can still tell what she understands. Introduces Valerie Shute's stealth assessment, assessment woven into a game so tightly that play is not interrupted, and grounds it in evidence-centered design: a competency model of what we want to know, an evidence model of which actions count and how strongly, and a task model of the levels that give players chances to show it. Shows each action updating the estimate, often in a Bayesian network, with a lever solution counting as evidence about torque and many restarts on ramp levels pointing to a gap. Notes that Shute and colleagues built Physics Playground this way and checked the game's estimates against regular physics tests. Shows the estimates guiding a hint, a new level, or a teacher report, and returns to Mia, whose avoided levers leave the torque estimate uncertain, so the game offers a level that needs a lever.",
     "question": "In a game or simulation you know, which player action would be good evidence of a skill, and what else might explain it?",
     "lab": null,
-    "thumbnail": "thumb-stealth-assessment.jpg",
-    "videoFile": "media/stealth-assessment.mp4"
+    "thumbnail": "thumb-stealth-assessment.jpg"
   },
   {
     "id": "dick-carey",
+    "driveFileId": "12IHbgeLpLgdLRn1H8HXbKCL4JBxes92m",
+    "narration": "synthetic",
     "title": "The Dick and Carey Systematic Design Model - Basic",
     "shortTitle": "The Dick and Carey Systematic Design Model",
     "category": "design",
@@ -539,11 +578,12 @@ window.LECTURES = [
     "summary": "Introduces Walter Dick and Lou Carey's systematic design model, first published in 1978, which treats instruction as a system of interdependent parts and lays out ten steps from identifying a goal to evaluating the finished instruction. A made-up designer, Tomás, builds training for new bank tellers on spotting counterfeit bills: he names the goal, analyzes the steps an expert follows and, alongside, the learners and their busy counter, writes a performance objective with a condition, behavior, and criterion, and develops the test before any teaching is planned. He then builds the strategy and materials, tries the training with one teller, a small group, and a branch, and revises the analysis and practice when tellers skip the security thread. The return arrow, which lets revision reach back to any earlier step, is shown as the heart of the model, followed by summative evaluation. Notes links to backward design and Gagné's learning hierarchies, and cautions that the full model can feel heavy for small, fast projects.",
     "question": "In a course you designed, which step did you skip, and what did that cost you later?",
     "lab": null,
-    "thumbnail": "thumb-dick-carey.jpg",
-    "videoFile": "media/dick-carey.mp4"
+    "thumbnail": "thumb-dick-carey.jpg"
   },
   {
     "id": "kirkpatrick",
+    "driveFileId": "17lWzHuFMLRBZ6Or93XnR6HTECkbafsUz",
+    "narration": "synthetic",
     "title": "Kirkpatrick's Four Levels of Training Evaluation - Basic",
     "shortTitle": "Kirkpatrick's Four Levels of Training Evaluation",
     "category": "assessment",
@@ -552,11 +592,12 @@ window.LECTURES = [
     "summary": "Introduces the four levels Donald Kirkpatrick proposed in 1959 for asking whether a training worked: reaction, learning, behavior, and results, each usually harder to measure than the one before. A made-up trainer, Mei, runs a hand hygiene training for hospital staff and checks each level in turn: an end-of-session survey, a quiz on the moments when hands must be cleaned and a technique check, observers on the ward counting hand cleaning weeks later, and infection rates on the wards. Shows that the levels form a chain but not a guaranteed one, citing George Alliger and colleagues' meta-analysis, which found reactions only weakly related to learning and to use on the job, so a high satisfaction score says little about behavior or results. Notes that later versions of the model plan from the result down, echoing backward design, and cautions that results have many causes besides training, such as new soap dispensers or staffing changes.",
     "question": "For a training you know, which level is actually measured, and what would it take to reach the next one?",
     "lab": null,
-    "thumbnail": "thumb-kirkpatrick.jpg",
-    "videoFile": "media/kirkpatrick.mp4"
+    "thumbnail": "thumb-kirkpatrick.jpg"
   },
   {
     "id": "learning-objectives",
+    "driveFileId": "1ifbsjChP1zI2Olupxn7ol3EbcFC8MFhX",
+    "narration": "synthetic",
     "title": "Writing Learning Objectives: Mager and Bloom - Basic",
     "shortTitle": "Writing Learning Objectives: Mager and Bloom",
     "category": "design",
@@ -565,11 +606,12 @@ window.LECTURES = [
     "summary": "Turns a vague goal like \"students will understand first aid\" into an objective that describes what learners will be able to do in a form someone can observe. Introduces Robert Mager's three parts (performance, conditions, and criterion) and the related ABCD format, which adds the audience. A made-up first aid instructor, Ana, rewrites \"understand CPR\" as: given a training manikin, the learner gives thirty chest compressions at a rate of 100 to 120 per minute. Then shows how the verb signals the kind of thinking, using Bloom's taxonomy as revised by Lorin Anderson and David Krathwohl (remember, understand, apply, analyze, evaluate, create), with Ana's objectives climbing those levels, and the revision's second dimension of knowledge (factual, conceptual, procedural, metacognitive). Notes that good objectives guide the assessment and the activities, and cautions that verb lists are rough guides and that easy-to-measure objectives can crowd out goals that matter but are hard to observe.",
     "question": "Take one goal from your own course that uses a word like understand or know. What would a learner do that would show it?",
     "lab": null,
-    "thumbnail": "thumb-learning-objectives.jpg",
-    "videoFile": "media/learning-objectives.mp4"
+    "thumbnail": "thumb-learning-objectives.jpg"
   },
   {
     "id": "task-analysis",
+    "driveFileId": "14Nqlvb33BAkrXLCpG--1Pg46PQgSVwde",
+    "narration": "synthetic",
     "title": "Task Analysis and Cognitive Task Analysis - Basic",
     "shortTitle": "Task Analysis and Cognitive Task Analysis",
     "category": "design",
@@ -578,11 +620,12 @@ window.LECTURES = [
     "summary": "Explains task analysis, which breaks a task into the steps, decisions, and knowledge a learner needs, and why it comes early in most design models. A made-up trainer of new mechanics, Rosa, analyzes changing a tire with hierarchical task analysis (John Annett and Keith Duncan): a goal split into subgoals with a plan for their order, each step observable. Diagnosing a strange noise is different: the expert just hears it, and Richard Clark and colleagues describe studies in which experts left out as much as seventy percent of their decisions when explaining their work. Cognitive task analysis tries to recover that hidden knowledge (the cues experts notice, the decisions they make, and their rules of thumb), for example with the critical decision method from Gary Klein and colleagues, which probes each decision in a real, difficult case. Rosa's interviews surface the cues, which become recordings for practice. Cautions that cognitive task analysis takes time and that one expert's account is incomplete, so analysts interview several experts and check against real performance.",
     "question": "Think of a task you could teach. Which of its steps can be seen, and which decisions happen only in the expert's head?",
     "lab": null,
-    "thumbnail": "thumb-task-analysis.jpg",
-    "videoFile": "media/task-analysis.mp4"
+    "thumbnail": "thumb-task-analysis.jpg"
   },
   {
     "id": "dbir",
+    "driveFileId": "1xofWbISlHUMheFgJcWiyT2gVGSzv_JJY",
+    "narration": "synthetic",
     "title": "Design-Based Implementation Research - Basic",
     "shortTitle": "Design-Based Implementation Research",
     "category": "design",
@@ -591,11 +634,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up district whose new science curriculum, proven in one pilot class, is used in only a few classrooms two years later, and asks what went missing. Introduces design-based implementation research (DBIR), proposed by William Penuel, Barry Fishman, and colleagues to study and improve how innovations work across a system, not only in one classroom. Draws its four commitments as turning 3D pillars: a focus on persistent problems of practice seen by several stakeholders, iterative and collaborative design with teachers and leaders as partners, theory about both classroom learning and implementation built through systematic inquiry, and capacity to sustain change after the researchers leave. A made-up research team finds that teachers have no time to learn the new labs and the testing calendar leaves no room for them, so it redesigns the teacher workshops and the pacing guide, not only the units, and studies both student learning and how the supports spread. Contrasts DBIR with design-based research: the unit of change grows from a classroom to a system, and implementation becomes something to design and study.",
     "question": "In a project you know, what problem of practice would teachers and leaders name first, and who would need to be at the design table?",
     "lab": null,
-    "thumbnail": "thumb-dbir.jpg",
-    "videoFile": "media/dbir.mp4"
+    "thumbnail": "thumb-dbir.jpg"
   },
   {
     "id": "tpack",
+    "driveFileId": "1fR5E5ulX0gHuHWU4FLgZVCbb4CPXyfOX",
+    "narration": "synthetic",
     "title": "TPACK: Technological Pedagogical Content Knowledge - Basic",
     "shortTitle": "TPACK",
     "category": "design",
@@ -604,11 +648,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up history teacher who is fluent with video tools and knows his content, yet whose documentary video lesson falls flat because the tool took over and the historical thinking got lost. Introduces technological pedagogical content knowledge (TPACK), proposed by Punya Mishra and Matthew Koehler to describe the knowledge teachers need to teach well with technology, building on Lee Shulman's pedagogical content knowledge. Draws three overlapping circles for technology, pedagogy, and content, lights up their pairwise overlaps, and closes in on the center: knowing how a particular technology can support a particular way of teaching a particular idea in a particular context. The teacher redesigns the task around what historians do, so students make a short video comparing two sources on the same event and must show where they disagree. Notes that the circles are a lens, that the kinds of knowledge are hard to measure separately, that self-report surveys may not match classroom practice, and that context shapes every choice.",
     "question": "Pick one tool you use in teaching. What does it let your students do with your content that they could not do before, and what does it get in the way of?",
     "lab": null,
-    "thumbnail": "thumb-tpack.jpg",
-    "videoFile": "media/tpack.mp4"
+    "thumbnail": "thumb-tpack.jpg"
   },
   {
     "id": "archive-guide",
+    "driveFileId": "1kJGSF7QiafvBXJyuUsBKySGL7ftW3RwF",
+    "narration": "synthetic",
     "title": "Getting Started with the Lecture Archive",
     "shortTitle": "Archive Guide",
     "category": "guide",
@@ -617,11 +662,12 @@ window.LECTURES = [
     "summary": "A screen walkthrough of this archive for new viewers. Shows the three ways in (all lectures, research questions, and viewing paths), filtering by field and sorting by length, and searching titles, summaries, study guides, Korean summaries, and English transcripts, including opening a lecture at the matching transcript line. On a lecture page, it covers the player, the timestamp and copy timed link, and the four tabs: Overview (what the lecture helps explain, the key distinction, what not to conclude, the Korean summary, and a Pause and consider question), Transcript (jump to a line, search within the lecture, download SRT or VTT), Sources and updates (further reading with access labels and check notes, audio status, reuse), and Review status. It also shows Share and embed, a research question card, a viewing path with its step navigation, the About section, and Report a problem, and closes with a short study routine and tips for teachers.",
     "question": "Which lecture will you start with, and what will you do with its Pause and consider question?",
     "lab": null,
-    "thumbnail": "thumb-archive-guide.jpg",
-    "videoFile": "media/archive-guide.mp4"
+    "thumbnail": "thumb-archive-guide.jpg"
   },
   {
     "id": "ill-structured-problems",
+    "driveFileId": "1cW2DuKGibaSB9jiuWOufsVJDd13xRFg-",
+    "narration": "synthetic",
     "title": "Well-Structured and Ill-Structured Problems - Basic",
     "shortTitle": "Well- and Ill-Structured Problems",
     "category": "design",
@@ -630,11 +676,12 @@ window.LECTURES = [
     "summary": "Opens by setting a simple equation beside the task of designing a park for a whole town, and notes that both are problems of very different kinds. Introduces David Jonassen's argument that problems vary in structure and that this changes how problem solving should be taught and assessed. Contrasts well-structured problems, with a clear starting state, a known goal, and rules that lead to one right answer, against ill-structured problems, with unclear goals, many possible solutions, and several criteria for judging them, which call for judgment and an argument for one solution. Shows Jonassen's range of problem types, from story problems and troubleshooting to design problems and dilemmas. A made-up engineering teacher whose students froze on their first open design brief adds ill-structured work early: students compare two bridge designs, state their criteria, and defend their choice, so calculations become tools inside a larger argument. Describes assessment that looks at problem framing, criteria, and justification, and cautions that structure is a continuum, that practice on well-structured problems still matters, and that open problems without support can overwhelm novices.",
     "question": "In a course you know, which problems are well structured, which are ill structured, and where do students practice the second kind?",
     "lab": null,
-    "thumbnail": "thumb-ill-structured-problems.jpg",
-    "videoFile": "media/ill-structured-problems.mp4"
+    "thumbnail": "thumb-ill-structured-problems.jpg"
   },
   {
     "id": "productive-failure",
+    "driveFileId": "10Wbfox1XP3ABkeK1UJhkKgOCOOzd9DrP",
+    "narration": "synthetic",
     "title": "Productive Failure - Basic",
     "shortTitle": "Productive Failure",
     "category": "design",
@@ -643,11 +690,12 @@ window.LECTURES = [
     "summary": "Opens with two classes learning standard deviation, one shown the formula first and one that first tries to invent its own measure of spread, and asks which learns more. Introduces Manu Kapur's productive failure, in which students first generate solutions to a problem they are not yet ready to solve and the teacher then consolidates the canonical idea. Describes Kapur's 2008 study, in which groups working on ill-structured physics problems produced poorer solutions but outperformed their peers on later individual tests. Gives three reasons generation may help: it activates prior knowledge, shows learners the limits of their methods, and prepares them to notice what the formal solution does. Reports Tanmay Sinha and Kapur's 2021 meta-analysis of 166 comparisons from 53 studies, with a moderate advantage (Hedges' g = 0.36), larger effects for designs with high fidelity to productive failure principles, and a reversal for learners in grades 2 to 5 and for domain-general skills. A made-up statistics class invents measures of spread for three basketball teams before the standard deviation is shown.",
     "question": "For a concept you teach, what problem could students try before your explanation, and what would you highlight in their attempts?",
     "lab": null,
-    "thumbnail": "thumb-productive-failure.jpg",
-    "videoFile": "media/productive-failure.mp4"
+    "thumbnail": "thumb-productive-failure.jpg"
   },
   {
     "id": "authentic-learning",
+    "driveFileId": "1QSoiYy6TzAZIuKvLq0KTKmEAiqhWVdbh",
+    "narration": "synthetic",
     "title": "Authentic Learning - Basic",
     "shortTitle": "Authentic Learning",
     "category": "design",
@@ -656,11 +704,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up public health course in which students memorize definitions of an outbreak and then, as a final task, are asked to investigate one and have no idea where to begin. Introduces Jan Herrington and Ron Oliver's design framework for authentic learning environments, built from research on situated learning, and its nine elements, drawn as a grid the camera pans across: authentic context, authentic tasks, access to expert performances, multiple roles and perspectives, collaborative construction of knowledge, reflection, articulation, coaching and scaffolding, and authentic assessment built into the task. A made-up instructor redesigns the course so teams investigate a made-up outbreak over the term, read reports from real health agencies, take roles such as epidemiologist and reporter, and present to a panel, while she coaches when teams get stuck and grades the investigation itself rather than a separate quiz. Cautions that authentic does not mean unstructured, that realism takes time a schedule may not allow, and that a task can look realistic without demanding expert thinking.",
     "question": "In a course you know, which of the nine elements is missing, and what would a more authentic task look like?",
     "lab": null,
-    "thumbnail": "thumb-authentic-learning.jpg",
-    "videoFile": "media/authentic-learning.mp4"
+    "thumbnail": "thumb-authentic-learning.jpg"
   },
   {
     "id": "design-cases",
+    "driveFileId": "13nlEW-fmhF_JcMYSND8hvZs9jT3WK6Ka",
+    "narration": "synthetic",
     "title": "Design Cases - Basic",
     "shortTitle": "Design Cases",
     "category": "design",
@@ -669,11 +718,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up team that spends a year designing an online course for rural health workers, makes hundreds of decisions, tries ideas that fail, launches, and then publishes only a study of learning outcomes, and asks where all that design knowledge went. Introduces Elizabeth Boling's argument for design cases, rigorous descriptions of a real designed artifact or experience, its context, and how it came to be what it is. Contrasts a design case with a research report, since it does not test a hypothesis or claim that a design works everywhere, and quotes Vanessa Svihla and Boling's point that design cases present design and the results of designing. Explains that designers learn from precedent, as architects study buildings, and lists what a strong case describes: context and constraints, the designed thing in enough detail to picture it, key decisions and the options set aside, and what happened in use, including what did not work. The made-up team writes up screenshots, three redesigns, the reason it dropped video lectures, and an unused forum, so another designer can learn from those decisions.",
     "question": "In a design you worked on, which decision would another designer most need to hear about, and why?",
     "lab": null,
-    "thumbnail": "thumb-design-cases.jpg",
-    "videoFile": "media/design-cases.mp4"
+    "thumbnail": "thumb-design-cases.jpg"
   },
   {
     "id": "accessibility-udl",
+    "driveFileId": "10U0zGUJIdE4PaLZzYYJUSwql_kKCJ6bR",
+    "narration": "synthetic",
     "title": "Accessibility and Universal Design for Learning - Basic",
     "shortTitle": "Accessibility and Universal Design for Learning",
     "category": "design",
@@ -682,11 +732,12 @@ window.LECTURES = [
     "summary": "Opens with an online course whose lecture videos have no captions and whose quizzes have a strict timer, so a student who is deaf and another with a processing disability hit walls before they can show what they know. Introduces Michele Estes, Cheryl Beverly, and Marco Castillo's review of where instructional design and the education of people with disabilities meet, whose themes included Universal Design for Learning, accommodations, inclusive classrooms, and collaboration, and which concluded that inclusive design is complex and needs an interdisciplinary team. Explains Universal Design for Learning as planning for the edges of a class from the start, with multiple means of engagement, representation, and action and expression, and contrasts it with accommodations made for one learner after a barrier appears. Reports that Kavita Rao and colleagues found no standard format for describing universal design in studies, and that Matthew Capp's meta-analysis suggests UDL improved the learning process while effects on learning outcomes were not demonstrated. A made-up instructor adds captions, transcripts, choices of format, and removes the timer where speed is not the skill tested.",
     "question": "In a course you know, where does the first barrier appear, and could it be removed for everyone?",
     "lab": null,
-    "thumbnail": "thumb-accessibility-udl.jpg",
-    "videoFile": "media/accessibility-udl.mp4"
+    "thumbnail": "thumb-accessibility-udl.jpg"
   },
   {
     "id": "icap",
+    "driveFileId": "1u6npd8xgf0G0Krzr20k2aAN0xwhNEtwJ",
+    "narration": "synthetic",
     "title": "The ICAP Framework: Four Modes of Engagement - Basic",
     "shortTitle": "The ICAP Framework: Four Modes of Engagement",
     "category": "experience",
@@ -695,11 +746,12 @@ window.LECTURES = [
     "summary": "Introduces Michelene Chi and Ruth Wylie's ICAP framework, which sorts learning activities by what learners actually do. Passive means receiving information while paying attention; active means doing something with the material itself, such as pausing, underlining, or copying; constructive means producing something beyond what was given, such as explaining why, drawing a concept map, or asking a question; interactive means two or more learners building on each other's ideas. A made-up biology teacher, Jun, keeps one video about the heart but changes the task through all four modes, ending with partners comparing drawings and fixing each other's mistakes. Presents the ICAP hypothesis that learning increases from passive to active to constructive to interactive, with the thinking behind each mode (storing, connecting, inferring, and inferring together). Cautions that modes are judged from what learners do rather than the task on paper, that group work where one student explains while others copy is not interactive, and that single studies do not always find every step.",
     "question": "Pick one activity you use. Which mode do learners actually show, and what small change would move it one step up?",
     "lab": null,
-    "thumbnail": "thumb-icap.jpg",
-    "videoFile": "media/icap.mp4"
+    "thumbnail": "thumb-icap.jpg"
   },
   {
     "id": "interest-development",
+    "driveFileId": "1zn23BgGj63KlFwqrErB-YH1vznC_VHar",
+    "narration": "synthetic",
     "title": "The Four-Phase Model of Interest Development - Basic",
     "shortTitle": "The Four-Phase Model of Interest Development",
     "category": "experience",
@@ -708,11 +760,12 @@ window.LECTURES = [
     "summary": "Opens with a made-up student whose afternoon at a museum bridge exhibit grows, years later, into designing bridges for fun, and asks how a passing spark becomes a lasting interest. Introduces Suzanne Hidi and Ann Renninger's four-phase model, in which interest develops with both feelings and knowledge growing along the way. Draws the phases as rising steps: triggered situational interest, when something in the setting catches attention; maintained situational interest, when attention holds because the task feels meaningful and others support it; emerging individual interest, when learners return to the topic on their own and ask their own questions; and well-developed individual interest, with deep knowledge, value for the topic, and persistence. Traces the student's path through the phases and notes that early on the environment does most of the work, while later learners need room for their own questions and challenges that match what they know. Cautions that the phases are not a fixed ladder, that a spark alone rarely lasts, and that triggered interest is not the same as learning.",
     "question": "For a learner you know, which phase is their interest in your subject, and what support would help it move to the next one?",
     "lab": null,
-    "thumbnail": "thumb-interest-development.jpg",
-    "videoFile": "media/interest-development.mp4"
+    "thumbnail": "thumb-interest-development.jpg"
   },
   {
     "id": "achievement-emotions",
+    "driveFileId": "1RYogi6w8nuId2AO9owPzBaMj3ojD4qNt",
+    "narration": "synthetic",
     "title": "Achievement Emotions and Control-Value Theory - Basic",
     "shortTitle": "Achievement Emotions and Control-Value Theory",
     "category": "experience",
@@ -721,11 +774,12 @@ window.LECTURES = [
     "summary": "Opens with three made-up students facing the same statistics exam, one hopeful, one anxious, and one bored, and asks where these emotions come from and whether they matter for learning. Introduces Reinhard Pekrun's control-value theory of achievement emotions, emotions tied to learning activities and to success or failure, which arise from two appraisals: control, whether I feel able to do this, and value, whether it matters to me. Places emotions on a control-by-value grid: high control and high value bring enjoyment or hope, low control and high value bring anxiety or hopelessness, and low value brings boredom. Notes that emotions differ in activation, with anxiety able to energize or block and boredom and hopelessness tending to drain effort. Adds Sidney D'Mello and Art Graesser's finding that confusion during complex learning can help when it is resolved but can turn into frustration and then boredom when it is not. A made-up teacher raises control with practice quizzes and feedback and raises value with data about the class's own school.",
     "question": "In a course you know, where do students feel low control, and what could raise it without lowering the challenge?",
     "lab": null,
-    "thumbnail": "thumb-achievement-emotions.jpg",
-    "videoFile": "media/achievement-emotions.mp4"
+    "thumbnail": "thumb-achievement-emotions.jpg"
   },
   {
     "id": "pedagogical-agents",
+    "driveFileId": "1uliF0xoXtg8toqmvHEMtWS0nJ9vOulEO",
+    "narration": "synthetic",
     "title": "Pedagogical Agents - Basic",
     "shortTitle": "Pedagogical Agents",
     "category": "experience",
@@ -734,8 +788,7 @@ window.LECTURES = [
     "summary": "Opens with an on-screen character that greets students in a science lesson, points at a diagram, and explains how a solar cell works, and asks whether it helps them learn or is just decoration. Defines pedagogical agents as on-screen characters that support instruction by explaining, hinting, asking questions, or modeling a skill. Describes James Lester and colleagues' persona effect, in which students viewed lessons with a lifelike agent more positively, and Noah Schroeder and colleagues' meta-analysis of 43 studies with 3,088 participants, which found a small but significant effect on learning, larger for school students than for college students. Reports Richard Mayer and Cynthia DaPra's finding that an agent using humanlike gestures, gaze, and facial expression improved transfer only when it spoke with a human voice. A made-up design team replaces an agent that waves and smiles constantly with one that points at and looks at the part being explained and then goes still, so students' eyes follow the pointing.",
     "question": "If you added an on-screen agent to a lesson you know, what would it do that the lesson cannot do without it?",
     "lab": null,
-    "thumbnail": "thumb-pedagogical-agents.jpg",
-    "videoFile": "media/pedagogical-agents.mp4"
+    "thumbnail": "thumb-pedagogical-agents.jpg"
   },
   {
     "id": "GcsN8Ozqvec",
@@ -799,6 +852,8 @@ window.LECTURES = [
   },
   {
     "id": "irt-basic",
+    "driveFileId": "1w1kDvaJyMkHH2mhn80SeJ7JvkCMDlTDZ",
+    "narration": "synthetic",
     "title": "Item Response Theory - Basic",
     "shortTitle": "Item Response Theory",
     "category": "assessment",
@@ -807,11 +862,12 @@ window.LECTURES = [
     "summary": "Introduces item response theory with a made-up fractions quiz that Lena took in an easy version and Sam in a hard one, both scoring six out of ten. Places students and items on one logit scale, draws the item characteristic curve, and shows difficulty, discrimination, and the Rasch, two-parameter, and three-parameter models, then joins the curves into a probability surface. Ends with two cautions: in the Rasch model the same total on the same items gives the same estimate, and IRT holds ability fixed during a test, unlike knowledge tracing.",
     "question": "On a test you know well, which item would you expect to discriminate best, and why?",
     "lab": null,
-    "thumbnail": "thumb-irt-basic.jpg",
-    "videoFile": "media/irt-basic.mp4"
+    "thumbnail": "thumb-irt-basic.jpg"
   },
   {
     "id": "learning-progressions",
+    "driveFileId": "1jGuMQfHsv-1yCjM7Oj2nVIA0AQCPauuF",
+    "narration": "synthetic",
     "title": "Learning Progressions - Basic",
     "shortTitle": "Learning Progressions",
     "category": "assessment",
@@ -820,11 +876,12 @@ window.LECTURES = [
     "summary": "Opens with three students explaining why a puddle dries up, the water is gone, it turned into vapor, molecules move apart, and asks whether these are wrong answers and one right one or steps along a path. Introduces learning progressions, which Carol Smith, Marianne Wiser, Charles Anderson, and Joseph Krajcik proposed as descriptions of increasingly sophisticated ways of reasoning about a big idea, such as matter, built from research on how children learn. Summarizes the shared features Ravit Golan Duncan and Ann Rivet describe: progressions are organized around a few core ideas and practices, describe intermediate levels grounded in research, and depend on targeted instruction, and each progression is a conjecture to be tested and revised. Describes Alicia Alonzo and Jeffrey Steedle's ordered multiple-choice items, whose options map to levels and diagnosed levels more precisely than open-ended items, while students answered inconsistently across contexts. A made-up science team rewrites test questions so each option matches a level and groups students by level, checking several items first.",
     "question": "For a big idea you teach, what would a beginning, a middle, and an advanced answer sound like?",
     "lab": null,
-    "thumbnail": "thumb-learning-progressions.jpg",
-    "videoFile": "media/learning-progressions.mp4"
+    "thumbnail": "thumb-learning-progressions.jpg"
   },
   {
     "id": "measuring-competencies",
+    "driveFileId": "17Q52DxN2WresgXELlohUCCm9Z0Gbjn0N",
+    "narration": "synthetic",
     "title": "Measuring Competencies - Basic",
     "shortTitle": "Measuring Competencies",
     "category": "assessment",
@@ -833,11 +890,12 @@ window.LECTURES = [
     "summary": "Opens with a nursing student who passes every written test yet freezes when a patient's condition changes, and asks whether the tests measured what mattered. Introduces Karoline Koeppen and colleagues' description of competencies as complex, context-specific, learnable abilities closely tied to real life. Explains Stefan Ufer and Knut Neumann's three parts of measuring competence, a competence model, assessment tasks, and a statistical model that infers competence from performance, and contrasts models of structure with models of levels. Presents Sigrid Blömeke, Jan-Eric Gustafsson, and Richard Shavelson's argument that competence debates rest on false choices and their continuum from underlying traits through perceiving, interpreting, and deciding to observed behavior, along with the complementary roles of item response theory and generalizability theory. A made-up nursing instructor adds short video cases and a two-rater simulation, finds that the case a student gets matters more than the rater, and adds more cases rather than more raters.",
     "question": "For a competence you care about, what would a learner have to notice, interpret, and do, and how would you see it?",
     "lab": null,
-    "thumbnail": "thumb-measuring-competencies.jpg",
-    "videoFile": "media/measuring-competencies.mp4"
+    "thumbnail": "thumb-measuring-competencies.jpg"
   },
   {
     "id": "micro-credentials",
+    "driveFileId": "1qIlDTAnLhhoz_emNP2QVsYnSHdlUC8cZ",
+    "narration": "synthetic",
     "title": "Micro-Credentials and Digital Badges - Basic",
     "shortTitle": "Micro-Credentials and Digital Badges",
     "category": "assessment",
@@ -846,8 +904,7 @@ window.LECTURES = [
     "summary": "Opens with a student whose summer video-editing workshop, community data project, and self-taught online statistics never appear on her transcript, and asks how that learning could be recognized. Introduces Richard West, Timothy Newby, and colleagues' review of alternative credentials, such as open microcredentials and digital badges, which are smaller and more flexible than degrees, and its three functions: the credentialing function, how a credential recognizes a skill and communicates it to others such as employers; the motivational function, how badges may encourage effort and participation; and the pedagogical function, how microcredentials can structure and scaffold learning. Adds Daniel Hickey and colleagues' point that most grades and transcripts are opaque about what was learned and where, while open digital badges can carry information about the context of learning and the evidence behind it. A made-up online course awards a badge for each project, linked to the criteria, the learner's chart, and a peer's endorsement, so an employer sees the work itself.",
     "question": "What learning in your setting goes unrecognized, and what evidence would a badge for it need to carry?",
     "lab": null,
-    "thumbnail": "thumb-micro-credentials.jpg",
-    "videoFile": "media/micro-credentials.mp4"
+    "thumbnail": "thumb-micro-credentials.jpg"
   },
   {
     "id": "Cn2KU6ooubI",
