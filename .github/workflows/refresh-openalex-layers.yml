@@ -59,7 +59,7 @@ jobs:
         if: steps.done.outputs.skip != 'true'
         continue-on-error: true
         run: |
-          python scripts/build_venue_metrics.py --samples 30
+          python scripts/build_venue_metrics.py --samples 60
           python scripts/disparity_backbone.py
 
       - name: Save referenced-works cache
