@@ -19,4 +19,4 @@ Scientific review corrected the date of the historical PBL research-gap claim an
 
 Validation: all ten video files contain video, audio, and embedded subtitles; caption text matches the final scripts; cues have positive, non-overlapping times. Archive checks confirm unique IDs, Drive links, thumbnails, guides and captions. Existing23 tests and production build pass. Scene midpoint contact sheets were visually inspected, and identified camera crops were corrected.
 
-Browser: local detail page, timed transcript and timestamped route updates verified using ego(lite). Drive sharing shows anyone-with-link access. Drive preview was still processing during the current browser check; completed playback has not yet been verified.
+Browser: local detail page, timed transcript and timestamped route updates verified using ego(lite). All ten Drive objects have anyone-with-link reader permissions and sizes matching the local final MP4s. Both the new files and a previously published Knowledge Tracing control video remain at Loading in ego(lite), so completed host playback has not been verified. The protected Vercel preview requires login; local archive UI checks passed.
