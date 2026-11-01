@@ -33,6 +33,7 @@ from pathlib import Path
 import requests
 
 from update_semantic_profiles import _abstract_from_work, MAILTO
+from fetch_alt_abstracts import save_venue
 
 OPENALEX_WORKS = "https://api.openalex.org/works"
 JEV_URL = "https://api.typesafe.ai/v1/systemone"
@@ -188,7 +189,7 @@ def fetch(per_venue):
         take = revs[:k_rev] + arts[: per_venue - min(k_rev, len(revs))]
         store[vid] = {"name": v["name"], "fetched_at": date.today().isoformat(), "window": [SINCE, UNTIL],
                       "openalex_counts": {"article": n_art, "review": n_rev}, "works": take}
-        ABSTRACTS.write_text(json.dumps(store, ensure_ascii=False), encoding="utf-8")
+        save_venue(ABSTRACTS, vid, store[vid])
         print(f"  [{vid}] {len(take)} abstracts (articles {n_art}, reviews {n_rev} in window)")
         time.sleep(0.2)
     print(f"fetch done: {len(store)} venues cached, {used} OpenAlex requests")
@@ -257,6 +258,10 @@ def code(key, venues_cap, per_venue):
     print(f"code done: {n} coded, {errs} errors, input tokens {tok}")
 
 
+# Meetings that publish no proceedings (presentations and session abstracts only): nothing to sample.
+NOT_APPLICABLE = {"aera": "AERA Annual Meeting", "earli": "EARLI Conference", "aect": "AECT Convention"}
+
+
 def no_abstracts(d):
     """OpenAlex has no regular-paper abstracts and scripts/fetch_alt_abstracts.py found no other source."""
     return (d.get("openalex_counts") or {}).get("article", 1) == 0 and not d.get("alt_source")
@@ -313,7 +318,8 @@ def build():
         a = r["answers"]
         return (a[f"{prefix}_{k}__A"]["noul"] + a[f"{prefix}_{k}__B"]["noul"]) / 2 >= .5
 
-    out = {}
+    out = {vid: {"name": name, "shares": {}, "dominant": None, "n_classified": 0, "n_abstracts": 0, "n_research": 0,
+                 "not_applicable": "presentation-only meeting without published proceedings"} for vid, name in NOT_APPLICABLE.items()}
     for vid, d in store.items():
         # OpenAlex holds abstracts only for this venue's occasional reviews, not its regular papers:
         # coding them would misread the venue, so it is listed without a profile.

@@ -11,9 +11,9 @@
       2026
     ],
     "n_venues": 89,
-    "n_edges": 2379,
+    "n_edges": 2441,
     "backbone_method": "directed disparity filter (Serrano et al. 2009, PNAS), alpha<0.1",
-    "n_backbone_edges": 329
+    "n_backbone_edges": 342
   },
   "venues": {
     "etrd": {
@@ -2794,11 +2794,40 @@
     },
     "tttp": {
       "name": "Teachers and Teaching: Theory and Practice",
-      "interdisciplinarity_simpson": null,
-      "interdisciplinarity_shannon": null,
-      "n_papers_sampled": 0,
-      "n_refs_field_resolved": 0,
-      "top_fields": []
+      "interdisciplinarity_simpson": {
+        "mean": 0.3591,
+        "median": 0.3862,
+        "n_papers": 59
+      },
+      "interdisciplinarity_shannon": {
+        "mean": 0.7146,
+        "median": 0.7605,
+        "n_papers": 59
+      },
+      "n_papers_sampled": 59,
+      "n_refs_field_resolved": 2226,
+      "top_fields": [
+        {
+          "field": "Social Sciences",
+          "share": 0.713
+        },
+        {
+          "field": "Psychology",
+          "share": 0.093
+        },
+        {
+          "field": "Health Professions",
+          "share": 0.049
+        },
+        {
+          "field": "Computer Science",
+          "share": 0.036
+        },
+        {
+          "field": "Arts and Humanities",
+          "share": 0.027
+        }
+      ]
     },
     "pde": {
       "name": "Professional Development in Education",
@@ -2915,7 +2944,7 @@
       "source": "se",
       "target": "jrst",
       "weight": 189,
-      "alpha": 0.0003,
+      "alpha": 0.0002,
       "backbone": true
     },
     {
@@ -2950,7 +2979,7 @@
       "source": "epr",
       "target": "jep",
       "weight": 157,
-      "alpha": 0.0007,
+      "alpha": 0.0006,
       "backbone": true
     },
     {
@@ -2964,7 +2993,7 @@
       "source": "ep",
       "target": "jep",
       "weight": 147,
-      "alpha": 0.0026,
+      "alpha": 0.0024,
       "backbone": true
     },
     {
@@ -2992,14 +3021,14 @@
       "source": "jecr",
       "target": "ce",
       "weight": 136,
-      "alpha": 0.0016,
+      "alpha": 0.0014,
       "backbone": true
     },
     {
       "source": "ci",
       "target": "se",
       "weight": 134,
-      "alpha": 0.0014,
+      "alpha": 0.0012,
       "backbone": true
     },
     {
@@ -3013,7 +3042,7 @@
       "source": "jecr",
       "target": "eit",
       "weight": 133,
-      "alpha": 0.0018,
+      "alpha": 0.0016,
       "backbone": true
     },
     {
@@ -3048,14 +3077,21 @@
       "source": "ate",
       "target": "jte",
       "weight": 121,
-      "alpha": 0.0001,
+      "alpha": 0.0002,
       "backbone": true
     },
     {
       "source": "de",
       "target": "ce",
       "weight": 119,
-      "alpha": 0.0011,
+      "alpha": 0.001,
+      "backbone": true
+    },
+    {
+      "source": "tttp",
+      "target": "tate",
+      "weight": 116,
+      "alpha": 0.0,
       "backbone": true
     },
     {
@@ -3069,7 +3105,7 @@
       "source": "jset",
       "target": "ce",
       "weight": 115,
-      "alpha": 0.0018,
+      "alpha": 0.0016,
       "backbone": true
     },
     {
@@ -3097,28 +3133,28 @@
       "source": "ate",
       "target": "tate",
       "weight": 111,
-      "alpha": 0.0017,
+      "alpha": 0.0016,
       "backbone": true
     },
     {
       "source": "epr",
       "target": "ep",
       "weight": 109,
-      "alpha": 0.0041,
+      "alpha": 0.0038,
       "backbone": true
     },
     {
       "source": "ile",
       "target": "eit",
       "weight": 108,
-      "alpha": 0.0015,
+      "alpha": 0.0013,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "ce",
       "weight": 104,
-      "alpha": 0.0031,
+      "alpha": 0.0028,
       "backbone": true
     },
     {
@@ -3132,7 +3168,7 @@
       "source": "li",
       "target": "jep",
       "weight": 100,
-      "alpha": 0.0039,
+      "alpha": 0.0035,
       "backbone": true
     },
     {
@@ -3146,14 +3182,14 @@
       "source": "is",
       "target": "epr",
       "weight": 98,
-      "alpha": 0.0099,
+      "alpha": 0.0094,
       "backbone": true
     },
     {
       "source": "jrst",
       "target": "ijse",
       "weight": 98,
-      "alpha": 0.0031,
+      "alpha": 0.0028,
       "backbone": true
     },
     {
@@ -3174,7 +3210,7 @@
       "source": "li",
       "target": "epr",
       "weight": 94,
-      "alpha": 0.0055,
+      "alpha": 0.005,
       "backbone": true
     },
     {
@@ -3188,7 +3224,7 @@
       "source": "ci",
       "target": "jrst",
       "weight": 93,
-      "alpha": 0.0115,
+      "alpha": 0.0106,
       "backbone": true
     },
     {
@@ -3209,14 +3245,14 @@
       "source": "jls",
       "target": "er",
       "weight": 89,
-      "alpha": 0.006,
+      "alpha": 0.0065,
       "backbone": true
     },
     {
       "source": "cep",
       "target": "epr",
       "weight": 89,
-      "alpha": 0.0154,
+      "alpha": 0.0147,
       "backbone": true
     },
     {
@@ -3237,28 +3273,28 @@
       "source": "eit",
       "target": "ce",
       "weight": 87,
-      "alpha": 0.0016,
+      "alpha": 0.0014,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "bjet",
       "weight": 86,
-      "alpha": 0.0183,
+      "alpha": 0.0174,
       "backbone": true
     },
     {
       "source": "is",
       "target": "jep",
       "weight": 84,
-      "alpha": 0.0299,
+      "alpha": 0.0283,
       "backbone": true
     },
     {
       "source": "cep",
       "target": "ep",
       "weight": 83,
-      "alpha": 0.0159,
+      "alpha": 0.0151,
       "backbone": true
     },
     {
@@ -3272,28 +3308,28 @@
       "source": "se",
       "target": "ijse",
       "weight": 82,
-      "alpha": 0.0202,
+      "alpha": 0.0187,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "bjet",
       "weight": 81,
-      "alpha": 0.0117,
+      "alpha": 0.0108,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "ce",
       "weight": 81,
-      "alpha": 0.005,
+      "alpha": 0.0046,
       "backbone": true
     },
     {
       "source": "ep",
       "target": "epr",
       "weight": 79,
-      "alpha": 0.0249,
+      "alpha": 0.0239,
       "backbone": true
     },
     {
@@ -3307,7 +3343,7 @@
       "source": "ijethe",
       "target": "eit",
       "weight": 79,
-      "alpha": 0.0058,
+      "alpha": 0.0053,
       "backbone": true
     },
     {
@@ -3328,14 +3364,14 @@
       "source": "cse",
       "target": "ce",
       "weight": 76,
-      "alpha": 0.0065,
+      "alpha": 0.006,
       "backbone": true
     },
     {
       "source": "ce",
       "target": "bjet",
       "weight": 75,
-      "alpha": 0.0115,
+      "alpha": 0.0107,
       "backbone": true
     },
     {
@@ -3349,14 +3385,14 @@
       "source": "jset",
       "target": "ijse",
       "weight": 74,
-      "alpha": 0.0189,
+      "alpha": 0.0176,
       "backbone": true
     },
     {
       "source": "sse",
       "target": "jset",
       "weight": 73,
-      "alpha": 0.0008,
+      "alpha": 0.0007,
       "backbone": true
     },
     {
@@ -3370,7 +3406,7 @@
       "source": "jset",
       "target": "eit",
       "weight": 71,
-      "alpha": 0.0223,
+      "alpha": 0.0209,
       "backbone": true
     },
     {
@@ -3384,14 +3420,14 @@
       "source": "ihe",
       "target": "bjet",
       "weight": 70,
-      "alpha": 0.0394,
+      "alpha": 0.0377,
       "backbone": true
     },
     {
       "source": "is",
       "target": "ce",
       "weight": 69,
-      "alpha": 0.057,
+      "alpha": 0.0546,
       "backbone": true
     },
     {
@@ -3412,7 +3448,7 @@
       "source": "ep",
       "target": "er",
       "weight": 68,
-      "alpha": 0.0211,
+      "alpha": 0.0222,
       "backbone": true
     },
     {
@@ -3426,7 +3462,7 @@
       "source": "cep",
       "target": "rer",
       "weight": 68,
-      "alpha": 0.0421,
+      "alpha": 0.0412,
       "backbone": true
     },
     {
@@ -3447,14 +3483,14 @@
       "source": "jset",
       "target": "se",
       "weight": 68,
-      "alpha": 0.0264,
+      "alpha": 0.0248,
       "backbone": true
     },
     {
       "source": "ce",
       "target": "eit",
       "weight": 67,
-      "alpha": 0.0189,
+      "alpha": 0.0178,
       "backbone": true
     },
     {
@@ -3489,7 +3525,7 @@
       "source": "se",
       "target": "jls",
       "weight": 66,
-      "alpha": 0.0153,
+      "alpha": 0.0144,
       "backbone": true
     },
     {
@@ -3503,35 +3539,35 @@
       "source": "ile",
       "target": "ijethe",
       "weight": 65,
-      "alpha": 0.0192,
+      "alpha": 0.0176,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "epr",
       "weight": 64,
-      "alpha": 0.0308,
+      "alpha": 0.029,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "ile",
       "weight": 64,
-      "alpha": 0.0109,
+      "alpha": 0.01,
       "backbone": true
     },
     {
       "source": "ile",
       "target": "ce",
       "weight": 64,
-      "alpha": 0.0235,
+      "alpha": 0.0219,
       "backbone": true
     },
     {
       "source": "de",
       "target": "eit",
       "weight": 64,
-      "alpha": 0.0292,
+      "alpha": 0.0273,
       "backbone": true
     },
     {
@@ -3545,14 +3581,14 @@
       "source": "jls",
       "target": "se",
       "weight": 63,
-      "alpha": 0.0381,
+      "alpha": 0.0355,
       "backbone": true
     },
     {
       "source": "ijcscl",
       "target": "jls",
       "weight": 63,
-      "alpha": 0.0186,
+      "alpha": 0.0176,
       "backbone": true
     },
     {
@@ -3573,28 +3609,28 @@
       "source": "is",
       "target": "jls",
       "weight": 63,
-      "alpha": 0.0186,
+      "alpha": 0.0176,
       "backbone": true
     },
     {
       "source": "cep",
       "target": "lid",
       "weight": 63,
-      "alpha": 0.0036,
+      "alpha": 0.0032,
       "backbone": true
     },
     {
       "source": "err",
       "target": "ce",
       "weight": 63,
-      "alpha": 0.0147,
+      "alpha": 0.0142,
       "backbone": true
     },
     {
       "source": "tt",
       "target": "eit",
       "weight": 63,
-      "alpha": 0.0048,
+      "alpha": 0.0045,
       "backbone": true
     },
     {
@@ -3608,14 +3644,14 @@
       "source": "li",
       "target": "ep",
       "weight": 62,
-      "alpha": 0.0352,
+      "alpha": 0.033,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "ijethe",
       "weight": 62,
-      "alpha": 0.0232,
+      "alpha": 0.0214,
       "backbone": true
     },
     {
@@ -3629,14 +3665,14 @@
       "source": "jset",
       "target": "jrst",
       "weight": 62,
-      "alpha": 0.0368,
+      "alpha": 0.0347,
       "backbone": true
     },
     {
       "source": "tt",
       "target": "etrd",
       "weight": 61,
-      "alpha": 0.0058,
+      "alpha": 0.0054,
       "backbone": true
     },
     {
@@ -3650,56 +3686,56 @@
       "source": "etrd",
       "target": "eit",
       "weight": 60,
-      "alpha": 0.0385,
+      "alpha": 0.0364,
       "backbone": true
     },
     {
       "source": "err",
       "target": "rer",
       "weight": 60,
-      "alpha": 0.0181,
+      "alpha": 0.0176,
       "backbone": true
     },
     {
       "source": "ihe",
       "target": "epr",
       "weight": 60,
-      "alpha": 0.0618,
+      "alpha": 0.0599,
       "backbone": true
     },
     {
       "source": "jls",
       "target": "jrst",
       "weight": 59,
-      "alpha": 0.0472,
+      "alpha": 0.0443,
       "backbone": true
     },
     {
       "source": "ile",
       "target": "bjet",
       "weight": 59,
-      "alpha": 0.0318,
+      "alpha": 0.0299,
       "backbone": true
     },
     {
       "source": "ep",
       "target": "aerj",
       "weight": 58,
-      "alpha": 0.0116,
+      "alpha": 0.0115,
       "backbone": true
     },
     {
       "source": "is",
       "target": "ep",
       "weight": 58,
-      "alpha": 0.0571,
+      "alpha": 0.0553,
       "backbone": true
     },
     {
       "source": "ile",
       "target": "ceai",
       "weight": 58,
-      "alpha": 0.0165,
+      "alpha": 0.0156,
       "backbone": true
     },
     {
@@ -3720,7 +3756,7 @@
       "source": "epr",
       "target": "rer",
       "weight": 57,
-      "alpha": 0.0711,
+      "alpha": 0.0699,
       "backbone": true
     },
     {
@@ -3741,14 +3777,21 @@
       "source": "rer",
       "target": "jep",
       "weight": 56,
-      "alpha": 0.0018,
+      "alpha": 0.0019,
+      "backbone": true
+    },
+    {
+      "source": "tate",
+      "target": "tttp",
+      "weight": 56,
+      "alpha": 0.0026,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "epr",
       "weight": 55,
-      "alpha": 0.0783,
+      "alpha": 0.0761,
       "backbone": true
     },
     {
@@ -3769,7 +3812,7 @@
       "source": "ci",
       "target": "jte",
       "weight": 54,
-      "alpha": 0.0252,
+      "alpha": 0.0287,
       "backbone": true
     },
     {
@@ -3790,28 +3833,28 @@
       "source": "ce",
       "target": "ijethe",
       "weight": 53,
-      "alpha": 0.041,
+      "alpha": 0.0383,
       "backbone": true
     },
     {
       "source": "eit",
       "target": "ijethe",
       "weight": 53,
-      "alpha": 0.0216,
+      "alpha": 0.0205,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "bjet",
       "weight": 53,
-      "alpha": 0.0335,
+      "alpha": 0.0316,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "ceai",
       "weight": 52,
-      "alpha": 0.0257,
+      "alpha": 0.0245,
       "backbone": true
     },
     {
@@ -3825,21 +3868,21 @@
       "source": "eit",
       "target": "chb",
       "weight": 52,
-      "alpha": 0.0233,
+      "alpha": 0.0221,
       "backbone": true
     },
     {
       "source": "ce",
       "target": "etrd",
       "weight": 51,
-      "alpha": 0.0369,
+      "alpha": 0.0352,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "jcal",
       "weight": 51,
-      "alpha": 0.0224,
+      "alpha": 0.0211,
       "backbone": true
     },
     {
@@ -3881,7 +3924,7 @@
       "source": "cep",
       "target": "tate",
       "weight": 50,
-      "alpha": 0.1383,
+      "alpha": 0.1323,
       "backbone": false
     },
     {
@@ -3902,28 +3945,28 @@
       "source": "ep",
       "target": "rer",
       "weight": 49,
-      "alpha": 0.1038,
+      "alpha": 0.1023,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "aerj",
       "weight": 49,
-      "alpha": 0.0238,
+      "alpha": 0.0237,
       "backbone": true
     },
     {
       "source": "jfdl",
       "target": "ce",
       "weight": 49,
-      "alpha": 0.0101,
+      "alpha": 0.0097,
       "backbone": true
     },
     {
       "source": "jche",
       "target": "etrd",
       "weight": 49,
-      "alpha": 0.0422,
+      "alpha": 0.0404,
       "backbone": true
     },
     {
@@ -3944,14 +3987,14 @@
       "source": "de",
       "target": "bjet",
       "weight": 48,
-      "alpha": 0.0726,
+      "alpha": 0.0692,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "ceai",
       "weight": 48,
-      "alpha": 0.0345,
+      "alpha": 0.0329,
       "backbone": true
     },
     {
@@ -3972,21 +4015,21 @@
       "source": "cse",
       "target": "eit",
       "weight": 48,
-      "alpha": 0.0441,
+      "alpha": 0.0421,
       "backbone": true
     },
     {
       "source": "tate",
       "target": "jte",
       "weight": 48,
-      "alpha": 0.0257,
+      "alpha": 0.0354,
       "backbone": true
     },
     {
       "source": "de",
       "target": "ijethe",
       "weight": 47,
-      "alpha": 0.0596,
+      "alpha": 0.0561,
       "backbone": true
     },
     {
@@ -4007,42 +4050,49 @@
       "source": "jte",
       "target": "rer",
       "weight": 47,
-      "alpha": 0.0444,
+      "alpha": 0.0477,
       "backbone": true
     },
     {
       "source": "ci",
       "target": "er",
       "weight": 46,
-      "alpha": 0.0758,
+      "alpha": 0.0784,
       "backbone": true
     },
     {
       "source": "jecr",
       "target": "etrd",
       "weight": 46,
-      "alpha": 0.0515,
+      "alpha": 0.0494,
       "backbone": true
     },
     {
       "source": "ihe",
       "target": "jcal",
       "weight": 46,
-      "alpha": 0.0329,
+      "alpha": 0.0312,
+      "backbone": true
+    },
+    {
+      "source": "ejte",
+      "target": "tttp",
+      "weight": 46,
+      "alpha": 0.0083,
       "backbone": true
     },
     {
       "source": "epr",
       "target": "lid",
       "weight": 45,
-      "alpha": 0.0192,
+      "alpha": 0.0178,
       "backbone": true
     },
     {
       "source": "ci",
       "target": "ep",
       "weight": 45,
-      "alpha": 0.1099,
+      "alpha": 0.1071,
       "backbone": false
     },
     {
@@ -4056,28 +4106,28 @@
       "source": "is",
       "target": "jrst",
       "weight": 45,
-      "alpha": 0.1575,
+      "alpha": 0.1532,
       "backbone": false
     },
     {
       "source": "is",
       "target": "ijse",
       "weight": 45,
-      "alpha": 0.123,
+      "alpha": 0.118,
       "backbone": false
     },
     {
       "source": "ihe",
       "target": "ijethe",
       "weight": 45,
-      "alpha": 0.0674,
+      "alpha": 0.0637,
       "backbone": true
     },
     {
       "source": "jche",
       "target": "ijethe",
       "weight": 45,
-      "alpha": 0.0674,
+      "alpha": 0.0637,
       "backbone": true
     },
     {
@@ -4091,21 +4141,21 @@
       "source": "rer",
       "target": "er",
       "weight": 44,
-      "alpha": 0.0078,
+      "alpha": 0.0081,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "chb",
       "weight": 43,
-      "alpha": 0.099,
+      "alpha": 0.0951,
       "backbone": true
     },
     {
       "source": "jls",
       "target": "ep",
       "weight": 43,
-      "alpha": 0.1106,
+      "alpha": 0.1056,
       "backbone": false
     },
     {
@@ -4126,14 +4176,14 @@
       "source": "err",
       "target": "jep",
       "weight": 43,
-      "alpha": 0.0588,
+      "alpha": 0.0575,
       "backbone": true
     },
     {
       "source": "jfdl",
       "target": "etrd",
       "weight": 43,
-      "alpha": 0.0181,
+      "alpha": 0.0175,
       "backbone": true
     },
     {
@@ -4154,35 +4204,42 @@
       "source": "jte",
       "target": "er",
       "weight": 43,
-      "alpha": 0.0586,
+      "alpha": 0.0625,
       "backbone": true
     },
     {
       "source": "ejte",
       "target": "jte",
       "weight": 43,
-      "alpha": 0.0422,
+      "alpha": 0.0526,
+      "backbone": true
+    },
+    {
+      "source": "pde",
+      "target": "tttp",
+      "weight": 43,
+      "alpha": 0.0116,
       "backbone": true
     },
     {
       "source": "ijcscl",
       "target": "etrd",
       "weight": 42,
-      "alpha": 0.0671,
+      "alpha": 0.0646,
       "backbone": true
     },
     {
       "source": "ce",
       "target": "chb",
       "weight": 42,
-      "alpha": 0.0862,
+      "alpha": 0.083,
       "backbone": true
     },
     {
       "source": "ci",
       "target": "mca",
       "weight": 42,
-      "alpha": 0.0023,
+      "alpha": 0.0017,
       "backbone": true
     },
     {
@@ -4203,7 +4260,7 @@
       "source": "ci",
       "target": "jep",
       "weight": 41,
-      "alpha": 0.1477,
+      "alpha": 0.1426,
       "backbone": false
     },
     {
@@ -4217,14 +4274,14 @@
       "source": "is",
       "target": "chb",
       "weight": 41,
-      "alpha": 0.183,
+      "alpha": 0.1783,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "chb",
       "weight": 41,
-      "alpha": 0.0937,
+      "alpha": 0.0897,
       "backbone": true
     },
     {
@@ -4238,7 +4295,7 @@
       "source": "is",
       "target": "se",
       "weight": 40,
-      "alpha": 0.1941,
+      "alpha": 0.1894,
       "backbone": false
     },
     {
@@ -4252,14 +4309,14 @@
       "source": "sse",
       "target": "tate",
       "weight": 40,
-      "alpha": 0.2414,
+      "alpha": 0.2624,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "jcal",
       "weight": 39,
-      "alpha": 0.0562,
+      "alpha": 0.0537,
       "backbone": true
     },
     {
@@ -4280,14 +4337,14 @@
       "source": "li",
       "target": "tate",
       "weight": 39,
-      "alpha": 0.1263,
+      "alpha": 0.1212,
       "backbone": false
     },
     {
       "source": "jche",
       "target": "jcal",
       "weight": 39,
-      "alpha": 0.0562,
+      "alpha": 0.0537,
       "backbone": true
     },
     {
@@ -4301,49 +4358,49 @@
       "source": "se",
       "target": "er",
       "weight": 39,
-      "alpha": 0.1131,
+      "alpha": 0.1164,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "epr",
       "weight": 39,
-      "alpha": 0.1285,
+      "alpha": 0.1241,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "bjet",
       "weight": 39,
-      "alpha": 0.1285,
+      "alpha": 0.1241,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "rer",
       "weight": 39,
-      "alpha": 0.0527,
+      "alpha": 0.068,
       "backbone": true
     },
     {
       "source": "pde",
       "target": "rer",
       "weight": 39,
-      "alpha": 0.0826,
+      "alpha": 0.0944,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "ile",
       "weight": 38,
-      "alpha": 0.072,
+      "alpha": 0.0686,
       "backbone": true
     },
     {
       "source": "ijcscl",
       "target": "jcal",
       "weight": 38,
-      "alpha": 0.0606,
+      "alpha": 0.058,
       "backbone": true
     },
     {
@@ -4357,7 +4414,7 @@
       "source": "err",
       "target": "chb",
       "weight": 38,
-      "alpha": 0.0825,
+      "alpha": 0.0809,
       "backbone": true
     },
     {
@@ -4378,35 +4435,35 @@
       "source": "jrst",
       "target": "jls",
       "weight": 38,
-      "alpha": 0.0938,
+      "alpha": 0.0906,
       "backbone": true
     },
     {
       "source": "sse",
       "target": "ce",
       "weight": 38,
-      "alpha": 0.3085,
+      "alpha": 0.3012,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "chb",
       "weight": 38,
-      "alpha": 0.086,
+      "alpha": 0.0829,
       "backbone": true
     },
     {
       "source": "tate",
       "target": "er",
       "weight": 38,
-      "alpha": 0.057,
+      "alpha": 0.073,
       "backbone": true
     },
     {
       "source": "epr",
       "target": "ce",
       "weight": 37,
-      "alpha": 0.2006,
+      "alpha": 0.1934,
       "backbone": false
     },
     {
@@ -4420,14 +4477,14 @@
       "source": "ep",
       "target": "jls",
       "weight": 37,
-      "alpha": 0.0999,
+      "alpha": 0.0967,
       "backbone": true
     },
     {
       "source": "is",
       "target": "rer",
       "weight": 37,
-      "alpha": 0.1823,
+      "alpha": 0.1802,
       "backbone": false
     },
     {
@@ -4441,14 +4498,14 @@
       "source": "eit",
       "target": "ceai",
       "weight": 37,
-      "alpha": 0.071,
+      "alpha": 0.0685,
       "backbone": true
     },
     {
       "source": "eit",
       "target": "epr",
       "weight": 37,
-      "alpha": 0.071,
+      "alpha": 0.0685,
       "backbone": true
     },
     {
@@ -4469,7 +4526,7 @@
       "source": "ijse",
       "target": "sse",
       "weight": 37,
-      "alpha": 0.0026,
+      "alpha": 0.0022,
       "backbone": true
     },
     {
@@ -4490,98 +4547,98 @@
       "source": "jte",
       "target": "aerj",
       "weight": 37,
-      "alpha": 0.0612,
+      "alpha": 0.0609,
       "backbone": true
     },
     {
       "source": "ce",
       "target": "jcal",
       "weight": 36,
-      "alpha": 0.0705,
+      "alpha": 0.0676,
       "backbone": true
     },
     {
       "source": "li",
       "target": "ce",
       "weight": 36,
-      "alpha": 0.1487,
+      "alpha": 0.1432,
       "backbone": false
     },
     {
       "source": "de",
       "target": "ile",
       "weight": 36,
-      "alpha": 0.083,
+      "alpha": 0.0793,
       "backbone": true
     },
     {
       "source": "ihe",
       "target": "etrd",
       "weight": 36,
-      "alpha": 0.0995,
+      "alpha": 0.0964,
       "backbone": true
     },
     {
       "source": "eit",
       "target": "bjet",
       "weight": 36,
-      "alpha": 0.0764,
+      "alpha": 0.0738,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "ile",
       "weight": 36,
-      "alpha": 0.083,
+      "alpha": 0.0793,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "chb",
       "weight": 36,
-      "alpha": 0.1022,
-      "backbone": false
+      "alpha": 0.0983,
+      "backbone": true
     },
     {
       "source": "ijse",
       "target": "jset",
       "weight": 36,
-      "alpha": 0.0351,
+      "alpha": 0.033,
       "backbone": true
     },
     {
       "source": "etrd",
       "target": "jecr",
       "weight": 35,
-      "alpha": 0.0255,
+      "alpha": 0.0239,
       "backbone": true
     },
     {
       "source": "epr",
       "target": "chb",
       "weight": 35,
-      "alpha": 0.2192,
+      "alpha": 0.2117,
       "backbone": false
     },
     {
       "source": "is",
       "target": "tate",
       "weight": 35,
-      "alpha": 0.239,
+      "alpha": 0.2339,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "err",
       "weight": 35,
-      "alpha": 0.0597,
+      "alpha": 0.0599,
       "backbone": true
     },
     {
       "source": "de",
       "target": "chb",
       "weight": 35,
-      "alpha": 0.1502,
+      "alpha": 0.145,
       "backbone": false
     },
     {
@@ -4595,7 +4652,7 @@
       "source": "ijse",
       "target": "rer",
       "weight": 35,
-      "alpha": 0.186,
+      "alpha": 0.1802,
       "backbone": false
     },
     {
@@ -4609,28 +4666,28 @@
       "source": "etrd",
       "target": "ep",
       "weight": 34,
-      "alpha": 0.1621,
+      "alpha": 0.157,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "mca",
       "weight": 34,
-      "alpha": 0.0089,
+      "alpha": 0.0072,
       "backbone": true
     },
     {
       "source": "jls",
       "target": "tate",
       "weight": 34,
-      "alpha": 0.1772,
+      "alpha": 0.1708,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "rer",
       "weight": 34,
-      "alpha": 0.1389,
+      "alpha": 0.1347,
       "backbone": false
     },
     {
@@ -4644,14 +4701,14 @@
       "source": "li",
       "target": "rer",
       "weight": 34,
-      "alpha": 0.1657,
+      "alpha": 0.1599,
       "backbone": false
     },
     {
       "source": "jecr",
       "target": "chb",
       "weight": 34,
-      "alpha": 0.2157,
+      "alpha": 0.2097,
       "backbone": false
     },
     {
@@ -4665,42 +4722,49 @@
       "source": "tt",
       "target": "ceai",
       "weight": 34,
-      "alpha": 0.0611,
+      "alpha": 0.0588,
       "backbone": true
     },
     {
       "source": "tt",
       "target": "ce",
       "weight": 34,
-      "alpha": 0.0611,
+      "alpha": 0.0588,
       "backbone": true
     },
     {
       "source": "jche",
       "target": "ile",
       "weight": 34,
-      "alpha": 0.0957,
+      "alpha": 0.0916,
       "backbone": true
     },
     {
       "source": "ijse",
       "target": "ce",
       "weight": 34,
-      "alpha": 0.1954,
+      "alpha": 0.1894,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "ep",
       "weight": 34,
-      "alpha": 0.1901,
+      "alpha": 0.1865,
       "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jte",
+      "weight": 34,
+      "alpha": 0.0462,
+      "backbone": true
     },
     {
       "source": "epr",
       "target": "er",
       "weight": 33,
-      "alpha": 0.1591,
+      "alpha": 0.163,
       "backbone": false
     },
     {
@@ -4721,28 +4785,28 @@
       "source": "is",
       "target": "err",
       "weight": 33,
-      "alpha": 0.0704,
+      "alpha": 0.0706,
       "backbone": true
     },
     {
       "source": "mca",
       "target": "jls",
       "weight": 33,
-      "alpha": 0.0154,
+      "alpha": 0.0142,
       "backbone": true
     },
     {
       "source": "err",
       "target": "eit",
       "weight": 33,
-      "alpha": 0.1156,
+      "alpha": 0.1136,
       "backbone": false
     },
     {
       "source": "de",
       "target": "etrd",
       "weight": 33,
-      "alpha": 0.1211,
+      "alpha": 0.1176,
       "backbone": false
     },
     {
@@ -4763,21 +4827,21 @@
       "source": "ep",
       "target": "lid",
       "weight": 32,
-      "alpha": 0.0623,
+      "alpha": 0.0592,
       "backbone": true
     },
     {
       "source": "ep",
       "target": "tate",
       "weight": 32,
-      "alpha": 0.3218,
+      "alpha": 0.3439,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "tate",
       "weight": 32,
-      "alpha": 0.0315,
+      "alpha": 0.0321,
       "backbone": true
     },
     {
@@ -4791,7 +4855,7 @@
       "source": "ihe",
       "target": "ep",
       "weight": 32,
-      "alpha": 0.2099,
+      "alpha": 0.2061,
       "backbone": false
     },
     {
@@ -4805,14 +4869,14 @@
       "source": "cexr",
       "target": "jcal",
       "weight": 32,
-      "alpha": 0.0952,
+      "alpha": 0.0918,
       "backbone": true
     },
     {
       "source": "cexr",
       "target": "ile",
       "weight": 32,
-      "alpha": 0.1102,
+      "alpha": 0.1058,
       "backbone": false
     },
     {
@@ -4826,14 +4890,14 @@
       "source": "rer",
       "target": "epr",
       "weight": 31,
-      "alpha": 0.0353,
+      "alpha": 0.036,
       "backbone": true
     },
     {
       "source": "ci",
       "target": "ijse",
       "weight": 31,
-      "alpha": 0.2374,
+      "alpha": 0.2311,
       "backbone": false
     },
     {
@@ -4854,70 +4918,77 @@
       "source": "jrst",
       "target": "tate",
       "weight": 31,
-      "alpha": 0.1794,
+      "alpha": 0.1746,
       "backbone": false
     },
     {
       "source": "se",
       "target": "rer",
       "weight": 31,
-      "alpha": 0.241,
+      "alpha": 0.2387,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "ile",
       "weight": 31,
-      "alpha": 0.1182,
+      "alpha": 0.1137,
       "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "er",
+      "weight": 31,
+      "alpha": 0.0614,
+      "backbone": true
     },
     {
       "source": "ce",
       "target": "err",
       "weight": 30,
-      "alpha": 0.0902,
+      "alpha": 0.0903,
       "backbone": true
     },
     {
       "source": "bjet",
       "target": "ceai",
       "weight": 30,
-      "alpha": 0.126,
+      "alpha": 0.1224,
       "backbone": false
     },
     {
       "source": "bjet",
       "target": "jcal",
       "weight": 30,
-      "alpha": 0.1106,
+      "alpha": 0.1069,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "tate",
       "weight": 30,
-      "alpha": 0.2732,
+      "alpha": 0.2653,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "epr",
       "weight": 30,
-      "alpha": 0.1791,
+      "alpha": 0.1735,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "bjet",
       "weight": 30,
-      "alpha": 0.0857,
+      "alpha": 0.0828,
       "backbone": true
     },
     {
       "source": "ijethe",
       "target": "etrd",
       "weight": 30,
-      "alpha": 0.1472,
+      "alpha": 0.1433,
       "backbone": false
     },
     {
@@ -4931,7 +5002,7 @@
       "source": "se",
       "target": "tate",
       "weight": 30,
-      "alpha": 0.3202,
+      "alpha": 0.3088,
       "backbone": false
     },
     {
@@ -4952,28 +5023,28 @@
       "source": "cbe",
       "target": "aerj",
       "weight": 30,
-      "alpha": 0.1052,
+      "alpha": 0.1047,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "jep",
       "weight": 30,
-      "alpha": 0.033,
+      "alpha": 0.0299,
       "backbone": true
     },
     {
       "source": "tate",
       "target": "pde",
       "weight": 30,
-      "alpha": 0.0107,
+      "alpha": 0.0143,
       "backbone": true
     },
     {
       "source": "jls",
       "target": "aerj",
       "weight": 29,
-      "alpha": 0.1136,
+      "alpha": 0.1131,
       "backbone": false
     },
     {
@@ -4987,7 +5058,7 @@
       "source": "err",
       "target": "epr",
       "weight": 29,
-      "alpha": 0.151,
+      "alpha": 0.1487,
       "backbone": false
     },
     {
@@ -5001,14 +5072,14 @@
       "source": "cexr",
       "target": "etrd",
       "weight": 29,
-      "alpha": 0.1571,
+      "alpha": 0.1531,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "ejte",
       "weight": 29,
-      "alpha": 0.0219,
+      "alpha": 0.0277,
       "backbone": true
     },
     {
@@ -5022,7 +5093,7 @@
       "source": "ce",
       "target": "epr",
       "weight": 28,
-      "alpha": 0.1979,
+      "alpha": 0.193,
       "backbone": false
     },
     {
@@ -5050,28 +5121,28 @@
       "source": "se",
       "target": "aerj",
       "weight": 28,
-      "alpha": 0.1227,
+      "alpha": 0.1221,
       "backbone": false
     },
     {
       "source": "se",
       "target": "jset",
       "weight": 28,
-      "alpha": 0.0757,
+      "alpha": 0.0722,
       "backbone": true
     },
     {
       "source": "ijse",
       "target": "tate",
       "weight": 28,
-      "alpha": 0.2619,
+      "alpha": 0.2553,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "rer",
       "weight": 28,
-      "alpha": 0.2312,
+      "alpha": 0.2255,
       "backbone": false
     },
     {
@@ -5092,14 +5163,14 @@
       "source": "tate",
       "target": "err",
       "weight": 28,
-      "alpha": 0.1062,
+      "alpha": 0.1064,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "jte",
       "weight": 28,
-      "alpha": 0.1557,
+      "alpha": 0.1658,
       "backbone": false
     },
     {
@@ -5113,56 +5184,56 @@
       "source": "etrd",
       "target": "jep",
       "weight": 27,
-      "alpha": 0.237,
+      "alpha": 0.2311,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "rer",
       "weight": 27,
-      "alpha": 0.2546,
+      "alpha": 0.2473,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "jte",
       "weight": 27,
-      "alpha": 0.1666,
+      "alpha": 0.177,
       "backbone": false
     },
     {
       "source": "ijcscl",
       "target": "ile",
       "weight": 27,
-      "alpha": 0.1566,
+      "alpha": 0.1514,
       "backbone": false
     },
     {
       "source": "li",
       "target": "err",
       "weight": 27,
-      "alpha": 0.1153,
+      "alpha": 0.1155,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "tate",
       "weight": 27,
-      "alpha": 0.2865,
+      "alpha": 0.28,
       "backbone": false
     },
     {
       "source": "is",
       "target": "bjet",
       "weight": 27,
-      "alpha": 0.2932,
+      "alpha": 0.2884,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "ci",
       "weight": 27,
-      "alpha": 0.035,
+      "alpha": 0.0325,
       "backbone": true
     },
     {
@@ -5204,14 +5275,14 @@
       "source": "jche",
       "target": "er",
       "weight": 27,
-      "alpha": 0.2233,
+      "alpha": 0.2277,
       "backbone": false
     },
     {
       "source": "se",
       "target": "jte",
       "weight": 27,
-      "alpha": 0.1666,
+      "alpha": 0.177,
       "backbone": false
     },
     {
@@ -5222,17 +5293,24 @@
       "backbone": false
     },
     {
+      "source": "jte",
+      "target": "tttp",
+      "weight": 27,
+      "alpha": 0.0656,
+      "backbone": true
+    },
+    {
       "source": "pde",
       "target": "er",
       "weight": 27,
-      "alpha": 0.182,
+      "alpha": 0.199,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "rer",
       "weight": 27,
-      "alpha": 0.2516,
+      "alpha": 0.2486,
       "backbone": false
     },
     {
@@ -5246,7 +5324,7 @@
       "source": "ce",
       "target": "tate",
       "weight": 26,
-      "alpha": 0.2226,
+      "alpha": 0.2174,
       "backbone": false
     },
     {
@@ -5267,7 +5345,7 @@
       "source": "jecr",
       "target": "rer",
       "weight": 26,
-      "alpha": 0.3039,
+      "alpha": 0.3015,
       "backbone": false
     },
     {
@@ -5281,14 +5359,14 @@
       "source": "lid",
       "target": "err",
       "weight": 26,
-      "alpha": 0.1251,
+      "alpha": 0.1253,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "etrd",
       "weight": 26,
-      "alpha": 0.1908,
+      "alpha": 0.1865,
       "backbone": false
     },
     {
@@ -5302,7 +5380,7 @@
       "source": "ihe",
       "target": "ile",
       "weight": 26,
-      "alpha": 0.1679,
+      "alpha": 0.1625,
       "backbone": false
     },
     {
@@ -5316,14 +5394,14 @@
       "source": "jfdl",
       "target": "eit",
       "weight": 26,
-      "alpha": 0.092,
+      "alpha": 0.0901,
       "backbone": true
     },
     {
       "source": "tt",
       "target": "ijethe",
       "weight": 26,
-      "alpha": 0.1199,
+      "alpha": 0.1164,
       "backbone": false
     },
     {
@@ -5337,7 +5415,7 @@
       "source": "eit",
       "target": "ile",
       "weight": 26,
-      "alpha": 0.1582,
+      "alpha": 0.1544,
       "backbone": false
     },
     {
@@ -5351,21 +5429,21 @@
       "source": "ijse",
       "target": "ep",
       "weight": 26,
-      "alpha": 0.2822,
+      "alpha": 0.2781,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "bjet",
       "weight": 26,
-      "alpha": 0.1891,
+      "alpha": 0.1844,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jecr",
       "weight": 26,
-      "alpha": 0.0676,
+      "alpha": 0.0643,
       "backbone": true
     },
     {
@@ -5379,42 +5457,42 @@
       "source": "tate",
       "target": "ce",
       "weight": 26,
-      "alpha": 0.1447,
+      "alpha": 0.1706,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "rer",
       "weight": 25,
-      "alpha": 0.264,
+      "alpha": 0.258,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "ce",
       "weight": 25,
-      "alpha": 0.2822,
+      "alpha": 0.2748,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "jep",
       "weight": 25,
-      "alpha": 0.236,
+      "alpha": 0.2308,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "li",
       "weight": 25,
-      "alpha": 0.236,
+      "alpha": 0.2308,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "ep",
       "weight": 25,
-      "alpha": 0.236,
+      "alpha": 0.2308,
       "backbone": false
     },
     {
@@ -5428,63 +5506,63 @@
       "source": "is",
       "target": "etrd",
       "weight": 25,
-      "alpha": 0.2036,
+      "alpha": 0.1991,
       "backbone": false
     },
     {
       "source": "err",
       "target": "er",
       "weight": 25,
-      "alpha": 0.197,
+      "alpha": 0.1944,
       "backbone": false
     },
     {
       "source": "err",
       "target": "tate",
       "weight": 25,
-      "alpha": 0.197,
+      "alpha": 0.1944,
       "backbone": false
     },
     {
       "source": "err",
       "target": "jecr",
       "weight": 25,
-      "alpha": 0.0752,
+      "alpha": 0.0717,
       "backbone": true
     },
     {
       "source": "ile",
       "target": "jcal",
       "weight": 25,
-      "alpha": 0.1607,
+      "alpha": 0.1561,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "tate",
       "weight": 25,
-      "alpha": 0.1011,
-      "backbone": false
+      "alpha": 0.099,
+      "backbone": true
     },
     {
       "source": "jfdl",
       "target": "rer",
       "weight": 25,
-      "alpha": 0.1011,
-      "backbone": false
+      "alpha": 0.099,
+      "backbone": true
     },
     {
       "source": "ijethe",
       "target": "rer",
       "weight": 25,
-      "alpha": 0.2076,
+      "alpha": 0.2021,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "jcal",
       "weight": 25,
-      "alpha": 0.1607,
+      "alpha": 0.1561,
       "backbone": false
     },
     {
@@ -5505,21 +5583,21 @@
       "source": "jset",
       "target": "jcal",
       "weight": 25,
-      "alpha": 0.1607,
+      "alpha": 0.1561,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "jls",
       "weight": 25,
-      "alpha": 0.2133,
+      "alpha": 0.2086,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "rer",
       "weight": 25,
-      "alpha": 0.2018,
+      "alpha": 0.197,
       "backbone": false
     },
     {
@@ -5540,21 +5618,21 @@
       "source": "ate",
       "target": "er",
       "weight": 25,
-      "alpha": 0.2499,
+      "alpha": 0.2544,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "li",
       "weight": 24,
-      "alpha": 0.2787,
+      "alpha": 0.2725,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "ceai",
       "weight": 24,
-      "alpha": 0.1923,
+      "alpha": 0.1879,
       "backbone": false
     },
     {
@@ -5582,28 +5660,28 @@
       "source": "li",
       "target": "lid",
       "weight": 24,
-      "alpha": 0.1268,
+      "alpha": 0.1221,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "err",
       "weight": 24,
-      "alpha": 0.1472,
+      "alpha": 0.1474,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "rer",
       "weight": 24,
-      "alpha": 0.3298,
+      "alpha": 0.3231,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "er",
       "weight": 24,
-      "alpha": 0.052,
+      "alpha": 0.0488,
       "backbone": true
     },
     {
@@ -5617,21 +5695,21 @@
       "source": "ijse",
       "target": "jls",
       "weight": 24,
-      "alpha": 0.2271,
+      "alpha": 0.2223,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "li",
       "weight": 24,
-      "alpha": 0.2858,
+      "alpha": 0.2797,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "rer",
       "weight": 24,
-      "alpha": 0.3334,
+      "alpha": 0.3309,
       "backbone": false
     },
     {
@@ -5659,14 +5737,14 @@
       "source": "jte",
       "target": "jrst",
       "weight": 24,
-      "alpha": 0.2116,
+      "alpha": 0.2188,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "jep",
       "weight": 23,
-      "alpha": 0.3127,
+      "alpha": 0.3051,
       "backbone": false
     },
     {
@@ -5687,14 +5765,14 @@
       "source": "ep",
       "target": "se",
       "weight": 23,
-      "alpha": 0.3945,
+      "alpha": 0.3872,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "jte",
       "weight": 23,
-      "alpha": 0.2186,
+      "alpha": 0.23,
       "backbone": false
     },
     {
@@ -5729,49 +5807,49 @@
       "source": "is",
       "target": "jcal",
       "weight": 23,
-      "alpha": 0.1864,
+      "alpha": 0.1816,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "ce",
       "weight": 23,
-      "alpha": 0.4087,
+      "alpha": 0.4005,
       "backbone": false
     },
     {
       "source": "err",
       "target": "etrd",
       "weight": 23,
-      "alpha": 0.2249,
+      "alpha": 0.2222,
       "backbone": false
     },
     {
       "source": "err",
       "target": "bjet",
       "weight": 23,
-      "alpha": 0.2249,
+      "alpha": 0.2222,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "ep",
       "weight": 23,
-      "alpha": 0.154,
+      "alpha": 0.1501,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "tate",
       "weight": 23,
-      "alpha": 0.154,
+      "alpha": 0.1501,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "lid",
       "weight": 23,
-      "alpha": 0.1384,
+      "alpha": 0.1335,
       "backbone": false
     },
     {
@@ -5792,35 +5870,35 @@
       "source": "hci",
       "target": "chb",
       "weight": 23,
-      "alpha": 0.388,
+      "alpha": 0.3824,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "er",
       "weight": 23,
-      "alpha": 0.2796,
+      "alpha": 0.2764,
       "backbone": false
     },
     {
       "source": "se",
       "target": "sse",
       "weight": 23,
-      "alpha": 0.0289,
+      "alpha": 0.0264,
       "backbone": true
     },
     {
       "source": "jset",
       "target": "etrd",
       "weight": 23,
-      "alpha": 0.2316,
+      "alpha": 0.2269,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "er",
       "weight": 23,
-      "alpha": 0.2796,
+      "alpha": 0.2842,
       "backbone": false
     },
     {
@@ -5834,7 +5912,7 @@
       "source": "cse",
       "target": "tate",
       "weight": 23,
-      "alpha": 0.2298,
+      "alpha": 0.2248,
       "backbone": false
     },
     {
@@ -5855,21 +5933,21 @@
       "source": "ejte",
       "target": "pde",
       "weight": 23,
-      "alpha": 0.0337,
+      "alpha": 0.0415,
       "backbone": true
     },
     {
       "source": "ate",
       "target": "aerj",
       "weight": 23,
-      "alpha": 0.1797,
+      "alpha": 0.179,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "pde",
       "weight": 23,
-      "alpha": 0.0337,
+      "alpha": 0.0415,
       "backbone": true
     },
     {
@@ -5890,7 +5968,7 @@
       "source": "ep",
       "target": "jrst",
       "weight": 22,
-      "alpha": 0.4496,
+      "alpha": 0.4438,
       "backbone": false
     },
     {
@@ -5904,7 +5982,7 @@
       "source": "rer",
       "target": "aerj",
       "weight": 22,
-      "alpha": 0.0965,
+      "alpha": 0.0976,
       "backbone": true
     },
     {
@@ -5918,28 +5996,28 @@
       "source": "err",
       "target": "li",
       "weight": 22,
-      "alpha": 0.2403,
+      "alpha": 0.2374,
       "backbone": false
     },
     {
       "source": "err",
       "target": "ep",
       "weight": 22,
-      "alpha": 0.2403,
+      "alpha": 0.2374,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "jep",
       "weight": 22,
-      "alpha": 0.2111,
+      "alpha": 0.2068,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "epr",
       "weight": 22,
-      "alpha": 0.2514,
+      "alpha": 0.2455,
       "backbone": false
     },
     {
@@ -5953,8 +6031,8 @@
       "source": "jche",
       "target": "jecr",
       "weight": 22,
-      "alpha": 0.1034,
-      "backbone": false
+      "alpha": 0.0992,
+      "backbone": true
     },
     {
       "source": "olj",
@@ -5974,21 +6052,21 @@
       "source": "jrst",
       "target": "sse",
       "weight": 22,
-      "alpha": 0.0341,
+      "alpha": 0.0313,
       "backbone": true
     },
     {
       "source": "jset",
       "target": "ijethe",
       "weight": 22,
-      "alpha": 0.2736,
+      "alpha": 0.2661,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "err",
       "weight": 22,
-      "alpha": 0.1732,
+      "alpha": 0.1734,
       "backbone": false
     },
     {
@@ -6002,7 +6080,7 @@
       "source": "cse",
       "target": "jset",
       "weight": 22,
-      "alpha": 0.1334,
+      "alpha": 0.1287,
       "backbone": false
     },
     {
@@ -6016,7 +6094,7 @@
       "source": "jls",
       "target": "li",
       "weight": 21,
-      "alpha": 0.3436,
+      "alpha": 0.3388,
       "backbone": false
     },
     {
@@ -6037,7 +6115,7 @@
       "source": "ce",
       "target": "ijse",
       "weight": 21,
-      "alpha": 0.2982,
+      "alpha": 0.2926,
       "backbone": false
     },
     {
@@ -6051,7 +6129,7 @@
       "source": "bjet",
       "target": "ile",
       "weight": 21,
-      "alpha": 0.2379,
+      "alpha": 0.2318,
       "backbone": false
     },
     {
@@ -6086,14 +6164,14 @@
       "source": "ihe",
       "target": "rer",
       "weight": 21,
-      "alpha": 0.3828,
+      "alpha": 0.3804,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "tate",
       "weight": 21,
-      "alpha": 0.2268,
+      "alpha": 0.2224,
       "backbone": false
     },
     {
@@ -6121,7 +6199,7 @@
       "source": "jrst",
       "target": "rer",
       "weight": 21,
-      "alpha": 0.3156,
+      "alpha": 0.3098,
       "backbone": false
     },
     {
@@ -6135,7 +6213,7 @@
       "source": "jset",
       "target": "sse",
       "weight": 21,
-      "alpha": 0.0401,
+      "alpha": 0.037,
       "backbone": true
     },
     {
@@ -6149,84 +6227,84 @@
       "source": "merj",
       "target": "rer",
       "weight": 21,
-      "alpha": 0.0963,
+      "alpha": 0.0899,
       "backbone": true
     },
     {
       "source": "merj",
       "target": "tate",
       "weight": 21,
-      "alpha": 0.0963,
+      "alpha": 0.0899,
       "backbone": true
     },
     {
       "source": "jte",
       "target": "ate",
       "weight": 21,
-      "alpha": 0.0066,
+      "alpha": 0.0047,
       "backbone": true
     },
     {
       "source": "ejte",
       "target": "err",
       "weight": 21,
-      "alpha": 0.1878,
+      "alpha": 0.188,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "eit",
       "weight": 21,
-      "alpha": 0.2219,
+      "alpha": 0.2455,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "ce",
       "weight": 21,
-      "alpha": 0.268,
+      "alpha": 0.2869,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "ijethe",
       "weight": 20,
-      "alpha": 0.3083,
+      "alpha": 0.3007,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "err",
       "weight": 20,
-      "alpha": 0.2036,
+      "alpha": 0.2039,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "jset",
       "weight": 20,
-      "alpha": 0.1609,
+      "alpha": 0.1557,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "ile",
       "weight": 20,
-      "alpha": 0.255,
+      "alpha": 0.2487,
       "backbone": false
     },
     {
       "source": "li",
       "target": "eit",
       "weight": 20,
-      "alpha": 0.3511,
+      "alpha": 0.3439,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "bjet",
       "weight": 20,
-      "alpha": 0.404,
+      "alpha": 0.399,
       "backbone": false
     },
     {
@@ -6240,21 +6318,21 @@
       "source": "jcal",
       "target": "lid",
       "weight": 20,
-      "alpha": 0.1801,
+      "alpha": 0.1745,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "aerj",
       "weight": 20,
-      "alpha": 0.2256,
+      "alpha": 0.2249,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "tate",
       "weight": 20,
-      "alpha": 0.0875,
+      "alpha": 0.083,
       "backbone": true
     },
     {
@@ -6275,14 +6353,14 @@
       "source": "ile",
       "target": "ep",
       "weight": 20,
-      "alpha": 0.32,
+      "alpha": 0.3134,
       "backbone": false
     },
     {
       "source": "de",
       "target": "jcal",
       "weight": 20,
-      "alpha": 0.2328,
+      "alpha": 0.2275,
       "backbone": false
     },
     {
@@ -6310,7 +6388,7 @@
       "source": "eit",
       "target": "ep",
       "weight": 20,
-      "alpha": 0.2437,
+      "alpha": 0.2391,
       "backbone": false
     },
     {
@@ -6331,35 +6409,35 @@
       "source": "jrst",
       "target": "jte",
       "weight": 20,
-      "alpha": 0.2676,
+      "alpha": 0.2796,
       "backbone": false
     },
     {
       "source": "se",
       "target": "ep",
       "weight": 20,
-      "alpha": 0.3789,
+      "alpha": 0.3746,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "epr",
       "weight": 20,
-      "alpha": 0.3858,
+      "alpha": 0.3789,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "bjet",
       "weight": 20,
-      "alpha": 0.404,
+      "alpha": 0.399,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "jte",
       "weight": 20,
-      "alpha": 0.2676,
+      "alpha": 0.2796,
       "backbone": false
     },
     {
@@ -6394,8 +6472,15 @@
       "source": "tate",
       "target": "li",
       "weight": 20,
-      "alpha": 0.2284,
+      "alpha": 0.2587,
       "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ejte",
+      "weight": 20,
+      "alpha": 0.0892,
+      "backbone": true
     },
     {
       "source": "etrd",
@@ -6415,7 +6500,7 @@
       "source": "ijcscl",
       "target": "err",
       "weight": 19,
-      "alpha": 0.2208,
+      "alpha": 0.221,
       "backbone": false
     },
     {
@@ -6429,28 +6514,28 @@
       "source": "bjet",
       "target": "jecr",
       "weight": 19,
-      "alpha": 0.1419,
+      "alpha": 0.1369,
       "backbone": false
     },
     {
       "source": "li",
       "target": "chb",
       "weight": 19,
-      "alpha": 0.3702,
+      "alpha": 0.363,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "jset",
       "weight": 19,
-      "alpha": 0.1767,
+      "alpha": 0.1712,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "epr",
       "weight": 19,
-      "alpha": 0.4165,
+      "alpha": 0.4098,
       "backbone": false
     },
     {
@@ -6478,7 +6563,7 @@
       "source": "is",
       "target": "er",
       "weight": 19,
-      "alpha": 0.3497,
+      "alpha": 0.3544,
       "backbone": false
     },
     {
@@ -6513,7 +6598,7 @@
       "source": "jfdl",
       "target": "chb",
       "weight": 19,
-      "alpha": 0.1769,
+      "alpha": 0.1742,
       "backbone": false
     },
     {
@@ -6527,14 +6612,14 @@
       "source": "eit",
       "target": "jcal",
       "weight": 19,
-      "alpha": 0.2506,
+      "alpha": 0.2452,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "li",
       "weight": 19,
-      "alpha": 0.2618,
+      "alpha": 0.2571,
       "backbone": false
     },
     {
@@ -6555,7 +6640,7 @@
       "source": "lmt",
       "target": "bjet",
       "weight": 19,
-      "alpha": 0.063,
+      "alpha": 0.0643,
       "backbone": true
     },
     {
@@ -6569,7 +6654,7 @@
       "source": "jset",
       "target": "jep",
       "weight": 19,
-      "alpha": 0.372,
+      "alpha": 0.3657,
       "backbone": false
     },
     {
@@ -6604,21 +6689,21 @@
       "source": "jte",
       "target": "se",
       "weight": 19,
-      "alpha": 0.2942,
+      "alpha": 0.3019,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "cep",
       "weight": 19,
-      "alpha": 0.2463,
+      "alpha": 0.2772,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "lid",
       "weight": 18,
-      "alpha": 0.2144,
+      "alpha": 0.2084,
       "backbone": false
     },
     {
@@ -6632,21 +6717,21 @@
       "source": "li",
       "target": "jcal",
       "weight": 18,
-      "alpha": 0.2698,
+      "alpha": 0.2643,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "jls",
       "weight": 18,
-      "alpha": 0.3303,
+      "alpha": 0.3251,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "chb",
       "weight": 18,
-      "alpha": 0.4772,
+      "alpha": 0.4719,
       "backbone": false
     },
     {
@@ -6681,28 +6766,28 @@
       "source": "is",
       "target": "eit",
       "weight": 18,
-      "alpha": 0.4816,
+      "alpha": 0.4763,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "jrst",
       "weight": 18,
-      "alpha": 0.4975,
+      "alpha": 0.4897,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "rer",
       "weight": 18,
-      "alpha": 0.3591,
+      "alpha": 0.3524,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "jset",
       "weight": 18,
-      "alpha": 0.1939,
+      "alpha": 0.1883,
       "backbone": false
     },
     {
@@ -6730,7 +6815,7 @@
       "source": "ihe",
       "target": "jecr",
       "weight": 18,
-      "alpha": 0.1576,
+      "alpha": 0.1524,
       "backbone": false
     },
     {
@@ -6744,21 +6829,21 @@
       "source": "jfdl",
       "target": "epr",
       "weight": 18,
-      "alpha": 0.1941,
+      "alpha": 0.1912,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "bjet",
       "weight": 18,
-      "alpha": 0.1941,
+      "alpha": 0.1912,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "jep",
       "weight": 18,
-      "alpha": 0.1941,
+      "alpha": 0.1912,
       "backbone": false
     },
     {
@@ -6772,21 +6857,21 @@
       "source": "eit",
       "target": "jecr",
       "weight": 18,
-      "alpha": 0.1576,
+      "alpha": 0.1524,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "li",
       "weight": 18,
-      "alpha": 0.3241,
+      "alpha": 0.3179,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "ep",
       "weight": 18,
-      "alpha": 0.3241,
+      "alpha": 0.3179,
       "backbone": false
     },
     {
@@ -6821,28 +6906,28 @@
       "source": "se",
       "target": "jep",
       "weight": 18,
-      "alpha": 0.4973,
+      "alpha": 0.4929,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "tate",
       "weight": 18,
-      "alpha": 0.3921,
+      "alpha": 0.3858,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jrst",
       "weight": 18,
-      "alpha": 0.3176,
+      "alpha": 0.3121,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jep",
       "weight": 18,
-      "alpha": 0.3176,
+      "alpha": 0.3121,
       "backbone": false
     },
     {
@@ -6856,7 +6941,7 @@
       "source": "ejte",
       "target": "rer",
       "weight": 18,
-      "alpha": 0.2764,
+      "alpha": 0.3012,
       "backbone": false
     },
     {
@@ -6870,14 +6955,14 @@
       "source": "jls",
       "target": "chb",
       "weight": 17,
-      "alpha": 0.4249,
+      "alpha": 0.4173,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "jecr",
       "weight": 17,
-      "alpha": 0.175,
+      "alpha": 0.1695,
       "backbone": false
     },
     {
@@ -6933,28 +7018,28 @@
       "source": "lid",
       "target": "etrd",
       "weight": 17,
-      "alpha": 0.3406,
+      "alpha": 0.3355,
       "backbone": false
     },
     {
       "source": "err",
       "target": "ile",
       "weight": 17,
-      "alpha": 0.3138,
+      "alpha": 0.3072,
       "backbone": false
     },
     {
       "source": "err",
       "target": "jcal",
       "weight": 17,
-      "alpha": 0.2904,
+      "alpha": 0.2848,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "lid",
       "weight": 17,
-      "alpha": 0.2338,
+      "alpha": 0.2277,
       "backbone": false
     },
     {
@@ -6975,7 +7060,7 @@
       "source": "ihe",
       "target": "err",
       "weight": 17,
-      "alpha": 0.2594,
+      "alpha": 0.2596,
       "backbone": false
     },
     {
@@ -7003,14 +7088,14 @@
       "source": "tt",
       "target": "ile",
       "weight": 17,
-      "alpha": 0.253,
+      "alpha": 0.2481,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "lid",
       "weight": 17,
-      "alpha": 0.2338,
+      "alpha": 0.2277,
       "backbone": false
     },
     {
@@ -7031,14 +7116,14 @@
       "source": "ijse",
       "target": "er",
       "weight": 17,
-      "alpha": 0.391,
+      "alpha": 0.3957,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "err",
       "weight": 17,
-      "alpha": 0.2594,
+      "alpha": 0.2596,
       "backbone": false
     },
     {
@@ -7052,28 +7137,28 @@
       "source": "jset",
       "target": "ceai",
       "weight": 17,
-      "alpha": 0.3132,
+      "alpha": 0.3081,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "jls",
       "weight": 17,
-      "alpha": 0.3515,
+      "alpha": 0.3462,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "aerj",
       "weight": 17,
-      "alpha": 0.283,
+      "alpha": 0.2821,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "jep",
       "weight": 17,
-      "alpha": 0.5171,
+      "alpha": 0.5128,
       "backbone": false
     },
     {
@@ -7087,42 +7172,42 @@
       "source": "cse",
       "target": "epr",
       "weight": 17,
-      "alpha": 0.3387,
+      "alpha": 0.3332,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "ile",
       "weight": 17,
-      "alpha": 0.3138,
+      "alpha": 0.3072,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "etrd",
       "weight": 17,
-      "alpha": 0.3387,
+      "alpha": 0.3332,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "er",
       "weight": 17,
-      "alpha": 0.3387,
+      "alpha": 0.3332,
       "backbone": false
     },
     {
       "source": "cbe",
       "target": "jls",
       "weight": 17,
-      "alpha": 0.3515,
+      "alpha": 0.3462,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "li",
       "weight": 17,
-      "alpha": 0.1529,
+      "alpha": 0.1446,
       "backbone": false
     },
     {
@@ -7150,8 +7235,15 @@
       "source": "jte",
       "target": "ejte",
       "weight": 17,
-      "alpha": 0.1146,
+      "alpha": 0.1301,
       "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "pde",
+      "weight": 17,
+      "alpha": 0.0994,
+      "backbone": true
     },
     {
       "source": "etrd",
@@ -7178,28 +7270,28 @@
       "source": "bjet",
       "target": "err",
       "weight": 16,
-      "alpha": 0.2811,
+      "alpha": 0.2813,
       "backbone": false
     },
     {
       "source": "li",
       "target": "bjet",
       "weight": 16,
-      "alpha": 0.4339,
+      "alpha": 0.4267,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "aerj",
       "weight": 16,
-      "alpha": 0.3051,
+      "alpha": 0.3042,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "jcal",
       "weight": 16,
-      "alpha": 0.3126,
+      "alpha": 0.3069,
       "backbone": false
     },
     {
@@ -7213,14 +7305,14 @@
       "source": "jcal",
       "target": "jecr",
       "weight": 16,
-      "alpha": 0.1943,
+      "alpha": 0.1885,
       "backbone": false
     },
     {
       "source": "jecr",
       "target": "jep",
       "weight": 16,
-      "alpha": 0.4889,
+      "alpha": 0.4826,
       "backbone": false
     },
     {
@@ -7255,56 +7347,56 @@
       "source": "is",
       "target": "jset",
       "weight": 16,
-      "alpha": 0.2335,
+      "alpha": 0.2274,
       "backbone": false
     },
     {
       "source": "is",
       "target": "lid",
       "weight": 16,
-      "alpha": 0.255,
+      "alpha": 0.2487,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "jcal",
       "weight": 16,
-      "alpha": 0.3126,
+      "alpha": 0.3069,
       "backbone": false
     },
     {
       "source": "err",
       "target": "lid",
       "weight": 16,
-      "alpha": 0.255,
+      "alpha": 0.2487,
       "backbone": false
     },
     {
       "source": "de",
       "target": "rer",
       "weight": 16,
-      "alpha": 0.4248,
+      "alpha": 0.4181,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "jset",
       "weight": 16,
-      "alpha": 0.2335,
+      "alpha": 0.2274,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "er",
       "weight": 16,
-      "alpha": 0.2335,
+      "alpha": 0.2304,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "chb",
       "weight": 16,
-      "alpha": 0.2746,
+      "alpha": 0.2697,
       "backbone": false
     },
     {
@@ -7325,56 +7417,56 @@
       "source": "jrst",
       "target": "aerj",
       "weight": 16,
-      "alpha": 0.3051,
+      "alpha": 0.3042,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "jep",
       "weight": 16,
-      "alpha": 0.4676,
+      "alpha": 0.4609,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "bjet",
       "weight": 16,
-      "alpha": 0.4676,
+      "alpha": 0.4609,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "eit",
       "weight": 16,
-      "alpha": 0.4676,
+      "alpha": 0.4609,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "ep",
       "weight": 16,
-      "alpha": 0.4354,
+      "alpha": 0.4293,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "chb",
       "weight": 16,
-      "alpha": 0.4354,
+      "alpha": 0.4293,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "er",
       "weight": 16,
-      "alpha": 0.4134,
+      "alpha": 0.418,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "ceai",
       "weight": 16,
-      "alpha": 0.3357,
+      "alpha": 0.3305,
       "backbone": false
     },
     {
@@ -7388,28 +7480,35 @@
       "source": "merj",
       "target": "ci",
       "weight": 16,
-      "alpha": 0.1715,
+      "alpha": 0.1627,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "jep",
       "weight": 16,
-      "alpha": 0.3085,
+      "alpha": 0.3405,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "epr",
       "weight": 16,
-      "alpha": 0.3085,
+      "alpha": 0.3405,
+      "backbone": false
+    },
+    {
+      "source": "ate",
+      "target": "tttp",
+      "weight": 16,
+      "alpha": 0.2049,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "epr",
       "weight": 15,
-      "alpha": 0.4704,
+      "alpha": 0.4629,
       "backbone": false
     },
     {
@@ -7444,7 +7543,7 @@
       "source": "ce",
       "target": "er",
       "weight": 15,
-      "alpha": 0.4227,
+      "alpha": 0.417,
       "backbone": false
     },
     {
@@ -7465,7 +7564,7 @@
       "source": "bjet",
       "target": "lid",
       "weight": 15,
-      "alpha": 0.2781,
+      "alpha": 0.2717,
       "backbone": false
     },
     {
@@ -7500,14 +7599,14 @@
       "source": "jecr",
       "target": "tate",
       "weight": 15,
-      "alpha": 0.5115,
+      "alpha": 0.5052,
       "backbone": false
     },
     {
       "source": "jecr",
       "target": "lid",
       "weight": 15,
-      "alpha": 0.2781,
+      "alpha": 0.2717,
       "backbone": false
     },
     {
@@ -7556,14 +7655,14 @@
       "source": "ile",
       "target": "tate",
       "weight": 15,
-      "alpha": 0.4267,
+      "alpha": 0.42,
       "backbone": false
     },
     {
       "source": "de",
       "target": "ep",
       "weight": 15,
-      "alpha": 0.4484,
+      "alpha": 0.4418,
       "backbone": false
     },
     {
@@ -7577,7 +7676,7 @@
       "source": "jfdl",
       "target": "ep",
       "weight": 15,
-      "alpha": 0.256,
+      "alpha": 0.2529,
       "backbone": false
     },
     {
@@ -7591,7 +7690,7 @@
       "source": "ijethe",
       "target": "err",
       "weight": 15,
-      "alpha": 0.3046,
+      "alpha": 0.3048,
       "backbone": false
     },
     {
@@ -7647,7 +7746,7 @@
       "source": "lmt",
       "target": "eit",
       "weight": 15,
-      "alpha": 0.1162,
+      "alpha": 0.1179,
       "backbone": false
     },
     {
@@ -7661,14 +7760,14 @@
       "source": "sse",
       "target": "ile",
       "weight": 15,
-      "alpha": 0.3602,
+      "alpha": 0.3535,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "err",
       "weight": 15,
-      "alpha": 0.3046,
+      "alpha": 0.3048,
       "backbone": false
     },
     {
@@ -7703,7 +7802,7 @@
       "source": "merj",
       "target": "aerj",
       "weight": 15,
-      "alpha": 0.1921,
+      "alpha": 0.1829,
       "backbone": false
     },
     {
@@ -7717,28 +7816,28 @@
       "source": "jte",
       "target": "pde",
       "weight": 15,
-      "alpha": 0.1163,
+      "alpha": 0.132,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "jrst",
       "weight": 15,
-      "alpha": 0.3324,
+      "alpha": 0.3646,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "ce",
       "weight": 15,
-      "alpha": 0.3437,
+      "alpha": 0.369,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "aerj",
       "weight": 15,
-      "alpha": 0.3289,
+      "alpha": 0.328,
       "backbone": false
     },
     {
@@ -7780,7 +7879,7 @@
       "source": "ce",
       "target": "lid",
       "weight": 14,
-      "alpha": 0.3032,
+      "alpha": 0.2967,
       "backbone": false
     },
     {
@@ -7801,21 +7900,21 @@
       "source": "li",
       "target": "er",
       "weight": 14,
-      "alpha": 0.462,
+      "alpha": 0.4666,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "etrd",
       "weight": 14,
-      "alpha": 0.4125,
+      "alpha": 0.4074,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "eit",
       "weight": 14,
-      "alpha": 0.5487,
+      "alpha": 0.5412,
       "backbone": false
     },
     {
@@ -7836,7 +7935,7 @@
       "source": "jecr",
       "target": "err",
       "weight": 14,
-      "alpha": 0.33,
+      "alpha": 0.3302,
       "backbone": false
     },
     {
@@ -7850,35 +7949,35 @@
       "source": "is",
       "target": "ile",
       "weight": 14,
-      "alpha": 0.3859,
+      "alpha": 0.3792,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "se",
       "weight": 14,
-      "alpha": 0.569,
+      "alpha": 0.5626,
       "backbone": false
     },
     {
       "source": "err",
       "target": "jset",
       "weight": 14,
-      "alpha": 0.2808,
+      "alpha": 0.2745,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "err",
       "weight": 14,
-      "alpha": 0.33,
+      "alpha": 0.3302,
       "backbone": false
     },
     {
       "source": "de",
       "target": "jecr",
       "weight": 14,
-      "alpha": 0.2393,
+      "alpha": 0.2331,
       "backbone": false
     },
     {
@@ -7892,7 +7991,7 @@
       "source": "ihe",
       "target": "ceai",
       "weight": 14,
-      "alpha": 0.3854,
+      "alpha": 0.3802,
       "backbone": false
     },
     {
@@ -7906,21 +8005,21 @@
       "source": "jfdl",
       "target": "li",
       "weight": 14,
-      "alpha": 0.2807,
+      "alpha": 0.2775,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "epr",
       "weight": 14,
-      "alpha": 0.3235,
+      "alpha": 0.3184,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "jcal",
       "weight": 14,
-      "alpha": 0.3235,
+      "alpha": 0.3184,
       "backbone": false
     },
     {
@@ -7941,21 +8040,21 @@
       "source": "eit",
       "target": "rer",
       "weight": 14,
-      "alpha": 0.3738,
+      "alpha": 0.3689,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "jep",
       "weight": 14,
-      "alpha": 0.4173,
+      "alpha": 0.4111,
       "backbone": false
     },
     {
       "source": "jche",
       "target": "jls",
       "weight": 14,
-      "alpha": 0.4234,
+      "alpha": 0.4181,
       "backbone": false
     },
     {
@@ -7976,28 +8075,28 @@
       "source": "jrst",
       "target": "err",
       "weight": 14,
-      "alpha": 0.33,
+      "alpha": 0.3302,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "jecr",
       "weight": 14,
-      "alpha": 0.2393,
+      "alpha": 0.2331,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jcal",
       "weight": 14,
-      "alpha": 0.362,
+      "alpha": 0.3562,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "ep",
       "weight": 14,
-      "alpha": 0.4107,
+      "alpha": 0.4053,
       "backbone": false
     },
     {
@@ -8011,14 +8110,14 @@
       "source": "merj",
       "target": "jls",
       "weight": 14,
-      "alpha": 0.2152,
+      "alpha": 0.2056,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "er",
       "weight": 14,
-      "alpha": 0.2152,
+      "alpha": 0.2056,
       "backbone": false
     },
     {
@@ -8039,21 +8138,21 @@
       "source": "jte",
       "target": "err",
       "weight": 14,
-      "alpha": 0.33,
+      "alpha": 0.3302,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "aerj",
       "weight": 14,
-      "alpha": 0.3545,
+      "alpha": 0.3536,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "er",
       "weight": 14,
-      "alpha": 0.3695,
+      "alpha": 0.3947,
       "backbone": false
     },
     {
@@ -8074,7 +8173,7 @@
       "source": "li",
       "target": "aerj",
       "weight": 13,
-      "alpha": 0.382,
+      "alpha": 0.3812,
       "backbone": false
     },
     {
@@ -8102,7 +8201,7 @@
       "source": "jcal",
       "target": "err",
       "weight": 13,
-      "alpha": 0.3575,
+      "alpha": 0.3577,
       "backbone": false
     },
     {
@@ -8116,14 +8215,14 @@
       "source": "tlt",
       "target": "jecr",
       "weight": 13,
-      "alpha": 0.2655,
+      "alpha": 0.259,
       "backbone": false
     },
     {
       "source": "is",
       "target": "jte",
       "weight": 13,
-      "alpha": 0.4269,
+      "alpha": 0.439,
       "backbone": false
     },
     {
@@ -8151,14 +8250,14 @@
       "source": "err",
       "target": "aerj",
       "weight": 13,
-      "alpha": 0.382,
+      "alpha": 0.3812,
       "backbone": false
     },
     {
       "source": "err",
       "target": "jrst",
       "weight": 13,
-      "alpha": 0.4331,
+      "alpha": 0.4301,
       "backbone": false
     },
     {
@@ -8179,7 +8278,7 @@
       "source": "ihe",
       "target": "lid",
       "weight": 13,
-      "alpha": 0.3306,
+      "alpha": 0.3239,
       "backbone": false
     },
     {
@@ -8263,7 +8362,7 @@
       "source": "cexr",
       "target": "err",
       "weight": 13,
-      "alpha": 0.3575,
+      "alpha": 0.3577,
       "backbone": false
     },
     {
@@ -8284,7 +8383,7 @@
       "source": "ijse",
       "target": "aerj",
       "weight": 13,
-      "alpha": 0.382,
+      "alpha": 0.3812,
       "backbone": false
     },
     {
@@ -8298,14 +8397,14 @@
       "source": "sse",
       "target": "epr",
       "weight": 13,
-      "alpha": 0.5528,
+      "alpha": 0.549,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "err",
       "weight": 13,
-      "alpha": 0.3575,
+      "alpha": 0.3577,
       "backbone": false
     },
     {
@@ -8347,28 +8446,42 @@
       "source": "tate",
       "target": "ep",
       "weight": 13,
-      "alpha": 0.3858,
+      "alpha": 0.4178,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "err",
+      "weight": 13,
+      "alpha": 0.3207,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "rer",
+      "weight": 13,
+      "alpha": 0.3207,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "se",
       "weight": 13,
-      "alpha": 0.4456,
+      "alpha": 0.4644,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "err",
       "weight": 13,
-      "alpha": 0.3575,
+      "alpha": 0.3577,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "jset",
       "weight": 12,
-      "alpha": 0.3376,
+      "alpha": 0.331,
       "backbone": false
     },
     {
@@ -8382,21 +8495,21 @@
       "source": "jls",
       "target": "jset",
       "weight": 12,
-      "alpha": 0.3376,
+      "alpha": 0.331,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "bjet",
       "weight": 12,
-      "alpha": 0.5476,
+      "alpha": 0.5406,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "ijse",
       "weight": 12,
-      "alpha": 0.5476,
+      "alpha": 0.5406,
       "backbone": false
     },
     {
@@ -8410,7 +8523,7 @@
       "source": "ce",
       "target": "jrst",
       "weight": 12,
-      "alpha": 0.5027,
+      "alpha": 0.4973,
       "backbone": false
     },
     {
@@ -8445,7 +8558,7 @@
       "source": "rer",
       "target": "jte",
       "weight": 12,
-      "alpha": 0.2849,
+      "alpha": 0.2865,
       "backbone": false
     },
     {
@@ -8459,7 +8572,7 @@
       "source": "jecr",
       "target": "ep",
       "weight": 12,
-      "alpha": 0.5597,
+      "alpha": 0.5559,
       "backbone": false
     },
     {
@@ -8515,14 +8628,14 @@
       "source": "de",
       "target": "jep",
       "weight": 12,
-      "alpha": 0.5271,
+      "alpha": 0.5208,
       "backbone": false
     },
     {
       "source": "de",
       "target": "li",
       "weight": 12,
-      "alpha": 0.5271,
+      "alpha": 0.5208,
       "backbone": false
     },
     {
@@ -8543,14 +8656,14 @@
       "source": "ceai",
       "target": "lid",
       "weight": 12,
-      "alpha": 0.3603,
+      "alpha": 0.3536,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "cep",
       "weight": 12,
-      "alpha": 0.3372,
+      "alpha": 0.3339,
       "backbone": false
     },
     {
@@ -8564,14 +8677,14 @@
       "source": "eit",
       "target": "etrd",
       "weight": 12,
-      "alpha": 0.4308,
+      "alpha": 0.426,
       "backbone": false
     },
     {
       "source": "jche",
       "target": "ceai",
       "weight": 12,
-      "alpha": 0.4422,
+      "alpha": 0.4371,
       "backbone": false
     },
     {
@@ -8627,28 +8740,28 @@
       "source": "ijse",
       "target": "jcal",
       "weight": 12,
-      "alpha": 0.419,
+      "alpha": 0.4133,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "jcal",
       "weight": 12,
-      "alpha": 0.419,
+      "alpha": 0.4133,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jls",
       "weight": 12,
-      "alpha": 0.4669,
+      "alpha": 0.4615,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "aerj",
       "weight": 12,
-      "alpha": 0.4117,
+      "alpha": 0.4108,
       "backbone": false
     },
     {
@@ -8669,14 +8782,14 @@
       "source": "merj",
       "target": "cep",
       "weight": 12,
-      "alpha": 0.2695,
+      "alpha": 0.2592,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "jte",
       "weight": 12,
-      "alpha": 0.2695,
+      "alpha": 0.2592,
       "backbone": false
     },
     {
@@ -8718,7 +8831,14 @@
       "source": "tate",
       "target": "ijse",
       "weight": 12,
-      "alpha": 0.4156,
+      "alpha": 0.4472,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "aerj",
+      "weight": 12,
+      "alpha": 0.3505,
       "backbone": false
     },
     {
@@ -8732,7 +8852,7 @@
       "source": "jls",
       "target": "etrd",
       "weight": 11,
-      "alpha": 0.4993,
+      "alpha": 0.4945,
       "backbone": false
     },
     {
@@ -8746,35 +8866,35 @@
       "source": "ijcscl",
       "target": "er",
       "weight": 11,
-      "alpha": 0.5456,
+      "alpha": 0.5498,
       "backbone": false
     },
     {
       "source": "ijcscl",
       "target": "jecr",
       "weight": 11,
-      "alpha": 0.3264,
+      "alpha": 0.3197,
       "backbone": false
     },
     {
       "source": "ijcscl",
       "target": "ijethe",
       "weight": 11,
-      "alpha": 0.5258,
+      "alpha": 0.5185,
       "backbone": false
     },
     {
       "source": "bjet",
       "target": "jls",
       "weight": 11,
-      "alpha": 0.5096,
+      "alpha": 0.5047,
       "backbone": false
     },
     {
       "source": "bjet",
       "target": "etrd",
       "weight": 11,
-      "alpha": 0.4993,
+      "alpha": 0.4945,
       "backbone": false
     },
     {
@@ -8786,16 +8906,23 @@
     },
     {
       "source": "rer",
+      "target": "tttp",
+      "weight": 11,
+      "alpha": 0.3185,
+      "backbone": false
+    },
+    {
+      "source": "rer",
       "target": "ce",
       "weight": 11,
-      "alpha": 0.3169,
+      "alpha": 0.3185,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "err",
       "weight": 11,
-      "alpha": 0.3169,
+      "alpha": 0.3185,
       "backbone": false
     },
     {
@@ -8816,7 +8943,7 @@
       "source": "jecr",
       "target": "jset",
       "weight": 11,
-      "alpha": 0.3699,
+      "alpha": 0.3633,
       "backbone": false
     },
     {
@@ -8858,14 +8985,14 @@
       "source": "is",
       "target": "aerj",
       "weight": 11,
-      "alpha": 0.4436,
+      "alpha": 0.4427,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "jecr",
       "weight": 11,
-      "alpha": 0.3264,
+      "alpha": 0.3197,
       "backbone": false
     },
     {
@@ -8886,7 +9013,7 @@
       "source": "de",
       "target": "epr",
       "weight": 11,
-      "alpha": 0.5562,
+      "alpha": 0.5501,
       "backbone": false
     },
     {
@@ -8921,7 +9048,7 @@
       "source": "jfdl",
       "target": "jcal",
       "weight": 11,
-      "alpha": 0.3695,
+      "alpha": 0.3662,
       "backbone": false
     },
     {
@@ -8935,7 +9062,7 @@
       "source": "eit",
       "target": "err",
       "weight": 11,
-      "alpha": 0.4193,
+      "alpha": 0.4195,
       "backbone": false
     },
     {
@@ -8956,7 +9083,7 @@
       "source": "jche",
       "target": "err",
       "weight": 11,
-      "alpha": 0.4193,
+      "alpha": 0.4195,
       "backbone": false
     },
     {
@@ -9019,28 +9146,28 @@
       "source": "lmt",
       "target": "ce",
       "weight": 11,
-      "alpha": 0.2109,
+      "alpha": 0.2129,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "etrd",
       "weight": 11,
-      "alpha": 0.2109,
+      "alpha": 0.2129,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "ce",
       "weight": 11,
-      "alpha": 0.5495,
+      "alpha": 0.5442,
       "backbone": false
     },
     {
       "source": "se",
       "target": "ce",
       "weight": 11,
-      "alpha": 0.662,
+      "alpha": 0.6534,
       "backbone": false
     },
     {
@@ -9061,14 +9188,14 @@
       "source": "jset",
       "target": "lid",
       "weight": 11,
-      "alpha": 0.3926,
+      "alpha": 0.3859,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "eit",
       "weight": 11,
-      "alpha": 0.6656,
+      "alpha": 0.6617,
       "backbone": false
     },
     {
@@ -9082,14 +9209,14 @@
       "source": "cse",
       "target": "se",
       "weight": 11,
-      "alpha": 0.4977,
+      "alpha": 0.4925,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "li",
       "weight": 11,
-      "alpha": 0.4977,
+      "alpha": 0.4925,
       "backbone": false
     },
     {
@@ -9145,28 +9272,28 @@
       "source": "jte",
       "target": "jls",
       "weight": 11,
-      "alpha": 0.4952,
+      "alpha": 0.5025,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "ijse",
       "weight": 11,
-      "alpha": 0.4952,
+      "alpha": 0.5025,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "lid",
       "weight": 11,
-      "alpha": 0.3926,
+      "alpha": 0.3859,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "tate",
       "weight": 10,
-      "alpha": 0.5895,
+      "alpha": 0.5841,
       "backbone": false
     },
     {
@@ -9194,63 +9321,63 @@
       "source": "li",
       "target": "jls",
       "weight": 10,
-      "alpha": 0.542,
+      "alpha": 0.5372,
       "backbone": false
     },
     {
       "source": "li",
       "target": "ijse",
       "weight": 10,
-      "alpha": 0.5947,
+      "alpha": 0.5886,
       "backbone": false
     },
     {
       "source": "li",
       "target": "ile",
       "weight": 10,
-      "alpha": 0.5075,
+      "alpha": 0.5012,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "ile",
       "weight": 10,
-      "alpha": 0.5075,
+      "alpha": 0.5012,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "ceai",
       "weight": 10,
-      "alpha": 0.5072,
+      "alpha": 0.5023,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "err",
       "weight": 10,
-      "alpha": 0.4541,
+      "alpha": 0.4543,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "ce",
       "weight": 10,
-      "alpha": 0.7279,
+      "alpha": 0.7213,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "ep",
       "weight": 10,
-      "alpha": 0.3524,
+      "alpha": 0.3539,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "ijse",
       "weight": 10,
-      "alpha": 0.3524,
+      "alpha": 0.3539,
       "backbone": false
     },
     {
@@ -9327,7 +9454,7 @@
       "source": "cep",
       "target": "er",
       "weight": 10,
-      "alpha": 0.5767,
+      "alpha": 0.5807,
       "backbone": false
     },
     {
@@ -9341,56 +9468,63 @@
       "source": "cep",
       "target": "chb",
       "weight": 10,
-      "alpha": 0.6638,
+      "alpha": 0.6596,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "er",
       "weight": 10,
-      "alpha": 0.5767,
+      "alpha": 0.5807,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "aerj",
       "weight": 10,
-      "alpha": 0.4779,
+      "alpha": 0.477,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "ile",
       "weight": 10,
-      "alpha": 0.5075,
+      "alpha": 0.5012,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "se",
       "weight": 10,
-      "alpha": 0.3055,
+      "alpha": 0.2975,
       "backbone": false
     },
     {
       "source": "err",
       "target": "ijethe",
       "weight": 10,
-      "alpha": 0.5261,
+      "alpha": 0.5233,
+      "backbone": false
+    },
+    {
+      "source": "err",
+      "target": "tttp",
+      "weight": 10,
+      "alpha": 0.3749,
       "backbone": false
     },
     {
       "source": "err",
       "target": "ijse",
       "weight": 10,
-      "alpha": 0.5261,
+      "alpha": 0.5233,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "li",
       "weight": 10,
-      "alpha": 0.5678,
+      "alpha": 0.5619,
       "backbone": false
     },
     {
@@ -9418,7 +9552,7 @@
       "source": "de",
       "target": "lid",
       "weight": 10,
-      "alpha": 0.4278,
+      "alpha": 0.4212,
       "backbone": false
     },
     {
@@ -9460,7 +9594,7 @@
       "source": "jfdl",
       "target": "jecr",
       "weight": 10,
-      "alpha": 0.3618,
+      "alpha": 0.3551,
       "backbone": false
     },
     {
@@ -9481,21 +9615,21 @@
       "source": "jfdl",
       "target": "ijethe",
       "weight": 10,
-      "alpha": 0.4049,
+      "alpha": 0.4016,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "err",
       "weight": 10,
-      "alpha": 0.4049,
+      "alpha": 0.4016,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "jrst",
       "weight": 10,
-      "alpha": 0.4049,
+      "alpha": 0.4016,
       "backbone": false
     },
     {
@@ -9509,7 +9643,7 @@
       "source": "tt",
       "target": "li",
       "weight": 10,
-      "alpha": 0.4479,
+      "alpha": 0.4429,
       "backbone": false
     },
     {
@@ -9523,14 +9657,14 @@
       "source": "eit",
       "target": "cep",
       "weight": 10,
-      "alpha": 0.4962,
+      "alpha": 0.4916,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "jls",
       "weight": 10,
-      "alpha": 0.5366,
+      "alpha": 0.5309,
       "backbone": false
     },
     {
@@ -9558,21 +9692,21 @@
       "source": "cexr",
       "target": "jecr",
       "weight": 10,
-      "alpha": 0.3618,
+      "alpha": 0.3551,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "ijaied",
       "weight": 10,
-      "alpha": 0.2442,
+      "alpha": 0.2462,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "er",
       "weight": 10,
-      "alpha": 0.2442,
+      "alpha": 0.2462,
       "backbone": false
     },
     {
@@ -9593,28 +9727,28 @@
       "source": "ijse",
       "target": "lid",
       "weight": 10,
-      "alpha": 0.4278,
+      "alpha": 0.4212,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "ceai",
       "weight": 10,
-      "alpha": 0.5072,
+      "alpha": 0.5023,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "jecr",
       "weight": 10,
-      "alpha": 0.3618,
+      "alpha": 0.3551,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "etrd",
       "weight": 10,
-      "alpha": 0.5321,
+      "alpha": 0.5274,
       "backbone": false
     },
     {
@@ -9698,21 +9832,21 @@
       "source": "ejte",
       "target": "li",
       "weight": 10,
-      "alpha": 0.4927,
+      "alpha": 0.5162,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "etrd",
       "weight": 10,
-      "alpha": 0.4927,
+      "alpha": 0.5162,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "ejte",
       "weight": 10,
-      "alpha": 0.2864,
+      "alpha": 0.3074,
       "backbone": false
     },
     {
@@ -9733,7 +9867,7 @@
       "source": "etrd",
       "target": "jls",
       "weight": 9,
-      "alpha": 0.5764,
+      "alpha": 0.5718,
       "backbone": false
     },
     {
@@ -9768,7 +9902,7 @@
       "source": "ijcscl",
       "target": "lid",
       "weight": 9,
-      "alpha": 0.4661,
+      "alpha": 0.4596,
       "backbone": false
     },
     {
@@ -9810,7 +9944,7 @@
       "source": "rer",
       "target": "cep",
       "weight": 9,
-      "alpha": 0.3917,
+      "alpha": 0.3932,
       "backbone": false
     },
     {
@@ -9838,7 +9972,7 @@
       "source": "ci",
       "target": "ce",
       "weight": 9,
-      "alpha": 0.6618,
+      "alpha": 0.6568,
       "backbone": false
     },
     {
@@ -9894,7 +10028,7 @@
       "source": "mca",
       "target": "jte",
       "weight": 9,
-      "alpha": 0.3449,
+      "alpha": 0.3368,
       "backbone": false
     },
     {
@@ -9922,49 +10056,49 @@
       "source": "ile",
       "target": "er",
       "weight": 9,
-      "alpha": 0.601,
+      "alpha": 0.5954,
       "backbone": false
     },
     {
       "source": "de",
       "target": "tate",
       "weight": 9,
-      "alpha": 0.6192,
+      "alpha": 0.6136,
       "backbone": false
     },
     {
       "source": "ceai",
       "target": "jecr",
       "weight": 9,
-      "alpha": 0.401,
+      "alpha": 0.3943,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "ceai",
       "weight": 9,
-      "alpha": 0.4435,
+      "alpha": 0.4403,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "ile",
       "weight": 9,
-      "alpha": 0.4435,
+      "alpha": 0.4403,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "jecr",
       "weight": 9,
-      "alpha": 0.401,
+      "alpha": 0.3943,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "er",
       "weight": 9,
-      "alpha": 0.4857,
+      "alpha": 0.4808,
       "backbone": false
     },
     {
@@ -9978,7 +10112,7 @@
       "source": "ets",
       "target": "jecr",
       "weight": 9,
-      "alpha": 0.401,
+      "alpha": 0.3943,
       "backbone": false
     },
     {
@@ -10013,14 +10147,14 @@
       "source": "ijethe",
       "target": "er",
       "weight": 9,
-      "alpha": 0.5713,
+      "alpha": 0.5658,
       "backbone": false
     },
     {
       "source": "jche",
       "target": "lid",
       "weight": 9,
-      "alpha": 0.4661,
+      "alpha": 0.4596,
       "backbone": false
     },
     {
@@ -10083,21 +10217,28 @@
       "source": "cexr",
       "target": "jset",
       "weight": 9,
-      "alpha": 0.4441,
+      "alpha": 0.4376,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "jcal",
       "weight": 9,
-      "alpha": 0.2824,
+      "alpha": 0.2844,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "ijethe",
       "weight": 9,
-      "alpha": 0.2824,
+      "alpha": 0.2844,
+      "backbone": false
+    },
+    {
+      "source": "jrst",
+      "target": "tttp",
+      "weight": 9,
+      "alpha": 0.4141,
       "backbone": false
     },
     {
@@ -10125,7 +10266,7 @@
       "source": "cse",
       "target": "ijse",
       "weight": 9,
-      "alpha": 0.5654,
+      "alpha": 0.5606,
       "backbone": false
     },
     {
@@ -10139,7 +10280,7 @@
       "source": "cbe",
       "target": "jset",
       "weight": 9,
-      "alpha": 0.4441,
+      "alpha": 0.4376,
       "backbone": false
     },
     {
@@ -10153,7 +10294,7 @@
       "source": "merj",
       "target": "lid",
       "weight": 9,
-      "alpha": 0.3764,
+      "alpha": 0.3656,
       "backbone": false
     },
     {
@@ -10181,49 +10322,49 @@
       "source": "jte",
       "target": "sse",
       "weight": 9,
-      "alpha": 0.264,
+      "alpha": 0.2551,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "jep",
       "weight": 9,
-      "alpha": 0.5633,
+      "alpha": 0.5701,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "ceai",
       "weight": 9,
-      "alpha": 0.5431,
+      "alpha": 0.5384,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "ijethe",
       "weight": 9,
-      "alpha": 0.5293,
+      "alpha": 0.5519,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "ile",
       "weight": 9,
-      "alpha": 0.5293,
+      "alpha": 0.5373,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "cep",
       "weight": 9,
-      "alpha": 0.5293,
+      "alpha": 0.5518,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "ep",
       "weight": 9,
-      "alpha": 0.5728,
+      "alpha": 0.5892,
       "backbone": false
     },
     {
@@ -10237,14 +10378,14 @@
       "source": "etrd",
       "target": "er",
       "weight": 8,
-      "alpha": 0.6441,
+      "alpha": 0.6477,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "se",
       "weight": 8,
-      "alpha": 0.6555,
+      "alpha": 0.6507,
       "backbone": false
     },
     {
@@ -10258,7 +10399,7 @@
       "source": "ijcscl",
       "target": "ceai",
       "weight": 8,
-      "alpha": 0.5815,
+      "alpha": 0.577,
       "backbone": false
     },
     {
@@ -10293,21 +10434,21 @@
       "source": "li",
       "target": "etrd",
       "weight": 8,
-      "alpha": 0.604,
+      "alpha": 0.5997,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "jset",
       "weight": 8,
-      "alpha": 0.4864,
+      "alpha": 0.4801,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "ijethe",
       "weight": 8,
-      "alpha": 0.6271,
+      "alpha": 0.6209,
       "backbone": false
     },
     {
@@ -10363,7 +10504,7 @@
       "source": "ijaied",
       "target": "jecr",
       "weight": 8,
-      "alpha": 0.4443,
+      "alpha": 0.4377,
       "backbone": false
     },
     {
@@ -10398,7 +10539,7 @@
       "source": "lid",
       "target": "sse",
       "weight": 8,
-      "alpha": 0.3071,
+      "alpha": 0.2979,
       "backbone": false
     },
     {
@@ -10419,21 +10560,21 @@
       "source": "ile",
       "target": "jep",
       "weight": 8,
-      "alpha": 0.6362,
+      "alpha": 0.6309,
       "backbone": false
     },
     {
       "source": "de",
       "target": "ceai",
       "weight": 8,
-      "alpha": 0.5815,
+      "alpha": 0.577,
       "backbone": false
     },
     {
       "source": "de",
       "target": "err",
       "weight": 8,
-      "alpha": 0.5323,
+      "alpha": 0.5324,
       "backbone": false
     },
     {
@@ -10454,21 +10595,21 @@
       "source": "ceai",
       "target": "err",
       "weight": 8,
-      "alpha": 0.5323,
+      "alpha": 0.5324,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "se",
       "weight": 8,
-      "alpha": 0.4858,
+      "alpha": 0.4826,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "rer",
       "weight": 8,
-      "alpha": 0.5266,
+      "alpha": 0.5219,
       "backbone": false
     },
     {
@@ -10517,14 +10658,14 @@
       "source": "eit",
       "target": "ijse",
       "weight": 8,
-      "alpha": 0.5713,
+      "alpha": 0.5671,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "se",
       "weight": 8,
-      "alpha": 0.6081,
+      "alpha": 0.6029,
       "backbone": false
     },
     {
@@ -10622,7 +10763,7 @@
       "source": "cexr",
       "target": "ijethe",
       "weight": 8,
-      "alpha": 0.6271,
+      "alpha": 0.6209,
       "backbone": false
     },
     {
@@ -10636,28 +10777,35 @@
       "source": "lmt",
       "target": "ceai",
       "weight": 8,
-      "alpha": 0.3262,
+      "alpha": 0.3282,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "jls",
       "weight": 8,
-      "alpha": 0.3262,
+      "alpha": 0.3282,
+      "backbone": false
+    },
+    {
+      "source": "lmt",
+      "target": "tttp",
+      "weight": 8,
+      "alpha": 0.3282,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "jcal",
       "weight": 8,
-      "alpha": 0.5608,
+      "alpha": 0.5557,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "etrd",
       "weight": 8,
-      "alpha": 0.604,
+      "alpha": 0.5997,
       "backbone": false
     },
     {
@@ -10671,7 +10819,7 @@
       "source": "sse",
       "target": "pde",
       "weight": 8,
-      "alpha": 0.3259,
+      "alpha": 0.3473,
       "backbone": false
     },
     {
@@ -10727,7 +10875,7 @@
       "source": "merj",
       "target": "ep",
       "weight": 8,
-      "alpha": 0.4203,
+      "alpha": 0.4096,
       "backbone": false
     },
     {
@@ -10769,7 +10917,7 @@
       "source": "jte",
       "target": "epr",
       "weight": 8,
-      "alpha": 0.6007,
+      "alpha": 0.6071,
       "backbone": false
     },
     {
@@ -10783,56 +10931,56 @@
       "source": "tate",
       "target": "jls",
       "weight": 8,
-      "alpha": 0.5583,
+      "alpha": 0.586,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "epr",
       "weight": 8,
-      "alpha": 0.5684,
+      "alpha": 0.5899,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "eit",
       "weight": 8,
-      "alpha": 0.6097,
+      "alpha": 0.6252,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "etrd",
       "weight": 8,
-      "alpha": 0.604,
+      "alpha": 0.5997,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "ep",
       "weight": 8,
-      "alpha": 0.671,
+      "alpha": 0.6684,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "jep",
       "weight": 8,
-      "alpha": 0.671,
+      "alpha": 0.6684,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "ijse",
       "weight": 7,
-      "alpha": 0.6912,
+      "alpha": 0.6867,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "jrst",
       "weight": 7,
-      "alpha": 0.6912,
+      "alpha": 0.6867,
       "backbone": false
     },
     {
@@ -10846,7 +10994,7 @@
       "source": "jls",
       "target": "jcal",
       "weight": 7,
-      "alpha": 0.6031,
+      "alpha": 0.5983,
       "backbone": false
     },
     {
@@ -10874,14 +11022,14 @@
       "source": "epr",
       "target": "jrst",
       "weight": 7,
-      "alpha": 0.7416,
+      "alpha": 0.7365,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "jecr",
       "weight": 7,
-      "alpha": 0.4921,
+      "alpha": 0.4857,
       "backbone": false
     },
     {
@@ -10892,10 +11040,17 @@
       "backbone": false
     },
     {
+      "source": "ep",
+      "target": "tttp",
+      "weight": 7,
+      "alpha": 0.5049,
+      "backbone": false
+    },
+    {
       "source": "rer",
       "target": "etrd",
       "weight": 7,
-      "alpha": 0.4835,
+      "alpha": 0.4849,
       "backbone": false
     },
     {
@@ -10923,14 +11078,14 @@
       "source": "ci",
       "target": "err",
       "weight": 7,
-      "alpha": 0.5762,
+      "alpha": 0.5763,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "etrd",
       "weight": 7,
-      "alpha": 0.6435,
+      "alpha": 0.6395,
       "backbone": false
     },
     {
@@ -10998,16 +11153,30 @@
     },
     {
       "source": "is",
+      "target": "tttp",
+      "weight": 7,
+      "alpha": 0.5049,
+      "backbone": false
+    },
+    {
+      "source": "is",
       "target": "ijethe",
       "weight": 7,
-      "alpha": 0.665,
+      "alpha": 0.6592,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "ijse",
       "weight": 7,
-      "alpha": 0.7268,
+      "alpha": 0.7222,
+      "backbone": false
+    },
+    {
+      "source": "cep",
+      "target": "tttp",
+      "weight": 7,
+      "alpha": 0.5049,
       "backbone": false
     },
     {
@@ -11021,21 +11190,21 @@
       "source": "mca",
       "target": "jrst",
       "weight": 7,
-      "alpha": 0.4388,
+      "alpha": 0.4308,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "err",
       "weight": 7,
-      "alpha": 0.4388,
+      "alpha": 0.4308,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "aerj",
       "weight": 7,
-      "alpha": 0.4388,
+      "alpha": 0.4308,
       "backbone": false
     },
     {
@@ -11084,21 +11253,21 @@
       "source": "jfdl",
       "target": "ihe",
       "weight": 7,
-      "alpha": 0.5319,
+      "alpha": 0.5289,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "lid",
       "weight": 7,
-      "alpha": 0.5528,
+      "alpha": 0.5469,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "jls",
       "weight": 7,
-      "alpha": 0.5709,
+      "alpha": 0.5664,
       "backbone": false
     },
     {
@@ -11140,7 +11309,7 @@
       "source": "eit",
       "target": "er",
       "weight": 7,
-      "alpha": 0.613,
+      "alpha": 0.6089,
       "backbone": false
     },
     {
@@ -11161,14 +11330,14 @@
       "source": "ijethe",
       "target": "tate",
       "weight": 7,
-      "alpha": 0.6473,
+      "alpha": 0.6425,
       "backbone": false
     },
     {
       "source": "jche",
       "target": "jset",
       "weight": 7,
-      "alpha": 0.5326,
+      "alpha": 0.5266,
       "backbone": false
     },
     {
@@ -11196,7 +11365,7 @@
       "source": "ijcci",
       "target": "jecr",
       "weight": 7,
-      "alpha": 0.4921,
+      "alpha": 0.4857,
       "backbone": false
     },
     {
@@ -11210,7 +11379,7 @@
       "source": "ijcci",
       "target": "mca",
       "weight": 7,
-      "alpha": 0.4243,
+      "alpha": 0.4066,
       "backbone": false
     },
     {
@@ -11245,14 +11414,14 @@
       "source": "jrst",
       "target": "lid",
       "weight": 7,
-      "alpha": 0.5528,
+      "alpha": 0.5469,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "ile",
       "weight": 7,
-      "alpha": 0.6227,
+      "alpha": 0.6173,
       "backbone": false
     },
     {
@@ -11266,14 +11435,14 @@
       "source": "se",
       "target": "epr",
       "weight": 7,
-      "alpha": 0.7272,
+      "alpha": 0.7246,
       "backbone": false
     },
     {
       "source": "se",
       "target": "err",
       "weight": 7,
-      "alpha": 0.5762,
+      "alpha": 0.5763,
       "backbone": false
     },
     {
@@ -11294,14 +11463,14 @@
       "source": "sse",
       "target": "chb",
       "weight": 7,
-      "alpha": 0.7508,
+      "alpha": 0.7475,
       "backbone": false
     },
     {
       "source": "sse",
       "target": "ejte",
       "weight": 7,
-      "alpha": 0.4197,
+      "alpha": 0.4405,
       "backbone": false
     },
     {
@@ -11315,14 +11484,14 @@
       "source": "cse",
       "target": "lid",
       "weight": 7,
-      "alpha": 0.5528,
+      "alpha": 0.5469,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "ijethe",
       "weight": 7,
-      "alpha": 0.6422,
+      "alpha": 0.6379,
       "backbone": false
     },
     {
@@ -11378,14 +11547,14 @@
       "source": "cbe",
       "target": "lid",
       "weight": 7,
-      "alpha": 0.5528,
+      "alpha": 0.5469,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "epr",
       "weight": 7,
-      "alpha": 0.4692,
+      "alpha": 0.4587,
       "backbone": false
     },
     {
@@ -11427,14 +11596,14 @@
       "source": "jte",
       "target": "ce",
       "weight": 7,
-      "alpha": 0.6405,
+      "alpha": 0.6464,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "eit",
       "weight": 7,
-      "alpha": 0.6405,
+      "alpha": 0.6464,
       "backbone": false
     },
     {
@@ -11455,42 +11624,56 @@
       "source": "tate",
       "target": "eit",
       "weight": 7,
-      "alpha": 0.6009,
+      "alpha": 0.6268,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "jcal",
       "weight": 7,
-      "alpha": 0.6009,
+      "alpha": 0.5983,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "bjet",
       "weight": 7,
-      "alpha": 0.6103,
+      "alpha": 0.6304,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ce",
+      "weight": 7,
+      "alpha": 0.545,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ep",
+      "weight": 7,
+      "alpha": 0.545,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "se",
       "weight": 7,
-      "alpha": 0.7056,
+      "alpha": 0.7032,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "aerj",
       "weight": 6,
-      "alpha": 0.643,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "err",
       "weight": 6,
-      "alpha": 0.6236,
+      "alpha": 0.6237,
       "backbone": false
     },
     {
@@ -11504,7 +11687,7 @@
       "source": "ce",
       "target": "jls",
       "weight": 6,
-      "alpha": 0.6931,
+      "alpha": 0.6894,
       "backbone": false
     },
     {
@@ -11546,42 +11729,42 @@
       "source": "bjet",
       "target": "jset",
       "weight": 6,
-      "alpha": 0.5831,
+      "alpha": 0.5775,
       "backbone": false
     },
     {
       "source": "li",
       "target": "ijethe",
       "weight": 6,
-      "alpha": 0.7051,
+      "alpha": 0.6998,
       "backbone": false
     },
     {
       "source": "li",
       "target": "jrst",
       "weight": 6,
-      "alpha": 0.7328,
+      "alpha": 0.7283,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "etrd",
       "weight": 6,
-      "alpha": 0.6855,
+      "alpha": 0.6818,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "se",
       "weight": 6,
-      "alpha": 0.5369,
+      "alpha": 0.5382,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "jrst",
       "weight": 6,
-      "alpha": 0.5369,
+      "alpha": 0.5382,
       "backbone": false
     },
     {
@@ -11609,7 +11792,7 @@
       "source": "ci",
       "target": "lid",
       "weight": 6,
-      "alpha": 0.602,
+      "alpha": 0.5964,
       "backbone": false
     },
     {
@@ -11623,14 +11806,14 @@
       "source": "ci",
       "target": "sse",
       "weight": 6,
-      "alpha": 0.4146,
+      "alpha": 0.4052,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "chb",
       "weight": 6,
-      "alpha": 0.7598,
+      "alpha": 0.7559,
       "backbone": false
     },
     {
@@ -11658,7 +11841,7 @@
       "source": "jecr",
       "target": "jrst",
       "weight": 6,
-      "alpha": 0.7656,
+      "alpha": 0.7619,
       "backbone": false
     },
     {
@@ -11756,7 +11939,7 @@
       "source": "is",
       "target": "sse",
       "weight": 6,
-      "alpha": 0.4146,
+      "alpha": 0.4052,
       "backbone": false
     },
     {
@@ -11770,7 +11953,7 @@
       "source": "is",
       "target": "jecr",
       "weight": 6,
-      "alpha": 0.5449,
+      "alpha": 0.5389,
       "backbone": false
     },
     {
@@ -11791,28 +11974,28 @@
       "source": "cep",
       "target": "ile",
       "weight": 6,
-      "alpha": 0.6665,
+      "alpha": 0.6615,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "jcal",
       "weight": 6,
-      "alpha": 0.6485,
+      "alpha": 0.644,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "bjet",
       "weight": 6,
-      "alpha": 0.763,
+      "alpha": 0.7602,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "jset",
       "weight": 6,
-      "alpha": 0.5831,
+      "alpha": 0.5775,
       "backbone": false
     },
     {
@@ -11826,7 +12009,7 @@
       "source": "lid",
       "target": "jls",
       "weight": 6,
-      "alpha": 0.6931,
+      "alpha": 0.6894,
       "backbone": false
     },
     {
@@ -11847,21 +12030,21 @@
       "source": "err",
       "target": "pde",
       "weight": 6,
-      "alpha": 0.4336,
+      "alpha": 0.4545,
       "backbone": false
     },
     {
       "source": "err",
       "target": "chi",
       "weight": 6,
-      "alpha": 0.681,
+      "alpha": 0.6788,
       "backbone": false
     },
     {
       "source": "err",
       "target": "se",
       "weight": 6,
-      "alpha": 0.681,
+      "alpha": 0.6788,
       "backbone": false
     },
     {
@@ -11910,7 +12093,7 @@
       "source": "ihe",
       "target": "aerj",
       "weight": 6,
-      "alpha": 0.643,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
@@ -11945,7 +12128,7 @@
       "source": "jfdl",
       "target": "jls",
       "weight": 6,
-      "alpha": 0.5824,
+      "alpha": 0.5796,
       "backbone": false
     },
     {
@@ -11957,9 +12140,16 @@
     },
     {
       "source": "jfdl",
+      "target": "tttp",
+      "weight": 6,
+      "alpha": 0.5571,
+      "backbone": false
+    },
+    {
+      "source": "jfdl",
       "target": "ijse",
       "weight": 6,
-      "alpha": 0.5824,
+      "alpha": 0.5796,
       "backbone": false
     },
     {
@@ -11973,14 +12163,14 @@
       "source": "tt",
       "target": "cep",
       "weight": 6,
-      "alpha": 0.6188,
+      "alpha": 0.6146,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "err",
       "weight": 6,
-      "alpha": 0.6188,
+      "alpha": 0.6146,
       "backbone": false
     },
     {
@@ -12001,14 +12191,14 @@
       "source": "tt",
       "target": "jset",
       "weight": 6,
-      "alpha": 0.5831,
+      "alpha": 0.5775,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "aerj",
       "weight": 6,
-      "alpha": 0.6188,
+      "alpha": 0.6146,
       "backbone": false
     },
     {
@@ -12022,7 +12212,7 @@
       "source": "eit",
       "target": "chi",
       "weight": 6,
-      "alpha": 0.6576,
+      "alpha": 0.6539,
       "backbone": false
     },
     {
@@ -12120,7 +12310,7 @@
       "source": "hci",
       "target": "bjet",
       "weight": 6,
-      "alpha": 0.763,
+      "alpha": 0.7602,
       "backbone": false
     },
     {
@@ -12169,28 +12359,28 @@
       "source": "lmt",
       "target": "rer",
       "weight": 6,
-      "alpha": 0.4341,
+      "alpha": 0.4359,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "tate",
       "weight": 6,
-      "alpha": 0.4341,
+      "alpha": 0.4359,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "jep",
       "weight": 6,
-      "alpha": 0.7224,
+      "alpha": 0.7186,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "ejte",
       "weight": 6,
-      "alpha": 0.476,
+      "alpha": 0.4961,
       "backbone": false
     },
     {
@@ -12211,7 +12401,7 @@
       "source": "ijse",
       "target": "ile",
       "weight": 6,
-      "alpha": 0.6665,
+      "alpha": 0.6615,
       "backbone": false
     },
     {
@@ -12225,7 +12415,7 @@
       "source": "sse",
       "target": "lid",
       "weight": 6,
-      "alpha": 0.602,
+      "alpha": 0.5964,
       "backbone": false
     },
     {
@@ -12253,21 +12443,21 @@
       "source": "cse",
       "target": "chi",
       "weight": 6,
-      "alpha": 0.6843,
+      "alpha": 0.6804,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "pde",
       "weight": 6,
-      "alpha": 0.4336,
+      "alpha": 0.4545,
       "backbone": false
     },
     {
       "source": "cse",
       "target": "jte",
       "weight": 6,
-      "alpha": 0.6768,
+      "alpha": 0.6804,
       "backbone": false
     },
     {
@@ -12295,7 +12485,7 @@
       "source": "merj",
       "target": "mca",
       "weight": 6,
-      "alpha": 0.481,
+      "alpha": 0.4639,
       "backbone": false
     },
     {
@@ -12400,7 +12590,7 @@
       "source": "jte",
       "target": "li",
       "weight": 6,
-      "alpha": 0.6828,
+      "alpha": 0.6882,
       "backbone": false
     },
     {
@@ -12414,28 +12604,28 @@
       "source": "tate",
       "target": "se",
       "weight": 6,
-      "alpha": 0.6465,
+      "alpha": 0.6703,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "jecr",
       "weight": 6,
-      "alpha": 0.5449,
+      "alpha": 0.5389,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "etrd",
       "weight": 6,
-      "alpha": 0.6465,
+      "alpha": 0.6703,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "aerj",
       "weight": 6,
-      "alpha": 0.643,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
@@ -12449,21 +12639,49 @@
       "source": "ejte",
       "target": "jep",
       "weight": 6,
-      "alpha": 0.6553,
+      "alpha": 0.6736,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "chb",
       "weight": 6,
-      "alpha": 0.6553,
+      "alpha": 0.6736,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ceai",
+      "weight": 6,
+      "alpha": 0.5949,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jrst",
+      "weight": 6,
+      "alpha": 0.5949,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jep",
+      "weight": 6,
+      "alpha": 0.5949,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "epr",
+      "weight": 6,
+      "alpha": 0.5949,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "jls",
       "weight": 6,
-      "alpha": 0.6905,
+      "alpha": 0.6894,
       "backbone": false
     },
     {
@@ -12477,14 +12695,14 @@
       "source": "pde",
       "target": "bjet",
       "weight": 6,
-      "alpha": 0.6905,
+      "alpha": 0.7036,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "jrst",
       "weight": 6,
-      "alpha": 0.6905,
+      "alpha": 0.7036,
       "backbone": false
     },
     {
@@ -12498,7 +12716,7 @@
       "source": "etrd",
       "target": "chi",
       "weight": 5,
-      "alpha": 0.7683,
+      "alpha": 0.7648,
       "backbone": false
     },
     {
@@ -12519,7 +12737,7 @@
       "source": "ijcscl",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
@@ -12547,7 +12765,7 @@
       "source": "ce",
       "target": "se",
       "weight": 5,
-      "alpha": 0.7517,
+      "alpha": 0.7484,
       "backbone": false
     },
     {
@@ -12561,7 +12779,14 @@
       "source": "ce",
       "target": "chi",
       "weight": 5,
-      "alpha": 0.7517,
+      "alpha": 0.7484,
+      "backbone": false
+    },
+    {
+      "source": "li",
+      "target": "tttp",
+      "weight": 5,
+      "alpha": 0.6147,
       "backbone": false
     },
     {
@@ -12575,7 +12800,7 @@
       "source": "li",
       "target": "se",
       "weight": 5,
-      "alpha": 0.7719,
+      "alpha": 0.7679,
       "backbone": false
     },
     {
@@ -12589,21 +12814,21 @@
       "source": "li",
       "target": "jecr",
       "weight": 5,
-      "alpha": 0.6033,
+      "alpha": 0.5977,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "se",
       "weight": 5,
-      "alpha": 0.8079,
+      "alpha": 0.804,
       "backbone": false
     },
     {
       "source": "epr",
       "target": "chi",
       "weight": 5,
-      "alpha": 0.8079,
+      "alpha": 0.804,
       "backbone": false
     },
     {
@@ -12617,14 +12842,14 @@
       "source": "ep",
       "target": "jcal",
       "weight": 5,
-      "alpha": 0.6972,
+      "alpha": 0.6932,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "mca",
       "weight": 5,
-      "alpha": 0.5448,
+      "alpha": 0.5286,
       "backbone": false
     },
     {
@@ -12638,7 +12863,7 @@
       "source": "rer",
       "target": "lid",
       "weight": 5,
-      "alpha": 0.596,
+      "alpha": 0.5972,
       "backbone": false
     },
     {
@@ -12652,14 +12877,14 @@
       "source": "ci",
       "target": "bjet",
       "weight": 5,
-      "alpha": 0.7955,
+      "alpha": 0.7921,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "jecr",
       "weight": 5,
-      "alpha": 0.6033,
+      "alpha": 0.5977,
       "backbone": false
     },
     {
@@ -12694,7 +12919,7 @@
       "source": "jecr",
       "target": "jte",
       "weight": 5,
-      "alpha": 0.7225,
+      "alpha": 0.7302,
       "backbone": false
     },
     {
@@ -12792,7 +13017,7 @@
       "source": "cep",
       "target": "jte",
       "weight": 5,
-      "alpha": 0.7225,
+      "alpha": 0.7302,
       "backbone": false
     },
     {
@@ -12813,7 +13038,7 @@
       "source": "mca",
       "target": "bjet",
       "weight": 5,
-      "alpha": 0.557,
+      "alpha": 0.5496,
       "backbone": false
     },
     {
@@ -12848,21 +13073,21 @@
       "source": "ile",
       "target": "jls",
       "weight": 5,
-      "alpha": 0.7369,
+      "alpha": 0.7336,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "jrst",
       "weight": 5,
-      "alpha": 0.7542,
+      "alpha": 0.7503,
       "backbone": false
     },
     {
       "source": "ile",
       "target": "se",
       "weight": 5,
-      "alpha": 0.7542,
+      "alpha": 0.7503,
       "backbone": false
     },
     {
@@ -12876,14 +13101,14 @@
       "source": "de",
       "target": "ejte",
       "weight": 5,
-      "alpha": 0.5396,
+      "alpha": 0.5583,
       "backbone": false
     },
     {
       "source": "de",
       "target": "aerj",
       "weight": 5,
-      "alpha": 0.6923,
+      "alpha": 0.6917,
       "backbone": false
     },
     {
@@ -12897,7 +13122,7 @@
       "source": "ceai",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
@@ -12946,7 +13171,7 @@
       "source": "jfdl",
       "target": "pde",
       "weight": 5,
-      "alpha": 0.4995,
+      "alpha": 0.5193,
       "backbone": false
     },
     {
@@ -12958,9 +13183,16 @@
     },
     {
       "source": "tt",
+      "target": "tttp",
+      "weight": 5,
+      "alpha": 0.6147,
+      "backbone": false
+    },
+    {
+      "source": "tt",
       "target": "jte",
       "weight": 5,
-      "alpha": 0.6706,
+      "alpha": 0.6668,
       "backbone": false
     },
     {
@@ -13016,21 +13248,28 @@
       "source": "eit",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "sse",
       "weight": 5,
-      "alpha": 0.4811,
+      "alpha": 0.472,
+      "backbone": false
+    },
+    {
+      "source": "eit",
+      "target": "tttp",
+      "weight": 5,
+      "alpha": 0.6147,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
@@ -13142,42 +13381,42 @@
       "source": "cexr",
       "target": "jls",
       "weight": 5,
-      "alpha": 0.7369,
+      "alpha": 0.7336,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "ep",
       "weight": 5,
-      "alpha": 0.5,
+      "alpha": 0.5017,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "ep",
       "weight": 5,
-      "alpha": 0.7628,
+      "alpha": 0.7595,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "epr",
       "weight": 5,
-      "alpha": 0.7628,
+      "alpha": 0.7595,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
       "source": "se",
       "target": "mca",
       "weight": 5,
-      "alpha": 0.5448,
+      "alpha": 0.5286,
       "backbone": false
     },
     {
@@ -13189,16 +13428,23 @@
     },
     {
       "source": "ijse",
+      "target": "tttp",
+      "weight": 5,
+      "alpha": 0.6147,
+      "backbone": false
+    },
+    {
+      "source": "ijse",
       "target": "jte",
       "weight": 5,
-      "alpha": 0.7225,
+      "alpha": 0.7302,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "jecr",
       "weight": 5,
-      "alpha": 0.6033,
+      "alpha": 0.5977,
       "backbone": false
     },
     {
@@ -13212,7 +13458,7 @@
       "source": "ijse",
       "target": "chb",
       "weight": 5,
-      "alpha": 0.7898,
+      "alpha": 0.7863,
       "backbone": false
     },
     {
@@ -13240,7 +13486,14 @@
       "source": "jset",
       "target": "ejte",
       "weight": 5,
-      "alpha": 0.5396,
+      "alpha": 0.5583,
+      "backbone": false
+    },
+    {
+      "source": "sse",
+      "target": "tttp",
+      "weight": 5,
+      "alpha": 0.6147,
       "backbone": false
     },
     {
@@ -13296,14 +13549,14 @@
       "source": "cbe",
       "target": "err",
       "weight": 5,
-      "alpha": 0.6749,
+      "alpha": 0.675,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "pde",
       "weight": 5,
-      "alpha": 0.4995,
+      "alpha": 0.5193,
       "backbone": false
     },
     {
@@ -13352,7 +13605,7 @@
       "source": "uist",
       "target": "ce",
       "weight": 5,
-      "alpha": 0.8852,
+      "alpha": 0.8838,
       "backbone": false
     },
     {
@@ -13408,7 +13661,7 @@
       "source": "jte",
       "target": "bjet",
       "weight": 5,
-      "alpha": 0.7279,
+      "alpha": 0.7327,
       "backbone": false
     },
     {
@@ -13422,21 +13675,21 @@
       "source": "tate",
       "target": "ate",
       "weight": 5,
-      "alpha": 0.4024,
+      "alpha": 0.372,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "ijethe",
       "weight": 5,
-      "alpha": 0.6956,
+      "alpha": 0.7168,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "bjet",
       "weight": 5,
-      "alpha": 0.6956,
+      "alpha": 0.7168,
       "backbone": false
     },
     {
@@ -13450,14 +13703,21 @@
       "source": "ejte",
       "target": "ceai",
       "weight": 5,
-      "alpha": 0.7034,
+      "alpha": 0.7097,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "eit",
+      "weight": 5,
+      "alpha": 0.6491,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "jset",
       "weight": 5,
-      "alpha": 0.6383,
+      "alpha": 0.6331,
       "backbone": false
     },
     {
@@ -13471,14 +13731,14 @@
       "source": "ate",
       "target": "bjet",
       "weight": 5,
-      "alpha": 0.78,
+      "alpha": 0.7781,
       "backbone": false
     },
     {
       "source": "etrd",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6281,
       "backbone": false
     },
     {
@@ -13499,7 +13759,7 @@
       "source": "jls",
       "target": "lid",
       "weight": 4,
-      "alpha": 0.7134,
+      "alpha": 0.709,
       "backbone": false
     },
     {
@@ -13513,7 +13773,7 @@
       "source": "jls",
       "target": "ceai",
       "weight": 4,
-      "alpha": 0.7632,
+      "alpha": 0.7603,
       "backbone": false
     },
     {
@@ -13562,14 +13822,21 @@
       "source": "ce",
       "target": "pde",
       "weight": 4,
-      "alpha": 0.5749,
+      "alpha": 0.5929,
       "backbone": false
     },
     {
       "source": "ce",
       "target": "sse",
       "weight": 4,
-      "alpha": 0.5578,
+      "alpha": 0.5494,
+      "backbone": false
+    },
+    {
+      "source": "ce",
+      "target": "tttp",
+      "weight": 4,
+      "alpha": 0.6779,
       "backbone": false
     },
     {
@@ -13618,7 +13885,7 @@
       "source": "epr",
       "target": "ijse",
       "weight": 4,
-      "alpha": 0.8336,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
@@ -13646,14 +13913,14 @@
       "source": "rer",
       "target": "bjet",
       "weight": 4,
-      "alpha": 0.6614,
+      "alpha": 0.6625,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "ci",
       "weight": 4,
-      "alpha": 0.6614,
+      "alpha": 0.6625,
       "backbone": false
     },
     {
@@ -13686,6 +13953,13 @@
     },
     {
       "source": "ci",
+      "target": "tttp",
+      "weight": 4,
+      "alpha": 0.6779,
+      "backbone": false
+    },
+    {
+      "source": "ci",
       "target": "tlt",
       "weight": 4,
       "alpha": 0.6016,
@@ -13695,7 +13969,7 @@
       "source": "ci",
       "target": "ile",
       "weight": 4,
-      "alpha": 0.7633,
+      "alpha": 0.7595,
       "backbone": false
     },
     {
@@ -13716,7 +13990,7 @@
       "source": "jcal",
       "target": "sse",
       "weight": 4,
-      "alpha": 0.5578,
+      "alpha": 0.5494,
       "backbone": false
     },
     {
@@ -13744,7 +14018,7 @@
       "source": "jecr",
       "target": "chi",
       "weight": 4,
-      "alpha": 0.8371,
+      "alpha": 0.8343,
       "backbone": false
     },
     {
@@ -13772,7 +14046,7 @@
       "source": "jecr",
       "target": "ijse",
       "weight": 4,
-      "alpha": 0.8336,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
@@ -13877,7 +14151,7 @@
       "source": "cep",
       "target": "jecr",
       "weight": 4,
-      "alpha": 0.6678,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
@@ -13891,7 +14165,7 @@
       "source": "cep",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6281,
       "backbone": false
     },
     {
@@ -13905,14 +14179,14 @@
       "source": "cep",
       "target": "etrd",
       "weight": 4,
-      "alpha": 0.7776,
+      "alpha": 0.7749,
       "backbone": false
     },
     {
       "source": "lid",
       "target": "jecr",
       "weight": 4,
-      "alpha": 0.6678,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
@@ -13926,63 +14200,70 @@
       "source": "mca",
       "target": "epr",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "rer",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "ep",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6203,
+      "backbone": false
+    },
+    {
+      "source": "mca",
+      "target": "tttp",
+      "weight": 4,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "ijcscl",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "ce",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "li",
       "weight": 4,
-      "alpha": 0.6269,
+      "alpha": 0.6203,
       "backbone": false
     },
     {
       "source": "err",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6281,
       "backbone": false
     },
     {
       "source": "err",
       "target": "jte",
       "weight": 4,
-      "alpha": 0.7713,
+      "alpha": 0.7727,
       "backbone": false
     },
     {
@@ -14003,7 +14284,7 @@
       "source": "err",
       "target": "jls",
       "weight": 4,
-      "alpha": 0.7744,
+      "alpha": 0.7727,
       "backbone": false
     },
     {
@@ -14038,7 +14319,7 @@
       "source": "ile",
       "target": "chi",
       "weight": 4,
-      "alpha": 0.7981,
+      "alpha": 0.7948,
       "backbone": false
     },
     {
@@ -14057,9 +14338,16 @@
     },
     {
       "source": "de",
+      "target": "tttp",
+      "weight": 4,
+      "alpha": 0.6779,
+      "backbone": false
+    },
+    {
+      "source": "de",
       "target": "er",
       "weight": 4,
-      "alpha": 0.8029,
+      "alpha": 0.8051,
       "backbone": false
     },
     {
@@ -14073,7 +14361,7 @@
       "source": "ihe",
       "target": "ijse",
       "weight": 4,
-      "alpha": 0.8336,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
@@ -14087,7 +14375,7 @@
       "source": "ihe",
       "target": "jset",
       "weight": 4,
-      "alpha": 0.6986,
+      "alpha": 0.694,
       "backbone": false
     },
     {
@@ -14129,21 +14417,21 @@
       "source": "jfdl",
       "target": "lid",
       "weight": 4,
-      "alpha": 0.6979,
+      "alpha": 0.6956,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6281,
       "backbone": false
     },
     {
       "source": "jfdl",
       "target": "chi",
       "weight": 4,
-      "alpha": 0.6979,
+      "alpha": 0.6956,
       "backbone": false
     },
     {
@@ -14157,7 +14445,7 @@
       "source": "tt",
       "target": "pde",
       "weight": 4,
-      "alpha": 0.5749,
+      "alpha": 0.5929,
       "backbone": false
     },
     {
@@ -14234,7 +14522,7 @@
       "source": "eit",
       "target": "se",
       "weight": 4,
-      "alpha": 0.7565,
+      "alpha": 0.7536,
       "backbone": false
     },
     {
@@ -14248,7 +14536,7 @@
       "source": "ijethe",
       "target": "aerj",
       "weight": 4,
-      "alpha": 0.7453,
+      "alpha": 0.7448,
       "backbone": false
     },
     {
@@ -14269,7 +14557,7 @@
       "source": "ijethe",
       "target": "ejte",
       "weight": 4,
-      "alpha": 0.6112,
+      "alpha": 0.6281,
       "backbone": false
     },
     {
@@ -14283,14 +14571,14 @@
       "source": "jche",
       "target": "jte",
       "weight": 4,
-      "alpha": 0.7713,
+      "alpha": 0.7778,
       "backbone": false
     },
     {
       "source": "olj",
       "target": "jecr",
       "weight": 4,
-      "alpha": 0.6678,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
@@ -14444,35 +14732,35 @@
       "source": "lmt",
       "target": "se",
       "weight": 4,
-      "alpha": 0.5754,
+      "alpha": 0.5769,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "aerj",
       "weight": 4,
-      "alpha": 0.5754,
+      "alpha": 0.5769,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "mca",
       "weight": 4,
-      "alpha": 0.6164,
+      "alpha": 0.6017,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "jecr",
       "weight": 4,
-      "alpha": 0.6678,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "bjet",
       "weight": 4,
-      "alpha": 0.8054,
+      "alpha": 0.8026,
       "backbone": false
     },
     {
@@ -14486,7 +14774,7 @@
       "source": "jrst",
       "target": "li",
       "weight": 4,
-      "alpha": 0.8054,
+      "alpha": 0.8026,
       "backbone": false
     },
     {
@@ -14500,7 +14788,7 @@
       "source": "jset",
       "target": "jte",
       "weight": 4,
-      "alpha": 0.7713,
+      "alpha": 0.7778,
       "backbone": false
     },
     {
@@ -14542,7 +14830,7 @@
       "source": "cse",
       "target": "sse",
       "weight": 4,
-      "alpha": 0.5578,
+      "alpha": 0.5494,
       "backbone": false
     },
     {
@@ -14557,6 +14845,13 @@
       "target": "ijhci",
       "weight": 4,
       "alpha": 0.6813,
+      "backbone": false
+    },
+    {
+      "source": "cse",
+      "target": "tttp",
+      "weight": 4,
+      "alpha": 0.6779,
       "backbone": false
     },
     {
@@ -14577,28 +14872,28 @@
       "source": "cbe",
       "target": "sse",
       "weight": 4,
-      "alpha": 0.5578,
+      "alpha": 0.5494,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "bjet",
       "weight": 4,
-      "alpha": 0.6507,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "jrst",
       "weight": 4,
-      "alpha": 0.6507,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "ce",
       "weight": 4,
-      "alpha": 0.6507,
+      "alpha": 0.6423,
       "backbone": false
     },
     {
@@ -14731,7 +15026,7 @@
       "source": "jte",
       "target": "lid",
       "weight": 4,
-      "alpha": 0.7134,
+      "alpha": 0.709,
       "backbone": false
     },
     {
@@ -14745,28 +15040,28 @@
       "source": "jte",
       "target": "mca",
       "weight": 4,
-      "alpha": 0.6164,
+      "alpha": 0.6017,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "ijethe",
       "weight": 4,
-      "alpha": 0.7758,
+      "alpha": 0.7799,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "chb",
       "weight": 4,
-      "alpha": 0.7482,
+      "alpha": 0.7663,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "jrst",
       "weight": 4,
-      "alpha": 0.7549,
+      "alpha": 0.7689,
       "backbone": false
     },
     {
@@ -14780,7 +15075,35 @@
       "source": "ejte",
       "target": "jls",
       "weight": 4,
-      "alpha": 0.7549,
+      "alpha": 0.7689,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ijse",
+      "weight": 4,
+      "alpha": 0.708,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "bjet",
+      "weight": 4,
+      "alpha": 0.708,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jls",
+      "weight": 4,
+      "alpha": 0.708,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "etrd",
+      "weight": 4,
+      "alpha": 0.708,
       "backbone": false
     },
     {
@@ -14794,14 +15117,14 @@
       "source": "ate",
       "target": "epr",
       "weight": 4,
-      "alpha": 0.8199,
+      "alpha": 0.8183,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "err",
       "weight": 4,
-      "alpha": 0.7303,
+      "alpha": 0.7304,
       "backbone": false
     },
     {
@@ -14829,7 +15152,7 @@
       "source": "etrd",
       "target": "sse",
       "weight": 3,
-      "alpha": 0.6462,
+      "alpha": 0.6389,
       "backbone": false
     },
     {
@@ -14843,7 +15166,7 @@
       "source": "etrd",
       "target": "jte",
       "weight": 3,
-      "alpha": 0.8231,
+      "alpha": 0.8284,
       "backbone": false
     },
     {
@@ -14857,7 +15180,7 @@
       "source": "jls",
       "target": "ile",
       "weight": 3,
-      "alpha": 0.8167,
+      "alpha": 0.8137,
       "backbone": false
     },
     {
@@ -14871,14 +15194,21 @@
       "source": "jls",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
       "source": "jls",
       "target": "sse",
       "weight": 3,
-      "alpha": 0.6462,
+      "alpha": 0.6389,
+      "backbone": false
+    },
+    {
+      "source": "jls",
+      "target": "tttp",
+      "weight": 3,
+      "alpha": 0.7475,
       "backbone": false
     },
     {
@@ -14934,7 +15264,7 @@
       "source": "ce",
       "target": "jte",
       "weight": 3,
-      "alpha": 0.8231,
+      "alpha": 0.8284,
       "backbone": false
     },
     {
@@ -14969,7 +15299,7 @@
       "source": "li",
       "target": "jset",
       "weight": 3,
-      "alpha": 0.7643,
+      "alpha": 0.7606,
       "backbone": false
     },
     {
@@ -14990,14 +15320,14 @@
       "source": "ep",
       "target": "jecr",
       "weight": 3,
-      "alpha": 0.739,
+      "alpha": 0.7349,
       "backbone": false
     },
     {
       "source": "ep",
       "target": "ijse",
       "weight": 3,
-      "alpha": 0.8725,
+      "alpha": 0.8701,
       "backbone": false
     },
     {
@@ -15018,42 +15348,42 @@
       "source": "rer",
       "target": "ejte",
       "weight": 3,
-      "alpha": 0.6919,
+      "alpha": 0.7061,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "li",
       "weight": 3,
-      "alpha": 0.7338,
+      "alpha": 0.7346,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "ate",
       "weight": 3,
-      "alpha": 0.5875,
+      "alpha": 0.5607,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "ile",
       "weight": 3,
-      "alpha": 0.7338,
+      "alpha": 0.7346,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "jls",
       "weight": 3,
-      "alpha": 0.7338,
+      "alpha": 0.7346,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
@@ -15130,21 +15460,21 @@
       "source": "ci",
       "target": "jcal",
       "weight": 3,
-      "alpha": 0.8056,
+      "alpha": 0.8029,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "eit",
       "weight": 3,
-      "alpha": 0.8718,
+      "alpha": 0.8696,
       "backbone": false
     },
     {
       "source": "ci",
       "target": "chi",
       "weight": 3,
-      "alpha": 0.8718,
+      "alpha": 0.8696,
       "backbone": false
     },
     {
@@ -15158,7 +15488,7 @@
       "source": "jcal",
       "target": "ejte",
       "weight": 3,
-      "alpha": 0.6919,
+      "alpha": 0.7061,
       "backbone": false
     },
     {
@@ -15172,14 +15502,21 @@
       "source": "jecr",
       "target": "ejte",
       "weight": 3,
-      "alpha": 0.6919,
+      "alpha": 0.7061,
+      "backbone": false
+    },
+    {
+      "source": "jecr",
+      "target": "tttp",
+      "weight": 3,
+      "alpha": 0.7475,
       "backbone": false
     },
     {
       "source": "jecr",
       "target": "se",
       "weight": 3,
-      "alpha": 0.8752,
+      "alpha": 0.873,
       "backbone": false
     },
     {
@@ -15333,7 +15670,7 @@
       "source": "is",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
@@ -15375,7 +15712,7 @@
       "source": "cep",
       "target": "eit",
       "weight": 3,
-      "alpha": 0.8911,
+      "alpha": 0.8888,
       "backbone": false
     },
     {
@@ -15403,7 +15740,7 @@
       "source": "lid",
       "target": "ijethe",
       "weight": 3,
-      "alpha": 0.84,
+      "alpha": 0.8369,
       "backbone": false
     },
     {
@@ -15417,7 +15754,7 @@
       "source": "mca",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
@@ -15464,6 +15801,13 @@
     },
     {
       "source": "ile",
+      "target": "tttp",
+      "weight": 3,
+      "alpha": 0.7475,
+      "backbone": false
+    },
+    {
+      "source": "ile",
       "target": "irrodl",
       "weight": 3,
       "alpha": 0.6816,
@@ -15480,7 +15824,7 @@
       "source": "de",
       "target": "jls",
       "weight": 3,
-      "alpha": 0.8328,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
@@ -15494,7 +15838,7 @@
       "source": "ihe",
       "target": "jls",
       "weight": 3,
-      "alpha": 0.8328,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
@@ -15571,7 +15915,7 @@
       "source": "jfdl",
       "target": "aerj",
       "weight": 3,
-      "alpha": 0.7637,
+      "alpha": 0.7619,
       "backbone": false
     },
     {
@@ -15599,7 +15943,7 @@
       "source": "tt",
       "target": "chi",
       "weight": 3,
-      "alpha": 0.7872,
+      "alpha": 0.7845,
       "backbone": false
     },
     {
@@ -15662,14 +16006,14 @@
       "source": "eit",
       "target": "jls",
       "weight": 3,
-      "alpha": 0.8113,
+      "alpha": 0.809,
       "backbone": false
     },
     {
       "source": "eit",
       "target": "aerj",
       "weight": 3,
-      "alpha": 0.8023,
+      "alpha": 0.8019,
       "backbone": false
     },
     {
@@ -15690,7 +16034,7 @@
       "source": "ijethe",
       "target": "jecr",
       "weight": 3,
-      "alpha": 0.739,
+      "alpha": 0.7349,
       "backbone": false
     },
     {
@@ -15704,7 +16048,14 @@
       "source": "ijethe",
       "target": "jrst",
       "weight": 3,
-      "alpha": 0.8304,
+      "alpha": 0.8277,
+      "backbone": false
+    },
+    {
+      "source": "ijethe",
+      "target": "tttp",
+      "weight": 3,
+      "alpha": 0.7475,
       "backbone": false
     },
     {
@@ -15732,7 +16083,7 @@
       "source": "jche",
       "target": "ejte",
       "weight": 3,
-      "alpha": 0.6919,
+      "alpha": 0.7061,
       "backbone": false
     },
     {
@@ -15795,21 +16146,21 @@
       "source": "hci",
       "target": "jls",
       "weight": 3,
-      "alpha": 0.8328,
+      "alpha": 0.8306,
       "backbone": false
     },
     {
       "source": "hci",
       "target": "rer",
       "weight": 3,
-      "alpha": 0.8727,
+      "alpha": 0.8718,
       "backbone": false
     },
     {
       "source": "hci",
       "target": "eit",
       "weight": 3,
-      "alpha": 0.8952,
+      "alpha": 0.8937,
       "backbone": false
     },
     {
@@ -16033,7 +16384,7 @@
       "source": "cexr",
       "target": "sse",
       "weight": 3,
-      "alpha": 0.6462,
+      "alpha": 0.6389,
       "backbone": false
     },
     {
@@ -16054,7 +16405,7 @@
       "source": "cexr",
       "target": "lid",
       "weight": 3,
-      "alpha": 0.7764,
+      "alpha": 0.7728,
       "backbone": false
     },
     {
@@ -16075,42 +16426,42 @@
       "source": "lmt",
       "target": "chb",
       "weight": 3,
-      "alpha": 0.6616,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "ile",
       "weight": 3,
-      "alpha": 0.6616,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "jset",
       "weight": 3,
-      "alpha": 0.6616,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "jrst",
       "weight": 3,
-      "alpha": 0.6616,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "tochi",
       "weight": 3,
-      "alpha": 0.6616,
+      "alpha": 0.6628,
       "backbone": false
     },
     {
       "source": "jrst",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
@@ -16131,21 +16482,21 @@
       "source": "se",
       "target": "chb",
       "weight": 3,
-      "alpha": 0.8846,
+      "alpha": 0.8829,
       "backbone": false
     },
     {
       "source": "se",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
       "source": "ijse",
       "target": "ejte",
       "weight": 3,
-      "alpha": 0.6919,
+      "alpha": 0.7061,
       "backbone": false
     },
     {
@@ -16159,7 +16510,7 @@
       "source": "ijse",
       "target": "ijethe",
       "weight": 3,
-      "alpha": 0.84,
+      "alpha": 0.8369,
       "backbone": false
     },
     {
@@ -16215,21 +16566,28 @@
       "source": "jset",
       "target": "aerj",
       "weight": 3,
-      "alpha": 0.8023,
+      "alpha": 0.8019,
+      "backbone": false
+    },
+    {
+      "source": "jset",
+      "target": "tttp",
+      "weight": 3,
+      "alpha": 0.7475,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
       "source": "jset",
       "target": "chi",
       "weight": 3,
-      "alpha": 0.8566,
+      "alpha": 0.8543,
       "backbone": false
     },
     {
@@ -16250,7 +16608,7 @@
       "source": "sse",
       "target": "mca",
       "weight": 3,
-      "alpha": 0.6967,
+      "alpha": 0.6842,
       "backbone": false
     },
     {
@@ -16327,7 +16685,7 @@
       "source": "toce",
       "target": "pde",
       "weight": 3,
-      "alpha": 0.6611,
+      "alpha": 0.6764,
       "backbone": false
     },
     {
@@ -16348,7 +16706,7 @@
       "source": "toce",
       "target": "mca",
       "weight": 3,
-      "alpha": 0.6967,
+      "alpha": 0.6842,
       "backbone": false
     },
     {
@@ -16369,14 +16727,14 @@
       "source": "cbe",
       "target": "jte",
       "weight": 3,
-      "alpha": 0.8231,
+      "alpha": 0.8284,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "ijse",
       "weight": 3,
-      "alpha": 0.7249,
+      "alpha": 0.718,
       "backbone": false
     },
     {
@@ -16397,28 +16755,28 @@
       "source": "merj",
       "target": "etrd",
       "weight": 3,
-      "alpha": 0.7249,
+      "alpha": 0.718,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "eit",
       "weight": 3,
-      "alpha": 0.7249,
+      "alpha": 0.718,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "err",
       "weight": 3,
-      "alpha": 0.7249,
+      "alpha": 0.718,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "jcal",
       "weight": 3,
-      "alpha": 0.7249,
+      "alpha": 0.718,
       "backbone": false
     },
     {
@@ -16558,7 +16916,7 @@
       "source": "ieeevr",
       "target": "jcal",
       "weight": 3,
-      "alpha": 0.8056,
+      "alpha": 0.8029,
       "backbone": false
     },
     {
@@ -16649,7 +17007,7 @@
       "source": "jte",
       "target": "ep",
       "weight": 3,
-      "alpha": 0.8268,
+      "alpha": 0.83,
       "backbone": false
     },
     {
@@ -16670,7 +17028,7 @@
       "source": "jte",
       "target": "etrd",
       "weight": 3,
-      "alpha": 0.8268,
+      "alpha": 0.826,
       "backbone": false
     },
     {
@@ -16691,21 +17049,28 @@
       "source": "ejte",
       "target": "ijse",
       "weight": 3,
-      "alpha": 0.8101,
+      "alpha": 0.8213,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "ate",
       "weight": 3,
-      "alpha": 0.5875,
+      "alpha": 0.5607,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jset",
+      "weight": 3,
+      "alpha": 0.7606,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "jep",
       "weight": 3,
-      "alpha": 0.8314,
+      "alpha": 0.8392,
       "backbone": false
     },
     {
@@ -16719,49 +17084,49 @@
       "source": "pde",
       "target": "li",
       "weight": 3,
-      "alpha": 0.8314,
+      "alpha": 0.8392,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "ate",
       "weight": 3,
-      "alpha": 0.5875,
+      "alpha": 0.5607,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "ile",
       "weight": 3,
-      "alpha": 0.8167,
+      "alpha": 0.8137,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "ijse",
       "weight": 3,
-      "alpha": 0.8314,
+      "alpha": 0.8392,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "sse",
       "weight": 3,
-      "alpha": 0.6462,
+      "alpha": 0.6389,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "epr",
       "weight": 3,
-      "alpha": 0.8314,
+      "alpha": 0.8392,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "jrst",
       "weight": 3,
-      "alpha": 0.8618,
+      "alpha": 0.8606,
       "backbone": false
     },
     {
@@ -16779,10 +17144,17 @@
       "backbone": false
     },
     {
+      "source": "etrd",
+      "target": "tttp",
+      "weight": 2,
+      "alpha": 0.8239,
+      "backbone": false
+    },
+    {
       "source": "jls",
       "target": "eit",
       "weight": 2,
-      "alpha": 0.9051,
+      "alpha": 0.9032,
       "backbone": false
     },
     {
@@ -16852,7 +17224,7 @@
       "source": "ce",
       "target": "ejte",
       "weight": 2,
-      "alpha": 0.7828,
+      "alpha": 0.7934,
       "backbone": false
     },
     {
@@ -16866,7 +17238,7 @@
       "source": "ce",
       "target": "ceai",
       "weight": 2,
-      "alpha": 0.8738,
+      "alpha": 0.8721,
       "backbone": false
     },
     {
@@ -16887,14 +17259,14 @@
       "source": "li",
       "target": "jte",
       "weight": 2,
-      "alpha": 0.8784,
+      "alpha": 0.8821,
       "backbone": false
     },
     {
       "source": "li",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -16923,6 +17295,13 @@
       "target": "jche",
       "weight": 2,
       "alpha": 0.7132,
+      "backbone": false
+    },
+    {
+      "source": "epr",
+      "target": "tttp",
+      "weight": 2,
+      "alpha": 0.8239,
       "backbone": false
     },
     {
@@ -16957,7 +17336,7 @@
       "source": "ep",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -16971,7 +17350,7 @@
       "source": "ep",
       "target": "bjet",
       "weight": 2,
-      "alpha": 0.9139,
+      "alpha": 0.9128,
       "backbone": false
     },
     {
@@ -16999,21 +17378,21 @@
       "source": "rer",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "chb",
       "weight": 2,
-      "alpha": 0.8138,
+      "alpha": 0.8144,
       "backbone": false
     },
     {
       "source": "rer",
       "target": "jcal",
       "weight": 2,
-      "alpha": 0.8138,
+      "alpha": 0.8144,
       "backbone": false
     },
     {
@@ -17027,7 +17406,7 @@
       "source": "rer",
       "target": "eit",
       "weight": 2,
-      "alpha": 0.8138,
+      "alpha": 0.8144,
       "backbone": false
     },
     {
@@ -17041,7 +17420,7 @@
       "source": "aerj",
       "target": "pde",
       "weight": 2,
-      "alpha": 0.7596,
+      "alpha": 0.7711,
       "backbone": false
     },
     {
@@ -17111,7 +17490,7 @@
       "source": "er",
       "target": "ate",
       "weight": 2,
-      "alpha": 0.7046,
+      "alpha": 0.6832,
       "backbone": false
     },
     {
@@ -17153,7 +17532,7 @@
       "source": "ci",
       "target": "ate",
       "weight": 2,
-      "alpha": 0.7046,
+      "alpha": 0.6832,
       "backbone": false
     },
     {
@@ -17230,14 +17609,14 @@
       "source": "jecr",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
       "source": "jecr",
       "target": "jls",
       "weight": 2,
-      "alpha": 0.8852,
+      "alpha": 0.8837,
       "backbone": false
     },
     {
@@ -17307,7 +17686,7 @@
       "source": "ijaied",
       "target": "ejte",
       "weight": 2,
-      "alpha": 0.7828,
+      "alpha": 0.7934,
       "backbone": false
     },
     {
@@ -17321,14 +17700,14 @@
       "source": "ijaied",
       "target": "pde",
       "weight": 2,
-      "alpha": 0.7596,
+      "alpha": 0.7711,
       "backbone": false
     },
     {
       "source": "ijaied",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -17454,14 +17833,14 @@
       "source": "is",
       "target": "mca",
       "weight": 2,
-      "alpha": 0.7866,
+      "alpha": 0.7773,
       "backbone": false
     },
     {
       "source": "is",
       "target": "ceai",
       "weight": 2,
-      "alpha": 0.8738,
+      "alpha": 0.8721,
       "backbone": false
     },
     {
@@ -17482,7 +17861,7 @@
       "source": "is",
       "target": "ejte",
       "weight": 2,
-      "alpha": 0.7828,
+      "alpha": 0.7934,
       "backbone": false
     },
     {
@@ -17510,14 +17889,14 @@
       "source": "cep",
       "target": "ijethe",
       "weight": 2,
-      "alpha": 0.8903,
+      "alpha": 0.8881,
       "backbone": false
     },
     {
       "source": "cep",
       "target": "jls",
       "weight": 2,
-      "alpha": 0.8852,
+      "alpha": 0.8837,
       "backbone": false
     },
     {
@@ -17538,35 +17917,35 @@
       "source": "mca",
       "target": "ijse",
       "weight": 2,
-      "alpha": 0.7927,
+      "alpha": 0.7885,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "jcal",
       "weight": 2,
-      "alpha": 0.7927,
+      "alpha": 0.7885,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "is",
       "weight": 2,
-      "alpha": 0.7908,
+      "alpha": 0.7885,
       "backbone": false
     },
     {
       "source": "mca",
       "target": "chb",
       "weight": 2,
-      "alpha": 0.7927,
+      "alpha": 0.7885,
       "backbone": false
     },
     {
       "source": "cs",
       "target": "epr",
       "weight": 2,
-      "alpha": 0.9132,
+      "alpha": 0.9122,
       "backbone": false
     },
     {
@@ -17643,7 +18022,7 @@
       "source": "ile",
       "target": "jte",
       "weight": 2,
-      "alpha": 0.8784,
+      "alpha": 0.8821,
       "backbone": false
     },
     {
@@ -17657,7 +18036,7 @@
       "source": "ile",
       "target": "pde",
       "weight": 2,
-      "alpha": 0.7596,
+      "alpha": 0.7711,
       "backbone": false
     },
     {
@@ -17678,7 +18057,7 @@
       "source": "ile",
       "target": "aerj",
       "weight": 2,
-      "alpha": 0.8635,
+      "alpha": 0.8632,
       "backbone": false
     },
     {
@@ -17706,7 +18085,7 @@
       "source": "de",
       "target": "jset",
       "weight": 2,
-      "alpha": 0.8361,
+      "alpha": 0.8334,
       "backbone": false
     },
     {
@@ -17748,14 +18127,14 @@
       "source": "de",
       "target": "pde",
       "weight": 2,
-      "alpha": 0.7596,
+      "alpha": 0.7711,
       "backbone": false
     },
     {
       "source": "de",
       "target": "chi",
       "weight": 2,
-      "alpha": 0.8994,
+      "alpha": 0.8976,
       "backbone": false
     },
     {
@@ -17769,14 +18148,14 @@
       "source": "ihe",
       "target": "er",
       "weight": 2,
-      "alpha": 0.8962,
+      "alpha": 0.8974,
       "backbone": false
     },
     {
       "source": "ihe",
       "target": "ejte",
       "weight": 2,
-      "alpha": 0.7828,
+      "alpha": 0.7934,
       "backbone": false
     },
     {
@@ -17790,7 +18169,7 @@
       "source": "ihe",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -17804,7 +18183,7 @@
       "source": "ceai",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -17909,7 +18288,7 @@
       "source": "ijdl",
       "target": "etrd",
       "weight": 2,
-      "alpha": 0.882,
+      "alpha": 0.8804,
       "backbone": false
     },
     {
@@ -17923,14 +18302,14 @@
       "source": "tt",
       "target": "jrst",
       "weight": 2,
-      "alpha": 0.8527,
+      "alpha": 0.8507,
       "backbone": false
     },
     {
       "source": "tt",
       "target": "jep",
       "weight": 2,
-      "alpha": 0.8527,
+      "alpha": 0.8507,
       "backbone": false
     },
     {
@@ -18077,7 +18456,7 @@
       "source": "eit",
       "target": "ejte",
       "weight": 2,
-      "alpha": 0.7828,
+      "alpha": 0.7934,
       "backbone": false
     },
     {
@@ -18091,21 +18470,21 @@
       "source": "eit",
       "target": "jte",
       "weight": 2,
-      "alpha": 0.8699,
+      "alpha": 0.8683,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "chi",
       "weight": 2,
-      "alpha": 0.8835,
+      "alpha": 0.8816,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -18119,14 +18498,14 @@
       "source": "ijethe",
       "target": "jte",
       "weight": 2,
-      "alpha": 0.8784,
+      "alpha": 0.8816,
       "backbone": false
     },
     {
       "source": "ijethe",
       "target": "ijse",
       "weight": 2,
-      "alpha": 0.8835,
+      "alpha": 0.8816,
       "backbone": false
     },
     {
@@ -18161,7 +18540,7 @@
       "source": "jche",
       "target": "aerj",
       "weight": 2,
-      "alpha": 0.8635,
+      "alpha": 0.8632,
       "backbone": false
     },
     {
@@ -18196,7 +18575,7 @@
       "source": "jche",
       "target": "mca",
       "weight": 2,
-      "alpha": 0.7866,
+      "alpha": 0.7773,
       "backbone": false
     },
     {
@@ -18357,7 +18736,7 @@
       "source": "tochi",
       "target": "jecr",
       "weight": 2,
-      "alpha": 0.8176,
+      "alpha": 0.8145,
       "backbone": false
     },
     {
@@ -18553,14 +18932,14 @@
       "source": "lmt",
       "target": "tt",
       "weight": 2,
-      "alpha": 0.7599,
+      "alpha": 0.7609,
       "backbone": false
     },
     {
       "source": "lmt",
       "target": "is",
       "weight": 2,
-      "alpha": 0.7599,
+      "alpha": 0.7609,
       "backbone": false
     },
     {
@@ -18574,14 +18953,21 @@
       "source": "jrst",
       "target": "chb",
       "weight": 2,
-      "alpha": 0.8976,
+      "alpha": 0.896,
+      "backbone": false
+    },
+    {
+      "source": "se",
+      "target": "tttp",
+      "weight": 2,
+      "alpha": 0.8239,
       "backbone": false
     },
     {
       "source": "se",
       "target": "eit",
       "weight": 2,
-      "alpha": 0.9282,
+      "alpha": 0.926,
       "backbone": false
     },
     {
@@ -18602,7 +18988,7 @@
       "source": "se",
       "target": "ile",
       "weight": 2,
-      "alpha": 0.8738,
+      "alpha": 0.8717,
       "backbone": false
     },
     {
@@ -18637,7 +19023,7 @@
       "source": "ijse",
       "target": "chi",
       "weight": 2,
-      "alpha": 0.9101,
+      "alpha": 0.9084,
       "backbone": false
     },
     {
@@ -18756,7 +19142,7 @@
       "source": "jee",
       "target": "mca",
       "weight": 2,
-      "alpha": 0.7866,
+      "alpha": 0.7773,
       "backbone": false
     },
     {
@@ -18777,7 +19163,7 @@
       "source": "cse",
       "target": "ate",
       "weight": 2,
-      "alpha": 0.7046,
+      "alpha": 0.6832,
       "backbone": false
     },
     {
@@ -18889,14 +19275,21 @@
       "source": "merj",
       "target": "ceai",
       "weight": 2,
-      "alpha": 0.8074,
+      "alpha": 0.8022,
+      "backbone": false
+    },
+    {
+      "source": "merj",
+      "target": "tttp",
+      "weight": 2,
+      "alpha": 0.8022,
       "backbone": false
     },
     {
       "source": "merj",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -19043,7 +19436,7 @@
       "source": "uist",
       "target": "bjet",
       "weight": 2,
-      "alpha": 0.9139,
+      "alpha": 0.9128,
       "backbone": false
     },
     {
@@ -19071,14 +19464,14 @@
       "source": "idc",
       "target": "jset",
       "weight": 2,
-      "alpha": 0.8361,
+      "alpha": 0.8334,
       "backbone": false
     },
     {
       "source": "idc",
       "target": "mca",
       "weight": 2,
-      "alpha": 0.7866,
+      "alpha": 0.7773,
       "backbone": false
     },
     {
@@ -19379,28 +19772,28 @@
       "source": "jte",
       "target": "chb",
       "weight": 2,
-      "alpha": 0.881,
+      "alpha": 0.8833,
       "backbone": false
     },
     {
       "source": "jte",
       "target": "jecr",
       "weight": 2,
-      "alpha": 0.8176,
+      "alpha": 0.8145,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
       "source": "tate",
       "target": "ile",
       "weight": 2,
-      "alpha": 0.8652,
+      "alpha": 0.8717,
       "backbone": false
     },
     {
@@ -19428,14 +19821,14 @@
       "source": "ejte",
       "target": "jset",
       "weight": 2,
-      "alpha": 0.8361,
+      "alpha": 0.8334,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "se",
       "weight": 2,
-      "alpha": 0.8691,
+      "alpha": 0.8771,
       "backbone": false
     },
     {
@@ -19449,14 +19842,14 @@
       "source": "ejte",
       "target": "lid",
       "weight": 2,
-      "alpha": 0.8449,
+      "alpha": 0.8423,
       "backbone": false
     },
     {
       "source": "ejte",
       "target": "sse",
       "weight": 2,
-      "alpha": 0.748,
+      "alpha": 0.7424,
       "backbone": false
     },
     {
@@ -19464,6 +19857,76 @@
       "target": "merj",
       "weight": 2,
       "alpha": 0.5647,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ijethe",
+      "weight": 2,
+      "alpha": 0.8419,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jecr",
+      "weight": 2,
+      "alpha": 0.8145,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "se",
+      "weight": 2,
+      "alpha": 0.8419,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ile",
+      "weight": 2,
+      "alpha": 0.8419,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "sse",
+      "weight": 2,
+      "alpha": 0.7424,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "ate",
+      "weight": 2,
+      "alpha": 0.6832,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "mca",
+      "weight": 2,
+      "alpha": 0.7773,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "chb",
+      "weight": 2,
+      "alpha": 0.8419,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "jcal",
+      "weight": 2,
+      "alpha": 0.8419,
+      "backbone": false
+    },
+    {
+      "source": "tttp",
+      "target": "lid",
+      "weight": 2,
+      "alpha": 0.8419,
       "backbone": false
     },
     {
@@ -19484,14 +19947,14 @@
       "source": "pde",
       "target": "jcal",
       "weight": 2,
-      "alpha": 0.8659,
+      "alpha": 0.8639,
       "backbone": false
     },
     {
       "source": "pde",
       "target": "mca",
       "weight": 2,
-      "alpha": 0.7866,
+      "alpha": 0.7773,
       "backbone": false
     },
     {
@@ -19512,21 +19975,21 @@
       "source": "ate",
       "target": "jecr",
       "weight": 2,
-      "alpha": 0.8176,
+      "alpha": 0.8145,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "ce",
       "weight": 2,
-      "alpha": 0.9057,
+      "alpha": 0.9048,
       "backbone": false
     },
     {
       "source": "ate",
       "target": "jset",
       "weight": 2,
-      "alpha": 0.8361,
+      "alpha": 0.8334,
       "backbone": false
     }
   ]

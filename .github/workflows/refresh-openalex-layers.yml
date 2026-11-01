@@ -52,6 +52,7 @@ jobs:
         continue-on-error: true
         run: |
           python scripts/build_venue_activity.py
+          python scripts/build_alt_activity.py   # conferences OpenAlex does not index (S2, Crossref, Zenodo)
           python scripts/build_field_trends.py
 
       - name: Citation layer and backbone

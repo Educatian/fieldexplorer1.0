@@ -12,7 +12,8 @@
     ],
     "generated_at": "2026-10-31",
     "source": "OpenAlex",
-    "method": "OpenAlex group_by source per year over venue set"
+    "method": "OpenAlex group_by source per year over venue set",
+    "alt_sources": "venues with `source` are counted by scripts/build_alt_activity.py, not OpenAlex"
   },
   "years": [
     2019,
@@ -804,6 +805,19 @@
       },
       "total": 445
     },
+    "tttp": {
+      "name": "Teachers and Teaching: Theory and Practice",
+      "counts": {
+        "2019": 52,
+        "2020": 42,
+        "2021": 52,
+        "2022": 88,
+        "2023": 86,
+        "2024": 80,
+        "2025": 97
+      },
+      "total": 497
+    },
     "tochi": {
       "name": "ACM Transactions on Computer-Human Interaction",
       "counts": {
@@ -946,6 +960,176 @@
         "2025": 37
       },
       "total": 125
+    },
+    "cscl": {
+      "name": "CSCL",
+      "counts": {
+        "2023": 95,
+        "2024": 110,
+        "2025": 135
+      },
+      "total": 340,
+      "source": "Crossref, ISLS proceedings DOIs (2023 on)"
+    },
+    "icls": {
+      "name": "ICLS",
+      "counts": {
+        "2023": 555,
+        "2024": 604,
+        "2025": 620
+      },
+      "total": 1779,
+      "source": "Crossref, ISLS proceedings DOIs (2023 on)"
+    },
+    "isls": {
+      "name": "ISLS Annual Meeting",
+      "counts": {
+        "2023": 650,
+        "2024": 714,
+        "2025": 755
+      },
+      "total": 2119,
+      "source": "Crossref, ISLS proceedings DOIs (2023 on)"
+    },
+    "cscw": {
+      "name": "CSCW Conference",
+      "counts": {
+        "2019": 207,
+        "2020": 144,
+        "2021": 451,
+        "2022": 385,
+        "2023": 273,
+        "2024": 383,
+        "2025": 525
+      },
+      "total": 2368,
+      "source": "Crossref, PACM HCI CSCW issues"
+    },
+    "lak": {
+      "name": "LAK Conference",
+      "counts": {
+        "2019": 68,
+        "2020": 76,
+        "2021": 76,
+        "2022": 62,
+        "2023": 81,
+        "2024": 100,
+        "2025": 91
+      },
+      "total": 554,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "uist": {
+      "name": "UIST Conference",
+      "counts": {
+        "2019": 171,
+        "2020": 157,
+        "2021": 154,
+        "2022": 204,
+        "2023": 247,
+        "2024": 260,
+        "2025": 206
+      },
+      "total": 1399,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "idc": {
+      "name": "IDC Conference",
+      "counts": {
+        "2019": 106,
+        "2020": 117,
+        "2021": 98,
+        "2022": 94,
+        "2023": 115,
+        "2024": 129,
+        "2025": 145
+      },
+      "total": 804,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "sigcse": {
+      "name": "SIGCSE Technical Symposium",
+      "counts": {
+        "2019": 467,
+        "2020": 498,
+        "2021": 407,
+        "2022": 664,
+        "2023": 174,
+        "2024": 532,
+        "2025": 483
+      },
+      "total": 3225,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "iticse": {
+      "name": "ITiCSE Conference",
+      "counts": {
+        "2019": 139,
+        "2020": 130,
+        "2021": 145,
+        "2022": 147,
+        "2023": 156,
+        "2024": 174,
+        "2025": 197
+      },
+      "total": 1088,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "aied": {
+      "name": "AIED Conference",
+      "counts": {
+        "2019": 123,
+        "2020": 127,
+        "2021": 124,
+        "2022": 196,
+        "2023": 185,
+        "2024": 65,
+        "2025": 218
+      },
+      "total": 1038,
+      "source": "Semantic Scholar, 10.1007/ DOIs"
+    },
+    "etra": {
+      "name": "ETRA Symposium",
+      "counts": {
+        "2019": 97,
+        "2020": 24,
+        "2021": 1,
+        "2022": 71,
+        "2023": 93,
+        "2024": 94,
+        "2025": 123
+      },
+      "total": 503,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "las": {
+      "name": "L@S Conference",
+      "counts": {
+        "2019": 59,
+        "2020": 76,
+        "2021": 58,
+        "2022": 75,
+        "2023": 64,
+        "2024": 93,
+        "2025": 64
+      },
+      "total": 489,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
+    },
+    "icer": {
+      "name": "ICER Conference",
+      "counts": {
+        "2019": 66,
+        "2020": 61,
+        "2021": 61,
+        "2022": 54,
+        "2023": 86,
+        "2024": 60,
+        "2025": 73
+      },
+      "total": 461,
+      "source": "Semantic Scholar, 10.1145/ DOIs"
     }
   }
 }

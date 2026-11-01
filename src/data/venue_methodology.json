@@ -14,8 +14,8 @@
       2023,
       2025
     ],
-    "n_abstracts": 4291,
-    "n_venues": 78,
+    "n_abstracts": 4771,
+    "n_venues": 89,
     "categories": [
       "Experimental",
       "Qualitative",
@@ -43,83 +43,110 @@
     "reliability": {
       "m_experimental": {
         "label": "Experimental",
-        "agreement": 0.921,
-        "kappa": 0.816,
-        "present_share": 0.314
+        "agreement": 0.922,
+        "kappa": 0.818,
+        "present_share": 0.309
       },
       "m_qualitative": {
         "label": "Qualitative",
-        "agreement": 0.944,
-        "kappa": 0.879,
-        "present_share": 0.361
+        "agreement": 0.945,
+        "kappa": 0.881,
+        "present_share": 0.365
       },
       "m_design_dev": {
         "label": "Design & Dev",
         "agreement": 0.91,
-        "kappa": 0.773,
-        "present_share": 0.272
+        "kappa": 0.777,
+        "present_share": 0.281
       },
       "m_data_ai": {
         "label": "Data & AI",
-        "agreement": 0.889,
-        "kappa": 0.531,
-        "present_share": 0.136
+        "agreement": 0.882,
+        "kappa": 0.519,
+        "present_share": 0.142
       },
       "m_review_meta": {
         "label": "Review & Meta",
-        "agreement": 0.965,
-        "kappa": 0.85,
-        "present_share": 0.134
+        "agreement": 0.966,
+        "kappa": 0.842,
+        "present_share": 0.124
       },
       "m_theory": {
         "label": "Theory",
-        "agreement": 0.931,
-        "kappa": 0.732,
-        "present_share": 0.15
+        "agreement": 0.932,
+        "kappa": 0.731,
+        "present_share": 0.147
       },
       "t_ai": {
         "label": "AI and intelligent systems",
-        "agreement": 0.898,
-        "kappa": 0.691,
-        "present_share": 0.205
+        "agreement": 0.895,
+        "kappa": 0.692,
+        "present_share": 0.215
       },
       "t_immersive": {
         "label": "VR and AR",
         "agreement": 0.988,
-        "kappa": 0.931,
-        "present_share": 0.096
+        "kappa": 0.924,
+        "present_share": 0.09
       },
       "t_games": {
         "label": "Games and play",
-        "agreement": 0.98,
-        "kappa": 0.799,
-        "present_share": 0.053
+        "agreement": 0.979,
+        "kappa": 0.792,
+        "present_share": 0.052
       },
       "t_collaboration": {
         "label": "Collaborative learning",
         "agreement": 0.943,
-        "kappa": 0.764,
-        "present_share": 0.14
+        "kappa": 0.758,
+        "present_share": 0.137
       },
       "t_analytics": {
         "label": "Analytics and dashboards",
-        "agreement": 0.939,
-        "kappa": 0.527,
-        "present_share": 0.069
+        "agreement": 0.937,
+        "kappa": 0.532,
+        "present_share": 0.072
       },
       "t_online": {
         "label": "Online and blended",
         "agreement": 0.978,
-        "kappa": 0.868,
-        "present_share": 0.093
+        "kappa": 0.867,
+        "present_share": 0.089
       }
     },
     "planted_controls": {
-      "n": 326,
-      "correct": 322
+      "n": 334,
+      "correct": 330
     }
   },
   "venues": {
+    "aera": {
+      "name": "AERA Annual Meeting",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "not_applicable": "presentation-only meeting without published proceedings"
+    },
+    "earli": {
+      "name": "EARLI Conference",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "not_applicable": "presentation-only meeting without published proceedings"
+    },
+    "aect": {
+      "name": "AECT Convention",
+      "shares": {},
+      "dominant": null,
+      "n_classified": 0,
+      "n_abstracts": 0,
+      "n_research": 0,
+      "not_applicable": "presentation-only meeting without published proceedings"
+    },
     "asee": {
       "name": "ASEE Annual Conference",
       "shares": {},
@@ -3417,6 +3444,352 @@
       "ab_disagreements": 44,
       "low_sample": false,
       "abstract_source": "Semantic Scholar"
+    },
+    "etra": {
+      "name": "ETRA Symposium",
+      "shares": {
+        "Experimental": 0.483,
+        "Design & Dev": 0.293,
+        "Data & AI": 0.207,
+        "Theory": 0.017
+      },
+      "dominant": "Experimental",
+      "n_classified": 58,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 2,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.567,
+        "Qualitative": 0.017,
+        "Design & Dev": 0.517,
+        "Data & AI": 0.1,
+        "Review & Meta": 0.0,
+        "Theory": 0.2
+      },
+      "tech": {
+        "AI and intelligent systems": 0.083,
+        "VR and AR": 0.25,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.017,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "higher_ed": 0.05,
+        "mixed_or_unspecified": 0.95
+      },
+      "low_confidence_n": 14,
+      "mean_confidence": 0.809,
+      "ab_disagreements": 70,
+      "low_sample": false,
+      "abstract_source": "Semantic Scholar"
+    },
+    "cscw": {
+      "name": "CSCW Conference",
+      "shares": {
+        "Experimental": 0.17,
+        "Qualitative": 0.415,
+        "Design & Dev": 0.302,
+        "Data & AI": 0.075,
+        "Theory": 0.038
+      },
+      "dominant": "Qualitative",
+      "n_classified": 53,
+      "n_abstracts": 60,
+      "n_research": 58,
+      "survey_correlational_n": 5,
+      "not_research_n": 2,
+      "uses": {
+        "Experimental": 0.207,
+        "Qualitative": 0.741,
+        "Design & Dev": 0.397,
+        "Data & AI": 0.069,
+        "Review & Meta": 0.017,
+        "Theory": 0.052
+      },
+      "tech": {
+        "AI and intelligent systems": 0.086,
+        "VR and AR": 0.0,
+        "Games and play": 0.034,
+        "Collaborative learning": 0.069,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.017,
+        "higher_ed": 0.086,
+        "workplace": 0.121,
+        "informal": 0.017,
+        "mixed_or_unspecified": 0.759
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.871,
+      "ab_disagreements": 44,
+      "low_sample": false,
+      "abstract_source": "Crossref, Proceedings of the ACM on HCI CSCW issues"
+    },
+    "icls": {
+      "name": "ICLS",
+      "shares": {
+        "Experimental": 0.07,
+        "Qualitative": 0.421,
+        "Design & Dev": 0.246,
+        "Data & AI": 0.088,
+        "Review & Meta": 0.07,
+        "Theory": 0.105
+      },
+      "dominant": "Qualitative",
+      "n_classified": 57,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 3,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.133,
+        "Qualitative": 0.517,
+        "Design & Dev": 0.25,
+        "Data & AI": 0.1,
+        "Review & Meta": 0.083,
+        "Theory": 0.133
+      },
+      "tech": {
+        "AI and intelligent systems": 0.217,
+        "VR and AR": 0.05,
+        "Games and play": 0.1,
+        "Collaborative learning": 0.15,
+        "Analytics and dashboards": 0.05,
+        "Online and blended": 0.017
+      },
+      "level": {
+        "k12": 0.2,
+        "higher_ed": 0.283,
+        "workplace": 0.017,
+        "informal": 0.05,
+        "mixed_or_unspecified": 0.45
+      },
+      "low_confidence_n": 9,
+      "mean_confidence": 0.851,
+      "ab_disagreements": 45,
+      "low_sample": false,
+      "abstract_source": "ISLS repository (DOI landing pages)"
+    },
+    "isls": {
+      "name": "ISLS Annual Meeting",
+      "shares": {
+        "Experimental": 0.127,
+        "Qualitative": 0.455,
+        "Design & Dev": 0.236,
+        "Data & AI": 0.091,
+        "Review & Meta": 0.018,
+        "Theory": 0.073
+      },
+      "dominant": "Qualitative",
+      "n_classified": 55,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 5,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.133,
+        "Qualitative": 0.517,
+        "Design & Dev": 0.317,
+        "Data & AI": 0.15,
+        "Review & Meta": 0.017,
+        "Theory": 0.117
+      },
+      "tech": {
+        "AI and intelligent systems": 0.067,
+        "VR and AR": 0.0,
+        "Games and play": 0.033,
+        "Collaborative learning": 0.35,
+        "Analytics and dashboards": 0.033,
+        "Online and blended": 0.05
+      },
+      "level": {
+        "k12": 0.383,
+        "higher_ed": 0.083,
+        "workplace": 0.05,
+        "informal": 0.067,
+        "mixed_or_unspecified": 0.417
+      },
+      "low_confidence_n": 7,
+      "mean_confidence": 0.855,
+      "ab_disagreements": 35,
+      "low_sample": false,
+      "abstract_source": "ISLS repository (DOI landing pages)"
+    },
+    "aied": {
+      "name": "AIED Conference",
+      "shares": {
+        "Experimental": 0.169,
+        "Qualitative": 0.051,
+        "Design & Dev": 0.254,
+        "Data & AI": 0.424,
+        "Theory": 0.102
+      },
+      "dominant": "Data & AI",
+      "n_classified": 59,
+      "n_abstracts": 60,
+      "n_research": 59,
+      "survey_correlational_n": 0,
+      "not_research_n": 1,
+      "uses": {
+        "Experimental": 0.203,
+        "Qualitative": 0.068,
+        "Design & Dev": 0.542,
+        "Data & AI": 0.576,
+        "Review & Meta": 0.0,
+        "Theory": 0.119
+      },
+      "tech": {
+        "AI and intelligent systems": 0.864,
+        "VR and AR": 0.0,
+        "Games and play": 0.034,
+        "Collaborative learning": 0.085,
+        "Analytics and dashboards": 0.271,
+        "Online and blended": 0.068
+      },
+      "level": {
+        "k12": 0.119,
+        "higher_ed": 0.169,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.695
+      },
+      "low_confidence_n": 23,
+      "mean_confidence": 0.71,
+      "ab_disagreements": 61,
+      "low_sample": false,
+      "abstract_source": "Semantic Scholar + Springer chapter pages"
+    },
+    "las": {
+      "name": "L@S Conference",
+      "shares": {
+        "Experimental": 0.263,
+        "Qualitative": 0.053,
+        "Design & Dev": 0.351,
+        "Data & AI": 0.281,
+        "Review & Meta": 0.018,
+        "Theory": 0.035
+      },
+      "dominant": "Design & Dev",
+      "n_classified": 57,
+      "n_abstracts": 60,
+      "n_research": 57,
+      "survey_correlational_n": 0,
+      "not_research_n": 3,
+      "uses": {
+        "Experimental": 0.474,
+        "Qualitative": 0.175,
+        "Design & Dev": 0.561,
+        "Data & AI": 0.579,
+        "Review & Meta": 0.018,
+        "Theory": 0.175
+      },
+      "tech": {
+        "AI and intelligent systems": 0.649,
+        "VR and AR": 0.0,
+        "Games and play": 0.088,
+        "Collaborative learning": 0.105,
+        "Analytics and dashboards": 0.368,
+        "Online and blended": 0.263
+      },
+      "level": {
+        "k12": 0.158,
+        "higher_ed": 0.316,
+        "informal": 0.018,
+        "mixed_or_unspecified": 0.509
+      },
+      "low_confidence_n": 14,
+      "mean_confidence": 0.798,
+      "ab_disagreements": 69,
+      "low_sample": false,
+      "abstract_source": "Semantic Scholar"
+    },
+    "icer": {
+      "name": "ICER Conference",
+      "shares": {
+        "Experimental": 0.321,
+        "Qualitative": 0.321,
+        "Design & Dev": 0.214,
+        "Data & AI": 0.107,
+        "Theory": 0.036
+      },
+      "dominant": "Experimental",
+      "n_classified": 56,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 4,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.333,
+        "Qualitative": 0.4,
+        "Design & Dev": 0.283,
+        "Data & AI": 0.15,
+        "Review & Meta": 0.017,
+        "Theory": 0.117
+      },
+      "tech": {
+        "AI and intelligent systems": 0.3,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.083,
+        "Analytics and dashboards": 0.033,
+        "Online and blended": 0.033
+      },
+      "level": {
+        "k12": 0.15,
+        "higher_ed": 0.5,
+        "workplace": 0.017,
+        "mixed_or_unspecified": 0.333
+      },
+      "low_confidence_n": 9,
+      "mean_confidence": 0.845,
+      "ab_disagreements": 38,
+      "low_sample": false,
+      "abstract_source": "Semantic Scholar"
+    },
+    "tttp": {
+      "name": "Teachers and Teaching: Theory and Practice",
+      "shares": {
+        "Experimental": 0.043,
+        "Qualitative": 0.848,
+        "Design & Dev": 0.043,
+        "Review & Meta": 0.065
+      },
+      "dominant": "Qualitative",
+      "n_classified": 46,
+      "n_abstracts": 60,
+      "n_research": 60,
+      "survey_correlational_n": 14,
+      "not_research_n": 0,
+      "uses": {
+        "Experimental": 0.067,
+        "Qualitative": 0.767,
+        "Design & Dev": 0.05,
+        "Data & AI": 0.0,
+        "Review & Meta": 0.05,
+        "Theory": 0.0
+      },
+      "tech": {
+        "AI and intelligent systems": 0.017,
+        "VR and AR": 0.0,
+        "Games and play": 0.0,
+        "Collaborative learning": 0.067,
+        "Analytics and dashboards": 0.0,
+        "Online and blended": 0.0
+      },
+      "level": {
+        "k12": 0.35,
+        "higher_ed": 0.333,
+        "workplace": 0.033,
+        "mixed_or_unspecified": 0.283
+      },
+      "low_confidence_n": 3,
+      "mean_confidence": 0.941,
+      "ab_disagreements": 14,
+      "low_sample": false,
+      "abstract_source": "OpenAlex"
     }
   }
 }

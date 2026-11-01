@@ -162,9 +162,10 @@ const FORMULAS: Record<string, { title: string; lines: () => string[]; src: stri
             '발표 수(v, y) = OpenAlex에서 출처가 학술지 v이고 출판 연도가 y인 문헌 수 (끝난 해만)',
             '노드 크기 = 기본 크기 + 30 × √(발표 수 ÷ 전체 최댓값)',
             '연도 사이는 두 해 값을 선형 보간합니다.',
+            'OpenAlex가 색인하지 않는 학회는 Semantic Scholar(출판사 DOI만), Crossref(ISLS·CSCW), Zenodo(EDM) 편수를 씁니다. 출처에 없는 연도는 0으로 보입니다(ISLS DOI는 2023년부터). Semantic Scholar 색인이 덜 된 해는 실제보다 적게 나옵니다(예: ETRA 2021, SIGCSE 2023, AIED 2024).',
             `기준 ${((venueActivity as any)._meta || {}).generated_at || '—'}`,
         ],
-        src: 'scripts/build_venue_activity.py',
+        src: 'scripts/build_venue_activity.py, scripts/build_alt_activity.py',
     },
     trends: {
         title: '토픽 점유율과 추세',
@@ -1585,7 +1586,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Amy Bruckman", affiliation: "Georgia Tech" }, { name: "Cliff Lampe", affiliation: "University of Michigan" }]
     },
     "AIED Conference": {
-        overview: { description: "AI in Education 분야의 핵심 국제학술대회입니다.", website: "https://aied2024.science" },
+        overview: { description: "AI in Education 분야의 핵심 국제학술대회입니다.", website: "https://iaied.org/conferences" },
         topics: ["ITS", "Adaptive Learning", "Student Modeling", "Educational Data Mining"],
         methodologyProfile: [{ methodology: "System Development", prevalence: 40 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Machine Learning", prevalence: 20 }],
         newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
@@ -1704,7 +1705,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Jeremy Roschelle", affiliation: "Digital Promise" }]
     },
     "EARLI Conference": {
-        overview: { description: "유럽학습교수연구학회(EARLI)의 연례 학술대회로, 학습과 교수법에 관한 전방위 연구를 다룹니다.", website: "https://www.earli.org/conferences" },
+        overview: { description: "유럽학습교수연구학회(EARLI)의 연례 학술대회로, 학습과 교수법에 관한 전방위 연구를 다룹니다.", website: "https://www.earli.org/" },
         topics: ["Instructional Psychology", "Learning Environments", "Teacher Education", "Higher Education"],
         methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Qualitative", prevalence: 25 }],
         newcomerFriendliness: { acceptanceRate: "50-60%", timeToDecision: "3개월" },
@@ -1718,7 +1719,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Neil Heffernan", affiliation: "Worcester Polytechnic Institute" }]
     },
     "ITS Conference": {
-        overview: { description: "지능형 튜터링 시스템과 지능형 학습 환경에 관한 격년제 컨퍼런스입니다.", website: "https://its2024.gr" },
+        overview: { description: "지능형 튜터링 시스템과 지능형 학습 환경에 관한 격년제 컨퍼런스입니다.", website: "https://iis-international.org/its2026/" },
         topics: ["Intelligent Tutoring", "Adaptive Instruction", "Student Modeling", "AI in Education"],
         methodologyProfile: [{ methodology: "System Development", prevalence: 45 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Technical Evaluation", prevalence: 20 }],
         newcomerFriendliness: { acceptanceRate: "35-40%", timeToDecision: "2-3개월" },
@@ -1844,7 +1845,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Charles Reigeluth", affiliation: "Indiana University" }]
     },
     "Online Learning Journal": {
-        overview: { description: "OLC의 대표 저널로, 온라인 학습의 질적 향상과 정책적 이슈를 다룹니다.", website: "https://onlinelearningconsortium.org/read/online-learning-journal/" },
+        overview: { description: "OLC의 대표 저널로, 온라인 학습의 질적 향상과 정책적 이슈를 다룹니다.", website: "https://olj.onlinelearningconsortium.org/index.php/olj" },
         topics: ["Online Teaching", "Student Engagement", "LMS", "Quality Assurance"],
         methodologyProfile: [{ methodology: "Survey", prevalence: 40 }, { methodology: "Mixed Methods", prevalence: 35 }, { methodology: "Quantitative", prevalence: 25 }],
         newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
@@ -2034,7 +2035,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Andrew Martin", affiliation: "UNSW Sydney" }]
     },
     "European Journal of Teacher Education": {
-        overview: { description: "유럽 교사 교육 학회(ATEE)의 공식 저널로, 교사 교육의 이론과 실제를 다룹니다.", website: "https://www.tandfonline.com/toc/cejt20/current" },
+        overview: { description: "유럽 교사 교육 학회(ATEE)의 공식 저널로, 교사 교육의 이론과 실제를 다룹니다.", website: "https://www.tandfonline.com/journals/cete20" },
         topics: ["Initial Teacher Education", "Continuing Professional Development", "Teacher Identity", "EU Education Policy"],
         methodologyProfile: [{ methodology: "Qualitative", prevalence: 45 }, { methodology: "Case Study", prevalence: 30 }, { methodology: "Mixed Methods", prevalence: 25 }],
         newcomerFriendliness: { acceptanceRate: "15-20%", timeToDecision: "4-5개월" },
@@ -2062,7 +2063,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Nancy Fichtman Dana", affiliation: "University of Florida" }]
     },
     "ASEE Annual Conference": {
-        overview: { description: "미국공학 교육학회(ASEE)의 연례 학술대회로, 전 세계 공학 교육자들의 핵심 모임입니다.", website: "https://www.asee.org/events/annual-conference" },
+        overview: { description: "미국공학 교육학회(ASEE)의 연례 학술대회로, 전 세계 공학 교육자들의 핵심 모임입니다.", website: "https://www.asee.org/events" },
         topics: ["Engineering Pedagogy", "Diversity in Engineering", "K-12 Engineering", "Ethics in Engineering"],
         methodologyProfile: [{ methodology: "Mixed Methods", prevalence: 40 }, { methodology: "Qualitative", prevalence: 30 }, { methodology: "Experience Report", prevalence: 30 }],
         newcomerFriendliness: { acceptanceRate: "60-70%", timeToDecision: "3개월" },
@@ -2076,7 +2077,7 @@ const venueDetails: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Russ Meier", affiliation: "Milwaukee School of Engineering" }]
     },
     "ITiCSE Conference": {
-        overview: { description: "컴퓨팅 관련 학문 분야의 혁신적인 교수법과 도구를 다루는 ACM의 연례 컨퍼런스입니다.", website: "https://itipse.acm.org" },
+        overview: { description: "컴퓨팅 관련 학문 분야의 혁신적인 교수법과 도구를 다루는 ACM의 연례 컨퍼런스입니다.", website: "https://iticse.acm.org" },
         topics: ["CS Education Tools", "Active Learning in CS", "Assessment Methods", "Programming Environments"],
         methodologyProfile: [{ methodology: "Technical Evaluation", prevalence: 40 }, { methodology: "Case Study", prevalence: 30 }, { methodology: "User Study", prevalence: 30 }],
         newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2개월" },
@@ -2311,6 +2312,11 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
 
     // V6: interdisciplinarity (cited-field diversity) cue + field composition
     const vm = venueMetricsByName[node.id];
+    const noCiteHtml = (vm && !vm.interdisciplinarity_simpson && venueData.some((v) => v.name === node.id)) ? `
+      <div class="sidebar-section">
+        <h3>🧭 학제간성 (인용 분야 다양성) ${formulaTip('interdisc')}</h3>
+        <p class="sidebar-note-muted">OpenAlex에 이 학술지·학회의 논문 참고문헌이 색인되어 있지 않아 계산하지 않았습니다.</p>
+      </div>` : '';
     const interdiscHtml = (vm && vm.interdisciplinarity_simpson) ? `
       <div class="sidebar-section">
         <h3 title="venue가 인용하는 OpenAlex 최상위 분야의 다양성(Simpson). pySciSci/Stirling 기반.">🧭 학제간성 (인용 분야 다양성) ${formulaTip('interdisc')}</h3>
@@ -2330,7 +2336,11 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
     const pills = (obj: any, min: number) => Object.entries(obj || {})
         .filter(([, v]: any) => v >= min).sort((a: any, b: any) => b[1] - a[1])
         .map(([k, v]: any) => `<span class="meta-pill">${escapeHtml(ko(k))} ${pct(v)}%</span>`).join('');
-    const profileHtml = mp?.no_article_abstracts ? `
+    const profileHtml = mp?.not_applicable ? `
+      <div class="sidebar-section">
+        <h3>🧪 연구 방법·맥락 (초록 코딩)</h3>
+        <p class="sidebar-note-muted">발표 중심 학회로 논문집(proceedings)을 내지 않아 코딩할 초록이 없습니다.</p>
+      </div>` : mp?.no_article_abstracts ? `
       <div class="sidebar-section">
         <h3>🧪 연구 방법·맥락 (초록 코딩)</h3>
         <p class="sidebar-note-muted">OpenAlex에 이 학회의 일반 논문 초록이 없고 다른 공개 출처에서도 구하지 못해 코딩하지 않았습니다${mp.reviews_with_abstracts ? ` (OpenAlex에 초록이 있는 것은 리뷰 ${mp.reviews_with_abstracts}편뿐이며, 리뷰만으로는 학회의 연구 방법을 대표하지 못합니다)` : ''}.</p>
@@ -2468,7 +2478,7 @@ function renderVenueDetails(data: any, node: NodeData, recommendations: NodeData
       <p>${topics}</p>
     </div>
 
-    ${interdiscHtml}
+    ${interdiscHtml}${noCiteHtml}
     ${profileHtml}
 
     <div class="sidebar-section">

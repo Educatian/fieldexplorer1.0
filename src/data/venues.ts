@@ -176,7 +176,7 @@ const venueDetailsMap: Record<string, VenueDetails> = {
         keyContributors: [{ name: "Amy Bruckman", affiliation: "Georgia Tech" }, { name: "Cliff Lampe", affiliation: "University of Michigan" }]
     },
     "aied": {
-        overview: { description: "AI in Education 분야의 핵심 국제학술대회입니다.", website: "https://aied2024.science" },
+        overview: { description: "AI in Education 분야의 핵심 국제학술대회입니다.", website: "https://iaied.org/conferences" },
         topics: ["ITS", "Adaptive Learning", "Student Modeling", "Educational Data Mining"],
         methodologyProfile: [{ methodology: "System Development", prevalence: 40 }, { methodology: "Experimental", prevalence: 35 }, { methodology: "Machine Learning", prevalence: 20 }],
         newcomerFriendliness: { acceptanceRate: "25-30%", timeToDecision: "2-3개월" },
