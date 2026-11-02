@@ -6,6 +6,17 @@ installToolbarIcons();
 try { document.body.dataset.theme = localStorage.getItem('fieldexplorer_theme') === 'light' ? 'light' : 'dark'; } catch { document.body.dataset.theme = 'dark'; }
 document.documentElement.dataset.appState = 'loading';
 
+// Installation/offline setup should not compete with the first map download.
+const pwaAfterReady = new MutationObserver(() => {
+    if (document.documentElement.dataset.appState !== 'ready') return;
+    pwaAfterReady.disconnect();
+    const manifest = document.createElement('link');
+    manifest.rel = 'manifest'; manifest.href = '/manifest.webmanifest';
+    document.head.appendChild(manifest);
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+});
+pwaAfterReady.observe(document.documentElement, {attributes: true, attributeFilter: ['data-app-state']});
+
 function showFailure() {
     document.documentElement.dataset.appState = 'error';
     const overlay = document.getElementById('loading-overlay');
