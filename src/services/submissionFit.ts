@@ -129,6 +129,9 @@ export interface VenueFitResult {
     methodScore: number | null; // 0..100, null when abstract has no methodology signal
     sharedTerms: string[];      // top overlapping fingerprint terms (the "why")
     topMethodology: string | null;
+    rawTopicCosine?: number;    // unnormalized evidence; never an acceptance probability
+    matchedTermCount?: number;  // overlapping expanded term entries, before truncating the explanation
+    candidateCount?: number;    // candidates with positive overlap for this abstract
 }
 
 const WEIGHTS = { topic: 0.65, method: 0.15 };
@@ -151,6 +154,7 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
     interface Interim {
         v: VenueFitInput; rawTopic: number; method: number | null;
         shared: string[]; topMethodology: string | null;
+        matchedTermCount: number;
     }
     const interim: Interim[] = [];
 
@@ -175,8 +179,8 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
             : null;
 
         const vTopic = expandForTopic(vVec);
-        const shared = Object.keys(aTopic)
-            .filter(k => k in vTopic)
+        const matchedTerms = Object.keys(aTopic).filter(k => k in vTopic);
+        const shared = matchedTerms
             .sort((x, y) => {
                 const cy = aTopic[y] * vTopic[y], cx = aTopic[x] * vTopic[x];
                 if (cy !== cx) return cy - cx;
@@ -187,7 +191,7 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
             ? (Object.entries(vShares).sort((a, b) => b[1] - a[1])[0]?.[0] ?? null)
             : null;
 
-        interim.push({ v, rawTopic, method, shared, topMethodology });
+        interim.push({ v, rawTopic, method, shared, topMethodology, matchedTermCount: matchedTerms.length });
     }
 
     if (interim.length === 0) return [];
@@ -213,6 +217,9 @@ export function rankSubmissionFit(abstract: string, venues: VenueFitInput[]): Ve
             methodScore: x.method === null ? null : Math.round(x.method * 100),
             sharedTerms: x.shared,
             topMethodology: x.topMethodology,
+            rawTopicCosine: x.rawTopic,
+            matchedTermCount: x.matchedTermCount,
+            candidateCount: interim.length,
         };
     });
 
@@ -312,7 +319,7 @@ export function explainFit(results: VenueFitResult[]): FitTeaching | null {
     const checkMethod = top.topMethodology || '당신의 핵심 방법론';
     const nextCheck = `직접 점검: ${top.name}의 최근 1년 목차를 열어 ${checkMethod} 계열 논문이 실제로 실리는지, aims & scope가 당신 기여와 맞는지 확인하세요. 지문은 어휘 통계일 뿐, 편집 방향의 최신 판단은 당신 몫입니다.`;
 
-    const caveat = `이 카드는 정답이 아니라 멘토 휴리스틱입니다. venue 지문은 OpenAlex 어휘 기반이라 최신 편집 방향과 어긋날 수 있어요.`;
+    const caveat = `이 카드는 멘토 휴리스틱이며 게재 확률이 아닙니다. 주제 점수는 이번 후보 중 최고 일치를 100으로 둔 상대점수입니다. 후보나 지문이 달라지면 점수도 변합니다. 어휘 지문은 최신 편집 방향과 어긋날 수 있어요.`;
 
     return {
         topName: top.name,
