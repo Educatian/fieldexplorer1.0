@@ -5,4 +5,6 @@ if(!files.some(f=>/graphVendor-.*\.js$/.test(f)))throw Error('Graph preload miss
 if(!files.some(f=>/\/index-.*\.js$/.test(f)))throw Error('Core preload missing');
 for(const file of files){if(!fs.existsSync(path.join(root,file)))throw Error('Missing preload '+file);if(/jspdf|html2canvas/.test(file))throw Error('Export loaded too early');}
 if(!html.includes('id="loading-overlay"')||!html.includes('media="print"'))throw Error('Retry surface or non-blocking fonts missing');
+if(!html.includes('wght@400..700')||html.includes('wght@400;500;600;700'))throw Error('Duplicate font weight styles restored');
+if(/<link\b[^>]*rel="manifest"/.test(html)||html.includes("navigator.serviceWorker.register('/sw.js')"))throw Error('PWA setup blocks the map download');
 console.log(`Startup build: ${files.length} valid module preloads; exports remain lazy; retry shell retained.`);
