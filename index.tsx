@@ -7547,6 +7547,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             searchInput.setAttribute('aria-expanded', 'false');
             searchInput.removeAttribute('aria-activedescendant');
             focusNodeById(nodeId, { scale: 1.5 });
+            searchInput.blur();
+            document.body.classList.remove('search-focused');
+            const heading = document.getElementById('sidebar-title');
+            if (heading) { heading.tabIndex = -1; heading.focus({preventScroll:true}); }
         }
     }
 
