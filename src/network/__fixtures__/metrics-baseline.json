@@ -1,0 +1,3121 @@
+[
+  {
+    "name": "released graph",
+    "expected": {
+      "metrics": {
+        "degreeCentrality": [
+          [
+            "Educational Technology Research and Development",
+            1
+          ],
+          [
+            "Instructional Design",
+            7
+          ],
+          [
+            "Journal of the Learning Sciences",
+            1
+          ],
+          [
+            "Learning Sciences",
+            11
+          ],
+          [
+            "International Journal of Computer-Supported Collaborative Learning",
+            1
+          ],
+          [
+            "Computers & Education",
+            1
+          ],
+          [
+            "Technology-Enhanced Learning",
+            9
+          ],
+          [
+            "British Journal of Educational Technology",
+            1
+          ],
+          [
+            "Learning and Instruction",
+            1
+          ],
+          [
+            "Educational Psychology Review",
+            1
+          ],
+          [
+            "Educational Psychology",
+            7
+          ],
+          [
+            "Educational Psychologist",
+            1
+          ],
+          [
+            "Review of Educational Research",
+            1
+          ],
+          [
+            "Education Research",
+            6
+          ],
+          [
+            "American Educational Research Journal",
+            1
+          ],
+          [
+            "Educational Researcher",
+            1
+          ],
+          [
+            "Journal of Educational Psychology",
+            1
+          ],
+          [
+            "Cognition and Instruction",
+            1
+          ],
+          [
+            "Journal of Computer Assisted Learning",
+            1
+          ],
+          [
+            "Journal of Educational Computing Research",
+            1
+          ],
+          [
+            "IEEE Transactions on Learning Technologies",
+            2
+          ],
+          [
+            "Immersive Technology",
+            6
+          ],
+          [
+            "International Journal of Artificial Intelligence in Education",
+            1
+          ],
+          [
+            "AIED",
+            7
+          ],
+          [
+            "User Modeling and User-Adapted Interaction",
+            1
+          ],
+          [
+            "Journal of Learning Analytics",
+            1
+          ],
+          [
+            "Learning Analytics",
+            5
+          ],
+          [
+            "Instructional Science",
+            1
+          ],
+          [
+            "Contemporary Educational Psychology",
+            1
+          ],
+          [
+            "Learning and Individual Differences",
+            1
+          ],
+          [
+            "Mind Culture and Activity",
+            1
+          ],
+          [
+            "Educational Research Review",
+            1
+          ],
+          [
+            "Computers in Human Behavior",
+            1
+          ],
+          [
+            "HCI",
+            12
+          ],
+          [
+            "Interactive Learning Environments",
+            1
+          ],
+          [
+            "Distance Education",
+            1
+          ],
+          [
+            "Online Learning",
+            5
+          ],
+          [
+            "Internet and Higher Education",
+            2
+          ],
+          [
+            "Higher Education",
+            3
+          ],
+          [
+            "Computers & Education: Artificial Intelligence",
+            1
+          ],
+          [
+            "Journal of Applied Instructional Design",
+            1
+          ],
+          [
+            "Journal of Formative Design in Learning",
+            1
+          ],
+          [
+            "International Journal of Designs for Learning",
+            1
+          ],
+          [
+            "TechTrends",
+            1
+          ],
+          [
+            "Performance Improvement Quarterly",
+            1
+          ],
+          [
+            "Educational Technology & Society",
+            1
+          ],
+          [
+            "Education and Information Technologies",
+            1
+          ],
+          [
+            "International Journal of Educational Technology in Higher Education",
+            1
+          ],
+          [
+            "Journal of Computing in Higher Education",
+            1
+          ],
+          [
+            "Online Learning Journal",
+            1
+          ],
+          [
+            "International Review of Research in Open and Distributed Learning",
+            1
+          ],
+          [
+            "International Journal of Human-Computer Interaction",
+            1
+          ],
+          [
+            "Human-Computer Interaction",
+            1
+          ],
+          [
+            "ACM Transactions on Computer-Human Interaction",
+            1
+          ],
+          [
+            "Behaviour & Information Technology",
+            1
+          ],
+          [
+            "International Journal of Child-Computer Interaction",
+            2
+          ],
+          [
+            "Simulation & Gaming",
+            1
+          ],
+          [
+            "Virtual Reality",
+            1
+          ],
+          [
+            "Computers & Education: X Reality",
+            1
+          ],
+          [
+            "Learning Media and Technology",
+            1
+          ],
+          [
+            "Journal of Research in Science Teaching",
+            1
+          ],
+          [
+            "STEM Education",
+            15
+          ],
+          [
+            "Science Education",
+            1
+          ],
+          [
+            "International Journal of Science Education",
+            1
+          ],
+          [
+            "Journal of Science Education and Technology",
+            1
+          ],
+          [
+            "Studies in Science Education",
+            1
+          ],
+          [
+            "Journal of Engineering Education",
+            1
+          ],
+          [
+            "Computer Science Education",
+            1
+          ],
+          [
+            "ACM Transactions on Computing Education",
+            1
+          ],
+          [
+            "CBE-Life Sciences Education",
+            1
+          ],
+          [
+            "Mathematics Education Research Journal",
+            1
+          ],
+          [
+            "Journal of Teacher Education",
+            2
+          ],
+          [
+            "Teacher Education",
+            8
+          ],
+          [
+            "Teaching and Teacher Education",
+            1
+          ],
+          [
+            "European Journal of Teacher Education",
+            1
+          ],
+          [
+            "Teachers and Teaching: Theory and Practice",
+            1
+          ],
+          [
+            "Professional Development in Education",
+            1
+          ],
+          [
+            "Action in Teacher Education",
+            2
+          ],
+          [
+            "ISLS Annual Meeting",
+            1
+          ],
+          [
+            "ICLS",
+            1
+          ],
+          [
+            "CSCL",
+            1
+          ],
+          [
+            "AERA Annual Meeting",
+            1
+          ],
+          [
+            "EARLI Conference",
+            1
+          ],
+          [
+            "LAK Conference",
+            1
+          ],
+          [
+            "EDM Conference",
+            1
+          ],
+          [
+            "AIED Conference",
+            1
+          ],
+          [
+            "ITS Conference",
+            1
+          ],
+          [
+            "CHI Conference",
+            1
+          ],
+          [
+            "CSCW Conference",
+            1
+          ],
+          [
+            "UIST Conference",
+            1
+          ],
+          [
+            "IDC Conference",
+            2
+          ],
+          [
+            "IEEE VR",
+            1
+          ],
+          [
+            "ISMAR",
+            1
+          ],
+          [
+            "AECT Convention",
+            1
+          ],
+          [
+            "ETRA Symposium",
+            1
+          ],
+          [
+            "L@S Conference",
+            2
+          ],
+          [
+            "SIGCSE Technical Symposium",
+            1
+          ],
+          [
+            "ICER Conference",
+            1
+          ],
+          [
+            "ITiCSE Conference",
+            1
+          ],
+          [
+            "FIE Conference",
+            1
+          ],
+          [
+            "ASEE Annual Conference",
+            1
+          ]
+        ],
+        "normalizedDegree": [
+          [
+            "Educational Technology Research and Development",
+            0.01
+          ],
+          [
+            "Instructional Design",
+            0.07
+          ],
+          [
+            "Journal of the Learning Sciences",
+            0.01
+          ],
+          [
+            "Learning Sciences",
+            0.11
+          ],
+          [
+            "International Journal of Computer-Supported Collaborative Learning",
+            0.01
+          ],
+          [
+            "Computers & Education",
+            0.01
+          ],
+          [
+            "Technology-Enhanced Learning",
+            0.09
+          ],
+          [
+            "British Journal of Educational Technology",
+            0.01
+          ],
+          [
+            "Learning and Instruction",
+            0.01
+          ],
+          [
+            "Educational Psychology Review",
+            0.01
+          ],
+          [
+            "Educational Psychology",
+            0.07
+          ],
+          [
+            "Educational Psychologist",
+            0.01
+          ],
+          [
+            "Review of Educational Research",
+            0.01
+          ],
+          [
+            "Education Research",
+            0.06
+          ],
+          [
+            "American Educational Research Journal",
+            0.01
+          ],
+          [
+            "Educational Researcher",
+            0.01
+          ],
+          [
+            "Journal of Educational Psychology",
+            0.01
+          ],
+          [
+            "Cognition and Instruction",
+            0.01
+          ],
+          [
+            "Journal of Computer Assisted Learning",
+            0.01
+          ],
+          [
+            "Journal of Educational Computing Research",
+            0.01
+          ],
+          [
+            "IEEE Transactions on Learning Technologies",
+            0.02
+          ],
+          [
+            "Immersive Technology",
+            0.06
+          ],
+          [
+            "International Journal of Artificial Intelligence in Education",
+            0.01
+          ],
+          [
+            "AIED",
+            0.07
+          ],
+          [
+            "User Modeling and User-Adapted Interaction",
+            0.01
+          ],
+          [
+            "Journal of Learning Analytics",
+            0.01
+          ],
+          [
+            "Learning Analytics",
+            0.05
+          ],
+          [
+            "Instructional Science",
+            0.01
+          ],
+          [
+            "Contemporary Educational Psychology",
+            0.01
+          ],
+          [
+            "Learning and Individual Differences",
+            0.01
+          ],
+          [
+            "Mind Culture and Activity",
+            0.01
+          ],
+          [
+            "Educational Research Review",
+            0.01
+          ],
+          [
+            "Computers in Human Behavior",
+            0.01
+          ],
+          [
+            "HCI",
+            0.12
+          ],
+          [
+            "Interactive Learning Environments",
+            0.01
+          ],
+          [
+            "Distance Education",
+            0.01
+          ],
+          [
+            "Online Learning",
+            0.05
+          ],
+          [
+            "Internet and Higher Education",
+            0.02
+          ],
+          [
+            "Higher Education",
+            0.03
+          ],
+          [
+            "Computers & Education: Artificial Intelligence",
+            0.01
+          ],
+          [
+            "Journal of Applied Instructional Design",
+            0.01
+          ],
+          [
+            "Journal of Formative Design in Learning",
+            0.01
+          ],
+          [
+            "International Journal of Designs for Learning",
+            0.01
+          ],
+          [
+            "TechTrends",
+            0.01
+          ],
+          [
+            "Performance Improvement Quarterly",
+            0.01
+          ],
+          [
+            "Educational Technology & Society",
+            0.01
+          ],
+          [
+            "Education and Information Technologies",
+            0.01
+          ],
+          [
+            "International Journal of Educational Technology in Higher Education",
+            0.01
+          ],
+          [
+            "Journal of Computing in Higher Education",
+            0.01
+          ],
+          [
+            "Online Learning Journal",
+            0.01
+          ],
+          [
+            "International Review of Research in Open and Distributed Learning",
+            0.01
+          ],
+          [
+            "International Journal of Human-Computer Interaction",
+            0.01
+          ],
+          [
+            "Human-Computer Interaction",
+            0.01
+          ],
+          [
+            "ACM Transactions on Computer-Human Interaction",
+            0.01
+          ],
+          [
+            "Behaviour & Information Technology",
+            0.01
+          ],
+          [
+            "International Journal of Child-Computer Interaction",
+            0.02
+          ],
+          [
+            "Simulation & Gaming",
+            0.01
+          ],
+          [
+            "Virtual Reality",
+            0.01
+          ],
+          [
+            "Computers & Education: X Reality",
+            0.01
+          ],
+          [
+            "Learning Media and Technology",
+            0.01
+          ],
+          [
+            "Journal of Research in Science Teaching",
+            0.01
+          ],
+          [
+            "STEM Education",
+            0.15
+          ],
+          [
+            "Science Education",
+            0.01
+          ],
+          [
+            "International Journal of Science Education",
+            0.01
+          ],
+          [
+            "Journal of Science Education and Technology",
+            0.01
+          ],
+          [
+            "Studies in Science Education",
+            0.01
+          ],
+          [
+            "Journal of Engineering Education",
+            0.01
+          ],
+          [
+            "Computer Science Education",
+            0.01
+          ],
+          [
+            "ACM Transactions on Computing Education",
+            0.01
+          ],
+          [
+            "CBE-Life Sciences Education",
+            0.01
+          ],
+          [
+            "Mathematics Education Research Journal",
+            0.01
+          ],
+          [
+            "Journal of Teacher Education",
+            0.02
+          ],
+          [
+            "Teacher Education",
+            0.08
+          ],
+          [
+            "Teaching and Teacher Education",
+            0.01
+          ],
+          [
+            "European Journal of Teacher Education",
+            0.01
+          ],
+          [
+            "Teachers and Teaching: Theory and Practice",
+            0.01
+          ],
+          [
+            "Professional Development in Education",
+            0.01
+          ],
+          [
+            "Action in Teacher Education",
+            0.02
+          ],
+          [
+            "ISLS Annual Meeting",
+            0.01
+          ],
+          [
+            "ICLS",
+            0.01
+          ],
+          [
+            "CSCL",
+            0.01
+          ],
+          [
+            "AERA Annual Meeting",
+            0.01
+          ],
+          [
+            "EARLI Conference",
+            0.01
+          ],
+          [
+            "LAK Conference",
+            0.01
+          ],
+          [
+            "EDM Conference",
+            0.01
+          ],
+          [
+            "AIED Conference",
+            0.01
+          ],
+          [
+            "ITS Conference",
+            0.01
+          ],
+          [
+            "CHI Conference",
+            0.01
+          ],
+          [
+            "CSCW Conference",
+            0.01
+          ],
+          [
+            "UIST Conference",
+            0.01
+          ],
+          [
+            "IDC Conference",
+            0.02
+          ],
+          [
+            "IEEE VR",
+            0.01
+          ],
+          [
+            "ISMAR",
+            0.01
+          ],
+          [
+            "AECT Convention",
+            0.01
+          ],
+          [
+            "ETRA Symposium",
+            0.01
+          ],
+          [
+            "L@S Conference",
+            0.02
+          ],
+          [
+            "SIGCSE Technical Symposium",
+            0.01
+          ],
+          [
+            "ICER Conference",
+            0.01
+          ],
+          [
+            "ITiCSE Conference",
+            0.01
+          ],
+          [
+            "FIE Conference",
+            0.01
+          ],
+          [
+            "ASEE Annual Conference",
+            0.01
+          ]
+        ],
+        "hubScore": [
+          [
+            "Educational Technology Research and Development",
+            1
+          ],
+          [
+            "Journal of the Learning Sciences",
+            1
+          ],
+          [
+            "International Journal of Computer-Supported Collaborative Learning",
+            1
+          ],
+          [
+            "Computers & Education",
+            1
+          ],
+          [
+            "British Journal of Educational Technology",
+            1
+          ],
+          [
+            "Learning and Instruction",
+            1
+          ],
+          [
+            "Educational Psychology Review",
+            1
+          ],
+          [
+            "Educational Psychologist",
+            1
+          ],
+          [
+            "Review of Educational Research",
+            1
+          ],
+          [
+            "American Educational Research Journal",
+            1
+          ],
+          [
+            "Educational Researcher",
+            1
+          ],
+          [
+            "Journal of Educational Psychology",
+            1
+          ],
+          [
+            "Cognition and Instruction",
+            1
+          ],
+          [
+            "Journal of Computer Assisted Learning",
+            1
+          ],
+          [
+            "Journal of Educational Computing Research",
+            1
+          ],
+          [
+            "IEEE Transactions on Learning Technologies",
+            2
+          ],
+          [
+            "International Journal of Artificial Intelligence in Education",
+            1
+          ],
+          [
+            "User Modeling and User-Adapted Interaction",
+            1
+          ],
+          [
+            "Journal of Learning Analytics",
+            1
+          ],
+          [
+            "Instructional Science",
+            1
+          ],
+          [
+            "Contemporary Educational Psychology",
+            1
+          ],
+          [
+            "Learning and Individual Differences",
+            1
+          ],
+          [
+            "Mind Culture and Activity",
+            1
+          ],
+          [
+            "Educational Research Review",
+            1
+          ],
+          [
+            "Computers in Human Behavior",
+            1
+          ],
+          [
+            "Interactive Learning Environments",
+            1
+          ],
+          [
+            "Distance Education",
+            1
+          ],
+          [
+            "Internet and Higher Education",
+            2
+          ],
+          [
+            "Computers & Education: Artificial Intelligence",
+            1
+          ],
+          [
+            "Journal of Applied Instructional Design",
+            1
+          ],
+          [
+            "Journal of Formative Design in Learning",
+            1
+          ],
+          [
+            "International Journal of Designs for Learning",
+            1
+          ],
+          [
+            "TechTrends",
+            1
+          ],
+          [
+            "Performance Improvement Quarterly",
+            1
+          ],
+          [
+            "Educational Technology & Society",
+            1
+          ],
+          [
+            "Education and Information Technologies",
+            1
+          ],
+          [
+            "International Journal of Educational Technology in Higher Education",
+            1
+          ],
+          [
+            "Journal of Computing in Higher Education",
+            1
+          ],
+          [
+            "Online Learning Journal",
+            1
+          ],
+          [
+            "International Review of Research in Open and Distributed Learning",
+            1
+          ],
+          [
+            "International Journal of Human-Computer Interaction",
+            1
+          ],
+          [
+            "Human-Computer Interaction",
+            1
+          ],
+          [
+            "ACM Transactions on Computer-Human Interaction",
+            1
+          ],
+          [
+            "Behaviour & Information Technology",
+            1
+          ],
+          [
+            "International Journal of Child-Computer Interaction",
+            1
+          ],
+          [
+            "Simulation & Gaming",
+            1
+          ],
+          [
+            "Virtual Reality",
+            1
+          ],
+          [
+            "Computers & Education: X Reality",
+            1
+          ],
+          [
+            "Learning Media and Technology",
+            1
+          ],
+          [
+            "Journal of Research in Science Teaching",
+            1
+          ],
+          [
+            "Science Education",
+            1
+          ],
+          [
+            "International Journal of Science Education",
+            1
+          ],
+          [
+            "Journal of Science Education and Technology",
+            1
+          ],
+          [
+            "Studies in Science Education",
+            1
+          ],
+          [
+            "Journal of Engineering Education",
+            1
+          ],
+          [
+            "Computer Science Education",
+            1
+          ],
+          [
+            "ACM Transactions on Computing Education",
+            1
+          ],
+          [
+            "CBE-Life Sciences Education",
+            1
+          ],
+          [
+            "Mathematics Education Research Journal",
+            1
+          ],
+          [
+            "Journal of Teacher Education",
+            1
+          ],
+          [
+            "Teaching and Teacher Education",
+            1
+          ],
+          [
+            "European Journal of Teacher Education",
+            1
+          ],
+          [
+            "Teachers and Teaching: Theory and Practice",
+            1
+          ],
+          [
+            "Professional Development in Education",
+            1
+          ],
+          [
+            "Action in Teacher Education",
+            1
+          ],
+          [
+            "ISLS Annual Meeting",
+            1
+          ],
+          [
+            "AERA Annual Meeting",
+            1
+          ],
+          [
+            "EARLI Conference",
+            1
+          ],
+          [
+            "LAK Conference",
+            1
+          ],
+          [
+            "EDM Conference",
+            1
+          ],
+          [
+            "AIED Conference",
+            1
+          ],
+          [
+            "ITS Conference",
+            1
+          ],
+          [
+            "CHI Conference",
+            1
+          ],
+          [
+            "CSCW Conference",
+            1
+          ],
+          [
+            "UIST Conference",
+            1
+          ],
+          [
+            "IDC Conference",
+            1
+          ],
+          [
+            "IEEE VR",
+            1
+          ],
+          [
+            "ISMAR",
+            1
+          ],
+          [
+            "AECT Convention",
+            1
+          ],
+          [
+            "ETRA Symposium",
+            1
+          ],
+          [
+            "L@S Conference",
+            2
+          ],
+          [
+            "SIGCSE Technical Symposium",
+            1
+          ],
+          [
+            "ICER Conference",
+            1
+          ],
+          [
+            "ITiCSE Conference",
+            1
+          ],
+          [
+            "FIE Conference",
+            1
+          ],
+          [
+            "ASEE Annual Conference",
+            1
+          ]
+        ],
+        "networkDensity": 0.019405940594059406,
+        "avgClustering": 0.2076190476190476,
+        "pageRank": [
+          [
+            "Educational Technology Research and Development",
+            0.0014851485148514854
+          ],
+          [
+            "Instructional Design",
+            0.010321782178217824
+          ],
+          [
+            "Journal of the Learning Sciences",
+            0.0014851485148514854
+          ],
+          [
+            "Learning Sciences",
+            0.01665654393564357
+          ],
+          [
+            "International Journal of Computer-Supported Collaborative Learning",
+            0.0014851485148514854
+          ],
+          [
+            "Computers & Education",
+            0.0014851485148514854
+          ],
+          [
+            "Technology-Enhanced Learning",
+            0.01221534653465347
+          ],
+          [
+            "British Journal of Educational Technology",
+            0.0014851485148514854
+          ],
+          [
+            "Learning and Instruction",
+            0.0014851485148514854
+          ],
+          [
+            "Educational Psychology Review",
+            0.0014851485148514854
+          ],
+          [
+            "Educational Psychology",
+            0.025765101330445548
+          ],
+          [
+            "Educational Psychologist",
+            0.0014851485148514854
+          ],
+          [
+            "Review of Educational Research",
+            0.0014851485148514854
+          ],
+          [
+            "Education Research",
+            0.00905940594059406
+          ],
+          [
+            "American Educational Research Journal",
+            0.0014851485148514854
+          ],
+          [
+            "Educational Researcher",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Educational Psychology",
+            0.0014851485148514854
+          ],
+          [
+            "Cognition and Instruction",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Computer Assisted Learning",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Educational Computing Research",
+            0.0014851485148514854
+          ],
+          [
+            "IEEE Transactions on Learning Technologies",
+            0.0014851485148514854
+          ],
+          [
+            "Immersive Technology",
+            0.008428217821782179
+          ],
+          [
+            "International Journal of Artificial Intelligence in Education",
+            0.0014851485148514854
+          ],
+          [
+            "AIED",
+            0.012814975247524755
+          ],
+          [
+            "User Modeling and User-Adapted Interaction",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Learning Analytics",
+            0.0014851485148514854
+          ],
+          [
+            "Learning Analytics",
+            0.005903465346534655
+          ],
+          [
+            "Instructional Science",
+            0.0014851485148514854
+          ],
+          [
+            "Contemporary Educational Psychology",
+            0.0014851485148514854
+          ],
+          [
+            "Learning and Individual Differences",
+            0.0014851485148514854
+          ],
+          [
+            "Mind Culture and Activity",
+            0.0014851485148514854
+          ],
+          [
+            "Educational Research Review",
+            0.0014851485148514854
+          ],
+          [
+            "Computers in Human Behavior",
+            0.0014851485148514854
+          ],
+          [
+            "HCI",
+            0.026169337871287134
+          ],
+          [
+            "Interactive Learning Environments",
+            0.0014851485148514854
+          ],
+          [
+            "Distance Education",
+            0.0014851485148514854
+          ],
+          [
+            "Online Learning",
+            0.006534653465346535
+          ],
+          [
+            "Internet and Higher Education",
+            0.0014851485148514854
+          ],
+          [
+            "Higher Education",
+            0.004641089108910892
+          ],
+          [
+            "Computers & Education: Artificial Intelligence",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Applied Instructional Design",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Formative Design in Learning",
+            0.0014851485148514854
+          ],
+          [
+            "International Journal of Designs for Learning",
+            0.0014851485148514854
+          ],
+          [
+            "TechTrends",
+            0.0014851485148514854
+          ],
+          [
+            "Performance Improvement Quarterly",
+            0.0014851485148514854
+          ],
+          [
+            "Educational Technology & Society",
+            0.0014851485148514854
+          ],
+          [
+            "Education and Information Technologies",
+            0.0014851485148514854
+          ],
+          [
+            "International Journal of Educational Technology in Higher Education",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Computing in Higher Education",
+            0.0014851485148514854
+          ],
+          [
+            "Online Learning Journal",
+            0.0014851485148514854
+          ],
+          [
+            "International Review of Research in Open and Distributed Learning",
+            0.0014851485148514854
+          ],
+          [
+            "International Journal of Human-Computer Interaction",
+            0.0014851485148514854
+          ],
+          [
+            "Human-Computer Interaction",
+            0.0014851485148514854
+          ],
+          [
+            "ACM Transactions on Computer-Human Interaction",
+            0.0014851485148514854
+          ],
+          [
+            "Behaviour & Information Technology",
+            0.0014851485148514854
+          ],
+          [
+            "International Journal of Child-Computer Interaction",
+            0.0014851485148514854
+          ],
+          [
+            "Simulation & Gaming",
+            0.0014851485148514854
+          ],
+          [
+            "Virtual Reality",
+            0.0014851485148514854
+          ],
+          [
+            "Computers & Education: X Reality",
+            0.0014851485148514854
+          ],
+          [
+            "Learning Media and Technology",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Research in Science Teaching",
+            0.0014851485148514854
+          ],
+          [
+            "STEM Education",
+            0.020420792079207932
+          ],
+          [
+            "Science Education",
+            0.0014851485148514854
+          ],
+          [
+            "International Journal of Science Education",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Science Education and Technology",
+            0.0014851485148514854
+          ],
+          [
+            "Studies in Science Education",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Engineering Education",
+            0.0014851485148514854
+          ],
+          [
+            "Computer Science Education",
+            0.0014851485148514854
+          ],
+          [
+            "ACM Transactions on Computing Education",
+            0.0014851485148514854
+          ],
+          [
+            "CBE-Life Sciences Education",
+            0.0014851485148514854
+          ],
+          [
+            "Mathematics Education Research Journal",
+            0.0014851485148514854
+          ],
+          [
+            "Journal of Teacher Education",
+            0.0014851485148514854
+          ],
+          [
+            "Teacher Education",
+            0.008964727722772278
+          ],
+          [
+            "Teaching and Teacher Education",
+            0.0014851485148514854
+          ],
+          [
+            "European Journal of Teacher Education",
+            0.0014851485148514854
+          ],
+          [
+            "Teachers and Teaching: Theory and Practice",
+            0.0014851485148514854
+          ],
+          [
+            "Professional Development in Education",
+            0.0014851485148514854
+          ],
+          [
+            "Action in Teacher Education",
+            0.0021163366336633665
+          ],
+          [
+            "ISLS Annual Meeting",
+            0.0014851485148514854
+          ],
+          [
+            "ICLS",
+            0.0014851485148514854
+          ],
+          [
+            "CSCL",
+            0.0014851485148514854
+          ],
+          [
+            "AERA Annual Meeting",
+            0.0014851485148514854
+          ],
+          [
+            "EARLI Conference",
+            0.0014851485148514854
+          ],
+          [
+            "LAK Conference",
+            0.0014851485148514854
+          ],
+          [
+            "EDM Conference",
+            0.0014851485148514854
+          ],
+          [
+            "AIED Conference",
+            0.0014851485148514854
+          ],
+          [
+            "ITS Conference",
+            0.0014851485148514854
+          ],
+          [
+            "CHI Conference",
+            0.0014851485148514854
+          ],
+          [
+            "CSCW Conference",
+            0.0014851485148514854
+          ],
+          [
+            "UIST Conference",
+            0.0014851485148514854
+          ],
+          [
+            "IDC Conference",
+            0.0021163366336633665
+          ],
+          [
+            "IEEE VR",
+            0.0014851485148514854
+          ],
+          [
+            "ISMAR",
+            0.0014851485148514854
+          ],
+          [
+            "AECT Convention",
+            0.0014851485148514854
+          ],
+          [
+            "ETRA Symposium",
+            0.0014851485148514854
+          ],
+          [
+            "L@S Conference",
+            0.0014851485148514854
+          ],
+          [
+            "SIGCSE Technical Symposium",
+            0.0014851485148514854
+          ],
+          [
+            "ICER Conference",
+            0.0014851485148514854
+          ],
+          [
+            "ITiCSE Conference",
+            0.0014851485148514854
+          ],
+          [
+            "FIE Conference",
+            0.0014851485148514854
+          ],
+          [
+            "ASEE Annual Conference",
+            0.0014851485148514854
+          ]
+        ],
+        "communities": [
+          [
+            "Educational Technology Research and Development",
+            0
+          ],
+          [
+            "Instructional Design",
+            0
+          ],
+          [
+            "Journal of Applied Instructional Design",
+            0
+          ],
+          [
+            "Journal of Formative Design in Learning",
+            0
+          ],
+          [
+            "International Journal of Designs for Learning",
+            0
+          ],
+          [
+            "TechTrends",
+            0
+          ],
+          [
+            "Performance Improvement Quarterly",
+            0
+          ],
+          [
+            "AECT Convention",
+            0
+          ],
+          [
+            "Journal of the Learning Sciences",
+            1
+          ],
+          [
+            "Learning Sciences",
+            1
+          ],
+          [
+            "International Journal of Computer-Supported Collaborative Learning",
+            1
+          ],
+          [
+            "Learning and Instruction",
+            1
+          ],
+          [
+            "Cognition and Instruction",
+            1
+          ],
+          [
+            "Instructional Science",
+            1
+          ],
+          [
+            "Mind Culture and Activity",
+            1
+          ],
+          [
+            "ISLS Annual Meeting",
+            1
+          ],
+          [
+            "ICLS",
+            1
+          ],
+          [
+            "CSCL",
+            1
+          ],
+          [
+            "Educational Psychology",
+            1
+          ],
+          [
+            "Teacher Education",
+            1
+          ],
+          [
+            "Educational Psychology Review",
+            1
+          ],
+          [
+            "Educational Psychologist",
+            1
+          ],
+          [
+            "Journal of Educational Psychology",
+            1
+          ],
+          [
+            "Contemporary Educational Psychology",
+            1
+          ],
+          [
+            "Learning and Individual Differences",
+            1
+          ],
+          [
+            "Journal of Teacher Education",
+            1
+          ],
+          [
+            "Teaching and Teacher Education",
+            1
+          ],
+          [
+            "European Journal of Teacher Education",
+            1
+          ],
+          [
+            "Teachers and Teaching: Theory and Practice",
+            1
+          ],
+          [
+            "Professional Development in Education",
+            1
+          ],
+          [
+            "Action in Teacher Education",
+            1
+          ],
+          [
+            "Computers & Education",
+            2
+          ],
+          [
+            "Technology-Enhanced Learning",
+            2
+          ],
+          [
+            "British Journal of Educational Technology",
+            2
+          ],
+          [
+            "Journal of Computer Assisted Learning",
+            2
+          ],
+          [
+            "Journal of Educational Computing Research",
+            2
+          ],
+          [
+            "IEEE Transactions on Learning Technologies",
+            2
+          ],
+          [
+            "Interactive Learning Environments",
+            2
+          ],
+          [
+            "Educational Technology & Society",
+            2
+          ],
+          [
+            "Education and Information Technologies",
+            2
+          ],
+          [
+            "Learning Media and Technology",
+            2
+          ],
+          [
+            "Immersive Technology",
+            2
+          ],
+          [
+            "Simulation & Gaming",
+            2
+          ],
+          [
+            "Virtual Reality",
+            2
+          ],
+          [
+            "Computers & Education: X Reality",
+            2
+          ],
+          [
+            "IEEE VR",
+            2
+          ],
+          [
+            "ISMAR",
+            2
+          ],
+          [
+            "Review of Educational Research",
+            3
+          ],
+          [
+            "Education Research",
+            3
+          ],
+          [
+            "American Educational Research Journal",
+            3
+          ],
+          [
+            "Educational Researcher",
+            3
+          ],
+          [
+            "Educational Research Review",
+            3
+          ],
+          [
+            "AERA Annual Meeting",
+            3
+          ],
+          [
+            "EARLI Conference",
+            3
+          ],
+          [
+            "International Journal of Artificial Intelligence in Education",
+            4
+          ],
+          [
+            "AIED",
+            4
+          ],
+          [
+            "User Modeling and User-Adapted Interaction",
+            4
+          ],
+          [
+            "Computers & Education: Artificial Intelligence",
+            4
+          ],
+          [
+            "AIED Conference",
+            4
+          ],
+          [
+            "ITS Conference",
+            4
+          ],
+          [
+            "Learning Analytics",
+            4
+          ],
+          [
+            "HCI",
+            4
+          ],
+          [
+            "Journal of Learning Analytics",
+            4
+          ],
+          [
+            "LAK Conference",
+            4
+          ],
+          [
+            "EDM Conference",
+            4
+          ],
+          [
+            "L@S Conference",
+            4
+          ],
+          [
+            "Computers in Human Behavior",
+            4
+          ],
+          [
+            "International Journal of Human-Computer Interaction",
+            4
+          ],
+          [
+            "Human-Computer Interaction",
+            4
+          ],
+          [
+            "ACM Transactions on Computer-Human Interaction",
+            4
+          ],
+          [
+            "Behaviour & Information Technology",
+            4
+          ],
+          [
+            "International Journal of Child-Computer Interaction",
+            4
+          ],
+          [
+            "CHI Conference",
+            4
+          ],
+          [
+            "CSCW Conference",
+            4
+          ],
+          [
+            "UIST Conference",
+            4
+          ],
+          [
+            "IDC Conference",
+            4
+          ],
+          [
+            "ETRA Symposium",
+            4
+          ],
+          [
+            "Online Learning",
+            4
+          ],
+          [
+            "Distance Education",
+            4
+          ],
+          [
+            "Internet and Higher Education",
+            4
+          ],
+          [
+            "Online Learning Journal",
+            4
+          ],
+          [
+            "International Review of Research in Open and Distributed Learning",
+            4
+          ],
+          [
+            "Higher Education",
+            4
+          ],
+          [
+            "International Journal of Educational Technology in Higher Education",
+            4
+          ],
+          [
+            "Journal of Computing in Higher Education",
+            4
+          ],
+          [
+            "Journal of Research in Science Teaching",
+            5
+          ],
+          [
+            "STEM Education",
+            5
+          ],
+          [
+            "Science Education",
+            5
+          ],
+          [
+            "International Journal of Science Education",
+            5
+          ],
+          [
+            "Journal of Science Education and Technology",
+            5
+          ],
+          [
+            "Studies in Science Education",
+            5
+          ],
+          [
+            "Journal of Engineering Education",
+            5
+          ],
+          [
+            "Computer Science Education",
+            5
+          ],
+          [
+            "ACM Transactions on Computing Education",
+            5
+          ],
+          [
+            "CBE-Life Sciences Education",
+            5
+          ],
+          [
+            "Mathematics Education Research Journal",
+            5
+          ],
+          [
+            "SIGCSE Technical Symposium",
+            5
+          ],
+          [
+            "ICER Conference",
+            5
+          ],
+          [
+            "ITiCSE Conference",
+            5
+          ],
+          [
+            "FIE Conference",
+            5
+          ],
+          [
+            "ASEE Annual Conference",
+            5
+          ]
+        ],
+        "communityCount": 6
+      },
+      "styled": [
+        {
+          "id": "Educational Technology Research and Development",
+          "label": "Educational Technology Research ...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6434,
+          "size": 16.06751474651599,
+          "title": "Educational Technology Research and Development\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "Instructional Design",
+          "label": "Instructional Design",
+          "group": "Category",
+          "size": 24.5,
+          "title": "Instructional Design\nPageRank: 1.03%\nDegree: 7 | Community: 1"
+        },
+        {
+          "id": "Journal of the Learning Sciences",
+          "label": "Journal of the Learning Sciences",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5799,
+          "size": 16.06751474651599,
+          "title": "Journal of the Learning Sciences\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Learning Sciences",
+          "label": "Learning Sciences",
+          "group": "Category",
+          "size": 30.5,
+          "title": "Learning Sciences\nPageRank: 1.67%\nDegree: 11 | Community: 2"
+        },
+        {
+          "id": "International Journal of Computer-Supported Collaborative Learning",
+          "label": "International Journal of Compute...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6246,
+          "size": 16.06751474651599,
+          "title": "International Journal of Computer-Supported Collaborative Learning\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Computers & Education",
+          "label": "Computers & Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.637,
+          "size": 16.06751474651599,
+          "title": "Computers & Education\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Technology-Enhanced Learning",
+          "label": "Technology-Enhanced Learning",
+          "group": "Category",
+          "size": 27.5,
+          "title": "Technology-Enhanced Learning\nPageRank: 1.22%\nDegree: 9 | Community: 3"
+        },
+        {
+          "id": "British Journal of Educational Technology",
+          "label": "British Journal of Educational T...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6599,
+          "size": 16.06751474651599,
+          "title": "British Journal of Educational Technology\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Learning and Instruction",
+          "label": "Learning and Instruction",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5856,
+          "size": 16.06751474651599,
+          "title": "Learning and Instruction\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Educational Psychology Review",
+          "label": "Educational Psychology Review",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5981,
+          "size": 16.06751474651599,
+          "title": "Educational Psychology Review\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Educational Psychology",
+          "label": "Educational Psychology",
+          "group": "Category",
+          "size": 24.5,
+          "title": "Educational Psychology\nPageRank: 2.58%\nDegree: 7 | Community: 2"
+        },
+        {
+          "id": "Educational Psychologist",
+          "label": "Educational Psychologist",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5491,
+          "size": 16.06751474651599,
+          "title": "Educational Psychologist\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Review of Educational Research",
+          "label": "Review of Educational Research",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4852,
+          "size": 16.06751474651599,
+          "title": "Review of Educational Research\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "Education Research",
+          "label": "Education Research",
+          "group": "Category",
+          "size": 23,
+          "title": "Education Research\nPageRank: 0.91%\nDegree: 6 | Community: 4"
+        },
+        {
+          "id": "American Educational Research Journal",
+          "label": "American Educational Research Jo...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.3198,
+          "size": 16.06751474651599,
+          "title": "American Educational Research Journal\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "Educational Researcher",
+          "label": "Educational Researcher",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.3193,
+          "size": 16.06751474651599,
+          "title": "Educational Researcher\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "Journal of Educational Psychology",
+          "label": "Journal of Educational Psychology",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": null,
+          "size": 16.06751474651599,
+          "title": "Journal of Educational Psychology\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Cognition and Instruction",
+          "label": "Cognition and Instruction",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5542,
+          "size": 16.06751474651599,
+          "title": "Cognition and Instruction\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Journal of Computer Assisted Learning",
+          "label": "Journal of Computer Assisted Lea...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6397,
+          "size": 16.06751474651599,
+          "title": "Journal of Computer Assisted Learning\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Journal of Educational Computing Research",
+          "label": "Journal of Educational Computing...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.665,
+          "size": 16.06751474651599,
+          "title": "Journal of Educational Computing Research\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "IEEE Transactions on Learning Technologies",
+          "label": "IEEE Transactions on Learning Te...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5285,
+          "size": 17.56751474651599,
+          "title": "IEEE Transactions on Learning Technologies\nPageRank: 0.15%\nDegree: 2 | Community: 3"
+        },
+        {
+          "id": "Immersive Technology",
+          "label": "Immersive Technology",
+          "group": "Category",
+          "size": 23,
+          "title": "Immersive Technology\nPageRank: 0.84%\nDegree: 6 | Community: 3"
+        },
+        {
+          "id": "International Journal of Artificial Intelligence in Education",
+          "label": "International Journal of Artific...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5704,
+          "size": 16.06751474651599,
+          "title": "International Journal of Artificial Intelligence in Education\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "AIED",
+          "label": "AIED",
+          "group": "Category",
+          "size": 24.5,
+          "title": "AIED\nPageRank: 1.28%\nDegree: 7 | Community: 5"
+        },
+        {
+          "id": "User Modeling and User-Adapted Interaction",
+          "label": "User Modeling and User-Adapted I...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4135,
+          "size": 16.06751474651599,
+          "title": "User Modeling and User-Adapted Interaction\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Journal of Learning Analytics",
+          "label": "Journal of Learning Analytics",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.5314,
+          "size": 12.067514746515991,
+          "title": "Journal of Learning Analytics\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Learning Analytics",
+          "label": "Learning Analytics",
+          "group": "Category",
+          "size": 21.5,
+          "title": "Learning Analytics\nPageRank: 0.59%\nDegree: 5 | Community: 5"
+        },
+        {
+          "id": "Instructional Science",
+          "label": "Instructional Science",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5756,
+          "size": 16.06751474651599,
+          "title": "Instructional Science\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Contemporary Educational Psychology",
+          "label": "Contemporary Educational Psychology",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5319,
+          "size": 16.06751474651599,
+          "title": "Contemporary Educational Psychology\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Learning and Individual Differences",
+          "label": "Learning and Individual Differences",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5593,
+          "size": 16.06751474651599,
+          "title": "Learning and Individual Differences\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Mind Culture and Activity",
+          "label": "Mind Culture and Activity",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.4522,
+          "size": 12.067514746515991,
+          "title": "Mind Culture and Activity\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Educational Research Review",
+          "label": "Educational Research Review",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5536,
+          "size": 16.06751474651599,
+          "title": "Educational Research Review\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "Computers in Human Behavior",
+          "label": "Computers in Human Behavior",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6673,
+          "size": 16.06751474651599,
+          "title": "Computers in Human Behavior\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "HCI",
+          "label": "HCI",
+          "group": "Category",
+          "size": 32,
+          "title": "HCI\nPageRank: 2.62%\nDegree: 12 | Community: 5"
+        },
+        {
+          "id": "Interactive Learning Environments",
+          "label": "Interactive Learning Environments",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6656,
+          "size": 16.06751474651599,
+          "title": "Interactive Learning Environments\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Distance Education",
+          "label": "Distance Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4919,
+          "size": 16.06751474651599,
+          "title": "Distance Education\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Online Learning",
+          "label": "Online Learning",
+          "group": "Category",
+          "size": 21.5,
+          "title": "Online Learning\nPageRank: 0.65%\nDegree: 5 | Community: 5"
+        },
+        {
+          "id": "Internet and Higher Education",
+          "label": "Internet and Higher Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6575,
+          "size": 17.56751474651599,
+          "title": "Internet and Higher Education\nPageRank: 0.15%\nDegree: 2 | Community: 5"
+        },
+        {
+          "id": "Higher Education",
+          "label": "Higher Education",
+          "group": "Category",
+          "size": 18.5,
+          "title": "Higher Education\nPageRank: 0.46%\nDegree: 3 | Community: 5"
+        },
+        {
+          "id": "Computers & Education: Artificial Intelligence",
+          "label": "Computers & Education: Artificia...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6474,
+          "size": 12.067514746515991,
+          "title": "Computers & Education: Artificial Intelligence\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Journal of Applied Instructional Design",
+          "label": "Journal of Applied Instructional...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.5067,
+          "size": 12.067514746515991,
+          "title": "Journal of Applied Instructional Design\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "Journal of Formative Design in Learning",
+          "label": "Journal of Formative Design in L...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.5872,
+          "size": 12.067514746515991,
+          "title": "Journal of Formative Design in Learning\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "International Journal of Designs for Learning",
+          "label": "International Journal of Designs...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6187,
+          "size": 12.067514746515991,
+          "title": "International Journal of Designs for Learning\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "TechTrends",
+          "label": "TechTrends",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6272,
+          "size": 12.067514746515991,
+          "title": "TechTrends\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "Performance Improvement Quarterly",
+          "label": "Performance Improvement Quarterly",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6235,
+          "size": 12.067514746515991,
+          "title": "Performance Improvement Quarterly\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "Educational Technology & Society",
+          "label": "Educational Technology & Society",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.52,
+          "size": 16.06751474651599,
+          "title": "Educational Technology & Society\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Education and Information Technologies",
+          "label": "Education and Information Techno...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6475,
+          "size": 16.06751474651599,
+          "title": "Education and Information Technologies\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "International Journal of Educational Technology in Higher Education",
+          "label": "International Journal of Educati...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6211,
+          "size": 16.06751474651599,
+          "title": "International Journal of Educational Technology in Higher Education\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Journal of Computing in Higher Education",
+          "label": "Journal of Computing in Higher E...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5925,
+          "size": 16.06751474651599,
+          "title": "Journal of Computing in Higher Education\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Online Learning Journal",
+          "label": "Online Learning Journal",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5082,
+          "size": 16.06751474651599,
+          "title": "Online Learning Journal\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "International Review of Research in Open and Distributed Learning",
+          "label": "International Review of Research...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "International Review of Research in Open and Distributed Learning\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "International Journal of Human-Computer Interaction",
+          "label": "International Journal of Human-C...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6637,
+          "size": 16.06751474651599,
+          "title": "International Journal of Human-Computer Interaction\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Human-Computer Interaction",
+          "label": "Human-Computer Interaction",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6102,
+          "size": 16.06751474651599,
+          "title": "Human-Computer Interaction\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "ACM Transactions on Computer-Human Interaction",
+          "label": "ACM Transactions on Computer-Hum...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6424,
+          "size": 16.06751474651599,
+          "title": "ACM Transactions on Computer-Human Interaction\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "Behaviour & Information Technology",
+          "label": "Behaviour & Information Technology",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.65,
+          "size": 12.067514746515991,
+          "title": "Behaviour & Information Technology\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "International Journal of Child-Computer Interaction",
+          "label": "International Journal of Child-C...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6107,
+          "size": 12.067514746515991,
+          "title": "International Journal of Child-Computer Interaction\nPageRank: 0.15%\nDegree: 2 | Community: 5"
+        },
+        {
+          "id": "Simulation & Gaming",
+          "label": "Simulation & Gaming",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6233,
+          "size": 12.067514746515991,
+          "title": "Simulation & Gaming\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Virtual Reality",
+          "label": "Virtual Reality",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.4916,
+          "size": 12.067514746515991,
+          "title": "Virtual Reality\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Computers & Education: X Reality",
+          "label": "Computers & Education: X Reality",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.6322,
+          "size": 12.067514746515991,
+          "title": "Computers & Education: X Reality\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Learning Media and Technology",
+          "label": "Learning Media and Technology",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.6128,
+          "size": 16.06751474651599,
+          "title": "Learning Media and Technology\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "Journal of Research in Science Teaching",
+          "label": "Journal of Research in Science T...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4557,
+          "size": 16.06751474651599,
+          "title": "Journal of Research in Science Teaching\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "STEM Education",
+          "label": "STEM Education",
+          "group": "Category",
+          "size": 34,
+          "title": "STEM Education\nPageRank: 2.04%\nDegree: 15 | Community: 6"
+        },
+        {
+          "id": "Science Education",
+          "label": "Science Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4921,
+          "size": 16.06751474651599,
+          "title": "Science Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "International Journal of Science Education",
+          "label": "International Journal of Science...",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.5216,
+          "size": 12.067514746515991,
+          "title": "International Journal of Science Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Journal of Science Education and Technology",
+          "label": "Journal of Science Education and...",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.6206,
+          "size": 12.067514746515991,
+          "title": "Journal of Science Education and Technology\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Studies in Science Education",
+          "label": "Studies in Science Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5177,
+          "size": 16.06751474651599,
+          "title": "Studies in Science Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Journal of Engineering Education",
+          "label": "Journal of Engineering Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5724,
+          "size": 16.06751474651599,
+          "title": "Journal of Engineering Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Computer Science Education",
+          "label": "Computer Science Education",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.5497,
+          "size": 12.067514746515991,
+          "title": "Computer Science Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "ACM Transactions on Computing Education",
+          "label": "ACM Transactions on Computing Ed...",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.543,
+          "size": 12.067514746515991,
+          "title": "ACM Transactions on Computing Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "CBE-Life Sciences Education",
+          "label": "CBE-Life Sciences Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.5163,
+          "size": 16.06751474651599,
+          "title": "CBE-Life Sciences Education\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Mathematics Education Research Journal",
+          "label": "Mathematics Education Research J...",
+          "group": "Journal",
+          "impact": "Q3",
+          "mass": 1.5,
+          "interdisc": 0.4322,
+          "size": 12.067514746515991,
+          "title": "Mathematics Education Research Journal\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "Journal of Teacher Education",
+          "label": "Journal of Teacher Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.3864,
+          "size": 16.06751474651599,
+          "title": "Journal of Teacher Education\nPageRank: 0.15%\nDegree: 2 | Community: 2"
+        },
+        {
+          "id": "Teacher Education",
+          "label": "Teacher Education",
+          "group": "Category",
+          "size": 26,
+          "title": "Teacher Education\nPageRank: 0.90%\nDegree: 8 | Community: 2"
+        },
+        {
+          "id": "Teaching and Teacher Education",
+          "label": "Teaching and Teacher Education",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4658,
+          "size": 16.06751474651599,
+          "title": "Teaching and Teacher Education\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "European Journal of Teacher Education",
+          "label": "European Journal of Teacher Educ...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.4423,
+          "size": 16.06751474651599,
+          "title": "European Journal of Teacher Education\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Teachers and Teaching: Theory and Practice",
+          "label": "Teachers and Teaching: Theory an...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.3591,
+          "size": 16.06751474651599,
+          "title": "Teachers and Teaching: Theory and Practice\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Professional Development in Education",
+          "label": "Professional Development in Educ...",
+          "group": "Journal",
+          "impact": "Q1",
+          "mass": 4,
+          "interdisc": 0.3564,
+          "size": 16.06751474651599,
+          "title": "Professional Development in Education\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "Action in Teacher Education",
+          "label": "Action in Teacher Education",
+          "group": "Journal",
+          "impact": "Q2",
+          "mass": 2.5,
+          "interdisc": 0.3366,
+          "size": 12.308708513785287,
+          "title": "Action in Teacher Education\nPageRank: 0.21%\nDegree: 2 | Community: 2"
+        },
+        {
+          "id": "ISLS Annual Meeting",
+          "label": "ISLS Annual Meeting",
+          "group": "Conference",
+          "cfpDeadline": "November",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "ISLS Annual Meeting\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "ICLS",
+          "label": "ICLS",
+          "group": "SubConference",
+          "cfpDeadline": "November",
+          "mass": 1,
+          "interdisc": null,
+          "size": 10,
+          "title": "ICLS\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "CSCL",
+          "label": "CSCL",
+          "group": "SubConference",
+          "cfpDeadline": "November",
+          "mass": 1,
+          "interdisc": null,
+          "size": 10,
+          "title": "CSCL\nPageRank: 0.15%\nDegree: 1 | Community: 2"
+        },
+        {
+          "id": "AERA Annual Meeting",
+          "label": "AERA Annual Meeting",
+          "group": "Conference",
+          "cfpDeadline": "July",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "AERA Annual Meeting\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "EARLI Conference",
+          "label": "EARLI Conference",
+          "group": "Conference",
+          "cfpDeadline": "January",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "EARLI Conference\nPageRank: 0.15%\nDegree: 1 | Community: 4"
+        },
+        {
+          "id": "LAK Conference",
+          "label": "LAK Conference",
+          "group": "Conference",
+          "cfpDeadline": "October",
+          "mass": 1,
+          "interdisc": 0.592,
+          "size": 12.067514746515991,
+          "title": "LAK Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "EDM Conference",
+          "label": "EDM Conference",
+          "group": "Conference",
+          "cfpDeadline": "February",
+          "mass": 1,
+          "interdisc": 0.4081,
+          "size": 12.067514746515991,
+          "title": "EDM Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "AIED Conference",
+          "label": "AIED Conference",
+          "group": "Conference",
+          "cfpDeadline": "February",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "AIED Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "ITS Conference",
+          "label": "ITS Conference",
+          "group": "Conference",
+          "cfpDeadline": "February",
+          "mass": 1,
+          "interdisc": 0.1275,
+          "size": 12.067514746515991,
+          "title": "ITS Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "CHI Conference",
+          "label": "CHI Conference",
+          "group": "Conference",
+          "cfpDeadline": "September",
+          "mass": 1,
+          "interdisc": 0.544,
+          "size": 12.067514746515991,
+          "title": "CHI Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "CSCW Conference",
+          "label": "CSCW Conference",
+          "group": "Conference",
+          "cfpDeadline": "April/November",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "CSCW Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "UIST Conference",
+          "label": "UIST Conference",
+          "group": "Conference",
+          "cfpDeadline": "April",
+          "mass": 1,
+          "interdisc": 0.4398,
+          "size": 12.067514746515991,
+          "title": "UIST Conference\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "IDC Conference",
+          "label": "IDC Conference",
+          "group": "Conference",
+          "cfpDeadline": "January",
+          "mass": 1,
+          "interdisc": 0.5805,
+          "size": 12.308708513785287,
+          "title": "IDC Conference\nPageRank: 0.21%\nDegree: 2 | Community: 5"
+        },
+        {
+          "id": "IEEE VR",
+          "label": "IEEE VR",
+          "group": "Conference",
+          "cfpDeadline": "September",
+          "mass": 1,
+          "interdisc": 0.4596,
+          "size": 12.067514746515991,
+          "title": "IEEE VR\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "ISMAR",
+          "label": "ISMAR",
+          "group": "Conference",
+          "cfpDeadline": "April",
+          "mass": 1,
+          "interdisc": 0.4242,
+          "size": 12.067514746515991,
+          "title": "ISMAR\nPageRank: 0.15%\nDegree: 1 | Community: 3"
+        },
+        {
+          "id": "AECT Convention",
+          "label": "AECT Convention",
+          "group": "Conference",
+          "cfpDeadline": "March",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "AECT Convention\nPageRank: 0.15%\nDegree: 1 | Community: 1"
+        },
+        {
+          "id": "ETRA Symposium",
+          "label": "ETRA Symposium",
+          "group": "Conference",
+          "cfpDeadline": "January",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "ETRA Symposium\nPageRank: 0.15%\nDegree: 1 | Community: 5"
+        },
+        {
+          "id": "L@S Conference",
+          "label": "L@S Conference",
+          "group": "Conference",
+          "cfpDeadline": "January",
+          "mass": 1,
+          "interdisc": null,
+          "size": 13.567514746515991,
+          "title": "L@S Conference\nPageRank: 0.15%\nDegree: 2 | Community: 5"
+        },
+        {
+          "id": "SIGCSE Technical Symposium",
+          "label": "SIGCSE Technical Symposium",
+          "group": "Conference",
+          "cfpDeadline": "August",
+          "mass": 1,
+          "interdisc": 0.3726,
+          "size": 12.067514746515991,
+          "title": "SIGCSE Technical Symposium\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "ICER Conference",
+          "label": "ICER Conference",
+          "group": "Conference",
+          "cfpDeadline": "March",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "ICER Conference\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "ITiCSE Conference",
+          "label": "ITiCSE Conference",
+          "group": "Conference",
+          "cfpDeadline": "January",
+          "mass": 1,
+          "interdisc": 0.3074,
+          "size": 12.067514746515991,
+          "title": "ITiCSE Conference\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "FIE Conference",
+          "label": "FIE Conference",
+          "group": "Conference",
+          "cfpDeadline": "April",
+          "mass": 1,
+          "interdisc": 0.439,
+          "size": 12.067514746515991,
+          "title": "FIE Conference\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        },
+        {
+          "id": "ASEE Annual Conference",
+          "label": "ASEE Annual Conference",
+          "group": "Conference",
+          "cfpDeadline": "October",
+          "mass": 1,
+          "interdisc": null,
+          "size": 12.067514746515991,
+          "title": "ASEE Annual Conference\nPageRank: 0.15%\nDegree: 1 | Community: 6"
+        }
+      ]
+    }
+  },
+  {
+    "name": "duplicate edges and self loops",
+    "nodes": [
+      {
+        "id": "A",
+        "group": "Journal"
+      },
+      {
+        "id": "B",
+        "group": "Conference"
+      },
+      {
+        "id": "C",
+        "group": "Category"
+      },
+      {
+        "id": "D",
+        "group": "Journal"
+      }
+    ],
+    "edges": [
+      {
+        "from": "A",
+        "to": "B"
+      },
+      {
+        "from": "A",
+        "to": "B"
+      },
+      {
+        "from": "B",
+        "to": "A"
+      },
+      {
+        "from": "C",
+        "to": "C"
+      },
+      {
+        "from": "A",
+        "to": "C"
+      },
+      {
+        "from": "unknown",
+        "to": "B"
+      }
+    ],
+    "expected": {
+      "metrics": {
+        "degreeCentrality": [
+          [
+            "A",
+            2
+          ],
+          [
+            "B",
+            2
+          ],
+          [
+            "C",
+            2
+          ],
+          [
+            "D",
+            0
+          ]
+        ],
+        "normalizedDegree": [
+          [
+            "A",
+            0.6666666666666666
+          ],
+          [
+            "B",
+            0.6666666666666666
+          ],
+          [
+            "C",
+            0.6666666666666666
+          ],
+          [
+            "D",
+            0
+          ]
+        ],
+        "hubScore": [
+          [
+            "A",
+            1
+          ],
+          [
+            "B",
+            0
+          ],
+          [
+            "D",
+            0
+          ]
+        ],
+        "networkDensity": 1,
+        "avgClustering": 0.3333333333333333,
+        "pageRank": [
+          [
+            "A",
+            0.13384244509044657
+          ],
+          [
+            "B",
+            0.11334405304758419
+          ],
+          [
+            "C",
+            0.5028135018619692
+          ],
+          [
+            "D",
+            0.037500000000000006
+          ]
+        ],
+        "communities": [
+          [
+            "A",
+            0
+          ],
+          [
+            "C",
+            0
+          ],
+          [
+            "B",
+            1
+          ],
+          [
+            "D",
+            2
+          ]
+        ],
+        "communityCount": 3
+      },
+      "styled": [
+        {
+          "id": "A",
+          "group": "Journal",
+          "size": 14.161870546332079,
+          "title": "A\nPageRank: 13.38%\nDegree: 2 | Community: 1"
+        },
+        {
+          "id": "B",
+          "group": "Conference",
+          "size": 12.254196687794972,
+          "title": "B\nPageRank: 11.33%\nDegree: 2 | Community: 2"
+        },
+        {
+          "id": "C",
+          "group": "Category",
+          "size": 17,
+          "title": "C\nPageRank: 50.28%\nDegree: 2 | Community: 1"
+        },
+        {
+          "id": "D",
+          "group": "Journal",
+          "size": 10.745803361706352,
+          "title": "D\nPageRank: 3.75%\nDegree: 0 | Community: 3"
+        }
+      ]
+    }
+  }
+]

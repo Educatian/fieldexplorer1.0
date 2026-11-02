@@ -39,6 +39,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Startup build checks
+        run: node scripts/check_startup_build.mjs
+
       - name: Map data checks
         run: python scripts/check_map_data.py
 
