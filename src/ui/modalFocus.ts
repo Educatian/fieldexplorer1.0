@@ -4,7 +4,10 @@ export function installModalFocus(): void {
     type State = {dialog: HTMLElement; trigger: HTMLElement | null};
     const stack: State[] = [];
     const inertBefore = new Map<HTMLElement, boolean>();
-    const visible = (e: HTMLElement) => e.isConnected && e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden';
+    // CSS keeps visibility during the closing transition. Treat a closed overlay as
+    // closed immediately so its focus trap/inert state cannot outlive that transition.
+    const visible = (e: HTMLElement) => e.isConnected && !e.closest('.modal-overlay:not(.visible)')
+        && e.getClientRects().length > 0 && getComputedStyle(e).visibility !== 'hidden';
     const focusable = (dialog: HTMLElement) => [...dialog.querySelectorAll<HTMLElement>(
         'button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
     )].filter(e => visible(e) && !e.closest('[hidden]') && e.tabIndex >= 0);
