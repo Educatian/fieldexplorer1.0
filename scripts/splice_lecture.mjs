@@ -43,18 +43,20 @@ const tail = ['};\r\n', '};\n', '};'].find((s) => t.endsWith('}' + s))
 if (!tail) throw new Error('transcripts.js tail unexpected')
 t = t.slice(0, -tail.length) + `,${JSON.stringify(id)}:${JSON.stringify(a.transcript)}` + tail
 
-// app.js: link from the lecture's research-question card (after `afterId` there, else at the end)
-let app = rd('app.js')
+// discovery.js is data shared by the UI and archive consistency checks.
+const discoveryHead = 'window.ARCHIVE_DISCOVERY = '
+const rawDiscovery = rd('discovery.js')
+const discovery = JSON.parse(rawDiscovery.slice(rawDiscovery.indexOf(discoveryHead) + discoveryHead.length).trim().replace(/;$/, ''))
 if (a.question !== 'none') {
     const qid = a.question || 'perspectives'
-    const reAfter = new RegExp(`(\\{id:'${qid}',[^}]*ids:\\[[^\\]]*'${after}',)`), reEnd = new RegExp(`(\\{id:'${qid}',[^}]*ids:\\[[^\\]]*)\\]`)
-    if (reAfter.test(app)) app = app.replace(reAfter, `$1'${id}',`)
-    else if (reEnd.test(app)) app = app.replace(reEnd, `$1,'${id}']`)
-    else throw new Error(`question card ${qid} missing`)
+    const card = discovery.questions.find(q => q.id === qid)
+    if (!card) throw new Error(`question card ${qid} missing`)
+    const position = card.ids.indexOf(after)
+    card.ids.splice(position < 0 ? card.ids.length : position + 1, 0, id)
 }
 
 wr('catalog.js', HEAD + JSON.stringify(lectures, null, 2) + ';\n')
 wr('guides.js', g)
 wr('transcripts.js', t)
-wr('app.js', app)
+wr('discovery.js', rawDiscovery.slice(0, rawDiscovery.indexOf(discoveryHead)) + discoveryHead + JSON.stringify(discovery, null, 2) + ';\n')
 console.log('spliced', id, 'after', after, 'drive', driveFileId)

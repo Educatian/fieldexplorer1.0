@@ -38,3 +38,9 @@ jobs:
 
       - name: Map data checks
         run: python scripts/check_map_data.py
+
+      - name: Archive integrity checks
+        run: npm run check:archive
+
+      - name: Refresh failure and retry regressions
+        run: python scripts/test_refresh_openalex_layers.py
