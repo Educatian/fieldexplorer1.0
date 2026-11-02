@@ -133,8 +133,8 @@
   .fe-app .header-zone-modes .filter-group { flex-wrap: wrap; }
 }
 @media (max-width: 768px) {
-  .fe-app:has(.sidebar.visible) .header { z-index: 40; }
-  .fe-app .sidebar-title-group { flex: 1; min-width: 0; }
+  .fe-app .sidebar { z-index: 110; }
+  .fe-app .sidebar-overlay { z-index: 105; }
   .fe-app .sidebar-actions button { width: 44px; min-width: 44px; min-height: 44px; }
   .fe-app .header { display: flex; flex-direction: column; position: relative; align-items: stretch; padding: 12px; }
   .fe-app .logo { padding: 0 48px 0 0; }
