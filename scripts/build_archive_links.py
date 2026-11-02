@@ -28,7 +28,16 @@ TOPIC = {
     'shared-regulation-cscl': ['cscl-can-you-see-a-group-regulate-itself'], 'group-cognition': ['cscl-who-learns-when-a-group-learns'],
     'design-design-based-research': ['NdaVj7XmiEU', 'cscl-design-based-research-answer-to-what'],
     'classroom-orchestration': ['cscl-smart-dashboards-or-modest-tools'], 'automated-collaborative-process-analysis': ['edm-learning-analytics'],
+    'argumentation-and-learning-in-cscl': ['argumentation-learning'],
+    'gestures-learning-teaching': ['gesture-learning'],
+    'inquiry-learning-knowledge-integration': ['knowledge-integration'],
+    'learning-by-design': ['learning-by-design'],
+    'cognition-and-metacognition': ['metacognitive-monitoring', 'srl'],
+    'assessment': ['peer-assessment', 'formative-feedback', 'validity-argument'],
+    'massively-open-online-courses-moocs': ['learning-at-scale'],
+    'foundations-of-the-learning-sciences': ['theory-model-framework', 'self-determination', 'self-efficacy'],
 }
+TOPIC['learning-through-problem-solving'].append('problem-based-learning')
 # coded research approach (venue_methodology.json labels) -> lectures on doing that kind of study
 METHOD = {
     'Experimental': ['learning-experiments', 's0HYoN8dfIM', 'multilevel-basic'],
