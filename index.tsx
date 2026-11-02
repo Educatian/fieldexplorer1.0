@@ -834,11 +834,20 @@ interface NetworkMetrics {
 function calculateNetworkMetrics(nodes: NodeData[], edges: EdgeData[]): NetworkMetrics {
     // Build adjacency list
     const adjacency = new Map<string, Set<string>>();
+    const incoming = new Map<string, string[]>();
+    const outgoingCount = new Map<string, number>();
+    const nodeById = new Map<string, NodeData>();
+    nodes.forEach(node => { if (!nodeById.has(node.id)) nodeById.set(node.id, node); });
     nodes.forEach(n => adjacency.set(n.id, new Set()));
 
     edges.forEach(e => {
         adjacency.get(e.from)?.add(e.to);
         adjacency.get(e.to)?.add(e.from);
+        // Keep original edge order and duplicates: PageRank uses a directed multigraph.
+        const sources = incoming.get(e.to) || [];
+        sources.push(e.from);
+        incoming.set(e.to, sources);
+        outgoingCount.set(e.from, (outgoingCount.get(e.from) || 0) + 1);
     });
 
     // 1. Degree Centrality
@@ -863,7 +872,7 @@ function calculateNetworkMetrics(nodes: NodeData[], edges: EdgeData[]): NetworkM
             const neighbors = adjacency.get(node.id) || new Set();
             // Count category connections
             const categoryConnections = Array.from(neighbors).filter(
-                nId => nodes.find(n => n.id === nId)?.group === 'Category'
+                nId => nodeById.get(nId)?.group === 'Category'
             ).length;
             hubScore.set(node.id, categoryConnections);
         }
@@ -911,9 +920,9 @@ function calculateNetworkMetrics(nodes: NodeData[], edges: EdgeData[]): NetworkM
         const newRank = new Map<string, number>();
         nodes.forEach(node => {
             let rank = (1 - d) / n;
-            const inLinks = edges.filter(e => e.to === node.id).map(e => e.from);
+            const inLinks = incoming.get(node.id) || [];
             inLinks.forEach(src => {
-                const outDegree = edges.filter(e => e.from === src).length || 1;
+                const outDegree = outgoingCount.get(src) || 1;
                 rank += d * ((pageRank.get(src) || 0) / outDegree);
             });
             newRank.set(node.id, rank);
@@ -937,9 +946,9 @@ function calculateNetworkMetrics(nodes: NodeData[], edges: EdgeData[]): NetworkM
                 communities.set(current, communityId);
 
                 // Add neighbors (limit to same type for better clustering)
-                const currentNode = nodes.find(n => n.id === current);
+                const currentNode = nodeById.get(current);
                 (adjacency.get(current) || new Set()).forEach(neighbor => {
-                    const neighborNode = nodes.find(n => n.id === neighbor);
+                    const neighborNode = nodeById.get(neighbor);
                     // Group venues with categories together
                     if (!visited.has(neighbor)) {
                         if (currentNode?.group === 'Category' || neighborNode?.group === 'Category') {
