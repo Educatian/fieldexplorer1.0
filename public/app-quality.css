@@ -105,6 +105,10 @@
 .fe-app .rag-chatbot-fab { box-shadow: 0 6px 20px rgba(15,23,42,.18); background: var(--action-bg); color: #fff; }
 .fe-app .fit-modal { border: 1px solid var(--outline-variant); border-radius: 16px; box-shadow: 0 18px 60px rgba(0,0,0,.2); }
 .fe-app .topic-description { display: block; }
+@media (min-width: 769px) {
+  .fe-app .sidebar { flex: 0 0 0; width: 0; border-left-width: 0; visibility: hidden; }
+  .fe-app .sidebar.visible { flex-basis: 360px; width: 360px; border-left-width: 1px; visibility: visible; }
+}
 @media (min-width: 769px) and (max-width: 1100px) {
   .fe-app .header { grid-template-columns: 176px minmax(0,1fr); gap: 12px; }
   .fe-app .header-controls { grid-template-columns: minmax(0,1fr); }

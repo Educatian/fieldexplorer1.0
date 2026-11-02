@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import ts from 'typescript';
 import semanticProfiles from './semantic_profiles.json';
 import venueMetrics from './venue_metrics.json';
-import raw from './venues.json';
+import {MAP_VENUES as raw} from './mapVenues';
+import {NETWORK_SUMMARY} from './networkSummary';
 import {TAG_CATEGORIES,canonicalCategory} from './venues';
 const source=fs.readFileSync(new URL('../../index.tsx',import.meta.url),'utf8');
 const ast=ts.createSourceFile('index.tsx',source,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
@@ -15,6 +16,7 @@ const reference=fn.replace('const terms = vectorTerms.get(v1.name)!;', 'const te
 describe('semantic graph calculation parity',()=>{
  it('preserves every node, edge, tooltip, category and citation record',()=>{
   const actual=parse(fn),before=parse(reference);
+  expect(NETWORK_SUMMARY).toEqual({journals:actual.nodes.filter((n:any)=>n.group==='Journal').length,conferences:actual.nodes.filter((n:any)=>['Conference','SubConference'].includes(n.group)).length,categories:actual.categories.length});
   expect(reference).not.toEqual(fn);expect(actual.nodes.length).toBeGreaterThan(100);expect(actual.edges.some((e:any)=>e.id?.startsWith('semantic-'))).toBe(true);
   expect(actual.nodes).toEqual(before.nodes);expect(actual.categories).toEqual(before.categories);expect(actual.citationEdges).toEqual(before.citationEdges);
   expect(actual.edges).toHaveLength(before.edges.length);
