@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "check:archive": "node scripts/check_archive.mjs && node --test scripts/check_archive.test.mjs",
+    "check:archive": "node scripts/check_archive.mjs && node --test scripts/check_archive.test.mjs scripts/embed.test.mjs",
     "rag:embed": "node scripts/fill-rag-embeddings.mjs"
   },
   "dependencies": {
