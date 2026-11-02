@@ -12,7 +12,11 @@
     "rag:embed": "node scripts/fill-rag-embeddings.mjs"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.89.0"
+    "@supabase/supabase-js": "^2.89.0",
+    "html2canvas": "1.4.1",
+    "jspdf": "4.2.1",
+    "vis-data": "8.0.6",
+    "vis-network": "10.1.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -732,6 +732,7 @@
         }
     </style>
     <link rel="stylesheet" href="/fieldexplorer-refresh.css">
+  <link rel="stylesheet" href="/app-quality.css">
 </head>
 
 <body class="fe-landing">
@@ -785,15 +786,15 @@
                 </div>
                 <div class="hero-meta">
                     <div class="hero-meta-item">
-                        <div class="hero-meta-value">64</div>
+                        <div class="hero-meta-value" data-network-count="journals">65</div>
                         <div class="hero-meta-label">Journals</div>
                     </div>
                     <div class="hero-meta-item">
-                        <div class="hero-meta-value">23</div>
+                        <div class="hero-meta-value" data-network-count="conferences">23</div>
                         <div class="hero-meta-label">Conferences</div>
                     </div>
                     <div class="hero-meta-item">
-                        <div class="hero-meta-value">18</div>
+                        <div class="hero-meta-value" data-network-count="categories">13</div>
                         <div class="hero-meta-label">Categories</div>
                     </div>
                 </div>
@@ -874,6 +875,8 @@
     </div>
     <script type="module">
         import { signIn, signUp, getSession } from './auth.ts';
+        import { renderNetworkSummary } from './src/data/networkSummary.ts';
+        renderNetworkSummary();
 
         // Generate random network dots
         const dotsContainer = document.getElementById('network-dots');
