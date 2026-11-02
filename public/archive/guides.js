@@ -3,7 +3,7 @@ window.LECTURE_GUIDES = {
     "id": "knowledge-tracing-bkt-dkt",
     "purpose": "Use this lecture to compare how BKT and DKT estimate what a learner knows and to choose a model for a specific tutoring decision.",
     "distinction": "BKT uses interpretable prior-knowledge, learning, guess, and slip parameters, while DKT learns a more flexible representation of response sequences for prediction.",
-    "caution": "The lecture's 0.809 versus 0.807 AUC comes from one small simulation, so treat it as illustrative and not as evidence about real learners or learning outcomes.",
+    "caution": "The lecture's 0.809 versus 0.807 AUC comes from one small simulation, so treat it as illustrative and not as evidence about real learners or learning outcomes. The 0.86 versus 0.69 comparison is a historical 2015 ASSISTments benchmark, not a general ordering of BKT and DKT. Predicting the next answer is different from demonstrating learning gains.",
     "koSummary": "이 강의는 학습자의 정오답 기록으로 지식 상태를 추정하는 베이지안 지식추적(BKT)과 딥러닝 기반 DKT를 비교합니다. 예측 성능만이 아니라 해석 가능성과 실제 교육적 의사결정에 맞는 모델을 고르라고 강조합니다.",
     "sources": [
       {
@@ -22,10 +22,20 @@ window.LECTURE_GUIDES = {
         "url": "https://arxiv.org/abs/1604.02416",
         "relationship": "Further reading",
         "access": "Full text available · excerpt checked",
-        "verificationNote": "arXiv abstract page read via search excerpt; full PDF not opened. Full text is available."
+        "verificationNote": "Targeted check 2026-11-01: arXiv PDF abstract and conclusion (p. 7) read. Extended BKT achieves comparable average predictive performance over the four datasets tested; this is not evidence of learning gains."
+      },
+      {
+        "title": "Deep Knowledge Tracing",
+        "authors": "Chris Piech, Jonathan Bassen, Jonathan Huang, Surya Ganguli, Mehran Sahami, Leonidas Guibas, and Jascha Sohl-Dickstein",
+        "year": 2015,
+        "url": "https://papers.nips.cc/paper/2015/hash/bac9162b47c56fc8a4d2a519803d51b3-Abstract.html",
+        "relationship": "Further reading",
+        "access": "Full text available · Table 1 and results checked",
+        "verificationNote": "Targeted check 2026-11-01: Table 1 of the original paper reports ASSISTments AUC 0.86 for DKT, 0.67 for standard BKT and 0.69 for the best prior reported BKT result. Historical benchmark only."
       }
     ],
-    "reviewedAt": "2026-10-16"
+    "verificationNote": "Targeted source check on 2026-11-01: Piech et al. 2015, Table 1/Results, confirms the historical ASSISTments AUC 0.86 versus best prior 0.69. Khajah et al. 2016, abstract and conclusion, finds comparable average performance for extended BKT over four tested datasets. The lecture’s separate 600-student simulation was not independently reproduced. Selected claims only, not independent scholarly approval.",
+    "reviewedAt": "2026-11-01"
   },
   "0P0xOb9frbA": {
     "id": "0P0xOb9frbA",
@@ -4048,7 +4058,7 @@ window.LECTURE_GUIDES = {
     "id": "problem-based-learning",
     "purpose": "Use this lecture to decide whether a problem-based design fits a unit, to plan the problem, the self-directed study and the facilitation it needs, and to read the evidence on what problem-based learning does and does not improve.",
     "distinction": "Problem-based learning (Barrows, 1986; Hmelo-Silver, 2004) puts a complex, ill-defined problem first: groups identify what they need to learn, study it, apply it, and reflect, with the teacher as facilitator. Barrows (1986) stresses that the label covers many methods. Meta-analytic work finds a small overall advantage that varies across studies (Walker & Leary, 2009), advantages for long-term retention and skills but not short-term exam retention (Strobel & van Barneveld, 2009), and the largest effects on understanding the principles that link concepts (Gijbels et al., 2005). Kirschner, Sweller, and Clark (2006) argue that minimal guidance fails novices; Hmelo-Silver, Duncan, and Chinn (2007) reply that problem-based learning is heavily scaffolded.",
-    "caution": "Ms. Rivera and her class are made up. Problem-based learning is not unguided discovery: it needs designed problems and active facilitation. The pooled effect is small and varies widely, short-term exam retention can favor traditional teaching, and much of the early evidence comes from medical and gifted education.",
+    "caution": "Ms. Rivera and her class are made up. Problem-based learning is not unguided discovery: it needs designed problems and active facilitation. The pooled effect is small and varies widely, short-term exam retention can favor traditional teaching, and much of the early evidence comes from medical and gifted education. The research-gap statement describes the 2004 review, not the current extent of PBL research.",
     "koSummary": "이 강의는 강의를 듣기 전에 환자 사례부터 접하고, 먼저 무엇을 배워야 하는지 스스로 정해야 하는 의대생들의 모습으로 시작합니다. 오늘날 형태의 문제기반학습(problem-based learning)은 의학교육에서 시작되었으며, Howard Barrows는 이 용어가 하나의 방법이 아니라 질이 제각각인 여러 설계를 가리킨다고 경고했습니다. Cindy Hmelo-Silver가 설명한 순환 과정, 즉 정답이 하나가 아닌 복잡한 문제, 모둠이 배워야 할 것을 찾아내기, 자기주도적 학습, 문제에 적용하기, 성찰하기를 따라가며, 교사는 지식을 전달하기보다 과정을 촉진한다는 점과 이 접근의 목표들을 소개합니다. Henk Schmidt가 제시한 세 가지 학습 원리인 선행 지식 활성화, 정교화, 부호화 특수성도 짚습니다. 82편의 연구와 201개 결과를 종합한 Walker와 Leary의 메타분석은 문제기반학습에 유리했지만 효과가 작고(d = 0.13) 연구마다 크게 달랐으며, Strobel과 van Barneveld의 종합에서는 장기 기억, 기술 발달, 만족도에서 앞섰지만 국가시험으로 잰 단기 기억에서는 전통적 수업이 나았고, 또 다른 메타분석에서는 개념을 잇는 원리를 묻는 평가에서 효과가 가장 컸습니다. 가상의 9학년 보건 수업에서는 한 마을의 여러 가족이 같은 주에 병이 난 사례를 탐구합니다. 마지막으로 안내가 얼마나 필요한지에 대한 논쟁과, 2004년 검토에서 지적한 의학교육과 영재교육 밖의 연구 부족를 짚고 성찰 질문으로 마무리합니다.",
     "sources": [
       {
@@ -4067,7 +4077,7 @@ window.LECTURE_GUIDES = {
         "url": "https://doi.org/10.1023/b:edpr.0000034022.16470.f3",
         "relationship": "Further reading",
         "access": "Abstract · full-text access not verified",
-        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31). Targeted check 2026-11-01: publisher abstract explicitly places the research-gap claim in this 2004 review."
       },
       {
         "title": "A problem based learning meta analysis: Differences across problem types, implementation types, disciplines, and assessment levels",
@@ -4075,8 +4085,8 @@ window.LECTURE_GUIDES = {
         "year": 2009,
         "url": "https://doi.org/10.7771/1541-5015.1061",
         "relationship": "Further reading",
-        "access": "Open-access copy indexed; full-text access not checked",
-        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+        "access": "Publisher abstract checked · full text not checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31). Targeted check 2026-11-01: abstract confirms 82 studies, 201 outcomes, d = 0.13 and heterogeneous results."
       },
       {
         "title": "When is PBL more effective? A meta-synthesis of meta-analyses comparing PBL to conventional classrooms",
@@ -4088,7 +4098,7 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
       }
     ],
-    "verificationNote": "Caption-based editorial guide. The video names Barrows (1986), Hmelo-Silver (2004), Schmidt (1983), Walker & Leary (2009), Strobel & van Barneveld (2009), Gijbels et al. (2005), Kirschner, Sweller & Clark (2006) and Hmelo-Silver, Duncan & Chinn (2007). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json.",
+    "verificationNote": "Caption-based editorial guide. The video names Barrows (1986), Hmelo-Silver (2004), Schmidt (1983), Walker & Leary (2009), Strobel & van Barneveld (2009), Gijbels et al. (2005), Kirschner, Sweller & Clark (2006) and Hmelo-Silver, Duncan & Chinn (2007). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json. Targeted source check on 2026-11-01: Walker & Leary publisher abstract (82 studies, 201 outcomes, d = 0.13) and Hmelo-Silver publisher abstract (historical research gap). Full texts and other claims were not re-audited in this pass. This is an editorial check, not independent scholarly approval.",
     "reviewedAt": "2026-11-01"
   },
   "learning-by-design": {
@@ -4142,7 +4152,7 @@ window.LECTURE_GUIDES = {
     "id": "knowledge-integration",
     "purpose": "Use this lecture to design inquiry that starts from students' own ideas and to decide how much and what kind of guidance it needs, from the teacher or from software.",
     "distinction": "The knowledge integration perspective (Linn, 2005; Linn et al., 2006) treats learners' multiple, conflicting ideas as the starting point and supports them to state, add, sort out, connect, and evaluate ideas; WISE (Linn, Clark & Slotta, 2003) builds this into customizable online inquiry projects. Meta-analyses on guidance show that unassisted discovery underperforms explicit instruction while enhanced discovery outperforms other instruction (Alfieri et al., 2011), that guidance improves inquiry activities, performance, and outcomes (Lazonder & Harmsen, 2016), that studies with teacher-led inquiry had larger average effects than studies with student-led inquiry (Furtak et al., 2012), and that automated guidance outperforms typical teacher guidance (Gerard et al., 2015).",
-    "caution": "Ms. Park and her class are made up. Inquiry is not leaving students alone: unassisted discovery did not help learners. Guidance can come from the teacher or from software, and there are too few studies to say how guidance should change with learners' age.",
+    "caution": "Ms. Park and her class are made up. Inquiry is not leaving students alone: unassisted discovery did not help learners. Guidance can come from the teacher or from software, and there are too few studies to say how guidance should change with learners' age. The teacher-led versus student-led difference is a comparison across studies, not a randomized head-to-head effect or a 40-percentage-point gain.",
     "koSummary": "이 강의는 빛이 얼마나 멀리 가는지 묻고, 학생들이 수업과 경험, 친구에게서 얻은 여러 답을 한꺼번에 내놓는 장면으로 시작합니다. Marcia Linn의 지식 통합(knowledge integration) 관점에서 학습자는 여러 개의 서로 충돌하고 때로 혼란스러운 생각을 지니며, 교사가 그 생각을 출발점으로 삼을 때 수업이 효과적이고 오래 남습니다. 학습자가 자기 생각을 말하고, 시각화를 포함한 새 생각을 더하고, 여러 맥락에서 생각을 가려내고, 서로 연결하고, 어떤 생각이 타당한지 판단할 기준을 세우는 과정을 따라가며, Linn의 연구팀이 이를 교사, 기술자, 교과 전문가, 연구자가 함께 설계하고 교사가 자기 수업에 맞게 고치는 온라인 탐구 환경 WISE에 담은 방식을 보여 줍니다. 이어서 탐구에 안내가 얼마나 필요한지 다룹니다. Alfieri와 동료들은 아무 도움 없는 발견학습이 명시적 교수보다 못했고(d = -0.38), 피드백, 풀이 예제, 비계, 설명을 더한 발견학습은 다른 수업보다 나았다(d = 0.30)고 보고했습니다. 72편의 연구를 종합한 Lazonder와 Harmsen은 안내가 학습 활동, 탐구 중 수행, 학습 성과(d = 0.50)를 모두 높였다고 밝혔고, 다른 메타분석에서는 교사 주도 탐구를 포함한 연구들의 평균 효과크기가 학생 주도 탐구 연구들보다 약 0.40 컸으며, 자동화된 안내가 일반적인 교사 안내보다 효과적이었고 특히 사전 지식이 적은 학생에게 도움이 되었습니다. 가상의 학급이 금속 숟가락이 나무 숟가락보다 차갑게 느껴지는 이유를 탐구하는 예와 주의점, 성찰 질문으로 마무리합니다.",
     "sources": [
       {
@@ -4169,8 +4179,8 @@ window.LECTURE_GUIDES = {
         "year": 2016,
         "url": "https://doi.org/10.3102/0034654315627366",
         "relationship": "Further reading",
-        "access": "Open-access copy indexed; full-text access not checked",
-        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+        "access": "Full text available · selected passages checked",
+        "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31). Targeted check 2026-11-01: version-of-record PDF at University of Groningen confirms 72 studies, learning-outcome d = 0.50, and limited age-moderator conclusions. https://pure.rug.nl/ws/portalfiles/portal/81069469/Meta_analysis_of_inquiry_based_learning_Effects_of_guidance.pdf"
       },
       {
         "title": "Does discovery-based instruction enhance learning?",
@@ -4180,9 +4190,18 @@ window.LECTURE_GUIDES = {
         "relationship": "Further reading",
         "access": "Open-access copy indexed; full-text access not checked",
         "verificationNote": "Live Crossref search matched (title words 100%, first author, year); DOI resolves to a publisher page showing this title (checked in ego-browser, 2026-10-31)."
+      },
+      {
+        "title": "Experimental and quasi-experimental studies of inquiry-based science teaching: A meta-analysis",
+        "authors": "Erin Marie Furtak, Tina Seidel, Heidi Iverson, and Derek C. Briggs",
+        "year": 2012,
+        "url": "https://doi.org/10.3102/0034654312457206",
+        "relationship": "Further reading",
+        "access": "Publisher abstract checked · full text not checked",
+        "verificationNote": "Targeted check 2026-11-01: publisher abstract reports a roughly 0.40 difference in mean effect sizes between studies with teacher-led and student-led activities. This is a study-level moderator comparison."
       }
     ],
-    "verificationNote": "Caption-based editorial guide. The video names Linn (2000, 2005), Linn et al. (2006), Linn, Clark & Slotta (2003), Alfieri et al. (2011), Lazonder & Harmsen (2016), Furtak et al. (2012) and Gerard et al. (2015). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json.",
+    "verificationNote": "Caption-based editorial guide. The video names Linn (2000, 2005), Linn et al. (2006), Linn, Clark & Slotta (2003), Alfieri et al. (2011), Lazonder & Harmsen (2016), Furtak et al. (2012) and Gerard et al. (2015). Every source passed a live Crossref search (title words, first author, year) and a DOI landing check in ego-browser on 2026-10-31; each narrated claim and number is matched to abstract text from OpenAlex or the publisher page in refs.json. Targeted source check on 2026-11-01: Lazonder & Harmsen version-of-record PDF (abstract and age-related limitations) and Furtak et al. publisher abstract. Selected claims only; this is not independent scholarly approval.",
     "reviewedAt": "2026-11-01"
   },
   "argumentation-learning": {
@@ -4236,7 +4255,7 @@ window.LECTURE_GUIDES = {
     "id": "peer-assessment",
     "purpose": "Use this lecture to decide what peer assessment can and cannot do in your course, and to design it: shared criteria, practice before rating, scores with comments, and time to revise.",
     "distinction": "Peer assessment has students judge the quality of peers' work; peer review is reciprocal, with students both producing and receiving reviews (Topping, 1998; Nicol, Thomson & Breslin, 2014). Peer ratings agree moderately with teacher ratings (r = .63; Li et al., 2016), and peer assessment improved academic performance with a small to medium effect (g = 0.31), not clearly different from self-assessment (Double, McGrane & Hopfenbeck, 2020). Producing reviews engages evaluative judgment about others' and one's own work (Nicol et al., 2014).",
-    "caution": "Dario and his class are made up. Peer and teacher ratings agree only moderately, so peer marks are better used as feedback than as final grades. Agreement was higher when raters helped build the criteria and gave comments as well as scores. Peer assessment was not clearly better than self-assessment, and Topping's 1998 review covered higher education.",
+    "caution": "Dario and his class are made up. Peer and teacher ratings agree only moderately, so peer marks are better used as feedback than as final grades. Agreement was higher when raters helped build the criteria and gave comments as well as scores. Peer assessment was not clearly better than self-assessment, and Topping's 1998 review covered higher education. A correlation of .63 does not establish interchangeable grades. The nonsignificant comparison with self-assessment does not establish equivalence.",
     "koSummary": "이 강의는 주말 동안 실험 보고서 서른 편을 채점해야 하는 교사를 보여 주며, 학생들이 먼저 서로의 초안을 평가한다면 그 판단이 쓸 만한지, 그리고 누가 배우게 되는지 묻습니다. 동료평가는 학생이 동료의 과제 품질을 점수나 코멘트, 또는 둘 다로 판단하는 것이며, David Nicol과 동료들은 동료 리뷰를 리뷰를 쓰기도 하고 받기도 하는 상호적 과정으로 설명합니다. Keith Topping의 1998년 리뷰는 동료평가의 정의와 유형을 제안했고, 여러 적용에서 신뢰도와 타당도가 적절하며 성취에 대한 형성적 효과가 교사 평가만큼 또는 그보다 좋다고 보고했습니다. Hongli Li와 동료들의 2016년 메타분석에서 동료 평정과 교사 평정의 평균 상관은 0.63으로 중간 이상이었고, 평가자가 점수와 함께 코멘트를 주거나 평가 기준 개발에 참여할 때 더 높았습니다. Kit Double, Joshua McGrane, Therese Hopfenbeck의 2020년 메타분석(54편 연구)에서 동료평가는 학업 성취에 작거나 중간 정도의 효과(g = 0.31)를 보였고, 평가가 없을 때나 교사 평가보다 나았지만 자기평가와는 뚜렷한 차이가 없었으며, 다양한 맥락에서 효과가 견고했습니다. 리뷰를 쓰는 일은 동료의 과제와 자신의 과제에 대한 평가적 판단을 이끌어 냅니다. 가상의 화학 수업에서는 학생들이 함께 루브릭을 만들고, 예시 보고서로 연습한 뒤, 두 동료의 초안을 평가하고 자기 초안을 고칩니다.",
     "sources": [
       {
@@ -4263,8 +4282,8 @@ window.LECTURE_GUIDES = {
         "year": 2020,
         "url": "https://doi.org/10.1007/s10648-019-09510-3",
         "relationship": "Further reading",
-        "access": "Open-access copy indexed; full-text access not checked",
-        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a Springer page showing this title."
+        "access": "Open-access full text · selected results checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a Springer page showing this title. Targeted check 2026-11-01: publisher abstract reports 54 studies, pooled g = 0.31 and self-assessment contrast g = 0.23, p = .209. Selected full-text comparison-group definitions were also read."
       },
       {
         "title": "Rethinking feedback practices in higher education: A peer review perspective",
@@ -4276,7 +4295,7 @@ window.LECTURE_GUIDES = {
         "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to a publisher page showing this title."
       }
     ],
-    "verificationNote": "Caption-based editorial guide. The video names Topping (1998), Li et al. (2016), Double, McGrane & Hopfenbeck (2020), and Nicol, Thomson & Breslin (2014); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json.",
+    "verificationNote": "Caption-based editorial guide. The video names Topping (1998), Li et al. (2016), Double, McGrane & Hopfenbeck (2020), and Nicol, Thomson & Breslin (2014); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json. Targeted source check on 2026-11-01: Double et al. open-access publisher full text, abstract, comparison groups and interpretation. Confirms pooled g = 0.31, with nonsignificant self-assessment contrast; no equivalence claim is justified. Other claims were not independently re-audited. This is not independent scholarly approval.",
     "reviewedAt": "2026-11-01"
   },
   "self-determination": {
@@ -4330,8 +4349,8 @@ window.LECTURE_GUIDES = {
     "id": "self-efficacy",
     "purpose": "Use this lecture to plan how learners can build realistic self-efficacy for a task they avoid, starting from the source most likely to work for them, and to remember that success feeds belief.",
     "distinction": "Self-efficacy (Bandura, 1977) is a person's expectation of personal efficacy, derived from performance accomplishments, vicarious experience, verbal persuasion, and physiological states. In school settings mastery experience is typically the most influential source, though the sources vary with context (Usher & Pajares, 2008). Self-efficacy relates positively to academic performance and persistence (Multon, Brown & Lent, 1991), and the relation is reciprocal for adults, with performance affecting later self-efficacy more than the reverse (Talsma et al., 2018).",
-    "caution": "Ms. Lopez and her class are made up. The sources work differently for different learners and subjects. Belief does not replace skill: over time, performance feeds belief more than belief feeds performance, and encouragement alone is usually weaker than real success.",
-    "koSummary": "이 강의는 첫 수학 퀴즈에서 같은 점수를 받은 두 학생, 즉 더 잘할 수 있다고 생각하는 학생과 자신은 수학형 인간이 아니라고 생각하는 학생을 보여 주며 누가 계속 노력할지 묻습니다. Albert Bandura가 1977년에 제시한 자기효능감(self-efficacy) 이론을 소개하는데, 효능 기대가 어려운 과제를 시작할지, 얼마나 노력할지, 장애물 앞에서 얼마나 오래 버틸지를 결정한다고 봅니다. 자기효능감의 네 가지 원천으로 수행 성취, 대리 경험, 언어적 설득, 생리적 상태를 제시합니다. Ellen Usher와 Frank Pajares의 학교 연구 리뷰에 따르면 숙달 경험이 대체로 가장 강력한 원천이지만, 각 원천의 힘은 성별, 민족, 능력, 교과에 따라 달라집니다. Multon, Brown, Lent의 1991년 메타분석은 자기효능감이 학업 수행 및 지속성과 유의한 정적 관계를 가지며 그 크기가 연구마다 다름을 보여 주었습니다. Talsma 등의 2018년 메타분석(종단 연구 11편, 2,688명)에서는 이전 수행이 이후 자기효능감을 예측하는 정도(beta = 0.205)가 자기효능감이 이후 수행을 예측하는 정도(beta = 0.071)보다 컸고, 아동에서는 수행에서 신념으로 가는 경로만 유지되었습니다. 가상의 대수 교사는 한 수업에서 네 원천을 하나씩 활용합니다.",
+    "caution": "Ms. Lopez and her class are made up. The sources work differently for different learners and subjects. Belief does not replace skill: over time, performance feeds belief more than belief feeds performance, and encouragement alone is usually weaker than real success. The 2018 cross-lagged results are predictive associations from non-experimental data, not proof of causation or percentage-point improvements.",
+    "koSummary": "이 강의는 첫 수학 퀴즈에서 같은 점수를 받은 두 학생, 즉 더 잘할 수 있다고 생각하는 학생과 자신은 수학형 인간이 아니라고 생각하는 학생을 보여 주며 누가 계속 노력할지 묻습니다. Albert Bandura가 1977년에 제시한 자기효능감(self-efficacy) 이론을 소개하는데, 효능 기대가 어려운 과제를 시작할지, 얼마나 노력할지, 장애물 앞에서 얼마나 오래 버틸지를 결정한다고 봅니다. 자기효능감의 네 가지 원천으로 수행 성취, 대리 경험, 언어적 설득, 생리적 상태를 제시합니다. Ellen Usher와 Frank Pajares의 학교 연구 리뷰에 따르면 숙달 경험이 대체로 가장 강력한 원천이지만, 각 원천의 힘은 성별, 민족, 능력, 교과에 따라 달라집니다. Multon, Brown, Lent의 1991년 메타분석은 자기효능감이 학업 수행 및 지속성과 유의한 정적 관계를 가지며 그 크기가 연구마다 다름을 보여 주었습니다. Talsma 등의 2018년 메타분석(종단 연구 11편, 2,688명)에서는 이전 수행이 이후 자기효능감을 예측하는 정도(beta = 0.205)가 자기효능감이 이후 수행을 예측하는 정도(beta = 0.071)보다 컸고, 아동에서는 수행에서 신념으로 가는 경로만 유지되었습니다. 가상의 대수 교사는 한 수업에서 네 원천을 하나씩 활용합니다. 이 교차지연 결과는 비실험 종단자료의 예측 관계이며, 인과관계나 성적의 퍼센트포인트 향상을 뜻하지 않습니다.",
     "sources": [
       {
         "title": "Self-efficacy: Toward a unifying theory of behavioral change",
@@ -4366,11 +4385,11 @@ window.LECTURE_GUIDES = {
         "year": 2018,
         "url": "https://doi.org/10.1016/j.lindif.2017.11.015",
         "relationship": "Further reading",
-        "access": "Open-access copy indexed; full-text access not checked",
-        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a ScienceDirect page showing this title (on a second try; the first showed a browser check)."
+        "access": "Author preprint available · selected results and limitations checked",
+        "verificationNote": "Crossref record matched (title words 100%, first author, year); DOI resolves to a ScienceDirect page showing this title (on a second try; the first showed a browser check). Targeted check 2026-11-01: Chapter 2 of author thesis (repository DOI https://doi.org/10.25959/23239409), PDF pp. 40, 64, 80–81; k = 11, N = 2688, standardized paths 0.205 and 0.071. Non-experimental evidence does not establish causality. The journal version was not available for this pass."
       }
     ],
-    "verificationNote": "Caption-based editorial guide. The video names Bandura (1977), Usher and Pajares (2008), Multon, Brown and Lent (1991), and Talsma et al. (2018); every number in the narration was checked against the retrieved abstracts (Semantic Scholar, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. Details in refs.json.",
+    "verificationNote": "Caption-based editorial guide. The video names Bandura (1977), Usher and Pajares (2008), Multon, Brown and Lent (1991), and Talsma et al. (2018); every number in the narration was checked against the retrieved abstracts (Semantic Scholar, publisher pages), and each source was checked against Crossref (title words, first author, year), OpenAlex, and its DOI landing page on 2026-11-01. Details in refs.json. Targeted source check on 2026-11-01: Chapter 2 preprint in the author’s University of Tasmania thesis, PDF pages 40 (abstract), 64 (Figure 2/results), and 80–81 (causal limitations), confirms the selected longitudinal numbers and limitations. This is not the journal version or independent scholarly approval; other claims were not re-audited.",
     "reviewedAt": "2026-11-01"
   },
   "learning-at-scale": {
@@ -4471,7 +4490,7 @@ window.LECTURE_GUIDES = {
     "id": "gesture-learning",
     "purpose": "Use this lecture to treat learners' gestures as evidence of their thinking, to decide when asking learners to gesture, or gesturing yourself, is likely to help, and to plan how you would watch for ideas that appear in the hands before they appear in words.",
     "distinction": "Gesture works in two directions: it reflects thinking, often thinking not yet in speech, and it can change thinking (Goldin-Meadow & Alibali, 2013). In mathematics, teachers' and learners' gestures are evidence that thinking is embodied (Alibali & Nathan, 2012). Producing correct gestures during a lesson improved learning (Goldin-Meadow, Cook & Mitchell, 2009), and across 83 samples gesture moderately helped comprehension, with larger average effects in studies of producing than of observing gestures (Dargue, Sweller & Jones, 2019).",
-    "caution": "Sam and the class are made up. A gesture is evidence to interpret, not a way to read minds. Not every gesture helps: in the meta-analysis the benefit depended on the type and function of the gesture, the learner's age, and how comprehension was measured. Asking learners to move their hands works best when the movement carries the idea; partly correct gestures helped less than correct ones.",
+    "caution": "Sam and the class are made up. A gesture is evidence to interpret, not a way to read minds. Not every gesture helps: in the meta-analysis the benefit depended on the type and function of the gesture, the learner's age, and how comprehension was measured. Asking learners to move their hands works best when the movement carries the idea; partly correct gestures helped less than correct ones. The production-versus-observation result compares average effects across studies; it does not establish that producing gestures is always better in a direct classroom comparison.",
     "koSummary": "이 강의는 수학 문제를 어떻게 풀었는지 설명하는 아이가 말로는 한 가지 전략을 말하지만 손으로는 다른 방식을 보여 주는 장면으로 시작해, 교사가 어느 쪽에 주목해야 하는지 묻습니다. Susan Goldin-Meadow와 Martha Alibali의 리뷰에 따르면 제스처는 말로 드러나지 않은 생각까지 반영하므로 사고를 들여다보는 창이 될 수 있고, 동시에 그 생각을 바꿀 수도 있습니다. Martha Alibali와 Mitchell Nathan은 교사와 학습자의 제스처를 근거로 수학적 사고가 체화되어 있다고 주장하는데, 가리키기 제스처는 생각을 물리적 환경에 연결하고 표상적 제스처는 행위와 지각의 정신적 시뮬레이션을 드러냅니다. 2009년 Goldin-Meadow와 동료들의 수학 수업 연구에서는 올바른 제스처를 하도록 한 아이들이 부분적으로 올바른 제스처를 한 아이들보다, 그리고 이들이 제스처를 하지 않은 아이들보다 더 많이 배웠으며, 이 효과는 손으로만 표현한 정보를 말에 더했는지에 달려 있었습니다. Nicole Dargue, Naomi Sweller, Michael Jones의 2019년 메타분석(83개 표본)에서 제스처는 이해에 중간 정도의 도움을 주었고, 직접 제스처를 하는 연구들의 평균 효과가 관찰 연구들보다 더 컸으며, 제스처의 유형과 기능, 학습자 연령, 측정 방식에 따라 달라졌습니다. 가상의 4학년 수업에서는 교사가 등식 문제를 푸는 학생의 묶는 손동작을 알아차리고 그것을 말로 옮겨 보게 합니다.",
     "sources": [
       {
@@ -4507,11 +4526,11 @@ window.LECTURE_GUIDES = {
         "year": 2019,
         "url": "https://doi.org/10.1037/bul0000202",
         "relationship": "Further reading",
-        "access": "Open-access copy indexed; full-text access not checked",
-        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to an APA PsycNET page showing this title."
+        "access": "Author abstract checked · full text not checked",
+        "verificationNote": "Crossref record matched (title words, first author, year); DOI resolves to an APA PsycNET page showing this title. Targeted check 2026-11-01: https://pubmed.ncbi.nlm.nih.gov/31219263/ confirms 83 independent samples and larger average effects in production studies than observation studies."
       }
     ],
-    "verificationNote": "Caption-based editorial guide. The video names Goldin-Meadow & Alibali (2013), Alibali & Nathan (2012), Goldin-Meadow, Cook & Mitchell (2009), and Dargue, Sweller & Jones (2019); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json.",
+    "verificationNote": "Caption-based editorial guide. The video names Goldin-Meadow & Alibali (2013), Alibali & Nathan (2012), Goldin-Meadow, Cook & Mitchell (2009), and Dargue, Sweller & Jones (2019); each was found by a live Crossref search (title words, first author, year), its DOI landing was checked in a browser, and every narrated claim and number was taken from its abstract (OpenAlex, Semantic Scholar, or the publisher page) on 2026-10-31. See refs.json. Targeted source check on 2026-11-01: Dargue et al. author abstract indexed by PubMed (83 independent samples and study-level production-versus-observation moderator). Other claims and full text were not re-audited. This is not independent scholarly approval.",
     "reviewedAt": "2026-11-01"
   }
 };

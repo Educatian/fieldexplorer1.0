@@ -107,6 +107,26 @@ describe('rankSubmissionFit', () => {
         // The strongest topical match anchors the pool at 100.
         expect(ranked[0].overall).toBe(100);
     });
+
+    it('exposes raw overlap independently of candidate-relative normalization', () => {
+        const abstract = 'online education feedback digital students engagement motivation classrooms';
+        const full = rankSubmissionFit(abstract, [
+            { name: 'Computers & Education' }, { name: 'Journal of the Learning Sciences' },
+            { name: 'British Journal of Educational Technology' },
+        ]);
+        expect(full.length).toBeGreaterThan(1);
+        const weaker = full.find(r => r.topicScore < 100)!;
+        expect(weaker).toBeDefined();
+        const solo = rankSubmissionFit(abstract, [{ name: weaker.name }])[0];
+        expect(solo.rawTopicCosine).toBe(weaker.rawTopicCosine);
+        expect(solo.topicScore).toBe(100);
+        expect(solo.candidateCount).toBe(1);
+        expect(weaker.candidateCount).toBe(full.length);
+        expect(solo.matchedTermCount).toBe(weaker.matchedTermCount);
+        expect(solo.matchedTermCount!).toBeGreaterThanOrEqual(solo.sharedTerms.length);
+        expect(solo.rawTopicCosine!).toBeGreaterThan(0);
+        expect(solo.rawTopicCosine!).toBeLessThanOrEqual(1);
+    });
 });
 
 describe('explainFit (scorecard teaching moment)', () => {
@@ -128,6 +148,8 @@ describe('explainFit (scorecard teaching moment)', () => {
         expect(t!.headline).toContain('Qualitative'); // discourse/culture signal surfaced
         expect(t!.nextCheck.length).toBeGreaterThan(0);
         expect(t!.caveat).toContain('휴리스틱');     // honest framing
+        expect(t!.caveat).toContain('게재 확률이 아닙니다');
+        expect(t!.caveat).toContain('상대점수');
     });
 
     it('contrasts #1 vs #2 on distinctive terms and methodology culture', () => {

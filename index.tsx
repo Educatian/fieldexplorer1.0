@@ -3672,16 +3672,17 @@ async function main() {
                     <span class="fit-rank">#${i + 1}</span>
                     <span class="fit-venue">${escapeHtml(r.name)}</span>
                     ${r.impact ? `<span class="fit-q">${r.impact}</span>` : ''}
-                    <span class="fit-overall">${r.overall}</span>
+                    <span class="fit-overall" aria-label="종합 상대점수 ${r.overall}">${r.overall}</span>
                 </div>
                 <div class="fit-metrics">
-                    ${fitBar('주제 적합', r.topicScore, '#7ba0cc')}
-                    ${fitBar('방법론 문화', r.methodScore, '#38bdf8')}
+                    ${fitBar('주제 상대점수', r.topicScore, '#7ba0cc')}
+                    ${fitBar('방법론 어휘', r.methodScore, '#38bdf8')}
                 </div>
                 <div class="fit-foot">
                     ${r.topMethodology ? `<span class="fit-meth">우세 방법론: ${escapeHtml(r.topMethodology)}</span>` : ''}
                 </div>
                 ${r.sharedTerms.length ? `<div class="fit-why">왜: ${r.sharedTerms.map(t => `<span class="fit-term">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+                ${r.rawTopicCosine !== undefined ? `<p class="fit-hint">원시 주제 코사인 ${r.rawTopicCosine.toFixed(4)} · 일치 어휘 항목 ${r.matchedTermCount}개 · 신호가 있는 후보 ${r.candidateCount}곳</p>` : ''}
             </div>
         `).join('');
 
@@ -3725,11 +3726,11 @@ async function main() {
                     <h3>🎯 투고 적합도 스코어카드</h3>
                     <button class="fit-close" id="fit-close-btn" title="닫기">✕</button>
                 </div>
-                <p class="fit-sub">초록을 붙여넣으면 주제 적합 + 방법론 문화를 결합해 투고처를 추천합니다. (논문 검색이 아니라 <strong>제출 타깃</strong> 추천)</p>
+                <p class="fit-sub">영어 초록의 주제와 방법론 어휘로 투고 후보를 비교합니다. <strong>게재 확률이 아닌 상대점수</strong>입니다. 주제 최고 일치를 100으로 두므로 후보나 지문이 바뀌면 점수도 달라집니다.</p>
                 <textarea id="fit-input" class="fit-textarea" placeholder="여기에 영어 초록(또는 핵심 단락)을 붙여넣으세요..."></textarea>
                 <div class="fit-actions">
                     <button class="btn" id="fit-run-btn">분석</button>
-                    <span class="fit-hint">주제는 venue 지문(OpenAlex 기반)과의 코사인, 방법론은 6개 연구문화 정렬로 계산됩니다.</span>
+                    <span class="fit-hint">주제는 어휘 지문과의 코사인 유사도, 방법론은 지문의 키워드 분포입니다. 지도 패널의 Jev 논문 코딩과는 별도입니다. 종합은 주제 81.25% + 방법론 18.75%; 방법론 신호가 없으면 주제만 사용합니다. 100점도 절대적 적합성을 보장하지 않습니다.</span>
                 </div>
                 <div id="fit-results" class="fit-results"></div>
             </div>
