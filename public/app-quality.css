@@ -109,10 +109,12 @@
 .fe-app .header .btn-icon:hover { background: var(--surface-container-high); border-color: var(--outline-variant); }
 .fe-app .header .filter-btn:not(.active) { background: transparent; border-color: transparent; }
 .fe-app .header .filter-btn:not(.active):hover { background: var(--surface-container-high); border-color: var(--outline-variant); }
+.fe-app #tb-more-btn.active { color: var(--text-primary); background: var(--surface-container-highest); border-color: var(--outline-variant); }
 .fe-app .header .search-box input { height: 36px; border-radius: 8px; }
 .fe-app .header .category-select { min-height: 36px; border-radius: 8px; }
 .fe-app .header .toolbar-icon { width: 17px; height: 17px; flex: 0 0 17px; fill: none; }
 .fe-app .stats-panel { font-variant-numeric: tabular-nums; }
+.fe-app :is(.stat-label,.metric-label,.legend h4,.fe-brand-archive,.rag-section-label) { font-size: .6875rem; }
 .fe-app .network-meta-dock { width: 232px; }
 .fe-app .legend { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 12px; }
 .fe-app .legend h4 { width: 100%; margin: 0; }
