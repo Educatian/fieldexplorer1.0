@@ -2542,7 +2542,7 @@ export async function startApp(vis: any) {
         setSidebarTitle(node.id, node.group, node.impact);
 
         // Update favorite button
-        const favBtn = document.getElementById('favorite-btn')!;
+        const favBtn = document.getElementById('favorite-btn') as HTMLButtonElement;
         favBtn.textContent = favorites.has(nodeId) ? '♥' : '♡';
         favBtn.classList.toggle('active', favorites.has(nodeId));
         favBtn.disabled = isGuestUser();
@@ -6404,7 +6404,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     (topic.keyResearchers || []).join(' ')
                 ].join(' '));
 
-                let score = explicit.includes(venue.name) ? 1000 - explicit.indexOf(venue.name) * 100 : 0;
+                let score = 0;
                 const normalizedName = normalizeRagText(topic.name);
                 if (normalizedQuery.includes(normalizedName)) score += 30;
                 queryTokens.forEach(token => {
@@ -7204,6 +7204,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         try {
             ragMessages[pendingIndex] = await resolveRagResponse(cleanPrompt);
+            renderRagMessages();
+        } catch (error) {
+            console.error('Sage response failed', error);
+            ragMessages[pendingIndex] = {role:'assistant', text:'답변을 준비하지 못했습니다. 잠시 후 다시 시도해 주세요.', suggestions:[cleanPrompt]};
             renderRagMessages();
         } finally {
             ragPending = false;

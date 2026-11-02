@@ -45,6 +45,7 @@
 .fe-app .filter-btn.conference.active { background: #38bdf8; border-color: #38bdf8; color: #0b0e14; }
 .fe-app .impact-badge { color: #0b0e14; }
 .fe-app :is(.rag-source-chip,.rag-action-chip,.rag-suggestion-chip) { color: var(--text-primary); }
+.fe-app .rag-section-label { color: var(--text-muted); }
 .fe-app .header .btn:not(.active) { color: var(--text-primary); }
 .fe-app .header .logout-btn:not(.active) { color: var(--link-ink); }
 .fe-app .sidebar-link-inline a, .fe-app .venue-table-go { text-decoration: underline; text-underline-offset: 3px; }
