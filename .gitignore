@@ -30,3 +30,16 @@ __pycache__/
 src/data/_ref_meta_cache.json
 scripts/_*.log
 data-cache/
+
+# Video originals belong in Google Drive, outside the source/deployment tree.
+*.[mM][pP]4
+*.[mM]4[vV]
+*.[wW][eE][bB][mM]
+*.[mM][oO][vV]
+*.[aA][vV][iI]
+*.[mM][kK][vV]
+*.[mM][pP][gG]
+*.[mM][pP][eE][gG]
+*.[oO][gG][vV]
+*.[mM][tT][sS]
+*.[mM]2[tT][sS]

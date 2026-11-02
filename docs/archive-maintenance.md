@@ -4,6 +4,16 @@
 
 Keep existing catalog IDs, Drive IDs, source links, transcripts and creator records when adding discovery paths. Lecture video files stay in the public Learning Unfolded Drive folder. Replace a corrected file in place with Drive `files.update`; retain its ID and sharing. Keep the previous source version locally before a correction.
 
+## Video hosting and GitHub updates
+
+Upload new MP4s to the existing [public Learning Unfolded Drive folder](https://drive.google.com/drive/folders/1SNlZixkHxA-L6Hexf-8_7TVbEd_rg_Uz), confirm its inherited public-reader permission, and use the returned file ID. Keep source video originals outside this checkout, especially outside `public/`, because Vite copies every public file into the deployment even if Git ignores it. GitHub contains code, host IDs/links, captions, guides and preview images. Existing YouTube entries retain their original mappings.
+
+The [FieldExplorer introduction](https://drive.google.com/file/d/1rFXjpG-YOG1e_-SmN9AlJTOgVSYQua3J/view) is also hosted in Drive. In `app.html`, its iframe's `data-src` is the Drive `/preview` URL; `src/ui/introVideo.ts` loads it only when the user expands the introduction. Collapsing the section or closing the About dialog unloads the player. Closing overlays release focus/inert state immediately, even while the CSS closing transition is running. Keep the direct `/view` fallback link and README link aligned when replacing the host. Corrected bytes should replace this same Drive file ID.
+
+Run `npm run check:media` after `npm run build` before pushing. CI rejects tracked video files (including force-added files), video files under `public/`, and video files in `dist/`. `.gitignore` also excludes video extensions. Existing Git history may contain the former intro MP4; this change removes it from the current source and deployment without rewriting history.
+
+After publishing, verify actual playback from the FieldExplorer About dialog, the archive player and its embedded share view. A Drive HTTP response or metadata permission alone does not prove playback. Check closing/reopening the intro and mobile sizing, and ensure no app-origin MP4 is requested.
+
 `public/archive/discovery.js` holds research-question cards and viewing paths. Keep route IDs stable and provide one reason per step. `scripts/splice_lecture.mjs` updates the question card there. Map links are maintained in `scripts/build_archive_links.py`; edit its mappings and regenerate `src/data/archive_links.ts`. Do not map a broad lecture to an unrelated research method just to increase coverage.
 
 Run `npm run check:archive`, `python scripts/check_map_data.py`, `npm test`, and `npm run build`. CI runs these checks plus six refresh failure/retry regressions. Test malformed/missing archive data with `node --test scripts/check_archive.test.mjs`.

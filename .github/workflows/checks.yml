@@ -48,5 +48,8 @@ jobs:
       - name: Archive integrity checks
         run: npm run check:archive
 
+      - name: External video hosting checks
+        run: npm run check:media
+
       - name: Refresh failure and retry regressions
         run: python scripts/test_refresh_openalex_layers.py
