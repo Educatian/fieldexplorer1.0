@@ -8,7 +8,7 @@
 
 *KELS Academic Resource Platform · ICOLSEI 2026*
 
-<img src="docs/media/kels-intro.gif" width="320" alt="KELS intro" />
+[Watch the FieldExplorer introduction on Google Drive](https://drive.google.com/file/d/1rFXjpG-YOG1e_-SmN9AlJTOgVSYQua3J/view)
 
 [Live app](https://fieldexplorer10.vercel.app) · [Architecture](#-architecture) · [Data pipeline](#-data-pipeline) · [Design system](#-design-system) · [Run locally](#-local-development)
 
@@ -123,6 +123,8 @@ FieldExplorer follows a three-layer pipeline wrapped in a pedagogical **scaffold
 **Frontend.** A single `index.tsx` builds the network model (`parseNetworkData`), computes metrics (`calculateNetworkMetrics`), and drives a `vis-network` canvas. The landing (`index.html`), app (`app.html`), and admin (`admin.html`) are separate Vite entry points.
 
 **Backend / data.** Supabase (annotations, logs, community venues, pgvector for RAG). Static research data ships as JSON in `src/data/`. Deployed on Vercel.
+
+**Videos.** Video files are hosted in Google Drive, outside this repository. The app introduction and Drive-backed archive entries use Google's embedded player with a direct Drive link as fallback. Existing YouTube lectures retain their original hosts. GitHub stores the app, catalog, captions, guides, and preview images; `npm run check:media` rejects video files in Git, `public/`, and the production build. See [archive maintenance](docs/archive-maintenance.md).
 
 **Offline data pipeline (Python).** Bibliometric signals are precomputed offline from the **OpenAlex** API and merged into the graph — never fetched at runtime.
 
