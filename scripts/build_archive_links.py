@@ -36,6 +36,8 @@ TOPIC = {
     'assessment': ['peer-assessment', 'formative-feedback', 'validity-argument'],
     'massively-open-online-courses-moocs': ['learning-at-scale'],
     'foundations-of-the-learning-sciences': ['theory-model-framework', 'self-determination', 'self-efficacy'],
+    'motivation-and-learning': ['self-determination', 'self-efficacy'],
+    'metacognition-science': ['metacognitive-monitoring', 'srl'],
 }
 TOPIC['learning-through-problem-solving'].append('problem-based-learning')
 # coded research approach (venue_methodology.json labels) -> lectures on doing that kind of study
@@ -58,6 +60,13 @@ used = sorted({i for d in (TOPIC, METHOD, TECH) for ids in d.values() for i in i
 missing = [i for i in used if i not in by_id]
 assert not missing, missing
 topics = {t['id'] for t in json.loads(Path('src/data/isls-topics.json').read_text(encoding='utf-8'))}
+# The UI also includes 15 Science of Learning topics beyond the NAPLeS subset.
+# Validate against the actual displayed IDs, so a mapping cannot silently miss its card.
+ui = Path('index.tsx').read_text(encoding='utf-8')
+start = ui.index('const ISLS_TOPICS:')
+displayed = set(re.findall(r'id:\s*"([^"]+)"', ui[start:ui.index('];', start)]))
+assert topics <= displayed, topics - displayed
+topics = displayed
 assert set(TOPIC) <= topics, set(TOPIC) - topics
 
 lect = {i: {'title': by_id[i]['shortTitle'], 'duration': by_id[i]['duration']} for i in used}

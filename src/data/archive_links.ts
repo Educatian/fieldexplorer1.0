@@ -337,6 +337,14 @@ export const LECTURES_BY_TOPIC: Record<string, string[]> = {
         "theory-model-framework",
         "self-determination",
         "self-efficacy"
+    ],
+    "motivation-and-learning": [
+        "self-determination",
+        "self-efficacy"
+    ],
+    "metacognition-science": [
+        "metacognitive-monitoring",
+        "srl"
     ]
 };
 // coded primary research approach -> lectures about that kind of study
