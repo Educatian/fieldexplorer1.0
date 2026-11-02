@@ -113,6 +113,7 @@
 .fe-app .header .category-select { min-height: 36px; border-radius: 8px; }
 .fe-app .header .toolbar-icon { width: 17px; height: 17px; flex: 0 0 17px; fill: none; }
 .fe-app .stats-panel { font-variant-numeric: tabular-nums; }
+.fe-app :is(.stat-label,.metric-label,.legend h4,.fe-brand-archive,.rag-section-label) { font-size: .6875rem; }
 .fe-app .network-meta-dock { width: 232px; }
 .fe-app .legend { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 12px; }
 .fe-app .legend h4 { width: 100%; margin: 0; }
