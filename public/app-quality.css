@@ -4,6 +4,12 @@
   --action-ink: #fff;
   --link-ink: #b4bcff;
   --focus-ink: #7dd3fc;
+  --topic-cscl: #38bdf8;
+  --topic-learning-sciences: #a5b4fc;
+  --topic-methodologies: #94a3b8;
+  --topic-technology: #a5b4fc;
+  --topic-practice: #7dd3fc;
+  --topic-science-of-learning: #a5b4fc;
   color-scheme: dark;
 }
 .fe-app[data-theme="light"] {
@@ -34,11 +40,18 @@
   --glass-border: #cbd5e1;
   --link-ink: #3730a3;
   --focus-ink: #0369a1;
+  --topic-cscl: #075985;
+  --topic-learning-sciences: #4338ca;
+  --topic-methodologies: #475569;
+  --topic-technology: #3730a3;
+  --topic-practice: #075985;
+  --topic-science-of-learning: #3730a3;
   --shadow-lg: 0 8px 24px rgba(15,23,42,.12);
   color-scheme: light;
 }
 .fe-app :is(a,.logout-btn,.detail-progress-value,.sidebar-status-chip--primary,.venue-table-go) { color: var(--link-ink); }
 .fe-app .filter-btn.active, .fe-app .fit-actions .btn,
+.fe-app .filter-chip.active,
 .fe-landing :is(.btn-primary,.login-btn) {
   background: var(--action-bg); border-color: var(--action-bg); color: var(--action-ink);
 }
@@ -71,6 +84,8 @@
 .fe-app[data-theme="light"] .formula-tooltip { background: #fff; color: var(--text-primary); }
 .fe-app[data-theme="light"] :is(.sidebar-status-chip,.meta-pill,.sidebar-note-card,.rag-chatbot-tutor,.rag-chatbot-close,.rag-chatbot-footer) { background: var(--surface-container-high); border-color: var(--outline-variant); }
 .fe-app[data-theme="light"] .rag-chatbot-tutor { color: var(--text-primary); }
+.fe-app[data-theme="light"] .rag-chatbot-input { background: var(--surface-container-low); color: var(--text-primary); border-color: var(--outline-variant); }
+.fe-app[data-theme="light"] .rag-chatbot-input::placeholder { color: var(--text-muted); opacity: 1; }
 .fe-app[data-theme="light"] .rag-chatbot-tutor[aria-pressed="true"] { background: #d1fae5; color: #065f46; }
 .fe-app .intro-on-demand { width: 100%; max-width: 560px; margin-top: 12px; }
 .fe-app .intro-on-demand video { width: 100%; max-height: 260px; }

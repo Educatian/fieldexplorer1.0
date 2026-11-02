@@ -5541,7 +5541,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 
     function renderTopicCard(topic: ResearchTopic): string {
-        const color = TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant;
+        const color = `var(--topic-${topic.category.toLowerCase().replace(/\s+/g,'-')}, ${TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant})`;
         const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
         return `
             <button type="button" class="topic-card" data-topic-id="${escapeHtml(topic.id)}" aria-label="${escapeHtml(topic.name)}">
@@ -5606,7 +5606,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 
     function renderTopicDetail(topic: ResearchTopic): string {
-        const color = TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant;
+        const color = `var(--topic-${topic.category.toLowerCase().replace(/\s+/g,'-')}, ${TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant})`;
         const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
         const details = topic.details || topic.description;
         const formattedDetails = formatTopicDetails(details);
@@ -5627,7 +5627,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 <div class="topic-detail-header">
                     <span class="topic-icon-large">${icon}</span>
                     <div>
-                        <span class="topic-category-badge" style="background: ${color}20; color: ${color}">${topic.category}</span>
+                        <span class="topic-category-badge" style="background: color-mix(in srgb, ${color} 12%, transparent); color: ${color}">${topic.category}</span>
                         <h2 class="topic-detail-name">${topic.name}</h2>
                     </div>
                 </div>
