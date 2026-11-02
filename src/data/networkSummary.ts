@@ -1,4 +1,4 @@
-import venues from './venues.json';
+import {MAP_VENUES} from './mapVenues';
 import {TAG_CATEGORIES,canonicalCategory} from './venues';
 
 /** Same unique-name and field/tag rules used by the map. */
@@ -10,7 +10,7 @@ export function summarizeVenues(data: readonly {name:string;type:string;categori
         categories: new Set([...unique.values()].flatMap(v=>v.categories).filter(c=>!TAG_CATEGORIES.has(c)).map(canonicalCategory)).size,
     };
 }
-export const NETWORK_SUMMARY = summarizeVenues(venues);
+export const NETWORK_SUMMARY = summarizeVenues(MAP_VENUES);
 
 export function renderNetworkSummary() {
     for(const [key,value] of Object.entries(NETWORK_SUMMARY)) {
