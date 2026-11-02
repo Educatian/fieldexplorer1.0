@@ -1,6 +1,8 @@
 import {installModalFocus} from './ui/modalFocus';
+import {installToolbarIcons} from './ui/toolbarIcons';
 
 installModalFocus();
+installToolbarIcons();
 try { document.body.dataset.theme = localStorage.getItem('fieldexplorer_theme') === 'light' ? 'light' : 'dark'; } catch { document.body.dataset.theme = 'dark'; }
 document.documentElement.dataset.appState = 'loading';
 
