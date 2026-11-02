@@ -820,6 +820,15 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
 
     // --- DATA-DRIVEN SEMANTIC EDGES (Cosine Similarity with TF-IDF) ---
     const venuesArray = Array.from(venueData);
+    // A vector's norm is constant across all pairs; compute it once per venue.
+    const vectorNorms = new Map<string, number>();
+    const vectorTerms = new Map<string, string[]>();
+    for (const venue of venuesArray) {
+        const vector = (semanticProfiles as any)[venue.name]?.vector;
+        if (!vector) continue;
+        vectorTerms.set(venue.name, Object.keys(vector));
+        vectorNorms.set(venue.name, Math.sqrt(Object.values(vector).reduce<number>((sum,value)=>sum+Number(value)*Number(value),0)));
+    }
     for (let i = 0; i < venuesArray.length; i++) {
         for (let j = i + 1; j < venuesArray.length; j++) {
             const v1 = venuesArray[i];
@@ -834,11 +843,8 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
 
                 // Calculate Cosine Similarity
                 let dotProduct = 0;
-                let mag1 = 0;
-                let mag2 = 0;
-
-                // Collect all unique terms from both vectors
-                const terms = new Set([...Object.keys(vec1), ...Object.keys(vec2)]);
+                // Terms unique to vector 2 contribute zero to the dot product.
+                const terms = vectorTerms.get(v1.name)!;
                 const sharedMeth: string[] = [];
                 const sharedDomain: string[] = [];
 
@@ -846,8 +852,6 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
                     const val1 = vec1[term] || 0;
                     const val2 = vec2[term] || 0;
                     dotProduct += val1 * val2;
-                    mag1 += val1 * val1;
-                    mag2 += val2 * val2;
 
                     if (val1 > 0 && val2 > 0) {
                         if (profile1.methodology?.[term] || profile2.methodology?.[term]) {
@@ -858,7 +862,7 @@ function parseNetworkData(): { nodes: NodeData[]; edges: EdgeData[]; categories:
                     }
                 }
 
-                const similarity = dotProduct / (Math.sqrt(mag1) * Math.sqrt(mag2));
+                const similarity = dotProduct / (vectorNorms.get(v1.name)! * vectorNorms.get(v2.name)!);
 
                 // Add an edge if similarity is high enough
                 if (similarity > 0.03) { // Lowered from 0.1 to 0.03 for denser TF-IDF matching

@@ -45,7 +45,7 @@
 .fe-app .filter-btn.conference.active { background: #38bdf8; border-color: #38bdf8; color: #0b0e14; }
 .fe-app .impact-badge { color: #0b0e14; }
 .fe-app :is(.rag-source-chip,.rag-action-chip,.rag-suggestion-chip) { color: var(--text-primary); }
-.fe-app .rag-section-label { color: var(--text-muted); }
+.fe-app .rag-section-label { color: var(--text-muted); opacity: 1; }
 .fe-app .header .btn:not(.active) { color: var(--text-primary); }
 .fe-app .header .logout-btn:not(.active) { color: var(--link-ink); }
 .fe-app .sidebar-link-inline a, .fe-app .venue-table-go { text-decoration: underline; text-underline-offset: 3px; }
@@ -69,6 +69,9 @@
 .fe-app[data-theme="light"] .header-zone-modes .filter-group .filter-btn:not(.active) { background: var(--surface-container-high); }
 .fe-app[data-theme="light"] .fit-q { color: var(--text-primary); }
 .fe-app[data-theme="light"] .formula-tooltip { background: #fff; color: var(--text-primary); }
+.fe-app[data-theme="light"] :is(.sidebar-status-chip,.meta-pill,.sidebar-note-card,.rag-chatbot-tutor,.rag-chatbot-close,.rag-chatbot-footer) { background: var(--surface-container-high); border-color: var(--outline-variant); }
+.fe-app[data-theme="light"] .rag-chatbot-tutor { color: var(--text-primary); }
+.fe-app[data-theme="light"] .rag-chatbot-tutor[aria-pressed="true"] { background: #d1fae5; color: #065f46; }
 .fe-app .intro-on-demand { width: 100%; max-width: 560px; margin-top: 12px; }
 .fe-app .intro-on-demand video { width: 100%; max-height: 260px; }
 .fe-app:not(.fullscreen) .fullscreen-exit { display: none; }
@@ -93,7 +96,7 @@
 .fe-app .header .filter-btn:not(.active):hover { background: var(--surface-container-high); border-color: var(--outline-variant); }
 .fe-app .header .search-box input { height: 36px; border-radius: 8px; }
 .fe-app .header .category-select { min-height: 36px; border-radius: 8px; }
-.fe-app .toolbar-icon { width: 17px; height: 17px; flex: 0 0 17px; }
+.fe-app .header .toolbar-icon { width: 17px; height: 17px; flex: 0 0 17px; fill: none; }
 .fe-app .stats-panel { font-variant-numeric: tabular-nums; }
 .fe-app .network-meta-dock { width: 232px; }
 .fe-app .legend { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 12px; }
@@ -111,7 +114,7 @@
 @media (max-width: 768px) {
   .fe-app .header { display: flex; flex-direction: column; position: relative; align-items: stretch; padding: 12px; }
   .fe-app .logo { padding: 0 48px 0 0; }
-  .fe-app .header-controls { display: flex; flex-wrap: wrap; width: 100%; min-width: 0; gap: 8px; }
+  .fe-app .header-controls { position: static; z-index: auto; display: flex; flex-wrap: wrap; width: 100%; min-width: 0; gap: 8px; }
   .fe-app .mobile-menu-btn { position: absolute; top: 14px; right: 12px; width: 44px; height: 44px; }
   .fe-app .header-zone-utilities { display: none; order: 3; width: 100%; flex-wrap: wrap; justify-content: flex-start; gap: 4px; padding-top: 8px; border-top: 1px solid var(--outline-variant); }
   .fe-app .header.modes-open .header-zone-utilities { display: flex; }
