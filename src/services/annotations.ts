@@ -1,3 +1,4 @@
+import {escapeHtml,ratingValue} from '../ui/html';
 /**
  * Annotation service for Supabase
  */
@@ -61,7 +62,7 @@ export async function addAnnotation(annotation: Omit<Annotation, 'id' | 'created
 const TAGS = ['신규 연구자 추천', '까다로운 리뷰', '빠른 피드백', '높은 영향력'];
 
 function starRating(rating: number): string {
-    return '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    return '★'.repeat(ratingValue(rating)) + '☆'.repeat(5 - ratingValue(rating));
 }
 
 export function renderAnnotations(annotations: Annotation[], venueName: string, venueType: string): string {
@@ -71,14 +72,14 @@ export function renderAnnotations(annotations: Annotation[], venueName: string, 
     const renderAnnotation = (a: Annotation, isReply = false): string => {
         const annotationReplies = replies.filter(r => r.parent_id === a.id);
         return `
-        <div class="annotation-item ${isReply ? 'reply' : ''}" data-id="${a.id}">
+        <div class="annotation-item ${isReply ? 'reply' : ''}" data-id="${escapeHtml(a.id)}">
             <div class="annotation-header">
                 <span class="annotation-rating">${starRating(a.rating)}</span>
                 <span class="annotation-date">${new Date(a.created_at || '').toLocaleDateString('ko')}</span>
             </div>
-            <p class="annotation-comment">${a.comment}</p>
-            ${a.tags?.length ? `<div class="annotation-tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-            ${!isReply ? `<button class="reply-btn" data-parent="${a.id}">💬 답글</button>` : ''}
+            <p class="annotation-comment">${escapeHtml(a.comment)}</p>
+            ${a.tags?.length ? `<div class="annotation-tags">${a.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+            ${!isReply ? `<button class="reply-btn" data-parent="${escapeHtml(a.id)}">💬 답글</button>` : ''}
             ${annotationReplies.length ? `
                 <div class="replies">
                     ${annotationReplies.map(r => renderAnnotation(r, true)).join('')}

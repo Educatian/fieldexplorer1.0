@@ -1,4 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
+import { escapeHtml, ratingValue } from './src/ui/html';
+import { findMentionedVenues } from './src/services/venueMentions';
 import semanticProfiles from './src/data/semantic_profiles.json';
 // V6 Compute/Augment layer: citation-grounded venue->venue edges + interdisciplinarity
 // (built offline by scripts/build_venue_metrics.py via OpenAlex + pySciSci diversity)
@@ -27,9 +29,6 @@ import quizData from './src/data/learning-quiz.json';
 // decision-capture service (decision_logs): wires choice + latency + signals
 import { setSessionId, logFavorite, logDismiss, logCompare, markViewStart } from './src/services/decisions';
 
-declare const vis: any;
-declare const html2canvas: any;
-declare const jspdf: any;
 
 // Supabase client for annotations
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -274,6 +273,15 @@ const DESIGN_COLORS = {
     tertiarySoft: '#cbd5e1',
     tertiaryDeep: '#64748b'
 } as const;
+
+function graphTheme() {
+    const style = getComputedStyle(document.body);
+    return {
+        ink: style.getPropertyValue('--on-surface').trim() || DESIGN_COLORS.onSurface,
+        background: style.getPropertyValue('--surface').trim() || DESIGN_COLORS.surface,
+        edge: style.getPropertyValue('--outline-soft').trim() || DESIGN_COLORS.outlineSoft,
+    };
+}
 
 // ============================================================================
 // COMPREHENSIVE USER ACTION LOGGING SYSTEM
@@ -694,15 +702,6 @@ function requireMemberAccess(featureLabel: string): boolean {
     if (!isGuestUser()) return true;
     showToast(`${featureLabel}은 로그인 후 사용할 수 있습니다.`);
     return false;
-}
-
-function escapeHtml(value: string): string {
-    return value
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#39;');
 }
 
 function formatRagMessageHtml(value: string): string {
@@ -1774,6 +1773,7 @@ function getVenueDetails(name: string, _type: string): VenueDetails {
 
 function hideLoading() {
     document.getElementById('loading-overlay')?.classList.add('hidden');
+    document.documentElement.dataset.appState = 'ready';
 }
 
 function showSidebar() {
@@ -2110,7 +2110,7 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
     const TAGS = ['신규 연구자 추천', '까다로운 리뷰', '빠른 피드백', '높은 영향력'];
     const guestMode = isGuestUser();
 
-    const starRating = (rating: number) => '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    const starRating = (rating: number) => '★'.repeat(ratingValue(rating)) + '☆'.repeat(5 - ratingValue(rating));
 
     // Separate root annotations and replies
     const rootAnnotations = annotations.filter(a => !a.parent_id);
@@ -2120,14 +2120,14 @@ function renderAnnotations(annotations: Annotation[], venueName: string, venueTy
     const renderAnnotation = (a: Annotation, isReply = false): string => {
         const annotationReplies = replies.filter(r => r.parent_id === a.id);
         return `
-        <div class="annotation-item ${isReply ? 'reply' : ''}" data-id="${a.id}">
+        <div class="annotation-item ${isReply ? 'reply' : ''}" data-id="${escapeHtml(a.id)}">
             <div class="annotation-header">
                 <span class="annotation-rating">${starRating(a.rating)}</span>
                 <span class="annotation-date">${new Date(a.created_at || '').toLocaleDateString('ko')}</span>
             </div>
-            <p class="annotation-comment">${a.comment}</p>
-            ${a.tags?.length ? `<div class="annotation-tags">${a.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-            ${!isReply && !guestMode ? `<button class="reply-btn" data-parent="${a.id}">💬 답글</button>` : ''}
+            <p class="annotation-comment">${escapeHtml(a.comment)}</p>
+            ${a.tags?.length ? `<div class="annotation-tags">${a.tags.map(t => `<span class="tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+            ${!isReply && !guestMode ? `<button class="reply-btn" data-parent="${escapeHtml(a.id)}">💬 답글</button>` : ''}
             ${annotationReplies.length ? `
                 <div class="replies">
                     ${annotationReplies.map(r => renderAnnotation(r, true)).join('')}
@@ -2194,7 +2194,8 @@ async function loadCommunityVenues(): Promise<VenueInfo[]> {
         const { data, error } = await supabase
             .from('community_venues')
             .select('id,name,type,categories,impact,cfp_deadline')
-            .eq('status', 'approved');
+            .eq('status', 'approved')
+            .abortSignal(AbortSignal.timeout(5000));
         if (error || !data) return [];
         return (data as any[]).map((r) => ({
             id: r.id || String(r.name).toLowerCase().replace(/[^a-z0-9]+/g, '-'),
@@ -2209,7 +2210,7 @@ async function loadCommunityVenues(): Promise<VenueInfo[]> {
     }
 }
 
-async function main() {
+export async function startApp(vis: any) {
     const container = document.getElementById('network');
     if (!container) return;
 
@@ -2338,11 +2339,11 @@ async function main() {
         nodes: {
             borderWidth: 2,
             shadow: { enabled: true, color: 'rgba(6, 14, 32, 0.36)', size: 8, x: 2, y: 2 },
-            font: { size: 12, color: DESIGN_COLORS.onSurface, face: 'Inter, Noto Sans KR, sans-serif', strokeWidth: 3, strokeColor: 'rgba(11,14,20,0.92)' }
+            font: { size: 12, color: graphTheme().ink, face: 'Inter, Noto Sans KR, sans-serif', strokeWidth: 3, strokeColor: graphTheme().background }
         },
         edges: {
             width: 1.5,
-            color: { color: DESIGN_COLORS.outlineSoft, highlight: DESIGN_COLORS.outlineStrong },
+            color: { color: graphTheme().edge, highlight: DESIGN_COLORS.outlineStrong },
             smooth: { enabled: true, type: 'continuous' }
         },
         groups: {
@@ -2393,7 +2394,7 @@ async function main() {
     const network = new vis.Network(container, { nodes: nodesDataset, edges: edgesDataset }, options);
 
     // Stabilization
-    network.on('stabilizationIterationsDone', () => {
+    network.once('stabilizationIterationsDone', () => {
         network.setOptions({ physics: false });
         hideLoading();
         network.fit({ animation: { duration: 400, easingFunction: 'easeInOutQuad' } });
@@ -2412,7 +2413,7 @@ async function main() {
         // Draw ripple effect on canvas
         network.on('afterDrawing', (ctx: CanvasRenderingContext2D) => {
             // Skip ripple animation when in cluster mode
-            if (isClustered) return;
+            if (isClustered || document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
             flagshipIds.forEach(id => {
                 // Check if node is visible (not in a cluster)
@@ -2445,6 +2446,7 @@ async function main() {
 
         // Animation loop
         setInterval(() => {
+            if (document.hidden || isClustered || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             ripplePhase = (ripplePhase + 1) % 60;
             network.redraw();
         }, 50);
@@ -3531,18 +3533,18 @@ async function main() {
 
         const itemsHtml = feedItems.length > 0
             ? feedItems.map(item => `
-                <div class="feed-card" data-venue="${item.venue_name}">
+                <div class="feed-card" data-venue="${escapeHtml(item.venue_name)}">
                     <div class="feed-header">
-                        <span class="feed-author">${item.author_label === 'me' ? '👤 나' : `👤 ${item.author_label}`}</span>
+                        <span class="feed-author">${item.author_label === 'me' ? '👤 나' : `👤 ${escapeHtml(item.author_label)}`}</span>
                         <span class="feed-time">${formatTimeAgo(item.created_at)}</span>
                     </div>
                     <div class="feed-venue">
                         <span>${item.venue_type === 'Journal' ? '📘' : '🎤'}</span>
-                        <span class="feed-venue-name">${item.venue_name}</span>
+                        <span class="feed-venue-name">${escapeHtml(item.venue_name)}</span>
                     </div>
-                    ${item.rating ? `<div class="feed-rating">${'⭐'.repeat(item.rating)}</div>` : ''}
-                    <div class="feed-comment">${item.comment}</div>
-                    ${item.tags?.length ? `<div class="feed-tags">${item.tags.map(t => `<span class="feed-tag">${t}</span>`).join('')}</div>` : ''}
+                    ${item.rating ? `<div class="feed-rating">${'⭐'.repeat(ratingValue(item.rating))}</div>` : ''}
+                    <div class="feed-comment">${escapeHtml(item.comment)}</div>
+                    ${item.tags?.length ? `<div class="feed-tags">${item.tags.map(t => `<span class="feed-tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
                 </div>
             `).join('')
             : '<div class="feed-empty">아직 리뷰가 없어요</div>';
@@ -4752,15 +4754,15 @@ async function main() {
                     </div>
                     <div class="collab-content" id="collab-content">
                         ${threads.length > 0 ? threads.map(t => `
-                            <div class="collab-thread" data-id="${t.id}">
+                            <div class="collab-thread" data-id="${escapeHtml(t.id)}">
                                 <div class="collab-thread-header">
-                                    <span class="collab-thread-title">${getPurposeIcons(t.purposes || [])} ${t.title}</span>
-                                    <span class="collab-thread-status ${t.status}">${getStatusLabel(t.status)}</span>
+                                    <span class="collab-thread-title">${getPurposeIcons(t.purposes || [])} ${escapeHtml(t.title)}</span>
+                                    <span class="collab-thread-status ${escapeHtml(t.status)}">${escapeHtml(getStatusLabel(t.status))}</span>
                                 </div>
-                                ${t.description ? `<div class="collab-thread-desc">${t.description.substring(0, 100)}${t.description.length > 100 ? '...' : ''}</div>` : ''}
+                                ${t.description ? `<div class="collab-thread-desc">${escapeHtml(t.description.substring(0, 100))}${t.description.length > 100 ? '...' : ''}</div>` : ''}
                                 <div class="collab-thread-meta">
                                     <span>🕐 ${formatCollabTime(t.last_activity_at)}</span>
-                                    ${t.needed_roles?.length > 0 ? `<span>👥 ${t.needed_roles.join(', ')}</span>` : ''}
+                                    ${t.needed_roles?.length > 0 ? `<span>👥 ${escapeHtml(t.needed_roles.join(', '))}</span>` : ''}
                                 </div>
                             </div>
                         `).join('') : '<div class="collab-empty">아직 협업 요청이 없어요</div>'}
@@ -4890,17 +4892,17 @@ async function main() {
             </div>
             <div class="collab-thread static-detail">
                 <div class="collab-thread-header">
-                    <span class="collab-thread-title">${thread.title}</span>
-                    <span class="collab-thread-status ${thread.status}">${getStatusLabel(thread.status)}</span>
+                    <span class="collab-thread-title">${escapeHtml(thread.title)}</span>
+                    <span class="collab-thread-status ${escapeHtml(thread.status)}">${escapeHtml(getStatusLabel(thread.status))}</span>
                 </div>
-                ${thread.description ? `<div class="collab-thread-desc">${thread.description}</div>` : ''}
+                ${thread.description ? `<div class="collab-thread-desc">${escapeHtml(thread.description)}</div>` : ''}
             </div>
             <h4 class="modal-section-title">💬 댓글 (${replies.length})</h4>
             <div id="replies-list">
                 ${replies.length > 0 ? replies.map(r => `
                     <div class="collab-reply">
-                        <div class="collab-reply-author">👤 ${r.author_id.substring(0, 8)}...</div>
-                        <div class="collab-reply-content">${r.content}</div>
+                        <div class="collab-reply-author">👤 ${escapeHtml(r.author_id.substring(0, 8))}...</div>
+                        <div class="collab-reply-content">${escapeHtml(r.content)}</div>
                     </div>
                 `).join('') : '<div class="collab-empty">아직 댓글이 없어요</div>'}
             </div>
@@ -5643,14 +5645,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const color = TOPIC_CATEGORY_COLORS[topic.category] || DESIGN_COLORS.onSurfaceVariant;
         const icon = TOPIC_CATEGORY_ICONS[topic.category] || '📌';
         return `
-            <div class="topic-card" data-topic-id="${topic.id}">
-                <div class="topic-header">
+            <button type="button" class="topic-card" data-topic-id="${escapeHtml(topic.id)}" aria-label="${escapeHtml(topic.name)}">
+                <span class="topic-header">
                     <span class="topic-icon">${icon}</span>
                     <span class="topic-category" style="color: ${color}">${topic.category}</span>
-                </div>
-                <h3 class="topic-name">${topic.name}</h3>
-                <p class="topic-description">${topic.description}</p>
-            </div>
+                </span>
+                <span class="topic-name">${escapeHtml(topic.name)}</span>
+                <span class="topic-description">${escapeHtml(topic.description)}</span>
+            </button>
         `;
     }
 
@@ -5769,10 +5771,12 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (grid) {
             grid.innerHTML = renderTopicDetail(topic);
 
+            document.getElementById('topic-back')?.focus();
             // Back button
             document.getElementById('topic-back')?.addEventListener('click', () => {
                 selectedTopic = null;
                 updateTopicsGridUI();
+                grid.querySelector<HTMLButtonElement>(`.topic-card[data-topic-id="${CSS.escape(topicId)}"]`)?.focus();
             });
 
             // Related topic clicks
@@ -5797,7 +5801,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         popup.id = 'research-topics-popup-container';
         popup.innerHTML = `
         <div class="research-topics-overlay visible" id="research-topics-modal">
-            <div class="research-topics-content">
+            <div class="research-topics-content" role="dialog" aria-modal="true" aria-label="연구 주제 탐색">
                 <div class="modal-header">
                     <div class="modal-title">
                         <h2>🔬 Research Topics</h2>
@@ -5813,7 +5817,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                             <circle cx="11" cy="11" r="8" />
                             <path d="m21 21-4.35-4.35" />
                         </svg>
-                        <input type="text" id="topics-search" placeholder="연구 주제 검색...">
+                        <input type="text" id="topics-search" aria-label="연구 주제 검색" placeholder="연구 주제 검색...">
                     </div>
 
                     <div class="category-filter">
@@ -5828,7 +5832,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     </div>
                 </div>
 
-                <div class="modal-body" id="topics-grid">
+                <div class="modal-body" id="topics-grid" tabindex="0" aria-label="연구 주제 목록">
                     ${renderTopicsGrid(topics)}
                 </div>
             </div>
@@ -6349,6 +6353,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     function buildVenueMatches(query: string) {
         const normalizedQuery = normalizeRagText(query);
         const queryTokens = tokenizeRagText(query);
+        const explicit = findMentionedVenues(query, venueData);
         const wantsJournal = /저널|journal/.test(normalizedQuery);
         const wantsConference = /학회|conference/.test(normalizedQuery);
 
@@ -6365,7 +6370,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     details.methodologyProfile.map(item => item.methodology).join(' ')
                 ].join(' '));
 
-                let score = 0;
+                let score = explicit.includes(venue.name) ? 1000 - explicit.indexOf(venue.name) * 100 : 0;
                 const normalizedName = normalizeRagText(venue.name);
 
                 if (normalizedQuery.includes(normalizedName)) score += 40;
@@ -6399,7 +6404,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     (topic.keyResearchers || []).join(' ')
                 ].join(' '));
 
-                let score = 0;
+                let score = explicit.includes(venue.name) ? 1000 - explicit.indexOf(venue.name) * 100 : 0;
                 const normalizedName = normalizeRagText(topic.name);
                 if (normalizedQuery.includes(normalizedName)) score += 30;
                 queryTokens.forEach(token => {
@@ -6797,6 +6802,13 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             }
         }
 
+        if (compareIntent && findMentionedVenues(query, venueData).length !== 2) {
+            const identified = findMentionedVenues(query, venueData);
+            return {role: 'assistant', text: identified.length > 2
+                ? '세 곳 이상을 찾았습니다. 비교할 두 학술지·학회를 지정해 주세요.'
+                : '비교할 두 학술지·학회의 이름을 확인해 주세요. 예: JLS와 C&E 비교. 비슷한 이름의 다른 학술지로 대체하지 않습니다.',
+                sources: [], actions: [], suggestions: ['JLS와 C&E 비교', 'ijCSCL과 JLS 비교']};
+        }
         if (compareIntent && venueMatches.length >= 2) {
             const [first, second] = venueMatches;
             const firstImpact = first.venue.impact || '정보 없음';
@@ -6978,6 +6990,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     }
 
     async function resolveRagResponse(query: string): Promise<RagChatMessage> {
+        if (/비교|compare|차이|difference|\bvs\b/.test(normalizeRagText(query)) && findMentionedVenues(query, venueData).length !== 2) return generateLocalRagResponse(query);
         const localDocuments = buildRagDocuments(query);
         const remoteDocuments = await requestRemoteRagDocuments(query);
         const retrievalDocuments = mergeRagDocuments(localDocuments, remoteDocuments);
@@ -7490,6 +7503,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     function updateAutocomplete(query: string) {
         if (!query) {
             autocomplete.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            searchInput.removeAttribute('aria-activedescendant');
             autocompleteItems = [];
             return;
         }
@@ -7501,6 +7516,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
         if (matches.length === 0) {
             autocomplete.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            searchInput.removeAttribute('aria-activedescendant');
             autocompleteItems = [];
             return;
         }
@@ -7510,13 +7527,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                 n.group === 'Category' ? 'category' : '';
             const typeLabel = n.group === 'Conference' || n.group === 'SubConference' ? '학회' :
                 n.group === 'Category' ? '분야' : '저널';
-            return `< div class="search-autocomplete-item" data - id="${n.id}" >
+            return `<div class="search-autocomplete-item" id="search-option-${matches.indexOf(n)}" role="option" aria-selected="false" data-id="${escapeHtml(n.id)}">
         <span class="type-badge ${typeClass}">${typeLabel}</span>
-                ${n.id}
-            </div > `;
+                ${escapeHtml(n.id)}
+            </div>`;
         }).join('');
 
         autocomplete.classList.add('visible');
+        searchInput.setAttribute('aria-expanded', 'true');
         autocompleteItems = Array.from(autocomplete.querySelectorAll('.search-autocomplete-item'));
         autocompleteIndex = -1;
     }
@@ -7526,6 +7544,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (nodeId) {
             searchInput.value = nodeId;
             autocomplete.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            searchInput.removeAttribute('aria-activedescendant');
             focusNodeById(nodeId, { scale: 1.5 });
         }
     }
@@ -7573,16 +7593,28 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         if (e.key === 'ArrowDown') {
             e.preventDefault();
             autocompleteIndex = Math.min(autocompleteIndex + 1, autocompleteItems.length - 1);
-            autocompleteItems.forEach((item, i) => item.classList.toggle('active', i === autocompleteIndex));
+            autocompleteItems.forEach((item, i) => {
+                item.classList.toggle('active', i === autocompleteIndex);
+                item.setAttribute('aria-selected', String(i === autocompleteIndex));
+            });
+            const active = autocompleteItems[autocompleteIndex];
+            if (active) { searchInput.setAttribute('aria-activedescendant', active.id); active.scrollIntoView({block: 'nearest'}); }
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
             autocompleteIndex = Math.max(autocompleteIndex - 1, 0);
-            autocompleteItems.forEach((item, i) => item.classList.toggle('active', i === autocompleteIndex));
+            autocompleteItems.forEach((item, i) => {
+                item.classList.toggle('active', i === autocompleteIndex);
+                item.setAttribute('aria-selected', String(i === autocompleteIndex));
+            });
+            const active = autocompleteItems[autocompleteIndex];
+            if (active) { searchInput.setAttribute('aria-activedescendant', active.id); active.scrollIntoView({block: 'nearest'}); }
         } else if (e.key === 'Enter' && autocompleteIndex >= 0) {
             e.preventDefault();
             selectAutocompleteItem(autocompleteItems[autocompleteIndex]);
         } else if (e.key === 'Escape') {
             autocomplete.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            searchInput.removeAttribute('aria-activedescendant');
         }
     });
 
@@ -7595,6 +7627,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     document.addEventListener('click', (e) => {
         if (!(e.target as HTMLElement).closest('.search-box')) {
             autocomplete.classList.remove('visible');
+            searchInput.setAttribute('aria-expanded', 'false');
+            searchInput.removeAttribute('aria-activedescendant');
         }
     });
 
@@ -7700,6 +7734,10 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         const newTheme = isDark ? 'light' : 'dark';
         body.setAttribute('data-theme', newTheme);
         localStorage.setItem('fieldexplorer_theme', newTheme);
+        const theme = graphTheme();
+        network.setOptions({nodes: {font: {color:theme.ink,strokeColor:theme.background}}, edges: {color: {color:theme.edge}}});
+        nodesDataset.update(nodesDataset.get().filter((n:any)=>n.group!=='Category').map((n:any)=>({id:n.id,font:{color:theme.ink,strokeColor:theme.background}})));
+        network.redraw();
         showToast(isDark ? '라이트 모드' : '다크 모드');
     });
 
@@ -7853,6 +7891,7 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     document.getElementById('export-btn')!.addEventListener('click', async () => {
         showToast('이미지 저장 중...');
         try {
+            const {default: html2canvas} = await import('html2canvas');
             const canvas = await html2canvas(container, { backgroundColor: getComputedStyle(document.body).getPropertyValue('--bg-primary') });
             const link = document.createElement('a');
             link.download = 'fieldexplorer-network.png';
@@ -7903,14 +7942,14 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
     });
 
     // PDF export
-    document.getElementById('pdf-btn')!.addEventListener('click', () => {
+    document.getElementById('pdf-btn')!.addEventListener('click', async () => {
         if (!currentNodeId) return;
 
         const content = document.getElementById('sidebar-content')!;
         const title = document.getElementById('sidebar-title')!.textContent || '';
 
         try {
-            const { jsPDF } = jspdf;
+            const { jsPDF } = await import('jspdf');
             const doc = new jsPDF();
 
             doc.setFontSize(18);
@@ -8029,13 +8068,13 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
             container.innerHTML = '<p class="text-muted-block">작성한 의견이 없습니다.</p>';
         } else {
             container.innerHTML = myAnnotations.map(a => `
-                <div class="my-annotation-item" data-id="${a.id}">
+                <div class="my-annotation-item" data-id="${escapeHtml(a.id)}">
                     <div class="my-annotation-venue">${escapeHtml(a.venue_name)}</div>
                     <div class="my-annotation-comment">${escapeHtml(a.comment)}</div>
                     <div class="my-annotation-meta">
                         <span class="note-stars">${'★'.repeat(a.rating)}${'☆'.repeat(5 - a.rating)}</span>
                         <div class="my-annotation-actions">
-                            <button class="delete" data-id="${a.id}">삭제</button>
+                            <button class="delete" data-id="${escapeHtml(a.id)}">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -8123,8 +8162,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
                     <span style="font-size: 1.1rem; font-weight: 600; color: var(--klse-yellow);">📢 공지사항</span>
                     <button id="close-announcement" style="background: none; border: none; color: var(--text-muted); font-size: 1.5rem; cursor: pointer;">×</button>
                 </div>
-                <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary);">${announcement.subject}</h3>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; white-space: pre-wrap;">${announcement.body}</p>
+                <h3 style="font-size: 1rem; margin-bottom: 12px; color: var(--text-primary);">${escapeHtml(announcement.subject)}</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; white-space: pre-wrap;">${escapeHtml(announcement.body)}</p>
                 <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
                     <button id="dismiss-announcement" class="btn" style="padding: 10px 20px;">확인</button>
                 </div>
@@ -8677,7 +8716,8 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
 
     // Mobile hamburger: toggle the mode-button row (was a dead button)
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-        document.querySelector('.header')?.classList.toggle('modes-open');
+        const expanded = document.querySelector('.header')?.classList.toggle('modes-open');
+        document.getElementById('mobile-menu-btn')?.setAttribute('aria-expanded', String(Boolean(expanded)));
     });
 
     // Guide button
@@ -8688,5 +8728,3 @@ Sandoval(2014)이 제안한 도구로 설계 가정을 명시화:
         setTimeout(startTour, 2000);
     }
 }
-
-main().catch((e) => console.error('main() failed', e));

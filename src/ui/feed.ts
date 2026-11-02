@@ -1,3 +1,4 @@
+import {escapeHtml,ratingValue} from '../ui/html';
 /**
  * Recent Reviews Feed Module
  * 
@@ -100,20 +101,20 @@ function renderStars(rating: number | null): string {
 export function renderFeedItem(item: FeedItem): string {
     const timeAgo = formatTimeAgo(item.created_at);
     const stars = renderStars(item.rating);
-    const tags = item.tags?.map(t => `<span class="feed-tag">${t}</span>`).join('') || '';
+    const tags = item.tags?.map(t => `<span class="feed-tag">${escapeHtml(t)}</span>`).join('') || '';
 
     return `
-    <div class="feed-card" data-venue="${item.venue_name}">
+    <div class="feed-card" data-venue="${escapeHtml(item.venue_name)}">
       <div class="feed-header">
-        <span class="feed-author">${item.author_label === 'me' ? '👤 나' : `👤 ${item.author_label}`}</span>
+        <span class="feed-author">${item.author_label === 'me' ? '👤 나' : `👤 ${escapeHtml(item.author_label)}`}</span>
         <span class="feed-time">${timeAgo}</span>
       </div>
       <div class="feed-venue">
         <span class="feed-venue-type ${item.venue_type.toLowerCase()}">${item.venue_type === 'Journal' ? '📘' : '🎤'}</span>
-        <span class="feed-venue-name">${item.venue_name}</span>
+        <span class="feed-venue-name">${escapeHtml(item.venue_name)}</span>
       </div>
       ${stars ? `<div class="feed-rating">${stars}</div>` : ''}
-      <div class="feed-comment">${item.comment}</div>
+      <div class="feed-comment">${escapeHtml(item.comment)}</div>
       ${tags ? `<div class="feed-tags">${tags}</div>` : ''}
     </div>
   `;
