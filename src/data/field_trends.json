@@ -10,7 +10,7 @@
       2024,
       2025
     ],
-    "generated_at": "2026-10-31",
+    "generated_at": "2026-11-03",
     "source": "OpenAlex",
     "n_sources": 91,
     "min_volume": 60,
@@ -3055,7 +3055,7 @@
         0.2,
         0.083
       ],
-      "slope": -0.0238,
+      "slope": -0.0237,
       "recent_share": 0.142,
       "delta": -0.092,
       "trend": "declining"
