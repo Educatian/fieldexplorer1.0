@@ -13,6 +13,15 @@ describe('startup graph metric parity',()=>{
   const graph=example.name==='released graph'?api.parseNetworkData():example;
   const m=api.calculateNetworkMetrics(graph.nodes,graph.edges);
   const result={metrics:Object.fromEntries(Object.entries(m).map(([k,v])=>[k,v instanceof Map?[...v]:v])),styled:api.applyMetricsToNodes(graph.nodes,m)};
-  expect(JSON.parse(JSON.stringify(result))).toEqual(example.expected);
+  // Interdisciplinarity is refreshed source metadata, not a result of the
+  // centrality/style algorithm captured by this parity fixture.
+  const algorithmOutput = (value: any) => ({ ...value, styled: value.styled.map(({ interdisc, ...node }: any) => node) });
+  expect(algorithmOutput(JSON.parse(JSON.stringify(result)))).toEqual(algorithmOutput(example.expected));
+ });
+ it('loads current interdisciplinarity metadata independently of the parity fixture', () => {
+  const byName = new Map(Object.values(venueMetrics.venues).map((venue: any) => [venue.name, venue]));
+  for (const node of api.parseNetworkData().nodes.filter((node: any) => node.group !== 'Category')) {
+   expect(node.interdisc).toBe(byName.get(node.id)?.interdisciplinarity_simpson?.mean ?? null);
+  }
  });
 });
